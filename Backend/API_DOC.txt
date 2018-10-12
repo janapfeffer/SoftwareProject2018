@@ -1,0 +1,6 @@
+Facebook API:
+https://developers.facebook.com/docs/facebook-login/
+https://developers.facebook.com/docs/facebook-login/web
+- wir brauchen eine APP ID 
+- https statt http (haben wir beides nicht)
+- code beispiel steht unten (gespeichert als facebook.html)
