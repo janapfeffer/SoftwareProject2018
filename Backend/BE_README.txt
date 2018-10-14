@@ -1,5 +1,6 @@
 1.
 mysql <- wir nehmen das
+download: https://dev.mysql.com/downloads/mysql/
 postgres
 apache derby
 mongodb (kostenpflichtig > 542mb)
