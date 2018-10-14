@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<!-- Head beeinhaltet Infos welche der Browser und Suchmaschinen braucht-->
+<head>
+    <!-- CSS Files-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- JS Files-->
+    <script src="js/vue.js"></script> <!-- Ruft JS Datei von VUE ab-->
+    <script src="js/indexVar.js"></script> <!-- ermoeglicht so viel wie moeglich an Text von JavaScript sich senden zu lassen-->
+    <!-- MetaDaten: -->
+    <meta http-equiv="language" content="german, de>
+    <meta charset="utf-8" />
+    <meta name="author" content="Hanna Scheub">
+    <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
+    <!-- Ende MetaDaten-->
+    <!-- Fur guter Aufbau der Webseite Titel hier schon-->
+    <script type="text/javascript">
+        document.title = ProjectName;
+    </script>
+
+
+    <!-- HERE MAPS SHIT-->
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+
+
+
+</head>
+
+
+
+
+<body>
+    <h1 style="float: right">
+        <script type="text/javascript">document.write(ProjectName);</script>
+    </h1>  <br />
+
+    <div id="app" @touchmove.prevent>
+
+        <b>  <span>Suchort: {{ location }}</span> </b>
+
+        <br />
+        <input class="text-sm-left" type="text" v-model="location">
+
+
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                location: 'New York'
+            }
+        })
+        var ORT = location;  //_________________________HIER HINBEKOMMEN DASS VARIABLE/Data "Location" in diese Variable "ORT" Übertragen wird, Wird in HERE Maps dann übertragen
+
+    </script>
+
+
+    <div id="panel" style="position:absolute; float: right; width:49%; left:51%; height:50%; background:inherit"></div>
+    <div id="map" style="position:absolute; float: right; width:49%; height:50%; background:grey"></div>
+    <script type="text/javascript" src="js/Map.js"></script>
+
+
+</body>
+</html>
