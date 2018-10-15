@@ -13,7 +13,7 @@
 function geocode(platform) {
     var geocoder = platform.getGeocodingService(),
         geocodingParameters = {
-            searchText: ORT,
+            searchText: ProjectName,
             jsonattributes: 1
         };
 
@@ -58,8 +58,8 @@ function onError(error) {
 
 //Step 1: initialize communication with the platform
 var platform = new H.service.Platform({
-    app_id: 'TERY6ac06hlozadvCdyy',
-    app_code: '1mqHefqb9ZMTdauG1qNNIQ',
+    app_id: 'devportal-demo-20180625',
+    app_code: '9v2BkviRwi9Ot26kp2IysQ',
     useHTTPS: true
 });
 var pixelRatio = window.devicePixelRatio || 1;
@@ -68,11 +68,11 @@ var defaultLayers = platform.createDefaultLayers({
     ppi: pixelRatio === 1 ? undefined : 320
 });
 
-//Step 2: initialize a map - 
+//Step 2: initialize a map - this map is centered over California
 var map = new H.Map(document.getElementById('map'),
     defaultLayers.normal.map, {
-        
-        zoom: 12,
+        center: { lat: 37.376, lng: -122.034 },
+        zoom: 15,
         pixelRatio: pixelRatio
     });
 
@@ -106,6 +106,14 @@ function openBubble(position, text) {
         bubble.open();
     }
 }
+
+/**
+ * Creates a series of list items for each location found, and adds it to the panel.
+ * @param {Object[]} locations An array of locations as received from the
+ *                             H.service.GeocodingService
+ */
+
+
 
 /**
  * Creates a series of H.map.Markers for each location found, and adds it to the map.

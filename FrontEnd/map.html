@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <!-- JS Files-->
-   
     <script src="js/indexVar.js"></script> <!-- ermoeglicht so viel wie moeglich an Text von JavaScript sich senden zu lassen-->
     <!-- MetaDaten: -->
     <meta http-equiv="language" content="german, de>
@@ -19,17 +18,12 @@
     <script type="text/javascript">
         document.title = ProjectName;
     </script>
-
-
     <!-- HERE MAPS SHIT-->
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-
-
-
 </head>
 
 
@@ -42,7 +36,8 @@
             <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <span class="mdl-layout-title">
-                <script type="text/javascript">document.write(ProjectName);</script> </span>
+                    <script type="text/javascript">document.write(ProjectName);</script>
+                </span>
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
@@ -52,46 +47,41 @@
                 </nav>
             </div>
         </header>
-        <body>
-            <!-- Navigation. Hauptsächlich für kleine Geräte gedacht ist die ausklapbare, da auf kleinere Geräte alles aufgelistet -->
-            <div class="mdl-layout__drawer">
-                <span class="mdl-layout-title">Lebenslauf</span>
-                <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="map.html">Map</a>
-                    <a class="mdl-navigation__link" href="addEvent.html">Event eintragen</a>
-                    <a class="mdl-navigation__link" href="favorite.html">Favoriten</a>
-                </nav>
-            </div>
-
-            <!-- NAVIGATIONS LEISE ENDEEEEEEEEEEEEEE-->
-
-
-
-
-
-            <br />
-            <br />
-            <br />
+        <!-- Navigation. Hauptsächlich für kleine Geräte gedacht ist die ausklapbare, da auf kleinere Geräte alles aufgelistet -->
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Lebenslauf</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="map.html">Map</a>
+                <a class="mdl-navigation__link" href="addEvent.html">Event eintragen</a>
+                <a class="mdl-navigation__link" href="favorite.html">Favoriten</a>
+            </nav>
+        </div>
+       
+        <!-- NAVIGATIONS LEISE ENDEEEEEEEEEEEEEE-->
+        <br />
+        <h1 style="text-align: right;">
+            <script type="text/javascript">document.write(ProjectName);</script>
+        </h1>  <br />
 
 
-            <h1 style="text-align: center;">
-                <script type="text/javascript">document.write(ProjectName);</script>
-            </h1>  <br />
+        <!-- HTML Zeugs darf/muss hier rein-->
+        <b style="position: fixed; right: 0;"> Suchort:  </b>
+
+        <form method="post" action="map.html">
+            <input style="right: 100px; position: absolute;    width: 300px;" type="text" placeholder="Suchort eingeben" name="s_place " id="s_place">
+            <button style="right: 0px; position: absolute;"   type="submit" class="mdl-button mdl-js-button mdl-button--raised" name="action" onclick="alertInputValue()">Suchen</button>
+        </form>
+        <br />
+    </div>
 
 
-            <!-- HTML Zeugs darf/muss hier rein-->
+            <!-- HTML Zeugs fur Map, kann nicht innerhalb Framework App benutzt werden, Grund: Unbekannt-->
+ <div id="map" style="position:fixed; width:49%; height:100%; background:grey" ></div>
+  <div id="panel" style="position:fixed; width:49%; left:51%; height:100%; background:inherit" ></div>
 
 
-            <br />
-            <div style="text-align: center;">
 
-                <form method="post" action="map.html">
-                    <input style="width: 300px;" type="text" placeholder="Suchort eingeben" name="s_place " id="s_place">
-                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised" name="action" onclick="alertInputValue()">Suchen</button>
-                </form>
-
-            </div>
-            <script type="text/javascript" src="js/LocationShare.js"></script>
+            <script type="text/javascript" src="js/Map.js"></script>
 
 
 
