@@ -1,15 +1,25 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <!-- Head beeinhaltet Infos welche der Browser und Suchmaschinen braucht-->
 <head>
+    <!--Anfang**************** Macht Seite nicht Scrollbar-->
+    <style type="text/css">
+        html {
+            overflow: hidden;
+        }
+    </style>
+    <!-- ENDE****************Macht Seite nicht Scrollbar-->
+
     <!-- CSS Files-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <!-- JS Files-->
+
     <script src="js/indexVar.js"></script> <!-- ermoeglicht so viel wie moeglich an Text von JavaScript sich senden zu lassen-->
     <!-- MetaDaten: -->
-    <meta http-equiv="language" content="german, de>
+    <meta http-equiv="language" content="german, de">
     <meta charset="utf-8" />
     <meta name="author" content="Hanna Scheub">
     <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
@@ -18,18 +28,23 @@
     <script type="text/javascript">
         document.title = ProjectName;
     </script>
+
+
     <!-- HERE MAPS SHIT-->
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <!-- Here Maps Shit ENDE-->
+
+
 </head>
 
 
 
 
-<body>
+<body sstyle="margin: 0; height: 100%; overflow: hidden">
     <!-- Header/NAVIGATIONS LEISTE ANNNNNNNNNFAAAANGGGG -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
@@ -56,34 +71,129 @@
                 <a class="mdl-navigation__link" href="favorite.html">Favoriten</a>
             </nav>
         </div>
-       
-        <!-- NAVIGATIONS LEISE ENDEEEEEEEEEEEEEE-->
-        <br />
-        <h1 style="text-align: right;">
-            <script type="text/javascript">document.write(ProjectName);</script>
-        </h1>  <br />
-
-
-        <!-- HTML Zeugs darf/muss hier rein-->
-        <b style="position: fixed; right: 0;"> Suchort:  </b>
-
-        <form method="post" action="map.html">
-            <input style="right: 100px; position: absolute;    width: 300px;" type="text" placeholder="Suchort eingeben" name="s_place " id="s_place">
-            <button style="right: 0px; position: absolute;"   type="submit" class="mdl-button mdl-js-button mdl-button--raised" name="action" onclick="alertInputValue()">Suchen</button>
-        </form>
-        <br />
     </div>
+    <!-- NAVIGATIONS LEISE ENDEEEEEEEEEEEEEE-->
+    <!-- HTML Zeugs darf/muss hier rein-->
+    <br />
+    <br />
+
+    <h2 style="right: 150px; position:absolute; top: 100px;"> Events</h2>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <table style="right: 100px; position:absolute; top: 200px; width: 600px; height: 300px; " class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+        <thead>
+            <tr>
+                <!-- Attribute welche in der Datenbank sind, ggf anpassen-->
+                <th class="mdl-data-table__cell--non-numeric">Event Name</th>
+                <th>Addresse</th>
+                <th>Ort</th>
+                <th>Art</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TEST DATEN_______BITTE LOESCHEN BEI SQL__________________-->
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Krisch/Höfler...</td>
+                <td>Altes Theater </td>
+                <td>Heilbronn</td>
+                <td>Theaterstück</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Zauber einer Ballnacht</td>
+                <td>Musikhaus</td>
+                <td>Ludwigsburg</td>
+                <td>Tanzveranstaltung</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                <td>Northern Lite</td>
+                <td>Ludwigsburg</td>
+                <td>Konzert</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Krisch/Höfler...</td>
+                <td>Altes Theater </td>
+                <td>Heilbronn</td>
+                <td>Theaterstück</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Zauber einer Ballnacht</td>
+                <td>Musikhaus</td>
+                <td>Ludwigsburg</td>
+                <td>Tanzveranstaltung</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                <td>Northern Lite</td>
+                <td>Ludwigsburg</td>
+                <td>Konzert</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Krisch/Höfler...</td>
+                <td>Altes Theater </td>
+                <td>Heilbronn</td>
+                <td>Theaterstück</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Zauber einer Ballnacht</td>
+                <td>Musikhaus</td>
+                <td>Ludwigsburg</td>
+                <td>Tanzveranstaltung</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                <td>Northern Lite</td>
+                <td>Ludwigsburg</td>
+                <td>Konzert</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Krisch/Höfler...</td>
+                <td>Altes Theater </td>
+                <td>Heilbronn</td>
+                <td>Theaterstück</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Zauber einer Ballnacht</td>
+                <td>Musikhaus</td>
+                <td>Ludwigsburg</td>
+                <td>Tanzveranstaltung</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                <td>Northern Lite</td>
+                <td>Ludwigsburg</td>
+                <td>Konzert</td>
+            </tr>
+            <!-- TEST DATEN_______BITTE LOESCHEN BEI SQL__________________-->
 
 
-            <!-- HTML Zeugs fur Map, kann nicht innerhalb Framework App benutzt werden, Grund: Unbekannt-->
- <div id="map" style="position:fixed; width:49%; height:100%; background:grey" ></div>
-  <div id="panel" style="position:fixed; width:49%; left:51%; height:100%; background:inherit" ></div>
+        </tbody>
+    </table>
+    <h1 style="position: absolute; top: 50px;">
+        <script type="text/javascript">document.write(ProjectName);</script>
+    </h1>
+    <!-- ANFANG::::::::::::: Ermoeglicht Suche von neuem Ort-->
+    <form method="post" action="map.html">
+        <input style=" position: relative;    width: 300px;" type="text" placeholder="Suchort eingeben" name="s_place " id="s_place">
+        <button style="left:30px; position: relative;" type="submit" class="mdl-button mdl-js-button mdl-button--raised" name="action" onclick="alertInputValue()">Suchen</button>
+    </form>
+    <br />
+    <script type="text/javascript" src="js/LocationShare.js"></script>
+    <!-- ENDE::::::::::::::Ermoeglicht Suche von neuem Ort-->
 
 
+    <!-- ANFANG________________HTML Zeugs fur Map-->
+    <div id="map" style="position:fixed; width:49%; height:100%; background:grey"></div>
+    <div id="panel" style="position:fixed; width:49%; left:51%; height:100%; background:inherit"></div>
+    <script type="text/javascript" src="js/Map.js"></script>
+    <!-- ENDE________________ HTML Zeugs fur Map -->
 
-            <script type="text/javascript" src="js/Map.js"></script>
 
-
-
-        </body>
+</body>
 </html>

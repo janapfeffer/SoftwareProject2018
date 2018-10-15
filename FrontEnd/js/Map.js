@@ -11,9 +11,11 @@
  * @param   {H.service.Platform} platform    A stub class to access HERE services
  */
 function geocode(platform) {
+    var ORD = localStorage.getItem("HANSCH");
+    console.log("Hello world!" + ORD);
     var geocoder = platform.getGeocodingService(),
         geocodingParameters = {
-            searchText: ProjectName,
+            searchText: ORD,
             jsonattributes: 1
         };
 
@@ -58,8 +60,8 @@ function onError(error) {
 
 //Step 1: initialize communication with the platform
 var platform = new H.service.Platform({
-    app_id: 'devportal-demo-20180625',
-    app_code: '9v2BkviRwi9Ot26kp2IysQ',
+    app_id: 'TERY6ac06hlozadvCdyy',
+    app_code: '1mqHefqb9ZMTdauG1qNNIQ',
     useHTTPS: true
 });
 var pixelRatio = window.devicePixelRatio || 1;
@@ -72,7 +74,7 @@ var defaultLayers = platform.createDefaultLayers({
 var map = new H.Map(document.getElementById('map'),
     defaultLayers.normal.map, {
         center: { lat: 37.376, lng: -122.034 },
-        zoom: 15,
+        zoom: 12,
         pixelRatio: pixelRatio
     });
 
@@ -107,11 +109,6 @@ function openBubble(position, text) {
     }
 }
 
-/**
- * Creates a series of list items for each location found, and adds it to the panel.
- * @param {Object[]} locations An array of locations as received from the
- *                             H.service.GeocodingService
- */
 
 
 
