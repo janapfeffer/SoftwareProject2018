@@ -11,6 +11,7 @@
  * @param   {H.service.Platform} platform    A stub class to access HERE services
  */
 function geocode(platform) {
+    //HANSCH beinhaltet immer die letzte Eingabe des Feldes also den Ort nach dem gesucht wurde 
     var ORD = localStorage.getItem("HANSCH");
     console.log("Hello world!" + ORD);
     var geocoder = platform.getGeocodingService(),
@@ -129,6 +130,18 @@ function addLocationsToMap(locations) {
             lng: locations[i].location.displayPosition.longitude
         };
         marker = new H.map.Marker(position);
+        // alles Fake Daten 
+        var FakeEventMA1 = new H.map.Marker({ lat: 49.47689, lng: 8.46798 });
+        map.addObject(FakeEventMA1);
+        var FakeEventMA2 = new H.map.Marker({ lat: 49.5, lng: 8.465 });
+        map.addObject(FakeEventMA2);
+        var FakeEventMA3 = new H.map.Marker({ lat: 49.44, lng: 8.462 });
+        map.addObject(FakeEventMA3);
+        var FakeEventMA4 = new H.map.Marker({ lat: 49.41, lng: 8.4671 });
+        map.addObject(FakeEventMA4);
+        var FakeEventMA5 = new H.map.Marker({ lat: 49.49, lng: 8.4672 });
+        map.addObject(FakeEventMA5);
+        
         marker.label = locations[i].location.address.label;
         group.addObject(marker);
     }
