@@ -23,3 +23,11 @@ Die Verbindung kann über die Ausführung des Files db_connection getestet werden:
 Gewünschte Ausgabe: 
 	Connected to database.
 	Disconnected from database.
+
+PROBLEMBEHANDLUNG
+Sollte beim Starten der MySQL Workbench der Server nicht laufen (Status == stopped):
+Server > Startup/Shutdown > auf start server klicken
+
+Wenn das Datenmodell geändert wird und eine neue Spalte mit foreign key hinzukommt, dürfen 
+keine tabelleneinträge vorhanden sein.
+Es können im Nachhinein keine Spalten als "zu generieren" eingestellt werden.
