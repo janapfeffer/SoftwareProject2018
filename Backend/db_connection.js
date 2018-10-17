@@ -15,9 +15,13 @@ con.query(sql, function (err, result) {
 });
 
 */
+
+//https://www.w3schools.com/nodejs/nodejs_http.asp
+var http = require('http');
+var url = require('url');
 var mysql = require("mysql");
 
-// connect to the database
+// connection to the database
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -25,13 +29,20 @@ var con = mysql.createConnection({
   insecureAuth : true
 });
 
+// All things that should be executed upon executing this file should be done here
+function onInit(){
+  con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected to database.");
+  });
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected to database.");
-});
+  http.createServer(function (req, res) {
+    res.write('Hello World!'); //write a response to the client
+    res.end(); //end the response
+  }).listen(8080); //the server object listens on port 8080
+}
 
-
+//#################Functions####################################################
 //returns all event_types entries
 function get_event_types() {
   con.query("SELECT * FROM event_finder.event_types;", function (err, result) {
@@ -74,9 +85,11 @@ function get_saved_events(user_id){
   });
 };
 
-
-// disconnect from database
-con.end(function(err) {
-  if (err) throw err;
-  console.log("Disconnected from database.");
-});
+//run onInit
+onInit();
+//#################Unused Helpful Code Snippets#################################
+// // disconnect from database
+// con.end(function(err) {
+//   if (err) throw err;
+//   console.log("Disconnected from database.");
+// });
