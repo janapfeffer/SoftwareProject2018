@@ -36,6 +36,7 @@ function onInit(){
     console.log("Connected to database.");
   });
 
+  //https://www.w3schools.com/nodejs/nodejs_url.asp
   http.createServer(function (req, res) {
     res.write('Hello World!'); //write a response to the client
     res.end(); //end the response
