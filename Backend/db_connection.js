@@ -20,6 +20,7 @@ con.query(sql, function (err, result) {
 var http = require('http');
 var url = require('url');
 var mysql = require("mysql");
+var express = require("express");
 
 // connection to the database
 var con = mysql.createConnection({
@@ -38,7 +39,8 @@ function onInit(){
 
   //https://www.w3schools.com/nodejs/nodejs_url.asp
   http.createServer(function (req, res) {
-    res.write('Hello World!'); //write a response to the client
+    var q = url.parse(req.url, true);
+    res.write(q.pathname); //write a response to the client
     res.end(); //end the response
   }).listen(8080); //the server object listens on port 8080
 }
