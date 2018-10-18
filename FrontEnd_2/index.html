@@ -7,7 +7,7 @@
     <title>Eventfinder</title>
 
     <!-- import vue.js-->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <!-- import CSS Element -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- import JavaScript Element -->
@@ -16,17 +16,12 @@
 
 <body>
 
-<div id="app">
-
-  
-    <el-container>
-        <el-header>Header</el-header>
-        <el-container>
-          <el-aside width="200px">Aside</el-aside>
-          <el-main>Main</el-main>
-        </el-container>
-      </el-container>
-
+<div id="app" class="vbox">
+  <header>Header</header>
+  <section class="main hbox space-between">
+    <aside>Nav</aside>
+    <div id="map">Article</div>
+  </section>
 
 </div>
 
@@ -44,7 +39,3 @@
 
 </body>
 </html>
-
-
-
-
