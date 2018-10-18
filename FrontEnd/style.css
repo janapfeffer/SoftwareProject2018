@@ -1,6 +1,29 @@
 body {
    background-attachment: fixed;
+   height: 100%;
 }
+
+#placeSearch {
+  position: fixed;
+  top: 150px;
+  left: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  margin: 10px;
+}
+
+#map {
+  position: fixed;
+  width: 60%;
+  height: 95%;
+  top: 5%;
+  left: 20px;
+  z-index: -1;
+}
+
 
 .mdl-layout__header {
   position: fixed;

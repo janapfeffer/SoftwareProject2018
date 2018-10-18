@@ -252,19 +252,19 @@
 
 
 
-    <h1 style="position: fixed; top: 70px; color: ghostwhite; ">
+    <form id="placeSearch" style="" method="post" action="map.html">
+      <h1 style="color: ghostwhite; ">
         <script type="text/javascript">document.write(ProjectName);</script>
-    </h1>
+      </h1>
     <!-- ANFANG::::::::::::: Ermoeglicht Suche von neuem Ort-->
-    <form style="position: fixed;" method="post" action="map.html">
-        <input style=" position: relative;    width: 300px;" type="text" placeholder="Suchort eingeben" name="s_place " id="s_place">
-        <button style="left:30px; color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift; position: relative;" type="submit" class="mdl-button mdl-js-button mdl-button--raised" name="action" onclick="alertInputValue()">Suchen</button>
+      <input style="width: 200px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" name="s_place " id="s_place">
+      <button style="color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift;" type="submit" class="mdl-button mdl-js-button mdl-button--raised" name="action" onclick="alertInputValue()">Suchen</button>
     </form>
     <br />
     <script type="text/javascript" src="js/LocationShare.js"></script>
     <!-- ENDE::::::::::::::Ermoeglicht Suche von neuem Ort-->
     <!-- ANFANG________________HTML Zeugs fur Map-->
-    <div id="map" style="position:fixed; width:49%; height:90%; background:grey"></div>
+    <div id="map" style="background:grey"></div>
     <div id="panel" style="position:fixed; width:49%; left:51%; height:100%; background:inherit"></div>
     <script type="text/javascript" src="js/Map.js"></script>
     <!-- ENDE________________ HTML Zeugs fur Map -->
