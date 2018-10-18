@@ -25,6 +25,7 @@
 
 <body>
 
+
 <div id="app" class="vbox">
   <header>
     <h1>Event Finder</h1>
@@ -52,7 +53,16 @@
 
   </header>
   <section class="main hbox space-between">
-    <aside>side</aside>
+    <aside>
+      <ul id="eventlist">
+        <li v-for="item in shownEvents" class="" >
+          <span class="title">{{item.title}}</span>
+          <span class="desc">{{item.desc}}</span>
+          <span class="time">{{item.time}}</span>
+          <span class="place">{{item.place}}</span>
+        </li>
+      </ul>
+    </aside>
 
     <div id="map">
         <div style="width: 640px; height: 480px" id="mapContainer"></div>
@@ -63,7 +73,11 @@
 </div>
 
 
-
+<ul id="example-1">
+  <li v-for="item in items">
+    {{ item.message }}
+  </li>
+</ul>
 
 
 

@@ -1,0 +1,7 @@
+body {
+   background-attachment: fixed;
+}
+
+.mdl-layout__header {
+  position: fixed;
+}
