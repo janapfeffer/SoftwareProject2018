@@ -6,10 +6,6 @@
 
     <title>Eventfinder</title>
 
-    <!-- link to style.css-->
-    <link rel="stylesheet" href="style.css">
-    <!-- link to javacsript-->
-    <script src="main.js"></script>
     <!-- import vue.js-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script> 
     <!-- import CSS Element -->
@@ -20,20 +16,27 @@
 
 <body>
 
+<div id="app">
 
-<el-container>
-    <el-header>Header</el-header>
-    <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-container>
-        <el-main>Main</el-main>
-        <el-footer>Footer</el-footer>
-      </el-container>
-    </el-container>
-  </el-container>
+  
+    <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
+  
+  <p>Die Anzahl ist: {{ num1 }}</p>
+
+
+</div>
 
 
 
+
+
+
+
+
+ <!-- link to javacsript-->
+ <script src="main.js"></script>
+ <!-- link to style.css-->
+ <link rel="stylesheet" href="style.css">
 
 </body>
 </html>
