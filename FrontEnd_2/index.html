@@ -14,14 +14,12 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
     <!-- import Here maps-->
-    <meta name="viewport" content="initial-scale=1.0, 
-    width=device-width" />
-    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" 
-    type="text/javascript" charset="utf-8"></script>
-    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" 
-    type="text/javascript" charset="utf-8"></script>
-
-    
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
 
 </head>
 
@@ -31,7 +29,11 @@
   <header>Header</header>
   <section class="main hbox space-between">
     <aside>side</aside>
-    <div id="map">Article</div>
+    <div id="map">
+        <div style="width: 640px; height: 480px" id="mapContainer"></div>
+        
+
+    </div>
   </section>
 
 </div>
@@ -45,6 +47,7 @@
 
  <!-- link to javacsript-->
  <script src="main.js"></script>
+ <script type="text/javascript" src="Map.js"></script>
  <!-- link to style.css-->
  <link rel="stylesheet" href="style.css">
 
