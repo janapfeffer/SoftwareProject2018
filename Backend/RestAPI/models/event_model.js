@@ -26,7 +26,10 @@ var Event = sequelizedConnection.define("events", {
         type: Sequelize.STRING,
         allowNull: false
     },
-    house_number : ,
+    house_number : {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     address_additional : {
         type: Sequelize.STRING,
         allowNull: true
