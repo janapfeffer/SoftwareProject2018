@@ -1,4 +1,5 @@
 
+
 function moveMapToBerlin(map){
     map.setCenter({lat:52.5159, lng:13.3777});
     map.setZoom(14);
@@ -32,4 +33,3 @@ function moveMapToBerlin(map){
   // Create the default UI components
   var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-  
