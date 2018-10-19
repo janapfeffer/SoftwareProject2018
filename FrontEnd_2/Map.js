@@ -31,6 +31,5 @@ function moveMapToBerlin(map){
   
   // Create the default UI components
   var ui = H.ui.UI.createDefault(map, defaultLayers);
+
   
-  // Now use the map as required...
-  moveMapToBerlin(map);

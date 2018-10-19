@@ -61,3 +61,7 @@ header .el-menu--horizontal>.el-menu-item {
 header .el-menu--horizontal>.el-submenu {
   float: right;
 }
+
+#mapSearch {
+  width:200px;
+}

@@ -20,12 +20,11 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
-
 </head>
 
-<body>
 
-<div id="app" class="vbox">
+<body>
+<div class="vbox">
   <header>
     <h1>Event Finder</h1>
     <el-menu
@@ -55,8 +54,9 @@
     <aside>side</aside>
 
     <div id="map">
+        <el-input id="mapSearch" @keyup.enter="searchPlace" placeholder="Suchort eingeben"  v-model="searchLocation"></el-input>
+        <button @click="searchPlace">Click me</button>
         <div style="width: 640px; height: 480px" id="mapContainer"></div>
-
     </div>
   </section>
 
