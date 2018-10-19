@@ -1,0 +1,48 @@
+html {
+   background-image: url("../images/festival.jpg");
+   background-attachment: fixed;
+   background-size: cover;
+}
+
+header.mdl-layout__header{
+   color: white;
+   font-family: Bahnschrift;
+   background-color:darkslategrey;
+}
+
+.eventtable {
+  background-color:whitesmoke;
+  width: 600px;
+  right: 100px;
+  position:absolute;
+  top: 200px; 
+  overflow:auto 
+}
+
+#placeSearch {
+  position: fixed;
+  top: 140px;
+  left: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+h1 {
+  margin: 5px 5px 5px 0;
+  color: ghostwhite; 
+}
+
+#map {
+  position: fixed;
+  width: calc(100% - 790px);
+  height: 95%;
+  top: 5%;
+  left: 0px;
+  z-index: 1;
+}
+
+
+.mdl-layout__header {
+  position: fixed;
+}

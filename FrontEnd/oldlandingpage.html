@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+
+<!-- Head beeinhaltet Infos welche der Browser und Suchmaschinen braucht-->
+<head>
+    <!--Anfang**************** Macht Seite nicht Scrollbar-->
+    <style type="text/css">
+        html {
+            background-image: url("images/festival.jpg");
+            overflow: hidden;
+        }
+    </style>
+    <!-- ENDE****************Macht Seite nicht Scrollbar-->
+    <!-- CSS Files zB die Google  MDL aufrufen-->
+    <link rel="stylesheet" href="https://s.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- JS Files-->
+
+    <link rel="stylesheet" href="style.css">
+    <script src="js/indexVar.js"></script> <!-- ermoeglicht so viel wie moeglich an Text von JavaScript sich senden zu lassen-->
+    <!-- MetaDaten: -->
+    <meta http-equiv="language" content="german, de">
+    <meta charset="utf-8" />
+    <meta name="author" content="Hanna Scheub">
+    <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
+    <!-- Ende MetaDaten-->
+    <!-- Fur guter Aufbau der Webseite Titel hier schon-->
+    <script type="text/javascript">
+        document.title = ProjectName;
+       // siehe in indexVar.js
+    </script>
+
+
+    <!-- HERE MAPS SHIT-->
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <!-- Here Maps Shit ENDE-->
+
+
+</head>
+
+
+
+
+<body style="margin: 0; height: 100%; overflow: hidden">
+    <!-- Header/NAVIGATIONS LEISTE ANNNNNNNNNFAAAANGGGG -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row"; style="background-color: darkslategrey;">
+                <!-- Title -->
+                <span class="mdl-layout-title" style=" color: white;">
+                    <script type="text/javascript">document.write(ProjectName);</script>
+                </span>
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <a class="mdl-navigation__link" href="map.html">Map</a>
+                    <a class="mdl-navigation__link" href="addEvent.html">Event eintragen</a>
+                    <a class="mdl-navigation__link" href="favorite.html">Favoriten</a>
+                </nav>
+            </div>
+        </header>
+        <!-- Navigation. Hauptsächlich für kleine Geräte gedacht ist die ausklapbare, da auf kleinere Geräte alles aufgelistet -->
+        <div class="mdl-layout__drawer" style="background-color:darkslategrey; color:white;">
+            <span class="mdl-layout-title">Eventszeug</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="map.html">Map</a>
+                <a class="mdl-navigation__link" href="addEvent.html">Event eintragen</a>
+                <a class="mdl-navigation__link" href="favorite.html">Favoriten</a>
+            </nav>
+        </div>
+    <!-- NAVIGATIONS LEISE ENDEEEEEEEEEEEEEE-->
+
+
+
+
+
+    <br />
+
+    <br />
+    <br />
+
+
+    <h1 style="text-align: center; color:white;">
+        <script type="text/javascript">document.write(ProjectName)</script>
+    </h1>  <br />
+
+
+    <!-- HTML Zeugs darf/muss hier rein-->
+
+
+    <br />
+    <div style="text-align: center; color:white">
+
+        <!-- ANFANG::::::::::::: Ermoeglicht Suche von neuem Ort-->
+        <form method="post" action="map.html">
+            <input style="width: 300px;" type="text" placeholder="Suchort eingeben" name="s_place " id="s_place">
+            <button style="color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift;"; type="submit" class="mdl-button mdl-js-button mdl-button--raised" name="action" onclick="alertInputValue()">Suchen</button>
+        </form>
+        <br />
+        <script type="text/javascript" src="js/LocationShare.js"></script>
+        <!-- ENDE::::::::::::::Ermoeglicht Suche von neuem Ort-->
+
+
+    </div>
+    <script type="text/javascript" src="js/LocationShare.js"></script>
+
+
+
+</body>
+</html>

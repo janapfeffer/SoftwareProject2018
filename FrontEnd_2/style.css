@@ -63,7 +63,7 @@ header .el-menu.el-menu--horizontal {
   height: 61px;
   position: static;
   border-bottom: none;
-  background-color: none>
+  background-color: none;
 }
 
 header .el-menu--horizontal>.el-menu-item {
