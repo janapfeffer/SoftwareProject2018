@@ -21,16 +21,15 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-    
+
     <!-- Own Files-->
-    <script src="js/indexVar.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
     <!-- Header/Navigation bar-->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header" >
             <div class="mdl-layout__header-row" >
                 <!-- Title -->
@@ -39,10 +38,10 @@
                 </span>
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
-                
+
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link" href="index.html">Map</a>
-                    <a class="mdl-navigation__link">Event eintragen</a>
+                    <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
                     <a class="mdl-navigation__link">Favoriten</a>
                 </nav>
             </div>
@@ -60,23 +59,65 @@
         </div>
     </div>
 
-    <h2 style="right: 570px; position:absolute; top: 140px; color:ghostwhite; font-family: Bahnschrift;"> Events</h2>
-    <ul id="eventTable" class="eventtable demo-list-three mdl-list">
-        <li v-for="event in aTestEvents" class="mdl-list__item mdl-list__item--three-line">
-            <span class="mdl-list__item-primary-content">
-                <i class="material-icons mdl-list__item-avatar">person</i>
-                <span>
-                    {{ event.sName }}
+    <!-- Alles rechts neben der Karte-->
+    <div id="aside">
+      <div id="newEventWrapper" class="sidecard" v-bind:class="{ hide: !cardShown}">
+        <h2>Neues Event eintragen</h2>
+        <div id="newEvent">
+          <p>
+            Fügen sie ein neues Event in unsere Databank ein
+          </p>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" v-model="draft.sName">
+            <label class="mdl-textfield__label" for="sample1">Titel</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
+             v-model="draft.sDescription"></textarea>
+            <label class="mdl-textfield__label" for="schools">Beschreibung</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" v-model="draft.adress">
+            <label class="mdl-textfield__label" for="sample1">Adresse</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" v-model="draft.date">
+            <label class="mdl-textfield__label" for="sample1">Datum</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" v-model="draft.time">
+            <label class="mdl-textfield__label" for="sample1">Uhrzeit</label>
+          </div>
+
+          <div class="buttons">
+            <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+             @click="formdraft">Vorschau</button>
+             <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+              @click="formsubmit">Senden</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidecard">
+        <h2> Events</h2>
+        <ul id="eventTable" class="demo-list-three mdl-list">
+            <li v-for="event in currentEvents" class="mdl-list__item mdl-list__item--three-line">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-avatar">person</i>
+                    <span>
+                        {{ event.sName }}
+                    </span>
+                    <span class="mdl-list__item-text-body">
+                        {{ event.sDescription }}
+                    </span>
                 </span>
-                <span class="mdl-list__item-text-body">
-                    {{ event.sDescription }}
+                <span class="mdl-list__item-secondary-content">
+                    <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
                 </span>
-            </span>
-            <span class="mdl-list__item-secondary-content">
-                <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-            </span>
-        </li>
-    </ul>
+            </li>
+        </ul>
+
+    </div>
 
     <div id="placeSearch">
       <h1>
@@ -87,7 +128,7 @@
       <button style="color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
        name="action" onclick="searchPlace()">Suchen</button>
     </div>
-   
+
 
     <!-- Map-->
     <div id="map"></div>

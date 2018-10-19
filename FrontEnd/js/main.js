@@ -1,3 +1,15 @@
+var oNavigationVue = new Vue({
+    el: "#navigation",
+    data: {
+      horizontalMenueShown: true
+    },
+    methods: {
+      showNewEventCard: function(){
+        oNewEventVue.cardShown = !oNewEventVue.cardShown;
+      }
+    }
+});
+
 var oEvent = function(oEvent){
     this.iEventId = oEvent.iEventId;
     this.sName = oEvent.sName;
@@ -25,30 +37,67 @@ var aTestEvents = [
     new oEvent({
         iEventId: 2,
         sName: "Elektro Party",
-        sDescription:"Lust auf moderne Elektromusik und ein stilvolles Ambiente? Kostenlos vorbeischauen!." 
+        sDescription:"Lust auf moderne Elektromusik und ein stilvolles Ambiente? Kostenlos vorbeischauen!."
     }),
     oTestEvent1 = new oEvent({
         iEventId: 1,
         sName: "Quatsch Comdey Club",
         sDescription: "Die Live Show. Das Herzstück des Quatsch Comedy Clubs ist die 'Live Show'."
-    })
+    }),
+    new oEvent({
+        sName: "PUSH",
+    }),
+    new oEvent({
+        sName: "Neu",
+    }),
+    new oEvent({
+        sName: "More",
+    }),
+    new oEvent({
+        sName: "PUSH",
+    }),
+    new oEvent({
+        sName: "PUSH",
+    }),
 ];
 
 var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
-        aTestEvents: aTestEvents
+        currentEvents: aTestEvents
     }
 });
-
 
 function searchPlace() {
     var ORT = document.getElementById('s_place').value;
    // alert(ORT);
-    //HANSCH beinhaltet immer die letzte Eingabe des Feldes also den Ort nach dem gesucht wurde 
+    //HANSCH beinhaltet immer die letzte Eingabe des Feldes also den Ort nach dem gesucht wurde
 
     localStorage.setItem("HANSCH", ORT);
     geocode(platform);
 
     // HIER KOMMT DANN DIE SUCHE DER DATENBANK REIN
 }
+
+var oNewEventVue = new Vue({
+    el: "#newEventWrapper",
+    data: {
+        cardShown: false,
+        draft: {
+          sName: "",
+          sDescription: "",
+          adress: "",
+          date: "",
+          time: "",
+          status: "draft"
+        }
+    },
+    methods: {
+      formdraft: function(){
+        oEventTableVue.currentEvents.unshift(this.draft)
+      },
+      formsubmit: function(){
+
+      },
+    }
+});

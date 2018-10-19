@@ -10,14 +10,84 @@ header.mdl-layout__header{
    background-color:darkslategrey;
 }
 
-.eventtable {
-  background-color:whitesmoke;
-  width: 600px;
-  right: 100px;
-  position:absolute;
-  top: 200px; 
-  overflow:auto 
+.mdl-navigation__link{ cursor: pointer }
+.mdl-navigation__link:hover{ background-color: rgba(255, 255, 255, 0.05) }
+.mdl-navigation__link:active{ background-color: rgba(255, 255, 255, 0.1) }
+
+h1 {
+  margin: 5px 5px 5px 0;
+  color: ghostwhite;
 }
+
+.hide {
+  height: 0px;
+  overflow: hidden;
+}
+
+div#aside {
+  width: 600px;
+  position:absolute;
+  top: 100px;
+  right: 100px;
+}
+
+div.sidecard {
+
+}
+
+.sidecard h2 {
+  color:ghostwhite; font-family: Bahnschrift;
+}
+
+#eventTable {
+  background-color:whitesmoke;
+  overflow:auto
+}
+
+#eventTable li.mdl-list__item:hover{ background-color: rgba(0, 0, 0, 0.04) }
+#eventTable li.mdl-list__item:active{ background-color: rgba(0, 0, 0, 0.06) }
+
+
+
+#newEventWrapper {
+  transition: margin 0.5s;
+  margin: 0px
+}
+#newEventWrapper.hide {
+  margin: -100px 0px 100px 0px
+}
+
+#newEvent {
+  background-color:whitesmoke;
+  padding: 20px 30px;
+  font-size: 18px
+}
+
+#newEvent p{
+  margin: 5px 0px 25px -10px;
+  font-size: 18px
+}
+
+#newEvent .mdl-textfield {
+  margin: -12px -10px;
+  display: block;
+  width: auto;
+}
+
+#newEvent input, #newEvent textarea{
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+#newEvent .buttons {
+  text-align: right;
+  padding: 10px 10px 3px 0px;
+}
+#newEvent .buttons button {
+  background-color: rgba(47, 66, 79, 0.66);
+  margin-left: 10px;
+}
+#newEvent .buttons button:hover {background-color: rgba(47, 66, 79, 0.46);}
+#newEvent .buttons button:active {background-color: rgba(47, 66, 79, 0.26);}
 
 #placeSearch {
   position: fixed;
@@ -28,10 +98,6 @@ header.mdl-layout__header{
   z-index: 10;
 }
 
-h1 {
-  margin: 5px 5px 5px 0;
-  color: ghostwhite; 
-}
 
 #map {
   position: fixed;
