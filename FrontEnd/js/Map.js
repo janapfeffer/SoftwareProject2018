@@ -19,6 +19,8 @@ var map = new H.Map(document.getElementById('map'),
         zoom: 14.5,
         pixelRatio: pixelRatio
     });
+map.setCenter({ lat: 49.48651, lng: 8.46679 }, true)
+
 
 //Step 3: make the map interactive
 // MapEvents enables the event system - behavior implements default interactions for pan/zoom (also on mobile touch environments)
@@ -27,12 +29,62 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 
+function suggestPlace(responseBody){
+    
+
+
+}
+
 /**
  * A full list of available request parameters can be found in the Geocoder API documentation.
  * see: http://developer.here.com/rest-apis/documentation/geocoder/topics/resource-geocode.html
  * @param   {H.service.Platform} platform    A stub class to access HERE services
  */
-function geocode(sQuery) {
+function getAutocompletion(sQuery) {
+    var AUTOCOMPLETION_URL = 'https://autocomplete.geocoder.api.here.com/6.2/suggest.json';
+    var ajaxRequest = new XMLHttpRequest();
+
+    function getResponseBody(response){
+        var responseBody = JSON.stringify(response, null, ' ');
+        function suggestPlace(responseBody)
+    };
+    var onAutoCompleteSuccess = function onAutoCompleteSuccess() {
+    
+        getResponseBody(this.response);  // In this context, 'this' means the XMLHttpRequest itself.
+        //  addSuggestionsToMap(this.response);
+    };
+       
+    /**
+    * This function will be called if a communication error occurs during the XMLHttpRequest
+    */
+    var onAutoCompleteFailed=    function onAutoCompleteFailed() {
+         alert('Ooops!');
+    };
+    // Attach the event listeners to the XMLHttpRequest object
+    ajaxRequest.addEventListener("load", onAutoCompleteSuccess);
+    ajaxRequest.addEventListener("error", onAutoCompleteFailed);
+    ajaxRequest.responseType = "json";
+
+    var params = '?' +
+    'query=' +  encodeURIComponent(sQuery) +   // The search text which is the basis of the query
+    '&beginHighlight=' + encodeURIComponent("") + //  Mark the beginning of the match in a token. 
+    '&endHighlight=' + encodeURIComponent("") + //  Mark the end of the match in a token. 
+    '&maxresults=5' +  // The upper limit the for number of suggestions to be included 
+                      // in the response.  Default is set to 5.
+    '&app_id=' + "TERY6ac06hlozadvCdyy" +
+    '&app_code=' + "1mqHefqb9ZMTdauG1qNNIQ";
+    ajaxRequest.open('GET', AUTOCOMPLETION_URL + params );
+    ajaxRequest.send();
+
+}
+
+
+/**
+ * A full list of available request parameters can be found in the Geocoder API documentation.
+ * see: http://developer.here.com/rest-apis/documentation/geocoder/topics/resource-geocode.html
+ * @param   {H.service.Platform} platform    A stub class to access HERE services
+ */
+function setCenter(sQuery) {
     //HANSCH always contains the last search request
     var sPlace = (sQuery === "" || sQuery === undefined) ? localStorage.getItem("HANSCH") : sQuery;
     localStorage.setItem("HANSCH", sPlace);

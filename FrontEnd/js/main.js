@@ -67,7 +67,7 @@ var oEventTableVue = new Vue({
     }
 });
 
-var osearchPlaceVue = new Vue({
+var oSearchPlaceVue = new Vue({
     el: "#searchPlace",
     data: {
         sQuery: "",
@@ -76,8 +76,11 @@ var osearchPlaceVue = new Vue({
     },
     methods: {
         searchPlace: function searchPlace() {
-            geocode(this.sQuery);
-        }
+            setCenter(this.sQuery);
+        },
+        autocomplete: function autocomplete() {
+          getAutocompletion(this.sQuery);
+        }    
     }
 })
 
@@ -119,4 +122,4 @@ var oNewEventVue = new Vue({
     }
 });
 
-geocode(undefined);
+setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage 
