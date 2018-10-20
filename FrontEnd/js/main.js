@@ -75,15 +75,10 @@ var osearchPlaceVue = new Vue({
     },
     methods: {
         searchPlace: function searchPlace() {
-
-            var ORT = this.sQuery;
-            localStorage.setItem("HANSCH", ORT);
-            geocode(platform);
+            geocode(this.sQuery);
         }
     }
 })
-
-
 
 var oNewEventVue = new Vue({
     el: "#newEventWrapper",
