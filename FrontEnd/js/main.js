@@ -79,10 +79,10 @@ var oSearchPlaceVue = new Vue({
             setCenter(this.sQuery);
         },
         autocomplete: function autocomplete() {
-          getAutocompletion(this.sQuery);
+            getAutocompletion(this.sQuery);
         }    
     }
-})
+});
 
 var oNewEventVue = new Vue({
     el: "#newEventWrapper",
