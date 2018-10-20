@@ -92,7 +92,7 @@ var oSearchPlaceVue = new Vue({
         },
         autocomplete: function autocomplete() {
             getAutocompletion(this.sQuery);
-        }    
+        }
     }
 });
 
@@ -124,6 +124,7 @@ var oNewEventVue = new Vue({
         this.draft.status = "unsend";
         var cloneObj = JSON.parse( JSON.stringify( this.draft ) ); // to not pass it by reference
         oEventTableVue.currentEvents.unshift(cloneObj);
+        this.cardShown = !this.cardShown;
         this.draft = { // reset vueinternal data to make possible to add new event
           sName: "",
           sDescription: "",
@@ -137,4 +138,4 @@ var oNewEventVue = new Vue({
     }
 });
 
-setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage 
+setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
