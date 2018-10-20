@@ -104,8 +104,8 @@
         <ul id="eventTable" class="demo-list-three mdl-list">
             <li v-for="event in currentEvents"
                 class="mdl-list__item mdl-list__item--three-line"
-                :class="{showMoreClass:event.iEventId == selected}"
-                @click="selected = event.iEventId">
+                :class="{selected:event.iEventId == selected}"
+                @click="select(event)">
                 <span class="mdl-list__item-primary-content">
                     <i class="material-icons mdl-list__item-avatar">person</i>
                     <span>

@@ -54,7 +54,7 @@ div.sidecard {
   padding: 20px;
 }
 
-#eventTable li.mdl-list__item--three-line.showMoreClass .mdl-list__item-primary-content {
+#eventTable li.mdl-list__item--three-line.selected .mdl-list__item-primary-content {
   height: auto;
 }
 
