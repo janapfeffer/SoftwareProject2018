@@ -101,7 +101,7 @@ var oNewEventVue = new Vue({
           date: "",
           time: "",
           status: "draft",
-          iEventId: 999999,
+          iEventId: Math.floor(Math.random() * 99999) + 1,
         }
     },
     methods: {
@@ -124,7 +124,7 @@ var oNewEventVue = new Vue({
           date: "",
           time: "",
           status: "draft",
-          iEventId: 999999,
+          iEventId: Math.floor(Math.random() * 99999) + 1,
         }
       },
     }
