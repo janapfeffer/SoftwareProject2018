@@ -77,7 +77,7 @@
             <label class="mdl-textfield__label" for="schools">Beschreibung</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" v-model="draft.adress">
+            <input class="mdl-textfield__input" type="text" v-model="draft.sAdress">
             <label class="mdl-textfield__label" for="sample1">Adresse</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -98,6 +98,7 @@
         </div>
       </div>
 
+
       <div class="sidecard">
         <h2> Events</h2>
         <ul id="eventTable" class="demo-list-three mdl-list">
@@ -109,6 +110,9 @@
                     </span>
                     <span class="mdl-list__item-text-body">
                         {{ event.sDescription }}
+                    </span>
+                    <span class="mdl-list__item-text-body">
+                        {{ event.sAdress }}
                     </span>
                 </span>
                 <span class="mdl-list__item-secondary-content">

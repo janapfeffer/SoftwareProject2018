@@ -49,6 +49,10 @@ div.sidecard {
 #eventTable li.mdl-list__item:hover{ background-color: rgba(0, 0, 0, 0.04) }
 #eventTable li.mdl-list__item:active{ background-color: rgba(0, 0, 0, 0.06) }
 
+#eventTable .mdl-list__item--three-line {
+  height: auto;
+  padding: 20px;
+}
 
 
 #newEventWrapper {
