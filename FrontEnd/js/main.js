@@ -68,16 +68,24 @@ var oEventTableVue = new Vue({
     }
 });
 
-function searchPlace() {
-    var ORT = document.getElementById('s_place').value;
-   // alert(ORT);
-    //HANSCH beinhaltet immer die letzte Eingabe des Feldes also den Ort nach dem gesucht wurde
+var osearchPlaceVue = new Vue({
+    el: "#searchPlace",
+    data: {
+        sQuery: "",
+        sName: "Event Finder",
+        sButtonName: "Suchen"
+    },
+    methods: {
+        searchPlace: function searchPlace() {
 
-    localStorage.setItem("HANSCH", ORT);
-    geocode(platform);
+            var ORT = this.sQuery;
+            localStorage.setItem("HANSCH", ORT);
+            geocode(platform);
+        }
+    }
+})
 
-    // HIER KOMMT DANN DIE SUCHE DER DATENBANK REIN
-}
+
 
 var oNewEventVue = new Vue({
     el: "#newEventWrapper",

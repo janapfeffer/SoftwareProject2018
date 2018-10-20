@@ -119,14 +119,14 @@
 
     </div>
 
-    <div id="placeSearch">
+    <div id="searchPlace">
       <h1>
-        Event Finder
+         {{sName}}
       </h1>
     <!-- Searchbar for places -->
-      <input style="width: 200px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" name="s_place " id="s_place">
+      <input style="width: 200px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery">
       <button style="color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-       name="action" onclick="searchPlace()">Suchen</button>
+       name="action" @click="searchPlace">{{sButtonName}}</button>
     </div>
 
 
