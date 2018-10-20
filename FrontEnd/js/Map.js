@@ -1,4 +1,3 @@
-
 /**
  * Map initialization
  */
@@ -16,7 +15,7 @@ var defaultLayers = platform.createDefaultLayers({
 //Step 2: initialize a map
 var map = new H.Map(document.getElementById('map'),
     defaultLayers.normal.map, {
-        center: { lat: 37.376, lng: -122.034 },
+        center: { lat: 49.48651, lng: 8.46679 },
         zoom: 14.5,
         pixelRatio: pixelRatio
     });
@@ -39,7 +38,7 @@ function geocode(sQuery) {
     localStorage.setItem("HANSCH", sPlace);
     var geocoder = platform.getGeocodingService(),
         geocodingParameters = {
-            searchText: sQuery,
+            searchText: sPlace,
             jsonattributes: 1
         };
     geocoder.geocode(
