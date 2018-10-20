@@ -41,23 +41,10 @@ var aTestEvents = [
         iEventId: 1,
         sName: "Quatsch Comdey Club",
         sDescription: "Die Live Show. Das Herzstück des Quatsch Comedy Clubs ist die 'Live Show'."
-    }),
-    new oEvent({
-        sName: "PUSH",
-    }),
-    new oEvent({
-        sName: "Neu",
-    }),
-    new oEvent({
-        sName: "More",
-    }),
-    new oEvent({
-        sName: "PUSH",
-    }),
-    new oEvent({
-        sName: "PUSH",
-    }),
+    })
 ];
+
+aTestEvents = aTestEvents.concat(oJsonTestData.array);
 
 var oEventTableVue = new Vue({
     el: "#eventTable",

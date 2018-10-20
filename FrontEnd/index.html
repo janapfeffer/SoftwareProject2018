@@ -85,6 +85,7 @@
             <label class="mdl-textfield__label" for="sample1">Adresse</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
             <el-date-picker
               v-model="draft.date"
               type="datetimerange"
@@ -146,7 +147,7 @@
   <input id="searchInput" style="width: 200px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace"  >
 </div>
 </form>
- 
+
   <button style="color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
    name="action" @click="searchPlace" >{{sButtonName}}</button>
     </div>
@@ -157,7 +158,8 @@
 
     <!-- own script files-->
     <script type="text/javascript" src="js/Map.js"></script>
-
+    <script type="text/javascript" src="js/testdata.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+
 </body>
 </html>
