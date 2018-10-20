@@ -1,8 +1,7 @@
 
 /**
- * Boilerplate map initialization code starts below:
+ * Map initialization
  */
-
 //Step 1: initialize communication with the platform
 var platform = new H.service.Platform({
     app_id: 'TERY6ac06hlozadvCdyy',
@@ -29,74 +28,74 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 
-var bubble; // Hold a reference to any infobubble opened
-/**
- * Opens/Closes a infobubble
- * @param  {H.geo.Point} position     The location on the map.
- * @param  {String} text              The contents of the infobubble.
- */
-function openBubble(position, text) {
-    if (!bubble) {
-        bubble = new H.ui.InfoBubble(
-            position,
-            { content: text });
-        ui.addBubble(bubble);
-    } else {
-        bubble.setPosition(position);
-        bubble.setContent(text);
-        bubble.open();
-    }
-}
 
 /**
  * A full list of available request parameters can be found in the Geocoder API documentation.
  * see: http://developer.here.com/rest-apis/documentation/geocoder/topics/resource-geocode.html
  * @param   {H.service.Platform} platform    A stub class to access HERE services
  */
-function geocode(platform) {
+function geocode(sQuery) {
     //HANSCH always contains the last search request
-    var sOrtLS = localStorage.getItem("HANSCH");
+    var sPlace = (sQuery === "" || sQuery === undefined) ? localStorage.getItem("HANSCH") : sQuery;
     var geocoder = platform.getGeocodingService(),
         geocodingParameters = {
-            searchText: sOrtLS,
+            searchText: sQuery,
             jsonattributes: 1
         };
-
     geocoder.geocode(
         geocodingParameters,
-        onSuccess,
-        onError
+        /**
+        * This function will be called once the Geocoder REST API provides a response
+        * @param  {Object} result A JSON object representing the  location(s) found.
+        *
+        * see: http://developer.here.com/rest-apis/documentation/geocoder/topics/resource-type-response-geocode.html
+        */
+        onSuccess = function onSuccess(result) {
+            var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
+            var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
+            var oLatLgn = {lat: dLat, lng: dLng}
+             
+            map.setCenter(oLatLgn, true);
+            
+            if(map.getZoom() < 14.5){
+                map.setZoom(14.5, true);
+            }
+            if(map.getZoom() > 17){
+                map.setZoom(16, true);
+            }
+
+            // addLocationsToMap(locations);
+        },
+        /**
+         * This function will be called if a communication error occurs during the JSON-P request
+        * @param  {Object} error  The error message received.
+        */
+        onError = function(error) {
+            alert('Ooops!');
+        }
     );
 }
-/**
- * This function will be called once the Geocoder REST API provides a response
- * @param  {Object} result A JSON object representing the  location(s) found.
- *
- * see: http://developer.here.com/rest-apis/documentation/geocoder/topics/resource-type-response-geocode.html
- */
-function onSuccess(result) {
-    var locations = result.response.view[0].result;
-    /*
-     * The styling of the geocoding response on the map is entirely under the developer's control.
-     * A representitive styling can be found the full JS + HTML code of this example
-     * in the functions below:
-     */
-    addLocationsToMap(locations);
-    //addLocationsToPanel(locations);
-    // ... etc.
+
+function getCoordsByAddress(sAddress){
+    var oCoords;
+
+    return oCoords;
 }
 
-/**
- * This function will be called if a communication error occurs during the JSON-P request
- * @param  {Object} error  The error message received.
- */
-function onError(error) {
-    alert('Ooops!');
+function setMarker(sAddress, sName){
+
+    var oCoords = getCoordsByAddress(sAddress);
+
+    marker = new H.map.Marker(oCoords);
+    marker.label = sName;
+
+    marker.addEventListener('tap', function (evt) {
+        map.setCenter(evt.target.getPosition());
+        openBubble(
+            evt.target.getPosition(), evt.target.label);
+    }, false);
+
 }
-
-
-
-
 
 /**
  * Creates a series of H.map.Markers for each location found, and adds it to the map.
@@ -141,11 +140,26 @@ function addLocationsToMap(locations) {
 
     // Add the locations group to the map
     map.addObject(group);
-    map.setCenter(group.getBounds().getCenter());
 }
 
-// Now use the map as required...
-geocode(platform);
+var bubble; // Hold a reference to any infobubble opened
+/**
+ * Opens/Closes a infobubble
+ * @param  {H.geo.Point} position     The location on the map.
+ * @param  {String} text              The contents of the infobubble.
+ */
+function openBubble(position, text) {
+    if (!bubble) {
+        bubble = new H.ui.InfoBubble(
+            position,
+            { content: text });
+        ui.addBubble(bubble);
+    } else {
+        bubble.setPosition(position);
+        bubble.setContent(text);
+        bubble.open();
+    }
+}
 
 
 // update map size at window size
