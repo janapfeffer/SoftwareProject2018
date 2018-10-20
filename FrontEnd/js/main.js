@@ -100,7 +100,8 @@ var oNewEventVue = new Vue({
           sAdress: "",
           date: "",
           time: "",
-          status: "draft"
+          status: "draft",
+          iEventId: 999999,
         }
     },
     methods: {
@@ -122,7 +123,8 @@ var oNewEventVue = new Vue({
           sAdress: "",
           date: "",
           time: "",
-          status: "draft"
+          status: "draft",
+          iEventId: 999999,
         }
       },
     }
