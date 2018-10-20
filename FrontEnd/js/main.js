@@ -62,7 +62,8 @@ var aTestEvents = [
 var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
-        currentEvents: aTestEvents
+        currentEvents: aTestEvents,
+        selected: "" //id of selected event (see more info)
     }
 });
 

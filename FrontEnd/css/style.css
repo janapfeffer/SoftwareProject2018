@@ -54,6 +54,12 @@ div.sidecard {
   padding: 20px;
 }
 
+#eventTable li.mdl-list__item--three-line.showMoreClass .mdl-list__item-primary-content {
+  height: auto;
+}
+
+
+
 
 #newEventWrapper {
   transition: margin 0.5s;
