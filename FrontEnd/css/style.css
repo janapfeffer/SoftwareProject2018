@@ -25,10 +25,12 @@ h1 {
 }
 
 div#aside {
-  width: 600px;
+  width: 40%;
   position:absolute;
   top: 100px;
-  right: 100px;
+  right: 0;
+  box-sizing: border-box;
+  padding: 0px 50px;
 }
 
 div.sidecard {
@@ -101,7 +103,7 @@ div.sidecard {
 
 #map {
   position: fixed;
-  width: calc(100% - 790px);
+  width: 60%;
   height: 95%;
   top: 5%;
   left: 0px;

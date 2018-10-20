@@ -116,7 +116,7 @@ function addLocationsToMap(locations) {
         };
         marker = new H.map.Marker(position);
 
-                            /** alles Fake Daten 
+                            /** alles Fake Daten
                             var FakeEventMA1 = new H.map.Marker({ lat: 49.47689, lng: 8.46798 });
                             map.addObject(FakeEventMA1);
                             var FakeEventMA2 = new H.map.Marker({ lat: 49.5, lng: 8.465 });
@@ -146,3 +146,9 @@ function addLocationsToMap(locations) {
 
 // Now use the map as required...
 geocode(platform);
+
+
+// update map size at window size
+window.addEventListener('resize', function () {
+    map.getViewPort().resize();
+});
