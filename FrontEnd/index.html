@@ -139,11 +139,17 @@
     <h1>
        {{sName}}
     </h1>
-<!-- Searchbar for places -->
-  <input style="width: 200px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery">
-  <button style="color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-   name="action" @click="searchPlace">{{sButtonName}}</button>
+<!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
+
+<form autocomplete="off" action="/action_page.php">
+    <div class="autocomplete" style="width:300px;">
+  <input id="searchInput" style="width: 200px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace"  >
 </div>
+</form>
+ 
+  <button style="color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+   name="action" @click="searchPlace" >{{sButtonName}}</button>
+    </div>
 
 
     <!-- Map-->
