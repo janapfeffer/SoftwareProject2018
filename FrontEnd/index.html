@@ -21,7 +21,11 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-
+    <!-- element -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+    <script> ELEMENT.locale(ELEMENT.lang.en)</script>
     <!-- Own Files-->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -81,12 +85,14 @@
             <label class="mdl-textfield__label" for="sample1">Adresse</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" v-model="draft.date">
-            <label class="mdl-textfield__label" for="sample1">Datum</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" v-model="draft.time">
-            <label class="mdl-textfield__label" for="sample1">Uhrzeit</label>
+            <el-date-picker
+              v-model="draft.date"
+              type="datetimerange"
+              align="right"
+              start-placeholder="Start Date"
+              end-placeholder="End Date"
+              :default-time="['15:00:00', '19:00:00']">
+            </el-date-picker>
           </div>
 
           <div class="buttons">
@@ -117,6 +123,9 @@
                     <span class="mdl-list__item-text-body">
                         {{ event.sAdress }}
                     </span>
+                    <span class="mdl-list__item-text-body">
+                        {{ event.date }}
+                    </span>
                 </span>
                 <span class="mdl-list__item-secondary-content">
                     <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
@@ -142,6 +151,7 @@
 
     <!-- own script files-->
     <script type="text/javascript" src="js/Map.js"></script>
+
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

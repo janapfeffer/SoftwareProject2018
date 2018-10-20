@@ -71,6 +71,9 @@ var oEventTableVue = new Vue({
           // only data with specific Ids can be selected
           if (target.iEventId != undefined){
             this.selected = target.iEventId;
+            if(target.sAdress){
+              setMarker(target.sAdress,target.sName);
+            }
           }
         }
     }
@@ -102,7 +105,8 @@ var oNewEventVue = new Vue({
           time: "",
           status: "draft",
           iEventId: Math.floor(Math.random() * 99999) + 1,
-        }
+        },
+        value7: ''
     },
     methods: {
       formdraft: function(){
