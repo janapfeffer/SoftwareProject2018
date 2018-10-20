@@ -63,7 +63,16 @@ var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
         currentEvents: aTestEvents,
-        selected: "" //id of selected event (see more info)
+        selected: "joooo" //id of selected event (to see more info)
+    },
+    methods: {
+        // click on event in list to see more details
+        select: function(target){
+          // only data with specific Ids can be selected
+          if (target.iEventId != undefined){
+            this.selected = target.iEventId;
+          }
+        }
     }
 });
 
