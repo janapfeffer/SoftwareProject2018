@@ -133,6 +133,9 @@ function getAutocompletion(sQuery) {
     function getResponseBody(response){
         var aSuggestions = [];
         response.suggestions.forEach(function(suggestion){
+            var oSugAdr = suggestion.address
+            var suggestionShown = oSugAdr.city + " " + oSugAdr.street + " " + oSugAdr.houseNumber + " " + oSugAdr.state
+
             aSuggestions.push(suggestion.label.replace(/,/g,""))
         });
         // console.log(aSuggestions);
@@ -257,7 +260,7 @@ function setMarker(sAddress, sName){
         map.addObject(marker);
 
         marker.addEventListener('tap', function (evt) {
-        map.setCenter(evt.target.getPosition());
+        map.setCenter(evt.target.getPosition(), true);
         openBubble(
             evt.target.getPosition(), evt.target.label);
     }, false);
