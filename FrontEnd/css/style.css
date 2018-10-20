@@ -91,7 +91,7 @@ div.sidecard {
 #newEvent .buttons button:hover {background-color: rgba(47, 66, 79, 0.46);}
 #newEvent .buttons button:active {background-color: rgba(47, 66, 79, 0.26);}
 
-#placeSearch {
+#searchPlace {
   position: fixed;
   top: 140px;
   left: 20px;
