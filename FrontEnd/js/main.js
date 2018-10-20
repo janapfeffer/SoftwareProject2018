@@ -17,8 +17,8 @@ var oEvent = function(oEvent){
     this.sAdress = oEvent.sAdress;
     this.sInstagramHastag = oEvent.sInstagramHastag;
     this.iVerificationStatus = oEvent.iVerificationStatus;
-    this.oStartDate = oEvent.oStartDate;
-    this.oEndDate = oEvent.oEndDate;
+    this.osDate = oEvent.sDate;
+    this.oEndDate = oEvent.sEndDate;
     this.sEventLink = oEvent.sEventLink;
     this.sTicketLink = oEvent.sTicketLink;
 };
@@ -91,7 +91,7 @@ var oNewEventVue = new Vue({
           sName: "",
           sDescription: "",
           sAdress: "",
-          date: "",
+          sDate: "",
           time: "",
           status: "draft",
           iEventId: Math.floor(Math.random() * 99999) + 1,

@@ -87,7 +87,7 @@
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
             <el-date-picker
-              v-model="draft.date"
+              v-model="draft.sDate"
               type="datetimerange"
               align="right"
               start-placeholder="Start Date"
@@ -125,7 +125,7 @@
                         {{ event.sAdress }}
                     </span>
                     <span class="mdl-list__item-text-body">
-                        {{ event.date }}
+                        {{ event.sDate }}
                     </span>
                 </span>
                 <span class="mdl-list__item-secondary-content">

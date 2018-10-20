@@ -129,7 +129,7 @@ var getday = function(date){
             var craw_ev = {
               iEventId: $(elem).children("a").first().attr("name"),
               sName: $(elem).find("a.vk_erg_title").text(),
-              oStartDate: $(elem).find("div.vk_erg_times").text(),
+              sDate: $(elem).find("div.vk_erg_times").text(),
               sAdress: $(elem).find("div.vk_erg_loc").text()
             }
             eventArray.push(craw_ev);
