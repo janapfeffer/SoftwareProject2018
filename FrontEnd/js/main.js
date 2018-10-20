@@ -127,3 +127,5 @@ var oNewEventVue = new Vue({
       },
     }
 });
+
+geocode(undefined);
