@@ -58,6 +58,10 @@ div.sidecard {
   height: auto;
 }
 
+#eventTable span.mdl-list__item-text-body:empty {
+  display: none;
+}
+
 
 
 
