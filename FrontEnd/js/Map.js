@@ -36,6 +36,7 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 function geocode(sQuery) {
     //HANSCH always contains the last search request
     var sPlace = (sQuery === "" || sQuery === undefined) ? localStorage.getItem("HANSCH") : sQuery;
+    localStorage.setItem("HANSCH", sPlace);
     var geocoder = platform.getGeocodingService(),
         geocodingParameters = {
             searchText: sQuery,
