@@ -26,11 +26,12 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
     <script> ELEMENT.locale(ELEMENT.lang.en)</script>
+
     <!-- Own Files-->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class='landingpage'>
 
     <!-- Header/Navigation bar-->
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -129,21 +130,23 @@
       </div>
     </div>
 
-    <div id="searchPlace">
+    <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
     <h1>
        {{sName}}
     </h1>
 <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
-<form autocomplete="off" action="/action_page.php">
-    <div class="autocomplete" style="width:300px;">
-  <input id="searchInput" style="width: 200px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben"
+<div id="searchPlaceInner" autocomplete="off">
+    <div class="autocomplete" style="width:370;">
+  <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben"
   v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace"  >
-</div>
-</form>
-
   <button style="color:ghostwhite; background-color: darkslategrey; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
    name="action" @click="searchPlace" >{{sButtonName}}</button>
+</div>
+</div>
+
+
+
     </div>
 
 
@@ -154,6 +157,9 @@
     <script type="text/javascript" src="js/Map.js"></script>
     <script type="text/javascript" src="js/testdata.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+
+    <!-- tilt libary for css animations -->
+    <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
 
 </body>
 </html>
