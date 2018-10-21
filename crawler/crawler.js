@@ -1,10 +1,14 @@
 var express = require('express');
-var fs = require('fs');
+var fs = require('fs'); // read and write files
 var request = require('request');
 var cheerio = require('cheerio');
+// cheerio is jquery for node
+// is use it to navigate the Dom and pick elements
 var app     = express();
 var iconv = require('iconv-lite');
+// iconv takes care UTF encoding and special characters
 var cachedRequest = require('cached-request')(request);
+// cachedRequest Wraps request, makes sure we don't request the same over and over again.
 var cacheDirectory = "tmp/cache";
 var mkdirp = require('mkdirp');
 cachedRequest.setCacheDirectory(cacheDirectory);

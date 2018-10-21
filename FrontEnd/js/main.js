@@ -59,7 +59,7 @@ var oEventTableVue = new Vue({
           if (target.iEventId != undefined){
             this.selected = target.iEventId;
             if(target.sAdress){
-              setMarker(target.sAdress,target.sName);
+              setMarker(target.sAdress,target.sName+"</br>"+target.sDescription+"</br>"+target.sAdress+"</br>"+target.sDate);
             }
           }
         }
