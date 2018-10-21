@@ -93,6 +93,7 @@ var oNewEventVue = new Vue({
           sAdress: "",
           sDate: "",
           time: "",
+          latlng: {},
           status: "draft",
           iEventId: Math.floor(Math.random() * 99999) + 1,
         },
