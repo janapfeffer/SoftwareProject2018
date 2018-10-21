@@ -34,7 +34,7 @@ function suggestPlaces(inp, arr){
         the text field element and an array of possible autocompleted values:*/
         var currentFocus;
         /*execute a function when someone writes in the text field:*/
-            var a, b, i, val = inp.value; 
+            var a, b, i, val = inp.value;
             /*close any already open lists of autocompleted values*/
             closeAllLists();
             if (!val) { return false;}
@@ -137,20 +137,20 @@ function getAutocompletion(sQuery, oInputField) {
         var aSuggestions = [];
         response.suggestions.forEach(function(suggestion){
             var oSugAdr = suggestion.address
-            var suggestionShown = oSugAdr.city + " " + oSugAdr.street + " " + oSugAdr.houseNumber + " " + oSugAdr.state
+            var suggestionShown = oSugAdr.city + " " + oSugAdr.street + " " + oSugAdr.houseNumber + " " + oSugAdr.state;
 
             aSuggestions.push(suggestion.label.replace(/,/g,""))
         });
         // console.log(aSuggestions);
         suggestPlaces(oInputField, aSuggestions)
-        
+
     };
     var onAutoCompleteSuccess = function onAutoCompleteSuccess() {
-    
+
         getResponseBody(this.response);  // In this context, 'this' means the XMLHttpRequest itself.
         //  addSuggestionsToMap(this.response);
     };
-       
+
     /**
     * This function will be called if a communication error occurs during the XMLHttpRequest
     */
@@ -164,9 +164,9 @@ function getAutocompletion(sQuery, oInputField) {
 
     var params = '?' +
     'query=' +  encodeURIComponent(sQuery) +   // The search text which is the basis of the query
-    '&beginHighlight=' + encodeURIComponent("") + //  Mark the beginning of the match in a token. 
-    '&endHighlight=' + encodeURIComponent("") + //  Mark the end of the match in a token. 
-    '&maxresults=5' +  // The upper limit the for number of suggestions to be included 
+    '&beginHighlight=' + encodeURIComponent("") + //  Mark the beginning of the match in a token.
+    '&endHighlight=' + encodeURIComponent("") + //  Mark the end of the match in a token.
+    '&maxresults=5' +  // The upper limit the for number of suggestions to be included
                       // in the response.  Default is set to 5.
     '&app_id=' + "TERY6ac06hlozadvCdyy" +
     '&app_code=' + "1mqHefqb9ZMTdauG1qNNIQ";
@@ -200,7 +200,7 @@ function setCenter(sQuery) {
             var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
             var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
             var oLatLgn = {lat: dLat, lng: dLng}
-             
+
             map.setCenter(oLatLgn, true);
             if(map.getZoom() < 14.5){
                 map.setZoom(14.5, true);
@@ -299,7 +299,7 @@ window.addEventListener('resize', function () {
 
 
 
-// API reference: https://developer.here.com/api-explorer/rest/batch_geocoding/batch-geocode-addresses 
+// API reference: https://developer.here.com/api-explorer/rest/batch_geocoding/batch-geocode-addresses
 function postBatchGeocoderRequest() {
     var BATCH_GEOCODER_URL = 'https://batch.geocoder.api.here.com/6.2/jobs';
     var ajaxRequest = new XMLHttpRequest();
@@ -307,7 +307,7 @@ function postBatchGeocoderRequest() {
     var params = '?' +
     'app_id=TERY6ac06hlozadvCdyy' +
     '&app_code=1mqHefqb9ZMTdauG1qNNIQ' +
-    '&mailto=cornelius.schaefer1@gmail.com' + 
+    '&mailto=cornelius.schaefer1@gmail.com' +
     '&indelim=|' +
     '&outdelim=|' +
     '&action=run' +

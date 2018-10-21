@@ -75,7 +75,12 @@ var oSearchPlaceVue = new Vue({
     },
     methods: {
         searchPlace: function searchPlace() {
-            setCenter(this.sQuery);
+          if(document.body.classList.contains('landingpage')){
+            document.body.classList.remove('landingpage');
+            document.querySelector("#searchPlace").vanillaTilt.destroy()
+            map.getViewPort().resize();
+          }
+          setCenter(this.sQuery);
         },
         autocomplete: function autocomplete() {
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
