@@ -6,6 +6,10 @@ var oNavigationVue = new Vue({
     methods: {
       showNewEventCard: function(){
         oNewEventVue.cardShown = !oNewEventVue.cardShown;
+      },
+      toggleBigMap: function(){
+          document.body.classList.toggle('bigMap');
+          map.getViewPort().resize();
       }
     }
 });

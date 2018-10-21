@@ -203,3 +203,21 @@ div.sidecard {
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+
+.bigMap div#aside {
+  width: 37%;
+  position:absolute;
+  top: 100px;
+  right: 57px;
+  padding: 2%;
+  z-index: 2;
+  background-color: #33333375;
+  border-radius: 10px;
+}
+
+.bigMap #map {
+  width: 100%;
+  height: 95%;
+  top: 5%;
+  left: 0px;
