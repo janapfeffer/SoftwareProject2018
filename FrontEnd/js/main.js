@@ -78,7 +78,7 @@ var oSearchPlaceVue = new Vue({
             setCenter(this.sQuery);
         },
         autocomplete: function autocomplete() {
-            getAutocompletion(this.sQuery);
+            getAutocompletion(this.sQuery, document.getElementById("searchInput"));
         }
     }
 });
@@ -106,7 +106,7 @@ var oNewEventVue = new Vue({
       },
       formsubmit: function(){
         if (oEventTableVue.currentEvents[0].status =="draft"){
-          oEventTableVue.currentEvents.shift(); //delete draft in surrent array
+          oEventTableVue.currentEvents.shift(); //delete draft in current array
         }
         this.draft.status = "unsend";
         var cloneObj = JSON.parse( JSON.stringify( this.draft ) ); // to not pass it by reference
@@ -122,6 +122,14 @@ var oNewEventVue = new Vue({
           iEventId: Math.floor(Math.random() * 99999) + 1,
         }
       },
+      autocomplete: function autocomplete() {
+        getAutocompletion(this.draft.sAdress, document.getElementById("newEventAddress"));
+      },
+      checkLocation: function checkLocation() {
+        setCenter(this.draft.sAdress);
+        var sCheckLocMarkerName = this.draft.sName != "" ? this.draft.sName : "Is this your events location?";
+        setMarker(this.draft.sAdress, sCheckLocMarkerName);
+      }
     }
 });
 

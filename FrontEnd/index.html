@@ -81,7 +81,8 @@
             <label class="mdl-textfield__label" for="schools">Beschreibung</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" v-model="draft.sAdress">
+            <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
+            <button @click="checkLocation">check location</button>
             <label class="mdl-textfield__label" for="sample1">Adresse</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

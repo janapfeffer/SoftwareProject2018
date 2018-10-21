@@ -34,18 +34,17 @@ function suggestPlaces(inp, arr){
         the text field element and an array of possible autocompleted values:*/
         var currentFocus;
         /*execute a function when someone writes in the text field:*/
-        inp.addEventListener("input", function(e) {
-            var a, b, i, val = this.value;
+            var a, b, i, val = inp.value; 
             /*close any already open lists of autocompleted values*/
             closeAllLists();
             if (!val) { return false;}
             currentFocus = -1;
             /*create a DIV element that will contain the items (values):*/
             a = document.createElement("DIV");
-            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("id", inp.id + "autocomplete-list");
             a.setAttribute("class", "autocomplete-items");
             /*append the DIV element as a child of the autocomplete container:*/
-            this.parentNode.appendChild(a);
+            inp.parentNode.appendChild(a);
             /*for each item in the array...*/
             for (i = 0; i < arr.length; i++) {
               /*check if the item starts with the same letters as the text field value:*/
@@ -53,7 +52,7 @@ function suggestPlaces(inp, arr){
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML = arr[i].substr(0, val.length);
                 b.innerHTML += arr[i].substr(val.length);
                 /*insert a input field that will hold the current array item's value:*/
                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
@@ -68,7 +67,6 @@ function suggestPlaces(inp, arr){
                 a.appendChild(b);
             //   }
             }
-        });
         /*execute a function presses a key on the keyboard:*/
         inp.addEventListener("keydown", function(e) {
             var x = document.getElementById(this.id + "autocomplete-list");
@@ -126,7 +124,7 @@ function suggestPlaces(inp, arr){
       });
 }
 
-function getAutocompletion(sQuery) {
+function getAutocompletion(sQuery, oInputField) {
     var AUTOCOMPLETION_URL = 'https://autocomplete.geocoder.api.here.com/6.2/suggest.json';
     var ajaxRequest = new XMLHttpRequest();
 
@@ -139,52 +137,7 @@ function getAutocompletion(sQuery) {
             aSuggestions.push(suggestion.label.replace(/,/g,""))
         });
         // console.log(aSuggestions);
-        suggestPlaces(document.getElementById("searchInput"), aSuggestions)
-        
-    };
-    var onAutoCompleteSuccess = function onAutoCompleteSuccess() {
-    
-        getResponseBody(this.response);  // In this context, 'this' means the XMLHttpRequest itself.
-        //  addSuggestionsToMap(this.response);
-    };
-       
-    /**
-    * This function will be called if a communication error occurs during the XMLHttpRequest
-    */
-    var onAutoCompleteFailed=    function onAutoCompleteFailed() {
-         alert('Ooops!');
-    };
-    // Attach the event listeners to the XMLHttpRequest object
-    ajaxRequest.addEventListener("load", onAutoCompleteSuccess);
-    ajaxRequest.addEventListener("error", onAutoCompleteFailed);
-    ajaxRequest.responseType = "json";
-
-    var params = '?' +
-    'query=' +  encodeURIComponent(sQuery) +   // The search text which is the basis of the query
-    '&beginHighlight=' + encodeURIComponent("") + //  Mark the beginning of the match in a token. 
-    '&endHighlight=' + encodeURIComponent("") + //  Mark the end of the match in a token. 
-    '&maxresults=5' +  // The upper limit the for number of suggestions to be included 
-                      // in the response.  Default is set to 5.
-    '&app_id=' + "TERY6ac06hlozadvCdyy" +
-    '&app_code=' + "1mqHefqb9ZMTdauG1qNNIQ";
-    ajaxRequest.open('GET', AUTOCOMPLETION_URL + params );
-    ajaxRequest.send();
-}
-
-function postBatchGeocoderRequest(sQuery) {
-    var AUTOCOMPLETION_URL = 'https://autocomplete.geocoder.api.here.com/6.2/suggest.json';
-    var ajaxRequest = new XMLHttpRequest();
-
-    function getResponseBody(response){
-        var aSuggestions = [];
-        response.suggestions.forEach(function(suggestion){
-            var oSugAdr = suggestion.address
-            var suggestionShown = oSugAdr.city + " " + oSugAdr.street + " " + oSugAdr.houseNumber + " " + oSugAdr.state
-
-            aSuggestions.push(suggestion.label.replace(/,/g,""))
-        });
-        // console.log(aSuggestions);
-        suggestPlaces(document.getElementById("searchInput"), aSuggestions)
+        suggestPlaces(oInputField, aSuggestions)
         
     };
     var onAutoCompleteSuccess = function onAutoCompleteSuccess() {
@@ -337,3 +290,35 @@ function openBubble(position, text) {
 window.addEventListener('resize', function () {
     map.getViewPort().resize();
 });
+
+
+
+
+// API reference: https://developer.here.com/api-explorer/rest/batch_geocoding/batch-geocode-addresses 
+function postBatchGeocoderRequest() {
+    var BATCH_GEOCODER_URL = 'https://batch.geocoder.api.here.com/6.2/jobs';
+    var ajaxRequest = new XMLHttpRequest();
+
+    var params = '?' +
+    'app_id=TERY6ac06hlozadvCdyy' +
+    '&app_code=1mqHefqb9ZMTdauG1qNNIQ' +
+    '&mailto=cornelius.schaefer1@gmail.com' + 
+    '&indelim=|' +
+    '&outdelim=|' +
+    '&action=run' +
+    '&outcols=displayLatitude,displayLongitude,locationLabel,houseNumber,street,district,city,postalCode,county,state,country' +
+    '&outputcombined=false'+
+    '&dataType';
+    var body = "recId|searchText|country"
+    + "|0001|Invalidenstraße 116 10115 Berlin|DEU"
+    +" |0002|Am Kronberger Hang 8 65824 Schwalbach|DEU"
+    + "|0003|425 W Randolph St Chicago IL 60606|USA"
+    + "|0004|One Main Street Cambridge MA 02142|USA"
+    + "|0005|200 S Mathilda Ave Sunnyvale CA 94086|USA";
+                      // in the response.  Default is set to 5.
+    ajaxRequest.open('POST', BATCH_GEOCODER_URL + params );
+    ajaxRequest.send();
+    // optional example: recId|street|city|postalCode|country - for more see: https://developer.here.com/documentation/batch-geocoder/topics/data-input.html
+
+    // Problem: https://stackoverflow.com/questions/20035101/why-does-my-javascript-get-a-no-access-control-allow-origin-header-is-present
+};
