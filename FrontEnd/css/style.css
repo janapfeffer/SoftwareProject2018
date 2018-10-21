@@ -205,6 +205,15 @@ div.sidecard {
 }
 
 
+
+
+.bigMap #map {
+  width: 100%;
+  height: 95%;
+  top: 5%;
+  left: 0px;
+}
+
 .bigMap div#aside {
   width: 37%;
   position:absolute;
@@ -212,12 +221,13 @@ div.sidecard {
   right: 57px;
   padding: 2%;
   z-index: 2;
-  background-color: #33333375;
-  border-radius: 10px;
 }
 
-.bigMap #map {
-  width: 100%;
-  height: 95%;
-  top: 5%;
-  left: 0px;
+.bigMap #eventTable, .bigMap #newEvent {
+  box-shadow: 4px 4px 16px #00000063;
+}
+
+.sidecard h2 {
+  color: white;
+  text-shadow: 4px 4px 30px #00000063;
+}
