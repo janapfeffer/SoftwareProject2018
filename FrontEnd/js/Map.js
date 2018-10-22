@@ -20,8 +20,6 @@ var map = new H.Map(document.getElementById('map'),
         pixelRatio: pixelRatio
     });
 map.setCenter({ lat: 49.48651, lng: 8.46679 }, true)
-
-
 //Step 3: make the map interactive
 // MapEvents enables the event system - behavior implements default interactions for pan/zoom (also on mobile touch environments)
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
@@ -59,10 +57,10 @@ function suggestPlaces(inp, arr){
                 /*execute a function when someone clicks on the item value (DIV element):*/
                     b.addEventListener("click", function(e) {
                     /*insert the value for the autocomplete text field:*/
-                    if(inp = document.getElementById("newEventAddress")){
+                    if(inp === document.getElementById("newEventAddress")){
                         oNewEventVue.draft.sAdress = this.getElementsByTagName("input")[0].value;
                     }
-                    if(document.getElementById("searchInput")){
+                    if(inp === document.getElementById("searchInput")){
                         oSearchPlaceVue.sQuery = this.getElementsByTagName("input")[0].value;
                     }
                     /*close the list of autocompleted values,
@@ -260,11 +258,16 @@ function setMarker(sAddress, sName){
 
         map.addObject(marker);
 
+        
         marker.addEventListener('tap', function (evt) {
-        map.setCenter(evt.target.getPosition(), true);
-        openBubble(
-            evt.target.getPosition(), evt.target.label);
-    }, false);
+            map.setCenter(evt.target.getPosition(), true);
+        }, false);
+        marker.addEventListener('pointerenter', function (evt) {
+            openBubble(evt.target.getPosition(), evt.target.label);
+        }, false);
+        marker.addEventListener('pointerleave', function (evt) {
+            closeBubble(evt.target.getPosition());
+        }, false);
     },
     onError = function(error) {
         alert('Ooops!');
@@ -291,39 +294,17 @@ function openBubble(position, text) {
     }
 }
 
+var bubble; // Hold a reference to any infobubble opened
+/**
+ * Opens/Closes a infobubble
+ * @param  {H.geo.Point} position     The location on the map.
+ * @param  {String} text              The contents of the infobubble.
+ */
+function closeBubble(position) {
+        bubble.close();
+}
+
 // update map size at window size
 window.addEventListener('resize', function () {
     map.getViewPort().resize();
 });
-
-
-
-
-// API reference: https://developer.here.com/api-explorer/rest/batch_geocoding/batch-geocode-addresses
-function postBatchGeocoderRequest() {
-    var BATCH_GEOCODER_URL = 'https://batch.geocoder.api.here.com/6.2/jobs';
-    var ajaxRequest = new XMLHttpRequest();
-
-    var params = '?' +
-    'app_id=TERY6ac06hlozadvCdyy' +
-    '&app_code=1mqHefqb9ZMTdauG1qNNIQ' +
-    '&mailto=cornelius.schaefer1@gmail.com' +
-    '&indelim=|' +
-    '&outdelim=|' +
-    '&action=run' +
-    '&outcols=displayLatitude,displayLongitude,locationLabel,houseNumber,street,district,city,postalCode,county,state,country' +
-    '&outputcombined=false'+
-    '&dataType';
-    var body = "recId|searchText|country"
-    + "|0001|Invalidenstraße 116 10115 Berlin|DEU"
-    +" |0002|Am Kronberger Hang 8 65824 Schwalbach|DEU"
-    + "|0003|425 W Randolph St Chicago IL 60606|USA"
-    + "|0004|One Main Street Cambridge MA 02142|USA"
-    + "|0005|200 S Mathilda Ave Sunnyvale CA 94086|USA";
-                      // in the response.  Default is set to 5.
-    ajaxRequest.open('POST', BATCH_GEOCODER_URL + params );
-    ajaxRequest.send();
-    // optional example: recId|street|city|postalCode|country - for more see: https://developer.here.com/documentation/batch-geocoder/topics/data-input.html
-
-    // Problem: https://stackoverflow.com/questions/20035101/why-does-my-javascript-get-a-no-access-control-allow-origin-header-is-present
-};

@@ -7,7 +7,7 @@ html {
 header.mdl-layout__header{
    color: white;
    font-family: Bahnschrift;
-   background-color:darkslategrey;
+   background-color:#365067;
 }
 
 .mdl-navigation__link{ cursor: pointer }
