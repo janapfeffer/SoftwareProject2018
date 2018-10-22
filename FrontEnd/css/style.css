@@ -45,11 +45,11 @@ h1{
 }
 
 .landingpage div#searchPlace {
-  top: 50%;
+  top: 40%;
   margin-top: -110px;
   margin-left: -165px;
   left: 50%;
-  padding: 10px;
+  padding: 0px 15px 12px 15px;
   transform-style: preserve-3d;
 }
 
