@@ -1,5 +1,6 @@
 const sequelizedConnection = require ("./model_sequelizer");
 const Sequelize = require("sequelize");
+
 var Event = sequelizedConnection.define("events", {
     idevents : {
         type: Sequelize.INTEGER,
