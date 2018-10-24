@@ -3,7 +3,7 @@ const Event_Type = require ("./models/event_type_model");
 
 //init event types in database
 
-exports.init_event_types = (req, res, next) => {
+exports.post_event_types = (req, res, next) => {
     const eventType = new Event_Type({
         _id: new mongoose.Types.ObjectId(),
         event_type: req.body.event_type,
