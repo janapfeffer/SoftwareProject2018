@@ -34,7 +34,7 @@
 <body class='landingpage'>
 
     <!-- Header/Navigation bar-->
-    <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header"> <!-- id="navigation" ist vue syntax - siehe main.js -->
         <header class="mdl-layout__header" >
             <div class="mdl-layout__header-row" >
                 <!-- Title -->
@@ -46,7 +46,7 @@
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link" href="index.html">Map</a>
-                    <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
+                    <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a> <!-- @click ist vue syntax - siehe main.js -->
                     <a class="mdl-navigation__link">Favoriten</a>
                     <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
                 </nav>
@@ -71,7 +71,7 @@
         <h2>Neues Event eintragen</h2>
         <div id="newEvent">
           <p>
-            Fügen sie ein neues Event in unsere Databank ein
+            Fügen Sie ein neues Event zu unserer Datenbank hinzu
           </p>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" v-model="draft.sName">
@@ -108,7 +108,7 @@
         </div>
       </div>
 
-
+      
       <div class="sidecard">
         <h2> Events</h2>
         <ul id="eventTable" class="demo-list-three mdl-list">
@@ -131,7 +131,7 @@
       </div>
     </div>
 
-    <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
+    <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="12" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
     <h1>
        {{sName}}
     </h1>

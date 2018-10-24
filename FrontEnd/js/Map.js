@@ -308,3 +308,4 @@ function closeBubble(position) {
 window.addEventListener('resize', function () {
     map.getViewPort().resize();
 });
+
