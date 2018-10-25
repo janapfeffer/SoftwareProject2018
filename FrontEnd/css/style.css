@@ -257,3 +257,12 @@ div.sidecard {
   color: white;
   text-shadow: 4px 4px 30px #00000063;
 }
+
+#infoBubble {
+  background-color:#f1f1f1;
+    width: 100px;
+    height: 50px;
+    border: 10px solid green;
+    padding: 10px;
+    margin: 10px;
+}

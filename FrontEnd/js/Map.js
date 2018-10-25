@@ -299,14 +299,17 @@ var bubble; // Hold a reference to any infobubble opened
  * @param  {String} text              The contents of the infobubble.
  */
 function openBubble(position, text) {
+    myHTMLcontent = '<div class=\'infoBubble\'>  </div>';
+
     if (!bubble) {
         bubble = new H.ui.InfoBubble(
             position,
-            { content: text });
+            { content: myHTMLcontent });
         ui.addBubble(bubble);
     } else {
+        
         bubble.setPosition(position);
-        bubble.setContent(text);
+        bubble.setContent(myHTMLcontent);
         if(bubble.getState() != "open"){
             bubble.open();
         }
