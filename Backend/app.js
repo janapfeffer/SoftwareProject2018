@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const helperRoutes = require("./RestAPI/routes/helper_routes");
 const eventRoutes = require( "../Backend/RestAPI/routes/event_router")
+const userRoutes = require( "../Backend/RestAPI/routes/user_router")
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
@@ -39,8 +40,8 @@ app.use((req, res, next) => {
         res.header("Access-Control-Allow-Methods", "PUT, POST, UPDATE, DELETE, GET");
         return res.status(200).json({});
     }
-    /** next() has to be called at end of middleware, 
-     * so that requests are allowed to pass after passing this middleware 
+    /** next() has to be called at end of middleware,
+     * so that requests are allowed to pass after passing this middleware
     */
     next();
 });
@@ -48,13 +49,14 @@ app.use((req, res, next) => {
 //Middleware: Connects to routes
 app.use("/event_type", helperRoutes);
 app.use("/events", eventRoutes)
+app.use("/user", userRoutes)
 
 app.get('/', function (req, res) {
     res.send('hello world');
 });
 
 //Error handling
-//404 Error 
+//404 Error
 app.use((req, res, next) => {
     const error = new Error("Not found");
     error.status = 404;

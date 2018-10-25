@@ -1,7 +1,8 @@
 const express = require("express");
+const multer = require ("multer");
 const router = express.Router();
 const EventController = require("../controllers/event_controller");
-const multer = require ("multer");
+
 // picture upload: START
 // storage strategy: allows to adjust how files get stored
 const storage = multer.diskStorage({
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
       cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
     }
   });
-  
+
   // only accept certain file types: jpeg and png
   const fileFilter = (req, file, cb) => {
     // reject a file
@@ -25,7 +26,7 @@ const storage = multer.diskStorage({
       cb(null, false);
     }
   };
-  
+
   const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
