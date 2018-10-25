@@ -1,15 +1,86 @@
-const mongoose = require ("mongoose");
-const Event = require("./models/event_model.js");
+const mongoose = require("mongoose");
+const OEvent = require("../models/event_model");
 
-exports.get_events();
+exports.get_all_events = (req, res, next) => {
+    OEvent.find()
+        .select("_id event_name author description address start_date end_date event_link ticket_link instagram_hashtag comments")
+        .populate("event_types")
+        .exec()
+        .then(elements => {
+            res.status(200).json({
+                count: elements.length,
+                oEvents: elements.map(element => {
+                    return {
+                        event_name: element._id,
+                        author: element.author,
+                        description: element.description,
+                        address: element.address,
+                        start_date: element.start_date,
+                        end_date: element.end_date,
+                        event_link: element.event_link,
+                        ticket_link: element.ticket_link,
+                        instagram_hashtag: element.instagram_hashtag,
+                        comments: element.comments,
+                        request: {
+                            type: "GET",
+                            uri: "http://localhost:3000/events/" + element._id
+                        }
+                    };
+                })
+            });
+        })
+        .catch(err => {
+            console.error("Error: ", err.stack);
+            res.status(500).json({
+                error: err
+            })
+        });
+}
 
+//Image muss noch hinzugefügt werden
 exports.create_event = (req, res, next) => {
-    const event = new Event({
+    const oEvent = new OEvent({
         _id: new mongoose.Types.ObjectId(),
         event_name: req.body.event_name,
         description: req.body.description,
-        address: req.body.address,
+        city: req.body.city,
+        zip: req.body.zip,
+        street: req.body.street,
+        house_number: req.body.house_number,
         start_date: req.body.start_date,
-        
-    })
+        end_date: req.body.end_date,
+        event_link: req.body.event_link,
+        ticket_link: req.body.ticket_link,
+        instagram_hashtag: req.body.instagram_hashtag,
+    });
+    oEvent
+        .save()
+        .then(result => {
+            res.status(201).json({
+                message: "Created new event successfully",
+                created_event: {
+                    event_name: result._id,
+                    description: result.description,
+                    city: result.city,
+                    zip: result.zip,
+                    street: result.street,
+                    house_number: result.house_number,
+                    start_date: result.start_date,
+                    end_date: result.end_date,
+                    event_link: result.event_link,
+                    ticket_link: result.ticket_link,
+                    instagram_hashtag: result.instagram_hashtag,
+                    request: {
+                        type: "GET",
+                        uri: "http://localhost:3000/events/" + result._id
+                    }
+                }
+            });
+        })
+        .catch(err => {
+            console.error("Error: ", err.stack);
+            res.status(500).json({
+                error: err
+            })
+        });
 }

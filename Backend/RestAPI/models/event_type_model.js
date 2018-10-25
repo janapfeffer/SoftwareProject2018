@@ -1,6 +1,6 @@
-const mongoose = require ("mongoose");
+const mongoose = require("mongoose");
 
-const eventTypeSchema = mongoose.Schema ({
+const eventTypeSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     event_type: {
         type: String,
@@ -8,4 +8,4 @@ const eventTypeSchema = mongoose.Schema ({
     }
 });
 
-module.exports = mongoose.model('Event_Type', eventTypeSchema);
+module.exports = mongoose.model('Event_Type', eventTypeSchema); 

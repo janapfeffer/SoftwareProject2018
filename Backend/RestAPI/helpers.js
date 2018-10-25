@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Event_Type = require ("./models/event_type_model");
+const Event_Type = require("./models/event_type_model");
 
 //init event types in database
 
@@ -7,28 +7,30 @@ exports.post_event_types = (req, res, next) => {
     const eventType = new Event_Type({
         _id: new mongoose.Types.ObjectId(),
         event_type: req.body.event_type,
-        
     });
 
-    eventType.save().then(result => {
-        console.log(result);
-        res.status(201).json({
-            message: "Created event type successfully",
-            newEventType:{
-                _id: result._id,
-                event_type: result.event_type,
-                request: {
-                    type: "POST",
-                    url: "http://localhost:3000/event_types/"+ result._id
+    eventType
+        .save()
+        .then(result => {
+            console.log(result);
+            res.status(201).json({
+                message: "Created new event type successfully",
+                newEventType: {
+                    _id: result._id,
+                    event_type: result.event_type,
+                    request: {
+                        type: "GET",
+                        uri: "http://localhost:3000/event_types/" + result._id
+                    }
                 }
-            }
+            })
         })
-    }). catch(err => {
-        console.error("Error: ", err.stack);
-        res.status(500).json({
-            err: err
+        .catch(err => {
+            console.error("Error: ", err.stack);
+            res.status(500).json({
+                err: err
+            })
         })
-    })
 }
 
 exports.get_event_types = (req, res, next) => {
@@ -44,7 +46,7 @@ exports.get_event_types = (req, res, next) => {
                         _id: doc._id,
                         request: {
                             type: "GET",
-                             url: "http://localhost:3000/event_type/" + doc._id
+                            uri: "http://localhost:3000/event_type/" + doc._id
                         }
                     };
                 })
@@ -54,7 +56,7 @@ exports.get_event_types = (req, res, next) => {
         .catch(err => {
             console.error("Error: ", err.stack);
             res.status(500).json({
-                error:err
+                error: err
             });
         });
 };
