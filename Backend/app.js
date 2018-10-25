@@ -36,10 +36,11 @@ app.use((req, res, next) => {
 });
 
 app.use("/event_type", routes);
+app.use("/events", routes);
 
 app.get('/', function(req, res){
     res.send('hello world');
-}); 
+});
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');

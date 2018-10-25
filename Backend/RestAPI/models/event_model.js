@@ -13,7 +13,7 @@ const eventSchema = mongoose.Schema ({
         description: {
         type: String,
         required: true
-        }, 
+        },
         address: {
             city: {
                 type: String,
@@ -61,9 +61,9 @@ const eventSchema = mongoose.Schema ({
             required: false
         },
         event_type: {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: "Event_Type", 
-            required: true 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Event_Type",
+            required: true
         },
         times_reported: {
             type: Number,
@@ -71,9 +71,9 @@ const eventSchema = mongoose.Schema ({
         },
         comments: {
             username: {
-                type: mongoose.Schema.Types.ObjectId, 
-                ref: "User", 
-                required: false 
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+                required: false
             },
             comment:{
                 type: String,

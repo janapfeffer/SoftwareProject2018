@@ -1,36 +1,6 @@
 const mongoose = require("mongoose");
 const Event_Type = require ("./models/event_type_model");
 
-//init event types in database
-
-exports.init_event_types = (req, res, next) => {
-    const eventType = new Event_Type({
-        _id: new mongoose.Types.ObjectId(),
-        event_type: req.body.event_type,
-
-    });
-
-    eventType.save().then(result => {
-        console.log(result);
-        res.status(201).json({
-            message: "Created event type successfully",
-            newEventType:{
-                _id: result._id,
-                event_type: result.event_type,
-                request: {
-                    type: "POST",
-                    url: "http://localhost:3000/event_types/"+ result._id
-                }
-            }
-        })
-    }). catch(err => {
-        console.error("Error: ", err.stack);
-        res.status(500).json({
-            err: err
-        })
-    })
-}
-
 exports.get_event_types = (req, res, next) => {
     Event_Type.find()
         .select("event_type _id")
@@ -57,4 +27,31 @@ exports.get_event_types = (req, res, next) => {
                 error:err
             });
         });
+};
+
+exports.get_event_type = (req, res, next) => {
+  const id = req.params.eventId;
+  Event.findById(id)
+    .select("event_type")
+    .exec()
+    .then(doc => {
+      console.log("From database", doc);
+      if (doc) {
+        res.status(200).json({
+          event_type: doc,
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/event_type"
+          }
+        });
+      } else {
+        res
+          .status(404)
+          .json({ message: "No valid entry found for provided ID" });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 };
