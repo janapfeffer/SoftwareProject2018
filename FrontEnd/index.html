@@ -154,17 +154,16 @@
                     Fügen sie ein neues Event in unsere Databank ein
                 </p>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" v-model="draft.sName">
+                    <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
                     <label class="mdl-textfield__label" for="sample1">Titel</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
+                    <textarea class="mdl-textfield__input" maxlength="300" type="text" rows="3" maxrows="6"
                               v-model="draft.sDescription"></textarea>
                     <label class="mdl-textfield__label" for="schools">Beschreibung</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
-                    <button @click="checkLocation">check location</button>
                     <label class="mdl-textfield__label" for="sample1">Adresse</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -177,6 +176,8 @@
                                     :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
+
+                <input class="mdl-textfield__input" type="file"  @change="onFileSelected">
 
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
@@ -216,7 +217,7 @@
 
         <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
             <h1>
-                {{sName}}
+                Event Finder
             </h1>
             <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
@@ -226,7 +227,7 @@
                            v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace">
                     <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
                             name="action" @click="searchPlace">
-                        {{sButtonName}}
+                        Suche
                     </button>
                 </div>
             </div>
