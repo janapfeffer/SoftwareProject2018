@@ -41,5 +41,6 @@ const upload = multer({
 
 // routes
 router.post("/", upload.single('eventImage'), EventController.create_event);
+router.get("/",  EventController.get_events);
 
 module.exports = router;

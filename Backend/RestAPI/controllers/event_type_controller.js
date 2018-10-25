@@ -30,7 +30,7 @@ exports.get_event_types = (req, res, next) => {
 };
 
 exports.get_event_type = (req, res, next) => {
-  const id = req.params.eventId;
+  const id = req.params._id;
   Event.findById(id)
     .select("event_type")
     .exec()
@@ -41,7 +41,7 @@ exports.get_event_type = (req, res, next) => {
           event_type: doc,
           request: {
             type: "GET",
-            url: "http://localhost:3000/event_type"
+            url: "http://localhost:3000/event_type/" + id
           }
         });
       } else {

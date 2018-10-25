@@ -1,8 +1,6 @@
 const mongoose = require ("mongoose");
 const Event = require("./models/event_model.js");
 
-exports.get_events();
-
 exports.create_event = (req, res, next) => {
     const event = new Event({
         _id: new mongoose.Types.ObjectId(),
@@ -17,4 +15,32 @@ exports.create_event = (req, res, next) => {
         ticket_link: req.body.ticket_link,
         event_type: req.body.event_type
     })
-}
+};
+
+exports.get_events = (req, res, next) => {
+  Event.find()
+      .select("event_name _id")
+      .exec()
+      .then(docs => {
+          const response = {
+              count: docs.length,
+              events: docs.map(doc => {
+                  return {
+                      event_name: doc.event_name,
+                      _id: doc._id,
+                      request: {
+                          type: "GET",
+                           url: "http://localhost:3000/events/" + doc._id
+                      }
+                  };
+              })
+          };
+          res.status(200).json(response);
+      })
+      .catch(err => {
+          console.error("Error: ", err.stack);
+          res.status(500).json({
+              error:err
+          });
+      });
+};
