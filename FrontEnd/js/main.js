@@ -6,7 +6,10 @@ var oNavigationVue = new Vue({
     methods: {
       showNewEventCard: function(){
         oNewEventVue.cardShown = !oNewEventVue.cardShown;
-      },
+        },
+        showNewLoginCard: function () {
+            oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
+        },
       toggleBigMap: function(){
           document.body.classList.toggle('bigMap');
           map.getViewPort().resize();
@@ -144,3 +147,56 @@ var oNewEventVue = new Vue({
 });
 
 setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
+
+//IDK what I do 
+var oNewLoginVue = new Vue({
+    el: "#newLoginWrapper",
+    data: {
+        cardShown: false,
+        draft: {
+            sName: "",
+            sDescription: "",
+            sAdress: "",
+            sDate: "",
+            time: "",
+            latlng: {},
+            status: "draft",
+            iEventId: Math.floor(Math.random() * 99999) + 1,
+        },
+        value7: ''
+    },
+    methods: {
+        formdraft: function () {
+            if (oEventTableVue.currentEvents[0].status != "draft") {
+                oEventTableVue.currentEvents.unshift(this.draft)
+            }
+        },
+        formsubmit: function () {
+            if (oEventTableVue.currentEvents[0].status == "draft") {
+                oEventTableVue.currentEvents.shift(); //delete draft in current array
+            }
+            this.draft.status = "unsend";
+            var cloneObj = JSON.parse(JSON.stringify(this.draft)); // to not pass it by reference
+            oEventTableVue.currentEvents.unshift(cloneObj);
+            this.cardShown = !this.cardShown;
+            this.draft = { // reset vueinternal data to make possible to add new event
+                sName: "",
+                sDescription: "",
+                sAdress: "",
+                date: "",
+                time: "",
+                latlng: {},
+                status: "draft",
+                iEventId: Math.floor(Math.random() * 99999) + 1,
+            }
+        },
+        autocomplete: function autocomplete() {
+            getAutocompletion(this.draft.sAdress, document.getElementById("newEventAddress"));
+        },
+        checkLocation: function checkLocation() {
+            setCenter(this.draft.sAdress);
+            var sCheckLocMarkerName = this.draft.sName != "" ? this.draft.sName : "Is this your events location?";
+            setMarker(this.draft.sAdress, sCheckLocMarkerName);
+        }
+    }
+});
