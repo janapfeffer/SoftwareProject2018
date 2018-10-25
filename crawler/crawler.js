@@ -14,9 +14,12 @@ var mkdirp = require('mkdirp');
 cachedRequest.setCacheDirectory(cacheDirectory);
 cachedRequest.setValue('ttl', 100000);
 var db = require('diskdb'); // database to track which event is saved how
-db = db.connect('data')
+db = db.connect('data');
+wochentag = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
 
-var getday = function(date){
+
+
+var getday = function(date, thenCallback=function(){}){
   db.loadCollections([date]);
   cachedRequest({
      url:'http://veranstaltungen-mannheimer-morgen.morgenweb.de',
@@ -128,24 +131,34 @@ var getday = function(date){
             return;
           }
           var $ = cheerio.load(iconv.decode(body, "ISO-8859-1"));
-          //console.log($.html());
-          //console.log($);
+
+          var updates = 0;
+          var inserts = 0;
+
           $('.vk_ergebnisse').each(function (i, elem){
 
             var oEvent = {
               iEventId: $(elem).children("a").first().attr("name").replace(/[^0-9\.]/g, ''),
               sName: $(elem).find("a.vk_erg_title").text(),
-              sDate: $(elem).find("div.vk_erg_times").text(),
+              sDate: $(elem).find("div.vk_erg_times").text().replace(/(Heute)|(Morgen)/ig,wochentag[oDate.getDay()]),
               //sAdress: $(elem).find("div.vk_erg_loc").text()
             }
             // update or insert events one by one in database
             var req = db[date].update({iEventId:oEvent.iEventId}, oEvent, {upsert:true});
             if (req.inserted){
+              inserts++;
               //give newly inserted events status 1
               db[date].update({iEventId:oEvent.iEventId}, {status:1});
             }
+            if(req.updated) updates++;
 
           });
+          console.log(" [updates:"+updates +" inserts:"+inserts+" in "+date+".json]")
+
+          //run function given as parameter of getDay /// PARAMETER is hardcoded :/
+          thenCallback(date);
+
+
           //console.log(eventArray)
 
           //json = JSON.stringify({array:eventArray}, null, 2);
@@ -211,30 +224,48 @@ getEvent = function(id, date){
           }
           var $ = cheerio.load(iconv.decode(body, "ISO-8859-1"));
           //console.log($.html());
-          //console.log($);
-          var eventArray = [];
+
           var h1 = $('h1');
-          console.log(h1.prev("p").text());
-          console.log(h1.text());
-          console.log(h1.next(".vk_detail_times").text());
+          var oEvent = {
+            sName: h1.text(),
+            sCategory: h1.prev("p").text(),
+            sDate: h1.next(".vk_detail_times").text().replace(/(Heute)|(Morgen)/ig,wochentag[oDate.getDay()]),
+            sAdress: $(h1.nextAll(".vk_detail_text")[0]).text(),
+            sDescription: $(h1.nextAll(".vk_detail_text")[1]).text(),
+            status: 2
+          }
 
+          if(oEvent.sName != ''){
+            var req = db[date].update({iEventId:id}, oEvent);
+            console.log(req);
+          }
+          console.log(oEvent)
 
-          h1.nextAll(".vk_detail_text").each(function(i, elem){
-            console.log(i,$(elem).text());
-          })
-          // json = JSON.stringify({array:eventArray}, null, 2);
-          // fs.writeFile('data/days/'+date+'.json', json, 'utf8', function(err){});
-
+          ////// ENDLESS LOOOP !!!!!!!!!!
+          fetchOneMoreEventdetail(date);
     }
   )
 }
 
 var fetchOneMoreEventdetail = function(date, delayBetweenRequests=0){
-  console.log(db[date].findOne({status:1}));
+  var next = db[date].findOne({status:1});
+  console.log(next);
+  if (next) getEvent(next.iEventId, date);
+  else console.log("All Details fetched of " + date)
 }
 
-date = "27.10.2018"
+
+
+date = "26.10.2018";
+
+// lame weekday code
+var dmy = date.split(".");
+oDate = new Date(dmy[2], dmy[1] - 1, dmy[0]);
+//console.log(wochentag[oDate.getDay()]);
+
 db.loadCollections([date]);
-getday(date);
-// getEvent("event_676473","26.11.2018");
-fetchOneMoreEventdetail(date);
+getday(
+  date,
+  fetchOneMoreEventdetail
+);
+//getEvent(841827,date);
