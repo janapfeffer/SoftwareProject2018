@@ -35,132 +35,179 @@
 
     <!-- Header/Navigation bar-->
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header" >
-            <div class="mdl-layout__header-row" >
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
                 <!-- Title -->
-                <span class="mdl-layout-title" >
-                   Event Finder
+                <span class="mdl-layout-title">
+                    Event Finder
                 </span>
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link" href="index.html">Map</a>
+                    <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
                     <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
                     <a class="mdl-navigation__link">Favoriten</a>
                     <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
+
                 </nav>
             </div>
         </header>
 
-        <!-- TODO: Navigation nur bei kleinem display anzeigen-->
+        <!-- TODO: Navigation nur bei kleinem display anzeigen   /// Dadurch immer resposiv bzw bessere Touch bedinung z.B. Tablets, lieber behalten-->
         <!-- Navigation. Hauptsächlich für kleine Geräte gedacht ist die ausklapbare, da auf kleinere Geräte alles aufgelistet -->
         <div class="mdl-layout__drawer" style="z-index: 12;">
-                <span class="mdl-layout-title">Eventzeugs</span>
-                <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="map.html">Map</a>
-                    <a class="mdl-navigation__link" href="addEvent.html">Event eintragen</a>
-                    <a class="mdl-navigation__link" href="favorite.html">Favoriten</a>
-                </nav>
+            <span class="mdl-layout-title">Eventzeugs</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="index.html">Map</a>
+                <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
+                <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
+                <a class="mdl-navigation__link">Favoriten</a>
+                <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
+            </nav>
         </div>
     </div>
+
+
+
+
 
     <!-- Alles rechts neben der Karte-->
     <div id="aside">
-      <div id="newEventWrapper" class="sidecard" v-bind:class="{ hide: !cardShown}">
-        <h2>Neues Event eintragen</h2>
-        <div id="newEvent">
-          <p>
-            Fügen sie ein neues Event in unsere Databank ein
-          </p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" v-model="draft.sName">
-            <label class="mdl-textfield__label" for="sample1">Titel</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
-             v-model="draft.sDescription"></textarea>
-            <label class="mdl-textfield__label" for="schools">Beschreibung</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
-            <button @click="checkLocation">check location</button>
-            <label class="mdl-textfield__label" for="sample1">Adresse</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-            <el-date-picker
-              v-model="draft.sDate"
-              type="datetimerange"
-              align="right"
-              start-placeholder="Start Date"
-              end-placeholder="End Date"
-              :default-time="['15:00:00', '19:00:00']">
-            </el-date-picker>
-          </div>
+        <div id="newLoginWrapper" class="sidecard" style="position: static" v-bind:class="{ hide: !cardShown}">
+            <h2>Loggen sie sich hier ein</h2>
+            <div id="newLogin">
+                <p>
+                    Loggen sie sich hier ein!
+                </p>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" v-model="draft.sName">
+                    <label class="mdl-textfield__label" for="sample1">Username</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
+                              v-model="draft.sDescription"></textarea>
+                    <label class="mdl-textfield__label" for="schools">Password</label>
+                </div>
 
-          <div class="buttons">
-            <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-             @click="formdraft">Vorschau</button>
-             <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-              @click="formsubmit">Senden</button>
-          </div>
+
+                <div class="buttons">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                            @click="formdraft">
+                        Vorschau
+                    </button>
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                            @click="formsubmit">
+                        Senden
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-
-
-      <div class="sidecard">
-        <h2> Events</h2>
-        <ul id="eventTable" class="demo-list-three mdl-list">
-            <li v-for="event in currentEvents"
-                class="mdl-list__item mdl-list__item--three-line"
-                :class="{selected:event.iEventId == selected}"
-                @click="select(event)">
-                <span class="mdl-list__item-primary-content">
-                    <i class="material-icons mdl-list__item-avatar">person</i>
-                    <span>{{ event.sName }}</span>
-                    <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
-                    <span class="mdl-list__item-text-body">{{ event.sAdress }}</span>
-                    <span class="mdl-list__item-text-body">{{ event.sDate }}</span>
-                </span>
-                <span class="mdl-list__item-secondary-content">
-                    <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-                </span>
-            </li>
-        </ul>
-      </div>
-    </div>
-
-    <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-    <h1>
-       {{sName}}
-    </h1>
-<!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
-
-<div id="searchPlaceInner" autocomplete="off">
-    <div class="autocomplete" style="width:370;">
-  <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben"
-  v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace"  >
-  <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-   name="action" @click="searchPlace" >{{sButtonName}}</button>
-</div>
-</div>
-
-
-
     </div>
 
 
-    <!-- Map-->
-    <div id="map"></div>
+        <!-- Karte für Event, Alles rechts neben der Karte-->
+        <div id="aside">
+            <div id="newEventWrapper" class="sidecard" v-bind:class="{ hide: !cardShown}">
+                <h2>Neues Event eintragen</h2>
+                <div id="newEvent">
+                    <p>
+                        Fügen sie ein neues Event in unsere Databank ein
+                    </p>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" v-model="draft.sName">
+                        <label class="mdl-textfield__label" for="sample1">Titel</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
+                                  v-model="draft.sDescription"></textarea>
+                        <label class="mdl-textfield__label" for="schools">Beschreibung</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
+                        <button @click="checkLocation">check location</button>
+                        <label class="mdl-textfield__label" for="sample1">Adresse</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
+                        <el-date-picker v-model="draft.sDate"
+                                        type="datetimerange"
+                                        align="right"
+                                        start-placeholder="Start Date"
+                                        end-placeholder="End Date"
+                                        :default-time="['15:00:00', '19:00:00']">
+                        </el-date-picker>
+                    </div>
 
-    <!-- own script files-->
-    <script type="text/javascript" src="js/Map.js"></script>
-    <script type="text/javascript" src="js/testdata.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+                    <div class="buttons">
+                        <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                                @click="formdraft">
+                            Vorschau
+                        </button>
+                        <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                                @click="formsubmit">
+                            Senden
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-    <!-- tilt libary for css animations -->
-    <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
+
+            <div class="sidecard">
+                <h2> Events</h2>
+                <ul id="eventTable" class="demo-list-three mdl-list">
+                    <li v-for="event in currentEvents"
+                        class="mdl-list__item mdl-list__item--three-line"
+                        :class="{selected:event.iEventId == selected}"
+                        @click="select(event)">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-avatar">person</i>
+                            <span>{{ event.sName }}</span>
+                            <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
+                            <span class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+                            <span class="mdl-list__item-text-body">{{ event.sDate }}</span>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
+            <h1>
+                {{sName}}
+            </h1>
+            <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
+
+            <div id="searchPlaceInner" autocomplete="off">
+                <div class="autocomplete" style="width:370;">
+                    <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben"
+                           v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace">
+                    <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                            name="action" @click="searchPlace">
+                        {{sButtonName}}
+                    </button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <!-- Map-->
+        <div id="map"></div>
+
+        <!-- own script files-->
+        <script type="text/javascript" src="js/Map.js"></script>
+        <script type="text/javascript" src="js/testdata.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+
+        <!-- tilt libary for css animations -->
+        <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
 
 </body>
 </html>
