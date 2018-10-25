@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const helperRoutes = require("../Backend/RestAPI/routes/routes");
+const helperRoutes = require("./RestAPI/routes/helper_routes");
 const eventRoutes = require( "../Backend/RestAPI/routes/event_router")
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
@@ -22,7 +22,7 @@ mongoose.connect(
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use("/event_images", express.static("event_images"));
 //Give Access to any client for this API, disables CORS, accepted request headers
 
 app.use((req, res, next) => {
