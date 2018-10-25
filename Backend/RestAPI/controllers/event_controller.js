@@ -60,6 +60,7 @@ exports.create_event = (req, res, next) => {
 
     const oEvent = new OEvent({
         _id: new mongoose.Types.ObjectId(),
+        author: req.body.userId,
         event_name: req.body.event_name,
         description: req.body.description,
         address: {
@@ -77,7 +78,7 @@ exports.create_event = (req, res, next) => {
         event_picture: req.file.path
     });
 
-    
+
     oEvent
         .save()
         .then(result => {
@@ -86,6 +87,7 @@ exports.create_event = (req, res, next) => {
                 created_event: {
                     event_name: result._id,
                     description: result.description,
+                    author: result.author,
                     address: {
                         city: result.address.city,
                         zip: result.address.zip,

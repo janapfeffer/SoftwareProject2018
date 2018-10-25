@@ -47,3 +47,43 @@ exports.user_signup = (req, res, next) => {
       }
     });
 };
+
+exports.add_to_saved_events = (req, res, next) => {
+    const event_id = req.body.eventId;
+    const user_id = req.body.userId;
+    User.findById(user_id, "saved_events", function (err, user) {
+      try{
+      if (user.saved_events.indexOf(event_id) > -1){
+        throw new Error("Event already saved.");
+      } else {
+        User.updateOne(
+          { _id: user_id},
+          { $push: { saved_events: event_id }},
+          {upsert: true}
+        )
+        .exec()
+        .then(result => {
+          res.status(200).json({
+            message: "Event saved",
+            request: {
+              type: "GET",
+              url: "http://localhost:3000/user/" + user_id + "/events"
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
+        });
+      }
+    }
+    catch(err) {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    }
+  } )
+};

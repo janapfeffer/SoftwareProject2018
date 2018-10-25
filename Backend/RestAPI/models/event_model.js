@@ -4,7 +4,8 @@ const oEventSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     event_name: { type: String, required: true },
     description: { type: String, required: true },
-    
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+
     address: {
         city: { type: String, required: true },
         zip: { type: Number, required: true },
@@ -13,7 +14,7 @@ const oEventSchema = mongoose.Schema({
         address_additional: { type: String, required: false },
         loc: { longitude: Number, latitude: Number },
     },
-    
+
     event_picture: { type: String, required: false },
     instagram_hashtag: { type: String, required: false },
     verification_status: { type: Boolean, default: false },
@@ -23,7 +24,7 @@ const oEventSchema = mongoose.Schema({
     ticket_link: { type: String, required: false },
     event_types: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event_Type", required: true }],
     times_reported: { type: Number, default: 0 },
-    
+
     comments: [{
         username: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
         comment: { type: String, required: true }
