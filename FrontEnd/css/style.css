@@ -111,7 +111,7 @@ div.sidecard {
 
 #newLoginWrapper {
     transition: margin 0.5s;
-    margin: 0px
+    margin: 0px;
 }
 
     #newLoginWrapper.hide {
@@ -129,12 +129,17 @@ div.sidecard {
     display: block;
     width: auto;
 }
+#newLoginWrapper.hide {
+    margin: -100px 0px 100px 0px;
+    position: static;
+}
 
 
 
 #newEventWrapper {
   transition: margin 0.5s;
-  margin: 0px
+  margin: 0px;
+
 }
     #newEventWrapper.hide {
         margin: -100px 0px 100px 0px;
