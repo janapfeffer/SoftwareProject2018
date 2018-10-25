@@ -299,7 +299,7 @@ var bubble; // Hold a reference to any infobubble opened
  * @param  {String} text              The contents of the infobubble.
  */
 function openBubble(position, text) {
-    myHTMLcontent = '<div class=\'infoBubble\'>  </div>';
+    var myHTMLcontent = '<div class=\'infoBubble\'>  </div>';
 
     if (!bubble) {
         bubble = new H.ui.InfoBubble(
@@ -330,4 +330,3 @@ function closeBubble(position) {
 window.addEventListener('resize', function () {
     map.getViewPort().resize();
 });
-
