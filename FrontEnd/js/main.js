@@ -5,10 +5,20 @@ var oNavigationVue = new Vue({
     },
     methods: {
       showNewEventCard: function(){
-        oNewEventVue.cardShown = !oNewEventVue.cardShown;
+          oNewEventVue.cardShown = !oNewEventVue.cardShown;
+          oRegisterVue.cardShown = false;
+          oNewLoginVue.cardShown = false;
         },
         showNewLoginCard: function () {
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+        },
+        showNewRegisterCard: function () {
+            oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
+            oNewLoginVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+
         },
       toggleBigMap: function(){
           document.body.classList.toggle('bigMap');
@@ -57,7 +67,7 @@ var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
         currentEvents: aTestEvents,
-        selected: "joooo" //id of selected event (to see more info)
+        selected: "HannaWarDa" //id of selected event (to see more info)
     },
     methods: {
         // click on event in list to see more details
@@ -124,7 +134,9 @@ var oNewEventVue = new Vue({
         this.draft.status = "unsend";
         var cloneObj = JSON.parse( JSON.stringify( this.draft ) ); // to not pass it by reference
         oEventTableVue.currentEvents.unshift(cloneObj);
-        this.cardShown = !this.cardShown;
+          this.cardShown = !this.cardShown;
+          oRegisterVue.cardShown = false;
+          oNewLoginVue.cardShown = false;
         this.draft = { // reset vueinternal data to make possible to add new event
           sName: "",
           sDescription: "",
@@ -148,9 +160,8 @@ var oNewEventVue = new Vue({
 
 setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
 
-//IDK what I do 
-var oNewLoginVue = new Vue({
-    el: "#newLoginWrapper",
+var oRegisterVue = new Vue({
+    el: "#newRegisterWrapper",
     data: {
         cardShown: false,
         draft: {
@@ -172,31 +183,49 @@ var oNewLoginVue = new Vue({
             }
         },
         formsubmit: function () {
-            if (oEventTableVue.currentEvents[0].status == "draft") {
-                oEventTableVue.currentEvents.shift(); //delete draft in current array
-            }
-            this.draft.status = "unsend";
-            var cloneObj = JSON.parse(JSON.stringify(this.draft)); // to not pass it by reference
-            oEventTableVue.currentEvents.unshift(cloneObj);
+
             this.cardShown = !this.cardShown;
-            this.draft = { // reset vueinternal data to make possible to add new event
-                sName: "",
-                sDescription: "",
-                sAdress: "",
-                date: "",
-                time: "",
-                latlng: {},
-                status: "draft",
-                iEventId: Math.floor(Math.random() * 99999) + 1,
-            }
+            oRegisterVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+
         },
-        autocomplete: function autocomplete() {
-            getAutocompletion(this.draft.sAdress, document.getElementById("newEventAddress"));
-        },
-        checkLocation: function checkLocation() {
-            setCenter(this.draft.sAdress);
-            var sCheckLocMarkerName = this.draft.sName != "" ? this.draft.sName : "Is this your events location?";
-            setMarker(this.draft.sAdress, sCheckLocMarkerName);
-        }
+       
     }
 });
+
+//IDK what I do 
+var oNewLoginVue = new Vue({
+    el: "#newLoginWrapper",
+    data: {
+        cardShown: false,
+        draft: {
+            sName: "",
+            sDescription: "",
+            sAdress: "",
+            sDate: "",
+            time: "",
+            latlng: {},
+            status: "draft",
+            iEventId: Math.floor(Math.random() * 99999) + 1,
+        },
+        value7: ''
+    },
+    methods: {
+
+
+        formsubmit: function () {
+
+            this.cardShown = !this.cardShown;
+            
+        },
+
+
+        BobMarleyCard: function () {
+            this.cardShown = !this.cardShown;
+            oRegisterVue.cardShown = true;
+
+
+        },
+    }
+});
+

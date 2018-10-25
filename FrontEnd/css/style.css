@@ -108,6 +108,34 @@ div.sidecard {
 
 
 
+#newRegisterWrapper {
+    transition: margin 0.5s;
+    margin: 0px;
+}
+
+    #newRegisterWrapper.hide {
+        margin: -100px 0px 100px 0px
+    }
+
+#newRegister {
+    background-color: whitesmoke;
+    padding: 20px 25px;
+    font-size: 18px
+}
+
+    #newRegister.mdl-textfield {
+        margin: -12px 0px;
+        display: block;
+        width: auto;
+    }
+
+#newRegisterWrapper.hide {
+    margin: -100px 0px 100px 0px;
+    position: static;
+}
+
+
+
 
 #newLoginWrapper {
     transition: margin 0.5s;
