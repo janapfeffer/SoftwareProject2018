@@ -9,6 +9,7 @@
     "request": "latest",
     "cheerio": "latest",
     "iconv-lite": "latest",
-    "cached-request": "latest"
+    "cached-request": "latest",
+    "diskdb": "latest"
   }
 }

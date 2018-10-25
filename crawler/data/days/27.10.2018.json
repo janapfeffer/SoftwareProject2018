@@ -1,0 +1,2132 @@
+{
+  "array": [
+    {
+      "iEventId": "752032",
+      "sName": "geöffnet",
+      "sDate": "Samstag, 27.10.2018, 8 - 22 Uhr",
+      "sAdress": "Basinus-Bad - Hallenbad, 64625 Bensheim",
+      "_id": "e1b4af6a622740908bd68b3c1e555ebf"
+    },
+    {
+      "iEventId": "411812",
+      "sName": "geöffnet",
+      "sDate": "Samstag, 27.10.2018, 15 - 19 Uhr",
+      "sAdress": "Hallenbad, 64683 Einhausen",
+      "_id": "1fd3c5afe62f4afe9c56c49475419353"
+    },
+    {
+      "iEventId": "736840",
+      "sName": "2000er Party!",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Genesis Musikclub, 68159 Mannheim",
+      "_id": "6eb8c3d85fe14db2ae60b68a3144f87a"
+    },
+    {
+      "iEventId": "676473",
+      "sName": "29 Grad",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Nachtleben, 60313 Frankfurt",
+      "_id": "3fb9460c68af4072bf24e8b0c1e510a1"
+    },
+    {
+      "iEventId": "924436",
+      "sName": "5 Jahre Dexit",
+      "sDate": "Samstag, 27.10.2018, 22 Uhr",
+      "sAdress": "MS Connexion, 68199 Mannheim",
+      "_id": "841712feac4e494598efdb7e469359be"
+    },
+    {
+      "iEventId": "841827",
+      "sName": "Bam Bam XXL",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Rude 7, 68169 Mannheim",
+      "_id": "bcaf6b44b4a0452d9554a255e0e83dd8"
+    },
+    {
+      "iEventId": "875606",
+      "sName": "Banks & Rawdriguez",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Cubes Club, 68161 Mannheim",
+      "_id": "fcbdf01398994389afe2cc4478fa8848"
+    },
+    {
+      "iEventId": "797716",
+      "sName": "Boogaloo Klub ",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Blau, 68159 Mannheim - Jungbusch",
+      "_id": "61d7361c3eba4656bd2d0c488be6b5d2"
+    },
+    {
+      "iEventId": "601702",
+      "sName": "Club Night",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Contra'n, 68159 Mannheim",
+      "_id": "0b00de62bfa84ec4a1889748e0325965"
+    },
+    {
+      "iEventId": "931675",
+      "sName": "Die Zapatto 90er bis heute Party",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "MWS Club - Musikwerkstatt, 67433 Neustadt",
+      "_id": "a861ecc13783469ca390e9a8354e0d91"
+    },
+    {
+      "iEventId": "497586",
+      "sName": "Feel The Beat",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Soho, 68159 Mannheim",
+      "_id": "1a36b266373142e8a3c9083556cea6af"
+    },
+    {
+      "iEventId": "816843",
+      "sName": "Fiesta Chaplina",
+      "sDate": "Samstag, 27.10.2018, 22 Uhr",
+      "sAdress": "Chaplin-Club, 68161 Mannheim - Innenstadt",
+      "_id": "0d2bc082f1f046eeb97ffcbe5811f22d"
+    },
+    {
+      "iEventId": "923511",
+      "sName": "Fiesta Reggaeton",
+      "sDate": "Samstag, 27.10.2018, 22 Uhr",
+      "sAdress": "Halle 02, 69115 Heidelberg",
+      "_id": "112642de5a8a416cbef53f3349400356"
+    },
+    {
+      "iEventId": "932252",
+      "sName": "Gestört aber Geil",
+      "sDate": "Samstag, 27.10.2018, 21:30 Uhr",
+      "sAdress": "Maimarkt-Club, 68163 Mannheim",
+      "_id": "5fa294893b0e46aeb36766c46d7b330b"
+    },
+    {
+      "iEventId": "936040",
+      "sName": "Gothic Rock Night",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "BB on the Rockzz, 67547 Worms",
+      "_id": "89d32020d68e47fd8562861053accc26"
+    },
+    {
+      "iEventId": "501500",
+      "sName": "Himbeerparty",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Alte Feuerwache - Halle, 68167 Mannheim",
+      "_id": "1cef41745c2e49cea4fe1128c54feed8"
+    },
+    {
+      "iEventId": "731384",
+      "sName": "Hot Shit",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Das Zimmer, 68161 Mannheim",
+      "_id": "7a8f4181065b46e6a2197918dac2b79d"
+    },
+    {
+      "iEventId": "718148",
+      "sName": "In.Die.Nacht",
+      "sDate": "Samstag, 27.10.2018, 22 Uhr",
+      "sAdress": "Kombinat, 68161 Mannheim - Innenstadt",
+      "_id": "94d4669f481f4f00b5e43b76886e0a5f"
+    },
+    {
+      "iEventId": "498847",
+      "sName": "Niteclub",
+      "sDate": "Samstag, 27.10.2018, 22 Uhr",
+      "sAdress": "Billy Blues im Ziegler, 69115 Heidelberg",
+      "_id": "39510bfc5e6e4751a7d8d7903d22316f"
+    },
+    {
+      "iEventId": "579876",
+      "sName": "Panda Party ",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Halle 02, 69115 Heidelberg",
+      "_id": "2f6e2ba30d0049748128c94f232f88a8"
+    },
+    {
+      "iEventId": "932466",
+      "sName": "Rap im Centro ",
+      "sDate": "Samstag, 27.10.2018, 22 Uhr",
+      "sAdress": "Apfelbaum, 64646 Heppenheim",
+      "_id": "dda622d079044d6ea25704d4c28889c4"
+    },
+    {
+      "iEventId": "756501",
+      "sName": "Raw Materials",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Disco Zwei, 68159 Mannheim",
+      "_id": "86fd59271ed64ec59b979b0d122361a5"
+    },
+    {
+      "iEventId": "664723",
+      "sName": "Rock & More",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Music-Hall, 67069 Ludwigshafen - Oppau",
+      "_id": "abfb04abcfec422fa421da5a50e8042e"
+    },
+    {
+      "iEventId": "936060",
+      "sName": "Schlagerparty Oktoberfest",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Bel Air Terminal, 68782 Brühl",
+      "_id": "3c3c62dc4dc242d78379260f6c4ede13"
+    },
+    {
+      "iEventId": "935119",
+      "sName": "Schneckenhof.de - Student Night",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Baton Rouge, 68161 Mannheim",
+      "_id": "0d1df1121d064c66bc84c9d30a298563"
+    },
+    {
+      "iEventId": "926765",
+      "sName": "SHDW & Obscure, Shape, I Hate Models, SNTS",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "The Loft Club, 67059 Ludwigshafen",
+      "_id": "ff1a47fcf3f644e7b8dfca75eabfba7d"
+    },
+    {
+      "iEventId": "931865",
+      "sName": "Single Ladies Memory Night",
+      "sDate": "Samstag, 27.10.2018, 22 Uhr",
+      "sAdress": "Musikpark, 67059 Ludwigshafen",
+      "_id": "c99c5ad213764731a770403d36f4791b"
+    },
+    {
+      "iEventId": "936066",
+      "sName": "Ü30 Deluxe Clubnight",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Manufaktur, 68169 Mannheim",
+      "_id": "76028e99fadb4c4abe8fdaac91f0133a"
+    },
+    {
+      "iEventId": "938548",
+      "sName": "Ü30 Party",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Eventfabrik A2, 69469 Weinheim",
+      "_id": "751f00d9946847d99d9e89023e3fa633"
+    },
+    {
+      "iEventId": "939254",
+      "sName": "Abend-GD ",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Protestantische Kirche, 67069 Ludwigshafen - Edigheim",
+      "_id": "9bb8b70f8e4f4caea3790ec7b5cbfa03"
+    },
+    {
+      "iEventId": "939253",
+      "sName": "GD",
+      "sDate": "Samstag, 27.10.2018, 10:30 Uhr",
+      "sAdress": "Städtisches Altenheim Dr. Hans Bardens, 67065 Ludwigshafen",
+      "_id": "25e563b5b46646aa895e4c6205fc7244"
+    },
+    {
+      "iEventId": "939746",
+      "sName": "GD mit Abendmahl, Brusche",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Theresienkrankenhaus - Kapelle, 68165 Mannheim - Oststadt",
+      "_id": "1106cb8442b54a3e83ab3ae60b094d53"
+    },
+    {
+      "iEventId": "939748",
+      "sName": "GD zum Kinderbibeltag, Langpape,Brekle, Waindok",
+      "sDate": "Samstag, 27.10.2018, 15 Uhr",
+      "sAdress": "Jonakirche, 68307 Mannheim - Sandhofen",
+      "_id": "8d93cfd6d9974d4bb5ecf9202cc83c8b"
+    },
+    {
+      "iEventId": "939755",
+      "sName": "Laudate Dominum, Sowa",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Johanniskirche, 68163 Mannheim - Lindenhof",
+      "_id": "867f8eb823904c309bf241395fd6ef9b"
+    },
+    {
+      "iEventId": "939761",
+      "sName": "ThesentürGD Thema:\"Was sagt mir die Bibel?\", Maier + Team",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Martinskirche, 68219 Mannheim - Rheinau",
+      "_id": "7f83926a36624e7e89c5840e2326437a"
+    },
+    {
+      "iEventId": "545939",
+      "sName": "1. Teddybärenkonzert 2018/2019",
+      "sDate": "Samstag, 27.10.2018, 11 Uhr",
+      "sAdress": "Staatstheater Darmstadt - Großes Haus, 64283 Darmstadt",
+      "_id": "54589a534ed54782b66d53979aaa716f"
+    },
+    {
+      "iEventId": "936950",
+      "sName": "Aktionstag - Einfach tierisch! Spaß mit Dino, Pander & Co.",
+      "sDate": "Samstag, 27.10.2018, 16 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Weltkulturen, 68159 Mannheim",
+      "_id": "aeac179b363e40e6823679729c6f0ed6"
+    },
+    {
+      "iEventId": "507265",
+      "sName": "Das Leben bei Hofe",
+      "sDate": "Samstag, 27.10.2018, 14:30 Uhr",
+      "sAdress": "Barockschloss, 68161 Mannheim",
+      "_id": "2bbe0e27496d4ab8b92efe4d4e68231d"
+    },
+    {
+      "iEventId": "865007",
+      "sName": "Das Leben bei Hofe",
+      "sDate": "Samstag, 27.10.2018, 14:30 Uhr",
+      "sAdress": "Schloss, 69117 Heidelberg",
+      "_id": "00c83396da5d4c80b25daa9267adc99b"
+    },
+    {
+      "iEventId": "901487",
+      "sName": "Das Sams und die Helden der Kinderbücher",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Historisches Museum der Pfalz, 67346 Speyer",
+      "_id": "1466b1e5e5854009ba2db9bce7624e28"
+    },
+    {
+      "iEventId": "929804",
+      "sName": "Der Zauberer von Oz",
+      "sDate": "Samstag, 27.10.2018, 11 Uhr",
+      "sAdress": "Stadtbücherei, 67227 Frankenthal",
+      "_id": "4790ef897e4a428e92f5866ca48bbb47"
+    },
+    {
+      "iEventId": "881372",
+      "sName": "Ein Sternbild für Flappi",
+      "sDate": "Samstag, 27.10.2018, 15 Uhr",
+      "sAdress": "Planetarium, 68165 Mannheim",
+      "_id": "69f4350ebc834e1ca0ada253b81740db"
+    },
+    {
+      "iEventId": "749872",
+      "sName": "Erdmännchens Abenteuer",
+      "sDate": "Samstag, 27.10.2018, 16 Uhr",
+      "sAdress": "Puppentheater Plappermaul, 69123 Heidelberg",
+      "_id": "527a9619d8ac453bac1fd8468dddd003"
+    },
+    {
+      "iEventId": "101570",
+      "sName": "Fahrten mit der Feldbahn durch das Museumsgelände",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Technoseum - Landesmuseum für Technik und Arbeit, 68169 Mannheim",
+      "_id": "a89fcb398c88466fb7377c0952ab2bc9"
+    },
+    {
+      "iEventId": "327631",
+      "sName": "Lillis Reise zum Mond",
+      "sDate": "Samstag, 27.10.2018, 14 Uhr",
+      "sAdress": "Planetarium, 68165 Mannheim",
+      "_id": "b5dc4efbede746eba25d9ca7e7e35686"
+    },
+    {
+      "iEventId": "911843",
+      "sName": "Ronja Räubertochter",
+      "sDate": "Samstag, 27.10.2018, 15 Uhr",
+      "sAdress": "Historisches Museum der Pfalz, 67346 Speyer",
+      "_id": "21f4f8025c6641dd913a3f0b3b58deb6"
+    },
+    {
+      "iEventId": "637615",
+      "sName": "Allerheiligenmarkt",
+      "sDate": "Samstag, 27.10.2018, 11 - 20 Uhr",
+      "sAdress": "Dreifaltigkeitskirche, 67547 Worms",
+      "_id": "3b1570b15706492abab40013fa9e4839"
+    },
+    {
+      "iEventId": "939055",
+      "sName": "Herbstfest",
+      "sDate": "Samstag, 27.10.2018, 15 - 19 Uhr",
+      "sAdress": "Zoo Landau, 76829 Landau",
+      "_id": "956e2849f0394c81b71ec78abaa7d586"
+    },
+    {
+      "iEventId": "938788",
+      "sName": "Herbstfest mit Fiddler's Red",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "TiB, 68519 Viernheim",
+      "_id": "9c857473704340428976c61187a0caac"
+    },
+    {
+      "iEventId": "418990",
+      "sName": "Herbstmesse",
+      "sDate": "Samstag, 27.10.2018, 14 - 22 Uhr",
+      "sAdress": "Festplatz, 67346 Speyer",
+      "_id": "f3f5abe918a842c986d01c81b066738f"
+    },
+    {
+      "iEventId": "845506",
+      "sName": "Kerwe",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Neuer Messplatz, 68723 Schwetzingen",
+      "_id": "0f3eb0da12cb4d1cb77e90d576805c2c"
+    },
+    {
+      "iEventId": "920080",
+      "sName": "Lautrer Oktoberkerwe",
+      "sDate": "Samstag, 27.10.2018, 14 - 23 Uhr",
+      "sAdress": " Kaiserslautern",
+      "_id": "b274a5e14b3b497abdd342f62ff6137b"
+    },
+    {
+      "iEventId": "530512",
+      "sName": "Oktoberfest",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Festzelt, 68165 Mannheim",
+      "_id": "0199aee65103412a84d559f25d8ffadc"
+    },
+    {
+      "iEventId": "886916",
+      "sName": "Altstadtrundgang",
+      "sDate": "Samstag, 27.10.2018, 10:30 Uhr",
+      "sAdress": "Heidelberg Marketing,  Heidelberg",
+      "_id": "b3b8ae67d45d452f83981ae43a6df6ce"
+    },
+    {
+      "iEventId": "938577",
+      "sName": "Beleuchtung, Feuer und Brandschutz im Mittelalter",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Histotainment Park Adventon, 74706 Osterburken",
+      "_id": "51274f1104334d73a9bfdc04ae99a8c6"
+    },
+    {
+      "iEventId": "725130",
+      "sName": "Besichtigung der Historischen Schmiede",
+      "sDate": "Samstag, 27.10.2018, 10 Uhr",
+      "sAdress": "Historische Schmiede, 67159 Friedelsheim",
+      "_id": "6ddaab5a69df433d8ac830e93cf1c1a4"
+    },
+    {
+      "iEventId": "502462",
+      "sName": "Besichtigung der Sektkellerei",
+      "sDate": "Samstag, 27.10.2018, 14 Uhr",
+      "sAdress": "Sektkellerei Schloss Wachenheim, 67157 Wachenheim/Weinstr.",
+      "_id": "f1f84a138cc8447fbf88e2f774c5aa56"
+    },
+    {
+      "iEventId": "502471",
+      "sName": "Besichtigung des Friedelsheimer Backhauses",
+      "sDate": "Samstag, 27.10.2018, 10 Uhr",
+      "sAdress": "Friedelsheimer Backhaus, 67159 Friedelsheim",
+      "_id": "9fc3c45812014fd2842dc4a315449754"
+    },
+    {
+      "iEventId": "910776",
+      "sName": "Friedelsheim erleben",
+      "sDate": "Samstag, 27.10.2018, 11 Uhr",
+      "sAdress": "Burgweiher, 67159 Friedelsheim",
+      "_id": "b0e90c4e233242c597baeb799c7f800d"
+    },
+    {
+      "iEventId": "688999",
+      "sName": "Führungen durch die historischen Räume und durch das Objektemuseum",
+      "sDate": "Samstag, 27.10.2018, 11 - 16 Uhr",
+      "sAdress": "Barockschloss - Schlossmuseum, 68161 Mannheim",
+      "_id": "0f8a3440b4174d0b83908fdb0584b39c"
+    },
+    {
+      "iEventId": "935138",
+      "sName": "Geführter Rundgang durch die \"Galerie der Innovationen\"",
+      "sDate": "Samstag, 27.10.2018, 15 Uhr",
+      "sAdress": "Alter Messplatz, 68169 Mannheim",
+      "_id": "9e94f779428442d49b613f5ee4cca671"
+    },
+    {
+      "iEventId": "902172",
+      "sName": "Gefängnistour",
+      "sDate": "Samstag, 27.10.2018, 11:30 Uhr",
+      "sAdress": "Fauler Pelz (Zugang Kettengasse), 69117 Heidelberg - Altstadt",
+      "_id": "1cf29db057d2438cae4e1a8991d5b0d4"
+    },
+    {
+      "iEventId": "781707",
+      "sName": "Henker, Hexen, Hübschlerinnen",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Marienstatue, 69117 Heidelberg",
+      "_id": "215f938e4a044f248fea85dfab1a36a1"
+    },
+    {
+      "iEventId": "881103",
+      "sName": "Kellerführung und Weinprobe",
+      "sDate": "Samstag, 27.10.2018, 15 Uhr",
+      "sAdress": "Weincontor Schloss Friedelsheim, 67159 Friedelsheim",
+      "_id": "499f90b9fe9b4294861b859d23543452"
+    },
+    {
+      "iEventId": "806079",
+      "sName": "Modernes und historisches Mannheim",
+      "sDate": "Samstag, 27.10.2018, 10:30 Uhr",
+      "sAdress": "Treffpunkt Ehrenhof - Eingang Schlosskirche, 68161 Mannheim",
+      "_id": "ca9199649b0a4f50a7854f4033886da0"
+    },
+    {
+      "iEventId": "905015",
+      "sName": "Modernes und historisches Mannheim",
+      "sDate": "Samstag, 27.10.2018, 14:30 Uhr",
+      "sAdress": "Treffpunkt Ehrenhof - Eingang Schlosskirche, 68161 Mannheim",
+      "_id": "799df0cdcf4e48538a07d2f0150f3e64"
+    },
+    {
+      "iEventId": "543385",
+      "sName": "Prickelnder Genuss im Glanz der Kronleuchter",
+      "sDate": "Samstag, 27.10.2018, 17 Uhr",
+      "sAdress": "Barockschloss, 68161 Mannheim",
+      "_id": "2613433f526a4b4599b87e20d144ef6c"
+    },
+    {
+      "iEventId": "834376",
+      "sName": "Quellenführung durch das Mühltal",
+      "sDate": "Samstag, 27.10.2018, 14 Uhr",
+      "sAdress": "Heidelberger Stadtwerke GmbH,  Heidelberg",
+      "_id": "509404ab182948c4a6432202e8225783"
+    },
+    {
+      "iEventId": "634310",
+      "sName": "Segwayfahrt - Hirschkopftour",
+      "sDate": "Samstag, 27.10.2018, 9:30 Uhr",
+      "sAdress": "Sigmund-Hirsch-Platz, 69469 Weinheim",
+      "_id": "6f722d020fbb4d60bcd1ff8294a8f21f"
+    },
+    {
+      "iEventId": "886879",
+      "sName": "Stadtrundfahrt",
+      "sDate": "Samstag, 27.10.2018, 11:30 Uhr",
+      "sAdress": " Heidelberg",
+      "_id": "dc84835ecd904c1482c6978e850ee9a9"
+    },
+    {
+      "iEventId": "886461",
+      "sName": "Überall Kaffee, das versteht sich - Café bei den Kurfürstens",
+      "sDate": "Samstag, 27.10.2018, 14:15 Uhr",
+      "sAdress": "Schloss, 68723 Schwetzingen",
+      "_id": "35fc13e6ccfe402c95e15d22cdf65aca"
+    },
+    {
+      "iEventId": "932243",
+      "sName": "Aldo Bassi und Alessandro Bravo",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Jazzhaus, 69117 Heidelberg",
+      "_id": "7362f80ed2384854bbc48365b422a1b2"
+    },
+    {
+      "iEventId": "919340",
+      "sName": "Dillon",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Nationaltheater - Opernhaus, 68161 Mannheim",
+      "_id": "6febd608a1424fedba96b6f408ecffc8"
+    },
+    {
+      "iEventId": "933837",
+      "sName": "Arnim Töpel",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Gehrings Kommode, 68199 Mannheim - Neckarau",
+      "_id": "48d71230c9ac485191cc061937167b41"
+    },
+    {
+      "iEventId": "685788",
+      "sName": "Comedy Royal (ausverkauft)",
+      "sDate": "Samstag, 27.10.2018, 20:30 Uhr",
+      "sAdress": "Theater Sapperlot, 64653 Lorsch",
+      "_id": "456e82703f654e66b32f557e8b65d5d1"
+    },
+    {
+      "iEventId": "920979",
+      "sName": "David Kebe",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Schatzkistl, 68165 Mannheim",
+      "_id": "5afe11d9d2ab460590a7f08e1a23c461"
+    },
+    {
+      "iEventId": "930717",
+      "sName": "David Leukert",
+      "sDate": "Samstag, 27.10.2018, 20:30 Uhr",
+      "sAdress": "HalbNeun Theater, 64283 Darmstadt",
+      "_id": "28c940ffaa94464ca9bbe229a59d5ed1"
+    },
+    {
+      "iEventId": "910775",
+      "sName": "Eure Mütter",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Capitol, 68169 Mannheim",
+      "_id": "46b4745479544384abf1230870303b1f"
+    },
+    {
+      "iEventId": "932777",
+      "sName": "Gerd Knebel",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Parktheater, 64625 Bensheim",
+      "_id": "4d07d2d33e9a4c32b9484503fbb4cca5"
+    },
+    {
+      "iEventId": "930964",
+      "sName": "Kabarett Dusche",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Klapsmühl' am Rathaus, 68159 Mannheim - Innenstadt",
+      "_id": "56dd9aa2d5b94e068553d5680dca1dcb"
+    },
+    {
+      "iEventId": "933557",
+      "sName": "Kabarett Kabbaratz",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Hoftheater Tromm, 64689 Grasellenbach",
+      "_id": "111fc6b1786044d48d0e1ef263e7b40f"
+    },
+    {
+      "iEventId": "703570",
+      "sName": "Nosferatu - eine Ironie des Grauens",
+      "sDate": "Samstag, 27.10.2018, 20:30 Uhr",
+      "sAdress": "Comedyhall, 64285 Darmstadt",
+      "_id": "c991b9900d6e4432ac20f29641ec957b"
+    },
+    {
+      "iEventId": "939701",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 7:15 Uhr",
+      "sAdress": "Pflegezentrum Maria Frieden, 68167 Mannheim",
+      "_id": "5b36591163f246c2a8b5b5e00878f78a"
+    },
+    {
+      "iEventId": "939723",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 9 Uhr",
+      "sAdress": "St. Sebastian, 68159 Mannheim - Innenstadt",
+      "_id": "45e0fbb4f4314fa98ec3fdff55ce6d5a"
+    },
+    {
+      "iEventId": "939724",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 17 Uhr",
+      "sAdress": "St. Sebastian, 68159 Mannheim - Innenstadt",
+      "_id": "f68242d438a24c01bc96298691ce7f27"
+    },
+    {
+      "iEventId": "939679",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Kath. Gemeinde Maria Hilf, 68199 Mannheim - Almenhof",
+      "_id": "d862b5b634fc4cbb8a80da4a17312b8a"
+    },
+    {
+      "iEventId": "939685",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "St. Theresia, 68219 Mannheim - Pfingstberg",
+      "_id": "ae8c9c45ff814e11ae749c32ec536a89"
+    },
+    {
+      "iEventId": "939688",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "St. Bonifatius, 68229 Mannheim - Friedrichsfeld",
+      "_id": "c818e829fc8f4820879dddbd1bdfcc70"
+    },
+    {
+      "iEventId": "939693",
+      "sName": "Eucharistiefeier ",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "St. Lioba, 68305 Mannheim - Waldhof",
+      "_id": "130a5df9c1024ceb84b5f263ea0834f1"
+    },
+    {
+      "iEventId": "939699",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "St. Bonifatius, 68169 Mannheim - Neckarstadt",
+      "_id": "b4f802881cba41dfbcaacb6b7d151be1"
+    },
+    {
+      "iEventId": "939707",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "St. Hildegard, 68309 Mannheim - Käfertal",
+      "_id": "4ffc7cb213ae40f2a8c7f8744d72ba65"
+    },
+    {
+      "iEventId": "939709",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "St. Laurentius, 68309 Mannheim - Käfertal",
+      "_id": "a35baae6866943b696a30cc63579c86b"
+    },
+    {
+      "iEventId": "939715",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Jesuitenkirche, 68159 Mannheim",
+      "_id": "a285c92624ca4b13a1b27cee3ff8e4e4"
+    },
+    {
+      "iEventId": "939721",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "St. Pius, 68163 Mannheim - Neuostheim",
+      "_id": "f1834633d7fb49c5ab84cd600d0e60d3"
+    },
+    {
+      "iEventId": "939729",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Diakonissenkrankenhaus - Mutterhauskapelle, 68163 Mannheim - Niederfeld",
+      "_id": "ac009f66d7f0434b94903a6fb3d5e26e"
+    },
+    {
+      "iEventId": "939733",
+      "sName": "Eucharistiefeier",
+      "sDate": "Samstag, 27.10.2018, 18:30 Uhr",
+      "sAdress": "Spitalkirche, 68159 Mannheim - Innenstadt",
+      "_id": "3d51858ff69a4b708c98280b48e11793"
+    },
+    {
+      "iEventId": "939727",
+      "sName": "Eucharistiefeier+Krankensalbung",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Klinikum Mannheim, 68167 Mannheim",
+      "_id": "a76e2034c47f4b86802e5a8b4e58f086"
+    },
+    {
+      "iEventId": "939117",
+      "sName": "Heilige Messe",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Heinrich-Pesch-Haus, 67059 Ludwigshafen",
+      "_id": "3509778778da4669bd3c14369226fddb"
+    },
+    {
+      "iEventId": "939115",
+      "sName": "Heilige Messe, Gallusfest",
+      "sDate": "Samstag, 27.10.2018, 18:30 Uhr",
+      "sAdress": "St. Gallus, 67063 Ludwigshafen - Friesenheim",
+      "_id": "3fd6f5efe3e146fa9d7665430238e7a7"
+    },
+    {
+      "iEventId": "938909",
+      "sName": "Laudes",
+      "sDate": "Samstag, 27.10.2018, 7:40 Uhr",
+      "sAdress": "St. Cyriakus Kirche Ruchheim, 67071 Ludwigshafen",
+      "_id": "7e5bb54013c842e0b7b76a44d4c607d2"
+    },
+    {
+      "iEventId": "938928",
+      "sName": "Messe",
+      "sDate": "Samstag, 27.10.2018, 7 Uhr",
+      "sAdress": "Krankenhaus Zum Guten Hirten, Kapelle, 67071 Ludwigshafen",
+      "_id": "34f9c50fab78459a811ebdf845503efe"
+    },
+    {
+      "iEventId": "938910",
+      "sName": "Messe",
+      "sDate": "Samstag, 27.10.2018, 8 Uhr",
+      "sAdress": "Wallfahrtskirche Maria Himmelfahrt, 67071 Ludwigshafen - Oggersheim",
+      "_id": "ab0ef669b1da4acfa8e9f08b53ef5fa9"
+    },
+    {
+      "iEventId": "939188",
+      "sName": "Messe in koreanischer Sprache",
+      "sDate": "Samstag, 27.10.2018, 16:30 Uhr",
+      "sAdress": "St. Hedwig, 67065 Ludwigshafen - Gartenstadt",
+      "_id": "25eccd8884c94fddbcd7342499ae4977"
+    },
+    {
+      "iEventId": "938911",
+      "sName": "Rosenkranz",
+      "sDate": "Samstag, 27.10.2018, 14:30 Uhr",
+      "sAdress": "Wallfahrtskirche Maria Himmelfahrt, 67071 Ludwigshafen - Oggersheim",
+      "_id": "c5fe237cbc974afdab9bf5e65d146b62"
+    },
+    {
+      "iEventId": "938924",
+      "sName": "Taizeandacht",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Kirche Heilige Familie, 67071 Ludwigshafen - Oggersheim",
+      "_id": "d703f5d84d25415594a7da2e1e4ee872"
+    },
+    {
+      "iEventId": "938899",
+      "sName": "Vorabendmesse",
+      "sDate": "Samstag, 27.10.2018, 17:30 Uhr",
+      "sAdress": "Christ König Kirche, 67071 Ludwigshafen - Oggersheim",
+      "_id": "6a48b42f886c43f782c25a5e7deb42d4"
+    },
+    {
+      "iEventId": "938923",
+      "sName": "Vorabendmesse ",
+      "sDate": "Samstag, 27.10.2018, 17:30 Uhr",
+      "sAdress": "Kirche Heilige Familie, 67071 Ludwigshafen - Oggersheim",
+      "_id": "bc63918fb3ae43708052653842ba78d5"
+    },
+    {
+      "iEventId": "938768",
+      "sName": "Vorabendmesse",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Kirche St. Martin, 67069 Ludwigshafen - Oppau",
+      "_id": "8eb7838522784a70960b4074dd2aa53c"
+    },
+    {
+      "iEventId": "938781",
+      "sName": "Vorabendmesse",
+      "sDate": "Samstag, 27.10.2018, 18:30 Uhr",
+      "sAdress": "Heilig-Geist-Kirche, 67061 Ludwigshafen",
+      "_id": "1d2bc4ae1a2c4f46966b09bbfd8952e4"
+    },
+    {
+      "iEventId": "938783",
+      "sName": "Vorabendmesse",
+      "sDate": "Samstag, 27.10.2018, 18:30 Uhr",
+      "sAdress": "St. Sebastian, 67065 Ludwigshafen - Mundenheim",
+      "_id": "d57ce3634b184efb93e4c468f78cb998"
+    },
+    {
+      "iEventId": "939187",
+      "sName": "Vorabendmesse",
+      "sDate": "Samstag, 27.10.2018, 18:30 Uhr",
+      "sAdress": "St. Hildegard, 67065 Ludwigshafen - Gartenstadt-Niederfeld",
+      "_id": "027f92f194b647799635cad2c7a44043"
+    },
+    {
+      "iEventId": "939192",
+      "sName": "Vorabendmesse",
+      "sDate": "Samstag, 27.10.2018, 18:30 Uhr",
+      "sAdress": "St. Michael, 67067 Ludwigshafen - Maudach",
+      "_id": "dfce98e908244994a8f49c4931601f70"
+    },
+    {
+      "iEventId": "939677",
+      "sName": "Wortgottesdienst",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "St. Josef, 68163 Mannheim - Lindenhof",
+      "_id": "a0cfe25f0bd146c8a02168635d6716ef"
+    },
+    {
+      "iEventId": "939705",
+      "sName": "Wortgottesdienst ",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Christ König, 68259 Mannheim - Wallstadt",
+      "_id": "e17598bf539d4b79ba957d3b87b1e8eb"
+    },
+    {
+      "iEventId": "897984",
+      "sName": "1. Mannheimer Meisterkonzert",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Rosengarten - Musensaal, 68161 Mannheim",
+      "_id": "edcc7b93d2cf49e6965999f96b957e19"
+    },
+    {
+      "iEventId": "936964",
+      "sName": "2. Mannheimer Schlosskonzert",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Barockschloss - Rittersaal Ehrenhof Ost, 68161 Mannheim",
+      "_id": "ce9ff82900d040b88e7ef078383af60c"
+    },
+    {
+      "iEventId": "933520",
+      "sName": "Fried, wo bist so lang geblieben",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Peterskirche, 69469 Weinheim",
+      "_id": "251936a669c7429b9b6fd222d1e9343a"
+    },
+    {
+      "iEventId": "939912",
+      "sName": "Orgelkonzert mit Gregory Hand",
+      "sDate": "Samstag, 27.10.2018, 17 Uhr",
+      "sAdress": "Herz-Jesu-Kirche, 67061 Ludwigshafen",
+      "_id": "ceb3451605af449391fed9feb2362858"
+    },
+    {
+      "iEventId": "931455",
+      "sName": "Stunde der Kirchenmusik",
+      "sDate": "Samstag, 27.10.2018, 18:15 Uhr",
+      "sAdress": "Heiliggeistkirche, 69117 Heidelberg - Altstadt",
+      "_id": "5dd89adff60e4b56a925616f1ec81708"
+    },
+    {
+      "iEventId": "69595",
+      "sName": "Museumszentrum geöffnet",
+      "sDate": "Samstag, 27.10.2018, 10 - 17 Uhr",
+      "sAdress": "Museumszentrum, 64653 Lorsch",
+      "_id": "6bda8aa2267b4adbb950dcb2a8bf534d"
+    },
+    {
+      "iEventId": "933541",
+      "sName": "Verleihung Büchner-Preis / Freud-Preis / Merck-Preis",
+      "sDate": "Samstag, 27.10.2018, 16 Uhr",
+      "sAdress": "Staatstheater Darmstadt - Großes Haus, 64283 Darmstadt",
+      "_id": "ecf3236c223841beb6a5ca7b29f336bb"
+    },
+    {
+      "iEventId": "936878",
+      "sName": "Die Leute sagen immer, die Zeiten werden schlimmer. Die Zeiten bleiben immer, die Leute werden schlimmer",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Taeter-Theater, 69115 Heidelberg",
+      "_id": "a6ae31ca19ec435aa6bc67e5c4c03dfd"
+    },
+    {
+      "iEventId": "939053",
+      "sName": "Lesesalon",
+      "sDate": "Samstag, 27.10.2018, 15 - 17 Uhr",
+      "sAdress": "Café Herrdegen, 68159 Mannheim",
+      "_id": "313d32f589464fc5be8934756d10b826"
+    },
+    {
+      "iEventId": "930667",
+      "sName": "Mundart - Eine Lesung im heimischen Dialekt",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Museumsscheuer, 69221 Dossenheim",
+      "_id": "f06edcd93a13429585f8d3c3f159c5f9"
+    },
+    {
+      "iEventId": "938524",
+      "sName": "Petros Markaris - Drei Grazien",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Deutsch-Amerikanisches Institut (DAI), 69115 Heidelberg",
+      "_id": "7bcfeaaaac4d4807b6f08202a4202fdd"
+    },
+    {
+      "iEventId": "852016",
+      "sName": "Word Up! Poetry Slam",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Bürgerhaus HeidelBERG, 69126 Heidelberg - Emmertsgrund",
+      "_id": "4847fc1243ad4c24ad5e9c1840bec0c1"
+    },
+    {
+      "iEventId": "180771",
+      "sName": "Grünschnittsammelstelle",
+      "sDate": "Samstag, 27.10.2018, 13 - 17 Uhr",
+      "sAdress": "Gemeindeverwaltung,  Einhausen",
+      "_id": "2f10f0234d4147c08b272036469b884c"
+    },
+    {
+      "iEventId": "113964",
+      "sName": "Sprechstunde",
+      "sDate": "Samstag, 27.10.2018, 13:30 - 18:30 Uhr",
+      "sAdress": "Schön Klinik Lorsch, 64653 Lorsch",
+      "_id": "146fb38b74f849dc9dcb39071d56f99f"
+    },
+    {
+      "iEventId": "852107",
+      "sName": "Basar \"Rund ums Kind\"",
+      "sDate": "Samstag, 27.10.2018, 15:30 - 17:30 Uhr",
+      "sAdress": "Gemeindesaal der Christuskirche, 67065 Ludwigshafen - Mundenheim",
+      "_id": "7dd07164ddc34015811f9cb17fcf4962"
+    },
+    {
+      "iEventId": "938478",
+      "sName": "Bau- und Immobilienmesse",
+      "sDate": "Samstag, 27.10.2018, 11 - 17 Uhr",
+      "sAdress": "Eberthalle, 67063 Ludwigshafen",
+      "_id": "655509034e61491bbce972572ca00796"
+    },
+    {
+      "iEventId": "938937",
+      "sName": "Bauernmarkt - Kartoffelfest",
+      "sDate": "Samstag, 27.10.2018, 14 Uhr",
+      "sAdress": "Rathaushof, 68649 Groß-Rohrheim",
+      "_id": "4c6c6de68e1d44b897d4c5305fa9d23e"
+    },
+    {
+      "iEventId": "575996",
+      "sName": "Frauenkleider-Flohmarkt",
+      "sDate": "Samstag, 27.10.2018, 12 - 15 Uhr",
+      "sAdress": "Zehntscheune, 68623 Lampertheim",
+      "_id": "d419c26b065f4a99b4df95b5abaf6e81"
+    },
+    {
+      "iEventId": "939842",
+      "sName": "Kinderflohmarkt",
+      "sDate": "Samstag, 27.10.2018, 10 - 13 Uhr",
+      "sAdress": "Kulturhalle, 68259 Mannheim - Feudenheim",
+      "_id": "f8fd0bf9ac7d46bb9e5dc51a965448ea"
+    },
+    {
+      "iEventId": "937948",
+      "sName": "Kunst- und Handwerkermarkt",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Astoria Halle für Sport und Kultur, 69190 Walldorf",
+      "_id": "e552e56c84b54ab8bde7d6b2c511219c"
+    },
+    {
+      "iEventId": "629091",
+      "sName": "Kunsthandwerkermarkt",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Donnersberghalle, 67806 Rockenhausen",
+      "_id": "6a2aa5a8ef724dcd8eeb69de50c7c383"
+    },
+    {
+      "iEventId": "932248",
+      "sName": "Mein Hund",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Maimarktgelände, 68163 Mannheim",
+      "_id": "4404c9b9edf54ca89d36d71e240e12bc"
+    },
+    {
+      "iEventId": "629093",
+      "sName": "Oktobermarkt",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": " Kandel bei Landau",
+      "_id": "b5a456b7c0b949d39eb5e740c1a24bf3"
+    },
+    {
+      "iEventId": "765812",
+      "sName": "Rhein-Neckar Kunst, design- & Kreativmarkt",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Rheinhalle, 68775 Ketsch",
+      "_id": "9bb218ad6248417ab21b4d48f50a9d74"
+    },
+    {
+      "iEventId": "862696",
+      "sName": "Winterdorf",
+      "sDate": "Samstag, 27.10.2018, 11 - 22 Uhr",
+      "sAdress": "Winterdorf vor der Rhein-Galerie, 67061 Ludwigshafen",
+      "_id": "1d68572aa0ec4f659fe7574db0c05921"
+    },
+    {
+      "iEventId": "930678",
+      "sName": "\"Alltäglich fantastisch: Kindergeschichten aus Finnland\"",
+      "sDate": "Samstag, 27.10.2018, 10 - 15 Uhr",
+      "sAdress": "Stadtbibliothek, 67059 Ludwigshafen",
+      "_id": "fc0de02719594b37923f13409906c1ac"
+    },
+    {
+      "iEventId": "939851",
+      "sName": "\"B. Deutungen\", Arbeiten von Birgit Metzler",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Parktheater - Gertrud-Eysoldt-Foyer, 64625 Bensheim",
+      "_id": "2dc8ec45cd314a928bc612fe5e51ce2a"
+    },
+    {
+      "iEventId": "927844",
+      "sName": "\"Dreißig Tage\", Mischtechniken von Manfred Fischer zum Gedicht \"Ausfahrt\" von Ingeborg Bachmann",
+      "sDate": "Samstag, 27.10.2018, 10 - 14 Uhr",
+      "sAdress": "Galerie Böhler, 64625 Bensheim",
+      "_id": "28e38b25b0754b2da135ba747515e852"
+    },
+    {
+      "iEventId": "931836",
+      "sName": "\"Flüssigkeiten und mehr...\"",
+      "sDate": "Samstag, 27.10.2018, 10 - 19 Uhr",
+      "sAdress": "St. Marienkrankenhaus, 67067 Ludwigshafen",
+      "_id": "b330bb7453fe42fdacc9432d06554966"
+    },
+    {
+      "iEventId": "937757",
+      "sName": "\"Malerei\", Bilder von Vera Fles-Schönegge",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Remise beim Alten Amtsgericht, 64673 Zwingenberg/Bergstraße",
+      "_id": "a53e35d6179c41a1887918d9d954456b"
+    },
+    {
+      "iEventId": "904163",
+      "sName": "(Wieder-)entdecken - Die Kunsthalle Mannheim 1933 bis 1945 und die Folgen",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Kunsthalle, 68165 Mannheim - Innenstadt",
+      "_id": "b88cc90749594291b266c1bdb563879b"
+    },
+    {
+      "iEventId": "935994",
+      "sName": "13 Momente",
+      "sDate": "Samstag, 27.10.2018, 11 - 13:30 Uhr",
+      "sAdress": "Klapsmühl' am Rathaus, 68159 Mannheim - Innenstadt",
+      "_id": "8caf74924c78498d80d93f5c219a1423"
+    },
+    {
+      "iEventId": "918172",
+      "sName": "21 - Erinnerungen ans Erwachsenwerden",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Nationaltheater - Unteres Foyer, 68161 Mannheim",
+      "_id": "99b4b02e365c4e45bb7d5846853d049e"
+    },
+    {
+      "iEventId": "931414",
+      "sName": "4 mal Götze - eine Hallenser Künstlerfamilie ",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Städtische Galerie/Kulturhof Flachsgasse, 67346 Speyer",
+      "_id": "fc2f582498d0463b9052e3efc917ee72"
+    },
+    {
+      "iEventId": "936115",
+      "sName": "50 Jahre Kunstverein Speyer ",
+      "sDate": "Samstag, 27.10.2018, 9 - 12 Uhr",
+      "sAdress": "Pfälzische Landesbibliothek, 67346 Speyer",
+      "_id": "906b0064ae264adab10770059e9726d3"
+    },
+    {
+      "iEventId": "912028",
+      "sName": "7. Europäische Quilt-Triennale",
+      "sDate": "Samstag, 27.10.2018, 13 - 18 Uhr",
+      "sAdress": "Textilsammlung Max Berk, 69118 Heidelberg - Ziegelhausen",
+      "_id": "8e0dfe58effb4e92bed541a6eb91fa0a"
+    },
+    {
+      "iEventId": "920933",
+      "sName": "Abenteuer Anden und Amazonas",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Zeughaus, 68159 Mannheim",
+      "_id": "737b3a226308476295018d837a27e30f"
+    },
+    {
+      "iEventId": "929278",
+      "sName": "Alles hat einen Anfang und ein Ende",
+      "sDate": "Samstag, 27.10.2018, 10 - 13 Uhr",
+      "sAdress": "RosenRot, 68259 Mannheim - Feudenheim",
+      "_id": "7f0b3a36b2234e61b2de2e315f765937"
+    },
+    {
+      "iEventId": "931278",
+      "sName": "Amerikas verborgene Orte",
+      "sDate": "Samstag, 27.10.2018, 12 - 18 Uhr",
+      "sAdress": "Mark-Twain-Center, 69126 Heidelberg",
+      "_id": "81d2a1a300e64cb498304962917bcc9b"
+    },
+    {
+      "iEventId": "929600",
+      "sName": "Anders Sehen - Malerei und Fotografie von Kim-Britt Eigenberger",
+      "sDate": "Samstag, 27.10.2018, 9 - 14 Uhr",
+      "sAdress": "Universität Mannheim - Schloss Ostflügel, 68159 Mannheim",
+      "_id": "76f34edb15f2428cbeae9e00bb89d199"
+    },
+    {
+      "iEventId": "929866",
+      "sName": "Arbeiten aus der Begabtenförderung 2017 und 2018 der Jugendkunstakademie",
+      "sDate": "Samstag, 27.10.2018, 9 - 12 Uhr",
+      "sAdress": "Das Wormser - Theater, Kultur- und Tagungszentrum - Oberes Foyer, 67549 Worms",
+      "_id": "4bad25d6063e416e9b0995f44eaedb32"
+    },
+    {
+      "iEventId": "932240",
+      "sName": "Arbeiten von Klaus Fußmann und Hermann Reimer",
+      "sDate": "Samstag, 27.10.2018, 10 - 13 Uhr",
+      "sAdress": "Galerie Lauth, 67061 Ludwigshafen",
+      "_id": "cf81e7a9015347ac9857b2156a3baa2c"
+    },
+    {
+      "iEventId": "926035",
+      "sName": "Beate Palme",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Wasserturm Plankstadt, 68723 Plankstadt",
+      "_id": "3d9dfae306944213bd29b90897c8f6a4"
+    },
+    {
+      "iEventId": "882916",
+      "sName": "Bild und Blick - Sehen in der Moderne",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Wilhelm-Hack-Museum, 67059 Ludwigshafen",
+      "_id": "43bdd13b6f0044dbb949323d7ec7ce4e"
+    },
+    {
+      "iEventId": "13420",
+      "sName": "Bionik",
+      "sDate": "Samstag, 27.10.2018, 9 - 17 Uhr",
+      "sAdress": "Technoseum - Landesmuseum für Technik und Arbeit, 68169 Mannheim",
+      "_id": "a8e5814a65834b9a9a2877dbd55e2f7e"
+    },
+    {
+      "iEventId": "933823",
+      "sName": "Blende 2018",
+      "sDate": "Samstag, 27.10.2018, 10 - 16 Uhr",
+      "sAdress": "Stadtbücherei  - Foyer, 69115 Heidelberg",
+      "_id": "3667616d61d94e90820c00f8c4350d0d"
+    },
+    {
+      "iEventId": "921453",
+      "sName": "Callot. Graphische Monumente",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Kunsthalle, 68165 Mannheim - Innenstadt",
+      "_id": "72c7aa48b82448afac5ea55e2e47201c"
+    },
+    {
+      "iEventId": "925466",
+      "sName": "Caroline Laengerer",
+      "sDate": "Samstag, 27.10.2018, 11 - 14 Uhr",
+      "sAdress": "GEDOK Gemeinschaft der Künstlerinnen und Kunstfreunde und -förderer, 69115 Heidelberg - Bergheim",
+      "_id": "ea06943b0679430982576158916e64b3"
+    },
+    {
+      "iEventId": "926257",
+      "sName": "Der weite Blick",
+      "sDate": "Samstag, 27.10.2018, 14 - 18 Uhr",
+      "sAdress": "3F Deutsches Museum für Foto-, Film- und Fernsehtechnik, 67146 Deidesheim",
+      "_id": "e0e79ccfa57247f9bdbfd881c9091137"
+    },
+    {
+      "iEventId": "935241",
+      "sName": "Der Zauber der Verwandlung - 10 Wege zur Photographie",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Städtische Galerie Villa Streccius, 76829 Landau",
+      "_id": "077d53b375fd44638bc08da6c2e5f243"
+    },
+    {
+      "iEventId": "936194",
+      "sName": "Die Farbe Orange",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Rathaus Galerie, 68519 Viernheim",
+      "_id": "0e633cf8e8b94cdb86c51d3fda70dda0"
+    },
+    {
+      "iEventId": "866182",
+      "sName": "Die Gute Form",
+      "sDate": "Samstag, 27.10.2018, 14 - 18 Uhr",
+      "sAdress": "Kunsthaus, 67227 Frankenthal",
+      "_id": "16bbd6a3067d4507870c97620aff6187"
+    },
+    {
+      "iEventId": "937162",
+      "sName": "Die Lerche die in die Lüfte steigt, der Löwe brüllt, wenn er nicht schweigt",
+      "sDate": "Samstag, 27.10.2018, 11 - 17 Uhr",
+      "sAdress": "Museum Haus Cajeth, 69117 Heidelberg - Altstadt",
+      "_id": "32152f3a66f840788ab9e6ae522d0cdc"
+    },
+    {
+      "iEventId": "929730",
+      "sName": "Die Pegeluhr - Wahrzeichen der Parkinsel",
+      "sDate": "Samstag, 27.10.2018, 8 - 18 Uhr",
+      "sAdress": "Volkshochschule im Bürgerhof, 67059 Ludwigshafen",
+      "_id": "548f70dc723b4e2eaee893896f237037"
+    },
+    {
+      "iEventId": "928072",
+      "sName": "Die Schächte des Lichts 2018 - Kunst unter dem Gehweg",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Kunststraße, 68161 Mannheim",
+      "_id": "c8d7fc34df744993b1d7db74cdd1dc44"
+    },
+    {
+      "iEventId": "919887",
+      "sName": "Die Vielfalt der Malerei",
+      "sDate": "Samstag, 27.10.2018, 8 - 20 Uhr",
+      "sAdress": "Augustinum, 69126 Heidelberg",
+      "_id": "c0d326f4ca1f4c37a77c455e0e646495"
+    },
+    {
+      "iEventId": "939843",
+      "sName": "Dunja Schandin - Papierwunderkammer",
+      "sDate": "Samstag, 27.10.2018, 17 Uhr",
+      "sAdress": "Kulturtreff Altes Rathaus Feudenheim, 68259 Mannheim - Feudenheim",
+      "_id": "ede2117b68ff466bad0d5c41d474c776"
+    },
+    {
+      "iEventId": "896686",
+      "sName": "Einfach tierisch! Spaß mit Dino, Panda & Co.",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Weltkulturen, 68159 Mannheim",
+      "_id": "6bed1fa6b56246d69a123cda79a3daca"
+    },
+    {
+      "iEventId": "904080",
+      "sName": "Erinnern - Aus der Geschichte einer Institution",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Kunsthalle, 68165 Mannheim - Innenstadt",
+      "_id": "1011c4379fc74111b9d3b62d2b5895a5"
+    },
+    {
+      "iEventId": "906695",
+      "sName": "Everyday life - die Geschichte der Amerikaner auf den Konversionsflächen in Mannheim",
+      "sDate": "Samstag, 27.10.2018, 13 - 16 Uhr",
+      "sAdress": "Zeitstrom-Haus, 68309 Mannheim - Käfertal",
+      "_id": "f872e765093d411787144f7f2f7e795e"
+    },
+    {
+      "iEventId": "933377",
+      "sName": "Extraordinaire!",
+      "sDate": "Samstag, 27.10.2018, 11 - 17 Uhr",
+      "sAdress": "Sammlung Prinzhorn, 69115 Heidelberg",
+      "_id": "7c30c170e20c413b9c796a3fda08a5c4"
+    },
+    {
+      "iEventId": "926014",
+      "sName": "Facetten des Erinnerns: 1968 Global  Eine Retrospektive",
+      "sDate": "Samstag, 27.10.2018, 14 - 18 Uhr",
+      "sAdress": "Völkerkundemuseum, 69117 Heidelberg",
+      "_id": "a1b648cda11b4160be1592656f1dc3a8"
+    },
+    {
+      "iEventId": "905396",
+      "sName": "Fotografie - Fotoarbeiten von Christina Detmers, Zuhal Eskiocak, Fritzi Haußmann, Ulrike Hollerbach, Heike Penner, Konstantin Weber",
+      "sDate": "Samstag, 27.10.2018, 14 - 18 Uhr",
+      "sAdress": "Pauline-Maier-Haus, 68165 Mannheim",
+      "_id": "f2a50d4f50c84ffdb7b39ec2a5aae6b8"
+    },
+    {
+      "iEventId": "912478",
+      "sName": "Frauen-Kunst-Kultur",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Best Western Plus Steubenhof Hotel, 68199 Mannheim - Neckarau",
+      "_id": "23f9d2bdc5d749719eec1c3f972c3627"
+    },
+    {
+      "iEventId": "938560",
+      "sName": "Galerie der Innovationen - Fotografie von zehn Mannheimer Fotografen",
+      "sDate": "Samstag, 27.10.2018, 8 - 22 Uhr",
+      "sAdress": "Alter Messplatz, 68169 Mannheim",
+      "_id": "9f19dd1e76074e39a1d32c512df7539d"
+    },
+    {
+      "iEventId": "565560",
+      "sName": "Geheimnisse der Steinzeit",
+      "sDate": "Samstag, 27.10.2018, 9 - 12 Uhr",
+      "sAdress": "Stadtbücherei, 68623 Lampertheim",
+      "_id": "46a7718cc6cc4772ac9806c54994a557"
+    },
+    {
+      "iEventId": "78054",
+      "sName": "Geschichte der Binnenschifffahrt",
+      "sDate": "Samstag, 27.10.2018, 14 - 18 Uhr",
+      "sAdress": "Museumsschiff, 68159 Mannheim",
+      "_id": "2a2c3f3c7bb74afb8e9b1052e5d194c3"
+    },
+    {
+      "iEventId": "929776",
+      "sName": "Gesehen werden",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "SRH Hochschule Heidelberg, 69123 Heidelberg",
+      "_id": "7e4ae6aee9cc4e808d12ddb427719b51"
+    },
+    {
+      "iEventId": "410211",
+      "sName": "geöffnet",
+      "sDate": "Samstag, 27.10.2018, 10 - 17 Uhr",
+      "sAdress": "Museumszentrum, 64653 Lorsch",
+      "_id": "a65c3312e6f3497fb3457bc4ff820dd2"
+    },
+    {
+      "iEventId": "778272",
+      "sName": "geöffnet",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Museum Stangenberg Merck, 64342 Seeheim-Jugenheim",
+      "_id": "ac18ef1fa099422aaea236e992120a30"
+    },
+    {
+      "iEventId": "410206",
+      "sName": "geöffnet",
+      "sDate": "Samstag, 27.10.2018, 12 - 18 Uhr",
+      "sAdress": "Museum der Stadt Bensheim, 64625 Bensheim",
+      "_id": "e5418ce2fe434eff85100227fb10d960"
+    },
+    {
+      "iEventId": "410204",
+      "sName": "geöffnet",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Museum für Stadtgeschichte und Volkskunde, 64646 Heppenheim",
+      "_id": "d5c361f1134d464997a2daba78b4b84c"
+    },
+    {
+      "iEventId": "918008",
+      "sName": "geöffnet",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Drachenmuseum im Haus Baureneck, 64678 Lindenfels",
+      "_id": "1bd4e5aba9ca4ecb931e62cb2a4e4235"
+    },
+    {
+      "iEventId": "927693",
+      "sName": "Josef Nadj Bildhauer",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Museum Théo Kerg, 69198 Schriesheim",
+      "_id": "741eafae10d149ae826fa7314377e815"
+    },
+    {
+      "iEventId": "926054",
+      "sName": "Just To See Your Smile - Werke von David Spiller",
+      "sDate": "Samstag, 27.10.2018, 12 - 15 Uhr",
+      "sAdress": "Galerie Kasten, 68165 Mannheim - Schwetzingerstadt",
+      "_id": "2af0d722625a415eb26317e6632103e9"
+    },
+    {
+      "iEventId": "882919",
+      "sName": "Kabinettstücke - Make Love Not War",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Wilhelm-Hack-Museum, 67059 Ludwigshafen",
+      "_id": "500c62fffab545699ec938d2c5ce52cf"
+    },
+    {
+      "iEventId": "920743",
+      "sName": "Keramik der Welt",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Galerie Marianne Heller, 69117 Heidelberg",
+      "_id": "cb09764ac94a41dea27b2a4c056ed9a1"
+    },
+    {
+      "iEventId": "882869",
+      "sName": "Laura Schawelka",
+      "sDate": "Samstag, 27.10.2018, 13 - 18 Uhr",
+      "sAdress": "Rudolf-Scharpf-Galerie, 67063 Ludwigshafen",
+      "_id": "467a3e2a5c1341cc883a07ad068e3ff7"
+    },
+    {
+      "iEventId": "935918",
+      "sName": "Lebensnah",
+      "sDate": "Samstag, 27.10.2018, 14 - 18 Uhr",
+      "sAdress": "Heidelberger Forum für Kunst, 69117 Heidelberg",
+      "_id": "f65868e31934481f95cdac85ffec13de"
+    },
+    {
+      "iEventId": "932792",
+      "sName": "Malerei",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Fürstenlager Damenbau, 64625 Bensheim - Auerbach",
+      "_id": "dec173a753254212855e37c900d1b59d"
+    },
+    {
+      "iEventId": "929298",
+      "sName": "Malerei von Annette Girke und Christa Maria Marschall",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Staatspark Fürstenlager - Damenbau, 64625 Bensheim - Auerbach",
+      "_id": "57d88f7518b34f67bd1573133ab2e0ed"
+    },
+    {
+      "iEventId": "910909",
+      "sName": "Mediengeschichte",
+      "sDate": "Samstag, 27.10.2018, 9 - 17 Uhr",
+      "sAdress": "Technoseum - Landesmuseum für Technik und Arbeit, 68169 Mannheim",
+      "_id": "5bdb99336dbf4ecaa1507e8dcd9b90c9"
+    },
+    {
+      "iEventId": "931042",
+      "sName": "Menschland - Erdgedächtnis, Werke von Malte Lück",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Philippuskirche, 68309 Mannheim - Käfertal",
+      "_id": "241d61656b7c4ad3a72bcfbca6d67f32"
+    },
+    {
+      "iEventId": "921257",
+      "sName": "Mittelpunkt Mensch",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Schloss Villa Ludwigshöhe, 67480 Edenkoben",
+      "_id": "9c39ae345c9a4f9cb73d98e93ff69036"
+    },
+    {
+      "iEventId": "921576",
+      "sName": "Mumien - Geheimnisse des Lebens",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Zeughaus, 68159 Mannheim",
+      "_id": "ff85033e81a7482f8ad2d4c7c5d1fff7"
+    },
+    {
+      "iEventId": "820108",
+      "sName": "MusikWelten - Geschichte der Musik",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Bassermannhaus für Musik und Kunst, 68159 Mannheim",
+      "_id": "42ba5babfcef45cd8f0f3c5f77700458"
+    },
+    {
+      "iEventId": "926962",
+      "sName": "Natürlich Natur",
+      "sDate": "Samstag, 27.10.2018, 11 - 17 Uhr",
+      "sAdress": "Schloss - Langer Saal, 68723 Schwetzingen",
+      "_id": "12d30bf458d14c7a96a2d48d196c366f"
+    },
+    {
+      "iEventId": "926377",
+      "sName": "Neuer Himmel. Neue Erde",
+      "sDate": "Samstag, 27.10.2018, 10 - 17 Uhr",
+      "sAdress": "Stadtmuseum, 1. OG im Rathauscenter, 67059 Ludwigshafen",
+      "_id": "373d10d6ddd841cb98a26a446b6a8a0f"
+    },
+    {
+      "iEventId": "904078",
+      "sName": "Offen - Werke aus der Sammlung der Kunsthalle",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Kunsthalle, 68165 Mannheim - Innenstadt",
+      "_id": "3720431bdbba48a6932586630b1e87e7"
+    },
+    {
+      "iEventId": "891120",
+      "sName": "Open Air Ausstellung/Projekt Asparagus - Spargel kreativ",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "VHS Volkshochschule, 68723 Schwetzingen",
+      "_id": "665d29b7286c427fa751e86cd71881e5"
+    },
+    {
+      "iEventId": "853123",
+      "sName": "Our Classics II",
+      "sDate": "Samstag, 27.10.2018, 12 - 16 Uhr",
+      "sAdress": "Döbele Kunst, 68165 Mannheim",
+      "_id": "cc5bd2c08c4942cd89d735d912d44306"
+    },
+    {
+      "iEventId": "866514",
+      "sName": "Präsentationen im Raum 5 - Werke von Vera Molnar",
+      "sDate": "Samstag, 27.10.2018, 13 - 16 Uhr",
+      "sAdress": "März Galerie Mannheim und Cube 4x4x4, 68165 Mannheim",
+      "_id": "6ca87f046e3b492d8a6a4f287ceefdb7"
+    },
+    {
+      "iEventId": "869633",
+      "sName": "Red Utopia - Fotografien von Jan Banning über Kommunismus 100 Jahre nach der Russischen Revolution",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Zephyr - Raum für Fotografie, 68159 Mannheim",
+      "_id": "980e4286176440de9d3355c2a384de1f"
+    },
+    {
+      "iEventId": "935214",
+      "sName": "Seckenheim Kreativ",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Domhof, 68526 Ladenburg",
+      "_id": "f601daac3d1c430aa25f25e3ab58d4cc"
+    },
+    {
+      "iEventId": "922237",
+      "sName": "Sonderausstellung \"Türme und historische Gebäude\" mit Modellen von Peter Elbert",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Drachenmuseum im Haus Baureneck, 64678 Lindenfels",
+      "_id": "852152cbfec94ab180d7f42011b7d9ba"
+    },
+    {
+      "iEventId": "919907",
+      "sName": "Sonderausstellung \"Zum Bild verführt - Visualisierungsversuche eines verlorenen Klosters\"",
+      "sDate": "Samstag, 27.10.2018, 10 - 17 Uhr",
+      "sAdress": "Museumszentrum, 64653 Lorsch",
+      "_id": "33014f314bf74844abd5fafe02a9d850"
+    },
+    {
+      "iEventId": "936011",
+      "sName": "Sonderausstellung \"Zum Bild verführt - Visualisierungsversuche eines verlorenen Klosters\"",
+      "sDate": "Samstag, 27.10.2018, 10 - 17 Uhr",
+      "sAdress": "Museumszentrum, 64653 Lorsch",
+      "_id": "cbf6c0a144814263bfa457e936ddb4cd"
+    },
+    {
+      "iEventId": "926025",
+      "sName": "Sonderausstellung Arbeiten des Bildhauers, Malers und Grafikers Ekkehard Wiegand",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Museum Stangenberg Merck, 64342 Seeheim-Jugenheim",
+      "_id": "9fc425cac5fd45feb9caf3c9ff0463d3"
+    },
+    {
+      "iEventId": "886012",
+      "sName": "Sonderausstellung Holzskulpturen von Franz Musiol",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Museum Stangenberg Merck, 64342 Seeheim-Jugenheim",
+      "_id": "432b81fb7eb6460cac4ae0c4a4abb7d9"
+    },
+    {
+      "iEventId": "931750",
+      "sName": "Stilvoller Wohnen - Malerei von Michael Frey",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": "Best Western Plus Steubenhof Hotel, 68199 Mannheim - Neckarau",
+      "_id": "f94664ae50dc43808abd2d1083ccb78d"
+    },
+    {
+      "iEventId": "924409",
+      "sName": "Sussi Hodel (Ch)",
+      "sDate": "Samstag, 27.10.2018, 11 - 15 Uhr",
+      "sAdress": "Galerie Böhner, 68161 Mannheim",
+      "_id": "24e53c786c3c4b50bd7dbc3c86c28483"
+    },
+    {
+      "iEventId": "925811",
+      "sName": "T-Shirts, Tüten und Tenside",
+      "sDate": "Samstag, 27.10.2018, 10 - 17 Uhr",
+      "sAdress": "Carl-Bosch-Museum, 69118 Heidelberg",
+      "_id": "65e24dc5b6254983bfd155813c582801"
+    },
+    {
+      "iEventId": "927609",
+      "sName": "Ungeborenen Elefanten ins Maul sehen - oder von der schönen Ordnung der Dinge",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Port25 - Raum für Gegenwartskunst, 68159 Mannheim - Jungbusch",
+      "_id": "7a982e0c35ee4804a96558c3344b8d7d"
+    },
+    {
+      "iEventId": "938789",
+      "sName": "Unheimliche Pastorale ",
+      "sDate": "Samstag, 27.10.2018, 11 - 14 Uhr",
+      "sAdress": "Galerie Peter Zimmermann, 68165 Mannheim - Oststadt",
+      "_id": "98665bf6f3874cda93094c489627fbc6"
+    },
+    {
+      "iEventId": "928678",
+      "sName": "Unwirklichkeiten - Das Imaginäre in der Kunst von Caspar David Friedrich bis Picasso",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Kurpfälzisches Museum, 69117 Heidelberg - Altstadt",
+      "_id": "d7780fe6ebfd4b8daec6463b0e4b9d99"
+    },
+    {
+      "iEventId": "927934",
+      "sName": "Valentinian I. und die Pfalz in der Spätantike",
+      "sDate": "Samstag, 27.10.2018, 10 - 18 Uhr",
+      "sAdress": "Historisches Museum der Pfalz, 67346 Speyer",
+      "_id": "025420abfb7d43ce8fd82c9195225fd5"
+    },
+    {
+      "iEventId": "920939",
+      "sName": "Viernheimer Kreuz",
+      "sDate": "Samstag, 27.10.2018, 14 - 18 Uhr",
+      "sAdress": "Kunstraum Gerdi Gutperle, 68519 Viernheim",
+      "_id": "d02812eba88b46c181dd0198c10e5a6a"
+    },
+    {
+      "iEventId": "869485",
+      "sName": "Von Pulverdampf und Schlachtidyll - Weißes Gold aus der Frankenthaler Manufaktur",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Zeughaus, 68159 Mannheim",
+      "_id": "4a062388820541a98bd88ff68ed38d6b"
+    },
+    {
+      "iEventId": "928801",
+      "sName": "Wassertürme und Wasserwege in der Metropolregion",
+      "sDate": "Samstag, 27.10.2018, 9 - 17 Uhr",
+      "sAdress": "Technoseum - Landesmuseum für Technik und Arbeit, 68169 Mannheim",
+      "_id": "662c393036c6432b84a39493de8e315a"
+    },
+    {
+      "iEventId": "911070",
+      "sName": "Weinheim - Bilder einer Stadt",
+      "sDate": "Samstag, 27.10.2018, 14 - 17 Uhr",
+      "sAdress": "Museum der Stadt, 69469 Weinheim",
+      "_id": "0237c2103ca645cc8843779bab7f3587"
+    },
+    {
+      "iEventId": "925090",
+      "sName": "Welt retten... später - Malerei von Robert Matthes",
+      "sDate": "Samstag, 27.10.2018, 10 - 16 Uhr",
+      "sAdress": "Galerie Grandel, 68161 Mannheim - Innenstadt",
+      "_id": "1029d5396d02413ebc1bb2855b9ce2b2"
+    },
+    {
+      "iEventId": "935880",
+      "sName": "Wurzeln der Mathematik - Wo, wann und warum haben Menschen angefangen, Mathematik zu machen",
+      "sDate": "Samstag, 27.10.2018, 14 - 19 Uhr",
+      "sAdress": "Mathematik-Informatik-Station - MAINS, 69115 Heidelberg",
+      "_id": "723127cd4c834e67987b5173d99dd0e0"
+    },
+    {
+      "iEventId": "935937",
+      "sName": "Young Talents ",
+      "sDate": "Samstag, 27.10.2018, 12 - 17 Uhr",
+      "sAdress": "SAP Internationales Schulungszentrum - Building 5, 69190 Walldorf",
+      "_id": "f339f3f12c4246ec930af2c492cc29ca"
+    },
+    {
+      "iEventId": "927938",
+      "sName": "Zeichen_Lust",
+      "sDate": "Samstag, 27.10.2018, 13 - 17 Uhr",
+      "sAdress": "Galerie Linde Hollinger, 68526 Ladenburg",
+      "_id": "6e8e71548c9a487b80e8d550a9db47a6"
+    },
+    {
+      "iEventId": "522639",
+      "sName": "Ägypten - Land der Unsterblichkeit ",
+      "sDate": "Samstag, 27.10.2018, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Weltkulturen, 68159 Mannheim",
+      "_id": "a0336fd8e3c14805976f685cb73ce1b2"
+    },
+    {
+      "iEventId": "895338",
+      "sName": "Radio Gaga 80er Show",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Rhein Neckar Theater, 68199 Mannheim - Neckarau",
+      "_id": "efdc94534b2c43eabd6df48033a2707e"
+    },
+    {
+      "iEventId": "922704",
+      "sName": "\"L'Orfeo\"",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Staatstheater Darmstadt Kammerspiele, 64295 Darmstadt",
+      "_id": "e873ae1e95a4465b85a7978078f1479f"
+    },
+    {
+      "iEventId": "855707",
+      "sName": "Auroras - Geheimnisvolle Lichter des Nordens",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Planetarium, 68165 Mannheim",
+      "_id": "9a76ad456d504b78ab18e490ca040189"
+    },
+    {
+      "iEventId": "650319",
+      "sName": "Schwarze Löcher",
+      "sDate": "Samstag, 27.10.2018, 16:30 Uhr",
+      "sAdress": "Planetarium, 68165 Mannheim",
+      "_id": "17623299960a4ba697daab24de92f907"
+    },
+    {
+      "iEventId": "936921",
+      "sName": "Beat Brothers",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Kulturzentrum Gleis4, 67227 Frankenthal",
+      "_id": "c0f8fb70c8504f51a5f6059f9dd4689b"
+    },
+    {
+      "iEventId": "899736",
+      "sName": "Bernd Walter",
+      "sDate": "Samstag, 27.10.2018, 18:30 Uhr",
+      "sAdress": "Holz-Weisbrodt, 67273 Weisenheim am Berg",
+      "_id": "beacf0297e25427d87129ab27c942320"
+    },
+    {
+      "iEventId": "936994",
+      "sName": "Cúig (ausverkauft)",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Kulturfenster, 69115 Heidelberg - Bergheim",
+      "_id": "5ad7c445be8f4539b44b620cc5979f4c"
+    },
+    {
+      "iEventId": "936955",
+      "sName": "Echoes",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Lutherhaus, 68723 Schwetzingen",
+      "_id": "85d76bbea94f4e83a1928b397f3cb7e1"
+    },
+    {
+      "iEventId": "935125",
+      "sName": "Fake ID & Abzorb",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "The Suite, 67433 Neustadt",
+      "_id": "88581542b86a4e9f864e429dd03d040f"
+    },
+    {
+      "iEventId": "930957",
+      "sName": "Final Breath",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "7er-Club, 68169 Mannheim",
+      "_id": "de4c950c62b34c8a965732c8690976bf"
+    },
+    {
+      "iEventId": "939051",
+      "sName": "Giora Feidmann",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Kongresshaus Stadthalle, 69117 Heidelberg",
+      "_id": "a841f1871dcd4ba7ac715c51469d539c"
+    },
+    {
+      "iEventId": "931819",
+      "sName": "Goitzsche Front",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "MS Connexion, 68199 Mannheim",
+      "_id": "ac8367320a084168890a19bde641e136"
+    },
+    {
+      "iEventId": "920819",
+      "sName": "Kieran Goss",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Pumpwerk, 68766 Hockenheim",
+      "_id": "68d4d4aa9cdf40e8946100e97e12056b"
+    },
+    {
+      "iEventId": "926058",
+      "sName": "Konzerte und Begegnungen im Salon -  Die Billy Joel Story",
+      "sDate": "Samstag, 27.10.2018, 15:30 Uhr",
+      "sAdress": "Mehrgenerationenhaus, 69126 Heidelberg - Rohrbach",
+      "_id": "ec14ca5c342b4818887867245b04df12"
+    },
+    {
+      "iEventId": "936942",
+      "sName": "Nacht der Gitarren",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Frank's Bodega, 67229 Großkarlbach",
+      "_id": "436bec8c0ad94cd0838e732520ff8484"
+    },
+    {
+      "iEventId": "831635",
+      "sName": "Nachtwandel",
+      "sDate": "Samstag, 27.10.2018",
+      "sAdress": " Mannheim - Jungbusch",
+      "_id": "62c854530c6445058b9b78de6145cf05"
+    },
+    {
+      "iEventId": "847332",
+      "sName": "Nachtwandel",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Blau, 68159 Mannheim - Jungbusch",
+      "_id": "24bcd5cd0fb04e439f1489b5b1aa5d5e"
+    },
+    {
+      "iEventId": "931521",
+      "sName": "O Reillys und The Paddyhats",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Café Central, 69469 Weinheim",
+      "_id": "4cdcf141f2524e0ea127331c2c207997"
+    },
+    {
+      "iEventId": "938934",
+      "sName": "Oldies and Goldies",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Musikschule, 68623 Lampertheim",
+      "_id": "424fbecf12024bcd9e5b48143d583e03"
+    },
+    {
+      "iEventId": "923632",
+      "sName": "Pink Floyd - Dark Side Of The Moon",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Planetarium, 68165 Mannheim",
+      "_id": "cca5fa7395ac4cd3a4332d4e8bc3d62c"
+    },
+    {
+      "iEventId": "932684",
+      "sName": "The Amity Affliction/The Plot In You/ Endless Heights/Dream State",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Kulturzentrum Schlachthof, 65189 Wiesbaden",
+      "_id": "fa5957a07dda4ee382bbec47ec8e17a9"
+    },
+    {
+      "iEventId": "927017",
+      "sName": "The Quireboys",
+      "sDate": "Samstag, 27.10.2018, 20:30 Uhr",
+      "sAdress": "Musiktheater Rex in der Güterhalle, 64625 Bensheim",
+      "_id": "48422f51c9a64af78f4ccae09dc1d488"
+    },
+    {
+      "iEventId": "926782",
+      "sName": "Tobias Escher",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Wirtshaus Zum Weißen Lamm, 69493 Hirschberg - Großsachsen",
+      "_id": "e2b8801b563d421dba56b8ef20758661"
+    },
+    {
+      "iEventId": "931359",
+      "sName": "Tristan Brusch",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Halle 02, 69115 Heidelberg",
+      "_id": "c69e8adf0222457989885e816efaa99b"
+    },
+    {
+      "iEventId": "931358",
+      "sName": "Ufo361 (ausverkauft)",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Halle 02, 69115 Heidelberg",
+      "_id": "5b624b351ee34d11a4219f049ac19e5e"
+    },
+    {
+      "iEventId": "936958",
+      "sName": "Uschi Nerke & The Flower Power Men",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Bürgerhaus Oppau, 67069 Ludwigshafen",
+      "_id": "a7161f1766414244b8c54832df99c469"
+    },
+    {
+      "iEventId": "606342",
+      "sName": "Harald Wohlfahrt \"Palazzo\"",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Spiegelpalast, 68165 Mannheim",
+      "_id": "5fccb88042b440739006e6b7dcff8bb5"
+    },
+    {
+      "iEventId": "908528",
+      "sName": "Street-Life!",
+      "sDate": "Samstag, 27.10.2018, 20:30 Uhr",
+      "sAdress": "Varieté-Theater Pegasus, 64625 Bensheim",
+      "_id": "e6342ee7e3b744d9b03c039feeb9b58d"
+    },
+    {
+      "iEventId": "305724",
+      "sName": "Bibelgespräch",
+      "sDate": "Samstag, 27.10.2018, 9:30 Uhr",
+      "sAdress": "Adventgemeinde Mannheim - Adventgemeinde, 68309 Mannheim - Käfertal",
+      "_id": "ac121e4424834b7abd48c70d75a6c920"
+    },
+    {
+      "iEventId": "307218",
+      "sName": "GD",
+      "sDate": "Samstag, 27.10.2018, 9:30 Uhr",
+      "sAdress": "Synagoge, 68159 Mannheim - Innenstadt",
+      "_id": "11bb37ed0569426893ae993a8d6f4c0c"
+    },
+    {
+      "iEventId": "377825",
+      "sName": "GD",
+      "sDate": "Samstag, 27.10.2018, 9:30 Uhr",
+      "sAdress": "Kulturhaus Käfertal, 68309 Mannheim - Käfertal",
+      "_id": "c4577919f3724a8e8217171f5bbd487a"
+    },
+    {
+      "iEventId": "217429",
+      "sName": "GD.",
+      "sDate": "Samstag, 27.10.2018, 17 Uhr",
+      "sAdress": "Jehovas Zeugen - Saal (R), 68199 Mannheim",
+      "_id": "7c1b22d63f934cb186a58cdcc578b8e7"
+    },
+    {
+      "iEventId": "407553",
+      "sName": "Predigt",
+      "sDate": "Samstag, 27.10.2018, 11 Uhr",
+      "sAdress": "Adventgemeinde Mannheim - Adventgemeinde, 68309 Mannheim - Käfertal",
+      "_id": "d79c08509db742da82a0cd323293bb2d"
+    },
+    {
+      "iEventId": "395319",
+      "sName": "Teenies und Jugend",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Evangelisch-Freikirchliche-Gemeinde (Baptisten), 68167 Mannheim",
+      "_id": "a74c80893d754dcdabd1c569d1b7f306"
+    },
+    {
+      "iEventId": "607408",
+      "sName": "Wortgottesdienst",
+      "sDate": "Samstag, 27.10.2018, 10:30 Uhr",
+      "sAdress": "Freikirche der Siebenten-Tags-Adventisten, 67061 Ludwigshafen",
+      "_id": "b091014eb9194d90930339b46cacc461"
+    },
+    {
+      "iEventId": "842649",
+      "sName": "Eislaufen",
+      "sDate": "Samstag, 27.10.2018, 10:15 - 23:30 Uhr",
+      "sAdress": "Eishalle, 69168 Wiesloch",
+      "_id": "87532bb0c1cb46fbb52969b109c13192"
+    },
+    {
+      "iEventId": "842642",
+      "sName": "Eislaufen",
+      "sDate": "Samstag, 27.10.2018, 14 - 18 Uhr",
+      "sAdress": "Eissporthalle \"Icehouse\", 69214 Eppelheim",
+      "_id": "cdd78e44874a4561acbac288b9b8aa7c"
+    },
+    {
+      "iEventId": "842648",
+      "sName": "Eislaufen",
+      "sDate": "Samstag, 27.10.2018, 14 - 22 Uhr",
+      "sAdress": "Eissportzentrum Herzogenried, 68169 Mannheim",
+      "_id": "08297c48dadc4aa98c8163f2eaa00ffe"
+    },
+    {
+      "iEventId": "686006",
+      "sName": "Mannheim²-Renntag",
+      "sDate": "Samstag, 27.10.2018, 11 Uhr",
+      "sAdress": "Waldrennbahn, 68239 Mannheim - Seckenheim",
+      "_id": "e87b9bd0fbd8414d9136b00bd1850ece"
+    },
+    {
+      "iEventId": "907398",
+      "sName": "Extremalism/Bolero",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Theater im Pfalzbau, Theatersaal, 67059 Ludwigshafen",
+      "_id": "55063f39360f4139be1d7d5e6b6309f2"
+    },
+    {
+      "iEventId": "939021",
+      "sName": "\"Drei Weiber und ein Gockel\"",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Bürgersaal Nord, 67063 Ludwigshafen",
+      "_id": "37725efae19145d88703b0e8318cd7c2"
+    },
+    {
+      "iEventId": "746468",
+      "sName": "\"Faust. Der Tragödie Erster Teil\"",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Staatstheater Darmstadt - Kleines Haus, 64283 Darmstadt",
+      "_id": "317d3a63229d4a71a9b416b320d39845"
+    },
+    {
+      "iEventId": "669671",
+      "sName": "\"Läd Naid Sürpries\"",
+      "sDate": "Samstag, 27.10.2018, 23 Uhr",
+      "sAdress": "Staatstheater Darmstadt Kammerspiele, 64295 Darmstadt",
+      "_id": "cb5fd0b88376423c835fe7359c809eb2"
+    },
+    {
+      "iEventId": "937172",
+      "sName": "\"S'bleibt in der Familie!\"",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Vereinsgaststätte des SVF Friesenheim, 67063 Ludwigshafen",
+      "_id": "9cb1ccba4ddf408fbbc89c34add62080"
+    },
+    {
+      "iEventId": "809298",
+      "sName": "Adelheid und ihre Kurschatten",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Theater Hemshofschachtel, 67063 Ludwigshafen",
+      "_id": "65d78dc85b2f477b8a54484ea0d40041"
+    },
+    {
+      "iEventId": "924266",
+      "sName": "Alle Jahre wieder ",
+      "sDate": "Samstag, 27.10.2018, 17 Uhr",
+      "sAdress": "Prinzregenten Theater, 67063 Ludwigshafen",
+      "_id": "4aefe96f66554fd1aeffde0ee5c6ed43"
+    },
+    {
+      "iEventId": "931439",
+      "sName": "Auf Hawai gibt's Leberkäs mit Ei",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Halle/Vereinsheim FC Boys Wattenheim, 68647 Biblis - Wattenheim",
+      "_id": "5c84d14abf5149ff892a90873fb84f41"
+    },
+    {
+      "iEventId": "929707",
+      "sName": "Blackbird",
+      "sDate": "Samstag, 27.10.2018, 21 Uhr",
+      "sAdress": "Romanischer Keller, 69117 Heidelberg",
+      "_id": "33639788134b46ffb9a01367861baced"
+    },
+    {
+      "iEventId": "916652",
+      "sName": "Die Lüge",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Zimmertheater, 69117 Heidelberg",
+      "_id": "4581357314bc49aab1aa1992960b942e"
+    },
+    {
+      "iEventId": "852827",
+      "sName": "Die Regeln des Sommers (UA)",
+      "sDate": "Samstag, 27.10.2018, 16 - 17 Uhr",
+      "sAdress": "Nationaltheater - Junges NTM - Saal, 68167 Mannheim",
+      "_id": "4cb44934e919404d8b7cb3bc21ad64f4"
+    },
+    {
+      "iEventId": "916567",
+      "sName": "Don Karlos",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Theater und Orchester Heidelberg - Marguerre Saal, 69117 Heidelberg",
+      "_id": "b5e7cb43727d43de94fc1cf282ea388a"
+    },
+    {
+      "iEventId": "922771",
+      "sName": "Ein bisschen Jekyll, ein bisschen Hyde",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Theater Oliv, 68169 Mannheim",
+      "_id": "e9843ecc186c449480888bcea06860b3"
+    },
+    {
+      "iEventId": "929710",
+      "sName": "Enter2Esc",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Karlstorbahnhof, TiKK-Theater, 69117 Heidelberg",
+      "_id": "23bb634ec0e947b8bdf10f9d8e68e7b6"
+    },
+    {
+      "iEventId": "919342",
+      "sName": "Istanbul",
+      "sDate": "Samstag, 27.10.2018, 19:30 Uhr",
+      "sAdress": "Nationaltheater - Schauspielhaus, 68161 Mannheim",
+      "_id": "1b9767417e714305b73d988e25917ab4"
+    },
+    {
+      "iEventId": "862949",
+      "sName": "Monsieur Ibrahim und die Blumen des Koran",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Theater am Puls, 68723 Schwetzingen",
+      "_id": "60de6f67fb3b4bb79183ffae90396e3c"
+    },
+    {
+      "iEventId": "928829",
+      "sName": "Platonia",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "EinTanzHaus - Trinitatiskirche, 68159 Mannheim - Innenstadt",
+      "_id": "83f4953f37324acf81b9c8ea18432a64"
+    },
+    {
+      "iEventId": "848754",
+      "sName": "Radical Minds (UA)",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Theater/Haus G 7 - Saal, 68159 Mannheim",
+      "_id": "bb0d3bffcc2d4063b68f1c7f1eb4fca6"
+    },
+    {
+      "iEventId": "933190",
+      "sName": "Shakespeares wilde Weiber",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Freilichtbühne, Zimmertheater, 68305 Mannheim",
+      "_id": "2dabbc2931614d1cb2ad4512abf28aa6"
+    },
+    {
+      "iEventId": "924275",
+      "sName": "Tele, Sex und Nummern",
+      "sDate": "Samstag, 27.10.2018, 22:30 Uhr",
+      "sAdress": "Prinzregenten Theater, 67063 Ludwigshafen",
+      "_id": "b5084ab70b0b42a597e2e2ad736a195d"
+    },
+    {
+      "iEventId": "799139",
+      "sName": "Tratsch im Treppenhaus",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Oststadt Theater, 68161 Mannheim",
+      "_id": "3b7464627cb2423ead050fcfd2e8cfde"
+    },
+    {
+      "iEventId": "931532",
+      "sName": "Uffruhr in Klääwingertsbach",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Theater Alte Werkstatt, 67227 Frankenthal",
+      "_id": "e55c58dce4e84c64a859f38b45e0e565"
+    },
+    {
+      "iEventId": "936996",
+      "sName": "Was e Theater",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Bürgerhaus, 68623 Lampertheim - Hofheim",
+      "_id": "7ccb65c60ad84f7e9ee95fd2c35ae656"
+    },
+    {
+      "iEventId": "932923",
+      "sName": "Werkschau der Abschlussklasse der Theaterakademie",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Theater Felina-Areal, 68167 Mannheim",
+      "_id": "89751482067c44678f58acf80ffe50b5"
+    },
+    {
+      "iEventId": "938803",
+      "sName": "Jubiläumsfeier",
+      "sDate": "Samstag, 27.10.2018, 19 Uhr",
+      "sAdress": "Schützenhaus, 64686 Lautertal - ReichenbachSchützenverein Reichenbach",
+      "_id": "e475b8b642cf49d3a12957e7f020913e"
+    },
+    {
+      "iEventId": "936751",
+      "sName": "Schlachtfest",
+      "sDate": "Samstag, 27.10.2018, 18 Uhr",
+      "sAdress": "Vereinsheim der Lorscher Klosterspatzen, 64653 LorschLorscher Klosterspatzen e.V.",
+      "_id": "9c081c25b0574695965f69baa7789442"
+    },
+    {
+      "iEventId": "773154",
+      "sName": "Training mit den NF Lorsch",
+      "sDate": "Samstag, 27.10.2018, 11 Uhr",
+      "sAdress": "Hallenbad, 64683 EinhausenNaturfreunde Einhausen",
+      "_id": "42e8a9284fcc46e68296be84e3e0d985"
+    },
+    {
+      "iEventId": "928700",
+      "sName": "Treffen",
+      "sDate": "Samstag, 27.10.2018, 14 Uhr",
+      "sAdress": "NaturFreunde, 68005 MannheimNaturFreunde Bezirk Waldhof-Gartenstadt",
+      "_id": "8bf9f3d05ae744aa8b7a9be4e7b78f4a"
+    },
+    {
+      "iEventId": "938838",
+      "sName": "Treffen zum Aufbau der Theaterkulisse",
+      "sDate": "Samstag, 27.10.2018, 9:30 Uhr",
+      "sAdress": "DGH Gronau, 64625 Bensheim - GronauMGV Eintracht Gronau",
+      "_id": "c8f5542688a9493ab4b9b307af59b5a4"
+    },
+    {
+      "iEventId": "929858",
+      "sName": "Wanderung: Bergstraße/Odenwald \"Hügelgrabwanderung\"",
+      "sDate": "Samstag, 27.10.2018, 8:20 Uhr",
+      "sAdress": "Abfahrt Hauptbahnhof Mannheim, 68161 MannheimWanderfreunde Mannheim",
+      "_id": "8e0fdfcf197c49b2bbc4f53641148b5c"
+    },
+    {
+      "iEventId": "643954",
+      "sName": "Zierfisch- und Wasserpflanzenbörse",
+      "sDate": "Samstag, 27.10.2018, 9:30 - 12 Uhr",
+      "sAdress": "Aquarienfreunde Mannheim 1965, 68167 MannheimAquarienfreunde Mannheim 1965",
+      "_id": "460eab3feafa41e8a1ef22ce9ea5e2bc"
+    },
+    {
+      "iEventId": "936961",
+      "sName": "Lebenslänglich hinter Gittern - Wildtiere im Zoo",
+      "sDate": "Samstag, 27.10.2018, 20 Uhr",
+      "sAdress": "Universität Mannheim, 68159 Mannheim",
+      "_id": "a210571cf9a749ec972794faef8c90eb"
+    },
+    {
+      "iEventId": "936913",
+      "sName": "Sexueller Missbrauch an Kindern",
+      "sDate": "Samstag, 27.10.2018, 19:30 - 21 Uhr",
+      "sAdress": "Fontäne Kulturzentrum, 67059 Ludwigshafen",
+      "_id": "d3e9df07eb19417d9aadbd82c48a5706"
+    },
+    {
+      "iEventId": "938970",
+      "sName": "Infostand der CDU Einhausen zur Landtagswahl",
+      "sDate": "Samstag, 27.10.2018, 7:30 Uhr",
+      "sAdress": "Ried-Apotheke, 64683 Einhausen",
+      "_id": "8371b12a74e7408bae7c66ca615b9532"
+    },
+    {
+      "iEventId": "936269",
+      "sName": "Infostand der CDU Lorsch zur Landtagswahl",
+      "sDate": "Samstag, 27.10.2018, 9 - 12 Uhr",
+      "sAdress": "Altes Rathaus Lorsch, 64653 Lorsch",
+      "_id": "785e271ddef64a3896c201ddc2bf3619"
+    },
+    {
+      "iEventId": "938318",
+      "sName": "Circus Carelli",
+      "sDate": "Samstag, 27.10.2018, 15 Uhr",
+      "sAdress": "Festplatz am Rhein, 67501 Worms",
+      "_id": "a6f206c0cec744ff95433d063c762b3a"
+    }
+  ]
+}

@@ -1,0 +1,1444 @@
+{
+  "array": [
+    {
+      "iEventId": "event_752032",
+      "sName": "geöffnet",
+      "sDate": "Morgen, 10 - 22 Uhr",
+      "sAdress": "Basinus-Bad - Hallenbad, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_411812",
+      "sName": "geöffnet",
+      "sDate": "Morgen, 15 - 21 Uhr",
+      "sAdress": "Hallenbad, 64683 Einhausen"
+    },
+    {
+      "iEventId": "event_498998",
+      "sName": "90er Party",
+      "sDate": "Morgen, 22 Uhr",
+      "sAdress": "Billy Blues im Ziegler, 69115 Heidelberg"
+    },
+    {
+      "iEventId": "event_936058",
+      "sName": "90er Wiesn Party",
+      "sDate": "Morgen, 21 Uhr",
+      "sAdress": "Bel Air Terminal, 68782 Brühl"
+    },
+    {
+      "iEventId": "event_616851",
+      "sName": "Best Of Dance",
+      "sDate": "Morgen, 21 Uhr",
+      "sAdress": "Music-Hall, 67069 Ludwigshafen - Oppau"
+    },
+    {
+      "iEventId": "event_931520",
+      "sName": "Brühler und Friends - Techno in Town",
+      "sDate": "Morgen, 22 Uhr",
+      "sAdress": "Café Central, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_922810",
+      "sName": "CrewLove pres. ",
+      "sDate": "Morgen, 23 Uhr",
+      "sAdress": "Cubes Club, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_823041",
+      "sName": "Genesis Rockt am Nachtwandel",
+      "sDate": "Morgen, 23 Uhr",
+      "sAdress": "Genesis Musikclub, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_731393",
+      "sName": "iA Bailarr!",
+      "sDate": "Morgen, 22 Uhr",
+      "sAdress": "Baton Rouge, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_893229",
+      "sName": "Lazy Friday",
+      "sDate": "Morgen, 23 Uhr",
+      "sAdress": "MWS Club - Musikwerkstatt, 67433 Neustadt"
+    },
+    {
+      "iEventId": "event_926763",
+      "sName": "Len Faki",
+      "sDate": "Morgen, 23 Uhr",
+      "sAdress": "The Loft Club, 67059 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_905237",
+      "sName": "Noche Cubana",
+      "sDate": "Morgen, 21 Uhr",
+      "sAdress": "Karlstorbahnhof - Saal, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_932468",
+      "sName": "Oktoberfestgaudi",
+      "sDate": "Morgen, 18 - 23 Uhr",
+      "sAdress": "Wirtshaus Zum Weißen Lamm, 69493 Hirschberg - Großsachsen"
+    },
+    {
+      "iEventId": "event_782176",
+      "sName": "Revivalparty",
+      "sDate": "Morgen, 21 Uhr",
+      "sAdress": "Villa Titiana, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_807502",
+      "sName": "Sweet Friday",
+      "sDate": "Morgen, 23 Uhr",
+      "sAdress": "Chaplin-Club, 68161 Mannheim - Innenstadt"
+    },
+    {
+      "iEventId": "event_765878",
+      "sName": "The Dead Kennys Party",
+      "sDate": "Morgen, 23 Uhr",
+      "sAdress": "Nachtleben, 60313 Frankfurt"
+    },
+    {
+      "iEventId": "event_821958",
+      "sName": "Twize",
+      "sDate": "Morgen, 23 Uhr",
+      "sAdress": "MS Connexion, 68199 Mannheim"
+    },
+    {
+      "iEventId": "event_937204",
+      "sName": "GD",
+      "sDate": "Morgen, 14:30 Uhr",
+      "sAdress": "Evangelisches Alten- und Pflegeheim, 67065 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_937205",
+      "sName": "GD Taizé-Andacht ",
+      "sDate": "Morgen, 18:30 Uhr",
+      "sAdress": "Paul-Gerhardt-Kirche, 67067 Ludwigshafen - Rheingönheim"
+    },
+    {
+      "iEventId": "event_937623",
+      "sName": "Mitmachgottesdienst für die Kleinen, Helfrich-Brucksch",
+      "sDate": "Morgen, 16:30 Uhr",
+      "sAdress": "Vogelstang GMZ, 68309 Mannheim - Vogelstang"
+    },
+    {
+      "iEventId": "event_933802",
+      "sName": "Bilderbuchzeit - Der kleine Dachs hilft seinen Freunden",
+      "sDate": "Morgen, 16 Uhr",
+      "sAdress": "Stadtbücherei, 69115 Heidelberg"
+    },
+    {
+      "iEventId": "event_901487",
+      "sName": "Das Sams und die Helden der Kinderbücher",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Historisches Museum der Pfalz, 67346 Speyer"
+    },
+    {
+      "iEventId": "event_531731",
+      "sName": "Kindernachmittag",
+      "sDate": "Morgen, 15 Uhr",
+      "sAdress": "Stadtbibliothek, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_931501",
+      "sName": "Mumien - Geheimnisse des Lebens",
+      "sDate": "Morgen, 18:30 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Zeughaus - Kasse, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_637615",
+      "sName": "Allerheiligenmarkt",
+      "sDate": "Morgen, 11 - 20 Uhr",
+      "sAdress": "Dreifaltigkeitskirche, 67547 Worms"
+    },
+    {
+      "iEventId": "event_418990",
+      "sName": "Herbstmesse",
+      "sDate": "Morgen, 14 - 22 Uhr",
+      "sAdress": "Festplatz, 67346 Speyer"
+    },
+    {
+      "iEventId": "event_845506",
+      "sName": "Kerwe",
+      "sDate": "Morgen",
+      "sAdress": "Neuer Messplatz, 68723 Schwetzingen"
+    },
+    {
+      "iEventId": "event_920080",
+      "sName": "Lautrer Oktoberkerwe",
+      "sDate": "Morgen, 14 - 23 Uhr",
+      "sAdress": " Kaiserslautern"
+    },
+    {
+      "iEventId": "event_530512",
+      "sName": "Oktoberfest",
+      "sDate": "Morgen, 18 Uhr",
+      "sAdress": "Festzelt, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_522098",
+      "sName": "Altstadtführung",
+      "sDate": "Morgen, 18 Uhr",
+      "sAdress": "Marktplatzbrunnen, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_886916",
+      "sName": "Altstadtrundgang",
+      "sDate": "Morgen, 10:30 Uhr",
+      "sAdress": "Heidelberg Marketing,  Heidelberg"
+    },
+    {
+      "iEventId": "event_838461",
+      "sName": "Dunkel war's, der Mond schien helle....",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Schlossgarten, 68723 Schwetzingen"
+    },
+    {
+      "iEventId": "event_572017",
+      "sName": "Fackelführung",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Marktplatzbrunnen, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_761944",
+      "sName": "Kellerführung",
+      "sDate": "Morgen, 11 Uhr",
+      "sAdress": "Wachtenburg, 67157 Wachenheim/Weinstr."
+    },
+    {
+      "iEventId": "event_850471",
+      "sName": "Mord aus zarter Hand",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Deutsches Apotheken-Museum, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_886879",
+      "sName": "Stadtrundfahrt",
+      "sDate": "Morgen, 13:30 Uhr",
+      "sAdress": " Heidelberg"
+    },
+    {
+      "iEventId": "event_585087",
+      "sName": "Werwölfe, Wiedergänger und Vampyre",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Marienstatue, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_922913",
+      "sName": "Black Milk & Nat Turner Band",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Alte Feuerwache, 68167 Mannheim"
+    },
+    {
+      "iEventId": "event_932242",
+      "sName": "Die Zwei",
+      "sDate": "Morgen, 21 Uhr",
+      "sAdress": "Jazzhaus, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_930676",
+      "sName": "Filippo Vignato Trio",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Betriebswerk, 69123 Heidelberg"
+    },
+    {
+      "iEventId": "event_932491",
+      "sName": "Haufe Leit",
+      "sDate": "Morgen, 20:30 Uhr",
+      "sAdress": "Muddys Club, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_930539",
+      "sName": "Jazz au Comptoir",
+      "sDate": "Morgen, 22 Uhr",
+      "sAdress": "Côté Comptoir, 68165 Mannheim - Oststadt"
+    },
+    {
+      "iEventId": "event_847739",
+      "sName": "Johannes Ambrosius Trio",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Volksbühne - kleines Theater, 67549 Worms"
+    },
+    {
+      "iEventId": "event_617717",
+      "sName": "Leiningerland Band",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Bockenheimer Weinstube, 67278 Bockenheim"
+    },
+    {
+      "iEventId": "event_932259",
+      "sName": "The Oswald",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Kazzwoo, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_938691",
+      "sName": "Antje Schumacher",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Kulturtreff \"Alter Bahnhof\", 68809 Neulußheim"
+    },
+    {
+      "iEventId": "event_884942",
+      "sName": "Dr. Markus Weber & Dieter Scheithe",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Ulner Kapelle, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_910775",
+      "sName": "Eure Mütter",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Capitol, 68169 Mannheim"
+    },
+    {
+      "iEventId": "event_938852",
+      "sName": "Franz Josef Feimer",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Evang. Gemeindezentrum Vogelstang, 68309 Mannheim - Vogelstang"
+    },
+    {
+      "iEventId": "event_925765",
+      "sName": "Herta & Berta",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Alte Druckerei, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_930964",
+      "sName": "Kabarett Dusche",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Klapsmühl' am Rathaus, 68159 Mannheim - Innenstadt"
+    },
+    {
+      "iEventId": "event_923899",
+      "sName": "Kabbaratz",
+      "sDate": "Morgen, 20:30 Uhr",
+      "sAdress": "HalbNeun Theater, 64283 Darmstadt"
+    },
+    {
+      "iEventId": "event_901907",
+      "sName": "Moritz Netenjakob: \"Das Ufo parkt falsch\"",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Theater Mobile - Gewölbekeller des Alten Amtsgerichts, 64673 Zwingenberg/Bergstraße"
+    },
+    {
+      "iEventId": "event_703570",
+      "sName": "Nosferatu - eine Ironie des Grauens",
+      "sDate": "Morgen, 20:30 Uhr",
+      "sAdress": "Comedyhall, 64285 Darmstadt"
+    },
+    {
+      "iEventId": "event_932508",
+      "sName": "Tino Bomelino",
+      "sDate": "Morgen, 20:30 Uhr",
+      "sAdress": "Theater Sapperlot, 64653 Lorsch"
+    },
+    {
+      "iEventId": "event_936972",
+      "sName": "Messe",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Christ König Kirche, 67071 Ludwigshafen - Oggersheim"
+    },
+    {
+      "iEventId": "event_934941",
+      "sName": "Frauenfrühstück der Ev. Kirchengemeinde Schönberg/Wilmshausen",
+      "sDate": "Morgen, 9 Uhr",
+      "sAdress": "Evangelisches Gemeindezentrum - Gemeindesaal, 64625 Bensheim - Schönberg"
+    },
+    {
+      "iEventId": "event_933563",
+      "sName": "18. Darmstädter Nacht der Stimmen (ausverkauft)",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Centralstation - Saal, 64283 Darmstadt"
+    },
+    {
+      "iEventId": "event_918623",
+      "sName": "Carolin Widmann",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "BASF - Feierabendhaus, 67063 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_927255",
+      "sName": "Orgel Punkt Sechs",
+      "sDate": "Morgen, 18 Uhr",
+      "sAdress": "Christuskirche, 68161 Mannheim - Oststadt"
+    },
+    {
+      "iEventId": "event_896546",
+      "sName": "Orgelkurzkonzert",
+      "sDate": "Morgen, 17:15 - 17:45 Uhr",
+      "sAdress": "Heiliggeistkirche, 69117 Heidelberg - Altstadt"
+    },
+    {
+      "iEventId": "event_69595",
+      "sName": "Museumszentrum geöffnet",
+      "sDate": "Morgen, 10 - 17 Uhr",
+      "sAdress": "Museumszentrum, 64653 Lorsch"
+    },
+    {
+      "iEventId": "event_937152",
+      "sName": "Elisabeth Herrmann - Die Stimme der Toten",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Gemeindebücherei Limburgerhof, 67117 Limburgerhof"
+    },
+    {
+      "iEventId": "event_931793",
+      "sName": "Peter Prange - Eine Familie in Deutschland: Zeit zu hoffen, Zeit zu leben",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Bürgerhaus, 68542 Heddesheim"
+    },
+    {
+      "iEventId": "event_933210",
+      "sName": "Rudi Dutschke. Die Biographie",
+      "sDate": "Morgen, 17 Uhr",
+      "sAdress": "Augustinum, 69126 Heidelberg"
+    },
+    {
+      "iEventId": "event_408701",
+      "sName": "\"Zeit teilen\" - Seniorenfrühstück und Betreuung",
+      "sDate": "Morgen, 9 - 12 Uhr",
+      "sAdress": "Mehrgenerationenhaus/Caritas Zentrum Franziskushaus, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_113959",
+      "sName": "Bürger-Info",
+      "sDate": "Morgen, 8 - 12 Uhr",
+      "sAdress": "Stadthaus, 64653 Lorsch"
+    },
+    {
+      "iEventId": "event_113964",
+      "sName": "Sprechstunde",
+      "sDate": "Morgen, 13:30 - 18:30 Uhr",
+      "sAdress": "Schön Klinik Lorsch, 64653 Lorsch"
+    },
+    {
+      "iEventId": "event_786771",
+      "sName": "Kartoffelmarkt",
+      "sDate": "Morgen, 14 - 17 Uhr",
+      "sAdress": "Lindenallee, 68649 Groß-Rohrheim"
+    },
+    {
+      "iEventId": "event_862696",
+      "sName": "Winterdorf",
+      "sDate": "Morgen, 11 - 22 Uhr",
+      "sAdress": "Winterdorf vor der Rhein-Galerie, 67061 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_930678",
+      "sName": "\"Alltäglich fantastisch: Kindergeschichten aus Finnland\"",
+      "sDate": "Morgen, 10 - 19 Uhr",
+      "sAdress": "Stadtbibliothek, 67059 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_939852",
+      "sName": "\"B. Deutungen\", Arbeiten von Birgit Metzler",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Parktheater - Gertrud-Eysoldt-Foyer, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_924131",
+      "sName": "\"Chaos.Zufall\", Arbeiten von 17 Künstlerinnen der Gruppe GEDOK",
+      "sDate": "Morgen",
+      "sAdress": "Galerie im Schloss, 69502 Hemsbach"
+    },
+    {
+      "iEventId": "event_927846",
+      "sName": "\"Dreißig Tage\", Mischtechniken von Manfred Fischer zum Gedicht \"Ausfahrt\" von Ingeborg Bachmann",
+      "sDate": "Morgen, 10 - 19 Uhr",
+      "sAdress": "Galerie Böhler, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_931836",
+      "sName": "\"Flüssigkeiten und mehr...\"",
+      "sDate": "Morgen, 10 - 19 Uhr",
+      "sAdress": "St. Marienkrankenhaus, 67067 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_933208",
+      "sName": "\"Kunst kennt keine Behinderung\"",
+      "sDate": "Morgen, 8 - 14 Uhr",
+      "sAdress": "Behindertenhilfe Bergstraße, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_929525",
+      "sName": "\"Landschaften\", Jahresausstellung der Gruppe Frauen-Kunst-Kultur",
+      "sDate": "Morgen, 8 - 12 Uhr",
+      "sAdress": "Landratsamt - Rhein-Main-Neckar-Galerie, 64646 Heppenheim"
+    },
+    {
+      "iEventId": "event_938128",
+      "sName": "\"Malerische Korrespondenzen\", Arbeiten von Christine Wachtel und Marlies Wank",
+      "sDate": "Morgen, 8 - 12 Uhr",
+      "sAdress": "Rathausgalerie, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_904163",
+      "sName": "(Wieder-)entdecken - Die Kunsthalle Mannheim 1933 bis 1945 und die Folgen",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Kunsthalle, 68165 Mannheim - Innenstadt"
+    },
+    {
+      "iEventId": "event_935994",
+      "sName": "13 Momente",
+      "sDate": "Morgen, 11 - 13:30 Uhr",
+      "sAdress": "Klapsmühl' am Rathaus, 68159 Mannheim - Innenstadt"
+    },
+    {
+      "iEventId": "event_918172",
+      "sName": "21 - Erinnerungen ans Erwachsenwerden",
+      "sDate": "Morgen",
+      "sAdress": "Nationaltheater - Unteres Foyer, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_931414",
+      "sName": "4 mal Götze - eine Hallenser Künstlerfamilie ",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Städtische Galerie/Kulturhof Flachsgasse, 67346 Speyer"
+    },
+    {
+      "iEventId": "event_936115",
+      "sName": "50 Jahre Kunstverein Speyer ",
+      "sDate": "Morgen, 9 - 18 Uhr",
+      "sAdress": "Pfälzische Landesbibliothek, 67346 Speyer"
+    },
+    {
+      "iEventId": "event_920933",
+      "sName": "Abenteuer Anden und Amazonas",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Zeughaus, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_929278",
+      "sName": "Alles hat einen Anfang und ein Ende",
+      "sDate": "Morgen, 10 - 13 Uhr",
+      "sAdress": "RosenRot, 68259 Mannheim - Feudenheim"
+    },
+    {
+      "iEventId": "event_931278",
+      "sName": "Amerikas verborgene Orte",
+      "sDate": "Morgen, 12 - 18 Uhr",
+      "sAdress": "Mark-Twain-Center, 69126 Heidelberg"
+    },
+    {
+      "iEventId": "event_929600",
+      "sName": "Anders Sehen - Malerei und Fotografie von Kim-Britt Eigenberger",
+      "sDate": "Morgen, 9 - 19 Uhr",
+      "sAdress": "Universität Mannheim - Schloss Ostflügel, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_929866",
+      "sName": "Arbeiten aus der Begabtenförderung 2017 und 2018 der Jugendkunstakademie",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Das Wormser - Theater, Kultur- und Tagungszentrum - Oberes Foyer, 67549 Worms"
+    },
+    {
+      "iEventId": "event_932240",
+      "sName": "Arbeiten von Klaus Fußmann und Hermann Reimer",
+      "sDate": "Morgen, 9 - 13 Uhr",
+      "sAdress": "Galerie Lauth, 67061 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_915634",
+      "sName": "Art im Port",
+      "sDate": "Morgen",
+      "sAdress": "Business-Center Partner Port, 69190 Walldorf"
+    },
+    {
+      "iEventId": "event_882916",
+      "sName": "Bild und Blick - Sehen in der Moderne",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Wilhelm-Hack-Museum, 67059 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_13420",
+      "sName": "Bionik",
+      "sDate": "Morgen, 9 - 17 Uhr",
+      "sAdress": "Technoseum - Landesmuseum für Technik und Arbeit, 68169 Mannheim"
+    },
+    {
+      "iEventId": "event_933823",
+      "sName": "Blende 2018",
+      "sDate": "Morgen, 10 - 20 Uhr",
+      "sAdress": "Stadtbücherei  - Foyer, 69115 Heidelberg"
+    },
+    {
+      "iEventId": "event_921453",
+      "sName": "Callot. Graphische Monumente",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Kunsthalle, 68165 Mannheim - Innenstadt"
+    },
+    {
+      "iEventId": "event_922641",
+      "sName": "Caribbean Warriors",
+      "sDate": "Morgen, 7:30 - 12 Uhr",
+      "sAdress": "Haus am Römer, 68623 Lampertheim"
+    },
+    {
+      "iEventId": "event_925466",
+      "sName": "Caroline Laengerer",
+      "sDate": "Morgen, 17 - 20 Uhr",
+      "sAdress": "GEDOK Gemeinschaft der Künstlerinnen und Kunstfreunde und -förderer, 69115 Heidelberg - Bergheim"
+    },
+    {
+      "iEventId": "event_928713",
+      "sName": "Chaos.Zufall",
+      "sDate": "Morgen, 7:30 - 13 Uhr",
+      "sAdress": "Galerie im Schloss, 69502 Hemsbach"
+    },
+    {
+      "iEventId": "event_939854",
+      "sName": "Den Himmel berühren - Bestickte Fotografien/Installationen",
+      "sDate": "Morgen, 9 - 12 Uhr",
+      "sAdress": "Kreisarchiv, 68526 Ladenburg"
+    },
+    {
+      "iEventId": "event_925486",
+      "sName": "Der Kalte Krieg. Ursachen - Geschichte - Folgen ",
+      "sDate": "Morgen, 8 - 16 Uhr",
+      "sAdress": "Marchivum - Haus der Stadtgeschichte und Erinnerung, 68169 Mannheim - Neckarstadt"
+    },
+    {
+      "iEventId": "event_926257",
+      "sName": "Der weite Blick",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "3F Deutsches Museum für Foto-, Film- und Fernsehtechnik, 67146 Deidesheim"
+    },
+    {
+      "iEventId": "event_935241",
+      "sName": "Der Zauber der Verwandlung - 10 Wege zur Photographie",
+      "sDate": "Morgen, 14 - 17 Uhr",
+      "sAdress": "Städtische Galerie Villa Streccius, 76829 Landau"
+    },
+    {
+      "iEventId": "event_936194",
+      "sName": "Die Farbe Orange",
+      "sDate": "Morgen",
+      "sAdress": "Rathaus Galerie, 68519 Viernheim"
+    },
+    {
+      "iEventId": "event_866182",
+      "sName": "Die Gute Form",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Kunsthaus, 67227 Frankenthal"
+    },
+    {
+      "iEventId": "event_937162",
+      "sName": "Die Lerche die in die Lüfte steigt, der Löwe brüllt, wenn er nicht schweigt",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Museum Haus Cajeth, 69117 Heidelberg - Altstadt"
+    },
+    {
+      "iEventId": "event_929730",
+      "sName": "Die Pegeluhr - Wahrzeichen der Parkinsel",
+      "sDate": "Morgen, 8 - 18 Uhr",
+      "sAdress": "Volkshochschule im Bürgerhof, 67059 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_928072",
+      "sName": "Die Schächte des Lichts 2018 - Kunst unter dem Gehweg",
+      "sDate": "Morgen",
+      "sAdress": "Kunststraße, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_919887",
+      "sName": "Die Vielfalt der Malerei",
+      "sDate": "Morgen, 8 - 20 Uhr",
+      "sAdress": "Augustinum, 69126 Heidelberg"
+    },
+    {
+      "iEventId": "event_935113",
+      "sName": "einander.Aktionstage - Mein Mannheim",
+      "sDate": "Morgen, 13 - 22 Uhr",
+      "sAdress": "Café Filsbach, 68159 Mannheim - Innenstadt"
+    },
+    {
+      "iEventId": "event_896686",
+      "sName": "Einfach tierisch! Spaß mit Dino, Panda & Co.",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Weltkulturen, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_904080",
+      "sName": "Erinnern - Aus der Geschichte einer Institution",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Kunsthalle, 68165 Mannheim - Innenstadt"
+    },
+    {
+      "iEventId": "event_939850",
+      "sName": "Eröffnung der Ausstellung \"B. Deutungen\" mit Arbeiten von Birgit Metzler",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Parktheater - Gertrud-Eysoldt-Foyer, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_906695",
+      "sName": "Everyday life - die Geschichte der Amerikaner auf den Konversionsflächen in Mannheim",
+      "sDate": "Morgen, 10 - 16 Uhr",
+      "sAdress": "Zeitstrom-Haus, 68309 Mannheim - Käfertal"
+    },
+    {
+      "iEventId": "event_933377",
+      "sName": "Extraordinaire!",
+      "sDate": "Morgen, 11 - 17 Uhr",
+      "sAdress": "Sammlung Prinzhorn, 69115 Heidelberg"
+    },
+    {
+      "iEventId": "event_926014",
+      "sName": "Facetten des Erinnerns: 1968 Global  Eine Retrospektive",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Völkerkundemuseum, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_905396",
+      "sName": "Fotografie - Fotoarbeiten von Christina Detmers, Zuhal Eskiocak, Fritzi Haußmann, Ulrike Hollerbach, Heike Penner, Konstantin Weber",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Pauline-Maier-Haus, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_912478",
+      "sName": "Frauen-Kunst-Kultur",
+      "sDate": "Morgen",
+      "sAdress": "Best Western Plus Steubenhof Hotel, 68199 Mannheim - Neckarau"
+    },
+    {
+      "iEventId": "event_906813",
+      "sName": "Fundstücke und andere Sehenswürdigkeiten",
+      "sDate": "Morgen, 8:30 - 12 Uhr",
+      "sAdress": "Rathausgalerie, 68782 Brühl"
+    },
+    {
+      "iEventId": "event_938560",
+      "sName": "Galerie der Innovationen - Fotografie von zehn Mannheimer Fotografen",
+      "sDate": "Morgen, 8 - 22 Uhr",
+      "sAdress": "Alter Messplatz, 68169 Mannheim"
+    },
+    {
+      "iEventId": "event_565560",
+      "sName": "Geheimnisse der Steinzeit",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Stadtbücherei, 68623 Lampertheim"
+    },
+    {
+      "iEventId": "event_930628",
+      "sName": "Gemeinschaftsausstellung mit Werken von - Yuko Akiya, Nanayo Daimaru, Yoneichi Hosoda, Kazuma Ishida, Moe Watanabe, Hiroshi Yamazoe, u. a.",
+      "sDate": "Morgen, 9 - 17 Uhr",
+      "sAdress": "Galerie Böhner im Signal-Iduna Business-Tower, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_78054",
+      "sName": "Geschichte der Binnenschifffahrt",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Museumsschiff, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_929776",
+      "sName": "Gesehen werden",
+      "sDate": "Morgen",
+      "sAdress": "SRH Hochschule Heidelberg, 69123 Heidelberg"
+    },
+    {
+      "iEventId": "event_410211",
+      "sName": "geöffnet",
+      "sDate": "Morgen, 10 - 17 Uhr",
+      "sAdress": "Museumszentrum, 64653 Lorsch"
+    },
+    {
+      "iEventId": "event_410206",
+      "sName": "geöffnet",
+      "sDate": "Morgen, 15 - 18 Uhr",
+      "sAdress": "Museum der Stadt Bensheim, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_778272",
+      "sName": "geöffnet",
+      "sDate": "Morgen, 15 - 19 Uhr",
+      "sAdress": "Museum Stangenberg Merck, 64342 Seeheim-Jugenheim"
+    },
+    {
+      "iEventId": "event_929729",
+      "sName": "Glas rostet nie",
+      "sDate": "Morgen, 8 - 11:30 Uhr",
+      "sAdress": "Rathaus, 68647 Biblis"
+    },
+    {
+      "iEventId": "event_931534",
+      "sName": "Hein Albig und Freunde",
+      "sDate": "Morgen, 8 - 12 Uhr",
+      "sAdress": "Rathaus-Galerie, 69493 Hirschberg"
+    },
+    {
+      "iEventId": "event_938947",
+      "sName": "Holger Heimann, ein Fotograf des Unterwegs",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Europäisches Fotozentrum für junge Fotografen, 68519 Viernheim"
+    },
+    {
+      "iEventId": "event_926054",
+      "sName": "Just To See Your Smile - Werke von David Spiller",
+      "sDate": "Morgen, 14 - 19 Uhr",
+      "sAdress": "Galerie Kasten, 68165 Mannheim - Schwetzingerstadt"
+    },
+    {
+      "iEventId": "event_882919",
+      "sName": "Kabinettstücke - Make Love Not War",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Wilhelm-Hack-Museum, 67059 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_920743",
+      "sName": "Keramik der Welt",
+      "sDate": "Morgen, 11 - 13 Uhr",
+      "sAdress": "Galerie Marianne Heller, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_927634",
+      "sName": "Kunst im Amtsgericht",
+      "sDate": "Morgen, 8 - 14 Uhr",
+      "sAdress": "Amtsgericht, 68723 Schwetzingen"
+    },
+    {
+      "iEventId": "event_932790",
+      "sName": "Kunst kennt keine Behinderung",
+      "sDate": "Morgen, 8 - 14 Uhr",
+      "sAdress": "Behindertenhilfe Bergstraße, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_933817",
+      "sName": "Landschaften",
+      "sDate": "Morgen, 8 - 12 Uhr",
+      "sAdress": "Landratsamt - Rhein-Main-Neckar-Galerie, 64646 Heppenheim"
+    },
+    {
+      "iEventId": "event_882869",
+      "sName": "Laura Schawelka",
+      "sDate": "Morgen, 15 - 18 Uhr",
+      "sAdress": "Rudolf-Scharpf-Galerie, 67063 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_935918",
+      "sName": "Lebensnah",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Heidelberger Forum für Kunst, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_932793",
+      "sName": "Malerische Korrespondenzen",
+      "sDate": "Morgen, 8 - 12 Uhr",
+      "sAdress": "Rathausgalerie, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_910909",
+      "sName": "Mediengeschichte",
+      "sDate": "Morgen, 9 - 17 Uhr",
+      "sAdress": "Technoseum - Landesmuseum für Technik und Arbeit, 68169 Mannheim"
+    },
+    {
+      "iEventId": "event_931042",
+      "sName": "Menschland - Erdgedächtnis, Werke von Malte Lück",
+      "sDate": "Morgen",
+      "sAdress": "Philippuskirche, 68309 Mannheim - Käfertal"
+    },
+    {
+      "iEventId": "event_921257",
+      "sName": "Mittelpunkt Mensch",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Schloss Villa Ludwigshöhe, 67480 Edenkoben"
+    },
+    {
+      "iEventId": "event_921576",
+      "sName": "Mumien - Geheimnisse des Lebens",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Zeughaus, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_820108",
+      "sName": "MusikWelten - Geschichte der Musik",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Bassermannhaus für Musik und Kunst, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_926377",
+      "sName": "Neuer Himmel. Neue Erde",
+      "sDate": "Morgen, 10 - 17 Uhr",
+      "sAdress": "Stadtmuseum, 1. OG im Rathauscenter, 67059 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_904078",
+      "sName": "Offen - Werke aus der Sammlung der Kunsthalle",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Kunsthalle, 68165 Mannheim - Innenstadt"
+    },
+    {
+      "iEventId": "event_891120",
+      "sName": "Open Air Ausstellung/Projekt Asparagus - Spargel kreativ",
+      "sDate": "Morgen",
+      "sAdress": "VHS Volkshochschule, 68723 Schwetzingen"
+    },
+    {
+      "iEventId": "event_853123",
+      "sName": "Our Classics II",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Döbele Kunst, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_866514",
+      "sName": "Präsentationen im Raum 5 - Werke von Vera Molnar",
+      "sDate": "Morgen, 15 - 18 Uhr",
+      "sAdress": "März Galerie Mannheim und Cube 4x4x4, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_869633",
+      "sName": "Red Utopia - Fotografien von Jan Banning über Kommunismus 100 Jahre nach der Russischen Revolution",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Zephyr - Raum für Fotografie, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_933526",
+      "sName": "Schule macht  macht Schule",
+      "sDate": "Morgen, 9 - 16 Uhr",
+      "sAdress": "Galerie der Volksbank, 69469 Weinheim"
+    },
+    {
+      "iEventId": "event_919907",
+      "sName": "Sonderausstellung \"Zum Bild verführt - Visualisierungsversuche eines verlorenen Klosters\"",
+      "sDate": "Morgen, 10 - 17 Uhr",
+      "sAdress": "Museumszentrum, 64653 Lorsch"
+    },
+    {
+      "iEventId": "event_936011",
+      "sName": "Sonderausstellung \"Zum Bild verführt - Visualisierungsversuche eines verlorenen Klosters\"",
+      "sDate": "Morgen, 10 - 17 Uhr",
+      "sAdress": "Museumszentrum, 64653 Lorsch"
+    },
+    {
+      "iEventId": "event_926025",
+      "sName": "Sonderausstellung Arbeiten des Bildhauers, Malers und Grafikers Ekkehard Wiegand",
+      "sDate": "Morgen, 15 - 19 Uhr",
+      "sAdress": "Museum Stangenberg Merck, 64342 Seeheim-Jugenheim"
+    },
+    {
+      "iEventId": "event_886012",
+      "sName": "Sonderausstellung Holzskulpturen von Franz Musiol",
+      "sDate": "Morgen, 15 - 19 Uhr",
+      "sAdress": "Museum Stangenberg Merck, 64342 Seeheim-Jugenheim"
+    },
+    {
+      "iEventId": "event_928877",
+      "sName": "Spektrum - zwischen Farbe und Stein, Werke von Tanja Lebski",
+      "sDate": "Morgen, 9 - 16 Uhr",
+      "sAdress": "Club Arte Galerie im Moll-Gymnasium, 68163 Mannheim - Almenhof"
+    },
+    {
+      "iEventId": "event_931750",
+      "sName": "Stilvoller Wohnen - Malerei von Michael Frey",
+      "sDate": "Morgen",
+      "sAdress": "Best Western Plus Steubenhof Hotel, 68199 Mannheim - Neckarau"
+    },
+    {
+      "iEventId": "event_931249",
+      "sName": "Sur le chemin de la Paix - Die Friedensbilder von Zaü",
+      "sDate": "Morgen, 10 - 13 Uhr",
+      "sAdress": "Montpellier-Haus, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_924409",
+      "sName": "Sussi Hodel (Ch)",
+      "sDate": "Morgen, 15 - 19 Uhr",
+      "sAdress": "Galerie Böhner, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_925811",
+      "sName": "T-Shirts, Tüten und Tenside",
+      "sDate": "Morgen, 10 - 17 Uhr",
+      "sAdress": "Carl-Bosch-Museum, 69118 Heidelberg"
+    },
+    {
+      "iEventId": "event_927609",
+      "sName": "Ungeborenen Elefanten ins Maul sehen - oder von der schönen Ordnung der Dinge",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Port25 - Raum für Gegenwartskunst, 68159 Mannheim - Jungbusch"
+    },
+    {
+      "iEventId": "event_938789",
+      "sName": "Unheimliche Pastorale ",
+      "sDate": "Morgen, 19 - 21 Uhr",
+      "sAdress": "Galerie Peter Zimmermann, 68165 Mannheim - Oststadt"
+    },
+    {
+      "iEventId": "event_928678",
+      "sName": "Unwirklichkeiten - Das Imaginäre in der Kunst von Caspar David Friedrich bis Picasso",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Kurpfälzisches Museum, 69117 Heidelberg - Altstadt"
+    },
+    {
+      "iEventId": "event_927934",
+      "sName": "Valentinian I. und die Pfalz in der Spätantike",
+      "sDate": "Morgen, 10 - 18 Uhr",
+      "sAdress": "Historisches Museum der Pfalz, 67346 Speyer"
+    },
+    {
+      "iEventId": "event_936914",
+      "sName": "Veränderbare Zusammenhänge aus Gesetz und Zufall",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Augenladen, 68165 Mannheim - Schwetzingerstadt"
+    },
+    {
+      "iEventId": "event_920939",
+      "sName": "Viernheimer Kreuz",
+      "sDate": "Morgen, 14 - 18 Uhr",
+      "sAdress": "Kunstraum Gerdi Gutperle, 68519 Viernheim"
+    },
+    {
+      "iEventId": "event_869485",
+      "sName": "Von Pulverdampf und Schlachtidyll - Weißes Gold aus der Frankenthaler Manufaktur",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Zeughaus, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_928801",
+      "sName": "Wassertürme und Wasserwege in der Metropolregion",
+      "sDate": "Morgen, 9 - 17 Uhr",
+      "sAdress": "Technoseum - Landesmuseum für Technik und Arbeit, 68169 Mannheim"
+    },
+    {
+      "iEventId": "event_935880",
+      "sName": "Wurzeln der Mathematik - Wo, wann und warum haben Menschen angefangen, Mathematik zu machen",
+      "sDate": "Morgen, 14 - 19 Uhr",
+      "sAdress": "Mathematik-Informatik-Station - MAINS, 69115 Heidelberg"
+    },
+    {
+      "iEventId": "event_935937",
+      "sName": "Young Talents ",
+      "sDate": "Morgen, 10 - 18:30 Uhr",
+      "sAdress": "SAP Internationales Schulungszentrum - Building 5, 69190 Walldorf"
+    },
+    {
+      "iEventId": "event_927938",
+      "sName": "Zeichen_Lust",
+      "sDate": "Morgen, 15 - 19 Uhr",
+      "sAdress": "Galerie Linde Hollinger, 68526 Ladenburg"
+    },
+    {
+      "iEventId": "event_522639",
+      "sName": "Ägypten - Land der Unsterblichkeit ",
+      "sDate": "Morgen, 11 - 18 Uhr",
+      "sAdress": "Reiss-Engelhorn-Museen / Museum Weltkulturen, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_895338",
+      "sName": "Radio Gaga 80er Show",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Rhein Neckar Theater, 68199 Mannheim - Neckarau"
+    },
+    {
+      "iEventId": "event_933540",
+      "sName": "\"Die Zauberflöte\"",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Staatstheater Darmstadt - Großes Haus, 64283 Darmstadt"
+    },
+    {
+      "iEventId": "event_845276",
+      "sName": "Aschenputtel (La Cenerentola)",
+      "sDate": "Morgen, 19:30 - 22:20 Uhr",
+      "sAdress": "Nationaltheater - Opernhaus, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_915865",
+      "sName": "Rigoletto",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Theater und Orchester Heidelberg - Marguerre Saal, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_857580",
+      "sName": "Die drei ??? - und die schwarze Katze",
+      "sDate": "Morgen, 21 Uhr",
+      "sAdress": "Planetarium, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_583173",
+      "sName": "Milliarden Sonnen - Eine Reise durch die Galaxis",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Planetarium, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_537871",
+      "sName": "Zeitreise",
+      "sDate": "Morgen, 15 Uhr",
+      "sAdress": "Planetarium, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_903258",
+      "sName": "Andy & The Singing Lady's (verlegt vom 9.6.)",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Franziskushaus  - Franziskussaal, 68305 Mannheim - Waldhof"
+    },
+    {
+      "iEventId": "event_936921",
+      "sName": "Beat Brothers",
+      "sDate": "Morgen, 21 Uhr",
+      "sAdress": "Kulturzentrum Gleis4, 67227 Frankenthal"
+    },
+    {
+      "iEventId": "event_819701",
+      "sName": "Bierwürfeln",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Contra'n, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_935124",
+      "sName": "Eric Steckel",
+      "sDate": "Morgen, 20:30 Uhr",
+      "sAdress": "The Suite, 67433 Neustadt"
+    },
+    {
+      "iEventId": "event_939671",
+      "sName": "Gabriela Mendes & Band",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Kulturbrücken, 68159 Mannheim - Jungbusch"
+    },
+    {
+      "iEventId": "event_932679",
+      "sName": "Knochenfabrik/No°rd/Ersatzkopf",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Kulturzentrum Schlachthof, 65189 Wiesbaden"
+    },
+    {
+      "iEventId": "event_831635",
+      "sName": "Nachtwandel",
+      "sDate": "Morgen",
+      "sAdress": " Mannheim - Jungbusch"
+    },
+    {
+      "iEventId": "event_847332",
+      "sName": "Nachtwandel",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Blau, 68159 Mannheim - Jungbusch"
+    },
+    {
+      "iEventId": "event_932682",
+      "sName": "Powerwolf/Amaranthe & Kissin Dynamite (ausverkauft)",
+      "sDate": "Morgen, 18:40 Uhr",
+      "sAdress": "Kulturzentrum Schlachthof, 65189 Wiesbaden"
+    },
+    {
+      "iEventId": "event_933575",
+      "sName": "Seven Eagles",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Gehrings Kommode, 68199 Mannheim - Neckarau"
+    },
+    {
+      "iEventId": "event_932410",
+      "sName": "Yung Hurn (ausverkauft)",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Kulturzentrum Batschkapp, 60388 Frankfurt"
+    },
+    {
+      "iEventId": "event_926075",
+      "sName": "Der letzte Mann",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Theater am Puls, 68723 Schwetzingen"
+    },
+    {
+      "iEventId": "event_606342",
+      "sName": "Harald Wohlfahrt \"Palazzo\"",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Spiegelpalast, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_908528",
+      "sName": "Street-Life!",
+      "sDate": "Morgen, 20:30 Uhr",
+      "sAdress": "Varieté-Theater Pegasus, 64625 Bensheim"
+    },
+    {
+      "iEventId": "event_930013",
+      "sName": "Thorsten Havener",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Das Wormser - Theater, Kultur- und Tagungszentrum, 67549 Worms"
+    },
+    {
+      "iEventId": "event_317603",
+      "sName": "EC-Jungschar",
+      "sDate": "Morgen, 16:30 Uhr",
+      "sAdress": "Landeskirchliche Gemeinschaft Rheinau-Süd - bei Tobi Stein, 68219 Mannheim"
+    },
+    {
+      "iEventId": "event_390202",
+      "sName": "Jugendtreff",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Christliches Zentrum Mannheim, 68307 Mannheim - Schönau"
+    },
+    {
+      "iEventId": "event_390201",
+      "sName": "Pfadfinder Royal Rangers",
+      "sDate": "Morgen, 17 Uhr",
+      "sAdress": "Christliches Zentrum Mannheim, 68307 Mannheim - Schönau"
+    },
+    {
+      "iEventId": "event_195321",
+      "sName": "Royal Rangers (christl. Pfadfinder)",
+      "sDate": "Morgen, 18 Uhr",
+      "sAdress": "Volksmission entschiedener Christen, 68309 Mannheim - Käfertal"
+    },
+    {
+      "iEventId": "event_367201",
+      "sName": "Teen-Jugendkreis",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Landeskirchliche Gemeinschaft Rheinau-Süd - bei Tobi Stein, 68219 Mannheim"
+    },
+    {
+      "iEventId": "event_842642",
+      "sName": "Eislaufen",
+      "sDate": "Morgen, 9 - 12 Uhr",
+      "sAdress": "Eissporthalle \"Icehouse\", 69214 Eppelheim"
+    },
+    {
+      "iEventId": "event_842648",
+      "sName": "Eislaufen",
+      "sDate": "Morgen, 10 - 12 Uhr",
+      "sAdress": "Eissportzentrum Herzogenried, 68169 Mannheim"
+    },
+    {
+      "iEventId": "event_842649",
+      "sName": "Eislaufen",
+      "sDate": "Morgen, 10 - 23:30 Uhr",
+      "sAdress": "Eishalle, 69168 Wiesloch"
+    },
+    {
+      "iEventId": "event_907398",
+      "sName": "Extremalism/Bolero",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Theater im Pfalzbau, Theatersaal, 67059 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_935120",
+      "sName": "Zaurak",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "UnterwegsTheater/Hebel-Halle, 69115 Heidelberg"
+    },
+    {
+      "iEventId": "event_853609",
+      "sName": "\"Indien\"",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Staatstheater Darmstadt - Kleines Haus, 64283 Darmstadt"
+    },
+    {
+      "iEventId": "event_937172",
+      "sName": "\"S'bleibt in der Familie!\"",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Vereinsgaststätte des SVF Friesenheim, 67063 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_933538",
+      "sName": "\"Zwischen den Säulen\"",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Staatstheater Darmstadt Kammerspiele, 64295 Darmstadt"
+    },
+    {
+      "iEventId": "event_695855",
+      "sName": "Achtung Deutsch!",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Oststadt Theater, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_809298",
+      "sName": "Adelheid und ihre Kurschatten",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Theater Hemshofschachtel, 67063 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_414221",
+      "sName": "Alla Gut! - Verliebt ins Quadrat",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Schatzkistl, 68165 Mannheim"
+    },
+    {
+      "iEventId": "event_924266",
+      "sName": "Alle Jahre wieder ",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Prinzregenten Theater, 67063 Ludwigshafen"
+    },
+    {
+      "iEventId": "event_931439",
+      "sName": "Auf Hawai gibt's Leberkäs mit Ei",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Halle/Vereinsheim FC Boys Wattenheim, 68647 Biblis - Wattenheim"
+    },
+    {
+      "iEventId": "event_916652",
+      "sName": "Die Lüge",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Zimmertheater, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_852827",
+      "sName": "Die Regeln des Sommers (UA)",
+      "sDate": "Morgen, 11 - 12 Uhr",
+      "sAdress": "Nationaltheater - Junges NTM - Saal, 68167 Mannheim"
+    },
+    {
+      "iEventId": "event_918199",
+      "sName": "Drei Farben: Gold",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Nationaltheater - Casino Werkhaus, 68161 Mannheim"
+    },
+    {
+      "iEventId": "event_922771",
+      "sName": "Ein bisschen Jekyll, ein bisschen Hyde",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Theater Oliv, 68169 Mannheim"
+    },
+    {
+      "iEventId": "event_893199",
+      "sName": "Ein Souvenir zum verlieben...der nackte Fußballer!",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Boulevardtheater, 67146 Deidesheim"
+    },
+    {
+      "iEventId": "event_929705",
+      "sName": "Esel sucht Schwein",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Karlstorbahnhof, TiKK-Theater, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_915863",
+      "sName": "Justizmord des Jakob Mohr",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Haus der Johannesgemeinde, 69120 Heidelberg"
+    },
+    {
+      "iEventId": "event_848754",
+      "sName": "Radical Minds (UA)",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Theater/Haus G 7 - Saal, 68159 Mannheim"
+    },
+    {
+      "iEventId": "event_933190",
+      "sName": "Shakespeares wilde Weiber",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Freilichtbühne, Zimmertheater, 68305 Mannheim"
+    },
+    {
+      "iEventId": "event_931532",
+      "sName": "Uffruhr in Klääwingertsbach",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Theater Alte Werkstatt, 67227 Frankenthal"
+    },
+    {
+      "iEventId": "event_854076",
+      "sName": "Unser Lehrer ist ein Troll",
+      "sDate": "Morgen, 10 Uhr",
+      "sAdress": "Theater und Orchester Heidelberg - Zwinger3/Junges Theater, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_648526",
+      "sName": "Valentiniaden ",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Taeter-Theater, 69115 Heidelberg"
+    },
+    {
+      "iEventId": "event_932923",
+      "sName": "Werkschau der Abschlussklasse der Theaterakademie",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Theater Felina-Areal, 68167 Mannheim"
+    },
+    {
+      "iEventId": "event_927441",
+      "sName": "Bridge",
+      "sDate": "Morgen, 14:30 - 18 Uhr",
+      "sAdress": "Bridgeclub Mannheim e. V.  - 1. OG ESC-Blau-Weiss, 68259 Mannheim - FeudenheimBridge Club"
+    },
+    {
+      "iEventId": "event_862689",
+      "sName": "Chorprobe",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Feuerwehrhaus, 64686 Lautertal - ReichenbachFrauenchor Reichenbach"
+    },
+    {
+      "iEventId": "event_63605",
+      "sName": "Clubabend",
+      "sDate": "Morgen, 20:30 - 22 Uhr",
+      "sAdress": "Gasthaus \"Bauernstube\", 64678 Lindenfels - SchlierbachInteressengemeinschaft Motorsport Schlierbachtal (IMS)"
+    },
+    {
+      "iEventId": "event_922126",
+      "sName": "Freizeitgruppe",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "ASV Feudenheim, 68259 Mannheim - FeudenheimASV Feudenheim"
+    },
+    {
+      "iEventId": "event_663971",
+      "sName": "Informationsgespräch über gemeinschaftliches und selbstbestimmtes Wohnen.",
+      "sDate": "Morgen, 17 - 19 Uhr",
+      "sAdress": "Mannheimer Junge Alte, 68167 Mannheim - NeckarstadtMaJunA"
+    },
+    {
+      "iEventId": "event_245475",
+      "sName": "Lauftreff für Anfänger und Wiedereinsteiger",
+      "sDate": "Morgen, 18 Uhr",
+      "sAdress": "Trainingsgelände, 68219 MannheimTurnverein 1893 Rheinau"
+    },
+    {
+      "iEventId": "event_820121",
+      "sName": "Meetings mittwochs und freitags",
+      "sDate": "Morgen, 19:30 - 21 Uhr",
+      "sAdress": "Gemeindehaus der Ev. Stephanusgemeinde, 64625 BensheimAA - Anonyme Alkoholiker"
+    },
+    {
+      "iEventId": "event_635189",
+      "sName": "Probe",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Gemeindezentrum Evang. Thomasgemeinde, 68163 Mannheim - NeuhermsheimMandolinata Mannheim 1920"
+    },
+    {
+      "iEventId": "event_447910",
+      "sName": "Spielabend",
+      "sDate": "Morgen, 19:30 Uhr",
+      "sAdress": "Gaststätte \"Auerschänke\", 64625 Bensheim - AuerbachSkat-Club \"Trumpf-Ass-Auerbach\""
+    },
+    {
+      "iEventId": "event_872290",
+      "sName": "Treffen",
+      "sDate": "Morgen, 19:30 - 21 Uhr",
+      "sAdress": "Praxis Dr. Mehregan, 64625 BensheimSelbsthilfegruppe Depressionen"
+    },
+    {
+      "iEventId": "event_860906",
+      "sName": "Treffen \"Die Druffis, Clean geworden - Sauber bleiben!\"",
+      "sDate": "Morgen, 19 - 20:30 Uhr",
+      "sAdress": "Caritas Zentrum Heppenheim, 64646 HeppenheimCaritas - Allgemeine Lebensberatung"
+    },
+    {
+      "iEventId": "event_938326",
+      "sName": "100 Jahre Frauenwahlrecht - nicht geschenkt, sondern erkämpft!",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Capitol, 68169 Mannheim"
+    },
+    {
+      "iEventId": "event_940007",
+      "sName": "Der Würdekompass",
+      "sDate": "Morgen, 20 Uhr",
+      "sAdress": "Neue Universität - Aula, 69117 Heidelberg"
+    },
+    {
+      "iEventId": "event_939916",
+      "sName": "Die Selbstvergiftung aus dem Verdauungssystem",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Pater-Delp-Zentrum, 68623 Lampertheim - Hüttenfeld"
+    },
+    {
+      "iEventId": "event_932580",
+      "sName": "Unendliches Wachstum oder alternative Wirtschaftssysteme - ein Vergleich",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Volkshochschule, 69115 Heidelberg"
+    },
+    {
+      "iEventId": "event_896669",
+      "sName": "Vortrag",
+      "sDate": "Morgen, 19 Uhr",
+      "sAdress": "Naturfreunde Stadtheim, 68169 Mannheim - Neckarstadt"
+    },
+    {
+      "iEventId": "event_936269",
+      "sName": "Infostand der CDU Lorsch zur Landtagswahl",
+      "sDate": "Morgen, 9 - 12 Uhr",
+      "sAdress": "Altes Rathaus Lorsch, 64653 Lorsch"
+    }
+  ]
+}
