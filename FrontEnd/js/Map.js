@@ -177,6 +177,16 @@ function getAutocompletion(sQuery, oInputField) {
  * see: http://developer.here.com/rest-apis/documentation/geocoder/topics/resource-geocode.html
  * @param   {H.service.Platform} platform    A stub class to access HERE services
  */
+
+function zoomMap() {
+    if(map.getZoom() < 14.5){
+        map.setZoom(14.5, true);
+    }
+    if(map.getZoom() > 17){
+        map.setZoom(16, true);
+    }
+}
+
 function setCenter(sQuery) {
     //HANSCH always contains the last search request
     var sPlace = (sQuery === "" || sQuery === undefined) ? localStorage.getItem("HANSCH") : sQuery;
@@ -200,12 +210,7 @@ function setCenter(sQuery) {
             var oLatLgn = {lat: dLat, lng: dLng}
 
             map.setCenter(oLatLgn, true);
-            if(map.getZoom() < 14.5){
-                map.setZoom(14.5, true);
-            }
-            if(map.getZoom() > 17){
-                map.setZoom(16, true);
-            }
+            zoomMap();
         },
         /**
          * This function will be called if a communication error occurs during the JSON-P request
@@ -215,29 +220,6 @@ function setCenter(sQuery) {
             alert('Ooops!');
         }
     );
-}
-
-//TODO - take care and fix the global variable + callback check
-var oCoords = undefined;
-function getCoordsByAddress(sAddress){
-    var geocoder = platform.getGeocodingService(),
-    geocodingParameters = {
-        searchText: sAddress,
-        jsonattributes: 1
-    };
-    geocoder.geocode(
-    geocodingParameters,
-    onSuccess = function onSuccess(result) {
-        var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
-        var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
-        var oLatLgn = {lat: dLat, lng: dLng}
-        oCoords = oLatLgn;
-    },
-    onError = function(error) {
-        alert('Ooops!');
-    }
-    )
-    return oCoords;
 }
 
 function setMarker(sAddress, sName){
@@ -266,13 +248,48 @@ function setMarker(sAddress, sName){
             openBubble(evt.target.getPosition(), evt.target.label);
         }, false);
         marker.addEventListener('pointerleave', function (evt) {
-            closeBubble(evt.target.getPosition());
+             closeBubble(evt.target.getPosition());
         }, false);
     },
     onError = function(error) {
         alert('Ooops!');
     }
     )
+}
+
+function setVerifyLocationMarker(sAddress){
+    var geocoder = platform.getGeocodingService(),
+    geocodingParameters = {
+        searchText: sAddress,
+        jsonattributes: 1
+    };
+    geocoder.geocode(
+    geocodingParameters,
+    onSuccess = function onSuccess(result) {
+        var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
+        var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
+        var oLatLgn = {lat: dLat, lng: dLng}
+
+        var marker = new H.map.Marker(oLatLgn);
+        marker.label = "Ist das der Standort deines Events?";
+
+        map.addObject(marker);
+        openBubble(oLatLgn, marker.label);
+
+        marker.addEventListener('tap', function (evt) {
+            map.setCenter(evt.target.getPosition(), true);
+            openBubble(evt.target.getPosition(), evt.target.label);
+
+            map.setCenter(oLatLgn, true);
+            zoomMap();
+
+        }, false);
+    },
+    onError = function(error) {
+        alert('Ooops!');
+    }
+    )
+
 }
 
 var bubble; // Hold a reference to any infobubble opened
@@ -290,7 +307,9 @@ function openBubble(position, text) {
     } else {
         bubble.setPosition(position);
         bubble.setContent(text);
-        bubble.open();
+        if(bubble.getState() != "open"){
+            bubble.open();
+        }
     }
 }
 

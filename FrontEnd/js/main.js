@@ -138,8 +138,7 @@ var oNewEventVue = new Vue({
       },
       checkLocation: function checkLocation() {
         setCenter(this.draft.sAdress);
-        var sCheckLocMarkerName =  "Is this your events location?";
-        setMarker(this.draft.sAdress, sCheckLocMarkerName);
+        setVerifyLocationMarker(this.draft.sAdress);
       }
     }
 });
