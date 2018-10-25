@@ -286,11 +286,44 @@ div.sidecard {
   text-shadow: 4px 4px 30px #00000063;
 }
 
-#infoBubble {
-  background-color:#f1f1f1;
-    width: 100px;
-    height: 50px;
-    border: 10px solid green;
-    padding: 10px;
-    margin: 10px;
+#newLogin .buttons button {
+  background-color: rgba(47, 66, 79, 0.66);
+  margin-left: 10px;
+}
+
+#newRegister .buttons button {
+  background-color: rgba(47, 66, 79, 0.66);
+  margin-left: 10px;
+}
+
+/* Infobubble Style + Überschreibungen */
+.infoBubble {
+background-color:#f1f1f1;
+    width: 250px;
+    height: 150px;
+    border: 1px solid black;
+    padding: 5px;
+    color: black;
+}
+
+.H_ib_tail {
+  display: none
+}
+
+.H_ib_body {
+  background: #f1f1f1;
+  bottom: auto;
+  padding: 0 0 0 0;
+  border-radius: auto;
+  margin-right: auto;
+}
+
+.H_ib_close {
+  display: none;
+}
+
+.H_ib_content {
+  min-width: 0;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
 }
