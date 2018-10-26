@@ -18,7 +18,6 @@ db = db.connect('data');
 wochentag = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
 
 
-
 var getday = function(date, thenCallback=function(){}){
   db.loadCollections([date]);
   cachedRequest({
@@ -88,7 +87,7 @@ var getday = function(date, thenCallback=function(){}){
       ],
       "em_suche[ort_id2]": "Anderer Ort",
       "em_suche[radius]": "999",
-      "em_suche[vorschau]": "500",
+      "em_suche[vorschau]": "800",
       "em_suche[sort]": "date",
       "em_suche[act_reiter]": "0",
       "em_suche[neue_suche]": "0",
@@ -140,7 +139,8 @@ var getday = function(date, thenCallback=function(){}){
             var oEvent = {
               iEventId: $(elem).children("a").first().attr("name").replace(/[^0-9\.]/g, ''),
               sName: $(elem).find("a.vk_erg_title").text(),
-              sDate: $(elem).find("div.vk_erg_times").text().replace(/(Heute)|(Morgen)/ig,wochentag[oDate.getDay()]),
+              sDate: $(elem).find("div.vk_erg_times").text()
+                  .replace(/(Heute)|(Morgen)/ig,wochentag[oDate.getDay()]+', '+date),
               //sAdress: $(elem).find("div.vk_erg_loc").text()
             }
             // update or insert events one by one in database
@@ -156,7 +156,8 @@ var getday = function(date, thenCallback=function(){}){
           console.log(" [updates:"+updates +" inserts:"+inserts+" in "+date+".json]")
 
           //run function given as parameter of getDay /// PARAMETER is hardcoded :/
-          thenCallback(date);
+          // thenCallback(date);
+          fetchOneMoreEventdetail()
 
 
           //console.log(eventArray)
@@ -226,46 +227,113 @@ getEvent = function(id, date){
           //console.log($.html());
 
           var h1 = $('h1');
-          var oEvent = {
+          var oEventUpdate = {
             sName: h1.text(),
             sCategory: h1.prev("p").text(),
-            sDate: h1.next(".vk_detail_times").text().replace(/(Heute)|(Morgen)/ig,wochentag[oDate.getDay()]),
+            sDate: h1.next(".vk_detail_times").text()
+              .replace(/(Heute)|(Morgen)/ig,wochentag[oDate.getDay()]+', '+date),
             sAdress: $(h1.nextAll(".vk_detail_text")[0]).text(),
             sDescription: $(h1.nextAll(".vk_detail_text")[1]).text(),
             status: 2
           }
 
-          if(oEvent.sName != ''){
-            var req = db[date].update({iEventId:id}, oEvent);
+          if(oEventUpdate.sName != ''){
+            var req = db[date].update({iEventId:id}, oEventUpdate);
             console.log(req);
           }
-          console.log(oEvent)
+          console.log(oEventUpdate)
 
           ////// ENDLESS LOOOP !!!!!!!!!!
-          fetchOneMoreEventdetail(date);
+          fetchOneMoreEventdetail();
     }
   )
 }
 
-var fetchOneMoreEventdetail = function(date, delayBetweenRequests=0){
+var fetchOneMoreEventdetail = function(delayBetweenRequests=0){
   var next = db[date].findOne({status:1});
   console.log(next);
   if (next) getEvent(next.iEventId, date);
-  else console.log("All Details fetched of " + date)
+  else {
+    console.log("All Eventdetails fetched of " + date);
+    fetchOneMoreLocation();
+  }
+
 }
 
+var fetchOneMoreLocation = function(delayBetweenRequests=0){
+  var next = db[date].findOne({status:2});
+  if (next){
+    console.log(next.sName);
+    console.log(
+      next.alternativeAdress?
+      "Try to cut location ---- " + next.alternativeAdress
+      : next.sAdress
+    );
+    //https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html
+    request({
+      url:'https://geocoder.api.here.com/6.2/geocode.json',
+      method: "GET",
+      qs: {
+        app_id: 'TERY6ac06hlozadvCdyy',
+        app_code: '1mqHefqb9ZMTdauG1qNNIQ',
+        searchtext: next.alternativeAdress? next.alternativeAdress : next.sAdress
+        },
+      json:true
+      },
+      function(err,httpResponse,body){
+         if(err){ console.log(err); return; }
+
+         try{
+            oPos = body.Response.View[0].Result[0].Location.DisplayPosition;
+         }
+         catch (e) {
+           // wenn kein ergebnis gefunden werden konnte
+           if(body.Response.View.length == 0){
+             console.log('........ rewrite Adress');
+             // cut after first comma,
+             // before the first comma is propably an institutionname which can be confusing
+             db[date].update(
+               { iEventId:next.iEventId },
+               { alternativeAdress: next.sAdress.substring(next.sAdress.indexOf(', ') + 2)}
+             );
+             fetchOneMoreLocation();
+             return;
+           }
+           console.log(e)
+         }
+
+         var oEventUpdate = {
+           oLatLgn:{
+             "lat": oPos.Latitude,
+             "lng": oPos.Longitude
+           },
+           status:3
+         }
+         db[date].update({iEventId:next.iEventId}, oEventUpdate);
+         console.log(oEventUpdate.oLatLgn);
+         //ENDLESS LOOP
+         fetchOneMoreLocation();
+      }
+    )
 
 
-date = "26.10.2018";
+  }
+  else console.log("All Locations fetched of " + date)
+}
 
-// lame weekday code
-var dmy = date.split(".");
-oDate = new Date(dmy[2], dmy[1] - 1, dmy[0]);
-//console.log(wochentag[oDate.getDay()]);
+// STEP1 always set Day, its necesseary for database and more
+date = "27.10.2018";
 
+    // lame weekday code
+    var dmy = date.split(".");
+    oDate = new Date(dmy[2], dmy[1] - 1, dmy[0]);
+    //console.log(wochentag[oDate.getDay()]);
+
+//load database
 db.loadCollections([date]);
-getday(
-  date,
-  fetchOneMoreEventdetail
-);
-//getEvent(841827,date);
+// get every event of one day. status 1 (updates existing data)
+getday(date);
+// get all the Details of every event. status 2
+// fetchOneMoreEventdetail(date) // loops infinitely
+// get the exakt Locations status 3
+// fetchOneMoreLocation(date); // loops infinitely
