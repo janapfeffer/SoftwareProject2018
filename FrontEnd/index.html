@@ -1,8 +1,25 @@
 ﻿<!DOCTYPE html>
 <html>
+<!-- Variabln Namen, Aufgelistet für das BackEnd Team:
+    -Datum des Filters:   "draft.FilterDate"
+    -Login:
+          *Username: "draft.sUserName"
+          *Password: "draft.sPassword"
+    -Registierung:
+          *Username: "draft.rUserName"
+          *Password: "draft.rPassword"
+          *Password2: "draft.rPassword2"
+    -Event Daten:
+          *Description: "draft.EDescription"
+          *Event Name: "draft.EName"
+          *Event Date:  "draft.EDat"
+          *Event Adress: "draft.EAdress"
+
+    -->
+<!-- MetaDaten: -->
+
 
 <head>
-    <!-- MetaDaten: -->
     <meta http-equiv="language" content="german, de">
     <meta charset="utf-8" />
     <meta name="author" content="Hanna Scheub">
@@ -25,14 +42,12 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
-    <script> ELEMENT.locale(ELEMENT.lang.en)</script>
-
+    <script>ELEMENT.locale(ELEMENT.lang.en)</script>
     <!-- Own Files-->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class='landingpage'>
-
     <!-- Header/Navigation bar-->
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
@@ -54,8 +69,7 @@
                 </nav>
             </div>
         </header>
-
-        <!-- TODO: Navigation nur bei kleinem display anzeigen   /// Dadurch immer resposiv bzw bessere Touch bedinung z.B. Tablets, lieber behalten-->
+        <!-- TODO: Navigation nur bei kleinem display anzeigen   /// Dadurch immer resposiv bzw bessere Touch bedinung z.B. Tablets -> lieber behalten-->
         <!-- Navigation. Hauptsächlich für kleine Geräte gedacht ist die ausklapbare, da auf kleinere Geräte alles aufgelistet -->
         <div class="mdl-layout__drawer" style="z-index: 12;">
             <span class="mdl-layout-title">Eventzeugs</span>
@@ -68,19 +82,40 @@
             </nav>
         </div>
     </div>
-
-
-
-
-
     <!-- Alles rechts neben der Karte-->
     <div id="aside">
+        <!-- Date Filter Card-->
+        <div id="newDateWrapper" class="sidecard" style="position: static" v-bind:class="{ hide: !cardShown}">
+            <h2>Datum Filter: </h2>
+            <div id="newDate">
+                <p>
+                    Geben sie das Datum an für das gefiltert werden soll
+                </p>
 
+                <!-- Ausgewahltes Datum wird als "FilterDate gespeichert-->
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
+                    <el-date-picker v-model="draft.FilterDate"
+                                    type="datetimerange"
+                                    align="right"
+                                    start-placeholder="Start Date"
+                                    end-placeholder="End Date"
+                                    :default-time="['15:00:00', '19:00:00']">
+                    </el-date-picker>
+                </div>
 
-
-
+                <div class="buttons">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                            @click="formsubmit">
+                        Filtern
+                    </button>
+                </div>
+            </div>
+            <br />
+        </div>
+        <!-- Date Filter Card End-->
         <!-- Register Card-->
-
+        <!-- Registiereungs Daten werden immer mit "r." verarbeitet, zum Beispiel "rPassword"/"rUserName"-->
         <div id="newRegisterWrapper" class="sidecard" style="position: static" v-bind:class="{ hide: !cardShown}">
             <h2>Registrieren sie sich </h2>
             <div id="newRegister">
@@ -110,11 +145,11 @@
                     </button>
                 </div>
             </div>
+            <br />
         </div>
-
-
-
+        <!-- Register Card End-->
         <!-- Login Card-->
+        <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="newLoginWrapper" class="sidecard" style="position: static" v-bind:class="{ hide: !cardShown}">
             <h2>Loggen sie sich hier ein</h2>
             <div id="newLogin">
@@ -126,15 +161,17 @@
                     <label class="mdl-textfield__label" for="sample1">E-Mail</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    
+
                     <input class="mdl-textfield__input" type="password" v-model="draft.sPassword">
                     <label class="mdl-textfield__label" for="schools">Password</label>
                 </div>
 
 
+
+
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                           @click='BobMarleyCard'>
+                            @click='BobMarleyCard'>
                         Registieren
                     </button>
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
@@ -143,9 +180,9 @@
                     </button>
                 </div>
             </div>
+            <br />
         </div>
-
-
+        <!-- Login Card End-->
         <!-- Karte für Event, Alles rechts neben der Karte-->
         <div id="newEventWrapper" class="sidecard" v-bind:class="{ hide: !cardShown}">
             <h2>Neues Event eintragen</h2>
@@ -154,22 +191,22 @@
                     Fügen sie ein neues Event in unsere Databank ein
                 </p>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" v-model="draft.sName">
+                    <input class="mdl-textfield__input" type="text" v-model="draft.EName">
                     <label class="mdl-textfield__label" for="sample1">Titel</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
-                              v-model="draft.sDescription"></textarea>
+                              v-model="draft.EDescription"></textarea>
                     <label class="mdl-textfield__label" for="schools">Beschreibung</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
+                    <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.EAdress">
                     <button @click="checkLocation">check location</button>
                     <label class="mdl-textfield__label" for="sample1">Adresse</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-                    <el-date-picker v-model="draft.sDate"
+                    <el-date-picker v-model="draft.EDate"
                                     type="datetimerange"
                                     align="right"
                                     start-placeholder="Start Date"
@@ -190,7 +227,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="sidecard">
             <h2> Events</h2>
@@ -214,38 +250,43 @@
         </div>
     </div>
 
-        <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-            <h1>
-                {{sName}}
-            </h1>
-            <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
+    <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
+        <h1>
+            {{sName}}
+        </h1>
+        <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
-            <div id="searchPlaceInner" autocomplete="off">
-                <div class="autocomplete" style="width:370;">
-                    <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben"
-                           v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace">
-                    <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                            name="action" @click="searchPlace">
-                        {{sButtonName}}
-                    </button>
-                </div>
+        <div id="searchPlaceInner" autocomplete="off">
+            <div class="autocomplete" style="width:370;">
+                <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben"
+                       v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace">
+                <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                        name="action" @click="searchPlace">
+                    {{sButtonName}}
+                </button>
+                <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                        name="action" @click="showNewDateCard">
+                    Filtern
+                </button>
+
             </div>
 
-
-
         </div>
+        <!-- Seachbar Ends here-->
+
+    </div>
 
 
-        <!-- Map-->
-        <div id="map"></div>
+    <!-- Map-->
+    <div id="map"></div>
 
-        <!-- own script files-->
-        <script type="text/javascript" src="js/Map.js"></script>
-        <script type="text/javascript" src="js/testdata.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+    <!-- own script files-->
+    <script type="text/javascript" src="js/Map.js"></script>
+    <script type="text/javascript" src="js/testdata.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 
-        <!-- tilt libary for css animations -->
-        <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
+    <!-- tilt libary for css animations -->
+    <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
 
 </body>
 </html>

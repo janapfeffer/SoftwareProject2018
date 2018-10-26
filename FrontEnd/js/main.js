@@ -4,6 +4,8 @@ var oNavigationVue = new Vue({
       horizontalMenueShown: true
     },
     methods: {
+
+
       showNewEventCard: function(){
           oNewEventVue.cardShown = !oNewEventVue.cardShown;
           oRegisterVue.cardShown = false;
@@ -63,6 +65,9 @@ var aTestEvents = [
 
 aTestEvents = aTestEvents.concat(oJsonTestData.array);
 
+
+
+//Vue fuer die Event Tabelle fertig
 var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
@@ -83,6 +88,8 @@ var oEventTableVue = new Vue({
     }
 });
 
+
+//Vue fuer die Leiste mit Suchfunktion und Filter Button
 var oSearchPlaceVue = new Vue({
     el: "#searchPlace",
     data: {
@@ -91,6 +98,18 @@ var oSearchPlaceVue = new Vue({
         sButtonName: "Suchen"
     },
     methods: {
+
+        // Oeffnet neue Karte fuer den Filter
+        showNewDateCard: function () {
+            oNewDateVue.cardShown = !oNewDateVue.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+
+        },
+        //Filter Karten Funktion zuende
+
+        //Sucht nach einem Ort
         searchPlace: function searchPlace() {
           if(document.body.classList.contains('landingpage')){
             document.body.classList.remove('landingpage');
@@ -99,9 +118,12 @@ var oSearchPlaceVue = new Vue({
           }
           setCenter(this.sQuery);
         },
+        //AutoComplet Funktion der Suchleiste
         autocomplete: function autocomplete() {
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
         }
+        
+
     }
 });
 
@@ -110,10 +132,10 @@ var oNewEventVue = new Vue({
     data: {
         cardShown: false,
         draft: {
-          sName: "",
-          sDescription: "",
-          sAdress: "",
-          sDate: "",
+          EName: "",
+          EDescription: "",
+          EAdress: "",
+          EDate: "",
           time: "",
           latlng: {},
           status: "draft",
@@ -160,19 +182,20 @@ var oNewEventVue = new Vue({
 
 setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
 
+
+
+
+// Register Vue
 var oRegisterVue = new Vue({
     el: "#newRegisterWrapper",
     data: {
         cardShown: false,
         draft: {
-            sName: "",
-            sDescription: "",
-            sAdress: "",
-            sDate: "",
-            time: "",
-            latlng: {},
+            rUserName: "",
+            rPassword: "",
+            rPassword2: "",
             status: "draft",
-            iEventId: Math.floor(Math.random() * 99999) + 1,
+            iRegisterId: Math.floor(Math.random() * 99999) + 1,
         },
         value7: ''
     },
@@ -193,20 +216,19 @@ var oRegisterVue = new Vue({
     }
 });
 
-//IDK what I do 
+//Register Vue End
+
+
+//Login Vue
 var oNewLoginVue = new Vue({
     el: "#newLoginWrapper",
     data: {
         cardShown: false,
         draft: {
-            sName: "",
-            sDescription: "",
-            sAdress: "",
-            sDate: "",
-            time: "",
-            latlng: {},
+            sUserName: "",
+            sPassword: "",
             status: "draft",
-            iEventId: Math.floor(Math.random() * 99999) + 1,
+            iLoginId: Math.floor(Math.random() * 99999) + 1,
         },
         value7: ''
     },
@@ -228,4 +250,36 @@ var oNewLoginVue = new Vue({
         },
     }
 });
+//Login Vue End
 
+
+// Date Vue
+var oNewDateVue = new Vue({
+    el: "#newDateWrapper",
+    data: {
+        cardShown: false,
+        draft: {
+            FilterDate: "",
+            status: "draft",
+            iFilterId: Math.floor(Math.random() * 99999) + 1,
+        },
+        value7: ''
+    },
+    methods: {
+        formdraft: function () {
+            if (oEventTableVue.currentEvents[0].status != "draft") {
+                oEventTableVue.currentEvents.unshift(this.draft)
+            }
+        },
+        formsubmit: function () {
+
+            this.cardShown = !this.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+
+        },
+
+    }
+});
+
+//Register Vue End
