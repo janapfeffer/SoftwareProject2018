@@ -222,39 +222,39 @@ function setCenter(sQuery) {
     );
 }
 
-function setMarker(oLatLgn, sName, oData){
+function setMarker(sAddress, sName){
+    var geocoder = platform.getGeocodingService(),
+    geocodingParameters = {
+        searchText: sAddress,
+        jsonattributes: 1
+    };
+    geocoder.geocode(
+    geocodingParameters,
+    onSuccess = function onSuccess(result) {
+        var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
+        var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
+        var oLatLgn = {lat: dLat, lng: dLng}
+
         var marker = new H.map.Marker(oLatLgn);
         marker.label = sName;
-        marker.data = oData;
 
         map.addObject(marker);
 
-
-        //
-
+        
         marker.addEventListener('tap', function (evt) {
-            // map.setCenter(evt.target.getPosition(), true);
-            zoomMap();
-            document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({block: "end", behavior: "smooth"});
-            oEventTableVue.selected = evt.target.data.iEventId;
+            map.setCenter(evt.target.getPosition(), true);
         }, false);
         marker.addEventListener('pointerenter', function (evt) {
             openBubble(evt.target.getPosition(), evt.target.label);
-            // document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({block: "end", behavior: "smooth"});
-            // oEventTableVue.selected = evt.target.data.iEventId;
         }, false);
         marker.addEventListener('pointerleave', function (evt) {
              closeBubble(evt.target.getPosition());
         }, false);
-}
-
-function setMarkers(aEvents){
-    aEvents.forEach((oEvent, index) => {
-        if(oEvent.oLatLgn != undefined){
-            var oData = {index: index, iEventId: oEvent.iEventId};
-            setMarker(oEvent.oLatLgn, oEvent.sName + '</br>' + oEvent.sDate, oData);
-        }
-    })
+    },
+    onError = function(error) {
+        alert('Ooops!');
+    }
+    )
 }
 
 function setVerifyLocationMarker(sAddress){
@@ -266,21 +266,24 @@ function setVerifyLocationMarker(sAddress){
     geocoder.geocode(
     geocodingParameters,
     onSuccess = function onSuccess(result) {
-
         var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
         var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
         var oLatLgn = {lat: dLat, lng: dLng}
 
         var marker = new H.map.Marker(oLatLgn);
-        marker.label = "Ist das der Ort Ihres Events?";
+        marker.label = "Ist das der Standort deines Events?";
 
         map.addObject(marker);
+        openBubble(oLatLgn, marker.label);
 
         marker.addEventListener('tap', function (evt) {
             map.setCenter(evt.target.getPosition(), true);
             openBubble(evt.target.getPosition(), evt.target.label);
-        }, false);
 
+            map.setCenter(oLatLgn, true);
+            zoomMap();
+
+        }, false);
     },
     onError = function(error) {
         alert('Ooops!');
@@ -296,23 +299,27 @@ var bubble; // Hold a reference to any infobubble opened
  * @param  {String} text              The contents of the infobubble.
  */
 function openBubble(position, text) {
-    var myHTMLcontent = "<div class=\'infoBubble\'>" + text + "</div>";
-
     if (!bubble) {
         bubble = new H.ui.InfoBubble(
             position,
-            { content: myHTMLcontent });
+            { content: text });
         ui.addBubble(bubble);
     } else {
         bubble.setPosition(position);
-        bubble.setContent(myHTMLcontent);
+        bubble.setContent(text);
         if(bubble.getState() != "open"){
             bubble.open();
         }
     }
 }
 
-function closeBubble() {
+var bubble; // Hold a reference to any infobubble opened
+/**
+ * Opens/Closes a infobubble
+ * @param  {H.geo.Point} position     The location on the map.
+ * @param  {String} text              The contents of the infobubble.
+ */
+function closeBubble(position) {
         bubble.close();
 }
 
@@ -320,3 +327,4 @@ function closeBubble() {
 window.addEventListener('resize', function () {
     map.getViewPort().resize();
 });
+

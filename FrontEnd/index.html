@@ -191,7 +191,6 @@
                     Fügen sie ein neues Event in unsere Databank ein
                 </p>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-<<<<<<< HEAD
                     <input class="mdl-textfield__input" type="text" v-model="draft.EName">
                     <label class="mdl-textfield__label" for="sample1">Titel</label>
                 </div>
@@ -203,18 +202,6 @@
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.EAdress">
                     <button @click="checkLocation">check location</button>
-=======
-                    <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
-                    <label class="mdl-textfield__label" for="sample1">Titel</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <textarea class="mdl-textfield__input" maxlength="300" type="text" rows="3" maxrows="6"
-                              v-model="draft.sDescription"></textarea>
-                    <label class="mdl-textfield__label" for="schools">Beschreibung</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
->>>>>>> b3b84efe8264b5637677ba68ac9279dad8be57ed
                     <label class="mdl-textfield__label" for="sample1">Adresse</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -227,8 +214,6 @@
                                     :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
-
-                <input class="mdl-textfield__input" type="file"  @change="onFileSelected">
 
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
@@ -265,7 +250,6 @@
         </div>
     </div>
 
-<<<<<<< HEAD
     <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
         <h1>
             {{sName}}
@@ -284,25 +268,6 @@
                         name="action" @click="showNewDateCard">
                     Filtern
                 </button>
-=======
-        <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-            <h1>
-                Event Finder
-            </h1>
-            <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
-
-            <div id="searchPlaceInner" autocomplete="off">
-                <div class="autocomplete" style="width:370;">
-                    <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben"
-                           v-model="sQuery" @keyup="autocomplete" @keyup.enter="searchPlace">
-                    <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                            name="action" @click="searchPlace">
-                        Suche
-                    </button>
-                </div>
-            </div>
-
->>>>>>> b3b84efe8264b5637677ba68ac9279dad8be57ed
 
             </div>
 
