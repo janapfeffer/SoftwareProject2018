@@ -252,7 +252,7 @@ function setMarkers(aEvents){
     aEvents.forEach((oEvent, index) => {
         if(oEvent.oLatLgn != undefined){
             var oData = {index: index, iEventId: oEvent.iEventId};
-            setMarker(oEvent.oLatLgn, oEvent.sName, oData);
+            setMarker(oEvent.oLatLgn, oEvent.sName + '</br>' + oEvent.sDate, oData);
         }
     })
 }
