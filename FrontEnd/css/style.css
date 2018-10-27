@@ -208,7 +208,7 @@ h1{
 div#aside {
   width: 40%;
   position:absolute;
-  top: 100px;
+  top: 60px;
   right: 0;
   box-sizing: border-box;
   padding: 3%;
@@ -269,6 +269,16 @@ div#aside, div#map{
 
 #eventTable span.mdl-list__item-text-body:empty {
   display: none;
+}
+
+.favstar {
+   color: rgb(230, 230, 230);
+}
+.favstar:hover {
+  color: rgb(202, 202, 202);
+}
+.faved .favstar {
+   color: rgb(255,64,129);
 }
 
 

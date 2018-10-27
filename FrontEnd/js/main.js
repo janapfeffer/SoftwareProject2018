@@ -47,6 +47,7 @@ var oEvent = function(oEvent){
     this.sEventLink = oEvent.sEventLink;
     this.sTicketLink = oEvent.sTicketLink;
     this.oLatLgn = oEvent.oLatLgn;
+    this.faved = oEvent.faved;
 };
 
 // this array should be retrieved from the database, maybe according to location chosen and/or the filter options
@@ -67,6 +68,7 @@ var aTestEvents = [
         sName: "Elektro Party",
         sDescription:"Lust auf moderne Elektromusik und ein stilvolles Ambiente? Kostenlos vorbeischauen!.",
         sAdress: "Berliner Straße 19a, 68159 Mannheim",
+        faved: true,
         oLatLgn: {
             "lat": 49.48712,
             "lng": 8.47826
@@ -93,15 +95,18 @@ var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
         currentEvents: aTestEvents,
-        selected: "HannaWarDa" //id of selected event (to see more info)
+        selected: "" //id of selected event (to see more info)
     },
     methods: {
 
-        checkboxToggle: function() {
-            //wird aufgerufen wenn etwas ausgewhlt wird aus der EventListe
-
+        favToggle: function(target) {
+            // target: eventobject wird hinein gereicht von vue for schleife
+            Vue.set(target, 'faved', !target.faved)
+            // this is the same as:
+            // target.faved = !target.faved;
+            // but databinding works also if event doesnt have property faved in the beginning
+            // console.log(target.faved);
         },
-
 
         // click on event in list to see more details
         select: function(target){
@@ -327,11 +332,6 @@ var oNewFavoiteVue = new Vue({
         value7: ''
     },
     methods: {
-        formdraft: function () {
-            if (oEventTableVue.currentEvents[0].status != "draft") {
-                oEventTableVue.currentEvents.unshift(this.draft)
-            }
-        },
         close: function () {
 
             this.cardShown = !this.cardShown;

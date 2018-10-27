@@ -308,7 +308,7 @@
             <ul id="eventTable" class="sidecard demo-list-three mdl-list">
                 <li v-for="event in currentEvents"
                     class="mdl-list__item mdl-list__item--three-line"
-                    :class="{selected:event.iEventId == selected}"
+                    :class="{selected:event.iEventId == selected, faved: event.faved}"
                     @click="select(event)">
                     <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-avatar">person</i>
@@ -318,8 +318,11 @@
                         <span class="mdl-list__item-text-body">{{ event.sDate }}</span>
 
                     </span>
-
-                    <input type="checkbox" id="subscribeNews" name="subscribe" value=event.sName @click="checkboxToggle">
+                    <span class="mdl-list__item-secondary-content">
+                        <a class="mdl-list__item-secondary-action favstar"
+                          @click="favToggle(event)"
+                        ><i class="material-icons">star</i></a>
+                    </span>
                 </li>
             </ul>
         </div>
