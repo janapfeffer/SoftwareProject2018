@@ -46,6 +46,7 @@ var oEvent = function(oEvent){
     this.oEndDate = oEvent.sEndDate;
     this.sEventLink = oEvent.sEventLink;
     this.sTicketLink = oEvent.sTicketLink;
+    this.oLatLgn = oEvent.oLatLgn;
 };
 
 // this array should be retrieved from the database, maybe according to location chosen and/or the filter options
@@ -54,22 +55,36 @@ var aTestEvents = [
        iEventId: 3,
        sName: "Kultursonntag im Museum für moderne Kunst",
        sDescription: "Gemälde, Figuren und Performances. Dies und vieles mehr erwartet Sie und Ihre Familie. Eintritt: 5€.",
-       sAdress: "C2 20, 68159 Mannheim"
+       sAdress: "C2 20, 68159 Mannheim",
+       oLatLgn: {
+        "lat": 49.4871,
+        "lng": 8.46343
+      }
+
     }),
     new oEvent({
         iEventId: 2,
         sName: "Elektro Party",
         sDescription:"Lust auf moderne Elektromusik und ein stilvolles Ambiente? Kostenlos vorbeischauen!.",
-        sAdress: "Berliner Straße 19a, 68159 Mannheim"
+        sAdress: "Berliner Straße 19a, 68159 Mannheim",
+        oLatLgn: {
+            "lat": 49.48712,
+            "lng": 8.47826
+          }
     }),
     oTestEvent1 = new oEvent({
         iEventId: 1,
-        sName: "Quatsch Comdey Club",
-        sDescription: "Die Live Show. Das Herzstück des Quatsch Comedy Clubs ist die 'Live Show'."
+        sName: "Autoparty",
+        sDescription: "Beschleunigen und co",
+        sAdress: "Mannheim Paradeplatz",
+        oLatLgn:{
+            "lat": 49.48672,
+            "lng": 8.46641
+          }
     })
 ];
 
-aTestEvents = aTestEvents.concat(oJsonTestData.array);
+aTestEvents = aTestEvents.concat(aJsonTestData);
 
 
 
@@ -81,10 +96,10 @@ var oEventTableVue = new Vue({
         selected: "HannaWarDa" //id of selected event (to see more info)
     },
     methods: {
-        
+
         checkboxToggle: function() {
             //wird aufgerufen wenn etwas ausgewhlt wird aus der EventListe
-          
+
         },
 
 
@@ -93,13 +108,10 @@ var oEventTableVue = new Vue({
           // only data with specific Ids can be selected
           if (target.iEventId != undefined){
             this.selected = target.iEventId;
-            if(target.sAdress){
-              setMarker(target.sAdress,target.sName+"</br>"+target.sDescription+"</br>"+target.sAdress+"</br>"+target.sDate);
-            }
           }
         },
 
-        
+
     }
 });
 
@@ -137,7 +149,7 @@ var oSearchPlaceVue = new Vue({
         autocomplete: function autocomplete() {
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
         }
-        
+
 
     }
 });
@@ -147,14 +159,15 @@ var oNewEventVue = new Vue({
     data: {
         cardShown: false,
         draft: {
-          EName: "",
-          EDescription: "",
-          EAdress: "",
-          EDate: "",
+          sName: "",
+          sDescription: "",
+          sAdress: "",
+          sDate: "",
           time: "",
           latlng: {},
           status: "draft",
           iEventId: Math.floor(Math.random() * 99999) + 1,
+          oSelectedFile: null
         },
         value7: ''
     },
@@ -163,6 +176,8 @@ var oNewEventVue = new Vue({
         if (oEventTableVue.currentEvents[0].status !="draft"){
           oEventTableVue.currentEvents.unshift(this.draft)
         }
+        setCenter(this.draft.sAdress);
+        setVerifyLocationMarker(this.draft.sAdress, this.draft.sName);
       },
       formsubmit: function(){
         if (oEventTableVue.currentEvents[0].status =="draft"){
@@ -184,13 +199,14 @@ var oNewEventVue = new Vue({
           status: "draft",
           iEventId: Math.floor(Math.random() * 99999) + 1,
         }
+        //https://www.youtube.com/watch?v=VqnJwh6E9ak see this for picture upload
+
       },
       autocomplete: function autocomplete() {
         getAutocompletion(this.draft.sAdress, document.getElementById("newEventAddress"));
       },
-      checkLocation: function checkLocation() {
-        setCenter(this.draft.sAdress);
-        setVerifyLocationMarker(this.draft.sAdress);
+      onFileSelected: function(event){
+        this.draft.oSelectedFile = event.target.files[0];
       }
     }
 });
@@ -227,7 +243,7 @@ var oRegisterVue = new Vue({
             oNewLoginVue.cardShown = false;
 
         },
-       
+
     }
 });
 
@@ -253,7 +269,7 @@ var oNewLoginVue = new Vue({
         formsubmit: function () {
 
             this.cardShown = !this.cardShown;
-            
+
         },
 
 
@@ -297,10 +313,6 @@ var oNewDateVue = new Vue({
     }
 });
 
-//Data Vue End
-
-
-
 // Favoite Vue
 var oNewFavoiteVue = new Vue({
     el: "#newFavoriteWrapper",
@@ -332,4 +344,9 @@ var oNewFavoiteVue = new Vue({
     }
 });
 
-//Data Vue End
+function initEverything(){
+    setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
+    setMarkers(oEventTableVue.currentEvents);
+}
+
+initEverything();

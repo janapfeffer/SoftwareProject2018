@@ -159,6 +159,10 @@ thead th {
 }
 }
 
+
+/* BITTE alles heir drüber umsortieren please  */
+
+
 .landingpage h1 {
   margin: 5px 5px 5px 0;
   display: block;
@@ -176,11 +180,6 @@ h1{
 
 .landingpage #searchPlaceInner{
   transform: translateZ(25px);
-}
-
-.hide {
-  height: 0px;
-  overflow: hidden;
 }
 
 .landingpage div#aside, .landingpage div#map {
@@ -220,19 +219,42 @@ div#aside, div#map{
   transition: opacity 0.2s linear;
 }
 
-div.sidecard {
+.sidecardWrapper {
+  transition: margin 0.5s;
+  margin: 0px;
 
 }
+.sidecardWrapper.hide {
+  margin: -100px 0px 100px 0px;
+}
 
-.sidecard h2 {
+.sidecardWrapper h2 {
   color:ghostwhite; font-family: Bahnschrift;
+  margin: 0px;
+  padding: 20px 0px 15px 0px;
+}
+
+.hide {
+  height: 0px;
+  overflow: hidden;
+}
+
+.sidecard {
+  background-color:whitesmoke;
+  padding: 20px 25px;
+  margin: 0px;
+  font-size: 18px
+}
+
+.sidecard .mdl-textfield {
+    margin: -12px 0px;
+    display: block;
+    width: auto;
 }
 
 #eventTable {
-  background-color:whitesmoke;
-  overflow:auto
+  padding: 0px;
 }
-
 #eventTable li.mdl-list__item:hover{ background-color: rgba(0, 0, 0, 0.04) }
 #eventTable li.mdl-list__item:active{ background-color: rgba(0, 0, 0, 0.06) }
 
@@ -250,147 +272,9 @@ div.sidecard {
 }
 
 
-
-
-
-#newFavoriteWrapper {
-    transition: margin 0.5s;
-    margin: 0px;
-}
-
-    #newFavoriteWrapper.hide {
-        margin: -100px 0px 100px 0px
-    }
-
-#newFavorite {
-    background-color: whitesmoke;
-    padding: 20px 25px;
-    font-size: 18px
-}
-
- #newFavorite.mdl-textfield {
-        margin: -12px 0px;
-        display: block;
-        width: auto;
-    }
-
-#newFavoriteWrapper.hide {
-    margin: -100px 0px 100px 0px;
-    position: static;
-}
-
-
-
-#newDateWrapper {
-    transition: margin 0.5s;
-    margin: 0px;
-}
-
-    #newDateWrapper.hide {
-        margin: -100px 0px 100px 0px
-    }
-
-#newDate {
-    background-color: whitesmoke;
-    padding: 20px 25px;
-    font-size: 18px
-}
-
-    #newDate.mdl-textfield {
-        margin: -12px 0px;
-        display: block;
-        width: auto;
-    }
-
-#newDateWrapper.hide {
-    margin: -100px 0px 100px 0px;
-    position: static;
-}
-
-
-
-
-#newRegisterWrapper {
-    transition: margin 0.5s;
-    margin: 0px;
-}
-
-    #newRegisterWrapper.hide {
-        margin: -100px 0px 100px 0px
-    }
-
-#newRegister {
-    background-color: whitesmoke;
-    padding: 20px 25px;
-    font-size: 18px
-}
-
-    #newRegister.mdl-textfield {
-        margin: -12px 0px;
-        display: block;
-        width: auto;
-    }
-
-#newRegisterWrapper.hide {
-    margin: -100px 0px 100px 0px;
-    position: static;
-}
-
-
-
-
-#newLoginWrapper {
-    transition: margin 0.5s;
-    margin: 0px;
-}
-
-    #newLoginWrapper.hide {
-        margin: -100px 0px 100px 0px
-    }
-
-#newLogin {
-    background-color: whitesmoke;
-    padding: 20px 25px;
-    font-size: 18px
-}
-
-#newLogin .mdl-textfield {
-    margin: -12px 0px;
-    display: block;
-    width: auto;
-}
-#newLoginWrapper.hide {
-    margin: -100px 0px 100px 0px;
-    position: static;
-}
-
-
-
-#newEventWrapper {
-  transition: margin 0.5s;
-  margin: 0px;
-
-}
-    #newEventWrapper.hide {
-        margin: -100px 0px 100px 0px;
-        position: static;
-    }
-
-#newEvent {
-  background-color:whitesmoke;
-  padding: 20px 25px;
-  font-size: 18px
-}
-
 #newEvent p{
   margin: 5px 0px 25px 0px;
   font-size: 18px
-}
-
-#newEvent .mdl-textfield {
-  margin: -12px 0px;
-  display: block;
-  width: auto;
 }
 
 #newEvent mdl-textfield__input{
@@ -486,4 +370,46 @@ div.sidecard {
 .sidecard h2 {
   color: white;
   text-shadow: 4px 4px 30px #00000063;
+}
+
+#newLogin .buttons button {
+  background-color: rgba(47, 66, 79, 0.66);
+  margin-left: 10px;
+}
+
+#newRegister .buttons button {
+  background-color: rgba(47, 66, 79, 0.66);
+  margin-left: 10px;
+}
+
+/* Infobubble Style + Überschreibungen */
+.infoBubble {
+background-color:#f1f1f1;
+    width: 250px;
+    height: 150px;
+    border: 1px solid black;
+    padding: 5px;
+    color: black;
+}
+
+.H_ib_tail {
+  display: none
+}
+
+.H_ib_body {
+  background: #f1f1f1;
+  bottom: auto;
+  padding: 0 0 0 0;
+  border-radius: auto;
+  margin-right: auto;
+}
+
+.H_ib_close {
+  display: none;
+}
+
+.H_ib_content {
+  min-width: 0;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
 }
