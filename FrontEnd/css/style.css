@@ -273,6 +273,7 @@ div#aside, div#map{
 
 .favstar {
    color: rgb(230, 230, 230);
+   cursor: pointer;
 }
 .favstar:hover {
   color: rgb(202, 202, 202);
