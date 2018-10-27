@@ -81,6 +81,13 @@ var oEventTableVue = new Vue({
         selected: "HannaWarDa" //id of selected event (to see more info)
     },
     methods: {
+        
+        checkboxToggle: function() {
+            //wird aufgerufen wenn etwas ausgewhlt wird aus der EventListe
+          
+        },
+
+
         // click on event in list to see more details
         select: function(target){
           // only data with specific Ids can be selected
@@ -90,7 +97,9 @@ var oEventTableVue = new Vue({
               setMarker(target.sAdress,target.sName+"</br>"+target.sDescription+"</br>"+target.sAdress+"</br>"+target.sDate);
             }
           }
-        }
+        },
+
+        
     }
 });
 

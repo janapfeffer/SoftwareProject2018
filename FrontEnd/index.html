@@ -15,6 +15,10 @@
           *Event Date:  "draft.EDat"
           *Event Adress: "draft.EAdress"
 
+
+    Favoriten:
+    main.js:
+    Zeile 86: Funktion "checkboxToggle" wird immer aufgerufen wenn ein Hacken gesetzt wurde
     -->
 <!-- MetaDaten: -->
 
@@ -153,9 +157,6 @@
             <br />
         </div>
         <!-- Favorite Card End-->
-
-
-
         <!-- Date Filter Card-->
         <div id="newDateWrapper" class="sidecard" style="position: static" v-bind:class="{ hide: !cardShown}">
             <h2>Datum Filter: </h2>
@@ -315,7 +316,8 @@
                         <span class="mdl-list__item-text-body">{{ event.sDate }}</span>
 
                     </span>
-                        <input class="mdl-checkbox__input" type="checkbox" id="list-checkbox-1"  unchecked />
+
+                    <input type="checkbox" id="subscribeNews" name="subscribe" value=event.sName @click="checkboxToggle">
                 </li>
             </ul>
         </div>
