@@ -253,6 +253,34 @@ div.sidecard {
 
 
 
+#newFavoriteWrapper {
+    transition: margin 0.5s;
+    margin: 0px;
+}
+
+    #newFavoriteWrapper.hide {
+        margin: -100px 0px 100px 0px
+    }
+
+#newFavorite {
+    background-color: whitesmoke;
+    padding: 20px 25px;
+    font-size: 18px
+}
+
+ #newFavorite.mdl-textfield {
+        margin: -12px 0px;
+        display: block;
+        width: auto;
+    }
+
+#newFavoriteWrapper.hide {
+    margin: -100px 0px 100px 0px;
+    position: static;
+}
+
+
+
 #newDateWrapper {
     transition: margin 0.5s;
     margin: 0px;
