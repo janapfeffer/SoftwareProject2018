@@ -276,6 +276,7 @@ div#aside, div#map{
 }
 .favstar:hover {
   color: rgb(202, 202, 202);
+  /* text-shadow: 0 0 10px rgb(255,64,129); */
 }
 .faved .favstar {
    color: rgb(255,64,129);

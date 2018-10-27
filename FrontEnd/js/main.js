@@ -68,7 +68,6 @@ var aTestEvents = [
         sName: "Elektro Party",
         sDescription:"Lust auf moderne Elektromusik und ein stilvolles Ambiente? Kostenlos vorbeischauen!.",
         sAdress: "Berliner Straße 19a, 68159 Mannheim",
-        faved: true,
         oLatLgn: {
             "lat": 49.48712,
             "lng": 8.47826
@@ -82,7 +81,8 @@ var aTestEvents = [
         oLatLgn:{
             "lat": 49.48672,
             "lng": 8.46641
-          }
+          },
+        faved: true
     })
 ];
 
@@ -104,7 +104,7 @@ var oEventTableVue = new Vue({
             Vue.set(target, 'faved', !target.faved)
             // this is the same as:
             // target.faved = !target.faved;
-            // but databinding works also if event doesnt have property faved in the beginning
+            // but databinding works also if event hasnt property faved set in the beginning
             // console.log(target.faved);
         },
 
