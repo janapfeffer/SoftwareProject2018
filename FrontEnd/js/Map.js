@@ -235,7 +235,9 @@ function setMarker(oLatLgn, sName, oData){
         marker.addEventListener('tap', function (evt) {
             // map.setCenter(evt.target.getPosition(), true);
             zoomMap();
-            document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({block: "end", behavior: "smooth"});
+            document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({behavior: 'smooth',
+            block: 'center',
+            inline: 'center'});
             oEventTableVue.selected = evt.target.data.iEventId;
         }, false);
         marker.addEventListener('pointerenter', function (evt) {
@@ -252,7 +254,7 @@ function setMarkers(aEvents){
     aEvents.forEach((oEvent, index) => {
         if(oEvent.oLatLgn != undefined){
             var oData = {index: index, iEventId: oEvent.iEventId};
-            setMarker(oEvent.oLatLgn, oEvent.sName, oData);
+            setMarker(oEvent.oLatLgn, oEvent.sName + '</br>' + oEvent.sDate, oData);
         }
     })
 }

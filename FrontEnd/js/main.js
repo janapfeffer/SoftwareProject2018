@@ -76,7 +76,7 @@ var aTestEvents = [
     })
 ];
 
-aTestEvents = aTestEvents.concat(oJsonTestData.array);
+aTestEvents = aTestEvents.concat(aJsonTestData);
 
 var oEventTableVue = new Vue({
     el: "#eventTable",
@@ -203,11 +203,11 @@ var oRegisterVue = new Vue({
             oNewLoginVue.cardShown = false;
 
         },
-       
+
     }
 });
 
-//IDK what I do 
+//IDK what I do
 var oNewLoginVue = new Vue({
     el: "#newLoginWrapper",
     data: {
@@ -230,7 +230,7 @@ var oNewLoginVue = new Vue({
         formsubmit: function () {
 
             this.cardShown = !this.cardShown;
-            
+
         },
 
 

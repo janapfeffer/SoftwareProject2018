@@ -14,9 +14,11 @@ var mkdirp = require('mkdirp');
 cachedRequest.setCacheDirectory(cacheDirectory);
 cachedRequest.setValue('ttl', 100000);
 var db = require('diskdb'); // database to track which event is saved how
-db = db.connect('data')
+db = db.connect('data');
+wochentag = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
 
-var getday = function(date){
+
+var getday = function(date, thenCallback=function(){}){
   db.loadCollections([date]);
   cachedRequest({
      url:'http://veranstaltungen-mannheimer-morgen.morgenweb.de',
@@ -85,7 +87,7 @@ var getday = function(date){
       ],
       "em_suche[ort_id2]": "Anderer Ort",
       "em_suche[radius]": "999",
-      "em_suche[vorschau]": "500",
+      "em_suche[vorschau]": "800",
       "em_suche[sort]": "date",
       "em_suche[act_reiter]": "0",
       "em_suche[neue_suche]": "0",
@@ -128,24 +130,36 @@ var getday = function(date){
             return;
           }
           var $ = cheerio.load(iconv.decode(body, "ISO-8859-1"));
-          //console.log($.html());
-          //console.log($);
+
+          var updates = 0;
+          var inserts = 0;
+
           $('.vk_ergebnisse').each(function (i, elem){
 
             var oEvent = {
               iEventId: $(elem).children("a").first().attr("name").replace(/[^0-9\.]/g, ''),
               sName: $(elem).find("a.vk_erg_title").text(),
-              sDate: $(elem).find("div.vk_erg_times").text(),
+              sDate: $(elem).find("div.vk_erg_times").text()
+                  .replace(/(Heute)|(Morgen)/ig,wochentag[oDate.getDay()]+', '+date),
               //sAdress: $(elem).find("div.vk_erg_loc").text()
             }
             // update or insert events one by one in database
             var req = db[date].update({iEventId:oEvent.iEventId}, oEvent, {upsert:true});
             if (req.inserted){
+              inserts++;
               //give newly inserted events status 1
               db[date].update({iEventId:oEvent.iEventId}, {status:1});
             }
+            if(req.updated) updates++;
 
           });
+          console.log(" [updates:"+updates +" inserts:"+inserts+" in "+date+".json]")
+
+          //run function given as parameter of getDay /// PARAMETER is hardcoded :/
+          // thenCallback(date);
+          fetchOneMoreEventdetail()
+
+
           //console.log(eventArray)
 
           //json = JSON.stringify({array:eventArray}, null, 2);
@@ -211,30 +225,115 @@ getEvent = function(id, date){
           }
           var $ = cheerio.load(iconv.decode(body, "ISO-8859-1"));
           //console.log($.html());
-          //console.log($);
-          var eventArray = [];
+
           var h1 = $('h1');
-          console.log(h1.prev("p").text());
-          console.log(h1.text());
-          console.log(h1.next(".vk_detail_times").text());
+          var oEventUpdate = {
+            sName: h1.text(),
+            sCategory: h1.prev("p").text(),
+            sDate: h1.next(".vk_detail_times").text()
+              .replace(/(Heute)|(Morgen)/ig,wochentag[oDate.getDay()]+', '+date),
+            sAdress: $(h1.nextAll(".vk_detail_text")[0]).text(),
+            sDescription: $(h1.nextAll(".vk_detail_text")[1]).text(),
+            status: 2
+          }
 
+          if(oEventUpdate.sName != ''){
+            var req = db[date].update({iEventId:id}, oEventUpdate);
+            console.log(req);
+          }
+          console.log(oEventUpdate)
 
-          h1.nextAll(".vk_detail_text").each(function(i, elem){
-            console.log(i,$(elem).text());
-          })
-          // json = JSON.stringify({array:eventArray}, null, 2);
-          // fs.writeFile('data/days/'+date+'.json', json, 'utf8', function(err){});
-
+          ////// ENDLESS LOOOP !!!!!!!!!!
+          fetchOneMoreEventdetail();
     }
   )
 }
 
-var fetchOneMoreEventdetail = function(date, delayBetweenRequests=0){
-  console.log(db[date].findOne({status:1}));
+var fetchOneMoreEventdetail = function(delayBetweenRequests=0){
+  var next = db[date].findOne({status:1});
+  console.log(next);
+  if (next) getEvent(next.iEventId, date);
+  else {
+    console.log("All Eventdetails fetched of " + date);
+    fetchOneMoreLocation();
+  }
+
 }
 
-date = "27.10.2018"
+var fetchOneMoreLocation = function(delayBetweenRequests=0){
+  var next = db[date].findOne({status:2});
+  if (next){
+    console.log(next.sName);
+    console.log(
+      next.alternativeAdress?
+      "Try to cut location ---- " + next.alternativeAdress
+      : next.sAdress
+    );
+    //https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html
+    request({
+      url:'https://geocoder.api.here.com/6.2/geocode.json',
+      method: "GET",
+      qs: {
+        app_id: 'TERY6ac06hlozadvCdyy',
+        app_code: '1mqHefqb9ZMTdauG1qNNIQ',
+        searchtext: next.alternativeAdress? next.alternativeAdress : next.sAdress
+        },
+      json:true
+      },
+      function(err,httpResponse,body){
+         if(err){ console.log(err); return; }
+
+         try{
+            oPos = body.Response.View[0].Result[0].Location.DisplayPosition;
+         }
+         catch (e) {
+           // wenn kein ergebnis gefunden werden konnte
+           if(body.Response.View.length == 0){
+             console.log('........ rewrite Adress');
+             // cut after first comma,
+             // before the first comma is propably an institutionname which can be confusing
+             db[date].update(
+               { iEventId:next.iEventId },
+               { alternativeAdress: next.sAdress.substring(next.sAdress.indexOf(', ') + 2)}
+             );
+             fetchOneMoreLocation();
+             return;
+           }
+           console.log(e)
+         }
+
+         var oEventUpdate = {
+           oLatLgn:{
+             "lat": oPos.Latitude,
+             "lng": oPos.Longitude
+           },
+           status:3
+         }
+         db[date].update({iEventId:next.iEventId}, oEventUpdate);
+         console.log(oEventUpdate.oLatLgn);
+         //ENDLESS LOOP
+         fetchOneMoreLocation();
+      }
+    )
+
+
+  }
+  else console.log("All Locations fetched of " + date)
+}
+
+// STEP1 always set Day, its necesseary for database and more
+date = "27.10.2018";
+
+    // lame weekday code
+    var dmy = date.split(".");
+    oDate = new Date(dmy[2], dmy[1] - 1, dmy[0]);
+    //console.log(wochentag[oDate.getDay()]);
+
+//load database
 db.loadCollections([date]);
+// get every event of one day. status 1 (updates existing data)
 getday(date);
-// getEvent("event_676473","26.11.2018");
-fetchOneMoreEventdetail(date);
+// get all the Details of every event. status 2
+// fetchOneMoreEventdetail(date) // loops infinitely
+// get the exakt Locations status 3
+// fetchOneMoreLocation(date); // loops infinitely
