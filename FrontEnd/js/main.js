@@ -94,11 +94,26 @@ aTestEvents = aTestEvents.concat(aJsonTestData);
 var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
-        currentEvents: aTestEvents,
-        selected: "" //id of selected event (to see more info)
+        allEvents: aTestEvents,
+        selected: "", //id of selected event (to see more info)
+        mapBounds: {ga: 0, ha: 0, ka: 0, ja: 0}
+    },
+    computed: {
+        filteredList: function(){
+          vi = this;
+          return this.allEvents.filter(function (ev) {
+             var bool = (
+                (vi.mapBounds.ja < ev.oLatLgn.lat)
+                && (vi.mapBounds.ka > ev.oLatLgn.lat)
+                && (vi.mapBounds.ga < ev.oLatLgn.lng)
+                && (vi.mapBounds.ha > ev.oLatLgn.lng)
+              )
+              // console.log(bool);
+              return bool
+          })
+        }
     },
     methods: {
-
         favToggle: function(target) {
             // target: eventobject wird hinein gereicht von vue for schleife
             Vue.set(target, 'faved', !target.faved)
@@ -114,6 +129,9 @@ var oEventTableVue = new Vue({
           if (target.iEventId != undefined){
             this.selected = target.iEventId;
           }
+
+          // map.setCenter(target.marker.getPosition(), true);
+          openBubble(target.marker.getPosition(), target.marker.label);
         },
 
 
@@ -346,7 +364,7 @@ var oNewFavoiteVue = new Vue({
 
 function initEverything(){
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
-    setMarkers(oEventTableVue.currentEvents);
+    setMarkers(oEventTableVue.allEvents);
 }
 
 initEverything();

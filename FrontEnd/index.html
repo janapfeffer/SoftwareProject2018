@@ -33,6 +33,7 @@
     <!-- External Libaries-->
     <!-- Vue.js-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
     <!-- Material Files-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
@@ -99,11 +100,11 @@
 
                 <!-- Vorübergehende Tabelle, muss erneuert werden und dann Favoriten anzeigen-->
                 <!-- Three Line List with secondary info and action -->
-                <style>
+                <!-- <style>
                     .demo-list-three {
                         width: 650px;
                     }
-                </style>
+                </style> -->
                 <ul class="demo-list-three mdl-list">
                     <li class="mdl-list__item mdl-list__item--three-line">
                         <span class="mdl-list__item-primary-content">
@@ -306,10 +307,11 @@
         <div class="sidecardWrapper">
             <h2> Events</h2>
             <ul id="eventTable" class="sidecard demo-list-three mdl-list">
-                <li v-for="event in currentEvents"
+                <li v-for="event in filteredList"
                     class="mdl-list__item mdl-list__item--three-line"
                     :class="{selected:event.iEventId == selected, faved: event.faved}"
-                    @click="select(event)">
+                    @click="select(event)"
+                    v-bind:id="event.iEventId">
                     <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-avatar">person</i>
                         <span>{{ event.sName }}</span>

@@ -178,13 +178,19 @@ function getAutocompletion(sQuery, oInputField) {
  * @param   {H.service.Platform} platform    A stub class to access HERE services
  */
 
-function zoomMap() {
+function zoomMap(posi) {
+
     if(map.getZoom() < 14.5){
         map.setZoom(14.5, true);
+        if(posi){
+          map.setCenter(posi, true);
+        }
     }
     if(map.getZoom() > 17){
         map.setZoom(16, true);
+
     }
+
 }
 
 function setCenter(sQuery) {
@@ -234,25 +240,29 @@ function setMarker(oLatLgn, sName, oData){
 
         marker.addEventListener('tap', function (evt) {
             // map.setCenter(evt.target.getPosition(), true);
-            zoomMap();
-            document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({block: "end", behavior: "smooth"});
+            zoomMap(evt.target.getPosition());
+            // document.getElementById(evt.target.data.iEventId).scrollIntoView({block: "end", behavior: "smooth"});
+            VueScrollTo.scrollTo(document.getElementById(evt.target.data.iEventId), 800, {offset: -65,
+                                                                                  force: false,})
             oEventTableVue.selected = evt.target.data.iEventId;
         }, false);
         marker.addEventListener('pointerenter', function (evt) {
             openBubble(evt.target.getPosition(), evt.target.label);
             // document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({block: "end", behavior: "smooth"});
-            // oEventTableVue.selected = evt.target.data.iEventId;
+            oEventTableVue.selected = evt.target.data.iEventId;
         }, false);
         marker.addEventListener('pointerleave', function (evt) {
              closeBubble(evt.target.getPosition());
         }, false);
+
+        return marker;
 }
 
 function setMarkers(aEvents){
     aEvents.forEach((oEvent, index) => {
         if(oEvent.oLatLgn != undefined){
             var oData = {index: index, iEventId: oEvent.iEventId};
-            setMarker(oEvent.oLatLgn, oEvent.sName + '</br>' + oEvent.sDate, oData);
+            oEvent.marker = setMarker(oEvent.oLatLgn, oEvent.sName + '</br>' + oEvent.sDate, oData);
         }
     })
 }
@@ -288,6 +298,17 @@ function setVerifyLocationMarker(sAddress){
     )
 
 }
+
+var updateViewTimeout;
+ // verfolge wohin der user scrolld und draged
+ map.addEventListener('mapviewchange', function(evt) {
+   clearTimeout(updateViewTimeout);
+   updateViewTimeout = setTimeout(function() {
+        console.log("update list");
+        oEventTableVue.mapBounds = map.getViewBounds()
+    }, 300)
+ });
+
 
 var bubble; // Hold a reference to any infobubble opened
 /**
