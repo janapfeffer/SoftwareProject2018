@@ -2171,6 +2171,7 @@ aJsonTestData = [
     sCategory: "Rock & Pop",
     sAdress: "Kulturzentrum Batschkapp, Gwinnerstraße 5, 60388 Frankfurt",
     sDescription: "Hip-Hop, Rap",
+    faved: true,
     oLatLgn: { lat: 50.13553, lng: 8.73926 }
   },
   {

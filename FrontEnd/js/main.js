@@ -4,6 +4,14 @@ var oNavigationVue = new Vue({
       horizontalMenueShown: true
     },
     methods: {
+
+        showNewFavoiteCard: function () {
+            oNewFavoiteVue.cardShown = !oNewFavoiteVue.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+        },
+
       showNewEventCard: function(){
           oNewEventVue.cardShown = !oNewEventVue.cardShown;
           oRegisterVue.cardShown = false;
@@ -39,6 +47,7 @@ var oEvent = function(oEvent){
     this.sEventLink = oEvent.sEventLink;
     this.sTicketLink = oEvent.sTicketLink;
     this.oLatLgn = oEvent.oLatLgn;
+    this.faved = oEvent.faved;
 };
 
 // this array should be retrieved from the database, maybe according to location chosen and/or the filter options
@@ -72,29 +81,47 @@ var aTestEvents = [
         oLatLgn:{
             "lat": 49.48672,
             "lng": 8.46641
-          }
+          },
+        faved: true
     })
 ];
 
 aTestEvents = aTestEvents.concat(aJsonTestData);
 
+
+
+//Vue fuer die Event Tabelle fertig
 var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
         currentEvents: aTestEvents,
-        selected: "HannaWarDa" //id of selected event (to see more info)
+        selected: "" //id of selected event (to see more info)
     },
     methods: {
+
+        favToggle: function(target) {
+            // target: eventobject wird hinein gereicht von vue for schleife
+            Vue.set(target, 'faved', !target.faved)
+            // this is the same as:
+            // target.faved = !target.faved;
+            // but databinding works also if event hasnt property faved set in the beginning
+            // console.log(target.faved);
+        },
+
         // click on event in list to see more details
         select: function(target){
           // only data with specific Ids can be selected
           if (target.iEventId != undefined){
             this.selected = target.iEventId;
           }
-        }
+        },
+
+
     }
 });
 
+
+//Vue fuer die Leiste mit Suchfunktion und Filter Button
 var oSearchPlaceVue = new Vue({
     el: "#searchPlace",
     data: {
@@ -103,6 +130,18 @@ var oSearchPlaceVue = new Vue({
         sButtonName: "Suchen"
     },
     methods: {
+
+        // Oeffnet neue Karte fuer den Filter
+        showNewDateCard: function () {
+            oNewDateVue.cardShown = !oNewDateVue.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+
+        },
+        //Filter Karten Funktion zuende
+
+        //Sucht nach einem Ort
         searchPlace: function searchPlace() {
           if(document.body.classList.contains('landingpage')){
             document.body.classList.remove('landingpage');
@@ -111,9 +150,12 @@ var oSearchPlaceVue = new Vue({
           }
           setCenter(this.sQuery);
         },
+        //AutoComplet Funktion der Suchleiste
         autocomplete: function autocomplete() {
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
         }
+
+
     }
 });
 
@@ -174,19 +216,22 @@ var oNewEventVue = new Vue({
     }
 });
 
+setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
+
+
+
+
+// Register Vue
 var oRegisterVue = new Vue({
     el: "#newRegisterWrapper",
     data: {
         cardShown: false,
         draft: {
-            sName: "",
-            sDescription: "",
-            sAdress: "",
-            sDate: "",
-            time: "",
-            latlng: {},
+            rUserName: "",
+            rPassword: "",
+            rPassword2: "",
             status: "draft",
-            iEventId: Math.floor(Math.random() * 99999) + 1,
+            iRegisterId: Math.floor(Math.random() * 99999) + 1,
         },
         value7: ''
     },
@@ -207,20 +252,19 @@ var oRegisterVue = new Vue({
     }
 });
 
-//IDK what I do
+//Register Vue End
+
+
+//Login Vue
 var oNewLoginVue = new Vue({
     el: "#newLoginWrapper",
     data: {
         cardShown: false,
         draft: {
-            sName: "",
-            sDescription: "",
-            sAdress: "",
-            sDate: "",
-            time: "",
-            latlng: {},
+            sUserName: "",
+            sPassword: "",
             status: "draft",
-            iEventId: Math.floor(Math.random() * 99999) + 1,
+            iLoginId: Math.floor(Math.random() * 99999) + 1,
         },
         value7: ''
     },
@@ -240,6 +284,63 @@ var oNewLoginVue = new Vue({
 
 
         },
+    }
+});
+//Login Vue End
+
+
+// Date Vue
+var oNewDateVue = new Vue({
+    el: "#newDateWrapper",
+    data: {
+        cardShown: false,
+        draft: {
+            FilterDate: "",
+            status: "draft",
+            iFilterId: Math.floor(Math.random() * 99999) + 1,
+        },
+        value7: ''
+    },
+    methods: {
+        formdraft: function () {
+            if (oEventTableVue.currentEvents[0].status != "draft") {
+                oEventTableVue.currentEvents.unshift(this.draft)
+            }
+        },
+        formsubmit: function () {
+
+            this.cardShown = !this.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+
+        },
+
+    }
+});
+
+// Favoite Vue
+var oNewFavoiteVue = new Vue({
+    el: "#newFavoriteWrapper",
+    data: {
+        cardShown: false,
+        draft: {
+            // Muss die favoiten aus der DB holen
+            Favorites: "",
+            status: "draft",
+            iFilterId: Math.floor(Math.random() * 99999) + 1,
+        },
+        value7: ''
+    },
+    methods: {
+        close: function () {
+
+            this.cardShown = !this.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+
+        },
+
     }
 });
 

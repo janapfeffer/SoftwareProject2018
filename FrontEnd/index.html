@@ -1,12 +1,34 @@
 ﻿<!DOCTYPE html>
 <html>
+<!-- Variabln Namen, Aufgelistet für das BackEnd Team:
+    -Datum des Filters:   "FilterDate"
+    -Login:
+          *Username: "sUserName"
+          *Password: "sPassword"
+    -Registierung:
+          *Username: "rUserName"
+          *Password: "rPassword"
+          *Password2: "rPassword2"
+    -Event Daten:
+          *Description: "sDescription"
+          *Event Name: "sName"
+          *Event Date:  "sDate"
+          *Event Adress: "sAdress"
+
+
+    Favoriten:
+    main.js:
+    Zeile 86: Funktion "checkboxToggle" wird immer aufgerufen wenn ein Hacken gesetzt wurde
+    -->
+<!-- MetaDaten: -->
+
 
 <head>
-    <!-- MetaDaten: -->
     <meta http-equiv="language" content="german, de">
     <meta charset="utf-8" />
     <meta name="author" content="Hanna Scheub">
     <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
+    <title> Event Finder </title>
 
     <!-- External Libaries-->
     <!-- Vue.js-->
@@ -25,14 +47,12 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
-    <script> ELEMENT.locale(ELEMENT.lang.en)</script>
-
+    <script>ELEMENT.locale(ELEMENT.lang.en)</script>
     <!-- Own Files-->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class='landingpage'>
-
     <!-- Header/Navigation bar-->
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
@@ -48,14 +68,13 @@
                     <a class="mdl-navigation__link" href="index.html">Map</a>
                     <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
                     <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
-                    <a class="mdl-navigation__link">Favoriten</a>
+                    <a class="mdl-navigation__link" @click='showNewFavoiteCard'>Favoriten</a>
                     <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
 
                 </nav>
             </div>
         </header>
-
-        <!-- TODO: Navigation nur bei kleinem display anzeigen   /// Dadurch immer resposiv bzw bessere Touch bedinung z.B. Tablets, lieber behalten-->
+        <!-- TODO: Navigation nur bei kleinem display anzeigen   /// Dadurch immer resposiv bzw bessere Touch bedinung z.B. Tablets -> lieber behalten-->
         <!-- Navigation. Hauptsächlich für kleine Geräte gedacht ist die ausklapbare, da auf kleinere Geräte alles aufgelistet -->
         <div class="mdl-layout__drawer" style="z-index: 12;">
             <span class="mdl-layout-title">Eventzeugs</span>
@@ -68,22 +87,111 @@
             </nav>
         </div>
     </div>
-
-
-
-
-
     <!-- Alles rechts neben der Karte-->
     <div id="aside">
+        <!-- Favorite Card-->
+        <div id="newFavoriteWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
+            <h2>Favoriten: </h2>
+            <div id="newDate" class="sidecard">
+                <p>
+                    Hier sind ihre Favoriten aufgelistet
+                </p>
 
+                <!-- Vorübergehende Tabelle, muss erneuert werden und dann Favoriten anzeigen-->
+                <!-- Three Line List with secondary info and action -->
+                <style>
+                    .demo-list-three {
+                        width: 650px;
+                    }
+                </style>
+                <ul class="demo-list-three mdl-list">
+                    <li class="mdl-list__item mdl-list__item--three-line">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons mdl-list__item-avatar">person</i>
+                            <span>Bryan Cranston</span>
+                            <span class="mdl-list__item-text-body">
+                                Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+                                for playing Hal in Malcom in the Middle.
+                            </span>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item mdl-list__item--three-line">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons  mdl-list__item-avatar">person</i>
+                            <span>Aaron Paul</span>
+                            <span class="mdl-list__item-text-body">
+                                Aaron Paul played the role of Jesse in Breaking Bad. He also featured in
+                                the "Need For Speed" Movie.
+                            </span>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                        </span>
+                    </li>
+                    <li class="mdl-list__item mdl-list__item--three-line">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons  mdl-list__item-avatar">person</i>
+                            <span>Bob Odenkirk</span>
+                            <span class="mdl-list__item-text-body">
+                                Bob Odinkrik played the role of Saul in Breaking Bad. Due to public fondness for the
+                                character, Bob stars in his own show now, called "Better Call Saul".
+                            </span>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                        </span>
+                    </li>
+                </ul>
+                <!-- Favoriten Liste zuende-->
 
+                <div class="buttons">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                            @click="close">
+                        Schließen
+                    </button>
+                </div>
+            </div>
 
+        </div>
+        <!-- Favorite Card End-->
+        <!-- Date Filter Card-->
+        <div id="newDateWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
+            <h2>Datum Filter: </h2>
+            <div id="newDate" class="sidecard">
+                <p>
+                    Geben sie das Datum an für das gefiltert werden soll
+                </p>
 
+                <!-- Ausgewahltes Datum wird als "FilterDate gespeichert-->
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
+                    <el-date-picker v-model="draft.FilterDate"
+                                    type="datetimerange"
+                                    align="right"
+                                    start-placeholder="Start Date"
+                                    end-placeholder="End Date"
+                                    :default-time="['15:00:00', '19:00:00']">
+                    </el-date-picker>
+                </div>
+
+                <div class="buttons">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                            @click="formsubmit">
+                        Filtern
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <!-- Date Filter Card End-->
         <!-- Register Card-->
-
-        <div id="newRegisterWrapper" class="sidecard" style="position: static" v-bind:class="{ hide: !cardShown}">
+        <!-- Registiereungs Daten werden immer mit "r." verarbeitet, zum Beispiel "rPassword"/"rUserName"-->
+        <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Registrieren sie sich </h2>
-            <div id="newRegister">
+            <div id="newRegister" class="sidecard">
                 <p>
                     Registrieren sie sich jetzt!
                 </p>
@@ -110,14 +218,14 @@
                     </button>
                 </div>
             </div>
+
         </div>
-
-
-
+        <!-- Register Card End-->
         <!-- Login Card-->
-        <div id="newLoginWrapper" class="sidecard" style="position: static" v-bind:class="{ hide: !cardShown}">
+        <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
+        <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Loggen sie sich hier ein</h2>
-            <div id="newLogin">
+            <div id="newLogin" class="sidecard">
                 <p>
                     Loggen sie sich hier ein!
                 </p>
@@ -126,15 +234,17 @@
                     <label class="mdl-textfield__label" for="sample1">E-Mail</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    
+
                     <input class="mdl-textfield__input" type="password" v-model="draft.sPassword">
                     <label class="mdl-textfield__label" for="schools">Password</label>
                 </div>
 
 
+
+
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                           @click='BobMarleyCard'>
+                            @click='BobMarleyCard'>
                         Registieren
                     </button>
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
@@ -143,17 +253,18 @@
                     </button>
                 </div>
             </div>
+
         </div>
-
-
+        <!-- Login Card End-->
         <!-- Karte für Event, Alles rechts neben der Karte-->
-        <div id="newEventWrapper" class="sidecard" v-bind:class="{ hide: !cardShown}">
+        <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Neues Event eintragen</h2>
-            <div id="newEvent">
+            <div id="newEvent" class="sidecard">
                 <p>
                     Fügen sie ein neues Event in unsere Databank ein
                 </p>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
                     <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
                     <label class="mdl-textfield__label" for="sample1">Titel</label>
                 </div>
@@ -168,7 +279,7 @@
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-                    <el-date-picker v-model="draft.sDate"
+                    <el-date-picker v-model="draft.EDate"
                                     type="datetimerange"
                                     align="right"
                                     start-placeholder="Start Date"
@@ -192,13 +303,12 @@
             </div>
         </div>
 
-
-        <div class="sidecard">
+        <div class="sidecardWrapper">
             <h2> Events</h2>
-            <ul id="eventTable" class="demo-list-three mdl-list">
+            <ul id="eventTable" class="sidecard demo-list-three mdl-list">
                 <li v-for="event in currentEvents"
                     class="mdl-list__item mdl-list__item--three-line"
-                    :class="{selected:event.iEventId == selected}"
+                    :class="{selected:event.iEventId == selected, faved: event.faved}"
                     @click="select(event)">
                     <span class="mdl-list__item-primary-content">
                         <i class="material-icons mdl-list__item-avatar">person</i>
@@ -206,14 +316,18 @@
                         <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
                         <span class="mdl-list__item-text-body">{{ event.sAdress }}</span>
                         <span class="mdl-list__item-text-body">{{ event.sDate }}</span>
+
                     </span>
                     <span class="mdl-list__item-secondary-content">
-                        <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                        <a class="mdl-list__item-secondary-action favstar"
+                          @click.stop="favToggle(event)"
+                        ><i class="material-icons">star</i></a>
                     </span>
                 </li>
             </ul>
         </div>
     </div>
+
 
         <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
             <h1>
@@ -229,24 +343,32 @@
                             name="action" @click="searchPlace">
                         Suche
                     </button>
+                    <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                            name="action" @click="showNewDateCard">
+                        Filtern
+                    </button>
                 </div>
             </div>
 
 
+            </div>
 
         </div>
+        <!-- Seachbar Ends here-->
+
+    </div>
 
 
-        <!-- Map-->
-        <div id="map"></div>
+    <!-- Map-->
+    <div id="map"></div>
 
-        <!-- own script files-->
-        <script type="text/javascript" src="js/Map.js"></script>
-        <script type="text/javascript" src="js/testdata.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+    <!-- own script files-->
+    <script type="text/javascript" src="js/Map.js"></script>
+    <script type="text/javascript" src="js/testdata.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 
-        <!-- tilt libary for css animations -->
-        <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
+    <!-- tilt libary for css animations -->
+    <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
 
 </body>
 </html>
