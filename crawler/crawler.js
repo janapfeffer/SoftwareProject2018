@@ -137,6 +137,7 @@ var getday = function(date, thenCallback=function(){}){
           $('.vk_ergebnisse').each(function (i, elem){
 
             var oEvent = {
+              // TODO: die id ist hier dieselbe fuer Termine wiedrkehrender events
               iEventId: $(elem).children("a").first().attr("name").replace(/[^0-9\.]/g, ''),
               sName: $(elem).find("a.vk_erg_title").text(),
               sDate: $(elem).find("div.vk_erg_times").text()
