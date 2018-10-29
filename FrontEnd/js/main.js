@@ -87,7 +87,7 @@ var aTestEvents = [
 ];
 
 aTestEvents = aTestEvents.concat(aJsonTestData);
-
+checkDuplicatePositions(aTestEvents);
 
 
 //Vue fuer die Event Tabelle fertig
@@ -143,7 +143,7 @@ var oEventTableVue = new Vue({
 var oSearchPlaceVue = new Vue({
     el: "#searchPlace",
     data: {
-        sQuery: "",
+        sQuery: localStorage.getItem("HANSCH"),
         sName: "Event Finder",
         sButtonName: "Suchen"
     },
@@ -172,8 +172,6 @@ var oSearchPlaceVue = new Vue({
         autocomplete: function autocomplete() {
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
         }
-
-
     }
 });
 
@@ -362,9 +360,35 @@ var oNewFavoiteVue = new Vue({
     }
 });
 
+
+// suche nach gleichen events mit exakt gleichen Koordinaten
+// und verändert die Position der Duplikate ein bisschen (in place)
+function checkDuplicatePositions(arr){
+    // console.time("duplishift")
+    arrCopy = arr.slice(0); //copy array but keep references to orig. objects
+    while(arrCopy.length){
+      testFor = arrCopy.shift().oLatLgn // original eventobj that keeps location data
+      countDuplicates = 0;
+      for(var i = 0; i < arrCopy.length; i++) // iterate over array lookig for duplicates
+        if(testFor.lat - arrCopy[i].oLatLgn.lat == 0) // lat gleich?
+          if(testFor.lng - arrCopy[i].oLatLgn.lng == 0){ // long gleich ?
+            countDuplicates++;
+            // Die Duplikate ordnen sich in einer angedeuteten Spiralformation um
+            // die echten Koordinaten an. loool :D
+            angle = countDuplicates * 1.4 + 4;
+            arrCopy[i].oLatLgn.lng -= angle * Math.cos(angle) * 0.000005;
+            arrCopy[i].oLatLgn.lat -= angle * Math.sin(angle) * 0.000002;
+            arrCopy.splice(i, 1) // remove object of arrCopy
+          }
+    }
+    // console.timeEnd("duplishift")
+}
+
 function initEverything(){
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     setMarkers(oEventTableVue.allEvents);
 }
+
+
 
 initEverything();
