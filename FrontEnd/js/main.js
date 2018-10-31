@@ -12,25 +12,35 @@ var oNavigationVue = new Vue({
             oNewEventVue.cardShown = false;
         },
 
-      showNewEventCard: function(){
+        showNewEventCard: function(){
           oNewEventVue.cardShown = !oNewEventVue.cardShown;
           oRegisterVue.cardShown = false;
           oNewLoginVue.cardShown = false;
+          oNewFavoiteVue.cardShown = false;
         },
         showNewLoginCard: function () {
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
+            oNewFavoiteVue.cardShown = false;
         },
         showNewRegisterCard: function () {
             oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
             oNewLoginVue.cardShown = false;
             oNewEventVue.cardShown = false;
-
+            oNewFavoiteVue.cardShown = false;
+        },
+         showNewDateCard: function () {
+            oNewDateVue.cardShown = !oNewDateVue.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+            oNewFavoiteVue.cardShown = false;
         },
       toggleBigMap: function(){
           document.body.classList.toggle('bigMap');
           map.getViewPort().resize();
+        //   oAsideVue.bShown = false;
       }
     }
 });
@@ -148,17 +158,6 @@ var oSearchPlaceVue = new Vue({
         sButtonName: "Suchen"
     },
     methods: {
-
-        // Oeffnet neue Karte fuer den Filter
-        showNewDateCard: function () {
-            oNewDateVue.cardShown = !oNewDateVue.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewEventVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
-
-        },
-        //Filter Karten Funktion zuende
-
         //Sucht nach einem Ort
         searchPlace: function searchPlace() {
           if(document.body.classList.contains('landingpage')){
@@ -188,7 +187,8 @@ var oNewEventVue = new Vue({
           latlng: {},
           status: "draft",
           iEventId: Math.floor(Math.random() * 99999) + 1,
-          oSelectedFile: null
+          oSelectedFile: null,
+          image: null
         },
         value7: ''
     },
@@ -228,7 +228,19 @@ var oNewEventVue = new Vue({
       },
       onFileSelected: function(event){
         this.draft.oSelectedFile = event.target.files[0];
+      },
+      onChange (image) {
+        console.log('New picture selected!')
+        if (image) {
+          console.log('Picture loaded.')
+          this.draft.image = image
+        } else {
+          console.log('FileReader API not supported: use the <form>, Luke!')
+        }
       }
+    },
+    components: {
+        'picture-input': PictureInput
     }
 });
 
@@ -359,6 +371,13 @@ var oNewFavoiteVue = new Vue({
 
     }
 });
+
+// var oAsideVue = new Vue({
+//     el: "#aside",
+//     data: {
+//         bShown: true
+//     }
+// });
 
 
 // suche nach gleichen events mit exakt gleichen Koordinaten
