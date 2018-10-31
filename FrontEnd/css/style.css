@@ -263,6 +263,18 @@ div#aside, div#map{
   padding: 20px;
 }
 
+#eventTable li.selected {
+    /* transition: transform 0.1s;
+    transform: scale(1.05); */
+    transition: background-color 0.1s, box-shadow 0.2s;
+    background-color: #fbfbfb;
+    /* box-shadow: 1px 1px 16px #6d6d6d2e; */
+}
+
+#eventTable li.selected:hover {
+    background-color: #fbfbfb;
+}
+
 #eventTable li.mdl-list__item--three-line.selected .mdl-list__item-primary-content {
   height: auto;
 }
