@@ -125,7 +125,30 @@ exports.add_comment = (req, res, next) => {
 };
 
 exports.get_event = (req, res, next) => {
-  //get one single event with all comments
+  const id = req.params.eventId;
+  OEvent.findById(id)
+  .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments")
+    .exec()
+    .then(doc => {
+      console.log("From database", doc);
+      if (doc) {
+        res.status(200).json({
+          product: doc,
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/events"
+          }
+        });
+      } else {
+        res
+          .status(404)
+          .json({ message: "No valid entry found for provided ID." });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 };
 
 exports.report_event = (req, res, next) => {
@@ -136,8 +159,31 @@ exports.report_event = (req, res, next) => {
 //   //report a comment,
 // };
 
+//the parameters in the body have to have the same name as in the database (e.g. event_name)
+//todo: check, whether this works eg for the address
 exports.update_event = (req, res, next) => {
-  //allow a user to update an owned event
+  const id = req.params.eventId;
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  OEvent.update({ _id: id }, { $set: updateOps })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Event updated",
+        request: {
+          type: "GET",
+          url: "http://localhost:3000/events/" + id
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 };
 
 exports.rate_event = (req, res, next) => {
