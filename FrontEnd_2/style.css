@@ -1,0 +1,99 @@
+ body, #app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+  font-family:"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 14px;
+}
+
+header, footer,
+nav, #map, aside {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.vbox {
+  display:         flex;
+  flex-direction: column;
+}
+
+.hbox {
+  display:         flex;
+  flex-direction: row;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+header{
+  height: 80px;
+  border-bottom: solid 1px #e6e6e6;
+}
+
+.main {
+  flex: 1;
+}
+
+div#map {
+  flex: 3;
+}
+
+aside {
+  flex: 2;
+  padding: 10px;
+  border-right: solid 1px #e6e6e6;
+  max-width: 500px;
+}
+
+header h1 {
+  float: left;
+  color: #999;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 56px;
+  letter-spacing: -.02em;
+  margin: 9px 18PX;
+  border: none;
+}
+header .el-menu.el-menu--horizontal {
+  margin-top: 19px;
+  height: 61px;
+  position: static;
+  border-bottom: none;
+  background-color: none;
+}
+
+header .el-menu--horizontal>.el-menu-item {
+  float: right;
+}
+
+header .el-menu--horizontal>.el-submenu {
+  float: right;
+}
+
+#mapSearch {
+  width:200px;
+}
+
+
+
+ul#eventlist {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  font-size: 13px;
+}
+
+ul#eventlist li {
+  margin: 14px;
+  padding: 0px;
+
+
+}
+ul#eventlist span.title{
+  font-size: 150%;
+  display: block;
+}

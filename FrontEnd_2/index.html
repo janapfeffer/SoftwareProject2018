@@ -1,0 +1,95 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Eventfinder</title>
+
+    <!-- import vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- import CSS Element -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import JavaScript Element -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <!-- import Here maps-->
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
+</head>
+
+
+<body>
+
+
+
+<div id="app" class="vbox">
+  <header>
+    <h1>Event Finder</h1>
+    <el-menu
+    :default-active="activeIndex2"
+    class="el-menu-demo"
+    mode="horizontal"
+    @select="handleSelect">
+    <el-menu-item index="1">Processing Center</el-menu-item>
+    <el-submenu index="2">
+      <template slot="title">Workspace</template>
+      <el-menu-item index="2-1">item one</el-menu-item>
+      <el-menu-item index="2-2">item two</el-menu-item>
+      <el-menu-item index="2-3">item three</el-menu-item>
+      <el-submenu index="2-4">
+        <template slot="title">item four</template>
+        <el-menu-item index="2-4-1">item one</el-menu-item>
+        <el-menu-item index="2-4-2">item two</el-menu-item>
+        <el-menu-item index="2-4-3">item three</el-menu-item>
+      </el-submenu>
+    </el-submenu>
+    <el-menu-item index="3" disabled>Info</el-menu-item>
+    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
+    </el-menu>
+
+  </header>
+  <section class="main hbox space-between">
+    <aside>
+      <ul id="eventlist">
+        <li v-for="item in shownEvents" class="" >
+          <span class="title">{{item.title}}</span>
+          <span class="desc">{{item.desc}}</span>
+          <span class="time">{{item.time}}</span>
+          <span class="place">{{item.place}}</span>
+        </li>
+      </ul>
+    </aside>
+
+    <div id="map">
+        <el-input id="mapSearch" @keyup.enter="searchPlace" placeholder="Suchort eingeben"  v-model="searchLocation"></el-input>
+        <button @click="searchPlace">Click me</button>
+        <div style="width: 640px; height: 480px" id="mapContainer"></div>
+    </div>
+  </section>
+
+</div>
+
+
+<ul id="example-1">
+  <li v-for="item in items">
+    {{ item.message }}
+  </li>
+</ul>
+
+
+
+
+
+ <!-- link to javacsript-->
+ <script src="main.js"></script>
+ <script type="text/javascript" src="Map.js"></script>
+ <!-- link to style.css-->
+ <link rel="stylesheet" href="style.css">
+
+</body>
+</html>
