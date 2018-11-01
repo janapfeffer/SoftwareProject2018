@@ -94,18 +94,20 @@ exports.user_login = (req, res, next) => {
     .then(user => {
       if (user.length < 1) {
         return res.status(401).json({
-          message: "Auth failed u"
+          message: "Auth failed"
         });
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            message: "Auth failed pw"
+            message: "Auth failed"
           });
-        }
+        } else {
           return res.status(200).json({ // not needed with JWT, then it's done later!
             message: "Auth successful"
           });
+        }
+
         // if (result) {
         //   const token = jwt.sign(
         //     {
