@@ -65,12 +65,9 @@ exports.create_event = (req, res, next) => {
         }
     });
 
-<<<<<<< HEAD
-=======
-   
+
     console.log(req.body);
 
->>>>>>> 3206fa9a0ee00b868fcd6b6a642ff709888496ea
     const oEvent = new OEvent({
         _id: new mongoose.Types.ObjectId(),
         author: req.body.userId,
@@ -128,6 +125,9 @@ exports.create_event = (req, res, next) => {
 
 exports.add_comment = (req, res, next) => {
   //add a comment to one event
+  // ähnlich wie save event 
+  // req.body.comment
+  // req.body.username
 };
 
 exports.get_event = (req, res, next) => {
@@ -157,14 +157,6 @@ exports.get_event = (req, res, next) => {
     });
 };
 
-exports.report_event = (req, res, next) => {
-  //report an event
-};
-
-// exports.report_comment = (req, res, next) => {
-//   //report a comment,
-// };
-
 //the parameters in the body have to have the same name as in the database (e.g. event_name)
 //todo: check, whether this works eg for the address
 exports.update_event = (req, res, next) => {
@@ -192,15 +184,6 @@ exports.update_event = (req, res, next) => {
     });
 };
 
-exports.rate_event = (req, res, next) => {
-  //add rating and number_of_ratings to event model. update rating to avg
-  //add rated_events to user and save which events he has voted for -> only 1 voting possible
-};
-
-exports.get_filtered_events = (req, res, next) => {
-  //get events with filters applied
-};
-
 
 //todo: only delete owned events -> if no event is found, it doesn't belong to user/doesn't exist
 exports.delete_event = (req, res, next) => {
@@ -218,3 +201,20 @@ exports.delete_event = (req, res, next) => {
       });
     });
 };
+
+exports.rate_event = (req, res, next) => {
+  //add rating and number_of_ratings to event model. update rating to avg
+  //add rated_events to user and save which events he has voted for -> only 1 voting possible
+};
+
+exports.get_filtered_events = (req, res, next) => {
+  //get events with filters applied
+};
+
+exports.report_event = (req, res, next) => {
+  //report an event
+};
+
+// exports.report_comment = (req, res, next) => {
+//   //report a comment,
+// };
