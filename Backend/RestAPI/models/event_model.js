@@ -4,15 +4,11 @@ const oEventSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     event_name: { type: String, required: true },
     description: { type: String, required: true },
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
 
     address: {
-        city: { type: String, required: true },
-        zip: { type: Number, required: true },
-        street: { type: String, required: true },
-        house_number: { type: Number, required: true },
-        address_additional: { type: String, required: false },
-        loc: { lng: Number, lat: Number },
+        freeformAddress: { type: String, required: true },
+        loc: { lng: {type: Number, required: true} ,lat: {type: Number, required: true}},
     },
 
     event_picture: { type: String, required: false },
