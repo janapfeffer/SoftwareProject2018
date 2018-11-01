@@ -98,13 +98,13 @@ var oEvent = function(oEvent){
 
 // aTestEvents = aTestEvents.concat(aJsonTestData);
 var aAllEvents = [];
-// aAllEvents = 
+// aAllEvents =
 
 function getAllEvents(){
     var AUTOCOMPLETION_URL = 'http://localhost:3000/events';
     var ajaxRequest = new XMLHttpRequest();
 
-    
+
     var onSuccess = function onSuccess() {
 
         var apievents = this.response.oEvents;
@@ -117,7 +117,7 @@ function getAllEvents(){
                 osDate: apievent.start_date,
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
-                sTicketLink: apievent.ticket_link,  
+                sTicketLink: apievent.ticket_link,
                 oLatLgn: apievent.address.loc
             };
         });
@@ -333,14 +333,14 @@ var oRegisterVue = new Vue({
                 alert(' SO NE SCHEISSE');
             };
 
-            
+
             this.cardShown = !this.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
 
             var newuser = "http://localhost:3000/user/signup"
             var ajaxRequest = new XMLHttpRequest();
-            
+
             ajaxRequest.addEventListener("load", onSuccess);
             ajaxRequest.addEventListener("error", onFailed);
             ajaxRequest.responseType = "json";
@@ -374,13 +374,13 @@ var oNewLoginVue = new Vue({
 
 
         formsubmit: function () {
-            
+
             var suserlogin = "http://localhost:3000/user/login"
             var ajaxRequest = new XMLHttpRequest();
 
-           
+
             var onSuccess = function onSuccess() {
-           
+
                 console.log(this.status);
                 if (this.status == 200) {
                     alert('Du bist erfolgreich eingeloggt');
@@ -394,15 +394,15 @@ var oNewLoginVue = new Vue({
                 alert(' SO NE SCHEISSE');
             };
 
-            
 
             ajaxRequest.addEventListener("load", onSuccess);
             ajaxRequest.addEventListener("error", onFailed);
             ajaxRequest.responseType = "json";
             ajaxRequest.open("POST", suserlogin, true);
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
             var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
-            
+
             ajaxRequest.send(suserdata);
             console.log(suserdata);
 
