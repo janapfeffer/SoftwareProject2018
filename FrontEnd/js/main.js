@@ -118,7 +118,8 @@ function getAllEvents() {
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
                 sTicketLink: apievent.ticket_link,
-                oLatLgn: apievent.address.loc
+                oLatLgn: apievent.address.loc,
+                oImage: apievent.event_picture
             };
         });
 
@@ -289,6 +290,7 @@ var oNewEventVue = new Vue({
                             EDate: null,
                             status: "draft",
                             iEventId: Math.floor(Math.random() * 99999) + 1,
+
                         }
                     };
         
@@ -309,7 +311,7 @@ var oNewEventVue = new Vue({
                         start_date: oNewEventVue.draft.EDate[0],
                         end_date: oNewEventVue.draft.EDate[1],
                         event_types: ["5bd1874824c1783894595b68"],
-                        event_picture: oNewEventVue.image
+                        event_picture: oNewEventVue.draft.image
                     };
                     var stringBody = JSON.stringify(body);
         

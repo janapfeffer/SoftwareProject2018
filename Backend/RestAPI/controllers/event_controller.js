@@ -14,6 +14,7 @@ exports.get_all_events = (req, res, next) => {
                 count: elements.length,
                 oEvents: elements.map(element => {
                     return {
+                        _id: element._id,
                         event_name: element.event_name,
                         author: element.author,
                         description: element.description,
@@ -87,14 +88,14 @@ exports.create_event = (req, res, next) => {
         event_picture: pic_filepath
     });
 
-
     oEvent
         .save()
         .then(result => {
             res.status(201).json({
                 message: "Created new event successfully",
                 created_event: {
-                    event_name: result._id,
+                    _id : result._id,
+                    event_name: result.event_name,
                     description: result.description,
                     author: result.author,
                     address: {
