@@ -98,11 +98,12 @@ var oEvent = function (oEvent) {
 
 // aTestEvents = aTestEvents.concat(aJsonTestData);
 var aAllEvents = [];
-// aAllEvents = 
+// aAllEvents =
 
 function getAllEvents() {
     var GETALLEVENTS_URL = 'http://localhost:3000/events';
     var ajaxRequest = new XMLHttpRequest();
+
 
     var onSuccess = function onSuccess() {
 
@@ -360,6 +361,7 @@ var oRegisterVue = new Vue({
         cardShown: false,
         draft: {
             rUserName: "",
+            rEmail: "",
             rPassword: "",
             rPassword2: "",
             status: "draft",
@@ -374,11 +376,29 @@ var oRegisterVue = new Vue({
             }
         },
         formsubmit: function () {
+            var onSuccess = function onSuccess() {
+                alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
+            };
+            var onFailed = function onFailed() {
+                alert(' SO NE SCHEISSE');
+            };
+
 
             this.cardShown = !this.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
 
+            var newuser = "http://localhost:3000/user/signup"
+            var ajaxRequest = new XMLHttpRequest();
+
+            ajaxRequest.addEventListener("load", onSuccess);
+            ajaxRequest.addEventListener("error", onFailed);
+            ajaxRequest.responseType = "json";
+            ajaxRequest.open("POST", newuser, true);
+            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
+            console.log(snewuserdata);
+            ajaxRequest.send(snewuserdata);
         },
 
     }
@@ -405,8 +425,38 @@ var oNewLoginVue = new Vue({
 
         formsubmit: function () {
 
-            this.cardShown = !this.cardShown;
+            var suserlogin = "http://localhost:3000/user/login"
+            var ajaxRequest = new XMLHttpRequest();
 
+
+            var onSuccess = function onSuccess() {
+
+                console.log(this.status);
+                if (this.status == 200) {
+                    alert('Du bist erfolgreich eingeloggt');
+                } else {
+                    alert('Anmeldung nicht erfolgreich');
+
+                }
+
+            };
+            var onFailed = function onFailed() {
+                alert(' SO NE SCHEISSE');
+            };
+
+
+            ajaxRequest.addEventListener("load", onSuccess);
+            ajaxRequest.addEventListener("error", onFailed);
+            ajaxRequest.responseType = "json";
+            ajaxRequest.open("POST", suserlogin, true);
+            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
+
+            ajaxRequest.send(suserdata);
+            console.log(suserdata);
+
+            this.cardShown = !this.cardShown;
         },
 
 
