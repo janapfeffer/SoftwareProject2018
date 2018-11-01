@@ -59,7 +59,7 @@ exports.add_to_saved_events = (req, res, next) => {
         User.updateOne(
           { _id: user_id},
           { $push: { saved_events: event_id }},
-          {upsert: true}
+          { upsert: true}
         )
         .exec()
         .then(result => {
