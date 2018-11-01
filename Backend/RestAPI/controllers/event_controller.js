@@ -6,7 +6,7 @@ const EventType = require("../models/event_type_model");
 //todo: add additional needed fields
 exports.get_all_events = (req, res, next) => {
     OEvent.find()
-        .select("_id event_name author description address start_date end_date event_picture event_link ticket_link instagram_hashtag comments loc")
+        .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments loc")
         .populate("event_types")
         .exec()
         .then(elements => {
@@ -23,10 +23,8 @@ exports.get_all_events = (req, res, next) => {
                         event_picture: element.event_picture,
                         event_link: element.event_link,
                         ticket_link: element.ticket_link,
-                        instagram_hashtag: element.instagram_hashtag,
                         comments: element.comments,
                         event_types: element.event_types,
-                        loc: element.loc,
                         request: {
                             type: "GET",
                             uri: "http://localhost:3000/events/" + element._id
@@ -45,7 +43,7 @@ exports.get_all_events = (req, res, next) => {
 
 //Image muss noch hinzugefügt werden
 exports.create_event = (req, res, next) => {
-  var pic_filepath = "C:/Users/D067608/Documents/GitHub/SoftwareProject2018/Backend/event_images/standard.png";
+  var pic_filepath = "./SoftwareProject2018/Backend/event_images/standard.png";
     EventType.find({
         _id: {
             $in: req.body.eventTypeIds
@@ -72,10 +70,7 @@ exports.create_event = (req, res, next) => {
         event_name: req.body.event_name,
         description: req.body.description,
         address: {
-            city: req.body.address.city,
-            zip: req.body.address.zip,
-            street: req.body.address.street,
-            house_number: req.body.address.house_number,
+            freeformAddress: req.body.address.freeformAddress,
             loc: {
               lat: req.body.address.loc.lat,
               lng: req.body.address.loc.lng
@@ -85,7 +80,6 @@ exports.create_event = (req, res, next) => {
         end_date: req.body.end_date,
         event_link: req.body.event_link,
         ticket_link: req.body.ticket_link,
-        instagram_hashtag: req.body.instagram_hashtag,
         event_types: req.body.eventTypeIds,
         event_picture: pic_filepath
     });
@@ -101,17 +95,14 @@ exports.create_event = (req, res, next) => {
                     description: result.description,
                     author: result.author,
                     address: {
-                        city: result.address.city,
-                        zip: result.address.zip,
-                        street: result.address.street,
-                        house_number: result.address.house_number,
+                        freeformAddress: result.address.freeformAddress,
+                        loc: result.address.loc
                     },
                     start_date: result.start_date,
                     end_date: result.end_date,
                     event_picture: result.event_picture,
                     event_link: result.event_link,
                     ticket_link: result.ticket_link,
-                    instagram_hashtag: result.instagram_hashtag,
                     event_types: result.event_types,
                     request: {
                         type: "GET",
