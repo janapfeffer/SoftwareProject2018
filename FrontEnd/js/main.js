@@ -99,7 +99,6 @@ var oEvent = function(oEvent){
 // aTestEvents = aTestEvents.concat(aJsonTestData);
 var aAllEvents = [];
 // aAllEvents = 
-checkDuplicatePositions(aAllEvents);
 
 function getAllEvents(){
     var AUTOCOMPLETION_URL = 'http://localhost:3000/events';
@@ -109,12 +108,12 @@ function getAllEvents(){
     var onSuccess = function onSuccess() {
 
         var apievents = this.response.oEvents;
-        aAllEvents = apievents.map(apievent => {
+        oEventTableVue.allEvents = apievents.map(apievent => {
             return{
                 iEventId: apievent._id,
                 sName: apievent.event_name,
                 sDescription: apievent.description,
-                sAdress: apievent.address,
+                sAdress: apievent.address.freeformAddress,
                 osDate: apievent.start_date,
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
@@ -122,7 +121,8 @@ function getAllEvents(){
                 oLatLgn: apievent.address.loc
             };
         });
-        console.log(aAllEvents);
+
+        setMarkers(oEventTableVue.allEvents);
 
     };
 
@@ -460,7 +460,8 @@ function checkDuplicatePositions(arr){
 
 function initEverything(){
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
-    setMarkers(oEventTableVue.allEvents);
+    getAllEvents()
+    checkDuplicatePositions(oEventTableVue.allEvents);
 }
 
 
