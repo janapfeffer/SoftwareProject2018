@@ -5,6 +5,7 @@ const EventType = require("../models/event_type_model");
 
 //todo: add additional needed fields
 exports.get_all_events = (req, res, next) => {
+  //todo only get verified events
     OEvent.find()
         .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments loc")
         .populate("event_types")
@@ -121,4 +122,79 @@ exports.create_event = (req, res, next) => {
                 error: err
             })
         });
-}
+};
+
+exports.add_comment = (req, res, next) => {
+  //add a comment to one event
+};
+
+exports.get_event = (req, res, next) => {
+  const id = req.params.eventId;
+  OEvent.findById(id)
+  .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments")
+    .exec()
+    .then(doc => {
+      console.log("From database", doc);
+      if (doc) {
+        res.status(200).json({
+          product: doc,
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/events"
+          }
+        });
+      } else {
+        res
+          .status(404)
+          .json({ message: "No valid entry found for provided ID." });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+};
+
+exports.report_event = (req, res, next) => {
+  //report an event
+};
+
+// exports.report_comment = (req, res, next) => {
+//   //report a comment,
+// };
+
+//the parameters in the body have to have the same name as in the database (e.g. event_name)
+//todo: check, whether this works eg for the address
+exports.update_event = (req, res, next) => {
+  const id = req.params.eventId;
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  OEvent.update({ _id: id }, { $set: updateOps })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Event updated",
+        request: {
+          type: "GET",
+          url: "http://localhost:3000/events/" + id
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+};
+
+exports.rate_event = (req, res, next) => {
+  //add rating and number_of_ratings to event model. update rating to avg
+  //add rated_events to user and save which events he has voted for -> only 1 voting possible
+};
+
+exports.get_filtered_events = (req, res, next) => {
+  //get events with filters applied
+};
