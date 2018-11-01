@@ -5,8 +5,7 @@ const EventType = require("../models/event_type_model");
 
 //todo: add additional needed fields
 exports.get_all_events = (req, res, next) => {
-  //todo only get verified events
-    OEvent.find()
+    OEvent.find() //enter: {verification_status: true} into brackets for only verified events
         .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments loc")
         .populate("event_types")
         .exec()
@@ -42,7 +41,7 @@ exports.get_all_events = (req, res, next) => {
         });
 }
 
-//Image muss noch hinzugefügt werden
+
 exports.create_event = (req, res, next) => {
   var pic_filepath = "./SoftwareProject2018/Backend/event_images/standard.png";
     EventType.find({
@@ -63,8 +62,6 @@ exports.create_event = (req, res, next) => {
         }
     });
 
-
-
     const oEvent = new OEvent({
         _id: new mongoose.Types.ObjectId(),
         author: req.body.userId,
@@ -84,7 +81,6 @@ exports.create_event = (req, res, next) => {
         event_types: req.body.eventTypeIds,
         event_picture: pic_filepath
     });
-
 
     oEvent
         .save()
@@ -193,4 +189,22 @@ exports.rate_event = (req, res, next) => {
 
 exports.get_filtered_events = (req, res, next) => {
   //get events with filters applied
+};
+
+
+//todo: only delete owned events -> if no event is found, it doesn't belong to user/doesn't exist
+exports.delete_event = (req, res, next) => {
+  OEvent.remove({ _id: req.params.eventId, author: req.body.user_id })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Event deleted"
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 };
