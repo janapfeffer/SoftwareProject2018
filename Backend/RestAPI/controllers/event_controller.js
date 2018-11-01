@@ -43,7 +43,9 @@ exports.get_all_events = (req, res, next) => {
 
 //Image muss noch hinzugefügt werden
 exports.create_event = (req, res, next) => {
-  var pic_filepath = "./SoftwareProject2018/Backend/event_images/standard.png";
+    console.log("IN Methode");
+
+  var pic_filepath = "";
     EventType.find({
         _id: {
             $in: req.body.eventTypeIds
@@ -62,7 +64,8 @@ exports.create_event = (req, res, next) => {
         }
     });
 
-
+   
+    console.log(req.body);
 
     const oEvent = new OEvent({
         _id: new mongoose.Types.ObjectId(),
