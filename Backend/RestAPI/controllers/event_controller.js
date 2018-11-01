@@ -5,6 +5,7 @@ const EventType = require("../models/event_type_model");
 
 //todo: add additional needed fields
 exports.get_all_events = (req, res, next) => {
+  //todo only get verified events
     OEvent.find()
         .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments loc")
         .populate("event_types")
@@ -117,4 +118,33 @@ exports.create_event = (req, res, next) => {
                 error: err
             })
         });
-}
+};
+
+exports.add_comment = (req, res, next) => {
+  //add a comment to one event
+};
+
+exports.get_event = (req, res, next) => {
+  //get one single event with all comments
+};
+
+exports.report_event = (req, res, next) => {
+  //report an event
+};
+
+// exports.report_comment = (req, res, next) => {
+//   //report a comment,
+// };
+
+exports.update_event = (req, res, next) => {
+  //allow a user to update an owned event
+};
+
+exports.rate_event = (req, res, next) => {
+  //add rating and number_of_ratings to event model. update rating to avg
+  //add rated_events to user and save which events he has voted for -> only 1 voting possible
+};
+
+exports.get_filtered_events = (req, res, next) => {
+  //get events with filters applied
+};
