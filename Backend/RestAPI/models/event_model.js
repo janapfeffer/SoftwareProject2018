@@ -4,7 +4,7 @@ const oEventSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     event_name: { type: String, required: true },
     description: { type: String, required: true },
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
 
     address: {
         city: { type: String, required: true },
@@ -12,7 +12,7 @@ const oEventSchema = mongoose.Schema({
         street: { type: String, required: true },
         house_number: { type: Number, required: true },
         address_additional: { type: String, required: false },
-        loc: { longitude: Number, latitude: Number },
+        loc: { lng: Number, lat: Number },
     },
 
     event_picture: { type: String, required: false },

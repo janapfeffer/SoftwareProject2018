@@ -3,6 +3,7 @@ const OEvent = require("../models/event_model");
 const EventType = require("../models/event_type_model");
 
 
+//todo: add additional needed fields
 exports.get_all_events = (req, res, next) => {
     OEvent.find()
         .select("_id event_name author description address start_date end_date event_picture event_link ticket_link instagram_hashtag comments")
@@ -43,6 +44,7 @@ exports.get_all_events = (req, res, next) => {
 
 //Image muss noch hinzugefügt werden
 exports.create_event = (req, res, next) => {
+  var pic_filepath = "C:/Users/D067608/Documents/GitHub/SoftwareProject2018/Backend/event_images/standard.png";
     EventType.find({
         _id: {
             $in: req.body.eventTypeIds
@@ -53,10 +55,15 @@ exports.create_event = (req, res, next) => {
         if (!eventType) {
             return res.status(404).json({
                 message: "Wrong event type given"
+            }).then (function() {
+              if (typeof req.file.path === "undefined") {
+                pic_filepath = req.file.path;
+              }
             });
         }
     });
-    console.log(req.file.path);
+
+
 
     const oEvent = new OEvent({
         _id: new mongoose.Types.ObjectId(),
@@ -68,6 +75,10 @@ exports.create_event = (req, res, next) => {
             zip: req.body.address.zip,
             street: req.body.address.street,
             house_number: req.body.address.house_number,
+            loc: {
+              lat: req.body.address.loc.lat,
+              lng: req.body.address.loc.lng
+            }
         },
         start_date: req.body.start_date,
         end_date: req.body.end_date,
@@ -75,7 +86,7 @@ exports.create_event = (req, res, next) => {
         ticket_link: req.body.ticket_link,
         instagram_hashtag: req.body.instagram_hashtag,
         event_types: req.body.eventTypeIds,
-        event_picture: req.file.path
+        event_picture: pic_filepath
     });
 
 
