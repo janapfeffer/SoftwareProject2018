@@ -303,7 +303,7 @@ var updateViewTimeout;
    clearTimeout(updateViewTimeout);
    updateViewTimeout = setTimeout(function() {
         console.log("update list");
-        oEventTableVue.mapBounds = map.getViewBounds()
+        oEventTableVue.mapBounds = map.getViewBounds();
     }, 300)
  });
 

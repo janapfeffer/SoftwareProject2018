@@ -12,7 +12,7 @@ const oEventSchema = mongoose.Schema({
         street: { type: String, required: true },
         house_number: { type: Number, required: true },
         address_additional: { type: String, required: false },
-        loc: { longitude: Number, latitude: Number },
+        loc: { lng: Number, lat: Number },
     },
 
     event_picture: { type: String, required: false },

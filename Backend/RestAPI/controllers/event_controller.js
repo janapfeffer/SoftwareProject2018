@@ -5,7 +5,7 @@ const EventType = require("../models/event_type_model");
 
 exports.get_all_events = (req, res, next) => {
     OEvent.find()
-        .select("_id event_name author description address start_date end_date event_picture event_link ticket_link instagram_hashtag comments")
+        .select("_id event_name author description address start_date end_date event_picture event_link ticket_link instagram_hashtag comments loc")
         .populate("event_types")
         .exec()
         .then(elements => {
@@ -13,7 +13,7 @@ exports.get_all_events = (req, res, next) => {
                 count: elements.length,
                 oEvents: elements.map(element => {
                     return {
-                        event_name: element._id,
+                        event_name: element.event_name,
                         author: element.author,
                         description: element.description,
                         address: element.address,
@@ -25,6 +25,7 @@ exports.get_all_events = (req, res, next) => {
                         instagram_hashtag: element.instagram_hashtag,
                         comments: element.comments,
                         event_types: element.event_types,
+                        loc: element.loc,
                         request: {
                             type: "GET",
                             uri: "http://localhost:3000/events/" + element._id
