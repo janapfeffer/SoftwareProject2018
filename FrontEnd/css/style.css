@@ -283,6 +283,12 @@ div#aside, div#map{
   display: none;
 }
 
+img.eventSymbol {
+    border-radius: 50%;
+    margin: 0px 14px 0px 0px;
+    float: left;
+}
+
 .favstar {
    color: rgb(230, 230, 230);
    cursor: pointer;
@@ -443,5 +449,3 @@ div#aside, div#map{
   margin: 0 0 0 0;
   padding: 0 0 0 0;
 }
-
-

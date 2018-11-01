@@ -284,13 +284,13 @@
                     Fügen sie ein neues Event in unsere Databank ein
                 </p>
 
-                <picture-input 
+                <picture-input
                 ref="pictureInput"
-                width="100" 
-                height="100" 
-                margin="16" 
-                accept="image/jpeg,image/png" 
-                size="10" 
+                width="100"
+                height="100"
+                margin="16"
+                accept="image/jpeg,image/png"
+                size="10"
                 button-class="btn"
                 :custom-strings="{
                   upload: '<h1>Bummer!</h1>',
@@ -350,7 +350,7 @@
                     @click="select(event)"
                     v-bind:id="event.iEventId">
                     <span class="mdl-list__item-primary-content">
-                        <img src="images/smartphone.jpg" height="50" width="50">
+                        <img src="images/smartphone.jpg" class="eventSymbol" height="50" width="50">
                         <!--i class="material-icons mdl-list__item-avatar">person</i-->
                         <span>{{ event.sName }}</span>
                         <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
