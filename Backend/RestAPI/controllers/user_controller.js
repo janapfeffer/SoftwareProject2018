@@ -94,15 +94,18 @@ exports.user_login = (req, res, next) => {
     .then(user => {
       if (user.length < 1) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Auth failed u"
         });
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            message: "Auth failed"
+            message: "Auth failed pw"
           });
         }
+          return res.status(200).json({ // not needed with JWT, then it's done later!
+            message: "Auth successful"
+          });
         // if (result) {
         //   const token = jwt.sign(
         //     {
@@ -119,9 +122,9 @@ exports.user_login = (req, res, next) => {
         //     token: token
         //   });
         // }
-        res.status(401).json({
-          message: "Auth failed"
-        });
+        // res.status(401).json({
+        //   message: "Auth failed"
+        // });
       });
     })
     .catch(err => {
