@@ -118,8 +118,8 @@ function getAllEvents(){
                 osDate: apievent.start_date,
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
-                sTicketLink: apievent.ticket_link,
-                oLatLgn: apievent.loc
+                sTicketLink: apievent.ticket_link,  
+                oLatLgn: apievent.address.loc
             };
         });
         console.log(aAllEvents);
