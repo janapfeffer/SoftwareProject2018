@@ -61,50 +61,88 @@ var oEvent = function(oEvent){
 };
 
 // this array should be retrieved from the database, maybe according to location chosen and/or the filter options
-var aTestEvents = [
-    new oEvent({
-       iEventId: 3,
-       sName: "Kultursonntag im Museum für moderne Kunst",
-       sDescription: "Gemälde, Figuren und Performances. Dies und vieles mehr erwartet Sie und Ihre Familie. Eintritt: 5€.",
-       sAdress: "C2 20, 68159 Mannheim",
-       oLatLgn: {
-        "lat": 49.4871,
-        "lng": 8.46343
-      }
+// var aTestEvents = [
+//     new oEvent({
+//        iEventId: 3,
+//        sName: "Kultursonntag im Museum für moderne Kunst",
+//        sDescription: "Gemälde, Figuren und Performances. Dies und vieles mehr erwartet Sie und Ihre Familie. Eintritt: 5€.",
+//        sAdress: "C2 20, 68159 Mannheim",
+//        oLatLgn: {
+//         "lat": 49.4871,
+//         "lng": 8.46343
+//       }
 
-    }),
-    new oEvent({
-        iEventId: 2,
-        sName: "Elektro Party",
-        sDescription:"Lust auf moderne Elektromusik und ein stilvolles Ambiente? Kostenlos vorbeischauen!.",
-        sAdress: "Berliner Straße 19a, 68159 Mannheim",
-        oLatLgn: {
-            "lat": 49.48712,
-            "lng": 8.47826
-          }
-    }),
-    oTestEvent1 = new oEvent({
-        iEventId: 1,
-        sName: "Autoparty",
-        sDescription: "Beschleunigen und co",
-        sAdress: "Mannheim Paradeplatz",
-        oLatLgn:{
-            "lat": 49.48672,
-            "lng": 8.46641
-          },
-        faved: true
-    })
-];
+//     }),
+//     new oEvent({
+//         iEventId: 2,
+//         sName: "Elektro Party",
+//         sDescription:"Lust auf moderne Elektromusik und ein stilvolles Ambiente? Kostenlos vorbeischauen!.",
+//         sAdress: "Berliner Straße 19a, 68159 Mannheim",
+//         oLatLgn: {
+//             "lat": 49.48712,
+//             "lng": 8.47826
+//           }
+//     }),
+//     oTestEvent1 = new oEvent({
+//         iEventId: 1,
+//         sName: "Autoparty",
+//         sDescription: "Beschleunigen und co",
+//         sAdress: "Mannheim Paradeplatz",
+//         oLatLgn:{
+//             "lat": 49.48672,
+//             "lng": 8.46641
+//           },
+//         faved: true
+//     })
+// ];
 
-aTestEvents = aTestEvents.concat(aJsonTestData);
-checkDuplicatePositions(aTestEvents);
+// aTestEvents = aTestEvents.concat(aJsonTestData);
+var aAllEvents = [];
+// aAllEvents = 
+checkDuplicatePositions(aAllEvents);
 
+function getAllEvents(){
+    var AUTOCOMPLETION_URL = 'http://localhost:3000/events';
+    var ajaxRequest = new XMLHttpRequest();
+
+    
+    var onSuccess = function onSuccess() {
+
+        var apievents = this.response.oEvents;
+        aAllEvents = apievents.map(apievent => {
+            return{
+                iEventId: apievent._id,
+                sName: apievent.event_name,
+                sDescription: apievent.description,
+                sAdress: apievent.address,
+                osDate: apievent.start_date,
+                oEndDate: apievent.end_date,
+                sEventLink: apievent.event_link,
+                sTicketLink: apievent.ticket_link,  
+                oLatLgn: apievent.address.loc
+            };
+        });
+        console.log(aAllEvents);
+
+    };
+
+    var onFailed = function onFailed() {
+         alert('Ooops!');
+    };
+    // Attach the event listeners to the XMLHttpRequest object
+    ajaxRequest.addEventListener("load", onSuccess);
+    ajaxRequest.addEventListener("error", onFailed);
+    ajaxRequest.responseType = "json";
+
+    ajaxRequest.open('GET', AUTOCOMPLETION_URL);
+    ajaxRequest.send();
+}
 
 //Vue fuer die Event Tabelle fertig
 var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
-        allEvents: aTestEvents,
+        allEvents: aAllEvents,
         selected: "", //id of selected event (to see more info)
         mapBounds: {ga: 0, ha: 0, ka: 0, ja: 0},
         sQuery: ""
@@ -156,9 +194,13 @@ var oEventTableVue = new Vue({
             });
             this.allEvents = aFilterdEvents;
         }
-
-
     }
+    // ,
+    // mounted: function() {
+    //   axios
+    //   .get('http://localhost:3000/events')
+    //   .then(response => (this.allEvents = response))
+    // }
 });
 
 
