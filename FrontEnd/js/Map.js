@@ -228,9 +228,8 @@ function setCenter(sQuery) {
     );
 }
 
-function setMarker(oLatLgn, sName, oData){
-        var marker = new H.map.Marker(oLatLgn);
-        marker.label = sName;
+function setMarker(oData){
+        var marker = new H.map.Marker(oData.oLatLgn);
         marker.data = oData;
 
         map.addObject(marker);
@@ -247,9 +246,8 @@ function setMarker(oLatLgn, sName, oData){
             oEventTableVue.selected = evt.target.data.iEventId;
         }, false);
         marker.addEventListener('pointerenter', function (evt) {
-            openBubble(evt.target.getPosition(), evt.target.label);
+            openBubble(evt.target.getPosition(), evt.target.data);
             // document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({block: "end", behavior: "smooth"});
-            oEventTableVue.selected = evt.target.data.iEventId;
         }, false);
         marker.addEventListener('pointerleave', function (evt) {
              closeBubble(evt.target.getPosition());
@@ -261,8 +259,8 @@ function setMarker(oLatLgn, sName, oData){
 function setMarkers(aEvents){
     aEvents.forEach((oEvent, index) => {
         if(oEvent.oLatLgn != undefined){
-            var oData = {index: index, iEventId: oEvent.iEventId};
-            oEvent.marker = setMarker(oEvent.oLatLgn, oEvent.sName + '</br>' + oEvent.sDate, oData);
+            // var oData = {index: index, iEventId: oEvent.iEventId};
+            oEvent.marker = setMarker(oEvent);
         }
     })
 }
@@ -316,8 +314,8 @@ var bubble; // Hold a reference to any infobubble opened
  * @param  {H.geo.Point} position     The location on the map.
  * @param  {String} text              The contents of the infobubble.
  */
-function openBubble(position, text) {
-    var myHTMLcontent = "<div class=\infoBubble\> <div class=\ibPicture\><div><div class=\ibText\><div class=\ibTime><div><div class=\ibPlace\><div>"  + text + "</div>";
+function openBubble(position, oData) {
+    var myHTMLcontent = "<div class=\infoBubble\><div class=\ibPicture\><img src='images/smartphone.jpg' height='50' width='50'> <div><div class=\ibText\><div class=\ibTime><div><div class=\ibPlace\><div>"  + oData.sName + "</div>";
 
     if (!bubble) {
         bubble = new H.ui.InfoBubble(

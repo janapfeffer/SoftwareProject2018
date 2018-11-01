@@ -106,7 +106,8 @@ var oEventTableVue = new Vue({
     data: {
         allEvents: aTestEvents,
         selected: "", //id of selected event (to see more info)
-        mapBounds: {ga: 0, ha: 0, ka: 0, ja: 0}
+        mapBounds: {ga: 0, ha: 0, ka: 0, ja: 0},
+        sQuery: ""
     },
     computed: {
         filteredList: function(){
@@ -132,7 +133,6 @@ var oEventTableVue = new Vue({
             // but databinding works also if event hasnt property faved set in the beginning
             // console.log(target.faved);
         },
-
         // click on event in list to see more details
         select: function(target){
           // only data with specific Ids can be selected
@@ -141,8 +141,21 @@ var oEventTableVue = new Vue({
           }
 
           // map.setCenter(target.marker.getPosition(), true);
-          openBubble(target.marker.getPosition(), target.marker.label);
+          openBubble(target.marker.getPosition(), target.marker.data);
         },
+        searchEvent: function(){
+            if(sQuery === "" || sQuery === undefined){
+                this.allEvents = aTestEvents;
+                return;
+            }
+            var aFilterdEvents;
+            this.allEvents.forEach(function(oEvent){
+                if(oEvent.sName.includes(sQuery)){
+                    aFilterdEvents.push(oEvent);
+                }
+            });
+            this.allEvents = aFilterdEvents;
+        }
 
 
     }

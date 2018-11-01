@@ -267,12 +267,12 @@ div#aside, div#map{
     /* transition: transform 0.1s;
     transform: scale(1.05); */
     transition: background-color 0.1s, box-shadow 0.2s;
-    background-color: #fbfbfb;
-    /* box-shadow: 1px 1px 16px #6d6d6d2e; */
+    background-color: #36506726;
+    box-shadow: 1px 3px 4px 4px #6d6d6d2e;
 }
 
 #eventTable li.selected:hover {
-    background-color: #fbfbfb;
+    background-color: #36506726;
 }
 
 #eventTable li.mdl-list__item--three-line.selected .mdl-list__item-primary-content {
@@ -409,7 +409,7 @@ div#aside, div#map{
 
 /* Infobubble Style + Überschreibungen */
 .infoBubble {
-background-color:#f1f1f1;
+    background-color: #36506726;
     width: 250px;
     height: 150px;
     border: 1px solid black;
@@ -417,7 +417,10 @@ background-color:#f1f1f1;
     color: black;
 }
 
-.
+.ibPicture{
+  width: 50px;
+  height: 50px;
+}
 
 .H_ib_tail {
   display: none
