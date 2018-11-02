@@ -102,8 +102,8 @@ exports.user_login = (req, res, next) => {
           return res.status(401).json({
             message: "Auth failed"
           });
-        } else {
-          return res.status(200).json({ // not needed with JWT, then it's done later!
+        } else { // not needed with JWT, then it's done later!
+          return res.status(200).json({
             message: "Auth successful"
           });
         }
@@ -151,4 +151,8 @@ exports.user_delete = (req, res, next) => {
         error: err
       });
     });
+};
+
+exports.user_get_saved_events = (req, res, next) => {
+  //"http://localhost:3000/user/" + user_id + "/events"
 };

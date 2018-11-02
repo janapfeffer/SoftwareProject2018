@@ -42,5 +42,6 @@ router.post("/", upload.single('event_picture'), EventController.create_event);
 router.get("/:eventId", EventController.get_event);
 router.patch("/:eventId",  EventController.update_event);
 router.delete("/:eventId", EventController.delete_event);
+router.post("/addcomment", EventController.add_comment);
 
 module.exports = router;

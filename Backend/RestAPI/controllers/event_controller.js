@@ -124,8 +124,34 @@ exports.create_event = (req, res, next) => {
 };
 
 exports.add_comment = (req, res, next) => {
+  OEvent.findById(req.body.eventId, "comments", function(err, event) {
+    OEvent.updateOne(
+      { _id: req.body.eventId },
+      { $push: { comments: {
+          username: req.body.userId,
+          comment: req.body.comment }
+        }
+      },
+      { upsert: true})
+      .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Comment saved",
+        request: {
+          type: "GET",
+          url: "http://localhost:3000/events"
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+  });
   //add a comment to one event
-  // ähnlich wie save event 
+  // ähnlich wie save event
   // req.body.comment
   // req.body.username
 };
