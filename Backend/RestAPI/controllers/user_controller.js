@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user_model");
+const OEvent = require("../models/event_model");
 
 exports.user_signup = (req, res, next) => {
   //check whether an account with that email already exists
@@ -155,6 +156,60 @@ exports.user_delete = (req, res, next) => {
 
 exports.get_saved_events = (req, res, next) => {
   //"http://localhost:3000/user/" + user_id + "/events"
+  User.findById(req.params.userId, "saved_events", function(err, event) {
+  })
+  .exec()
+  .then(user => {
+      OEvent.find({
+        _id: {
+          $in: user.saved_events
+        }
+      })
+      .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments")
+      .populate("event_type")
+      .exec()
+      .then(events => {
+        res.status(200).json({
+          count: user.saved_events.length,
+          saved_events: events.map(event => {
+              return {
+                  _id: event._id,
+                  event_name: event.event_name,
+                  author: event.author,
+                  description: event.description,
+                  address: event.address,
+                  start_date: event.start_date,
+                  end_date: event.end_date,
+                  event_picture: event.event_picture,
+                  event_link: event.event_link,
+                  ticket_link: event.ticket_link,
+                  comments: event.comments,
+                  event_types: event.event_types
+              };
+          })
+
+          // .then(events => {
+          //   return {
+          //     "hi"
+          //   }
+          // })
+
+          // saved_events: user.saved_events.map(event => {
+          //   return {
+          //     _id: event._id
+          //
+          //   }
+        });
+      })
+
+    })
+    .catch(err => {
+        console.error("Error: ", err.stack);
+        res.status(500).json({
+            error: err
+        })
+    });
+
 };
 
 //todo find comment first before trying to delete?
