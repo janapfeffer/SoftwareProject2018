@@ -5,14 +5,10 @@ const oEventSchema = mongoose.Schema({
     event_name: { type: String, required: true },
     description: { type: String, required: true },
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
-
-    address: {
-        freeformAddress: { type: String, required: false },
-        loc: { lng: {type: Number, required: false} ,lat: {type: Number, required: false}},
-    },
-
+    address: { type: String, required: false },
+    lng: { type: Number, required: false },
+    lat: { type: Number, required: false },
     event_picture: { type: String, required: false },
-    instagram_hashtag: { type: String, required: false },
     verification_status: { type: Boolean, default: false },
     start_date: { type: Date, required: true },
     end_date: { type: Date, required: false },
