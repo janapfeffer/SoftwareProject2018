@@ -7,7 +7,7 @@ const EventController = require("../controllers/event_controller");
 // storage strategy: allows to adjust how files get stored
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, "C:/Users/D067609/Documents/HS-LU/5. Semester/SE2/Eventfinder/SoftwareProject2018/Backend/event_images"); //muss relativ gemacht werden
+      cb(null, "event_images/"); //muss relativ gemacht werden
     },
     // define name under which pic is stored
     filename: function(req, file, cb) {
