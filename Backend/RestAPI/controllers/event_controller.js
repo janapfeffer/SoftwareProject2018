@@ -235,6 +235,7 @@ exports.update_event = (req, res, next) => {
 
 
 //todo: only delete owned events -> if no event is found, it doesn't belong to user/doesn't exist
+//should not be an issue though if the frontend calls it correctly
 exports.delete_event = (req, res, next) => {
   OEvent.remove({ _id: req.params.eventId, author: req.body.user_id })
     .exec()
@@ -253,12 +254,17 @@ exports.delete_event = (req, res, next) => {
 
 
 exports.rate_event = (req, res, next) => {
-  //add rating and number_of_ratings to event model. update rating to avg
-  //add rated_events to user and save which events he has voted for -> only 1 voting possible
+  //todo
 };
+
+exports.rerate_event = (req, res, next) => {
+  //todo
+};
+
 
 exports.get_filtered_events = (req, res, next) => {
   //get events with filters applied
+  //time range filter and event_types filter
 };
 
 exports.report_event = (req, res, next) => {

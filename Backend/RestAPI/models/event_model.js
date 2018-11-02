@@ -26,6 +26,13 @@ const oEventSchema = mongoose.Schema({
         // should we replace this with the direct username instead of a reference?
         comment: { type: String, required: true }
     }]
+    // array of ratings -> get, whether a user has already voted
+    //calculate average. IMPORTANT if we want a user to be able to change their rating
+    
+    // ratings: [{
+    //   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
+    //   rating: {type: Number, required: true}
+    // }],
 });
 
 module.exports = mongoose.model('OEvent', oEventSchema);
