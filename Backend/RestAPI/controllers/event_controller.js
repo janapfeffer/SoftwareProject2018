@@ -123,6 +123,7 @@ exports.create_event = (req, res, next) => {
         });
 };
 
+//todo: find comment first before deleting?
 exports.delete_comment = (req, res, next) => {
   console.log(req.body.eventId);
   OEvent.findById(req.body.eventId, "comments", function(err, event) {

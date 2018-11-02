@@ -157,6 +157,31 @@ exports.get_saved_events = (req, res, next) => {
   //"http://localhost:3000/user/" + user_id + "/events"
 };
 
+//todo find comment first before trying to delete?
 exports.delete_saved_event = (req, res, next) => {
-  //use $pull
+  const event_id = req.body.eventId;
+  const user_id = req.body.userId;
+  User.findById(user_id, "saved_events", function (err, user) {
+      User.updateOne(
+        { _id: user_id},
+        { $pull: { saved_events: event_id }},
+        { upsert: true}
+      )
+      .exec()
+      .then(result => {
+        res.status(200).json({
+          message: "Event unsaved",
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/user/" + user_id + "/events"
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+    });
 };
