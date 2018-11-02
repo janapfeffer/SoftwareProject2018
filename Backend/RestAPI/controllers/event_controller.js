@@ -123,6 +123,33 @@ exports.create_event = (req, res, next) => {
         });
 };
 
+//todo: find comment first before deleting?
+exports.delete_comment = (req, res, next) => {
+  console.log(req.body.eventId);
+  OEvent.findById(req.body.eventId, "comments", function(err, event) {
+    OEvent.updateOne(
+      { _id: req.body.eventId },
+      { $pull: { comments: {_id: req.body.commentId}} },
+      { upsert: true})
+      .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Comment deleted",
+        request: {
+          type: "GET",
+          url: "http://localhost:3000/events"
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+  });
+};
+
 exports.add_comment = (req, res, next) => {
   OEvent.findById(req.body.eventId, "comments", function(err, event) {
     OEvent.updateOne(
@@ -150,10 +177,6 @@ exports.add_comment = (req, res, next) => {
       });
     });
   });
-  //add a comment to one event
-  // ähnlich wie save event
-  // req.body.comment
-  // req.body.username
 };
 
 exports.get_event = (req, res, next) => {
