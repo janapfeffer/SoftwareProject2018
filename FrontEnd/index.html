@@ -102,16 +102,17 @@
             <h2>Favoriten: </h2>
             <div id="newDate" class="sidecard">
                 <p>
-                    Hier sind ihre Favoriten aufgelistet
+                    Hier sind ihre Favoriten aufgelistet 
+
                 </p>
 
                 <!-- Vorübergehende Tabelle, muss erneuert werden und dann Favoriten anzeigen-->
                 <!-- Three Line List with secondary info and action -->
                 <!-- <style>
-                    .demo-list-three {
-                        width: 650px;
-                    }
-                </style> -->
+                .demo-list-three {
+                    width: 650px;
+                }
+            </style> -->
                 <ul class="demo-list-three mdl-list">
                     <li class="mdl-list__item mdl-list__item--three-line">
                         <span class="mdl-list__item-primary-content">
@@ -206,7 +207,7 @@
         <!-- Register Card-->
         <!-- Registiereungs Daten werden immer mit "r." verarbeitet, zum Beispiel "rPassword"/"rUserName"-->
         <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-            <h2>Registrieren sie sich </h2>
+            <h2>Registrierung </h2>
             <div id="newRegister" class="sidecard">
                 <p>
                     Registrieren sie sich jetzt!
@@ -241,6 +242,38 @@
 
         </div>
         <!-- Register Card End-->
+
+        <!-- Event genauer anzeigen-->
+        <div id="newEventGenauerAnzeigenWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
+            <h2>Event genauer anzeigen </h2>
+
+            <div id="newEventGenauerAnzeigen" class="sidecard">
+                <p style="font: bold 20px Bahnschrift">{{draft.sName}}</p>
+                <p>Eventbeschreibung: {{draft.sDescription}} </p>
+                <p>Eventadresse: {{draft.sAdress}}</p>
+                <p>Datum: {{draft.sDate}}</p>
+                <p>Uhrzeit: {{draft.time}} </p>
+                <p>Event ID: {{draft.iEventId}} </p>
+
+               <p style="font: bold 12px Arial">Gib hier deinen Senf dazu</p>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="sample1">
+                    <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                </div>
+            </form>
+            <div class="buttons">
+                <button style=" background-color: darkblue; color:ghostwhite" class="mdl-button mdl-js-button mdl-button--raised"
+                        @click="kommentieren"> Kommentieren </button>
+
+                <button style="color:darkblue; font-family:Bahnschrift" class="mdl-button mdl-js-button mdl-button--raised"
+                        @click="submit">
+                    Schließen
+                </button>
+            </div>
+            </div>
+        </div>
+        <!-- anzeiegen Card End-->
         <!-- Login Card-->
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
@@ -254,14 +287,9 @@
                     <label class="mdl-textfield__label" for="sample1">E-Mail</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
                     <input class="mdl-textfield__input" type="password" v-model="draft.sPassword">
                     <label class="mdl-textfield__label" for="schools">Passwort</label>
                 </div>
-
-
-
-
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
                             @click='BobMarleyCard'>
@@ -273,7 +301,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
         <!-- Login Card End-->
         <!-- Karte für Event, Alles rechts neben der Karte-->
@@ -283,22 +310,19 @@
                 <p>
                     Fügen sie ein neues Event in unsere Databank ein
                 </p>
-
-                <picture-input
-                ref="pictureInput"
-                width="100"
-                height="100"
-                margin="16"
-                accept="image/jpeg,image/png"
-                size="10"
-                button-class="btn"
-                :custom-strings="{
-                  upload: '<h1>Bummer!</h1>',
-                  drag: 'Laden sie ein Eventbild hoch'
-                }"
-                @change="onChange">
-              </picture-input>
-
+                <picture-input ref="pictureInput"
+                               width="100"
+                               height="100"
+                               margin="16"
+                               accept="image/jpeg,image/png"
+                               size="10"
+                               button-class="btn"
+                               :custom-strings="{
+                               upload: '<h1>Bummer!</h1>' ,
+                               drag: 'Laden sie ein Eventbild hoch'
+                               }"
+                               @change="onChange">
+                </picture-input>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
                     <label class="mdl-textfield__label" for="sample1">Titel</label>
@@ -322,10 +346,8 @@
                                     :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
-
                 <!--input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file"  @change="onFileSelected"-->
                 <!--label for="imageUpload">Laden Sie Ihr Eventbild hoch!</label-->
-
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
                             @click="formdraft">
@@ -338,11 +360,10 @@
                 </div>
             </div>
         </div>
-
         <div class="sidecardWrapper">
             <h2> Events</h2>
             <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
-            v-model="sQuery" @keyup.enter="searchEvent"><input-->
+        v-model="sQuery" @keyup.enter="searchEvent"><input-->
             <ul id="eventTable" class="sidecard demo-list-three mdl-list">
                 <li v-for="event in filteredList"
                     class="mdl-list__item mdl-list__item--three-line"
@@ -352,20 +373,20 @@
                     <span class="mdl-list__item-primary-content">
                         <img src="images/smartphone.jpg" class="eventSymbol" height="50" width="50">
                         <!--i class="material-icons mdl-list__item-avatar">person</i-->
-                        <span>{{ event.sName }}</span>
-                        <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
-                        <span class="mdl-list__item-text-body">{{ event.sAdress }}</span>
-                        <span class="mdl-list__item-text-body">{{ event.sDate }}</span>
+                        <span>{{ event.sName
+                    }}</span>
+                    <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
+                    <span class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+                    <span class="mdl-list__item-text-body">{{ event.sDate }}</span>
 
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <a class="mdl-list__item-secondary-action favstar"
-                          @click.stop="favToggle(event)"
-                        ><i class="material-icons">star</i></a>
+                           @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
                     </span>
-                </li>
-            </ul>
-        </div>
+                    </li>
+                    </ul>
+</div>
     </div>
 
 
