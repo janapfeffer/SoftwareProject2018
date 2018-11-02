@@ -5,179 +5,161 @@ const EventType = require("../models/event_type_model");
 
 //todo: add additional needed fields
 exports.get_all_events = (req, res, next) => {
-    OEvent.find() //enter: {verification_status: true} into brackets for only verified events
-        .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments loc")
-        .populate("event_types")
-        .exec()
-        .then(elements => {
-            res.status(200).json({
-                count: elements.length,
-                oEvents: elements.map(element => {
-                    return {
-                        _id: element._id,
-                        event_name: element.event_name,
-                        author: element.author,
-                        description: element.description,
-                        address: element.address,
-                        start_date: element.start_date,
-                        end_date: element.end_date,
-                        event_picture: element.event_picture,
-                        event_link: element.event_link,
-                        ticket_link: element.ticket_link,
-                        comments: element.comments,
-                        event_types: element.event_types,
-                        request: {
-                            type: "GET",
-                            uri: "http://localhost:3000/events/" + element._id
-                        }
-                    };
-                })
-            });
+  OEvent.find() //enter: {verification_status: true} into brackets for only verified events
+    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng")
+    .populate("event_types")
+    .populate("comments")
+    .exec()
+    .then(elements => {
+      res.status(200).json({
+        count: elements.length,
+        oEvents: elements.map(element => {
+          return {
+            _id: element._id,
+            event_name: element.event_name,
+            author: element.author,
+            description: element.description,
+            address: element.address,
+            lng: element.lng,
+            lat: element.lat,
+            start_date: element.start_date,
+            end_date: element.end_date,
+            event_picture: element.event_picture,
+            event_link: element.event_link,
+            ticket_link: element.ticket_link,
+            comments: element.comments,
+            event_types: element.event_types,
+            request: {
+              type: "GET",
+              uri: "http://localhost:3000/events/" + element._id
+            }
+          };
         })
-        .catch(err => {
-            console.error("Error: ", err.stack);
-            res.status(500).json({
-                error: err
-            })
-        });
+      });
+    })
+    .catch(err => {
+      console.error("Error: ", err.stack);
+      res.status(500).json({
+        error: err
+      })
+    });
 }
 
 
 exports.create_event = (req, res, next) => {
-  //var pic_filepath = "";
-   /*  EventType.find({
-        _id: {
-            $in: req.body.eventTypeIds
-        }
-    })
-    .exec()
-    .then(eventType => {
-        if (!eventType) {
-            return res.status(404).json({
-                message: "Wrong event type given"
-            }).then (function() {
-              if (typeof req.file.path === "undefined") {
-                pic_filepath = req.file.path;
-              }
-            });
-        }
-    });
- */
-    const oEvent = new OEvent({
-        _id: new mongoose.Types.ObjectId(),
-        author: req.body.userId,
-        event_name: req.body.event_name,
-        description: req.body.description,
-       /*  address: {
-            freeformAddress: req.body.address.freeformAddress,
-            loc: {
-              lat: req.body.address.loc.lat,
-              lng: req.body.address.loc.lng
-            }
-        }, */
-        start_date: req.body.start_date,
-        end_date: req.body.end_date,
-        event_link: req.body.event_link,
-        ticket_link: req.body.ticket_link,
-        event_types: req.body.eventTypeIds,
-        event_picture: req.file.path
-    });
+  const oEvent = new OEvent({
+    _id: new mongoose.Types.ObjectId(),
+    author: req.body.userId,
+    event_name: req.body.event_name,
+    description: req.body.description,
+    address: req.body.address,
+    lat: req.body.lat,
+    lng: req.body.lng,
+    start_date: req.body.start_date,
+    end_date: req.body.end_date,
+    event_link: req.body.event_link,
+    ticket_link: req.body.ticket_link,
+    event_types: req.body.event_types,
+    event_picture: req.file.path
+  });
 
-    oEvent
-        .save()
-        .then(result => {
-            res.status(201).json({
-                message: "Created new event successfully",
-                created_event: {
-                    _id : result._id,
-                    event_name: result.event_name,
-                    description: result.description,
-                    author: result.author,
-                    /* address: {
-                        freeformAddress: result.address.freeformAddress,
-                        loc: result.address.loc
-                    }, */
-                    start_date: result.start_date,
-                    end_date: result.end_date,
-                    event_picture: result.event_picture,
-                    event_link: result.event_link,
-                    ticket_link: result.ticket_link,
-                    event_types: result.event_types,
-                    request: {
-                        type: "GET",
-                        uri: "http://localhost:3000/events/" + result._id
-                    }
-                }
-            });
-        })
-        .catch(err => {
-            console.error("Error: ", err.stack);
-            res.status(500).json({
-                error: err
-            })
-        });
+  oEvent
+    .save()
+    .then(result => {
+      res.status(201).json({
+        message: "Created new event successfully",
+        created_event: {
+          _id: result._id,
+          event_name: result.event_name,
+          description: result.description,
+          author: result.author,
+          address: result.address,
+          lat: result.lat,
+          lng: result.lng,
+          start_date: result.start_date,
+          end_date: result.end_date,
+          event_picture: result.event_picture,
+          event_link: result.event_link,
+          ticket_link: result.ticket_link,
+          event_types: result.event_types,
+          request: {
+            type: "GET",
+            uri: "http://localhost:3000/events/" + result._id
+          }
+        }
+      });
+    })
+    .catch(err => {
+      console.error("Error: ", err.stack);
+      res.status(500).json({
+        error: err
+      })
+    });
 };
 
 //todo: find comment first before deleting?
 exports.delete_comment = (req, res, next) => {
   console.log(req.body.eventId);
-  OEvent.findById(req.body.eventId, "comments", function(err, event) {
+  OEvent.findById(req.body.eventId, "comments", function (err, event) {
     OEvent.updateOne(
       { _id: req.body.eventId },
-      { $pull: { comments: {_id: req.body.commentId}} },
-      { upsert: true})
+      { $pull: { comments: { _id: req.body.commentId } } },
+      { upsert: true })
       .exec()
-    .then(result => {
-      res.status(200).json({
-        message: "Comment deleted",
-        request: {
-          type: "GET",
-          url: "http://localhost:3000/events"
-        }
+      .then(result => {
+        res.status(200).json({
+          message: "Comment deleted",
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/events"
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
       });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
   });
 };
 
 exports.add_comment = (req, res, next) => {
-  OEvent.findById(req.body.eventId, "comments", function(err, event) {
+  OEvent.findById(req.body.eventId, "comments", function (err, event) {
     OEvent.updateOne(
       { _id: req.body.eventId },
-      { $push: { comments: {
-          username: req.body.userId,
-          comment: req.body.comment }
+      {
+        $push: {
+          comments: {
+            username: req.body.userId,
+            comment: req.body.comment
+          }
         }
       },
-      { upsert: true})
+      { upsert: true })
       .exec()
-    .then(result => {
-      res.status(200).json({
-        message: "Comment saved",
-        request: {
-          type: "GET",
-          url: "http://localhost:3000/events"
-        }
+      .then(result => {
+        res.status(200).json({
+          message: "Comment saved",
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/events"
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
       });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
   });
 };
 
 exports.get_event = (req, res, next) => {
   const id = req.params.eventId;
   OEvent.findById(id)
-  .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments")
+    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments")
     .exec()
     .then(doc => {
       console.log("From database", doc);

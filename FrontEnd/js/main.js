@@ -77,12 +77,12 @@ function getAllEvents() {
                 iEventId: apievent._id,
                 sName: apievent.event_name,
                 sDescription: apievent.description,
-                sAdress: apievent.address.freeformAddress,
+                sAdress: apievent.address,
                 osDate: apievent.start_date,
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
                 sTicketLink: apievent.ticket_link,
-                oLatLgn: apievent.address.loc,
+                oLatLgn: {lat: apievent.lat, lng: apievent.lng},
                 oImage: apievent.event_picture
             };
         });
