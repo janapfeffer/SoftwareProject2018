@@ -153,6 +153,10 @@ exports.user_delete = (req, res, next) => {
     });
 };
 
-exports.user_get_saved_events = (req, res, next) => {
+exports.get_saved_events = (req, res, next) => {
   //"http://localhost:3000/user/" + user_id + "/events"
+};
+
+exports.delete_saved_event = (req, res, next) => {
+  //use $pull
 };
