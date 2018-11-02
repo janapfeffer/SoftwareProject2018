@@ -7,8 +7,8 @@ const oEventSchema = mongoose.Schema({
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
 
     address: {
-        freeformAddress: { type: String, required: true },
-        loc: { lng: {type: Number, required: true} ,lat: {type: Number, required: true}},
+        freeformAddress: { type: String, required: false },
+        loc: { lng: {type: Number, required: false} ,lat: {type: Number, required: false}},
     },
 
     event_picture: { type: String, required: false },

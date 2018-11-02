@@ -44,10 +44,8 @@ exports.get_all_events = (req, res, next) => {
 
 
 exports.create_event = (req, res, next) => {
-    console.log("IN Methode");
-
-  var pic_filepath = "";
-    EventType.find({
+  //var pic_filepath = "";
+   /*  EventType.find({
         _id: {
             $in: req.body.eventTypeIds
         }
@@ -64,28 +62,25 @@ exports.create_event = (req, res, next) => {
             });
         }
     });
-
-
-    console.log(req.body);
-
+ */
     const oEvent = new OEvent({
         _id: new mongoose.Types.ObjectId(),
         author: req.body.userId,
         event_name: req.body.event_name,
         description: req.body.description,
-        address: {
+       /*  address: {
             freeformAddress: req.body.address.freeformAddress,
             loc: {
               lat: req.body.address.loc.lat,
               lng: req.body.address.loc.lng
             }
-        },
+        }, */
         start_date: req.body.start_date,
         end_date: req.body.end_date,
         event_link: req.body.event_link,
         ticket_link: req.body.ticket_link,
         event_types: req.body.eventTypeIds,
-        event_picture: pic_filepath
+        event_picture: req.file.path
     });
 
     oEvent
@@ -98,10 +93,10 @@ exports.create_event = (req, res, next) => {
                     event_name: result.event_name,
                     description: result.description,
                     author: result.author,
-                    address: {
+                    /* address: {
                         freeformAddress: result.address.freeformAddress,
                         loc: result.address.loc
-                    },
+                    }, */
                     start_date: result.start_date,
                     end_date: result.end_date,
                     event_picture: result.event_picture,

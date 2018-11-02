@@ -7,12 +7,12 @@ const EventController = require("../controllers/event_controller");
 // storage strategy: allows to adjust how files get stored
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, "event_images/"); //muss relativ gemacht werden
+      cb(null, "event_images/"); 
     },
     // define name under which pic is stored
     filename: function(req, file, cb) {
       //2018-10-25T10:04:01.873Zoriginalname.jpg
-      cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
+      cb(null, new Date().toISOString().replace(/:/g, '-') + "_" + file.originalname);
     }
   });
 

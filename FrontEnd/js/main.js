@@ -1,4 +1,3 @@
-
 var oEvent = function (oEvent) {
     this.iEventId = oEvent.iEventId;
     this.sName = oEvent.sName;
@@ -260,12 +259,17 @@ var oNewEventVue = new Vue({
                     var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
                     var oLatLgn = { lat: dLat, lng: dLng }
 
-                    //Post Request mit LatLgn senden
-                    var URI = 'http://localhost:3000/events';
-                    var ajaxRequest = new XMLHttpRequest();
+                    const fd = new FormData();
+                    fd.append("event_name", oNewEventVue.draft.sName);
+                    fd.append("description", oNewEventVue.draft.sDescription);
+                    /* fd.append("address", JSON.stringify({"freeformAddress": oNewEventVue.draft.sAdress, "loc": oLatLgn })); */
+                    fd.append("start_date", oNewEventVue.draft.EDate[0]);
+                    fd.append("end_date", oNewEventVue.draft.EDate[1]);
+                    fd.append("event_types", ["5bd1874824c1783894595b68"]);
+                    fd.append("event_picture", oNewEventVue.draft.oSelectedFile, oNewEventVue.draft.oSelectedFile.name);
+                    // // fd.append('image', oNewEventVue.draft.image, "EventImage");
 
-                    var onSuccess = function onSuccess() {
-
+                    axios.post("http://localhost:3000/events", fd).then(res => {
                         alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
                         oNewEventVue.draft = { // reset vueinternal data to make possible to add new event
@@ -278,38 +282,67 @@ var oNewEventVue = new Vue({
                             EDate: null,
                             status: "draft",
                             iEventId: Math.floor(Math.random() * 99999) + 1,
-
                         }
-                    };
+                    }).catch(function (error) {
+                        console.log(error);
+                    });;
 
-                    var onFailed = function onFailed() {
-                        alert('Event konnt nicht angelegt werden!');
-                    };
-                    // Attach the event listeners to the XMLHttpRequest object
-                    ajaxRequest.addEventListener("load", onSuccess);
-                    ajaxRequest.addEventListener("error", onFailed);
-                    ajaxRequest.responseType = "json";
-                    var body = {
-                        event_name: oNewEventVue.draft.sName,
-                        description: oNewEventVue.draft.sDescription,
-                        address: {
-                            freeformAddress: oNewEventVue.draft.sAdress,
-                            loc: oLatLgn
-                        },
-                        start_date: oNewEventVue.draft.EDate[0],
-                        end_date: oNewEventVue.draft.EDate[1],
-                        event_types: ["5bd1874824c1783894595b68"],
-                        event_picture: oNewEventVue.draft.image
-                    };
-                    var stringBody = JSON.stringify(body);
 
-                    ajaxRequest.open('POST', URI);
-                    ajaxRequest.setRequestHeader('Content-Type', 'application/json');
-                    ajaxRequest.send(stringBody);
+
+                    // //Post Request mit LatLgn senden
+                    // var URI = 'http://localhost:3000/events';
+                    // var ajaxRequest = new XMLHttpRequest();
+
+                    // var onSuccess = function onSuccess() {
+
+                    //     alert("Req angekommen");
+                    //     oNewEventVue.draft.status = "unsend";
+                    //     oNewEventVue.draft = { // reset vueinternal data to make possible to add new event
+                    //         sName: "",
+                    //         sDescription: "",
+                    //         sAdress: "",
+                    //         date: "",
+                    //         time: "",
+                    //         latlng: {},
+                    //         EDate: null,
+                    //         status: "draft",
+                    //         iEventId: Math.floor(Math.random() * 99999) + 1,
+
+                    //     }
+                    // };
+
+                    // var onFailed = function onFailed() {
+                    //     alert('Event konnt nicht angelegt werden!');
+                    // };
+                    // // Attach the event listeners to the XMLHttpRequest object
+                    // ajaxRequest.addEventListener("load", onSuccess);
+                    // ajaxRequest.addEventListener("error", onFailed);
+                    // ajaxRequest.responseType = "json";
+
+                    // const fd = new FormData();
+                    // fd.append('image', oNewEventVue.draft.image, "EventImage");
+
+                    // var body = {
+                    //     event_name: oNewEventVue.draft.sName,
+                    //     description: oNewEventVue.draft.sDescription,
+                    //     address: {
+                    //         freeformAddress: oNewEventVue.draft.sAdress,
+                    //         loc: oLatLgn
+                    //     },
+                    //     start_date: oNewEventVue.draft.EDate[0],
+                    //     end_date: oNewEventVue.draft.EDate[1],
+                    //     event_types: ["5bd1874824c1783894595b68"],
+                    //     event_picture: oNewEventVue.draft.image
+                    // };
+                    // var stringBody = JSON.stringify(body);
+
+                    // ajaxRequest.open('POST', URI);
+                    // ajaxRequest.setRequestHeader('Content-Type', 'application/json');
+                    // ajaxRequest.send(stringBody);
 
                 },
                 onError = function (error) {
-                    alert('Ooops!');
+                    alert('Geodaten nicht bekommen!');
                 }
             )
 
@@ -329,6 +362,10 @@ var oNewEventVue = new Vue({
             if (image) {
                 console.log('Picture loaded.')
                 this.draft.image = image
+
+
+
+
             } else {
                 console.log('FileReader API not supported: use the <form>, Luke!')
             }
@@ -400,7 +437,7 @@ var oEventGenauerAnzeigenVue = new Vue({
     data: {
         cardShown: false,
         draft: {
-            sName:  "nicht geupdated manno",
+            sName: "nicht geupdated manno",
             sDescription: "",
             sAdress: "",
             sDate: "",
@@ -411,15 +448,15 @@ var oEventGenauerAnzeigenVue = new Vue({
             iEventId: null,
             oSelectedFile: null,
             image: null,
-           
+
         },
         value7: ''
     },
     methods: {
-   
+
         submit: function () {
             this.cardShown = !this.cardShown;
-            
+
         },
         kommentieren: function () {
             alert("ich versuche es");
@@ -432,7 +469,7 @@ var oEventGenauerAnzeigenVue = new Vue({
             this.draft.sDate = ausgewaehlt.sDate;
             this.draft.time = ausgewaehlt.time;
             this.iEventId = ausgewaehlt.iEventId;
-           
+
 
         },
 
