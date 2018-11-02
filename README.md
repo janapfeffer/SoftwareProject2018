@@ -7,7 +7,7 @@
 	- vorm push erst fetch+merge/pull um konflikten vorzuwirken
 	- nach pull + konflikte beheben: push (alle änderungen, die committed wurden, werden 
 	  auf github veröffentlicht und die anderen teammitglieder können darauf zugreifen)
-Bei Problemen: an Jana wenden oder googlen
+
 Falls mal irgendwas ganz komisch überschrieben wird: 
  keine Panik, man kann alte Versionen wieder herstellen
  jemand anderes hat im zweifelsfall lokal eine ältere version gespeichert
