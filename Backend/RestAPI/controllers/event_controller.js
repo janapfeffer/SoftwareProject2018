@@ -5,8 +5,7 @@ const EventType = require("../models/event_type_model");
 
 //todo: add additional needed fields
 exports.get_all_events = (req, res, next) => {
-  //todo only get verified events
-    OEvent.find()
+    OEvent.find() //enter: {verification_status: true} into brackets for only verified events
         .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments loc")
         .populate("event_types")
         .exec()
@@ -43,7 +42,7 @@ exports.get_all_events = (req, res, next) => {
         });
 }
 
-//Image muss noch hinzugefügt werden
+
 exports.create_event = (req, res, next) => {
     console.log("IN Methode");
 
@@ -66,7 +65,7 @@ exports.create_event = (req, res, next) => {
         }
     });
 
-   
+
     console.log(req.body);
 
     const oEvent = new OEvent({
@@ -124,8 +123,60 @@ exports.create_event = (req, res, next) => {
         });
 };
 
+//todo: find comment first before deleting?
+exports.delete_comment = (req, res, next) => {
+  console.log(req.body.eventId);
+  OEvent.findById(req.body.eventId, "comments", function(err, event) {
+    OEvent.updateOne(
+      { _id: req.body.eventId },
+      { $pull: { comments: {_id: req.body.commentId}} },
+      { upsert: true})
+      .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Comment deleted",
+        request: {
+          type: "GET",
+          url: "http://localhost:3000/events"
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+  });
+};
+
 exports.add_comment = (req, res, next) => {
-  //add a comment to one event
+  OEvent.findById(req.body.eventId, "comments", function(err, event) {
+    OEvent.updateOne(
+      { _id: req.body.eventId },
+      { $push: { comments: {
+          username: req.body.userId,
+          comment: req.body.comment }
+        }
+      },
+      { upsert: true})
+      .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Comment saved",
+        request: {
+          type: "GET",
+          url: "http://localhost:3000/events"
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+  });
 };
 
 exports.get_event = (req, res, next) => {
@@ -155,14 +206,6 @@ exports.get_event = (req, res, next) => {
     });
 };
 
-exports.report_event = (req, res, next) => {
-  //report an event
-};
-
-// exports.report_comment = (req, res, next) => {
-//   //report a comment,
-// };
-
 //the parameters in the body have to have the same name as in the database (e.g. event_name)
 //todo: check, whether this works eg for the address
 exports.update_event = (req, res, next) => {
@@ -190,6 +233,24 @@ exports.update_event = (req, res, next) => {
     });
 };
 
+
+//todo: only delete owned events -> if no event is found, it doesn't belong to user/doesn't exist
+exports.delete_event = (req, res, next) => {
+  OEvent.remove({ _id: req.params.eventId, author: req.body.user_id })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Event deleted"
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+};
+
 exports.rate_event = (req, res, next) => {
   //add rating and number_of_ratings to event model. update rating to avg
   //add rated_events to user and save which events he has voted for -> only 1 voting possible
@@ -198,3 +259,11 @@ exports.rate_event = (req, res, next) => {
 exports.get_filtered_events = (req, res, next) => {
   //get events with filters applied
 };
+
+exports.report_event = (req, res, next) => {
+  //report an event
+};
+
+// exports.report_comment = (req, res, next) => {
+//   //report a comment,
+// };

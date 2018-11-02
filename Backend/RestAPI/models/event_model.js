@@ -23,6 +23,7 @@ const oEventSchema = mongoose.Schema({
 
     comments: [{
         username: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
+        // should we replace this with the direct username instead of a reference?
         comment: { type: String, required: true }
     }]
 });

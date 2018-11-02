@@ -143,6 +143,10 @@ var oEventTableVue = new Vue({
             // only data with specific Ids can be selected
             if (target.iEventId != undefined) {
                 this.selected = target.iEventId;
+
+                ausgewaehlt = target;
+                oEventGenauerAnzeigenVue.update();
+                oEventGenauerAnzeigenVue.cardShown = true;
             }
 
             // map.setCenter(target.marker.getPosition(), true);
@@ -391,7 +395,49 @@ var oRegisterVue = new Vue({
 });
 
 //Register Vue End
+var oEventGenauerAnzeigenVue = new Vue({
+    el: "#newEventGenauerAnzeigenWrapper",
+    data: {
+        cardShown: false,
+        draft: {
+            sName:  "nicht geupdated manno",
+            sDescription: "",
+            sAdress: "",
+            sDate: "",
+            time: "",
+            latlng: {},
+            status: "draft",
+            EDate: null,
+            iEventId: null,
+            oSelectedFile: null,
+            image: null,
+           
+        },
+        value7: ''
+    },
+    methods: {
+   
+        submit: function () {
+            this.cardShown = !this.cardShown;
+            
+        },
+        kommentieren: function () {
+            alert("ich versuche es");
 
+        },
+        update: function () {
+            this.draft.sName = ausgewaehlt.sName;
+            this.draft.sDescription = ausgewaehlt.sDescription;
+            this.draft.sAdress = ausgewaehlt.sAdress;
+            this.draft.sDate = ausgewaehlt.sDate;
+            this.draft.time = ausgewaehlt.time;
+            this.iEventId = ausgewaehlt.iEventId;
+           
+
+        },
+
+    }
+});
 
 //Login Vue
 var oNewLoginVue = new Vue({
