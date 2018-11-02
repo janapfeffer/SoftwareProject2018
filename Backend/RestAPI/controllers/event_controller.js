@@ -3,7 +3,7 @@ const OEvent = require("../models/event_model");
 const EventType = require("../models/event_type_model");
 
 
-//todo: add additional needed fields
+//todo: add additional needed fields (whatever the front end wants)
 exports.get_all_events = (req, res, next) => {
     OEvent.find() //enter: {verification_status: true} into brackets for only verified events
         .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments loc")
@@ -250,6 +250,7 @@ exports.delete_event = (req, res, next) => {
       });
     });
 };
+
 
 exports.rate_event = (req, res, next) => {
   //add rating and number_of_ratings to event model. update rating to avg
