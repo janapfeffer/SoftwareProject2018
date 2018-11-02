@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- HERE MAPS -->
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
@@ -350,14 +352,21 @@
                 <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
                     @click="select(event)" v-bind:id="event.iEventId">
                     <span class="mdl-list__item-primary-content">
-                        <img src="images/smartphone.jpg" class="eventSymbol" height="50" width="50">
-                        <!--i class="material-icons mdl-list__item-avatar">person</i-->
-                        <span>{{ event.sName
-                    }}</span>
+                        <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
+                        <!--{{ event.oImage }} i class="material-icons mdl-list__item-avatar">person</i-->
+                        <span>{{ event.sName }}</span>
                     <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
-                    <span class="mdl-list__item-text-body">{{ event.sAdress }}</span>
-                    <span class="mdl-list__item-text-body">{{ event.sDate }}</span>
-
+                    <i class="fa fa-map-marker" style="font-size:24px"></i>
+                    <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+                    <br style="line-height: 150%;">
+                    <i class="fa fa-calendar" style="font-size:18px"></i>
+                    <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
+                    <i class="fa fa-clock-o" style="font-size:18px"></i>
+                    <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="sample1">
+                        <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                    </div>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <a class="mdl-list__item-secondary-action favstar"

@@ -78,12 +78,13 @@ function getAllEvents() {
                 sName: apievent.event_name,
                 sDescription: apievent.description,
                 sAdress: apievent.address,
-                osDate: apievent.start_date,
+                oStartDate: apievent.start_date.split("T")[0],
+                oStartTime: apievent.start_date.split("T")[1].substring(0,5),
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
                 sTicketLink: apievent.ticket_link,
                 oLatLgn: {lat: apievent.lat, lng: apievent.lng},
-                oImage: apievent.event_picture
+                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
             };
         });
         setMarkers(oEventTableVue.allEvents);
@@ -289,19 +290,19 @@ var oNewEventVue = new Vue({
                     fd.append("start_date", oNewEventVue.draft.EDate[0]);
                     fd.append("end_date", oNewEventVue.draft.EDate[1]);
                     fd.append("event_types", ["5bd1874824c1783894595b68"]);
-                    // fd.append("event_picture", oNewEventVue.draft.oSelectedFile, oNewEventVue.draft.oSelectedFile.name);
+                    fd.append("event_picture", oNewEventVue.draft.oSelectedFile, oNewEventVue.draft.oSelectedFile.name);
 
-                    //file convert + append
-                    var ImageURL = oNewEventVue.draft.image;
-                    // Split the base64 string in data and contentType
-                    var block = ImageURL.split(";");
-                    // Get the content type of the image
-                    var contentType = block[0].split(":")[1];// In this case "image/gif"
-                    // get the real base64 content of the file
-                    var realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
-                    // Convert it to a blob to upload
-                    var blob = b64toBlob(realData, contentType);
-                    fd.append('event_picture', blob, "");
+                    // //file convert + append
+                    // var ImageURL = oNewEventVue.draft.image;
+                    // // Split the base64 string in data and contentType
+                    // var block = ImageURL.split(";");
+                    // // Get the content type of the image
+                    // var contentType = block[0].split(":")[1];// In this case "image/gif"
+                    // // get the real base64 content of the file
+                    // var realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
+                    // // Convert it to a blob to upload
+                    // var blob = b64toBlob(realData, contentType);
+                    // // fd.append('event_picture', blob, "");
 
                     axios.post("http://localhost:3000/events", fd).then(res => {
                         alert("Req angekommen");
