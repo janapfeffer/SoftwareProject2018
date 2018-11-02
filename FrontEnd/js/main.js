@@ -1,3 +1,19 @@
+
+var oEvent = function (oEvent) {
+    this.iEventId = oEvent.iEventId;
+    this.sName = oEvent.sName;
+    this.sDescription = oEvent.sDescription;
+    this.sAdress = oEvent.sAdress;
+    this.sInstagramHastag = oEvent.sInstagramHastag;
+    this.iVerificationStatus = oEvent.iVerificationStatus;
+    this.osDate = oEvent.sDate;
+    this.oEndDate = oEvent.sEndDate;
+    this.sEventLink = oEvent.sEventLink;
+    this.sTicketLink = oEvent.sTicketLink;
+    this.oLatLgn = oEvent.oLatLgn;
+    this.faved = oEvent.faved;
+};
+
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -45,59 +61,9 @@ var oNavigationVue = new Vue({
     }
 });
 
-var oEvent = function (oEvent) {
-    this.iEventId = oEvent.iEventId;
-    this.sName = oEvent.sName;
-    this.sDescription = oEvent.sDescription;
-    this.sAdress = oEvent.sAdress;
-    this.sInstagramHastag = oEvent.sInstagramHastag;
-    this.iVerificationStatus = oEvent.iVerificationStatus;
-    this.osDate = oEvent.sDate;
-    this.oEndDate = oEvent.sEndDate;
-    this.sEventLink = oEvent.sEventLink;
-    this.sTicketLink = oEvent.sTicketLink;
-    this.oLatLgn = oEvent.oLatLgn;
-    this.faved = oEvent.faved;
-};
-
-// this array should be retrieved from the database, maybe according to location chosen and/or the filter options
-// var aTestEvents = [
-//     new oEvent({
-//        iEventId: 3,
-//        sName: "Kultursonntag im Museum für moderne Kunst",
-//        sDescription: "Gemälde, Figuren und Performances. Dies und vieles mehr erwartet Sie und Ihre Familie. Eintritt: 5€.",
-//        sAdress: "C2 20, 68159 Mannheim",
-//        oLatLgn: {
-//         "lat": 49.4871,
-//         "lng": 8.46343
-//       }
-
-//     }),
-//     new oEvent({
-//         iEventId: 2,
-//         sName: "Elektro Party",
-//         sDescription:"Lust auf moderne Elektromusik und ein stilvolles Ambiente? Kostenlos vorbeischauen!.",
-//         sAdress: "Berliner Straße 19a, 68159 Mannheim",
-//         oLatLgn: {
-//             "lat": 49.48712,
-//             "lng": 8.47826
-//           }
-//     }),
-//     oTestEvent1 = new oEvent({
-//         iEventId: 1,
-//         sName: "Autoparty",
-//         sDescription: "Beschleunigen und co",
-//         sAdress: "Mannheim Paradeplatz",
-//         oLatLgn:{
-//             "lat": 49.48672,
-//             "lng": 8.46641
-//           },
-//         faved: true
-//     })
-// ];
 
 // aTestEvents = aTestEvents.concat(aJsonTestData);
-var aAllEvents = [];
+var aAllEvents = new Array();
 // aAllEvents =
 
 function getAllEvents() {
@@ -128,7 +94,7 @@ function getAllEvents() {
     };
 
     var onFailed = function onFailed() {
-        alert('Ooops!');
+        alert('Die Eventlist konnte nicht geladen werden!');
     };
     // Attach the event listeners to the XMLHttpRequest object
     ajaxRequest.addEventListener("load", onSuccess);
@@ -240,7 +206,7 @@ var oNewEventVue = new Vue({
             sAdress: "",
             sDate: "",
             time: "",
-            latlng: {},
+            oLatLng: {},
             status: "draft",
             EDate: null,
             iEventId: Math.floor(Math.random() * 99999) + 1,
@@ -251,11 +217,29 @@ var oNewEventVue = new Vue({
     },
     methods: {
         formdraft: function () {
-            if (oEventTableVue.currentEvents[0].status != "draft") {
-                oEventTableVue.currentEvents.unshift(this.draft)
-            }
-            setCenter(this.draft.sAdress);
-            setVerifyLocationMarker(this.draft.sAdress, this.draft.sName);
+            // var geocoder = platform.getGeocodingService(),
+            //     geocodingParameters = {
+            //         searchText: oNewEventVue.draft.sAdress,
+            //         jsonattributes: 1
+            //     };
+            // geocoder.geocode(
+            //     geocodingParameters,
+            //     onSuccess = function onSuccess(result) {
+
+            //         var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
+            //         var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
+            //         var oLatLgn = { lat: dLat, lng: dLng }
+            //         oNewEventVue.draft.oLatLng = oLatLgn;
+
+            //         oEventTableVue.allEvents.unshift(oNewEventVue.draft);
+            //         map.setCenter(oLatLgn, true);
+            //         setMarker(oNewEventVue.draft);
+
+            //     },
+            //     onError = function(error) {
+            //         alert('Error beim suchen der Adresse!');
+            //     }
+            // )
         },
         formsubmit: function () {
             // Koordinaten für Adresse holen
@@ -275,9 +259,9 @@ var oNewEventVue = new Vue({
                     //Post Request mit LatLgn senden
                     var URI = 'http://localhost:3000/events';
                     var ajaxRequest = new XMLHttpRequest();
-        
+
                     var onSuccess = function onSuccess() {
-        
+
                         alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
                         oNewEventVue.draft = { // reset vueinternal data to make possible to add new event
@@ -293,7 +277,7 @@ var oNewEventVue = new Vue({
 
                         }
                     };
-        
+
                     var onFailed = function onFailed() {
                         alert('Event konnt nicht angelegt werden!');
                     };
@@ -314,7 +298,7 @@ var oNewEventVue = new Vue({
                         event_picture: oNewEventVue.draft.image
                     };
                     var stringBody = JSON.stringify(body);
-        
+
                     ajaxRequest.open('POST', URI);
                     ajaxRequest.setRequestHeader('Content-Type', 'application/json');
                     ajaxRequest.send(stringBody);
@@ -326,7 +310,7 @@ var oNewEventVue = new Vue({
             )
 
 
-           
+
 
             //https://www.youtube.com/watch?v=VqnJwh6E9ak see this for picture upload
         },
