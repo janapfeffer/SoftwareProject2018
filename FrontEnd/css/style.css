@@ -415,52 +415,64 @@ img.eventSymbol {
 
 /* Infobubble Style + Überschreibungen */
 .infoBubble {
-    width: 250px;
-    height: 150px;
-    /* padding: 5px; */
-    color: #fff;
-    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
-    filter: saturate(125%);
-    /* background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center; */
-    border-radius: 3px;
-    font: 12px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif;
-    font-weight: 500;
-    padding: 5px;
+  width: 230px;
+  min-height: 150px;
+  /* padding: 5px; */
+  color: #fff;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+  filter: saturate(125%);
+  /* background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; */
+  border-radius: 3px;
+  font: 12px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif;
+  font-weight: 500;
+  padding: 10px;
 }
 .infoBubble i {
-  margin: 5px;
+margin: 5px;
+}
+
+.iconContainer {
+  background-color: blac#00000061k;
 }
 
 .ibPicture {
-  filter: brightness(60%);
-  position: absolute;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100%;
-  height: 100%;
+filter: brightness(60%);
+position: absolute;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+width: 100%;
+height: 100%;
+border-radius: 3px;
+}
+
+.ibText {
+  font-size: 19px;
+  font-weight: 300;
+  margin-bottom: 26px;
+  font-family: Bahnschrift;
 }
 
 .H_ib_tail {
-  display: none
+display: none
 }
 
 .H_ib_body {
-  background: #f1f1f1;
-  bottom: auto;
-  padding: 0 0 0 0;
-  border-radius: auto;
-  margin-right: auto;
+background: #f1f1f1;
+bottom: auto;
+padding: 0 0 0 0;
+border-radius: auto;
+margin-right: auto;
 }
 
 .H_ib_close {
-  display: none;
+display: none;
 }
 
 .H_ib_content {
-  min-width: 0;
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
+min-width: 0;
+margin: 0 0 0 0;
+padding: 0 0 0 0;
 }
