@@ -13,6 +13,7 @@ var oEvent = function (oEvent) {
     this.faved = oEvent.faved;
 };
 
+var favoritengeklickt = false;
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -20,14 +21,7 @@ var oNavigationVue = new Vue({
     },
     methods: {
 
-        showNewFavoiteCard: function () {
-            oNewFavoiteVue.cardShown = !oNewFavoiteVue.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
-            oNewEventVue.cardShown = false;
-        },
-
-        showNewEventCard: function () {
+        EventCard: function () {
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
@@ -52,10 +46,13 @@ var oNavigationVue = new Vue({
             oNewLoginVue.cardShown = false;
             oNewFavoiteVue.cardShown = false;
         },
+        showNewFavoritenCard: function () {
+            favoritengeklickt = !favoritengeklickt;
+            alert("Träum weiter " + favoritengeklickt);
+        },
         toggleBigMap: function () {
             document.body.classList.toggle('bigMap');
             map.getViewPort().resize();
-            //   oAsideVue.bShown = false;
         }
     }
 });
@@ -63,6 +60,8 @@ var oNavigationVue = new Vue({
 
 // aTestEvents = aTestEvents.concat(aJsonTestData);
 var aAllEvents = new Array();
+var aAllFavoriten = new Array();
+
 // aAllEvents =
 
 function getAllEvents() {
@@ -89,7 +88,31 @@ function getAllEvents() {
         });
         setMarkers(oEventTableVue.allEvents);
     };
+    /* muss man anpassen weiß leider ned wie :(
+    function getAllFavoriten() {
+        var GETALLEVENTS_URL = 'http://localhost:3000/events';
+        var ajaxRequest = new XMLHttpRequest();
+        var onSuccess = function onSuccess() {
 
+            var apievents = this.response.oEvents;
+            oEventTableVue.allEvents = apievents.map(apievent => {
+                return {
+                    iEventId: apievent._id,
+                    sName: apievent.event_name,
+                    sDescription: apievent.description,
+                    sAdress: apievent.address,
+                    oStartDate: apievent.start_date.split("T")[0],
+                    oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+                    oEndDate: apievent.end_date,
+                    sEventLink: apievent.event_link,
+                    sTicketLink: apievent.ticket_link,
+                    oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+                    oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
+                };
+            });
+            setMarkers(oEventTableVue.allEvents);
+        };
+*/
     var onFailed = function onFailed() {
         alert('Die Eventlist konnte nicht geladen werden!');
     };
@@ -107,35 +130,35 @@ var oEventTableVue = new Vue({
     el: "#eventTable",
     data: {
         allEvents: aAllEvents,
+        allFavoriten: aAllFavoriten,
         selected: "", //id of selected event (to see more info)
         mapBounds: { ga: 0, ha: 0, ka: 0, ja: 0 },
         sQuery: ""
     },
     computed: {
         filteredList: function () {
-            vi = this;
-            return this.allEvents.filter(function (ev) {
-                var bool = (
-                    (vi.mapBounds.ja < ev.oLatLgn.lat)
-                    && (vi.mapBounds.ka > ev.oLatLgn.lat)
-                    && (vi.mapBounds.ga < ev.oLatLgn.lng)
-                    && (vi.mapBounds.ha > ev.oLatLgn.lng)
-                )
-                // console.log(bool);
-                return bool
-            })
+            if (favoritengeklickt === true) {
+            }
+            else {
+                vi = this;
+                return this.allEvents.filter(function (ev) {
+                    var bool = (
+                        (vi.mapBounds.ja < ev.oLatLgn.lat)
+                        && (vi.mapBounds.ka > ev.oLatLgn.lat)
+                        && (vi.mapBounds.ga < ev.oLatLgn.lng)
+                        && (vi.mapBounds.ha > ev.oLatLgn.lng)
+                    )
+                    // console.log(bool);
+                    return bool
+                })
+            }
         }
     },
     methods: {
         favToggle: function (target) {
-            // target: eventobject wird hinein gereicht von vue for schleife
             Vue.set(target, 'faved', !target.faved)
-            // this is the same as:
-            // target.faved = !target.faved;
-            // but databinding works also if event hasnt property faved set in the beginning
-            // console.log(target.faved);
+           
         },
-        // click on event in list to see more details
         select: function (target) {
             // only data with specific Ids can be selected
             if (target.iEventId != undefined) {
@@ -163,12 +186,6 @@ var oEventTableVue = new Vue({
             this.allEvents = aFilterdEvents;
         }
     }
-    // ,
-    // mounted: function() {
-    //   axios
-    //   .get('http://localhost:3000/events')
-    //   .then(response => (this.allEvents = response))
-    // }
 });
 
 
@@ -412,50 +429,7 @@ var oRegisterVue = new Vue({
     }
 });
 
-//Register Vue End
-var oEventGenauerAnzeigenVue = new Vue({
-    el: "#newEventGenauerAnzeigenWrapper",
-    data: {
-        cardShown: false,
-        draft: {
-            sName: "nicht geupdated manno",
-            sDescription: "",
-            sAdress: "",
-            sDate: "",
-            time: "",
-            latlng: {},
-            status: "draft",
-            EDate: null,
-            iEventId: null,
-            oSelectedFile: null,
-            image: null,
 
-        },
-        value7: ''
-    },
-    methods: {
-
-        submit: function () {
-            this.cardShown = !this.cardShown;
-
-        },
-        kommentieren: function () {
-            alert("ich versuche es");
-
-        },
-        update: function () {
-            this.draft.sName = ausgewaehlt.sName;
-            this.draft.sDescription = ausgewaehlt.sDescription;
-            this.draft.sAdress = ausgewaehlt.sAdress;
-            this.draft.sDate = ausgewaehlt.sDate;
-            this.draft.time = ausgewaehlt.time;
-            this.iEventId = ausgewaehlt.iEventId;
-
-
-        },
-
-    }
-});
 
 //Login Vue
 var oNewLoginVue = new Vue({
@@ -550,39 +524,6 @@ var oNewDateVue = new Vue({
     }
 });
 
-// Favoite Vue
-var oNewFavoiteVue = new Vue({
-    el: "#newFavoriteWrapper",
-    data: {
-        cardShown: false,
-        draft: {
-            // Muss die favoiten aus der DB holen
-            Favorites: "",
-            status: "draft",
-            iFilterId: Math.floor(Math.random() * 99999) + 1,
-        },
-        value7: ''
-    },
-    methods: {
-        close: function () {
-
-            this.cardShown = !this.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
-            oNewEventVue.cardShown = false;
-
-        },
-
-    }
-});
-
-// var oAsideVue = new Vue({
-//     el: "#aside",
-//     data: {
-//         bShown: true
-//     }
-// });
-
 
 // suche nach gleichen events mit exakt gleichen Koordinaten
 // und verändert die Position der Duplikate ein bisschen (in place)
@@ -611,6 +552,7 @@ function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     getAllEvents()
     checkDuplicatePositions(oEventTableVue.allEvents);
+   // getAllFavoriten();
 }
 
 
