@@ -314,8 +314,8 @@ var bubble; // Hold a reference to any infobubble opened
  */
 function openBubble(position, oData) {
     var myHTMLcontent = 
+    "<div class=\ibPicture\ style='background-image: url(" + oData.oImage + ")';></div>" +
     "<div class=\infoBubble\>" +
-        "<div class=\ibPicture\ style='background-image: url(" + oData.oImage + ")';></div>" +
         "<div class=\ibText\>" +
             "<span>" + oData.sName + "</span>" +
         "</div>" +   

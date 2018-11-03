@@ -417,7 +417,6 @@ img.eventSymbol {
 .infoBubble {
     width: 250px;
     height: 150px;
-    border: 1px solid black;
     /* padding: 5px; */
     color: #fff;
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
@@ -426,11 +425,16 @@ img.eventSymbol {
     background-repeat: no-repeat;
     background-position: center; */
     border-radius: 3px;
-    display: flex; /* might reconsider */
+    font: 12px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-weight: 500;
+    padding: 5px;
+}
+.infoBubble i {
+  margin: 5px;
 }
 
 .ibPicture {
-  filter: brightness(30%);
+  filter: brightness(60%);
   position: absolute;
   background-size: cover;
   background-repeat: no-repeat;
