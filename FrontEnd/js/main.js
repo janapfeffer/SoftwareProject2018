@@ -297,7 +297,7 @@ var oSearchPlaceVue = new Vue({
             //     .then(function () {
             //         // always executed
             //     });
-
+            console.log("filter date triggered");
 
         }
 
