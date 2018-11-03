@@ -13,29 +13,22 @@ var oEvent = function (oEvent) {
     this.faved = oEvent.faved;
 };
 
+var usernameemail = "";
 
-
-
+var favoritegeklickt = false;
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
-        horizontalMenueShown: true
+        horizontalMenueShown: true,
+       
+
     },
     methods: {
 
         showNewFavoiteCard: function () {
-            oNewFavoiteVue.cardShown = !oNewFavoiteVue.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
-            oNewEventVue.cardShown = false;
+            favoritegeklickt = !favoritegeklickt;
         },
-
-        showNewEventCard: function () {
-            oNewEventVue.cardShown = !oNewEventVue.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
-            oNewFavoiteVue.cardShown = false;
-        },
+       
         showNewLoginCard: function () {
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             oRegisterVue.cardShown = false;
@@ -66,6 +59,7 @@ var oNavigationVue = new Vue({
 
 // aTestEvents = aTestEvents.concat(aJsonTestData);
 var aAllEvents = new Array();
+var ausgewaehlt = "";
 // aAllEvents =
 
 function getAllEvents() {
@@ -144,13 +138,8 @@ var oEventTableVue = new Vue({
             // only data with specific Ids can be selected
             if (target.iEventId != undefined) {
                 this.selected = target.iEventId;
-
                 ausgewaehlt = target;
-                oEventGenauerAnzeigenVue.update();
-                oEventGenauerAnzeigenVue.cardShown = true;
-
             }
-
             // map.setCenter(target.marker.getPosition(), true);
             openBubble(target.marker.getPosition(), target.marker.data);
         },
@@ -432,49 +421,6 @@ var oRegisterVue = new Vue({
 });
 
 //Register Vue End
-var oEventGenauerAnzeigenVue = new Vue({
-    el: "#newEventGenauerAnzeigenWrapper",
-    data: {
-        cardShown: false,
-        draft: {
-            sName: "nicht geupdated manno",
-            sDescription: "",
-            sAdress: "",
-            sDate: "",
-            time: "",
-            latlng: {},
-            status: "draft",
-            EDate: null,
-            iEventId: null,
-            oSelectedFile: null,
-            image: null,
-
-        },
-        value7: ''
-    },
-    methods: {
-
-        submit: function () {
-            this.cardShown = !this.cardShown;
-
-        },
-        kommentieren: function () {
-            alert("ich versuche es");
-
-        },
-        update: function () {
-            this.draft.sName = ausgewaehlt.sName;
-            this.draft.sDescription = ausgewaehlt.sDescription;
-            this.draft.sAdress = ausgewaehlt.sAdress;
-            this.draft.sDate = ausgewaehlt.sDate;
-            this.draft.time = ausgewaehlt.time;
-            this.iEventId = ausgewaehlt.iEventId;
-
-
-        },
-
-    }
-});
 
 //Login Vue
 var oNewLoginVue = new Vue({
@@ -499,12 +445,14 @@ var oNewLoginVue = new Vue({
 
 
             var onSuccess = function onSuccess() {
-
+               
                 console.log(this.status);
                 if (this.status == 200) {
-                    alert('Du bist erfolgreich eingeloggt');
+                    alert('Willkommen ' + usernameemail);
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";
+                    AfterLoginLogin.style.visibility = "hidden";
+
                 } else {
                     alert('Anmeldung nicht erfolgreich');
 
@@ -523,7 +471,7 @@ var oNewLoginVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
-
+            usernameemail = this.draft.sUserName;
             ajaxRequest.send(suserdata);
             console.log(suserdata);
 
@@ -571,31 +519,6 @@ var oNewDateVue = new Vue({
     }
 });
 
-// Favoite Vue
-var oNewFavoiteVue = new Vue({
-    el: "#newFavoriteWrapper",
-    data: {
-        cardShown: false,
-        draft: {
-            // Muss die favoiten aus der DB holen
-            Favorites: "",
-            status: "draft",
-            iFilterId: Math.floor(Math.random() * 99999) + 1,
-        },
-        value7: ''
-    },
-    methods: {
-        close: function () {
-
-            this.cardShown = !this.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
-            oNewEventVue.cardShown = false;
-
-        },
-
-    }
-});
 
 // var oAsideVue = new Vue({
 //     el: "#aside",
