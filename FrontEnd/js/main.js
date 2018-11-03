@@ -167,9 +167,8 @@ var oEventTableVue = new Vue({
             });
             this.allEvents = aFilterdEvents;
         },
-
-
-        KommentarGemacht: function() {
+        //Offnet bzw macht Popup moeglich
+        KommentarGemacht: function () {
             var dialog = document.querySelector('dialog');
             var showDialogButton = document.querySelector('#show-dialog');
             if (!dialog.showModal) {
