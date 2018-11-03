@@ -416,7 +416,7 @@ img.eventSymbol {
 /* Infobubble Style + Überschreibungen */
 .infoBubble {
   width: 230px;
-  min-height: 150px;
+  min-height: 100px;
   /* padding: 5px; */
   color: #fff;
   box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
@@ -435,6 +435,7 @@ margin: 5px;
 
 .iconContainer {
   background-color: #00000061;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
 }
 
 .ibPicture {
