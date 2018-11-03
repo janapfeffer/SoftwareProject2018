@@ -19,10 +19,11 @@ var map = new H.Map(document.getElementById('map'),
         zoom: 14.5,
         pixelRatio: pixelRatio
     });
-map.setCenter({ lat: 49.48651, lng: 8.46679 }, true)
+map.setCenter({ lat: 49.48651, lng: 8.46679 }, true);
 //Step 3: make the map interactive
 // MapEvents enables the event system - behavior implements default interactions for pan/zoom (also on mobile touch environments)
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+behavior.disable(H.mapevents.Behavior.DBLTAPZOOM);
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
@@ -182,13 +183,12 @@ function zoomMap(posi) {
 
     if(map.getZoom() < 14.5){
         map.setZoom(14.5, true);
-        if(posi){
-          map.setCenter(posi, true);
-        }
     }
     if(map.getZoom() > 17){
         map.setZoom(16, true);
-
+    }
+    if(posi){
+        map.setCenter(posi, true);
     }
 
 }
@@ -234,12 +234,10 @@ function setMarker(oData){
 
         map.addObject(marker);
 
-
-        //
-
-        marker.addEventListener('tap', function (evt) {
-            // map.setCenter(evt.target.getPosition(), true);
+        marker.addEventListener('dbltap', function (evt) {
             zoomMap(evt.target.getPosition());
+        }, false);
+        marker.addEventListener('tap', function (evt) {
             // document.getElementById(evt.target.data.iEventId).scrollIntoView({block: "end", behavior: "smooth"});
             VueScrollTo.scrollTo(document.getElementById(evt.target.data.iEventId), 800, {offset: -65,
                                                                                   force: false,})
@@ -315,7 +313,33 @@ var bubble; // Hold a reference to any infobubble opened
  * @param  {String} text              The contents of the infobubble.
  */
 function openBubble(position, oData) {
-    var myHTMLcontent = "<div class=\infoBubble\><div class=\ibPicture\><img src='" + oData.oImage +  "'class='eventSymbol' height='50' width='50'> <div><div class=\ibText\><div class=\ibTime><div><div class=\ibPlace\><div>"  + oData.sName + "</div>";
+    var myHTMLcontent = 
+    "<div class=\infoBubble\>" +
+        "<div class=\ibPicture\>" +
+            "<img src='" + oData.oImage + "'class='eventSymbol' height='50' width='50'>" +
+        "<div>" +
+        "<div class=\ibText\>" +
+            "<span>" + oData.sName + "</span>" +
+        "<div>" +   
+        "<div class=\ibPlace\>" +
+            "<i class='fa fa-map-marker' style='font-size:24px'></i>" +
+            "<span class=nobr class='mdl-list__item-text-body'>" + oData.sAdress + "</span>" +
+        "<div>" +
+        "<br style='line-height: 150%;'>" +   
+        "<div class=\ibTime>" +
+            "<i class='fa fa-calendar' style='font-size:18px'></i>" +
+            "<span class=nobr class='mdl-list__item-text-body'>" + oData.oStartDate + "</span>" +
+            "<i class='fa fa-clock-o' style='font-size:18px'></i>" +
+            "<span class=nobr class='mdl-list__item-text-body'>" + oData.oStartTime + "</span>" +
+        "<div>" +
+        "</div>";
+
+                    "<span class=nobr class='mdl-list__item-text-body'>{{ event.sAdress }}</span>"
+                    "<br style='line-height: 150%;'>"
+                    "<i class='fa fa-calendar' style='font-size:18px'></i>"
+                    "<span class=nobr class='mdl-list__item-text-body'>{{ event.oStartDate }}</span>"
+                    "<i class='fa fa-clock-o' style='font-size:18px'></i>"
+                    "<span class=nobr class='mdl-list__item-text-body'>{{ event.oStartTime }}</span>"
 
     //background img
     //style='background-image: url(" + oData.oImage + "); background-size: 244px 154px;;'
