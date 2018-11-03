@@ -322,15 +322,15 @@ function openBubble(position, oData) {
         "<span>" + oData.sName + "</span>" +
         "</div>" +
         "<div class=\iconContainer\>" +
-        "<div class=\ibPlace\>" +
-        "<i class='fa fa-map-marker' style='font-size:16px'></i>" +
-        "<span class=nobr class='mdl-list__item-text-body'>" + oData.sAdress + "</span>" +
-        "</div>" +
         "<div class=\ibTime>" +
         "<i class='fa fa-calendar' style='font-size:14px'></i>" +
         "<span class=nobr class='mdl-list__item-text-body'>" + oData.oStartDate + "</span>" +
         "<i class='fa fa-clock-o' style='font-size:15px'></i>" +
         "<span class=nobr class='mdl-list__item-text-body'>" + oData.oStartTime + "</span>" +
+        "<div class=\ibPlace\>" +
+        "<i class='fa fa-map-marker' style='font-size:16px'></i>" +
+        "<span class=nobr class='mdl-list__item-text-body'>" + oData.sAdress + "</span>" +
+        "</div>" +
         "</div>" +
         "</div>" +
         "</div>";
