@@ -315,9 +315,7 @@ var bubble; // Hold a reference to any infobubble opened
 function openBubble(position, oData) {
     var myHTMLcontent = 
     "<div class=\infoBubble\>" +
-        "<div class=\ibPicture\>" +
-            "<img src='" + oData.oImage + "'class='eventSymbol' height='50' width='50'>" +
-        "</div>" +
+        "<div class=\ibPicture\ style='background-image: url(" + oData.oImage + ");></div>" +
         "<div class=\ibText\>" +
             "<span>" + oData.sName + "</span>" +
         "</div>" +   
@@ -332,7 +330,7 @@ function openBubble(position, oData) {
             "<i class='fa fa-clock-o' style='font-size:18px'></i>" +
             "<span class=nobr class='mdl-list__item-text-body'>" + oData.oStartTime + "</span>" +
         "</div>" +
-        "</div>";
+    "</div>";
 
                     "<span class=nobr class='mdl-list__item-text-body'>{{ event.sAdress }}</span>"
                     "<br style='line-height: 150%;'>"
