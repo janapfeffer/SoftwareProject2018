@@ -236,6 +236,7 @@ exports.update_event = (req, res, next) => {
 
 //todo: only delete owned events -> if no event is found, it doesn't belong to user/doesn't exist
 //should not be an issue though if the frontend calls it correctly
+//delete picture if given (NOT if its the default picture)
 exports.delete_event = (req, res, next) => {
   OEvent.remove({ _id: req.params.eventId, author: req.body.user_id })
     .exec()
@@ -263,6 +264,8 @@ exports.rerate_event = (req, res, next) => {
 
 
 exports.get_filtered_events = (req, res, next) => {
+  //https://stackoverflow.com/questions/32353999/mongoose-select-query-between-two-time-range
+  //todo: get events where all event_types apply or is one enough?
   //get events with filters applied
   //time range filter and event_types filter
 };
