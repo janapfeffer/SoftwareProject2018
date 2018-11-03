@@ -1,4 +1,3 @@
-
 var oEvent = function (oEvent) {
     this.iEventId = oEvent.iEventId;
     this.sName = oEvent.sName;
@@ -70,7 +69,6 @@ function getAllEvents() {
     var GETALLEVENTS_URL = 'http://localhost:3000/events';
     var ajaxRequest = new XMLHttpRequest();
 
-
     var onSuccess = function onSuccess() {
 
         var apievents = this.response.oEvents;
@@ -79,18 +77,17 @@ function getAllEvents() {
                 iEventId: apievent._id,
                 sName: apievent.event_name,
                 sDescription: apievent.description,
-                sAdress: apievent.address.freeformAddress,
-                osDate: apievent.start_date,
+                sAdress: apievent.address,
+                oStartDate: apievent.start_date.split("T")[0],
+                oStartTime: apievent.start_date.split("T")[1].substring(0,5),
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
                 sTicketLink: apievent.ticket_link,
-                oLatLgn: apievent.address.loc,
-                oImage: apievent.event_picture
+                oLatLgn: {lat: apievent.lat, lng: apievent.lng},
+                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
             };
         });
-
         setMarkers(oEventTableVue.allEvents);
-
     };
 
     var onFailed = function onFailed() {
@@ -200,6 +197,30 @@ var oSearchPlaceVue = new Vue({
     }
 });
 
+function b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+}
+
 var oNewEventVue = new Vue({
     el: "#newEventWrapper",
     data: {
@@ -260,12 +281,30 @@ var oNewEventVue = new Vue({
                     var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
                     var oLatLgn = { lat: dLat, lng: dLng }
 
-                    //Post Request mit LatLgn senden
-                    var URI = 'http://localhost:3000/events';
-                    var ajaxRequest = new XMLHttpRequest();
+                    const fd = new FormData();
+                    fd.append("event_name", oNewEventVue.draft.sName);
+                    fd.append("description", oNewEventVue.draft.sDescription);
+                    fd.append("address", oNewEventVue.draft.sAdress);
+                    fd.append("lat", dLat);
+                    fd.append("lng", dLng);
+                    fd.append("start_date", oNewEventVue.draft.EDate[0]);
+                    fd.append("end_date", oNewEventVue.draft.EDate[1]);
+                    fd.append("event_types", ["5bd1874824c1783894595b68"]);
+                    fd.append("event_picture", oNewEventVue.draft.oSelectedFile, oNewEventVue.draft.oSelectedFile.name);
 
-                    var onSuccess = function onSuccess() {
+                    // //file convert + append
+                    // var ImageURL = oNewEventVue.draft.image;
+                    // // Split the base64 string in data and contentType
+                    // var block = ImageURL.split(";");
+                    // // Get the content type of the image
+                    // var contentType = block[0].split(":")[1];// In this case "image/gif"
+                    // // get the real base64 content of the file
+                    // var realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
+                    // // Convert it to a blob to upload
+                    // var blob = b64toBlob(realData, contentType);
+                    // // fd.append('event_picture', blob, "");
 
+                    axios.post("http://localhost:3000/events", fd).then(res => {
                         alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
                         oNewEventVue.draft = { // reset vueinternal data to make possible to add new event
@@ -278,38 +317,13 @@ var oNewEventVue = new Vue({
                             EDate: null,
                             status: "draft",
                             iEventId: Math.floor(Math.random() * 99999) + 1,
-
                         }
-                    };
-
-                    var onFailed = function onFailed() {
-                        alert('Event konnt nicht angelegt werden!');
-                    };
-                    // Attach the event listeners to the XMLHttpRequest object
-                    ajaxRequest.addEventListener("load", onSuccess);
-                    ajaxRequest.addEventListener("error", onFailed);
-                    ajaxRequest.responseType = "json";
-                    var body = {
-                        event_name: oNewEventVue.draft.sName,
-                        description: oNewEventVue.draft.sDescription,
-                        address: {
-                            freeformAddress: oNewEventVue.draft.sAdress,
-                            loc: oLatLgn
-                        },
-                        start_date: oNewEventVue.draft.EDate[0],
-                        end_date: oNewEventVue.draft.EDate[1],
-                        event_types: ["5bd1874824c1783894595b68"],
-                        event_picture: oNewEventVue.draft.image
-                    };
-                    var stringBody = JSON.stringify(body);
-
-                    ajaxRequest.open('POST', URI);
-                    ajaxRequest.setRequestHeader('Content-Type', 'application/json');
-                    ajaxRequest.send(stringBody);
-
+                    }).catch(function (error) {
+                        console.log(error);
+                    });;
                 },
                 onError = function (error) {
-                    alert('Ooops!');
+                    alert('Geodaten nicht bekommen!');
                 }
             )
 
@@ -329,6 +343,10 @@ var oNewEventVue = new Vue({
             if (image) {
                 console.log('Picture loaded.')
                 this.draft.image = image
+
+
+
+
             } else {
                 console.log('FileReader API not supported: use the <form>, Luke!')
             }
@@ -400,7 +418,7 @@ var oEventGenauerAnzeigenVue = new Vue({
     data: {
         cardShown: false,
         draft: {
-            sName:  "nicht geupdated manno",
+            sName: "nicht geupdated manno",
             sDescription: "",
             sAdress: "",
             sDate: "",
@@ -411,15 +429,15 @@ var oEventGenauerAnzeigenVue = new Vue({
             iEventId: null,
             oSelectedFile: null,
             image: null,
-           
+
         },
         value7: ''
     },
     methods: {
-   
+
         submit: function () {
             this.cardShown = !this.cardShown;
-            
+
         },
         kommentieren: function () {
             alert("ich versuche es");
@@ -432,7 +450,7 @@ var oEventGenauerAnzeigenVue = new Vue({
             this.draft.sDate = ausgewaehlt.sDate;
             this.draft.time = ausgewaehlt.time;
             this.iEventId = ausgewaehlt.iEventId;
-           
+
 
         },
 
