@@ -458,8 +458,6 @@ var oNewLoginVue = new Vue({
                 console.log(this.status);
                 if (this.status == 200) {
                     alert('Du bist erfolgreich eingeloggt');
-                    AfterLoginFavoriten.style.visibility = "visible";
-                    AfterLoginEvent.style.visibility = "visible";
                 } else {
                     alert('Anmeldung nicht erfolgreich');
 

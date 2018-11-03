@@ -73,22 +73,12 @@
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                        <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoiteCard'>Favoriten</a>
-                        <a class="mdl-navigation__link" id="AfterLoginEvent"  style="visibility: hidden;" @click='showNewEventCard'>Event eintragen</a>
-
-                    
                     <a class="mdl-navigation__link" href="index.html">Map</a>
-<<<<<<< HEAD
                     <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
                     <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
                     <a class="mdl-navigation__link" @click='showNewFavoritenCard'>Favoriten</a>
                     <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
                     <a class="mdl-navigation__link" @click="showNewDateCard">Filtern</a>
-=======
-                        <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
-                        <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
-                        <a class="mdl-navigation__link" @click="showNewDateCard">Filtern</a>
->>>>>>> a6ed7e0dbebefd38338e2472b5d80492ef54e874
 
                 </nav>
             </div>
@@ -296,16 +286,14 @@
         <h1>
             Event Finder
         </h1>
-
-
         <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
         <div id="searchPlaceInner" autocomplete="off">
             <div class="autocomplete" style="width:370;">
                 <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
-                       @keyup="autocomplete" @keyup.enter="searchPlace">
+                    @keyup="autocomplete" @keyup.enter="searchPlace">
                 <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                        name="action" @click="searchPlace">
+                    name="action" @click="searchPlace">
                     Suche
                 </button>
             </div>
