@@ -248,9 +248,11 @@ function setMarker(oData) {
     marker.addEventListener('pointerenter', function (evt) {
         openBubble(evt.target.getPosition(), evt.target.data);
         // document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({block: "end", behavior: "smooth"});
+        map.getViewPort().element.style.cursor = 'pointer';
     }, false);
     marker.addEventListener('pointerleave', function (evt) {
         closeBubble(evt.target.getPosition());
+        map.getViewPort().element.style.cursor = 'auto';
     }, false);
 
     return marker;
