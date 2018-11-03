@@ -317,21 +317,21 @@ function openBubble(position, oData) {
     "<div class=\infoBubble\>" +
         "<div class=\ibPicture\>" +
             "<img src='" + oData.oImage + "'class='eventSymbol' height='50' width='50'>" +
-        "<div>" +
+        "</div>" +
         "<div class=\ibText\>" +
             "<span>" + oData.sName + "</span>" +
-        "<div>" +   
+        "</div>" +   
         "<div class=\ibPlace\>" +
             "<i class='fa fa-map-marker' style='font-size:24px'></i>" +
             "<span class=nobr class='mdl-list__item-text-body'>" + oData.sAdress + "</span>" +
-        "<div>" +
+        "</div>" +
         "<br style='line-height: 150%;'>" +   
         "<div class=\ibTime>" +
             "<i class='fa fa-calendar' style='font-size:18px'></i>" +
             "<span class=nobr class='mdl-list__item-text-body'>" + oData.oStartDate + "</span>" +
             "<i class='fa fa-clock-o' style='font-size:18px'></i>" +
             "<span class=nobr class='mdl-list__item-text-body'>" + oData.oStartTime + "</span>" +
-        "<div>" +
+        "</div>" +
         "</div>";
 
                     "<span class=nobr class='mdl-list__item-text-body'>{{ event.sAdress }}</span>"
