@@ -13,6 +13,9 @@ var oEvent = function (oEvent) {
     this.faved = oEvent.faved;
 };
 
+
+
+
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -127,6 +130,7 @@ var oEventTableVue = new Vue({
         }
     },
     methods: {
+
         favToggle: function (target) {
             // target: eventobject wird hinein gereicht von vue for schleife
             Vue.set(target, 'faved', !target.faved)
@@ -144,6 +148,7 @@ var oEventTableVue = new Vue({
                 ausgewaehlt = target;
                 oEventGenauerAnzeigenVue.update();
                 oEventGenauerAnzeigenVue.cardShown = true;
+
             }
 
             // map.setCenter(target.marker.getPosition(), true);
@@ -161,6 +166,21 @@ var oEventTableVue = new Vue({
                 }
             });
             this.allEvents = aFilterdEvents;
+        },
+
+
+        KommentarGemacht: function() {
+            var dialog = document.querySelector('dialog');
+            var showDialogButton = document.querySelector('#show-dialog');
+            if (!dialog.showModal) {
+                dialogPolyfill.registerDialog(dialog);
+            }
+            showDialogButton.addEventListener('click', function () {
+                dialog.showModal();
+            });
+            dialog.querySelector('.close').addEventListener('click', function () {
+                dialog.close();
+            });
         }
     }
     // ,

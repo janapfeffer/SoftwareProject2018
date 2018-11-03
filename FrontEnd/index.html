@@ -31,6 +31,14 @@
     <title> Event Finder </title>
 
     <!-- External Libaries-->
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet"
+          href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
     <!-- Vue.js-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
@@ -348,8 +356,9 @@
         </div>
         <div class="sidecardWrapper">
             <h2> Events</h2>
+           
             <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
-        v-model="sQuery" @keyup.enter="searchEvent"><input-->
+    v-model="sQuery" @keyup.enter="searchEvent"><input-->
             <ul id="eventTable" class="sidecard demo-list-three mdl-list">
                 <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
                     @click="select(event)" v-bind:id="event.iEventId">
@@ -357,26 +366,43 @@
                         <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
                         <!--{{ event.oImage }} i class="material-icons mdl-list__item-avatar">person</i-->
                         <span>{{ event.sName }}</span>
-                    <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
-                    <i class="fa fa-calendar" style="font-size:18px"></i>
-                    <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
-                    <i class="fa fa-clock-o" style="font-size:18px"></i>
-                    <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
-                    <br style="line-height: 150%;">
-                    <i class="fa fa-map-marker" style="font-size:24px"></i>
-                    <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" id="sample1">
-                        <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
-                    </div>
+                        <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
+                        <i class="fa fa-calendar" style="font-size:18px"></i>
+                        <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
+                        <i class="fa fa-clock-o" style="font-size:18px"></i>
+                        <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
+                        <br style="line-height: 150%;">
+                        <i class="fa fa-map-marker" style="font-size:24px"></i>
+                        <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht" type="text" id="sample1">
+                            <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                            <!-- Test Button -->
+                            
+                            <dialog class="mdl-dialog" id="DIALOG_EVENT">
+                                <h4 class="mdl-dialog__title">Kommentare</h4>
+                                <div class="mdl-dialog__content">
+                                    <p>
+                                       Popup Inhalt hier rein machen
+                                    </p>
+                                </div>
+                                <div class="mdl-dialog__actions">
+                                    <button type="button" class="mdl-button close">Schließen</button>
+                                </div>
+                            </dialog>
+                            <script>
+
+                            </script>
+                            <!-- Test Button Ende-->
+                        </div>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <a class="mdl-list__item-secondary-action favstar"
                            @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
                     </span>
-                    </li>
-                    </ul>
-</div>
+                </li>
+            </ul>
+        </div>
     </div>
 
 
@@ -384,20 +410,19 @@
         <h1>
             Event Finder
         </h1>
+       
+            <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
-
-        <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
-
-        <div id="searchPlaceInner" autocomplete="off">
-            <div class="autocomplete" style="width:370;">
-                <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
-                       @keyup="autocomplete" @keyup.enter="searchPlace">
-                <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                        name="action" @click="searchPlace">
-                    Suche
-                </button>
+            <div id="searchPlaceInner" autocomplete="off">
+                <div class="autocomplete" style="width:370;">
+                    <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
+                           @keyup="autocomplete" @keyup.enter="searchPlace">
+                    <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                            name="action" @click="searchPlace">
+                        Suche
+                    </button>
+                </div>
             </div>
-        </div>
 
 
     </div>
