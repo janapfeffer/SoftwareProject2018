@@ -104,7 +104,7 @@
             <h2>Favoriten: </h2>
             <div id="newDate" class="sidecard">
                 <p>
-                    Hier sind ihre Favoriten aufgelistet 
+                    Hier sind ihre Favoriten aufgelistet
 
                 </p>
 
@@ -176,7 +176,7 @@
                 <!-- Ausgewahltes Datum wird als "FilterDate gespeichert-->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-                    <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
+                    <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Startdatum" end-placeholder="Endtaum"
                         :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
@@ -248,22 +248,21 @@
                 <p>Uhrzeit: {{draft.time}} </p>
                 <p>Event ID: {{draft.iEventId}} </p>
 
-               <p style="font: bold 12px Arial">Gib hier deinen Senf dazu</p>
-            <form action="#">
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="sample1">
-                    <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
-                </div>
-            </form>
-            <div class="buttons">
-                <button style=" background-color: darkblue; color:ghostwhite" class="mdl-button mdl-js-button mdl-button--raised"
-                        @click="kommentieren"> Kommentieren </button>
+                <p style="font: bold 12px Arial">Gib hier deinen Senf dazu</p>
+                <form action="#">
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="sample1">
+                        <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                    </div>
+                </form>
+                <div class="buttons">
+                    <button style=" background-color: darkblue; color:ghostwhite" class="mdl-button mdl-js-button mdl-button--raised" @click="kommentieren">
+                        Kommentieren </button>
 
-                <button style="color:darkblue; font-family:Bahnschrift" class="mdl-button mdl-js-button mdl-button--raised"
-                        @click="submit">
-                    Schließen
-                </button>
-            </div>
+                    <button style="color:darkblue; font-family:Bahnschrift" class="mdl-button mdl-js-button mdl-button--raised" @click="submit">
+                        Schließen
+                    </button>
+                </div>
             </div>
         </div>
         <!-- anzeiegen Card End-->
@@ -319,7 +318,7 @@
                     <label class="mdl-textfield__label" for="sample1">Titel</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <textarea class="mdl-textfield__input" maxlength="300" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
+                    <textarea class="mdl-textfield__input" maxlength="200" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
                     <label class="mdl-textfield__label" for="schools">Beschreibung</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -327,12 +326,16 @@
                     <label class="mdl-textfield__label" for="sample1">Adresse</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
+                    <label class="mdl-textfield__label" for="sample1">Link</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-                    <el-date-picker v-model="draft.EDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
+                    <el-date-picker v-model="draft.EDate" type="datetimerange" align="right" start-placeholder="Startdatum" end-placeholder="Enddatum"
                         :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
-                <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file"  @change="onFileSelected">
+                <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected">
                 <!--label for="imageUpload">Laden Sie Ihr Eventbild hoch!</label-->
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
@@ -355,26 +358,32 @@
                         <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
                         <!--{{ event.oImage }} i class="material-icons mdl-list__item-avatar">person</i-->
                         <span>{{ event.sName }}</span>
-                    <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
-                    <i class="fa fa-calendar" style="font-size:18px"></i>
-                    <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
-                    <i class="fa fa-clock-o" style="font-size:18px"></i>
-                    <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
-                    <br style="line-height: 150%;">
-                    <i class="fa fa-map-marker" style="font-size:24px"></i>
-                    <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" id="sample1">
-                        <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
-                    </div>
+                        <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
+                        <i class="fa fa-calendar" style="font-size:18px"></i>
+                        <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
+                        <i class="fa fa-clock-o" style="font-size:18px"></i>
+                        <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
+                        <br style="line-height: 150%;">
+                        <i class="fa fa-map-marker" style="font-size:24px"></i>
+                        <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+                        <br style="line-height: 150%">
+                        <!--div v-bind:style="{ display: event.sDisplayEventLink }"-->
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            <span class=nobr class="link" class="mdl-list__item-text-body">
+                                <a :href="event.sEventLink" target="_blank">{{ event.sEventLink }}</a>
+                            </span>
+                        <!--/div -->
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="sample1">
+                            <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                        </div>
                     </span>
                     <span class="mdl-list__item-secondary-content">
-                        <a class="mdl-list__item-secondary-action favstar"
-                           @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
+                        <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
                     </span>
-                    </li>
-                    </ul>
-</div>
+                </li>
+            </ul>
+        </div>
     </div>
 
 
@@ -392,6 +401,11 @@
                     name="action" @click="searchPlace">
                     Suche
                 </button>
+                <div id="dateFilter">
+                    <el-date-picker type="datetimerange" align="right" v-model="FilterdDate" @change="filterDate" start-placeholder="Startdatum"
+                        end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']" :picker-options="pickerOptions">
+                    </el-date-picker>
+                </div>
             </div>
         </div>
 

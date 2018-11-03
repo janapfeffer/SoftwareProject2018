@@ -182,8 +182,24 @@ h1{
   transform: translateZ(25px);
 }
 
-.landingpage div#aside, .landingpage div#map {
+.landingpage div#aside, .landingpage div#map{
   opacity: 0;
+}
+
+.landingpage div#dateFilter{
+  display: none !important;
+}
+
+#dateFilter{
+  display:inline;
+}
+
+.el-date-range-picker__time-header {
+  position: static;
+}
+
+.el-picker-panel [slot=sidebar], .el-picker-panel__sidebar {
+  width: 116px;
 }
 
 .landingpage div#searchPlace {
@@ -279,6 +295,11 @@ div#aside, div#map{
   height: auto;
 }
 
+.mdl-list__item--three-line .mdl-list__item-text-body {
+  font-size: 13px;
+  line-height: 16px;
+}
+
 #eventTable span.mdl-list__item-text-body:empty {
   display: none;
 }
@@ -360,6 +381,7 @@ img.eventSymbol {
   top: 100%;
   left: 0;
   right: 0;
+  width: 260px;
 }
 .autocomplete-items div {
   padding: 10px;

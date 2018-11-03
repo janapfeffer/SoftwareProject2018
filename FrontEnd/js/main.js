@@ -78,14 +78,22 @@ function getAllEvents() {
                 sName: apievent.event_name,
                 sDescription: apievent.description,
                 sAdress: apievent.address,
+                oApiEventStartDate: apievent.start_date,
                 oStartDate: apievent.start_date.split("T")[0],
-                oStartTime: apievent.start_date.split("T")[1].substring(0,5),
+                oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
+                sDisplayEventLink: apievent.event_link != undefined ? "show" : "none",
                 sTicketLink: apievent.ticket_link,
-                oLatLgn: {lat: apievent.lat, lng: apievent.lng},
-                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
+                oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
             };
+        });
+        //Sortiere die events - sollte später vielleicht backend machen?
+        oEventTableVue.allEvents.sort(function(a,b){
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(a.oApiEventStartDate) - new Date(b.oApiEventStartDate);
         });
         setMarkers(oEventTableVue.allEvents);
     };
@@ -178,7 +186,66 @@ var oSearchPlaceVue = new Vue({
     data: {
         sQuery: localStorage.getItem("HANSCH"),
         sName: "Event Finder",
-        sButtonName: "Suchen"
+        sButtonName: "Suchen",
+        FilterdDate: null,
+        pickerOptions: {
+            shortcuts: [
+                {
+                    text: 'Heute',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'nächste Woche',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'nächster Monat',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'Gestern',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'Letzte Woche',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'Letzter Monat',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }
+            ]
+        },
     },
     methods: {
         //Sucht nach einem Ort
@@ -193,7 +260,47 @@ var oSearchPlaceVue = new Vue({
         //AutoComplet Funktion der Suchleiste
         autocomplete: function autocomplete() {
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
+        },
+        filterDate: function () {
+            // axios.get('http://localhost:3000/events'
+            //     //optional parameters
+            //     // , {
+            //     //     params: {
+            //     //         date: oSearchPlaceVue.FilterdDate
+            //     //     }
+            //     // }
+            // )
+            //     .then(function (response) {
+            //         var aFilterdEvents = this.response.oEvents;
+            //         oEventTableVue.allEvents = aFilterdEvents.map(apievent => {
+            //             return {
+            //                 iEventId: apievent._id,
+            //                 sName: apievent.event_name,
+            //                 sDescription: apievent.description,
+            //                 sAdress: apievent.address,
+            //                 oStartDate: apievent.start_date.split("T")[0],
+            //                 oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+            //                 oEndDate: apievent.end_date,
+            //                 sEventLink: apievent.event_link,
+            //                 sTicketLink: apievent.ticket_link,
+            //                 oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+            //                 oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
+            //             };
+            //         });
+            //         removeMarkers(oEventTableVue.allEvents); 
+            //         setMarkers(oEventTableVue.allEvents);
+            //     })
+            //     .catch(function (error) {
+            //         // handle error
+            //         console.log(error);
+            //     })
+            //     .then(function () {
+            //         // always executed
+            //     });
+
+
         }
+
     }
 });
 
@@ -234,6 +341,7 @@ var oNewEventVue = new Vue({
             oLatLng: {},
             status: "draft",
             EDate: null,
+            sEventLink: null,
             iEventId: Math.floor(Math.random() * 99999) + 1,
             oSelectedFile: null,
             image: null
@@ -291,6 +399,7 @@ var oNewEventVue = new Vue({
                     fd.append("end_date", oNewEventVue.draft.EDate[1]);
                     fd.append("event_types", ["5bd1874824c1783894595b68"]);
                     fd.append("event_picture", oNewEventVue.draft.oSelectedFile, oNewEventVue.draft.oSelectedFile.name);
+                    fd.append("event_link", oNewEventVue.draft.sEventLink);
 
                     // //file convert + append
                     // var ImageURL = oNewEventVue.draft.image;
