@@ -65,6 +65,18 @@ var oNavigationVue = new Vue({
     }
 });
 
+function getFavorites(user_id) {
+  const GETFAVORITES_URL = "http://localhost:3000/user" + user_id + "/events";
+
+  axios.get(GETFAVORITES_URL).then(res => {
+      console.log("Favoriten für " + user_id + " erhalten: " + res);
+      console.log(res.saved_events);
+      //set favorite data to favorite vue
+  }).catch(function (error) {
+      console.log(error);
+  });
+};
+
 
 // aTestEvents = aTestEvents.concat(aJsonTestData);
 var aAllEvents = new Array();
@@ -461,6 +473,7 @@ var oNewLoginVue = new Vue({
 
 
             var onSuccess = function onSuccess() {
+              console.log(this.response);
 
                 console.log(this.status);
                 if (this.status == 200) {

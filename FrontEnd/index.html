@@ -88,7 +88,7 @@
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoiteCard'>Favoriten</a>
+                    <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewfavoriteCard'>Favoriten</a>
                     <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event eintragen</a>
 
                     <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
@@ -104,14 +104,14 @@
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
                 <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
-                <a class="mdl-navigation__link"  @click='showNewFavoiteCard'>Favoriten</a>
+                <a class="mdl-navigation__link"  @click='showNewfavoriteCard'>Favoriten</a>
                 <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
             </nav>
         </div>
     </div>
     <!-- Alles rechts neben der Karte-->
     <div id="aside">
-       
+
         <!-- Date Filter Card-->
         <div id="newDateWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Datum Filter: </h2>
@@ -195,7 +195,7 @@
         </div>
         <!-- Register Card End-->
 
-        
+
         <!-- Login Card-->
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="EINLOGEN_Karte">
@@ -299,7 +299,7 @@
         </div>
         <div class="sidecardWrapper">
             <h2> Events</h2>
-           
+
             <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
     v-model="sQuery" @keyup.enter="searchEvent"><input-->
             <ul id="eventTable" class="sidecard demo-list-three mdl-list">
@@ -400,7 +400,7 @@
         <h1>
             Event Finder
         </h1>
-       
+
             <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
             <div id="searchPlaceInner" autocomplete="off">
@@ -428,7 +428,7 @@
 
     <!-- vue datein-->
     <!-- <script type="text/javascript" src="js/vues/eventTableVue.js"></script>
-    <script type="text/javascript" src="js/vues/favoiteVue.js"></script>
+    <script type="text/javascript" src="js/vues/favoriteVue.js"></script>
     <script type="text/javascript" src="js/vues/navigationVue.js"></script>
     <script type="text/javascript" src="js/vues/newDateVue.js"></script>
     <script type="text/javascript" src="js/vues/newEventVue.js"></script>

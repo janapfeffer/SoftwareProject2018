@@ -3,7 +3,7 @@ var oNewFavoriteVue = new Vue({
     data: {
         cardShown: false,
         draft: {
-            // Muss die favoiten aus der DB holen
+            // Muss die favoriten aus der DB holen
             Favorites: "",
             status: "draft",
             iFilterId: Math.floor(Math.random() * 99999) + 1,

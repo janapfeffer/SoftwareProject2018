@@ -105,7 +105,9 @@ exports.user_login = (req, res, next) => {
           });
         } else { // not needed with JWT, then it's done later!
           return res.status(200).json({
-            message: "Auth successful"
+            message: "Auth successful",
+            _id: user[0]._id,
+            saved_events: user[0].saved_events
           });
         }
 
