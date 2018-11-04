@@ -87,10 +87,10 @@
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
+                    <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewfavoriteCard'>Favoriten</a>
                     <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event eintragen</a>
 
-                    <a class="mdl-navigation__link" id="BigMap" @click='toggleBigMap'>Große Karte</a>
+                    <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
                     <a class="mdl-navigation__link" id="AfterLoginLogin" style="visibility: visible;" @click='showNewLoginCard'>Login</a>
 
                 </nav>
@@ -103,7 +103,7 @@
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
                 <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
-                <a class="mdl-navigation__link"  @click='showNewFavoriteCard'>Favoriten</a>
+                <a class="mdl-navigation__link"  @click='showNewfavoriteCard'>Favoriten</a>
                 <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
             </nav>
         </div>
@@ -296,7 +296,7 @@
             </div>
         </div>
         <div class="sidecardWrapper">
-            <h2 id="h2events"> Events </h2>
+            <h2> Events</h2>
 
             <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
             v-model="sQuery" @keyup.enter="searchEvent"><input-->
@@ -306,11 +306,9 @@
                     <span class="mdl-list__item-primary-content">
                         <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
                         <!--{{ event.oImage }} i class="material-icons mdl-list__item-avatar">person</i-->
-                        <span>{{ event.sName }}</span> 
-                        <span id="sterne" style="visibility:hidden;">
-                            <a class="mdl-list__item-secondary-action favstar" 
-                               @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
-                        </span>
+                        <span>{{ event.sName }}</span>
+                        <a class="mdl-list__item-secondary-action favstar"
+                           @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
                         <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
                         <i class="fa fa-calendar" style="font-size:18px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
