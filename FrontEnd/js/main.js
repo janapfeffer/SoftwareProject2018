@@ -189,9 +189,15 @@ var oEventTableVue = new Vue({
           // abfrage, ob es gefavt war oder nicht
           if (loggedInUser != "") { //only change status of faved i fa user is logged in
             if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
-              Vue.set(target, 'faved', !target.faved);
+              Vue.set(target, 'faved', true);
             } else {
-              // save _id of target in saved_events of user
+              var requestType = "POST";
+              var requestURL = "http://localhost:3000/user/";
+              if (target.faved) { //delete _id of target from saved_events of user
+                requestURL = requestURL + "unsaveEvent";
+              } else { // save _id of target in saved_events of user
+                requestURL = requestURL + "saveEvent";
+              }
               var ajaxRequest = new XMLHttpRequest();
 
               var onSuccess = function onSuccess(){
@@ -200,7 +206,7 @@ var oEventTableVue = new Vue({
                   // set target to be faved
                   Vue.set(target, 'faved', !target.faved);
                 } else {
-                  // warnung dass das gerade nicht ging
+                  // warnung dass das gerade nicht ging?
                 }
 
               };
@@ -212,10 +218,10 @@ var oEventTableVue = new Vue({
               ajaxRequest.addEventListener("load", onSuccess);
               ajaxRequest.addEventListener("error", onFailed);
               ajaxRequest.responseType = "json";
-              ajaxRequest.open("POST", "http://localhost:3000/user/saveEvent", true);
+              ajaxRequest.open(requestType, requestURL, true);
               ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              var sNewSavedEvent = "userId=" + loggedInUser._id + "&eventId=" + target.iEventId;
-              ajaxRequest.send(sNewSavedEvent);
+              var sFormData = "userId=" + loggedInUser._id + "&eventId=" + target.iEventId;
+              ajaxRequest.send(sFormData);
             }
           } else { // user ist nicht eingeloggt
             // meldung, dass man sich anmelden soll oder so
