@@ -9,7 +9,7 @@ router.post("/saveEvent", UserController.add_to_saved_events);
 
 router.post("/login", UserController.user_login);
 
-router.delete("/:userId", checkAuth, UserController.user_delete);
+router.delete("/:userId",  UserController.user_delete);
 
 router.post("/unsaveEvent", UserController.delete_saved_event);
 

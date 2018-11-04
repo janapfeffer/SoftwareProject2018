@@ -472,10 +472,10 @@ var oNewLoginVue = new Vue({
 
 
             var onSuccess = function onSuccess() {
-              loggedInUser = this.response.user;
-
                 console.log(this.status);
-                if (this.status == 200) {
+                if (this.status === 200) {
+                  // save user in global variable
+                  loggedInUser = this.response.user;
                   //set favorite events stars (favtoggle)
                   for (var i = 0; i < loggedInUser.saved_events.length; i++) {
                     for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
@@ -487,7 +487,7 @@ var oNewLoginVue = new Vue({
                     }
                   }
 
-                    alert('Willkommen ' + loggedInUser.name);
+                    alert('Willkommen');
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";
                     AfterLoginLogin.style.display = "none";

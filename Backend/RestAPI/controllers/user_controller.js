@@ -91,6 +91,7 @@ exports.add_to_saved_events = (req, res, next) => {
 
 exports.user_login = (req, res, next) => {
   User.find({ email: req.body.email })
+    .select("email password saved_events name")
     .exec()
     .then(user => {
       if (user.length < 1) {
@@ -103,38 +104,34 @@ exports.user_login = (req, res, next) => {
           return res.status(401).json({
             message: "Auth failed"
           });
-        } else { // not needed with JWT, then it's done later!
+        }
+        if (result) {
+          // console.log(user[0]);
+          // const token = jwt.sign(
+          //   {
+          //     email: user[0].email,
+          //     userId: user[0]._id
+          //   },
+          //   process.env.JWT_KEY,
+          //   {
+          //     expiresIn: "1h"
+          //   }
+          // );
           return res.status(200).json({
             message: "Auth successful",
+            // token: token,s
+            // saved_events: user[0].saved_events
             user: {
-              _id: user[0]._id,
               saved_events: user[0].saved_events,
-              name: user[0].name,
-              email: user[0].email
+              _id: user[0]._id,
+              email: user[0].email,
+              name: user[0].name
             }
-
           });
         }
-
-        // if (result) {
-        //   const token = jwt.sign(
-        //     {
-        //       email: user[0].email,
-        //       userId: user[0]._id
-        //     },
-        //     process.env.JWT_KEY,
-        //     {
-        //       expiresIn: "1h"
-        //     }
-        //   );
-        //   return res.status(200).json({
-        //     message: "Auth successful",
-        //     token: token
-        //   });
-        // }
-        // res.status(401).json({
-        //   message: "Auth failed"
-        // });
+        res.status(401).json({
+          message: "Auth failed"
+        });
       });
     })
     .catch(err => {
