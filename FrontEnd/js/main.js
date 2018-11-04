@@ -33,11 +33,14 @@ var oNavigationVue = new Vue({
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
             oNewFavoriteVue.cardShown = false;
-            favoritegeklickt = !favoritegeklickt;
         },
 
         showNewFavoriteCard: function () {
             favoritegeklickt = !favoritegeklickt;
+            if (favoritegeklickt === true) {
+                document.getElementById('h2events').innerText = "Favoriten";
+            }
+            else { document.getElementById('h2events').innerText = "Events"; }
         },
 
         showNewLoginCard: function () {
@@ -129,7 +132,8 @@ var oEventTableVue = new Vue({
         allEvents: aAllEvents,
         selected: "", //id of selected event (to see more info)
         mapBounds: { ga: 0, ha: 0, ka: 0, ja: 0 },
-        sQuery: ""
+        sQuery: "",
+       
     },
     computed: {
         filteredList: function () {

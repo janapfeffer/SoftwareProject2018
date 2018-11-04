@@ -87,7 +87,7 @@
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewfavoriteCard'>Favoriten</a>
+                    <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
                     <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event eintragen</a>
 
                     <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
@@ -103,7 +103,7 @@
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
                 <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
-                <a class="mdl-navigation__link"  @click='showNewfavoriteCard'>Favoriten</a>
+                <a class="mdl-navigation__link"  @click='showNewFavoriteCard'>Favoriten</a>
                 <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
             </nav>
         </div>
@@ -296,7 +296,7 @@
             </div>
         </div>
         <div class="sidecardWrapper">
-            <h2> Events</h2>
+            <h2 id="h2events"> Events </h2>
 
             <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
             v-model="sQuery" @keyup.enter="searchEvent"><input-->
