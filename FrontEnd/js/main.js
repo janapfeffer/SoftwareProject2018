@@ -84,6 +84,22 @@ var oNavigationVue = new Vue({
 });
 
 
+// async function starmanagement() {
+//   while(true){
+//     var stars = document.getElementsByName("stern");
+//     if (loggedInUser != ""){ // make stars visible if a user is logged in
+//         for(var m = 0; m < stars.length; m++) {
+//           stars[m].style = "visibility:visible;";
+//         }
+//     } else {
+//         for(var m = 0; m < stars.length; m++) {
+//           stars[m].style = "visibility:hidden;";
+//         }
+//     }
+//   }
+// };
+// starmanagement();
+
 var bigmapgeklickt = false;
 
 function getFavorites(user_id) {
@@ -149,6 +165,7 @@ var oEventTableVue = new Vue({
         selected: "", //id of selected event (to see more info)
         mapBounds: { ga: 0, ha: 0, ka: 0, ja: 0 },
         sQuery: "",
+        starVisibility: "hidden"
 
     },
     computed: {
@@ -160,9 +177,9 @@ var oEventTableVue = new Vue({
                     && (vi.mapBounds.ka > ev.oLatLgn.lat)
                     && (vi.mapBounds.ga < ev.oLatLgn.lng)
                     && (vi.mapBounds.ha > ev.oLatLgn.lng)
-                )
+                );
                 // console.log(bool);
-                return bool
+                return bool;
             })
         }
     },
@@ -548,7 +565,9 @@ var oNewLoginVue = new Vue({
                     AfterLoginEvent.style.visibility = "visible";
                     AfterLoginLogin.style.display = "none";
                     newLoginWrapper.style.display = "hidden";
-                    document.getElementById('sterne').style.visibility = "visible";
+
+                    oEventTableVue.starVisibility = "visible";
+
                     //Hier muss die Karte unsichtbar gemacht werden
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
@@ -661,7 +680,7 @@ function checkDuplicatePositions(arr) {
 
 function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
-    getAllEvents()
+    getAllEvents();
     checkDuplicatePositions(oEventTableVue.allEvents);
 }
 
