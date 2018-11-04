@@ -14,7 +14,8 @@ var oEvent = function (oEvent) {
 };
 
 var usernameemail = "";
-
+var daumenhochgeklickt = false;
+var daumenruntergeklickt = false;
 var favoritegeklickt = false;
 var oNavigationVue = new Vue({
     el: "#navigation",
@@ -147,14 +148,11 @@ var oEventTableVue = new Vue({
     methods: {
 
         favToggle: function (target) {
-            // target: eventobject wird hinein gereicht von vue for schleife
+            
             Vue.set(target, 'faved', !target.faved)
-            // this is the same as:
-            // target.faved = !target.faved;
-            // but databinding works also if event hasnt property faved set in the beginning
-            // console.log(target.faved);
+            
         },
-        // click on event in list to see more details
+       
         select: function (target) {
             // only data with specific Ids can be selected
             if (target.iEventId != undefined) {
@@ -514,7 +512,7 @@ var oNewLoginVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
-            usernameemail = this.draft.sUserName;
+            usernameemail = this.draft.iLoginId;
             ajaxRequest.send(suserdata);
             console.log(suserdata);
         },
