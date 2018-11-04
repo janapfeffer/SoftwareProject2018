@@ -149,8 +149,35 @@ var oEventTableVue = new Vue({
     methods: {
 
         favToggle: function (target) {
-            // console.log(target);
-            Vue.set(target, 'faved', !target.faved)
+
+            if (loggedInUser != "") {
+              // save _id of target in saved_events of user
+              var ajaxRequest = new XMLHttpRequest();
+              var onSuccess = function onSuccess(){
+                console.log("success: " + this.status);
+                if (this.status == 200){
+                  // set target to be faved
+                  Vue.set(target, 'faved', !target.faved)
+                } else {
+                  // warnung dass das gerade nicht ging
+                }
+
+              };
+              var onFailed = function onFailed() {
+                console.log("failed");
+              };
+
+              ajaxRequest.addEventListener("load", onSuccess);
+              ajaxRequest.addEventListener("error", onFailed);
+              ajaxRequest.responseType = "json";
+              ajaxRequest.open("POST", "http://localhost:3000/user/saveEvent", true);
+              ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              var sNewSavedEvent = "userId=" + loggedInUser._id + "&eventId=" + target.iEventId;
+              ajaxRequest.send(sNewSavedEvent);
+            } else { // user ist nicht eingeloggt
+              // meldung, dass man sich anmelden soll oder so
+            }
+
 
         },
 
