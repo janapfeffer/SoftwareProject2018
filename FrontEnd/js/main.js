@@ -13,7 +13,8 @@ var oEvent = function (oEvent) {
     this.faved = oEvent.faved;
 };
 
-var usernameemail = "";
+// var usernameemail = "";
+var loggedInUser = "";
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
 var favoritegeklickt = false;
@@ -148,11 +149,11 @@ var oEventTableVue = new Vue({
     methods: {
 
         favToggle: function (target) {
-            
+
             Vue.set(target, 'faved', !target.faved)
-            
+
         },
-       
+
         select: function (target) {
             // only data with specific Ids can be selected
             if (target.iEventId != undefined) {
@@ -471,11 +472,11 @@ var oNewLoginVue = new Vue({
 
 
             var onSuccess = function onSuccess() {
-              console.log(this.response);
+              loggedInUser = this.response.user;
 
                 console.log(this.status);
                 if (this.status == 200) {
-                    alert('Willkommen ' + usernameemail);
+                    alert('Willkommen ' + loggedInUser.name);
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";
                     AfterLoginLogin.style.display = "none";
@@ -512,9 +513,9 @@ var oNewLoginVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
-            usernameemail = this.draft.iLoginId;
+            // usernameemail = this.draft.iLoginId;
             ajaxRequest.send(suserdata);
-            console.log(suserdata);
+
         },
 
 
