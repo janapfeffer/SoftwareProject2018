@@ -18,6 +18,7 @@ var loggedInUser = "";
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
 var favoritegeklickt = false;
+var initalFavoriteSetting = false;
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -76,7 +77,7 @@ var oNavigationVue = new Vue({
 
             document.body.classList.toggle('bigMap');
             map.getViewPort().resize();
-            
+
             //   oAsideVue.bShown = false;
         }
     }
@@ -148,7 +149,7 @@ var oEventTableVue = new Vue({
         selected: "", //id of selected event (to see more info)
         mapBounds: { ga: 0, ha: 0, ka: 0, ja: 0 },
         sQuery: "",
-       
+
     },
     computed: {
         filteredList: function () {
@@ -168,20 +169,25 @@ var oEventTableVue = new Vue({
     methods: {
 
         favToggle: function (target) {
-
-            if (loggedInUser != "") {
+          // abfrage, ob es gefavt war oder nicht
+          if (loggedInUser != "") { //only change status of faved i fa user is logged in
+            if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
+              Vue.set(target, 'faved', !target.faved);
+            } else {
               // save _id of target in saved_events of user
               var ajaxRequest = new XMLHttpRequest();
+
               var onSuccess = function onSuccess(){
                 console.log("success: " + this.status);
                 if (this.status == 200){
                   // set target to be faved
-                  Vue.set(target, 'faved', !target.faved)
+                  Vue.set(target, 'faved', !target.faved);
                 } else {
                   // warnung dass das gerade nicht ging
                 }
 
               };
+
               var onFailed = function onFailed() {
                 console.log("failed");
               };
@@ -193,9 +199,11 @@ var oEventTableVue = new Vue({
               ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
               var sNewSavedEvent = "userId=" + loggedInUser._id + "&eventId=" + target.iEventId;
               ajaxRequest.send(sNewSavedEvent);
-            } else { // user ist nicht eingeloggt
-              // meldung, dass man sich anmelden soll oder so
             }
+          } else { // user ist nicht eingeloggt
+            // meldung, dass man sich anmelden soll oder so
+          }
+
 
 
         },
@@ -522,6 +530,7 @@ var oNewLoginVue = new Vue({
                 if (this.status === 200) {
                   // save user in global variable
                   loggedInUser = this.response.user;
+                  initalFavoriteSetting = true
                   //set favorite events stars (favtoggle)
                   for (var i = 0; i < loggedInUser.saved_events.length; i++) {
                     for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
@@ -532,6 +541,7 @@ var oNewLoginVue = new Vue({
                       }
                     }
                   }
+                  initalFavoriteSetting = false;
 
                     alert('Willkommen');
                     AfterLoginFavoriten.style.visibility = "visible";
