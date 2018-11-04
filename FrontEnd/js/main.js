@@ -25,6 +25,15 @@ var oNavigationVue = new Vue({
     },
     methods: {
 
+
+        showNewEventCard: function () {
+            oNewEventVue.cardShown = !oNewEventVue.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+            oNewFavoiteVue.cardShown = false;
+            favoritegeklickt = !favoritegeklickt;
+        },
+
         showNewFavoiteCard: function () {
             favoritegeklickt = !favoritegeklickt;
         },
@@ -392,17 +401,24 @@ var oRegisterVue = new Vue({
             }
         },
         formsubmit: function () {
-            var onSuccess = function onSuccess() {
-                alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
-            };
-            var onFailed = function onFailed() {
-                alert(' SO NE SCHEISSE');
-            };
 
-
-            this.cardShown = !this.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
+            if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
+                var onSuccess = function onSuccess() {
+                    alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
+                    this.cardShown = !this.cardShown;
+                    oRegisterVue.cardShown = false;
+                    oNewLoginVue.cardShown = false;
+                };
+                var onFailed = function onFailed() {
+                    alert(' SO NE SCHEISSE');
+                };
+            }
+            else {
+                Reg_Pass_Fehler.style.display = "block";
+            }
+            Reg_Pass_Fehler
+            
+            
 
             var newuser = "http://localhost:3000/user/signup"
             var ajaxRequest = new XMLHttpRequest();
@@ -445,16 +461,29 @@ var oNewLoginVue = new Vue({
 
 
             var onSuccess = function onSuccess() {
-               
+
                 console.log(this.status);
                 if (this.status == 200) {
                     alert('Willkommen ' + usernameemail);
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";
-                    AfterLoginLogin.style.visibility = "hidden";
+                    AfterLoginLogin.style.display = "none";
+                    newLoginWrapper.style.display = "hidden";
+                    //Hier muss die Karte unsichtbar gemacht werden
+                    this.cardShown = !this.cardShown;
+                    oRegisterVue.cardShown = false;
+                    oNewLoginVue.cardShown = false;
+
 
                 } else {
-                    alert('Anmeldung nicht erfolgreich');
+                    if (document.querySelector("#Login_username").value == "" || document.querySelector("#Login_password").value == "") {
+
+                        LoginFehlerLeer.style.display = "inline";
+                    }
+                    else {
+                        LoginFehlerDaten.style.display = "inline";
+                    }
+
 
                 }
 
@@ -462,6 +491,7 @@ var oNewLoginVue = new Vue({
             var onFailed = function onFailed() {
                 alert(' SO NE SCHEISSE');
             };
+
 
 
             ajaxRequest.addEventListener("load", onSuccess);
@@ -474,8 +504,6 @@ var oNewLoginVue = new Vue({
             usernameemail = this.draft.sUserName;
             ajaxRequest.send(suserdata);
             console.log(suserdata);
-
-            this.cardShown = !this.cardShown;
         },
 
 

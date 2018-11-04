@@ -31,14 +31,21 @@
     <title> Event Finder </title>
 
     <!-- External Libaries-->
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="//storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
     <link rel="stylesheet"
           href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!--Icon library for Like/Dislike Button-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- JQuery-->
     <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
+
+
     <!-- Vue.js-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
@@ -146,22 +153,34 @@
                 <p>
                     Registrieren sie sich jetzt!
                 </p>
+
+                <div id="Reg_Pass_Fehler" style="display: none">
+                    <i class="material-icons" style="float: left">warning</i>
+                    <p style="color:red; ">
+                        <b>
+                            Beide Passwörter müssen richtig sein!
+                        </b>
+                    </p>
+                </div>
+
+
+
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" v-model="draft.rUserName">
+                    <input class="mdl-textfield__input" type="text" v-model="draft.rUserName" name="Username" id="Username">
                     <label class="mdl-textfield__label" for="sample1">Username</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" v-model="draft.rEmail">
+                    <input class="mdl-textfield__input" type="text" v-model="draft.rEmail" name="email" id="email">
                     <label class="mdl-textfield__label" for="sample2">E-Mail</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                    <input class="mdl-textfield__input" type="password" v-model="draft.rPassword">
+                    <input class="mdl-textfield__input" type="password" v-model="draft.rPassword" name="password1" id="password1">
                     <label class="mdl-textfield__label" for="sample3">Password</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                    <input class="mdl-textfield__input" type="password" v-model="draft.rPassword2">
+                    <input class="mdl-textfield__input" type="password" v-model="draft.rPassword2" name="password2" id="password2">
                     <label class="mdl-textfield__label" for="schools">erneuert Passwort</label>
                 </div>
 
@@ -179,30 +198,55 @@
         
         <!-- Login Card-->
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
+        <div id="EINLOGEN_Karte">
         <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Loggen sie sich hier ein</h2>
             <div id="newLogin" class="sidecard">
                 <p>
                     Loggen sie sich hier ein!
                 </p>
+
+
+                <div id="LoginFehlerLeer" style="display: none">
+                    <i class="material-icons" style="float: left">error_outline</i>
+                    <p style="color:red; ">
+                        <b>
+                            Bitte füllen sie alle Felder aus!
+                        </b>
+                    </p>
+                </div>
+
+
+                <div id="LoginFehlerDaten" style="display: none">
+                    <i class="material-icons" style="float: left">error_outline</i>
+                    <p style="color:red; ">
+                        <b>
+                            Ihr eingegebener Benutzername/Passwort stimmen nicht überein!
+                        </b>
+                    </p>
+                </div>
+
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" v-model="draft.sUserName">
+                    <input class="mdl-textfield__input" type="text" v-model="draft.sUserName" name="Login_username" id="Login_username">
                     <label class="mdl-textfield__label" for="sample1">E-Mail</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" v-model="draft.sPassword">
+                    <input class="mdl-textfield__input" type="password" v-model="draft.sPassword" name="Login_password" id="Login_password">
                     <label class="mdl-textfield__label" for="schools">Passwort</label>
                 </div>
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click='BobMarleyCard'>
                         Registieren
-                    </button> 
-                    <button  style="color:ghostwhite; font-family:Bahnschrift;" 
-                            class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit" >Login </button>
+                    </button>
+                    <button style="color:ghostwhite; font-family:Bahnschrift;"
+                            class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                        Login
+                    </button>
                 </div>
             </div>
         </div>
         <!-- Login Card End-->
+            </div>
         <!-- Karte für Event, Alles rechts neben der Karte-->
         <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Neues Event eintragen</h2>
@@ -276,59 +320,71 @@
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht" type="text" id="sample1">
                             <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
-                         </div>
-                            <!-- Popup Diaglo -->
-
-                            <dialog class="mdl-dialog" id="DIALOG_EVENT">
-                                <h4 class="mdl-dialog__title">Kommentare</h4>
-                                <div class="mdl-dialog__content">
-                                    <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
-                                    <p>{{event.sName}}</p>
-
-                                    <form action="#">
-                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="text" id="sample3">
-                                                <label class="mdl-textfield__label" for="sample3">Ihr Kommentar</label>
-                                            </div>
-                                        </form>
-                                        <!-- Vorübergehend, muss ersetzt werden-->
-                                        <ul class="demo-list-two mdl-list">
-                                            <li class="mdl-list__item mdl-list__item--two-line">
-                                                <span class="mdl-list__item-primary-content">
-                                                    <i class="material-icons mdl-list__item-avatar">person</i>
-                                                    <span>Bryan Cranston</span>
-                                                    <span class="mdl-list__item-sub-title">62 Episodes</span>
-                                                </span>
-                                                <span class="mdl-list__item-secondary-content">
-                                                    <span class="mdl-list__item-secondary-info">Actor</span>
-                                                </span>
-                                            </li>
-                                            <li class="mdl-list__item mdl-list__item--two-line">
-                                                <span class="mdl-list__item-primary-content">
-                                                    <i class="material-icons mdl-list__item-avatar">person</i>
-                                                    <span>Aaron Paul</span>
-                                                    <span class="mdl-list__item-sub-title">62 Episodes</span>
-                                                </span>
-                                                <span class="mdl-list__item-secondary-content">
-
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </p>
-                                </div>
-                                <div class="mdl-dialog__actions">
-                                    <button type="button" class="mdl-button close">Schließen</button>
-                                </div>
-                            </dialog>
-                            <!-- Two Line List with secondary info and action -->
-                            <style>
-                                .demo-list-two {
-                                    width: 300px;
-                                }
-                            </style>
-
-                            <!-- Test Button Ende-->
                         </div>
+                        <!-- Popup Diaglog -->
+
+                        <dialog class="mdl-dialog" style="width: 550px;">
+                            <h4 class="mdl-dialog__title">Kommentare</h4>
+                            <div class="mdl-dialog__content">
+                                <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
+                                <p>{{event.sName}}</p>
+                                <br />
+                                <br />
+                                <!-- Use an element to toggle between a like/dislike icon -->
+                                <i onclick="LikeButton(this)" style="position: absolute; right: 50px;" class="fa fa-thumbs-up"></i>
+                                <!-- Like/Dislike Button Aktion die ausgeführt wird beim klicken-->
+                                <script>
+                                    function LikeButton(x) {
+                                        x.classList.toggle("fa-thumbs-down");
+                                    }
+                                </script>
+                                <form action="#" style="width: 400px;">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" id="sample3" />
+                                        <label class="mdl-textfield__label" for="sample3">Ihr Kommentar</label>
+                                    </div>
+                                </form>
+
+                                <!-- Vorübergehend, muss ersetzt werden-->
+                                <ul class="demo-list-two mdl-list">
+                                    <li class="mdl-list__item mdl-list__item--two-line">
+                                        <span class="mdl-list__item-primary-content">
+                                            <i class="material-icons mdl-list__item-avatar">person</i>
+                                            <span>Bryan Cranston</span>
+                                            <span class="mdl-list__item-sub-title">62 Episodes</span>
+                                        </span>
+                                        <span class="mdl-list__item-secondary-content">
+                                            <span class="mdl-list__item-secondary-info">Actor</span>
+                                        </span>
+                                    </li>
+                                    <li class="mdl-list__item mdl-list__item--two-line">
+                                        <span class="mdl-list__item-primary-content">
+                                            <i class="material-icons mdl-list__item-avatar">person</i>
+                                            <span>Aaron Paul</span>
+                                            <span class="mdl-list__item-sub-title">62 Episodes</span>
+                                        </span>
+                                        <span class="mdl-list__item-secondary-content">
+
+                                        </span>
+                                    </li>
+                                </ul>
+                                </p>
+                            </div>
+                            <div class="mdl-dialog__actions">
+                                <button type="button" class="mdl-button close">Schließen</button>
+                            </div>
+                        </dialog>
+
+
+                        <!-- Two Line List with secondary info and action -->
+                        <style>
+                            .demo-list-two {
+                                width: 300px;
+                            }
+                        </style>
+
+                        <!-- Test Button Ende-->
+</div>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <a class="mdl-list__item-secondary-action favstar"
