@@ -39,8 +39,10 @@ var oNavigationVue = new Vue({
             favoritegeklickt = !favoritegeklickt;
             if (favoritegeklickt === true) {
                 document.getElementById('h2events').innerText = "Favoriten";
+               }
+            else {
+                document.getElementById('h2events').innerText = "Events";
             }
-            else { document.getElementById('h2events').innerText = "Events"; }
         },
 
         showNewLoginCard: function () {
@@ -509,6 +511,7 @@ var oNewLoginVue = new Vue({
                     AfterLoginEvent.style.visibility = "visible";
                     AfterLoginLogin.style.display = "none";
                     newLoginWrapper.style.display = "hidden";
+                    document.getElementById('sterne').style.visibility = "visible";
                     //Hier muss die Karte unsichtbar gemacht werden
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
