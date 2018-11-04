@@ -63,12 +63,25 @@ var oNavigationVue = new Vue({
             oNewFavoriteVue.cardShown = false;
         },
         toggleBigMap: function () {
+            bigmapgeklickt = !bigmapgeklickt;
+            if (bigmapgeklickt === true) {
+
+                document.getElementById('BigMap').innerText = "zurück zur Liste ";
+            }
+            else {
+                document.getElementById('BigMap').innerText = "Große Karte ";
+            }
+
             document.body.classList.toggle('bigMap');
             map.getViewPort().resize();
+            
             //   oAsideVue.bShown = false;
         }
     }
 });
+
+
+var bigmapgeklickt = false;
 
 function getFavorites(user_id) {
   const GETFAVORITES_URL = "http://localhost:3000/user" + user_id + "/events";
