@@ -33,11 +33,16 @@ var oNavigationVue = new Vue({
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
             oNewFavoriteVue.cardShown = false;
-            favoritegeklickt = !favoritegeklickt;
         },
 
         showNewFavoriteCard: function () {
             favoritegeklickt = !favoritegeklickt;
+            if (favoritegeklickt === true) {
+                document.getElementById('h2events').innerText = "Favoriten";
+               }
+            else {
+                document.getElementById('h2events').innerText = "Events";
+            }
         },
 
         showNewLoginCard: function () {
@@ -60,12 +65,25 @@ var oNavigationVue = new Vue({
             oNewFavoriteVue.cardShown = false;
         },
         toggleBigMap: function () {
+            bigmapgeklickt = !bigmapgeklickt;
+            if (bigmapgeklickt === true) {
+
+                document.getElementById('BigMap').innerText = "zurück zur Liste ";
+            }
+            else {
+                document.getElementById('BigMap').innerText = "Große Karte ";
+            }
+
             document.body.classList.toggle('bigMap');
             map.getViewPort().resize();
+            
             //   oAsideVue.bShown = false;
         }
     }
 });
+
+
+var bigmapgeklickt = false;
 
 function getFavorites(user_id) {
   const GETFAVORITES_URL = "http://localhost:3000/user" + user_id + "/events";
@@ -129,7 +147,8 @@ var oEventTableVue = new Vue({
         allEvents: aAllEvents,
         selected: "", //id of selected event (to see more info)
         mapBounds: { ga: 0, ha: 0, ka: 0, ja: 0 },
-        sQuery: ""
+        sQuery: "",
+       
     },
     computed: {
         filteredList: function () {
@@ -519,6 +538,7 @@ var oNewLoginVue = new Vue({
                     AfterLoginEvent.style.visibility = "visible";
                     AfterLoginLogin.style.display = "none";
                     newLoginWrapper.style.display = "hidden";
+                    document.getElementById('sterne').style.visibility = "visible";
                     //Hier muss die Karte unsichtbar gemacht werden
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
