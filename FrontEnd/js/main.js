@@ -14,7 +14,8 @@ var oEvent = function (oEvent) {
 };
 
 var usernameemail = "";
-
+var daumenhochgeklickt = false;
+var daumenruntergeklickt = false;
 var favoritegeklickt = false;
 var oNavigationVue = new Vue({
     el: "#navigation",

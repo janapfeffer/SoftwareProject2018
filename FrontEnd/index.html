@@ -22,7 +22,6 @@
     -->
 <!-- MetaDaten: -->
 
-
 <head>
     <meta http-equiv="language" content="german, de">
     <meta charset="utf-8" />
@@ -92,7 +91,7 @@
                     <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event eintragen</a>
 
                     <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
-                    <a class="mdl-navigation__link"  id="AfterLoginLogin" style="visibility: visible;" @click='showNewLoginCard'>Login</a>
+                    <a class="mdl-navigation__link" id="AfterLoginLogin" style="visibility: visible;" @click='showNewLoginCard'>Login</a>
 
                 </nav>
             </div>
@@ -104,14 +103,14 @@
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
                 <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
-                <a class="mdl-navigation__link"  @click='showNewFavoiteCard'>Favoriten</a>
+                <a class="mdl-navigation__link" @click='showNewFavoiteCard'>Favoriten</a>
                 <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
             </nav>
         </div>
     </div>
     <!-- Alles rechts neben der Karte-->
     <div id="aside">
-       
+
         <!-- Date Filter Card-->
         <div id="newDateWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Datum Filter: </h2>
@@ -124,7 +123,7 @@
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
                     <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
-                        :default-time="['15:00:00', '19:00:00']">
+                                    :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
                 <p>
@@ -194,59 +193,57 @@
 
         </div>
         <!-- Register Card End-->
-
-        
         <!-- Login Card-->
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="EINLOGEN_Karte">
-        <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-            <h2>Loggen sie sich hier ein</h2>
-            <div id="newLogin" class="sidecard">
-                <p>
-                    Loggen sie sich hier ein!
-                </p>
-
-
-                <div id="LoginFehlerLeer" style="display: none">
-                    <i class="material-icons" style="float: left">error_outline</i>
-                    <p style="color:red; ">
-                        <b>
-                            Bitte füllen sie alle Felder aus!
-                        </b>
+            <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
+                <h2>Loggen sie sich hier ein</h2>
+                <div id="newLogin" class="sidecard">
+                    <p>
+                        Loggen sie sich hier ein!
                     </p>
-                </div>
 
 
-                <div id="LoginFehlerDaten" style="display: none">
-                    <i class="material-icons" style="float: left">error_outline</i>
-                    <p style="color:red; ">
-                        <b>
-                            Ihr eingegebener Benutzername/Passwort stimmen nicht überein!
-                        </b>
-                    </p>
-                </div>
+                    <div id="LoginFehlerLeer" style="display: none">
+                        <i class="material-icons" style="float: left">error_outline</i>
+                        <p style="color:red; ">
+                            <b>
+                                Bitte füllen sie alle Felder aus!
+                            </b>
+                        </p>
+                    </div>
 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" v-model="draft.sUserName" name="Login_username" id="Login_username">
-                    <label class="mdl-textfield__label" for="sample1">E-Mail</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" v-model="draft.sPassword" name="Login_password" id="Login_password">
-                    <label class="mdl-textfield__label" for="schools">Passwort</label>
-                </div>
-                <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click='BobMarleyCard'>
-                        Registieren
-                    </button>
-                    <button style="color:ghostwhite; font-family:Bahnschrift;"
-                            class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
-                        Login
-                    </button>
+
+                    <div id="LoginFehlerDaten" style="display: none">
+                        <i class="material-icons" style="float: left">error_outline</i>
+                        <p style="color:red; ">
+                            <b>
+                                Ihr eingegebener Benutzername/Passwort stimmen nicht überein!
+                            </b>
+                        </p>
+                    </div>
+
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" v-model="draft.sUserName" name="Login_username" id="Login_username">
+                        <label class="mdl-textfield__label" for="sample1">E-Mail</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="password" v-model="draft.sPassword" name="Login_password" id="Login_password">
+                        <label class="mdl-textfield__label" for="schools">Passwort</label>
+                    </div>
+                    <div class="buttons">
+                        <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click='BobMarleyCard'>
+                            Registieren
+                        </button>
+                        <button style="color:ghostwhite; font-family:Bahnschrift;"
+                                class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                            Login
+                        </button>
+                    </div>
                 </div>
             </div>
+            <!-- Login Card End-->
         </div>
-        <!-- Login Card End-->
-            </div>
         <!-- Karte für Event, Alles rechts neben der Karte-->
         <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Neues Event eintragen</h2>
@@ -282,10 +279,10 @@
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
                     <el-date-picker v-model="draft.EDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
-                        :default-time="['15:00:00', '19:00:00']">
+                                    :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
-                <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file"  @change="onFileSelected">
+                <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected">
                 <!--label for="imageUpload">Laden Sie Ihr Eventbild hoch!</label-->
                 <div class="buttons">
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
@@ -299,9 +296,9 @@
         </div>
         <div class="sidecardWrapper">
             <h2> Events</h2>
-           
+
             <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
-    v-model="sQuery" @keyup.enter="searchEvent"><input-->
+            v-model="sQuery" @keyup.enter="searchEvent"><input-->
             <ul id="eventTable" class="sidecard demo-list-three mdl-list">
                 <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
                     @click="select(event)" v-bind:id="event.iEventId">
@@ -331,13 +328,38 @@
                                 <br />
                                 <br />
                                 <!-- Use an element to toggle between a like/dislike icon -->
-                                <i onclick="LikeButton(this)" style="position: absolute; right: 50px;" class="fa fa-thumbs-up"></i>
-                                <!-- Like/Dislike Button Aktion die ausgeführt wird beim klicken-->
+                                <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
+                                <i onclick="LikeButton2(this)" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
+                                <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
                                 <script>
                                     function LikeButton(x) {
-                                        x.classList.toggle("fa-thumbs-down");
+                                        if (daumenhochgeklickt == false) {
+                                            daumenruntergeklickt = !daumenruntergeklickt;
+                                        }
+                                        if (daumenruntergeklickt === true && daumenhochgeklickt === false) {
+                                            x.style.color = "red";
+                                        }
+                                        else {
+                                            x.style.color = "grey";
+                                        }
+                                    }
+                                    function LikeButton2(x) {
+
+                                        if (daumenruntergeklickt == false) {
+                                            daumenhochgeklickt = !daumenhochgeklickt;
+                                        }
+                                        if (daumenhochgeklickt === true && daumenruntergeklickt === false) {
+                                            x.style.color = "green";
+                                        }
+                                        else {
+                                            x.style.color = "grey";
+                                        }
                                     }
                                 </script>
+                                <p style="color:black">Bewerte hier das Event gut oder schlecht </p>
+
+                                <p style="color:rebeccapurple; font:22px "> Gib hier dein Kommentar ab </p>
+
                                 <form action="#" style="width: 400px;">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="sample3" />
@@ -384,15 +406,15 @@
                         </style>
 
                         <!-- Test Button Ende-->
-</div>
-                    </span>
-                    <span class="mdl-list__item-secondary-content">
-                        <a class="mdl-list__item-secondary-action favstar"
-                           @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
-                    </span>
-                </li>
-            </ul>
         </div>
+        </span>
+        <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action favstar"
+               @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
+        </span>
+        </li>
+        </ul>
+    </div>
     </div>
 
 
@@ -400,26 +422,25 @@
         <h1>
             Event Finder
         </h1>
-       
-            <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
-            <div id="searchPlaceInner" autocomplete="off">
-                <div class="autocomplete" style="width:370;">
-                    <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
-                           @keyup="autocomplete" @keyup.enter="searchPlace">
-                    <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                            name="action" @click="searchPlace">
-                        Suche
-                    </button>
-                </div>
+        <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
+
+        <div id="searchPlaceInner" autocomplete="off">
+            <div class="autocomplete" style="width:370;">
+                <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
+                       @keyup="autocomplete" @keyup.enter="searchPlace">
+                <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                        name="action" @click="searchPlace">
+                    Suche
+                </button>
             </div>
+        </div>
 
 
     </div>
 
     </div>
     <!-- Seachbar Ends here-->
-
     </div>
 
 
