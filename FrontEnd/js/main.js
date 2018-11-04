@@ -149,7 +149,7 @@ var oEventTableVue = new Vue({
     methods: {
 
         favToggle: function (target) {
-
+            // console.log(target);
             Vue.set(target, 'faved', !target.faved)
 
         },
@@ -476,6 +476,17 @@ var oNewLoginVue = new Vue({
 
                 console.log(this.status);
                 if (this.status == 200) {
+                  //todo: set favorite events stars
+                  for (var j = 0; j < oEventTableVue.allEvents.length; j++) { // for verschachtelung umdrehen
+                    for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+                      if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                        console.log(oEventTableVue.allEvents[j].iEventId);
+                        oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                        break;
+                      }
+                    }
+                  }
+
                     alert('Willkommen ' + loggedInUser.name);
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";
