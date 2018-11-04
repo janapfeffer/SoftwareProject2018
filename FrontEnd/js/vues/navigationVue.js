@@ -6,7 +6,7 @@ var oNavigationVue = new Vue({
     methods: {
 
         showNewFavoriteCard: function () {
-            oNewFavoriteVue.cardShown = !oNewFavoriteeVue.cardShown;
+            oNewFavoriteVue.cardShown = !oNewFavoriteVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
             oNewEventVue.cardShown = false;
@@ -16,26 +16,26 @@ var oNavigationVue = new Vue({
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoriteeVue.cardShown = false;
+            oNewFavoriteVue.cardShown = false;
         },
         showNewLoginCard: function () {
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoriteeVue.cardShown = false;
+            oNewFavoriteVue.cardShown = false;
         },
         showNewRegisterCard: function () {
             oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
             oNewLoginVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoriteeVue.cardShown = false;
+            oNewFavoriteVue.cardShown = false;
         },
         showNewDateCard: function () {
             oNewDateVue.cardShown = !oNewDateVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoriteeVue.cardShown = false;
+            oNewFavoriteVue.cardShown = false;
         },
         toggleBigMap: function () {
             document.body.classList.toggle('bigMap');
