@@ -21,7 +21,7 @@ var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
         horizontalMenueShown: true,
-       
+
 
     },
     methods: {
@@ -31,32 +31,32 @@ var oNavigationVue = new Vue({
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoiteVue.cardShown = false;
+            oNewFavoriteVue.cardShown = false;
             favoritegeklickt = !favoritegeklickt;
         },
 
-        showNewFavoiteCard: function () {
+        showNewFavoriteCard: function () {
             favoritegeklickt = !favoritegeklickt;
         },
-       
+
         showNewLoginCard: function () {
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoiteVue.cardShown = false;
+            oNewFavoriteVue.cardShown = false;
         },
         showNewRegisterCard: function () {
             oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
             oNewLoginVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoiteVue.cardShown = false;
+            oNewFavoriteVue.cardShown = false;
         },
         showNewDateCard: function () {
             oNewDateVue.cardShown = !oNewDateVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoiteVue.cardShown = false;
+            oNewFavoriteVue.cardShown = false;
         },
         toggleBigMap: function () {
             document.body.classList.toggle('bigMap');
@@ -418,8 +418,8 @@ var oRegisterVue = new Vue({
                 Reg_Pass_Fehler.style.display = "block";
             }
             Reg_Pass_Fehler
-            
-            
+
+
 
             var newuser = "http://localhost:3000/user/signup"
             var ajaxRequest = new XMLHttpRequest();

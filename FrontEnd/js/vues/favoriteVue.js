@@ -1,4 +1,4 @@
-var oNewFavoiteVue = new Vue({
+var oNewFavoriteVue = new Vue({
     el: "#newFavoriteWrapper",
     data: {
         cardShown: false,

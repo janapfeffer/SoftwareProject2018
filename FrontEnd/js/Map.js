@@ -337,13 +337,6 @@ function openBubble(position, oData) {
         "</div>" +
         "</div>";
 
-    "<span class=nobr class='mdl-list__item-text-body'>{{ event.sAdress }}</span>"
-    "<br style='line-height: 150%;'>"
-    "<i class='fa fa-calendar' style='font-size:18px'></i>"
-    "<span class=nobr class='mdl-list__item-text-body'>{{ event.oStartDate }}</span>"
-    "<i class='fa fa-clock-o' style='font-size:18px'></i>"
-    "<span class=nobr class='mdl-list__item-text-body'>{{ event.oStartTime }}</span>"
-
     //background img
     //style='background-image: url(" + oData.oImage + "); background-size: 244px 154px;;'
 
