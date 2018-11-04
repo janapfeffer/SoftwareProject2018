@@ -306,6 +306,8 @@
                         <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
                         <!--{{ event.oImage }} i class="material-icons mdl-list__item-avatar">person</i-->
                         <span>{{ event.sName }}</span>
+                        <a class="mdl-list__item-secondary-action favstar"
+                           @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
                         <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
                         <i class="fa fa-calendar" style="font-size:18px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
@@ -314,6 +316,7 @@
                         <br style="line-height: 150%;">
                         <i class="fa fa-map-marker" style="font-size:24px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht" type="text" id="sample1">
                             <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
@@ -406,12 +409,9 @@
                         </style>
 
                         <!-- Test Button Ende-->
-        </div>
+</div>
         </span>
-        <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action favstar"
-               @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
-        </span>
+        
         </li>
         </ul>
     </div>
