@@ -43,9 +43,9 @@ var oNewEventVue = new Vue({
                     //Post Request mit LatLgn senden
                     var URI = 'http://localhost:3000/events';
                     var ajaxRequest = new XMLHttpRequest();
-        
+
                     var onSuccess = function onSuccess() {
-        
+
                         alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
                         oNewEventVue.draft = { // reset vueinternal data to make possible to add new event
@@ -61,7 +61,7 @@ var oNewEventVue = new Vue({
 
                         }
                     };
-        
+
                     var onFailed = function onFailed() {
                         alert('Event konnt nicht angelegt werden!');
                     };
@@ -82,7 +82,7 @@ var oNewEventVue = new Vue({
                         event_picture: oNewEventVue.draft.image
                     };
                     var stringBody = JSON.stringify(body);
-        
+
                     ajaxRequest.open('POST', URI);
                     ajaxRequest.setRequestHeader('Content-Type', 'application/json');
                     ajaxRequest.send(stringBody);
@@ -94,7 +94,7 @@ var oNewEventVue = new Vue({
             )
 
 
-           
+
 
             //https://www.youtube.com/watch?v=VqnJwh6E9ak see this for picture upload
         },
