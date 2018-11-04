@@ -83,7 +83,7 @@ function getAllEvents() {
                 oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
-                sDisplayEventLink: apievent.event_link != undefined ? "show" : "none",
+                sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
                 sTicketLink: apievent.ticket_link,
                 oLatLgn: { lat: apievent.lat, lng: apievent.lng },
                 oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
