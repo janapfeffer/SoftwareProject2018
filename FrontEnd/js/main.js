@@ -476,9 +476,9 @@ var oNewLoginVue = new Vue({
 
                 console.log(this.status);
                 if (this.status == 200) {
-                  //todo: set favorite events stars
-                  for (var j = 0; j < oEventTableVue.allEvents.length; j++) { // for verschachtelung umdrehen
-                    for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+                  //set favorite events stars (favtoggle)
+                  for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+                    for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
                       if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
                         console.log(oEventTableVue.allEvents[j].iEventId);
                         oEventTableVue.favToggle(oEventTableVue.allEvents[j])
