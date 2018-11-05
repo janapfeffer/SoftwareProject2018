@@ -40,9 +40,17 @@ var oNavigationVue = new Vue({
             favoritegeklickt = !favoritegeklickt;
             if (favoritegeklickt === true) {
                 document.getElementById('h2events').innerText = "Favoriten";
+                //filter event table for faved
+                oEventTableVue.filteredList = function() { //doesn't work like this
+                  vi = this;
+                  return this.allEvents.filter(item => { return item.faved;});
+
+                };
+
                }
             else {
                 document.getElementById('h2events').innerText = "Events";
+                // display all events
             }
         },
 
