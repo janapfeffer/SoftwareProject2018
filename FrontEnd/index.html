@@ -321,16 +321,17 @@
                         <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
 
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht" type="text" id="sample1">
+                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName)" type="text" id="sample1">
                             <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
                         </div>
                         <!-- Popup Diaglog -->
 
                         <dialog class="mdl-dialog" style="width: 550px;">
-                            <h4 class="mdl-dialog__title">Kommentare</h4>
+                            <h4 class="mdl-dialog__title" id="kommiüberschrift">Kommentare</h4>
                             <div class="mdl-dialog__content">
-                                <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
-                                <p>{{event.sName}}</p>
+                               
+                                <p id="eventidkommentare"> haha</p>
+                                <p id="eventidkommentare2"> haha</p>
                                 <br />
                                 <br />
                                 <!-- Use an element to toggle between a like/dislike icon -->
