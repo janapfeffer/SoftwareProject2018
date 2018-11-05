@@ -14,6 +14,7 @@ var oEvent = function (oEvent) {
 };
 
 // var usernameemail = "";
+var kommi = false;
 var loggedInUser = "";
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
@@ -254,19 +255,21 @@ var oEventTableVue = new Vue({
             this.allEvents = aFilterdEvents;
         },
         //Offnet bzw macht Popup moeglich
-        KommentarGemacht: function () {
-            var dialog = document.querySelector('dialog');
-            var showDialogButton = document.querySelector('#show-dialog');
-            if (!dialog.showModal) {
-                dialogPolyfill.registerDialog(dialog);
+        KommentarGemacht: function (id, name) {
+            kommi = true;
+            if (kommi === true) {
+                var dialog = document.querySelector('dialog');
+                document.getElementById('kommiüberschrift').innerText = name;
+                document.getElementById('eventidkommentare').innerText = "Kommentare zu diesem Event ";
+                document.getElementById('eventidkommentare2').innerText = "ID:" + id;
+                    dialog.showModal();
             }
-            showDialogButton.addEventListener('click', function () {
-                dialog.showModal();
-            });
             dialog.querySelector('.close').addEventListener('click', function () {
                 dialog.close();
             });
-        }
+        },
+        
+
     }
     // ,
     // mounted: function() {
