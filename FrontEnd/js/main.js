@@ -317,7 +317,7 @@ var oEventTableVue = new Vue({
             ajaxRequest.responseType = "json";
             ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            var sFormData = "userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+            var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
             ajaxRequest.send(sFormData);
         },
 
@@ -344,17 +344,42 @@ var oEventTableVue = new Vue({
             this.allEvents = aFilterdEvents;
         },
         //Offnet bzw macht Popup moeglich
-        KommentarGemacht: function (id, name) {
+        KommentarGemacht: function (id, name, comments) {
             kommi = true;
             if (loggedInUser != "") {
 
                 if (kommi === true) {
                     document.getElementById('gibhier').innerText = " Gib hier dein Kommentar ab " + loggedInUser.name;
-                    document.getElementById('lol').innerText = loggedInUser.name;
+                    // document.getElementById('lol').innerText = loggedInUser.name;
                     var dialog = document.querySelector('dialog');
                     document.getElementById('kommiüberschrift').innerText = name;
                     document.getElementById('eventidkommentare').innerText = "Kommentare zu diesem Event ";
                     document.getElementById('eventidkommentare2').innerText = "ID:" + id;
+
+                    //add comments to list
+                    for (var r = 0; r < comments.length; r++){
+                      var node = document.createElement("LI");                 // Create a <li> node
+
+                      var span = document.createElement("SPAN");
+                      span.className = "mdl-list__item-primary-content";
+
+                      var i = document.createElement("I");
+                      i.className = "material-icons mdl-list__item-avatar";
+                      i.innerHTML = "person";
+
+                      var comment = document.createElement("SPAN");
+                      comment.innerHTML = comments[r].comment;         // Create a text node
+                      var user = document.createElement("SPAN");
+                      user.innerHTML = comments[r].username;
+                      user.className = "mdl-list__item-text-body";
+
+                      span.appendChild(i);
+                      span.appendChild(user);
+                      span.appendChild(comment);
+
+                      node.appendChild(span);                              // Append the text to <li>
+                      document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
+                    }
                     dialog.showModal();
                 }
                 dialog.querySelector('.close').addEventListener('click', function () {
