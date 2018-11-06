@@ -357,6 +357,10 @@ var oEventTableVue = new Vue({
                     document.getElementById('eventidkommentare2').innerText = "ID:" + id;
 
                     //add comments to list
+                    var list = document.getElementById("myList");
+                    while (list.firstChild) {
+                    list.removeChild(list.firstChild);
+}
                     for (var r = 0; r < comments.length; r++){
                       var node = document.createElement("LI");                 // Create a <li> node
 
@@ -656,7 +660,7 @@ var oRegisterVue = new Vue({
             }
 
 
-        
+
             Reg_Pass_Fehler
             Reg_SONS_Fehler
             Reg_EMAIL_Fehler
