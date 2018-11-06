@@ -161,6 +161,7 @@ function getAllEvents() {
         oEventTableVue.allEvents = apievents.map(apievent => {
             return {
                 iEventId: apievent._id,
+                aComments: apievent.comments,
                 aRatings: apievent.ratings,
                 sName: apievent.event_name,
                 sDescription: apievent.description,
@@ -296,6 +297,23 @@ var oEventTableVue = new Vue({
         },
         kommentargeschickt: function (id) {
             alert("jo girl abgeschicktes kommentar");
+            var ajaxRequest = new XMLHttpRequest();
+            var comment = document.querySelector("#idComment").value;
+
+            var onSuccess = function onSuccess(){
+              console.log("toll");
+            };
+            var onFailed = function onFailed() {
+              console.log("failed");
+            };
+
+            ajaxRequest.addEventListener("load", onSuccess);
+            ajaxRequest.addEventListener("error", onFailed);
+            ajaxRequest.responseType = "json";
+            ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
+            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            var sFormData = "userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+            ajaxRequest.send(sFormData);
         },
 
         select: function (target) {
@@ -637,7 +655,7 @@ var oNewLoginVue = new Vue({
 
             var suserlogin = "http://localhost:3000/user/login"
             var ajaxRequest = new XMLHttpRequest();
-           
+
 
             var onSuccess = function onSuccess() {
                 console.log(this.status);
