@@ -241,6 +241,11 @@ var oEventTableVue = new Vue({
                 // console.log(bool);
                 return bool;
             })
+        },
+        commentList: function () {
+          return this.allEvents.filter(function(value) {
+            return value.iEventId === this.selected;
+          })[0];
         }
     },
     methods: {
