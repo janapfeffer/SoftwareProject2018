@@ -47,8 +47,42 @@ exports.get_all_events = (req, res, next) => {
     });
 };
 
+// requires body with: eventId, userId, rating. rating must be the opposite of the rating that is delete_saved_event
+// -> if the event was rated with a thumb up (1) enter -1
 exports.delete_event_rating = (req, res, next) => {
-
+  OEvent.findById(req.body.eventId, "ratings", function (err, event) {
+    // if()
+    OEvent.updateOne(
+      { _id: req.body.eventId},
+      { $pull: {
+          ratings: {
+            user_id: req.body.userId,
+            rating: req.body.rating
+          }
+        },
+        $inc: {
+          current_rating: req.body.rating
+        }
+      },
+      { upsert: true}
+    )
+      .exec()
+      .then(result => {
+        res.status(200).json({
+          message: "Rating saved",
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/events"
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
 };
 
 // add a rating to an event
