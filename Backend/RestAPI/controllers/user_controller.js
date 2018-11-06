@@ -169,7 +169,7 @@ exports.get_saved_events = (req, res, next) => {
           $in: user.saved_events
         }
       })
-      .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng")
+      .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating")
       .populate("event_type")
       .exec()
       .then(events => {
@@ -191,7 +191,8 @@ exports.get_saved_events = (req, res, next) => {
                   comments: event.comments,
                   event_types: event.event_types,
                   lat: event.lat,
-                  lng: event.lng
+                  lng: event.lng,
+                  current_rating: event.current_rating
               };
           })
 

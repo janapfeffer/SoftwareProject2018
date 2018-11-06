@@ -6,7 +6,7 @@ const EventType = require("../models/event_type_model");
 //todo: add additional needed fields (whatever the front end wants)
 exports.get_all_events = (req, res, next) => {
   OEvent.find() //enter: {verification_status: true} into brackets for only verified events
-    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng")
+    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating")
     .populate("event_types")
     .populate("comments")
     .exec()
@@ -29,6 +29,7 @@ exports.get_all_events = (req, res, next) => {
             ticket_link: element.ticket_link,
             comments: element.comments,
             event_types: element.event_types,
+            current_rating: element.current_rating,
             request: {
               type: "GET",
               uri: "http://localhost:3000/events/" + element._id
@@ -43,7 +44,45 @@ exports.get_all_events = (req, res, next) => {
         error: err
       })
     });
-}
+};
+
+// add a rating to an event
+// requires body with: userId, eventId, rating (1 or -1)
+exports.rate_event = (req, res, next) => {
+  OEvent.findById(req.body.eventId, "ratings", function (err, event) {
+    // if()
+    OEvent.updateOne(
+      { _id: req.body.eventId},
+      { $push: {
+          ratings: {
+            user_id: req.body.userId,
+            rating: req.body.rating
+          }
+        },
+        $inc: {
+          current_rating: req.body.rating
+        }
+      },
+      { upsert: true}
+    )
+      .exec()
+      .then(result => {
+        res.status(200).json({
+          message: "Rating saved",
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/events"
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
+};
 
 
 exports.create_event = (req, res, next) => {
@@ -126,6 +165,7 @@ exports.delete_comment = (req, res, next) => {
 
 exports.add_comment = (req, res, next) => {
   OEvent.findById(req.body.eventId, "comments", function (err, event) {
+    console.log(event);
     OEvent.updateOne(
       { _id: req.body.eventId },
       {
@@ -230,10 +270,6 @@ exports.delete_event = (req, res, next) => {
     });
 };
 
-
-exports.rate_event = (req, res, next) => {
-  //todo
-};
 
 exports.rerate_event = (req, res, next) => {
   //todo
