@@ -294,6 +294,9 @@ var oEventTableVue = new Vue({
 
 
         },
+        kommentargeschickt: function (id) {
+            alert("jo girl abgeschicktes kommentar");
+        },
 
         select: function (target) {
             // only data with specific Ids can be selected
@@ -626,7 +629,7 @@ var oNewLoginVue = new Vue({
 
             var suserlogin = "http://localhost:3000/user/login"
             var ajaxRequest = new XMLHttpRequest();
-            alert("HAHA");
+           
 
             var onSuccess = function onSuccess() {
                 console.log(this.status);

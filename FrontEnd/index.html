@@ -312,6 +312,7 @@
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName)" type="text" id="sample1">
                             <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                            
                         </div>
                         <!-- Popup Diaglog -->
 
@@ -329,7 +330,7 @@
                                 <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
                                 <script>
                                     function LikeButton(x) {
-                                        
+
                                         if (daumenhochgeklickt == false) {
                                             daumenruntergeklickt = !daumenruntergeklickt;
                                         }
@@ -348,11 +349,11 @@
                                                 i = i + 1;
                                                 document.getElementById('bewertungsdurchschnitt').innerText = i;
                                             }
-                                            
+
                                         }
                                     }
                                     function LikeButton2(x) {
-                                       
+
                                         if (daumenruntergeklickt == false) {
                                             daumenhochgeklickt = !daumenhochgeklickt;
                                         }
@@ -375,16 +376,17 @@
                                     }
                                 </script>
                                 <p style="color:black">Bewerte hier das Event gut oder schlecht </p>
-                                <p id ="bewertungsdurchschnitt" style="color:black">bla </p>
+                                <p id="bewertungsdurchschnitt" style="color:black">bla </p>
 
                                 <p id="gibhier" style="color:rebeccapurple; font:22px "> Gib hier dein Kommentar ab </p>
 
                                 <form action="#" style="width: 400px;">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="sample3" />
-                                        <label class="mdl-textfield__label" for="sample3">Ihr Kommentar</label>
+                                        <label class="mdl-textfield__label" for="sample3"> </label>
                                     </div>
                                 </form>
+                                <button style="background-color:cadetblue;" @click="kommentargeschickt" type="button" class="mdl-button close">Abschicken</button>
 
                                 <!-- Vorübergehend, muss ersetzt werden-->
                                 <ul id="eventTable" class="sidecard demo-list-three mdl-list">
