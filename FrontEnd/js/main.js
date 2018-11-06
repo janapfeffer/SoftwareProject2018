@@ -20,6 +20,8 @@ var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
 var favoritegeklickt = false;
 var initalFavoriteSetting = false;
+var i = 0;
+var achtung = 0;
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -37,13 +39,13 @@ var oNavigationVue = new Vue({
             oNewFavoriteVue.cardShown = false;
         },
 
-        showNewFavoriteCard: function () {
+        shownewfavoritecard: function () {
             favoritegeklickt = !favoritegeklickt;
             if (favoritegeklickt === true) {
-                document.getElementById('h2events').innerText = "Favoriten";
-               }
+                document.getelementbyid('h2events').innertext = "favoriten";
+            }
             else {
-                document.getElementById('h2events').innerText = "Events";
+                document.getelementbyid('h2events').innertext = "events";
             }
         },
 
@@ -166,6 +168,18 @@ function getAllEvents() {
     ajaxRequest.open('GET', GETALLEVENTS_URL);
     ajaxRequest.send();
 }
+//function getComments(event_id) {
+//    const GETCOMMENTS_URL = "http://localhost:3000/events" + event_id;
+
+//    axios.get(GETCOMMENTS_URL).then(res => {
+//        console.log("Kommis für " + event_id + " erhalten: " + res);
+//        console.log(res.???);
+
+//    }).catch(function (error) {
+//        console.log(error);
+//    });
+//};
+
 
 //Vue fuer die Event Tabelle fertig
 var oEventTableVue = new Vue({
@@ -266,16 +280,25 @@ var oEventTableVue = new Vue({
         //Offnet bzw macht Popup moeglich
         KommentarGemacht: function (id, name) {
             kommi = true;
-            if (kommi === true) {
-                var dialog = document.querySelector('dialog');
-                document.getElementById('kommiüberschrift').innerText = name;
-                document.getElementById('eventidkommentare').innerText = "Kommentare zu diesem Event ";
-                document.getElementById('eventidkommentare2').innerText = "ID:" + id;
+            if (loggedInUser != "") {
+
+                if (kommi === true) {
+                    document.getElementById('gibhier').innerText = " Gib hier dein Kommentar ab " + loggedInUser.name;
+                    document.getElementById('lol').innerText = loggedInUser.name;
+                    var dialog = document.querySelector('dialog');
+                    document.getElementById('kommiüberschrift').innerText = name;
+                    document.getElementById('eventidkommentare').innerText = "Kommentare zu diesem Event ";
+                    document.getElementById('eventidkommentare2').innerText = "ID:" + id;
                     dialog.showModal();
+                }
+                dialog.querySelector('.close').addEventListener('click', function () {
+                    dialog.close();
+                });
             }
-            dialog.querySelector('.close').addEventListener('click', function () {
-                dialog.close();
-            });
+            else {
+                alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
+            }
+
         },
         
 
