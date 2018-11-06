@@ -357,7 +357,7 @@ var oEventTableVue = new Vue({
                     document.getElementById('eventidkommentare2').innerText = "ID:" + id;
 
                     //add comments to list
-                    var list = document.getElementById("myList");
+                    var list = document.getElementById("commentTable");
                     while (list.firstChild) {
                     list.removeChild(list.firstChild);
 }
