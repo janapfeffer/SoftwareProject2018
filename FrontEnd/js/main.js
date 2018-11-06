@@ -69,11 +69,20 @@ var oNavigationVue = new Vue({
         toggleBigMap: function () {
             bigmapgeklickt = !bigmapgeklickt;
             if (bigmapgeklickt === true) {
-
+                AfterLoginLogin.style.visibility = "hidden";
+                AfterLoginFavoriten.style.visibility = "hidden";
+                AfterLoginEvent.style.visibility = "hidden";
                 document.getElementById('BigMap').innerText = "zurück zur Liste ";
             }
             else {
                 document.getElementById('BigMap').innerText = "Große Karte ";
+                if (loggedInUser != "") {
+                    AfterLoginFavoriten.style.visibility = "visible";
+                    AfterLoginEvent.style.visibility = "visible";
+                }
+                else {
+                    AfterLoginLogin.style.visibility = "visible";
+                }
             }
 
             document.body.classList.toggle('bigMap');
@@ -292,10 +301,15 @@ var oSearchPlaceVue = new Vue({
         //Sucht nach einem Ort
         searchPlace: function searchPlace() {
             if (document.body.classList.contains('landingpage')) {
+                AfterLoginLogin.style.visibility = "visible";
+                BigMap.style.visibility = "visible";
                 document.body.classList.remove('landingpage');
                 document.querySelector("#searchPlace").vanillaTilt.destroy()
                 map.getViewPort().resize();
+                AfterLoginLogin.style.visibility = "visible";
+                BigMap.style.visibility = "visible";
             }
+            
             setCenter(this.sQuery);
         },
         //AutoComplet Funktion der Suchleiste
