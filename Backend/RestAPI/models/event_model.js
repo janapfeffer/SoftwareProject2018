@@ -18,7 +18,8 @@ const oEventSchema = mongoose.Schema({
     times_reported: { type: Number, default: 0 },
 
     comments: [{
-        username: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
+        username:  { type: String, required: true},
+        user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
         // should we replace this with the direct username instead of a reference?
         comment: { type: String, required: true }
     }],

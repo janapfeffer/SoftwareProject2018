@@ -210,7 +210,8 @@ exports.add_comment = (req, res, next) => {
       {
         $push: {
           comments: {
-            username: req.body.userId,
+            username: req.body.username,
+            user_id: req.body.userId,
             comment: req.body.comment
           }
         }
