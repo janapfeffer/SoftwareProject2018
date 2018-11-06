@@ -348,7 +348,7 @@ var oSearchPlaceVue = new Vue({
                 AfterLoginLogin.style.visibility = "visible";
                 BigMap.style.visibility = "visible";
             }
-            
+
             setCenter(this.sQuery);
         },
         //AutoComplet Funktion der Suchleiste
