@@ -24,7 +24,7 @@ const oEventSchema = mongoose.Schema({
     }]
     // array of ratings -> get, whether a user has already voted
     //calculate average. IMPORTANT if we want a user to be able to change their rating
-    
+
     // ratings: [{
     //   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
     //   rating: {type: Number, required: true}

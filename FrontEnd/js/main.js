@@ -36,16 +36,19 @@ var oNavigationVue = new Vue({
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
 
-        shownewfavoritecard: function () {
+        showNewFavoriteCard: function () {
             favoritegeklickt = !favoritegeklickt;
             if (favoritegeklickt === true) {
-                document.getelementbyid('h2events').innertext = "favoriten";
-            }
+                document.getElementById('h2events').innerText = "Favoriten";
+                document.getElementById('AfterLoginFavoriten').innerText = "Events";
+                getFavorites(loggedInUser._id);
+               }
             else {
-                document.getelementbyid('h2events').innertext = "events";
+                document.getElementById('h2events').innerText = "Events";
+                document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+                getAllEvents();
             }
         },
 
@@ -53,20 +56,17 @@ var oNavigationVue = new Vue({
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         showNewRegisterCard: function () {
             oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
             oNewLoginVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         showNewDateCard: function () {
             oNewDateVue.cardShown = !oNewDateVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         toggleBigMap: function () {
             bigmapgeklickt = !bigmapgeklickt;
@@ -96,34 +96,51 @@ var oNavigationVue = new Vue({
 });
 
 
-// async function starmanagement() {
-//   while(true){
-//     var stars = document.getElementsByName("stern");
-//     if (loggedInUser != ""){ // make stars visible if a user is logged in
-//         for(var m = 0; m < stars.length; m++) {
-//           stars[m].style = "visibility:visible;";
-//         }
-//     } else {
-//         for(var m = 0; m < stars.length; m++) {
-//           stars[m].style = "visibility:hidden;";
-//         }
-//     }
-//   }
-// };
-// starmanagement();
 
 var bigmapgeklickt = false;
 
 function getFavorites(user_id) {
-  const GETFAVORITES_URL = "http://localhost:3000/user" + user_id + "/events";
+  const GETFAVORITES_URL = "http://localhost:3000/user/" + user_id + "/events";
+  var ajaxRequest = new XMLHttpRequest();
 
-  axios.get(GETFAVORITES_URL).then(res => {
-      console.log("Favoriten für " + user_id + " erhalten: " + res);
-      console.log(res.saved_events);
-      //set favorite data to favorite vue
-  }).catch(function (error) {
-      console.log(error);
-  });
+  var onSuccess = function onSuccess() {
+
+      var apievents = this.response.saved_events;
+      oEventTableVue.allEvents = apievents.map(apievent => {
+          return {
+              iEventId: apievent._id,
+              sName: apievent.event_name,
+              sDescription: apievent.description,
+              sAdress: apievent.address,
+              oStartDate: apievent.start_date.split("T")[0],
+              oStartTime: apievent.start_date.split("T")[1].substring(0,5),
+              oEndDate: apievent.end_date,
+              sEventLink: apievent.event_link,
+              sTicketLink: apievent.ticket_link,
+              oLatLgn: {lat: apievent.lat, lng: apievent.lng},
+              oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
+          };
+      });
+      setMarkers(oEventTableVue.allEvents);
+
+      //set stars
+      initalFavoriteSetting = true;
+      for(var z = 0; z < oEventTableVue.allEvents.length; z++){
+        oEventTableVue.favToggle(oEventTableVue.allEvents[z]);
+      }
+      initalFavoriteSetting = false;
+  };
+
+  var onFailed = function onFailed() {
+      alert('Die Favoritenlist konnte nicht geladen werden!');
+  };
+  // Attach the event listeners to the XMLHttpRequest object
+  ajaxRequest.addEventListener("load", onSuccess);
+  ajaxRequest.addEventListener("error", onFailed);
+  ajaxRequest.responseType = "json";
+
+  ajaxRequest.open('GET', GETFAVORITES_URL);
+  ajaxRequest.send();
 };
 
 
@@ -155,6 +172,20 @@ function getAllEvents() {
             };
         });
         setMarkers(oEventTableVue.allEvents);
+        if (loggedInUser != ""){
+          //set stars
+          initalFavoriteSetting = true;
+          for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+            for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+              if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                console.log(oEventTableVue.allEvents[j].iEventId);
+                oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                break;
+              }
+            }
+          }
+          initalFavoriteSetting = false;
+        }
     };
 
     var onFailed = function onFailed() {
@@ -219,6 +250,10 @@ var oEventTableVue = new Vue({
               var requestURL = "http://localhost:3000/user/";
               if (target.faved) { //delete _id of target from saved_events of user
                 requestURL = requestURL + "unsaveEvent";
+                //delete favorite from loggedInUser
+                loggedInUser.saved_events = loggedInUser.saved_events.filter(function(value, index, arr){
+                  return value != target.iEventId;
+                });
               } else { // save _id of target in saved_events of user
                 requestURL = requestURL + "saveEvent";
               }
@@ -227,7 +262,7 @@ var oEventTableVue = new Vue({
               var onSuccess = function onSuccess(){
                 console.log("success: " + this.status);
                 if (this.status == 200){
-                  // set target to be faved
+                  // set target to be (not) faved
                   Vue.set(target, 'faved', !target.faved);
                 } else {
                   // warnung dass das gerade nicht ging?
@@ -300,7 +335,7 @@ var oEventTableVue = new Vue({
             }
 
         },
-        
+
 
     }
     // ,
@@ -332,7 +367,7 @@ var oSearchPlaceVue = new Vue({
                 AfterLoginLogin.style.visibility = "visible";
                 BigMap.style.visibility = "visible";
             }
-            
+
             setCenter(this.sQuery);
         },
         //AutoComplet Funktion der Suchleiste
@@ -559,7 +594,7 @@ var oRegisterVue = new Vue({
             var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
             console.log(snewuserdata);
             ajaxRequest.send(snewuserdata);
-        },
+        }
 
     }
 });
@@ -586,7 +621,7 @@ var oNewLoginVue = new Vue({
 
             var suserlogin = "http://localhost:3000/user/login"
             var ajaxRequest = new XMLHttpRequest();
-
+            alert("HAHA");
 
             var onSuccess = function onSuccess() {
                 console.log(this.status);
