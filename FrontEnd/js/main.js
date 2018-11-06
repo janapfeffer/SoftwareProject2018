@@ -20,6 +20,8 @@ var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
 var favoritegeklickt = false;
 var initalFavoriteSetting = false;
+var i = 0;
+var achtung = 0;
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -34,7 +36,6 @@ var oNavigationVue = new Vue({
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
 
         showNewFavoriteCard: function () {
@@ -55,20 +56,17 @@ var oNavigationVue = new Vue({
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         showNewRegisterCard: function () {
             oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
             oNewLoginVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         showNewDateCard: function () {
             oNewDateVue.cardShown = !oNewDateVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         toggleBigMap: function () {
             bigmapgeklickt = !bigmapgeklickt;
@@ -202,6 +200,18 @@ function getAllEvents() {
     ajaxRequest.open('GET', GETALLEVENTS_URL);
     ajaxRequest.send();
 }
+//function getComments(event_id) {
+//    const GETCOMMENTS_URL = "http://localhost:3000/events" + event_id;
+
+//    axios.get(GETCOMMENTS_URL).then(res => {
+//        console.log("Kommis für " + event_id + " erhalten: " + res);
+//        console.log(res.???);
+
+//    }).catch(function (error) {
+//        console.log(error);
+//    });
+//};
+
 
 //Vue fuer die Event Tabelle fertig
 var oEventTableVue = new Vue({
@@ -306,16 +316,25 @@ var oEventTableVue = new Vue({
         //Offnet bzw macht Popup moeglich
         KommentarGemacht: function (id, name) {
             kommi = true;
-            if (kommi === true) {
-                var dialog = document.querySelector('dialog');
-                document.getElementById('kommiüberschrift').innerText = name;
-                document.getElementById('eventidkommentare').innerText = "Kommentare zu diesem Event ";
-                document.getElementById('eventidkommentare2').innerText = "ID:" + id;
+            if (loggedInUser != "") {
+
+                if (kommi === true) {
+                    document.getElementById('gibhier').innerText = " Gib hier dein Kommentar ab " + loggedInUser.name;
+                    document.getElementById('lol').innerText = loggedInUser.name;
+                    var dialog = document.querySelector('dialog');
+                    document.getElementById('kommiüberschrift').innerText = name;
+                    document.getElementById('eventidkommentare').innerText = "Kommentare zu diesem Event ";
+                    document.getElementById('eventidkommentare2').innerText = "ID:" + id;
                     dialog.showModal();
+                }
+                dialog.querySelector('.close').addEventListener('click', function () {
+                    dialog.close();
+                });
             }
-            dialog.querySelector('.close').addEventListener('click', function () {
-                dialog.close();
-            });
+            else {
+                alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
+            }
+
         },
 
 
@@ -576,7 +595,7 @@ var oRegisterVue = new Vue({
             var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
             console.log(snewuserdata);
             ajaxRequest.send(snewuserdata);
-        },
+        }
 
     }
 });
@@ -603,7 +622,7 @@ var oNewLoginVue = new Vue({
 
             var suserlogin = "http://localhost:3000/user/login"
             var ajaxRequest = new XMLHttpRequest();
-
+            alert("HAHA");
 
             var onSuccess = function onSuccess() {
                 console.log(this.status);
