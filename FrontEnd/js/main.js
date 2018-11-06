@@ -419,6 +419,7 @@ var oSearchPlaceVue = new Vue({
         //Sucht nach einem Ort
         searchPlace: function searchPlace() {
             if (document.body.classList.contains('landingpage')) {
+
                 AfterLoginLogin.style.visibility = "visible";
                 BigMap.style.visibility = "visible";
                 document.body.classList.remove('landingpage');
@@ -725,7 +726,8 @@ var oNewLoginVue = new Vue({
                   }
                   initalFavoriteSetting = false;
 
-                    alert('Willkommen');
+                    alert('Willkommen' + loggedInUser.name);
+                    document.getElementById('eingeloggteruser').innerText = loggedInUser.name+"s EventFinder";
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";
                     AfterLoginLogin.style.display = "none";

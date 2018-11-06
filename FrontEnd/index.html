@@ -80,7 +80,7 @@
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
-                <span class="mdl-layout-title">
+                <span id="eingeloggteruser" class="mdl-layout-title">
                     Event Finder
                 </span>
                 <div class="mdl-layout-spacer"></div>
@@ -99,7 +99,6 @@
     </div>
     <!-- Alles rechts neben der Karte-->
     <div id="aside">
-
         <!-- Date Filter Card-->
         <div id="newDateWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Datum Filter: </h2>
@@ -435,7 +434,7 @@
 
 
     <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-        <h1>
+        <h1 >
             Event Finder
         </h1>
 
