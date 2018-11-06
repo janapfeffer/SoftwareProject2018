@@ -595,22 +595,30 @@ var oRegisterVue = new Vue({
             }
         },
         formsubmit: function () {
-
-            if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
-                var onSuccess = function onSuccess() {
-                    alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
-                    this.cardShown = !this.cardShown;
-                    oRegisterVue.cardShown = false;
-                    oNewLoginVue.cardShown = false;
-                };
-                var onFailed = function onFailed() {
-                    alert(' SO NE SCHEISSE');
-                };
+            if (document.querySelector('#password2').value != "" && document.querySelector('#password1').value != "" &&
+                document.querySelector('#Username').value != "" && document.querySelector('#email').value != ""
+            ) {
+                if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
+                    var onSuccess = function onSuccess() {
+                        alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
+                        this.cardShown = !this.cardShown;
+                        oRegisterVue.cardShown = false;
+                        oNewLoginVue.cardShown = false;
+                    };
+                    var onFailed = function onFailed() {
+                        alert(' SO NE SCHEISSE');
+                    };
+                }
+                else {
+                    Reg_Pass_Fehler.style.display = "block";
+                }
             }
             else {
-                Reg_Pass_Fehler.style.display = "block";
+                Reg_SONS_Fehler.style.display = "block";
             }
+
             Reg_Pass_Fehler
+            Reg_SONS_Fehler
 
 
 
