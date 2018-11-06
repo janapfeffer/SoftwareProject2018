@@ -164,6 +164,7 @@ function getAllEvents() {
                 sName: apievent.event_name,
                 sDescription: apievent.description,
                 sAdress: apievent.address,
+                iCurrentRating: apievent.current_rating,
                 oStartDate: apievent.start_date.split("T")[0],
                 oStartTime: apievent.start_date.split("T")[1].substring(0,5),
                 oEndDate: apievent.end_date,
