@@ -90,7 +90,7 @@ function getAllEvents() {
             };
         });
         //Sortiere die events - sollte später vielleicht backend machen?
-        oEventTableVue.allEvents.sort(function(a,b){
+        oEventTableVue.allEvents.sort(function (a, b) {
             // Turn your strings into dates, and then subtract them
             // to get a value that is either negative, positive, or zero.
             return new Date(a.oApiEventStartDate) - new Date(b.oApiEventStartDate);
@@ -271,6 +271,8 @@ var oSearchPlaceVue = new Vue({
             //     // }
             // )
             //     .then(function (response) {
+            //         removeMarkers(oEventTableVue.allEvents); 
+            
             //         var aFilterdEvents = this.response.oEvents;
             //         oEventTableVue.allEvents = aFilterdEvents.map(apievent => {
             //             return {
@@ -287,7 +289,6 @@ var oSearchPlaceVue = new Vue({
             //                 oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
             //             };
             //         });
-            //         removeMarkers(oEventTableVue.allEvents); 
             //         setMarkers(oEventTableVue.allEvents);
             //     })
             //     .catch(function (error) {
@@ -346,9 +347,10 @@ var oNewEventVue = new Vue({
             oSelectedFile: null,
             image: null,
             titleIsInvalid: false,
-            displayError: {
-                display: "none"
-            }
+            descIsInvalid: false,
+            adressIsInvalid: false,
+            displayError: false,
+            dateIsInvalid: false
         },
         value7: ''
     },
@@ -380,26 +382,31 @@ var oNewEventVue = new Vue({
         },
         formsubmit: function () {
 
+           titleIsInvalid = false;
+           oNewEventVue.draft.descIsInvalid = false;
+           oNewEventVue.draft.adressIsInvalid = false;
+           oNewEventVue.draft.displayError = false;
+           oNewEventVue.draft.dateIsInvalid = false;
+
             //Hier die Bedingungen + Ausführungen, falls nicht alle Felder korrekt oder gar nicht ausgefüllt wurden.
-            if(this.draft.sName === ""){
+            if (this.draft.sName === "") {
                 this.draft.titleIsInvalid = true;
             }
-            if(this.draft.sDescription === ""){
-                // add class is-invalid
+            if (this.draft.sDescription === "") {
+                this.draft.descIsInvalid = true;
             }
-            if(this.draft.sAdress === ""){
-                // add class is-invalid to div newEventAdress
+            if (this.draft.sAdress === "") {
+                this.draft.adressIsInvalid = true;
             }
-            if(this.draft.EDate === null){
-                // add class is-invalid
+            if (this.draft.EDate === null) {
+                this.draft.dateIsInvalid = true;
             }
 
-            //verbesserbar
-            if(this.draft.sName === "" ||
-            this.draft.sDescription === "" ||
-            this.draft.sAdress === "" ||
-            this.draft.EDate === null){
-                // this.draft.displayError.display = "box";
+            if (this.draft.sName === "" ||
+                this.draft.sDescription === "" ||
+                this.draft.sAdress === "" ||
+                this.draft.EDate === null) {
+                this.draft.displayError = true;
                 return;
             }
 
@@ -444,17 +451,26 @@ var oNewEventVue = new Vue({
                     axios.post("http://localhost:3000/events", fd).then(res => {
                         alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
-                        oNewEventVue.draft = { // reset vueinternal data to make possible to add new event
+                        // reset vueinternal data to make possible to add new event
+                        oNewEventVue.draft = {
                             sName: "",
                             sDescription: "",
                             sAdress: "",
-                            date: "",
+                            sDate: "",
                             time: "",
-                            latlng: {},
-                            EDate: null,
+                            oLatLng: {},
                             status: "draft",
+                            EDate: null,
+                            sEventLink: null,
                             iEventId: Math.floor(Math.random() * 99999) + 1,
-                        };
+                            oSelectedFile: null,
+                            image: null,
+                            titleIsInvalid: false,
+                            descIsInvalid: false,
+                            adressIsInvalid: false,
+                            displayError: false,
+                            dateIsInvalid: false
+                        }
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
                         console.log(error);

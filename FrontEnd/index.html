@@ -29,7 +29,8 @@
     <meta name="author" content="Hanna Scheub">
     <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
     <title> Event Finder </title>
-    <link rel="icon" href="images/mapIcon.PNG"> <!-- tab icon-->
+    <link rel="icon" href="images/mapIcon.PNG">
+    <!-- tab icon-->
 
     <!-- External Libaries-->
     <!-- Vue.js-->
@@ -298,13 +299,10 @@
         <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Neues Event eintragen</h2>
             <div id="newEvent" class="sidecard">
-                <p>
-                    Fügen sie ein neues Event in unsere Databank ein
-                </p>
-                <div id="displayNewEventError" style="display: none">
-                <!-- <div v-bind:style="draft.displayError">> -->
+                <!-- <div id="displayNewEventError" style="display: none"> -->
+                <div v-show="draft.displayError">
                     <i class="material-icons" style="float: left">error_outline</i>
-                    <p style="color:red; ">
+                    <p style="color: #d50000; ">
                         <b>
                             Bitte füllen Sie alle benötigten Felder aus.
                         </b>
@@ -323,29 +321,40 @@
                                }"
                                @change="onChange">
                 </picture-input> -->
-                <!--div v-bind:class="{ is-invalid: draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"></div-->
-                <div id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <!-- <label class="custom-file-upload">
+                    <input id="imageUpload" type="file" style="display: none" @change="onFileSelected"/>
+                    <i class="fa fa-cloud-upload"></i> Eventfoto hochladen
+                </label> -->
+                <div v-bind:class="{ 'is-invalid': draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <!-- <div id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
                     <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
-                    <label class="mdl-textfield__label" for="sample1">Titel</label>
+                    <label class="mdl-textfield__label" for="sample1">Titel*</label>
                 </div>
-                <div id="newEventDescription" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div v-bind:class="{ 'is-invalid': draft.descIsInvalid }" id="newEventDescription" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <textarea class="mdl-textfield__input" maxlength="200" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
-                    <label class="mdl-textfield__label" for="schools">Beschreibung</label>
+                    <label class="mdl-textfield__label" for="schools">Beschreibung*</label>
                 </div>
-                <div id="newEventAddress" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div v-bind:class="{ 'is-invalid': draft.adressIsInvalid }" id="newEventAddress" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
-                    <label class="mdl-textfield__label" for="sample1">Adresse</label>
+                    <label class="mdl-textfield__label" for="sample1">Adresse*</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
                     <label class="mdl-textfield__label" for="sample1">Link</label>
                 </div>
+
                 <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <p>Datum*</p>
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-                    <el-date-picker v-model="draft.EDate" type="datetimerange" align="right" start-placeholder="Startdatum" end-placeholder="Enddatum"
-                        :default-time="['15:00:00', '19:00:00']">
+                    <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
+                        start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
+                <!-- <label class="custom-file-upload">
+                        <input id="imageUpload" style="display: none" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected"/>
+                        <i v-show="!draft.oSelectedFile" class="fa fa-cloud-upload"> "{{ draft.oSelectedFile.name }} </i>
+                        <i v-show="draft.oSelectedFile" class="fa fa-cloud-upload">  Eventfoto hochladen </i>
+                </label> -->
                 <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected">
                 <!--label for="imageUpload">Laden Sie Ihr Eventbild hoch!</label-->
                 <div class="buttons">
