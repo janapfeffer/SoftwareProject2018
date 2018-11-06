@@ -29,6 +29,7 @@
     <meta name="author" content="Hanna Scheub">
     <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
     <title> Event Finder </title>
+    <link rel="icon" href="images/mapIcon.PNG"> <!-- tab icon-->
 
     <!-- External Libaries-->
     <!-- Vue.js-->
@@ -300,6 +301,15 @@
                 <p>
                     Fügen sie ein neues Event in unsere Databank ein
                 </p>
+                <div id="displayNewEventError" style="display: none">
+                <!-- <div v-bind:style="draft.displayError">> -->
+                    <i class="material-icons" style="float: left">error_outline</i>
+                    <p style="color:red; ">
+                        <b>
+                            Bitte füllen Sie alle benötigten Felder aus.
+                        </b>
+                    </p>
+                </div>
                 <!-- <picture-input ref="pictureInput"
                                width="100"
                                height="100"
@@ -313,15 +323,16 @@
                                }"
                                @change="onChange">
                 </picture-input> -->
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <!--div v-bind:class="{ is-invalid: draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"></div-->
+                <div id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
                     <label class="mdl-textfield__label" for="sample1">Titel</label>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div id="newEventDescription" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <textarea class="mdl-textfield__input" maxlength="200" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
                     <label class="mdl-textfield__label" for="schools">Beschreibung</label>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div id="newEventAddress" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
                     <label class="mdl-textfield__label" for="sample1">Adresse</label>
                 </div>
@@ -329,7 +340,7 @@
                     <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
                     <label class="mdl-textfield__label" for="sample1">Link</label>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
                     <el-date-picker v-model="draft.EDate" type="datetimerange" align="right" start-placeholder="Startdatum" end-placeholder="Enddatum"
                         :default-time="['15:00:00', '19:00:00']">

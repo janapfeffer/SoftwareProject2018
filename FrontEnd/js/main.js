@@ -344,7 +344,11 @@ var oNewEventVue = new Vue({
             sEventLink: null,
             iEventId: Math.floor(Math.random() * 99999) + 1,
             oSelectedFile: null,
-            image: null
+            image: null,
+            titleIsInvalid: false,
+            displayError: {
+                display: "none"
+            }
         },
         value7: ''
     },
@@ -375,6 +379,30 @@ var oNewEventVue = new Vue({
             // )
         },
         formsubmit: function () {
+
+            //Hier die Bedingungen + Ausführungen, falls nicht alle Felder korrekt oder gar nicht ausgefüllt wurden.
+            if(this.draft.sName === ""){
+                this.draft.titleIsInvalid = true;
+            }
+            if(this.draft.sDescription === ""){
+                // add class is-invalid
+            }
+            if(this.draft.sAdress === ""){
+                // add class is-invalid to div newEventAdress
+            }
+            if(this.draft.EDate === null){
+                // add class is-invalid
+            }
+
+            //verbesserbar
+            if(this.draft.sName === "" ||
+            this.draft.sDescription === "" ||
+            this.draft.sAdress === "" ||
+            this.draft.EDate === null){
+                // this.draft.displayError.display = "box";
+                return;
+            }
+
             // Koordinaten für Adresse holen
             var geocoder = platform.getGeocodingService(),
                 geocodingParameters = {
@@ -426,13 +454,14 @@ var oNewEventVue = new Vue({
                             EDate: null,
                             status: "draft",
                             iEventId: Math.floor(Math.random() * 99999) + 1,
-                        }
+                        };
                     }).catch(function (error) {
+                        alert("Fehler beim speichern in der Datenbank");
                         console.log(error);
                     });;
                 },
                 onError = function (error) {
-                    alert('Geodaten nicht bekommen!');
+                    alert('Geodaten nicht bekommen. Bitte überprüfen Sie, ob die angegebene Adresse existiert.');
                 }
             )
 
