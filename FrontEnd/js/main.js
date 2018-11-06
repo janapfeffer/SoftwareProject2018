@@ -109,6 +109,8 @@ function getFavorites(user_id) {
       oEventTableVue.allEvents = apievents.map(apievent => {
           return {
               iEventId: apievent._id,
+              aRatings: apievent.ratings,
+              iCurrentRating: apievent.current_rating,
               sName: apievent.event_name,
               sDescription: apievent.description,
               sAdress: apievent.address,
@@ -159,6 +161,7 @@ function getAllEvents() {
         oEventTableVue.allEvents = apievents.map(apievent => {
             return {
                 iEventId: apievent._id,
+                aRatings: apievent.ratings,
                 sName: apievent.event_name,
                 sDescription: apievent.description,
                 sAdress: apievent.address,
@@ -256,6 +259,7 @@ var oEventTableVue = new Vue({
                   return value != target.iEventId;
                 });
               } else { // save _id of target in saved_events of user
+                loggedInUser.saved_events.push(target.iEvent);
                 requestURL = requestURL + "saveEvent";
               }
               var ajaxRequest = new XMLHttpRequest();

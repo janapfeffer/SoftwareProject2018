@@ -30,6 +30,7 @@ exports.get_all_events = (req, res, next) => {
             comments: element.comments,
             event_types: element.event_types,
             current_rating: element.current_rating,
+            ratings: element.ratings,
             request: {
               type: "GET",
               uri: "http://localhost:3000/events/" + element._id
@@ -44,6 +45,10 @@ exports.get_all_events = (req, res, next) => {
         error: err
       })
     });
+};
+
+exports.delete_event_rating = (req, res, next) => {
+
 };
 
 // add a rating to an event
