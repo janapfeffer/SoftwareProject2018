@@ -355,31 +355,35 @@ var oNewEventVue = new Vue({
         value7: ''
     },
     methods: {
-        formdraft: function () {
-            // var geocoder = platform.getGeocodingService(),
-            //     geocodingParameters = {
-            //         searchText: oNewEventVue.draft.sAdress,
-            //         jsonattributes: 1
-            //     };
-            // geocoder.geocode(
-            //     geocodingParameters,
-            //     onSuccess = function onSuccess(result) {
+        // formdraft: function () {
+        //     var geocoder = platform.getGeocodingService(),
+        //         geocodingParameters = {
+        //             searchText: oNewEventVue.draft.sAdress,
+        //             jsonattributes: 1
+        //         };
+        //     geocoder.geocode(
+        //         geocodingParameters,
+        //         onSuccess = function onSuccess(result) {
 
-            //         var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
-            //         var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
-            //         var oLatLgn = { lat: dLat, lng: dLng }
-            //         oNewEventVue.draft.oLatLng = oLatLgn;
+        //             var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
+        //             var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
+        //             var oLatLgn = { lat: dLat, lng: dLng }
+                    
+        //             oNewEventVue.draft.oLatLng = oLatLgn;
+        //             oNewEventVue.draft.oStartDate = oNewEventVue.draft.EDate[0].split("T")[0];
+        //             oNewEventVue.draft.oStartTime = oNewEventVue.draft.EDate[1].split("T")[1].substring(0, 5);
+        //             oNewEventVue.draft.sDisplayEventLink = oNewEventVue.draft.sEventLink = undefined ? "box" : "none";
 
-            //         oEventTableVue.allEvents.unshift(oNewEventVue.draft);
-            //         map.setCenter(oLatLgn, true);
-            //         setMarker(oNewEventVue.draft);
+        //             oEventTableVue.allEvents.unshift(oNewEventVue.draft);
+        //             map.setCenter(oLatLgn, true);
+        //             setMarker(oNewEventVue.draft);
 
-            //     },
-            //     onError = function(error) {
-            //         alert('Error beim suchen der Adresse!');
-            //     }
-            // )
-        },
+        //         },
+        //         onError = function(error) {
+        //             alert('Error beim suchen der Adresse!');
+        //         }
+        //     )
+        // },
         formsubmit: function () {
 
            titleIsInvalid = false;

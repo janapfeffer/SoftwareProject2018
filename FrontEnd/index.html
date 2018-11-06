@@ -334,7 +334,7 @@
                     <textarea class="mdl-textfield__input" maxlength="200" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
                     <label class="mdl-textfield__label" for="schools">Beschreibung*</label>
                 </div>
-                <div v-bind:class="{ 'is-invalid': draft.adressIsInvalid }" id="newEventAddress" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div v-bind:class="{ 'is-invalid': draft.adressIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
                     <label class="mdl-textfield__label" for="sample1">Adresse*</label>
                 </div>
@@ -358,9 +358,9 @@
                 <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected">
                 <!--label for="imageUpload">Laden Sie Ihr Eventbild hoch!</label-->
                 <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
+                    <!-- <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
                         Vorschau
-                    </button>
+                    </button> -->
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                         Senden
                     </button>
