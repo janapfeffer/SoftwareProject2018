@@ -380,7 +380,7 @@ var oEventTableVue = new Vue({
                     }
                     // set current_rating
                     i = selected_event.iCurrentRating;
-                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + i;
+                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + selected_event.iCurrentRating;
                     //add comments to list
                     var list = document.getElementById("commentTable");
                     while (list.firstChild) {
@@ -391,7 +391,7 @@ var oEventTableVue = new Vue({
 
                       var span = document.createElement("SPAN");
                       span.className = "mdl-list__item-primary-content";
-span = document.createElement("SPAN");
+                      span = document.createElement("SPAN");
                       var i = document.createElement("I");
                       i.className = "material-icons mdl-list__item-avatar";
                       i.innerHTML = "person";
