@@ -149,6 +149,14 @@
                         </b>
                     </p>
                 </div>
+                <div id="Reg_SONS_Fehler" style="display: none">
+                    <i class="material-icons" style="float: left">warning</i>
+                    <p style="color:red; ">
+                        <b>
+                            Bitte fülle alle Felder sinngemäß aus.
+                        </b>
+                    </p>
+                </div>
 
                 <div id="Reg_EMAIL_Fehler" style="display: none">
                     <i class="material-icons" style="float: left">warning</i>
@@ -469,7 +477,7 @@
                                     </div>
                                 </form>
                                 <button style="background-color:cadetblue;" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
-                                <button style="background-color:cadetblue;"  type="button" class="mdl-button close">close that shit</button>
+                                <br />
                                 <!-- Vorübergehend, muss ersetzt werden-->
                                 <ul id="commentTable" class="sidecard demo-list-three mdl-list">
                                     <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
@@ -485,7 +493,7 @@
         </li> -->
                                 </ul>
                             </div>
-                            <button type="button" class="mdl-button">Close</button>
+                            <button type="button" class="mdl-button close">close</button>
 
                         </dialog>
 

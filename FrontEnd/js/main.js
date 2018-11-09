@@ -368,22 +368,24 @@ var oEventTableVue = new Vue({
 
                       var span = document.createElement("SPAN");
                       span.className = "mdl-list__item-primary-content";
-
+span = document.createElement("SPAN");
                       var i = document.createElement("I");
                       i.className = "material-icons mdl-list__item-avatar";
                       i.innerHTML = "person";
-
-                      var comment = document.createElement("SPAN");
+                        var comment = document.createElement("SPAN");
+                        comment = document.createElement("SPAN");
                       comment.innerHTML = comments[r].comment;         // Create a text node
-                      var user = document.createElement("SPAN");
+                        var user = document.createElement("SPAN");
+                        user = document.createElement("SPAN");
                       user.innerHTML = comments[r].username;
                       user.className = "mdl-list__item-text-body";
 
                       span.appendChild(i);
                       span.appendChild(user);
                       span.appendChild(comment);
-
-                      node.appendChild(span);                              // Append the text to <li>
+                        node.appendChild(span);
+                        
+                        // Append the text to <li>
                       document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
                     }
                     dialog.showModal();
@@ -661,8 +663,7 @@ var oRegisterVue = new Vue({
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
             }
-
-
+            
 
             Reg_Pass_Fehler
             Reg_SONS_Fehler
