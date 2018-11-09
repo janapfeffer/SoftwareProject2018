@@ -45,7 +45,7 @@ router.patch("/:eventId",  EventController.update_event);
 router.delete("/:eventId", EventController.delete_event);
 router.post("/addComment", EventController.add_comment);
 router.post("/deleteComment", EventController.delete_comment);
-router.post("/rate", EventController.rate_event);
-router.post("/delete_rating", EventController.delete_event_rating);
+router.post("/rate", EventController.event_rating);
+// router.post("/delete_rating", EventController.delete_event_rating);
 
 module.exports = router;

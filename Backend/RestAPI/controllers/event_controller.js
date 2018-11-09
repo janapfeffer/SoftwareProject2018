@@ -6,7 +6,7 @@ const EventType = require("../models/event_type_model");
 //todo: add additional needed fields (whatever the front end wants)
 exports.get_all_events = (req, res, next) => {
   OEvent.find() //enter: {verification_status: true} into brackets for only verified events
-    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating")
+    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
     .populate("event_types")
     .populate("comments")
     .exec()
@@ -49,42 +49,80 @@ exports.get_all_events = (req, res, next) => {
 
 // requires body with: eventId, userId, rating. rating must be the opposite of the rating that is delete_saved_event
 // -> if the event was rated with a thumb up (1) enter -1
-exports.delete_event_rating = (req, res, next) => {
+exports.event_rating = (req, res, next) => {
   OEvent.findById(req.body.eventId, "ratings", function (err, event) {
     old_rating = event.ratings.find(obj => {
       return obj.user_id == req.body.userId;
     });
-    console.log(old_rating._id);
-    // if()
-    OEvent.updateOne(
-      { _id: req.body.eventId},
-      { $pull: {
-          ratings: {
-            _id: old_rating._id
+    // console.log(old_rating._id);
+    if(old_rating) {
+      OEvent.updateOne(
+        { _id: req.body.eventId},
+        { $pull: {
+            ratings: {
+              _id: old_rating._id
+            }
+          },
+          $push: {
+            ratings: {
+              user_id: req.body.userId,
+              rating: (req.body.rating) * 2 //delete old rating and add new rating at once
+            }
+          },
+          $inc: {
+            current_rating: req.body.rating
           }
         },
-        $inc: {
-          current_rating: req.body.rating
-        }
-      },
-      { upsert: true}
-    )
-      .exec()
-      .then(result => {
-        res.status(200).json({
-          message: "Rating saved",
-          request: {
-            type: "GET",
-            url: "http://localhost:3000/events"
+        { upsert: true}
+      )
+        .exec()
+        .then(result => {
+          res.status(200).json({
+            message: "Rating saved",
+            request: {
+              type: "GET",
+              url: "http://localhost:3000/events"
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
+        });
+    } else {
+      OEvent.updateOne(
+        { _id: req.body.eventId},
+        { $push: {
+            ratings: {
+              user_id: req.body.userId,
+              rating: req.body.rating
+            }
+          },
+          $inc: {
+            current_rating: req.body.rating
           }
+        },
+        { upsert: true}
+      )
+        .exec()
+        .then(result => {
+          res.status(200).json({
+            message: "Rating saved",
+            request: {
+              type: "GET",
+              url: "http://localhost:3000/events"
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
         });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({
-          error: err
-        });
-      });
+    }
   });
 };
 

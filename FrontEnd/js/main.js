@@ -358,6 +358,26 @@ var oEventTableVue = new Vue({
                     document.getElementById('eventidkommentare2').innerText = "Hier findest du Kommentare und Bewertungen zu diesem Event ";
                     document.getElementById('eventidkommentare').innerText = beschreibung;
 
+                    // get, whether the currently logged in user has already rated the event
+                    var selected_event = oEventTableVue.allEvents.find(obj => {
+                      return obj.iEventId == oEventTableVue.selected
+                    });
+                    var loggedInUser_rating = selected_event.aRatings.find(obj => {
+                      return obj.user_id == loggedInUser._id
+                    })
+
+                    if(loggedInUser_rating){ //set rating buttons
+                      if(loggedInUser_rating.rating == -1){
+                        document.getElementById('haha').style.color = "red"
+                        document.getElementById('idThumbUp').style.color = "grey"
+                      } else {
+                        document.getElementById('idThumbUp').style.color = "green"
+                        document.getElementById('haha').style.color = "grey"
+                      }
+                    }
+                    // set current_rating
+                    i = selected_event.iCurrentRating;
+                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + i;
                     //add comments to list
                     var list = document.getElementById("commentTable");
                     while (list.firstChild) {
