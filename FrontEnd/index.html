@@ -351,13 +351,13 @@
 
                                           document.getElementById('idThumbUp').style.color = "grey";
                                                 var ratingRequest = new XMLHttpRequest();
-                                                var comment = document.querySelector("#idComment").value;
                                                 var onSuccess = function onSuccess(){
-                                                  console.log("rating sent");
-                                                  x.style.color = "red";
-                                                  achtung = 1;
-                                                  i = i - 1;
-                                                  document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                                  if(this.status == 200){
+                                                    console.log("rating sent");
+                                                    x.style.color = "red";
+                                                    i = i - 2;
+                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                                  }
                                                 };
                                                 var onFailed = function onFailed() {
                                                   console.log("failed");
@@ -367,7 +367,7 @@
                                                 ratingRequest.responseType = "json";
                                                 ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
                                                 ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+                                                var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
                                                 ratingRequest.send(sFormData);
 
                                         }
@@ -380,12 +380,13 @@
                                                 var comment = document.querySelector("#idComment").value;
 
                                                 var onSuccess = function onSuccess(){
-                                                  console.log("rating sent");
-                                                  i = i + 1;
-                                                  achtung = 1;
-                                                  x.style.color = "green";
-                                                  document.getElementById('haha').style.color = "grey";
-                                                  document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                                  if(this.status == 200){
+                                                    console.log("rating sent");
+                                                    i = i + 2; // checken obs zum ersten mal geändert wurde
+                                                    x.style.color = "green";
+                                                    document.getElementById('haha').style.color = "grey";
+                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                                  }
                                                 };
                                                 var onFailed = function onFailed() {
                                                   console.log("failed");
@@ -396,7 +397,7 @@
                                                 ratingRequest.responseType = "json";
                                                 ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
                                                 ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+                                                var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
                                                 ratingRequest.send(sFormData);
                                               }
 

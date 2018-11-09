@@ -374,6 +374,9 @@ var oEventTableVue = new Vue({
                         document.getElementById('idThumbUp').style.color = "green"
                         document.getElementById('haha').style.color = "grey"
                       }
+                    } else {
+                      document.getElementById('idThumbUp').style.color = "grey"
+                      document.getElementById('haha').style.color = "grey"
                     }
                     // set current_rating
                     i = selected_event.iCurrentRating;
@@ -404,7 +407,7 @@ span = document.createElement("SPAN");
                       span.appendChild(user);
                       span.appendChild(comment);
                         node.appendChild(span);
-                        
+
                         // Append the text to <li>
                       document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
                     }
@@ -412,6 +415,7 @@ span = document.createElement("SPAN");
                 }
                 dialog.querySelector('.close').addEventListener('click', function () {
                     dialog.close();
+                    getAllEvents();
                 });
             }
             else {
@@ -683,7 +687,7 @@ var oRegisterVue = new Vue({
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
             }
-            
+
 
             Reg_Pass_Fehler
             Reg_SONS_Fehler

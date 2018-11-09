@@ -58,19 +58,15 @@ exports.event_rating = (req, res, next) => {
     if(old_rating) {
       OEvent.updateOne(
         { _id: req.body.eventId},
-        { $pull: {
+        { $set: {
             ratings: {
-              _id: old_rating._id
-            }
-          },
-          $push: {
-            ratings: {
+              _id: old_rating._id,
               user_id: req.body.userId,
-              rating: (req.body.rating) * 2 //delete old rating and add new rating at once
+              rating: (req.body.rating)
             }
           },
           $inc: {
-            current_rating: req.body.rating
+            current_rating: req.body.rating * 2
           }
         },
         { upsert: true}
@@ -78,7 +74,7 @@ exports.event_rating = (req, res, next) => {
         .exec()
         .then(result => {
           res.status(200).json({
-            message: "Rating saved",
+            message: "Rating Chaged",
             request: {
               type: "GET",
               url: "http://localhost:3000/events"
@@ -127,42 +123,42 @@ exports.event_rating = (req, res, next) => {
 };
 
 // add a rating to an event
-// requires body with: userId, eventId, rating (1 or -1)
-exports.rate_event = (req, res, next) => {
-  OEvent.findById(req.body.eventId, "ratings", function (err, event) {
-    // check whether there already is a rating
-    OEvent.updateOne(
-      { _id: req.body.eventId},
-      { $push: {
-          ratings: {
-            user_id: req.body.userId,
-            rating: req.body.rating
-          }
-        },
-        $inc: {
-          current_rating: req.body.rating
-        }
-      },
-      { upsert: true}
-    )
-      .exec()
-      .then(result => {
-        res.status(200).json({
-          message: "Rating saved",
-          request: {
-            type: "GET",
-            url: "http://localhost:3000/events"
-          }
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({
-          error: err
-        });
-      });
-  });
-};
+// // requires body with: userId, eventId, rating (1 or -1)
+// exports.rate_event = (req, res, next) => {
+//   OEvent.findById(req.body.eventId, "ratings", function (err, event) {
+//     // check whether there already is a rating
+//     OEvent.updateOne(
+//       { _id: req.body.eventId},
+//       { $push: {
+//           ratings: {
+//             user_id: req.body.userId,
+//             rating: req.body.rating
+//           }
+//         },
+//         $inc: {
+//           current_rating: req.body.rating
+//         }
+//       },
+//       { upsert: true}
+//     )
+//       .exec()
+//       .then(result => {
+//         res.status(200).json({
+//           message: "Rating saved",
+//           request: {
+//             type: "GET",
+//             url: "http://localhost:3000/events"
+//           }
+//         });
+//       })
+//       .catch(err => {
+//         console.log(err);
+//         res.status(500).json({
+//           error: err
+//         });
+//       });
+//   });
+// };
 
 
 exports.create_event = (req, res, next) => {
