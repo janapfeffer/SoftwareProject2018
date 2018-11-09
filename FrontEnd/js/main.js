@@ -301,7 +301,8 @@ var oEventTableVue = new Vue({
 
         },
         kommentargeschickt: function (id) {
-            alert("jo girl abgeschicktes kommentar");
+           
+            alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
             var ajaxRequest = new XMLHttpRequest();
             var comment = document.querySelector("#idComment").value;
 
@@ -319,6 +320,7 @@ var oEventTableVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
             ajaxRequest.send(sFormData);
+           
         },
 
         select: function (target) {
@@ -344,17 +346,20 @@ var oEventTableVue = new Vue({
             this.allEvents = aFilterdEvents;
         },
         //Offnet bzw macht Popup moeglich
-        KommentarGemacht: function (id, name, comments) {
+        KommentarGemacht: function (id, name, beschreibung, comments) {
+          
             kommi = true;
             if (loggedInUser != "") {
+               
 
                 if (kommi === true) {
-                    document.getElementById('gibhier').innerText = " Gib hier dein Kommentar ab " + loggedInUser.name;
+
+                    document.getElementById('gibhier').innerText = " Gib hier dein Kommentar ab " + loggedInUser.name +"!";
                     // document.getElementById('lol').innerText = loggedInUser.name;
                     var dialog = document.querySelector('dialog');
                     document.getElementById('kommiüberschrift').innerText = name;
-                    document.getElementById('eventidkommentare').innerText = "Kommentare zu diesem Event ";
-                    document.getElementById('eventidkommentare2').innerText = "ID:" + id;
+                    document.getElementById('eventidkommentare2').innerText = "Hier findest du Kommentare und Bewertungen zu diesem Event ";
+                    document.getElementById('eventidkommentare').innerText = beschreibung;
 
                     //add comments to list
                     var list = document.getElementById("commentTable");
@@ -382,13 +387,17 @@ var oEventTableVue = new Vue({
                       span.appendChild(comment);
 
                       node.appendChild(span);                              // Append the text to <li>
-                      document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
+                        document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
+
+                        dialog.querySelector('.close').addEventListener('click', function () {
+                            dialog.close();
+                            this.close();
+                            this.dialog.close();
+                        });
                     }
                     dialog.showModal();
                 }
-                dialog.querySelector('.close').addEventListener('click', function () {
-                    dialog.close();
-                });
+                
             }
             else {
                 alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
@@ -726,7 +735,7 @@ var oNewLoginVue = new Vue({
                   }
                   initalFavoriteSetting = false;
 
-                    alert('Willkommen' + loggedInUser.name);
+                    alert('Willkommen ' + loggedInUser.name);
                     document.getElementById('eingeloggteruser').innerText = loggedInUser.name+"s EventFinder";
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";

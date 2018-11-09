@@ -318,18 +318,19 @@
                         <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
 
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName, event.aComments)" type="text" id="sample1">
-                            <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)" type="text" id="sample1">
+                            <label  class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
 
                         </div>
                         <!-- Popup Dialog -->
 
                         <dialog class="mdl-dialog" style="width: 550px;">
+                            <p style="color:grey;" id="eventidkommentare2"> haha</p>
                             <h4 class="mdl-dialog__title" id="kommiüberschrift">Kommentare</h4>
                             <div class="mdl-dialog__content">
 
-                                <p id="eventidkommentare"> haha</p>
-                                <p id="eventidkommentare2"> haha</p>
+                                <p style="color:black;" id="eventidkommentare"> haha</p>
+
                                 <br />
                                 <br />
                                 <!-- Use an element to toggle between a like/dislike icon -->
@@ -347,7 +348,7 @@
                                                 x.style.color = "red";
                                                 achtung = 1;
                                                 i = i - 1;
-                                                document.getElementById('bewertungsdurchschnitt').innerText = i;
+                                                document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
                                             }
                                         }
                                         else {
@@ -355,7 +356,7 @@
                                                 achtung = 0;
                                                 x.style.color = "grey";
                                                 i = i + 1;
-                                                document.getElementById('bewertungsdurchschnitt').innerText = i;
+                                                document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
                                             }
 
                                         }
@@ -370,7 +371,7 @@
                                                 i = i + 1;
                                                 achtung = 1;
                                                 x.style.color = "green";
-                                                document.getElementById('bewertungsdurchschnitt').innerText = i;
+                                                document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
                                             }
                                         }
                                         else {
@@ -378,37 +379,41 @@
                                                 achtung = 0;
                                                 i = i - 1;
                                                 x.style.color = "grey";
-                                                document.getElementById('bewertungsdurchschnitt').innerText = i;
+                                                document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:  " + i;
                                             }
                                         }
                                     }
                                 </script>
-                                <p style="color:black">Bewerte hier das Event gut oder schlecht </p>
-                                <p id="bewertungsdurchschnitt" style="color:black">bla </p>
 
-                                <p id="gibhier" style="color:rebeccapurple; font:22px "> Gib hier dein Kommentar ab </p>
+                                <p style="color:black;" id="bewertungsdurchschnitt">Bewerte hier das Event gut oder schlecht </p>
+                                <br />
+                                <br />
+
+                                
 
                                 <form action="#" style="width: 400px;">
+                                    
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <p id="gibhier" style="color:grey; font:22px "> Gib hier dein Kommentar ab </p>
                                         <input class="mdl-textfield__input" type="text" id="idComment" />
                                         <label class="mdl-textfield__label" for="idComment"> </label>
                                     </div>
                                 </form>
-                                <button  style="background-color:cadetblue;" @click="kommentargeschickt" type="button" class="mdl-button close">Abschicken</button>
+                                <button style="background-color:cadetblue;" @click="kommentargeschickt" type="button" class="mdl-button close">Abschicken</button>
 
                                 <!-- Vorübergehend, muss ersetzt werden-->
                                 <ul id="commentTable" class="sidecard demo-list-three mdl-list">
                                     <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
-                                         v-bind:id="event.iEventId">
-                                        <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-avatar">person</i>
-                                            <span id="lol" test="{}"></span>
-                                            <span class="mdl-list__item-text-body">{{  }}</span>
-                                            <i class="fa fa-comment" style="font-size:18px"></i>
-                                            <br style="line-height: 150%;">
-                                        </span>
-                                      </span>
-                                    </li> -->
+             v-bind:id="event.iEventId">
+            <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-avatar">person</i>
+                <span id="lol" test="{}"></span>
+                <span class="mdl-list__item-text-body">{{  }}</span>
+                <i class="fa fa-comment" style="font-size:18px"></i>
+                <br style="line-height: 150%;">
+            </span>
+          </span>
+        </li> -->
                                 </ul>
                             </div>
                             <div class="mdl-dialog__actions">
