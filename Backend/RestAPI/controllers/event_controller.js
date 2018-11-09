@@ -51,13 +51,16 @@ exports.get_all_events = (req, res, next) => {
 // -> if the event was rated with a thumb up (1) enter -1
 exports.delete_event_rating = (req, res, next) => {
   OEvent.findById(req.body.eventId, "ratings", function (err, event) {
+    old_rating = event.ratings.find(obj => {
+      return obj.user_id == req.body.userId;
+    });
+    console.log(old_rating._id);
     // if()
     OEvent.updateOne(
       { _id: req.body.eventId},
       { $pull: {
           ratings: {
-            user_id: req.body.userId,
-            rating: req.body.rating
+            _id: old_rating._id
           }
         },
         $inc: {
@@ -89,7 +92,7 @@ exports.delete_event_rating = (req, res, next) => {
 // requires body with: userId, eventId, rating (1 or -1)
 exports.rate_event = (req, res, next) => {
   OEvent.findById(req.body.eventId, "ratings", function (err, event) {
-    // if()
+    // check whether there already is a rating
     OEvent.updateOne(
       { _id: req.body.eventId},
       { $push: {

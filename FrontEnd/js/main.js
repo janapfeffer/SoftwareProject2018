@@ -301,7 +301,7 @@ var oEventTableVue = new Vue({
 
         },
         kommentargeschickt: function (id) {
-           
+
             alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
             var ajaxRequest = new XMLHttpRequest();
             var comment = document.querySelector("#idComment").value;
@@ -320,7 +320,7 @@ var oEventTableVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
             ajaxRequest.send(sFormData);
-            
+
         },
 
         select: function (target) {

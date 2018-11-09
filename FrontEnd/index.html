@@ -345,18 +345,53 @@
                                         }
                                         if (daumenruntergeklickt === true && daumenhochgeklickt === false) {
                                             if (achtung == 0) {
-                                                x.style.color = "red";
-                                                achtung = 1;
-                                                i = i - 1;
-                                                document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                                // send rating to db
+                                                var ratingRequest = new XMLHttpRequest();
+                                                var comment = document.querySelector("#idComment").value;
+
+                                                var onSuccess = function onSuccess(){
+                                                  console.log("rating sent");
+                                                  x.style.color = "red";
+                                                  achtung = 1;
+                                                  i = i - 1;
+                                                  document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                                };
+                                                var onFailed = function onFailed() {
+                                                  console.log("failed");
+                                                };
+
+                                                ratingRequest.addEventListener("load", onSuccess);
+                                                ratingRequest.addEventListener("error", onFailed);
+                                                ratingRequest.responseType = "json";
+                                                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+                                                ratingRequest.send(sFormData);
                                             }
                                         }
                                         else {
                                             if (achtung == 1) {
+                                              var ratingRequest = new XMLHttpRequest();
+                                              var comment = document.querySelector("#idComment").value;
+
+                                              var onSuccess = function onSuccess(){
+                                                console.log("unrating sent");
                                                 achtung = 0;
                                                 x.style.color = "grey";
                                                 i = i + 1;
                                                 document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                              };
+                                              var onFailed = function onFailed() {
+                                                console.log("failed");
+                                              };
+
+                                              ratingRequest.addEventListener("load", onSuccess);
+                                              ratingRequest.addEventListener("error", onFailed);
+                                              ratingRequest.responseType = "json";
+                                              ratingRequest.open("POST", "http://localhost:3000/events/delete_rating", true);
+                                              ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                              var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+                                              ratingRequest.send(sFormData);
                                             }
 
                                         }
@@ -368,18 +403,52 @@
                                         }
                                         if (daumenhochgeklickt === true && daumenruntergeklickt === false) {
                                             if (achtung == 0) {
-                                                i = i + 1;
-                                                achtung = 1;
-                                                x.style.color = "green";
-                                                document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                                var ratingRequest = new XMLHttpRequest();
+                                                var comment = document.querySelector("#idComment").value;
+
+                                                var onSuccess = function onSuccess(){
+                                                  console.log("rating sent");
+                                                  i = i + 1;
+                                                  achtung = 1;
+                                                  x.style.color = "green";
+                                                  document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + i;
+                                                };
+                                                var onFailed = function onFailed() {
+                                                  console.log("failed");
+                                                };
+
+                                                ratingRequest.addEventListener("load", onSuccess);
+                                                ratingRequest.addEventListener("error", onFailed);
+                                                ratingRequest.responseType = "json";
+                                                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+                                                ratingRequest.send(sFormData);
                                             }
                                         }
                                         else {
                                             if (achtung == 1) {
-                                                achtung = 0;
-                                                i = i - 1;
-                                                x.style.color = "grey";
-                                                document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:  " + i;
+                                                var ratingRequest = new XMLHttpRequest();
+                                                var comment = document.querySelector("#idComment").value;
+
+                                                var onSuccess = function onSuccess(){
+                                                  console.log("unrating sent");
+                                                  achtung = 0;
+                                                  i = i - 1;
+                                                  x.style.color = "grey";
+                                                  document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:  " + i;
+                                                };
+                                                var onFailed = function onFailed() {
+                                                  console.log("failed");
+                                                };
+
+                                                ratingRequest.addEventListener("load", onSuccess);
+                                                ratingRequest.addEventListener("error", onFailed);
+                                                ratingRequest.responseType = "json";
+                                                ratingRequest.open("POST", "http://localhost:3000/events/delete_rating", true);
+                                                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+                                                ratingRequest.send(sFormData);
                                             }
                                         }
                                     }
@@ -417,7 +486,7 @@
                                 </ul>
                             </div>
                             <button type="button" class="mdl-button">Close</button>
-                           
+
                         </dialog>
 
                         <!-- Two Line List with secondary info and action -->
