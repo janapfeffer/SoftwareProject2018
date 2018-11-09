@@ -389,18 +389,18 @@
                                 <br />
                                 <br />
 
-                                
+
 
                                 <form action="#" style="width: 400px;">
-                                    
+
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <p id="gibhier" style="color:grey; font:22px "> Gib hier dein Kommentar ab </p>
                                         <input class="mdl-textfield__input" type="text" id="idComment" />
                                         <label class="mdl-textfield__label" for="idComment"> </label>
                                     </div>
                                 </form>
-                                <button style="background-color:cadetblue;" @click="kommentargeschickt" type="button" class="mdl-button close">Abschicken</button>
-
+                                <button style="background-color:cadetblue;" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
+                                <button style="background-color:cadetblue;"  type="button" class="mdl-button close">close that shit</button>
                                 <!-- Vorübergehend, muss ersetzt werden-->
                                 <ul id="commentTable" class="sidecard demo-list-three mdl-list">
                                     <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
@@ -416,9 +416,8 @@
         </li> -->
                                 </ul>
                             </div>
-                            <div class="mdl-dialog__actions">
-                                <button type="button" class="mdl-button close">Schließen</button>
-                            </div>
+                            <button type="button" class="mdl-button">Close</button>
+                           
                         </dialog>
 
                         <!-- Two Line List with secondary info and action -->

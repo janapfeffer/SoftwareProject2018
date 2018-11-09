@@ -320,7 +320,7 @@ var oEventTableVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
             ajaxRequest.send(sFormData);
-           
+            
         },
 
         select: function (target) {
@@ -347,13 +347,10 @@ var oEventTableVue = new Vue({
         },
         //Offnet bzw macht Popup moeglich
         KommentarGemacht: function (id, name, beschreibung, comments) {
-          
             kommi = true;
             if (loggedInUser != "") {
-               
 
                 if (kommi === true) {
-
                     document.getElementById('gibhier').innerText = " Gib hier dein Kommentar ab " + loggedInUser.name +"!";
                     // document.getElementById('lol').innerText = loggedInUser.name;
                     var dialog = document.querySelector('dialog');
@@ -387,17 +384,13 @@ var oEventTableVue = new Vue({
                       span.appendChild(comment);
 
                       node.appendChild(span);                              // Append the text to <li>
-                        document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
-
-                        dialog.querySelector('.close').addEventListener('click', function () {
-                            dialog.close();
-                            this.close();
-                            this.dialog.close();
-                        });
+                      document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
                     }
                     dialog.showModal();
                 }
-                
+                dialog.querySelector('.close').addEventListener('click', function () {
+                    dialog.close();
+                });
             }
             else {
                 alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
