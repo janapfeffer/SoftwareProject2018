@@ -479,15 +479,22 @@
         <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
         <div id="searchPlaceInner" autocomplete="off">
-            <div class="autocomplete" style="width:370;">
+            <div id="idSearchBar" class="autocomplete" style="width:370;">
                 <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
                        @keyup="autocomplete" @keyup.enter="searchPlace">
+
+                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
+               <el-date-picker  id="idDatePickerInput"  type="datetimerange" align="right" start-placeholder="Start Datum" end-placeholder="End Datum"
+                               :default-time="['15:00:00', '19:00:00" hidden="hidden">
+               </el-date-picker>
+
                 <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
                         name="action" @click="searchPlace">
                     Suche
                 </button>
             </div>
         </div>
+
 
 
     </div>

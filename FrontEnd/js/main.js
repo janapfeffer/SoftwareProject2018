@@ -440,6 +440,8 @@ var oSearchPlaceVue = new Vue({
     el: "#searchPlace",
     data: {
         sQuery: localStorage.getItem("HANSCH"),
+        dStartDate: null,
+        dEndDate: null,
         sName: "Event Finder",
         sButtonName: "Suchen"
     },
@@ -455,8 +457,9 @@ var oSearchPlaceVue = new Vue({
                 map.getViewPort().resize();
                 AfterLoginLogin.style.visibility = "visible";
                 BigMap.style.visibility = "visible";
+                document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden");
             }
-
+            //filter for start and end date
             setCenter(this.sQuery);
         },
         //AutoComplet Funktion der Suchleiste
@@ -876,6 +879,14 @@ function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     getAllEvents();
     checkDuplicatePositions(oEventTableVue.allEvents);
+
+    // var datepicker = document.createElement("el-date-picker");
+    // datepicker.id = "idDatePicker";
+    // datepicker.type = "datetimerange";
+    // datepicker.align = "right";
+    // // datepicker.start-placeholder = "Start Datum";
+    // // datepicker.end-placeholder = "End Datum";
+    // document.getElementById("idSearchBar").appendChild(datepicker);
 }
 
 
