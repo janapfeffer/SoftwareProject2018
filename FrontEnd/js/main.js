@@ -14,14 +14,14 @@ var oEvent = function (oEvent) {
 };
 
 // var usernameemail = "";
+var aktuellebewertung;
 var kommi = false;
 var loggedInUser = "";
+var nochniebewertet = false;
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
 var favoritegeklickt = false;
 var initalFavoriteSetting = false;
-var i = 0;
-var achtung = 0;
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -320,6 +320,7 @@ var oEventTableVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
             ajaxRequest.send(sFormData);
+            document.querySelector("#idComment").value = "";
 
         },
 
@@ -368,19 +369,23 @@ var oEventTableVue = new Vue({
 
                     if(loggedInUser_rating){ //set rating buttons
                       if(loggedInUser_rating.rating == -1){
-                        document.getElementById('haha').style.color = "red"
-                        document.getElementById('idThumbUp').style.color = "grey"
+                          document.getElementById('haha').style.color = "red"
+                          nochniebewertet = false;
+                          document.getElementById('idThumbUp').style.color = "grey"
+
                       } else {
-                        document.getElementById('idThumbUp').style.color = "green"
+                          document.getElementById('idThumbUp').style.color = "green"
+                          nochniebewertet = false;
                         document.getElementById('haha').style.color = "grey"
                       }
                     } else {
+                        nochniebewertet = true;
                       document.getElementById('idThumbUp').style.color = "grey"
                       document.getElementById('haha').style.color = "grey"
                     }
-                    // set current_rating
-                    i = selected_event.iCurrentRating;
-                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + selected_event.iCurrentRating;
+                    // set current_rating das erste mal 
+                    aktuellebewertung = selected_event.iCurrentRating;
+                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + aktuellebewertung;
                     //add comments to list
                     var list = document.getElementById("commentTable");
                     while (list.firstChild) {
@@ -414,6 +419,8 @@ var oEventTableVue = new Vue({
                     dialog.showModal();
                 }
                 dialog.querySelector('.close').addEventListener('click', function () {
+                    document.querySelector("#idComment").value = "";
+
                     dialog.close();
                     getAllEvents();
                 });
@@ -661,7 +668,7 @@ var oRegisterVue = new Vue({
                     document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
                     if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
                         var onSuccess = function onSuccess() {
-                            alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
+                            alert('Du bist nun registriert. Bitte melde dich nun an, um alle Funktionen nutzen zu können.');
                             this.cardShown = !this.cardShown;
                             oRegisterVue.cardShown = false;
                             oNewLoginVue.cardShown = false;
