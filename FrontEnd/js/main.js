@@ -14,14 +14,14 @@ var oEvent = function (oEvent) {
 };
 
 // var usernameemail = "";
+var aktuellebewertung;
 var kommi = false;
 var loggedInUser = "";
+var nochniebewertet = false;
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
 var favoritegeklickt = false;
 var initalFavoriteSetting = false;
-var i = 0;
-var achtung = 0;
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -369,19 +369,23 @@ var oEventTableVue = new Vue({
 
                     if(loggedInUser_rating){ //set rating buttons
                       if(loggedInUser_rating.rating == -1){
-                        document.getElementById('haha').style.color = "red"
-                        document.getElementById('idThumbUp').style.color = "grey"
+                          document.getElementById('haha').style.color = "red"
+                          nochniebewertet = false;
+                          document.getElementById('idThumbUp').style.color = "grey"
+
                       } else {
-                        document.getElementById('idThumbUp').style.color = "green"
+                          document.getElementById('idThumbUp').style.color = "green"
+                          nochniebewertet = false;
                         document.getElementById('haha').style.color = "grey"
                       }
                     } else {
+                        nochniebewertet = true;
                       document.getElementById('idThumbUp').style.color = "grey"
                       document.getElementById('haha').style.color = "grey"
                     }
-                    // set current_rating
-                    i = selected_event.iCurrentRating;
-                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + selected_event.iCurrentRating;
+                    // set current_rating das erste mal 
+                    aktuellebewertung = selected_event.iCurrentRating;
+                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + aktuellebewertung;
                     //add comments to list
                     var list = document.getElementById("commentTable");
                     while (list.firstChild) {
