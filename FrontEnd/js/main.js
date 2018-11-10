@@ -320,6 +320,7 @@ var oEventTableVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
             ajaxRequest.send(sFormData);
+            document.querySelector("#idComment").value = "";
 
         },
 
@@ -414,6 +415,8 @@ var oEventTableVue = new Vue({
                     dialog.showModal();
                 }
                 dialog.querySelector('.close').addEventListener('click', function () {
+                    document.querySelector("#idComment").value = "";
+
                     dialog.close();
                     getAllEvents();
                 });
@@ -658,7 +661,7 @@ var oRegisterVue = new Vue({
                     document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
                     if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
                         var onSuccess = function onSuccess() {
-                            alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
+                            alert('Du bist nun registriert. Bitte melde dich nun an, um alle Funktionen nutzen zu können.);
                             this.cardShown = !this.cardShown;
                             oRegisterVue.cardShown = false;
                             oNewLoginVue.cardShown = false;
