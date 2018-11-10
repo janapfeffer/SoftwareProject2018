@@ -458,67 +458,75 @@ var oSearchPlaceVue = new Vue({
                 BigMap.style.visibility = "visible";
                 document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden");
             }
+            document.getElementById("idDatePickerErrorEmpty").style.display = "none";
             //filter for start_date and end_date
             if(this.dDate){
-              var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
-              var ajaxRequest = new XMLHttpRequest();
+              //check, whether filter dates are in the past -> reject search
+              if(this.dDate[0] > new Date() && thid.dDate[1] > new Date()) {
+                var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
+                var ajaxRequest = new XMLHttpRequest();
 
-              var onSuccess = function onSuccess() {
+                var onSuccess = function onSuccess() {
 
-                  var apievents = this.response.oEvents;
-                  oEventTableVue.allEvents = apievents.map(apievent => {
-                      return {
-                          iEventId: apievent._id,
-                          aComments: apievent.comments,
-                          aRatings: apievent.ratings,
-                          sName: apievent.event_name,
-                          sDescription: apievent.description,
-                          sAdress: apievent.address,
-                          iCurrentRating: apievent.current_rating,
-                          oStartDate: apievent.start_date.split("T")[0],
-                          oStartTime: apievent.start_date.split("T")[1].substring(0,5),
-                          oEndDate: apievent.end_date,
-                          sEventLink: apievent.event_link,
-                          sTicketLink: apievent.ticket_link,
-                          oLatLgn: {lat: apievent.lat, lng: apievent.lng},
-                          oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
-                      };
-                  });
-                  setMarkers(oEventTableVue.allEvents);
-                  if (loggedInUser != ""){
-                    //set stars
-                    initalFavoriteSetting = true;
-                    for (var i = 0; i < loggedInUser.saved_events.length; i++) {
-                      for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-                        if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                          console.log(oEventTableVue.allEvents[j].iEventId);
-                          oEventTableVue.favToggle(oEventTableVue.allEvents[j])
-                          break;
+                    var apievents = this.response.oEvents;
+                    oEventTableVue.allEvents = apievents.map(apievent => {
+                        return {
+                            iEventId: apievent._id,
+                            aComments: apievent.comments,
+                            aRatings: apievent.ratings,
+                            sName: apievent.event_name,
+                            sDescription: apievent.description,
+                            sAdress: apievent.address,
+                            iCurrentRating: apievent.current_rating,
+                            oStartDate: apievent.start_date.split("T")[0],
+                            oStartTime: apievent.start_date.split("T")[1].substring(0,5),
+                            oEndDate: apievent.end_date,
+                            sEventLink: apievent.event_link,
+                            sTicketLink: apievent.ticket_link,
+                            oLatLgn: {lat: apievent.lat, lng: apievent.lng},
+                            oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
+                        };
+                    });
+                    setMarkers(oEventTableVue.allEvents);
+                    if (loggedInUser != ""){
+                      //set stars
+                      initalFavoriteSetting = true;
+                      for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+                        for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+                          if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                            console.log(oEventTableVue.allEvents[j].iEventId);
+                            oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                            break;
+                          }
                         }
                       }
+                      initalFavoriteSetting = false;
                     }
-                    initalFavoriteSetting = false;
-                  }
-                  //change center of map and filter for location
-                  setCenter(this.sQuery);
-              };
+                    //change center of map and filter for location
+                    setCenter(this.sQuery);
+                };
 
-              var onFailed = function onFailed() {
-                  alert('Die Eventliste konnte nicht nach Datum gefiltert werden!');
-                  //change center of map and filter for location
-                  setCenter(this.sQuery);
-              };
-              // Attach the event listeners to the XMLHttpRequest object
-              ajaxRequest.addEventListener("load", onSuccess);
-              ajaxRequest.addEventListener("error", onFailed);
-              ajaxRequest.responseType = "json";
+                var onFailed = function onFailed() {
+                    alert('Die Eventliste konnte nicht nach Datum gefiltert werden!');
+                    //change center of map and filter for location
+                    setCenter(this.sQuery);
+                };
+                // Attach the event listeners to the XMLHttpRequest object
+                ajaxRequest.addEventListener("load", onSuccess);
+                ajaxRequest.addEventListener("error", onFailed);
+                ajaxRequest.responseType = "json";
 
-              ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
-              ajaxRequest.setRequestHeader("filter_start_date", this.dDate[0].toString());
-              ajaxRequest.setRequestHeader("filter_end_date", this.dDate[1].toString());
+                ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
+                ajaxRequest.setRequestHeader("filter_start_date", this.dDate[0].toString());
+                ajaxRequest.setRequestHeader("filter_end_date", this.dDate[1].toString());
 
-              ajaxRequest.send();
-            } else {
+                ajaxRequest.send();
+              } else { // at least one of the dates is in the past, which is an incorrect input
+                // idDatePickerErrorEmpty
+                document.getElementById("idDatePickerErrorEmpty").style.display = "block";
+              }
+
+            } else { // no dates given
               //change center of map and filter for location
               getAllEvents();
               setMarkers(oEventTableVue.allEvents);

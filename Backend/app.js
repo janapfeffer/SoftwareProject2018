@@ -31,7 +31,7 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
         "Access-Control-Allow-Headers",
-        //Allowed headers
+        //Allowed headers incl. custom headers
         "Origin, X-Requested-With, Content-Type, Accept, Authorization, filter_start_date, filter_end_date"
     );
     //Options-Request from Browser

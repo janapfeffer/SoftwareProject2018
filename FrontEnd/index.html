@@ -104,7 +104,7 @@
             <h2>Datum Filter: </h2>
             <div id="newDate" class="sidecard">
                 <p>
-                    Geben sie das Datum an für das gefiltert werden soll
+                    Geben Sie das Datum an für das gefiltert werden soll
                 </p>
 
                 <!-- Ausgewahltes Datum wird als "FilterDate gespeichert-->
@@ -115,7 +115,7 @@
                     </el-date-picker>
                 </div>
                 <p>
-                    Wählen sie die Kategorien aus nach denen gefiltert werden soll
+                    Wählen Sie die Kategorien aus nach denen gefiltert werden soll
                 </p>
                 <!-- Checkboxen: Der Text muss noch bearbeitet werden wg Design und Größe-->
                 <input type="checkbox" id="scales" name="feature" value="Kategorie 1" checked /> Kategorie 1
@@ -138,7 +138,7 @@
             <h2>Registrierung </h2>
             <div id="newRegister" class="sidecard">
                 <p>
-                    Registrieren sie sich jetzt!
+                    Registrieren Sie sich jetzt!
                 </p>
 
                 <div id="Reg_Pass_Fehler" style="display: none">
@@ -203,10 +203,10 @@
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="EINLOGEN_Karte">
             <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-                <h2>Loggen sie sich hier ein</h2>
+                <h2>Loggen Sie sich hier ein</h2>
                 <div id="newLogin" class="sidecard">
                     <p>
-                        Loggen sie sich hier ein!
+                        Loggen Sie sich hier ein!
                     </p>
 
 
@@ -214,7 +214,7 @@
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
                             <b>
-                                Bitte füllen sie alle Felder aus!
+                                Bitte füllen Sie alle Felder aus!
                             </b>
                         </p>
                     </div>
@@ -255,7 +255,7 @@
             <h2>Neues Event eintragen</h2>
             <div id="newEvent" class="sidecard">
                 <p>
-                    Fügen sie ein neues Event in unsere Databank ein
+                    Fügen Sie ein neues Event in unsere Databank ein
                 </p>
                 <!-- <picture-input ref="pictureInput"
                                width="100"
@@ -266,7 +266,7 @@
                                button-class="btn"
                                :custom-strings="{
                                upload: '<h1>Bummer!</h1>' ,
-                               drag: 'Laden sie ein Eventbild hoch'
+                               drag: 'Laden Sie ein Eventbild hoch'
                                }"
                                @change="onChange">
                 </picture-input> -->
@@ -479,6 +479,14 @@
         <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
         <div id="searchPlaceInner" autocomplete="off">
+          <div id="idDatePickerErrorEmpty" style="display: none">
+              <i class="material-icons" style="float: left">error_outline</i>
+              <p style="color:red; ">
+                  <b>
+                      Bitte wählen Sie kein vergangenes Datum aus!
+                  </b>
+              </p>
+          </div>
             <div id="idSearchBar" class="autocomplete" style="width:370;">
                 <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
                        @keyup="autocomplete" @keyup.enter="searchPlace">
