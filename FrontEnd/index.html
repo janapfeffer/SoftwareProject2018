@@ -342,29 +342,28 @@
                                 <br />
                                 <br />
                                 <!-- Use an element to toggle between a like/dislike icon -->
-                                <i onclick="DisLikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
-                                <i onclick="LikeButton(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
+                                <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
+                                <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
                                 <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
                                 <script>
-                                    function DisLikeButton(x) {
-                                        if (x.style.color != "red") {
+                                    function LikeButton(x) {
+                                      if(x.style.color != "red"){
+                                        var add_rating = -1;
+                                          if (document.getElementById('idThumbUp').style.color == "green"){
+                                            add_rating = -2; //als Ausgleich zum vorherigen positiven Rating
+                                          }
                                           document.getElementById('idThumbUp').style.color = "grey";
                                                 var ratingRequest = new XMLHttpRequest();
                                                 var onSuccess = function onSuccess(){
                                                   if(this.status == 200){
                                                     var selected_event = oEventTableVue.allEvents.find(obj => {
                                                       return obj.iEventId == oEventTableVue.selected
-                                                      });
-                                                      if (nochniebewertet == true) {
-                                                          aktuellebewertung = aktuellebewertung - 1; nochniebewertet = false;
-                                                      }
-                                                      else {
-                                                          aktuellebewertung = aktuellebewertung - 2;
-                                                      }
+                                                    });
+                                                    selected_event.iCurrentRating = selected_event.iCurrentRating + add_rating;
                                                     console.log("rating sent");
-                                                      x.style.color = "red";
-                                                      // -2 bewerten 
-                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + aktuellebewertung;
+                                                    x.style.color = "red";
+                                                    i = i - 1;
+                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + selected_event.iCurrentRating;
                                                   }
                                                 };
                                                 var onFailed = function onFailed() {
@@ -381,41 +380,42 @@
                                         }
                                       }
 
-                                    function LikeButton(x) {
-                                        if (x.style.color != "green") {
-                                            var ratingRequest = new XMLHttpRequest();
-                                            var comment = document.querySelector("#idComment").value;
-                                            var onSuccess = function onSuccess() {
-                                                var selected_event = oEventTableVue.allEvents.find(obj => {
+                                    function LikeButton2(x) {
+                                            if(x.style.color != "green"){
+                                              var add_rating = 1;
+                                                if (document.getElementById('haha').style.color == "red"){
+                                                  add_rating = 2; //als Ausgleich zum vorherigen positiven Rating
+                                                }
+
+                                                var ratingRequest = new XMLHttpRequest();
+                                                var comment = document.querySelector("#idComment").value;
+
+                                                var onSuccess = function onSuccess(){
+                                                  var selected_event = oEventTableVue.allEvents.find(obj => {
                                                     return obj.iEventId == oEventTableVue.selected
-                                                });
-                                                if (nochniebewertet == true) {
-                                                    aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
-                                                }
-                                                else {
-                                                    aktuellebewertung = aktuellebewertung + 2;
-                                                }
-                                                //2 besser setzen da gut bewertet
-                                                if (this.status == 200) {
+                                                  });
+                                                  selected_event.iCurrentRating = selected_event.iCurrentRating + add_rating;
+                                                  if(this.status == 200){
                                                     console.log("rating sent");
+                                                    i = i + 1; // checken obs zum ersten mal geändert wurde
                                                     x.style.color = "green";
                                                     document.getElementById('haha').style.color = "grey";
-                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + aktuellebewertung;
-                                                }
-                                            };
-                                            var onFailed = function onFailed() {
-                                                console.log("failed");
-                                            };
+                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + selected_event.iCurrentRating;
+                                                  }
+                                                };
+                                                var onFailed = function onFailed() {
+                                                  console.log("failed");
+                                                };
 
-                                            ratingRequest.addEventListener("load", onSuccess);
-                                            ratingRequest.addEventListener("error", onFailed);
-                                            ratingRequest.responseType = "json";
-                                            ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
-                                            ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                            var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
-                                            ratingRequest.send(sFormData);
+                                                ratingRequest.addEventListener("load", onSuccess);
+                                                ratingRequest.addEventListener("error", onFailed);
+                                                ratingRequest.responseType = "json";
+                                                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                ratingRequest.send(sFormData);
+                                              }
 
-                                        }
                                     }
                                 </script>
 
@@ -484,8 +484,8 @@
                        @keyup="autocomplete" @keyup.enter="searchPlace">
 
                      <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-               <el-date-picker  id="idDatePickerInput"  type="datetimerange" align="right" start-placeholder="Start Datum" end-placeholder="End Datum"
-                               :default-time="['15:00:00', '19:00:00" hidden="hidden">
+               <el-date-picker  id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum" end-placeholder="End Datum"
+                               :default-time="['15:00:00', '19:00:00']"  hidden="hidden">
                </el-date-picker>
 
                 <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"

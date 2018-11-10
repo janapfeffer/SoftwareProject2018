@@ -74,7 +74,7 @@ exports.event_rating = (req, res, next) => {
         .exec()
         .then(result => {
           res.status(200).json({
-            message: "Rating Chaged",
+            message: "Rating Changed",
             request: {
               type: "GET",
               url: "http://localhost:3000/events"
@@ -359,31 +359,32 @@ exports.get_filtered_events = (req, res, next) => {
   //https://stackoverflow.com/questions/32353999/mongoose-select-query-between-two-time-range
   //get events with filters applied
   //time range filter and event_types filter
+  // console.log(req.headers);
   OEvent.find({
     $or: [
       {
         start_date: { //start_date within
-        $gte: filter_start_date,
-        $lte: filter_end_date
+        $gte: req.headers.filter_start_date,
+        $lte: req.headers.filter_end_date
         }
       },
       {
         end_date: { // end_date within
-          $gte: filter_start_date,
-          $lte: filter_end_date
+          $gte: req.headers.filter_start_date,
+          $lte: req.headers.filter_end_date
         }
       },
       {
         end_date: {
-          $gte: filter_end_date
+          $gte: req.headers.filter_end_date
         },
         start_date: {
-          $lte: filter_start_date
+          $lte: req.headers.filter_start_date
         }
       } // end_date and start_date around
     ]
   }) //enter: {verification_status: true} into brackets for only verified events
-    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng")
+    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
     .populate("event_types")
     .populate("comments")
     .exec()
@@ -406,6 +407,8 @@ exports.get_filtered_events = (req, res, next) => {
             ticket_link: element.ticket_link,
             comments: element.comments,
             event_types: element.event_types,
+            ratings: element.ratings,
+            current_rating: element.current_rating,
             request: {
               type: "GET",
               uri: "http://localhost:3000/events/" + element._id

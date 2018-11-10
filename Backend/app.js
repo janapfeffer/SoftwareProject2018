@@ -32,7 +32,7 @@ app.use((req, res, next) => {
     res.header(
         "Access-Control-Allow-Headers",
         //Allowed headers
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization, filter_start_date, filter_end_date"
     );
     //Options-Request from Browser
     if (req.method === "OPTIONS") {
@@ -72,6 +72,8 @@ app.use((error, req, res, next) => {
         }
     });
 });
+
+
 
 //Server connection to port 3000
 app.listen(3000, function () {
