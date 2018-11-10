@@ -661,7 +661,7 @@ var oRegisterVue = new Vue({
                     document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
                     if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
                         var onSuccess = function onSuccess() {
-                            alert('Du bist nun registriert. Bitte melde dich nun an, um alle Funktionen nutzen zu können.);
+                            alert('Du bist nun registriert. Bitte melde dich nun an, um alle Funktionen nutzen zu können.');
                             this.cardShown = !this.cardShown;
                             oRegisterVue.cardShown = false;
                             oNewLoginVue.cardShown = false;
