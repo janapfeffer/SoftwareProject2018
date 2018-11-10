@@ -122,44 +122,6 @@ exports.event_rating = (req, res, next) => {
   });
 };
 
-// add a rating to an event
-// // requires body with: userId, eventId, rating (1 or -1)
-// exports.rate_event = (req, res, next) => {
-//   OEvent.findById(req.body.eventId, "ratings", function (err, event) {
-//     // check whether there already is a rating
-//     OEvent.updateOne(
-//       { _id: req.body.eventId},
-//       { $push: {
-//           ratings: {
-//             user_id: req.body.userId,
-//             rating: req.body.rating
-//           }
-//         },
-//         $inc: {
-//           current_rating: req.body.rating
-//         }
-//       },
-//       { upsert: true}
-//     )
-//       .exec()
-//       .then(result => {
-//         res.status(200).json({
-//           message: "Rating saved",
-//           request: {
-//             type: "GET",
-//             url: "http://localhost:3000/events"
-//           }
-//         });
-//       })
-//       .catch(err => {
-//         console.log(err);
-//         res.status(500).json({
-//           error: err
-//         });
-//       });
-//   });
-// };
-
 
 exports.create_event = (req, res, next) => {
   const oEvent = new OEvent({
@@ -347,18 +309,15 @@ exports.delete_event = (req, res, next) => {
     });
 };
 
-
-exports.rerate_event = (req, res, next) => {
-  //todo
-};
-
 //events filtered for time range (start_date and end_date)
 // either/both start_date and end_date within the time range or start_date before and end_date after
 // needs: filter_start_date and filter_end_date
 exports.get_filtered_events = (req, res, next) => {
   //https://stackoverflow.com/questions/32353999/mongoose-select-query-between-two-time-range
-  //get events with filters applied
-  //time range filter and event_types filter
+  //get events with time range filters applied
+  // check wich filters are given and only apply the given ones:
+  //    start date: all events after/on this start date: for initial loading
+  //    start & end date: all events where at least one day is in the time range
   // console.log(req.headers);
   OEvent.find({
     $or: [
@@ -425,9 +384,9 @@ exports.get_filtered_events = (req, res, next) => {
     });
 };
 
-exports.report_event = (req, res, next) => {
-  //report an event
-};
+// exports.report_event = (req, res, next) => {
+//   //report an event
+// };
 
 // exports.report_comment = (req, res, next) => {
 //   //report a comment,
