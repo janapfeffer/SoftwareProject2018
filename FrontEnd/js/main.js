@@ -38,7 +38,7 @@ var oNavigationVue = new Vue({
             oNewLoginVue.cardShown = false;
         },
 
-        showNewFavoriteCard: function () {
+        showNewFavoriteCard: function () { //todo: change bubbles along with evenlist
             favoritegeklickt = !favoritegeklickt;
             if (favoritegeklickt === true) {
                 document.getElementById('h2events').innerText = "Favoriten";
@@ -151,8 +151,8 @@ var aAllEvents = new Array();
 var ausgewaehlt = "";
 // aAllEvents =
 
-function getAllEvents() {
-    var GETALLEVENTS_URL = 'http://localhost:3000/events';
+function getAllEvents() { //uses get events/filtered with header filter_start_date = new Date() instead of get events
+    var GETALLEVENTS_URL = 'http://localhost:3000/events/filtered';
     var ajaxRequest = new XMLHttpRequest();
 
     var onSuccess = function onSuccess() {
@@ -202,6 +202,7 @@ function getAllEvents() {
     ajaxRequest.responseType = "json";
 
     ajaxRequest.open('GET', GETALLEVENTS_URL);
+    ajaxRequest.setRequestHeader("filter_start_date", new Date());
     ajaxRequest.send();
 }
 //function getComments(event_id) {
