@@ -48,7 +48,7 @@ var oNavigationVue = new Vue({
             else {
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-                getAllEvents();
+                getAllEvents(); //todo: apply current filters
             }
         },
 
@@ -462,7 +462,7 @@ var oSearchPlaceVue = new Vue({
             //filter for start_date and end_date
             if(this.dDate){
               //check, whether filter dates are in the past -> reject search
-              if(this.dDate[0] > new Date() && thid.dDate[1] > new Date()) {
+              if(this.dDate[0] > new Date() && this.dDate[1] > new Date()) {
                 var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
                 var ajaxRequest = new XMLHttpRequest();
 
