@@ -384,6 +384,7 @@ exports.get_filtered_events = (req, res, next) => {
         })
       });
   } else { // no end_date -> INITIAL LOADING
+    console.log("initial loading");
     OEvent.find({
 
 

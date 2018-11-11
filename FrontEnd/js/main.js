@@ -38,7 +38,7 @@ var oNavigationVue = new Vue({
             oNewLoginVue.cardShown = false;
         },
 
-        showNewFavoriteCard: function () { //todo: change bubbles along with evenlist
+        showNewFavoriteCard: function () {
             favoritegeklickt = !favoritegeklickt;
             if (favoritegeklickt === true) {
                 document.getElementById('h2events').innerText = "Favoriten";
@@ -468,7 +468,6 @@ var oSearchPlaceVue = new Vue({
                 var ajaxRequest = new XMLHttpRequest();
 
                 var onSuccess = function onSuccess() {
-
                     var apievents = this.response.oEvents;
                     oEventTableVue.allEvents = apievents.map(apievent => {
                         return {
