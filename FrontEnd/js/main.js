@@ -952,14 +952,7 @@ function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     getAllEvents();
     checkDuplicatePositions(oEventTableVue.allEvents);
-
-    // var datepicker = document.createElement("el-date-picker");
-    // datepicker.id = "idDatePicker";
-    // datepicker.type = "datetimerange";
-    // datepicker.align = "right";
-    // // datepicker.start-placeholder = "Start Datum";
-    // // datepicker.end-placeholder = "End Datum";
-    // document.getElementById("idSearchBar").appendChild(datepicker);
+    document.getElementById("i").placeholder = new Date(); //set start date datepicker to current date
 }
 
 
