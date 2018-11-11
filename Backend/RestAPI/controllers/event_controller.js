@@ -319,69 +319,121 @@ exports.get_filtered_events = (req, res, next) => {
   //    start date: all events after/on this start date: for initial loading
   //    start & end date: all events where at least one day is in the time range
   // console.log(req.headers);
-  OEvent.find({
-    $or: [
-      {
-        start_date: { //start_date within
-        $gte: req.headers.filter_start_date,
-        $lte: req.headers.filter_end_date
-        }
-      },
-      {
-        end_date: { // end_date within
+  if (req.headers.filter_end_date) {
+    OEvent.find({
+      $or: [
+        {
+          start_date: { //start_date within
           $gte: req.headers.filter_start_date,
           $lte: req.headers.filter_end_date
-        }
-      },
-      {
-        end_date: {
-          $gte: req.headers.filter_end_date
+          }
         },
-        start_date: {
-          $lte: req.headers.filter_start_date
-        }
-      } // end_date and start_date around
-    ]
-  }) //enter: {verification_status: true} into brackets for only verified events
-    .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
-    .populate("event_types")
-    .populate("comments")
-    .exec()
-    .then(elements => {
-      res.status(200).json({
-        count: elements.length,
-        oEvents: elements.map(element => {
-          return {
-            _id: element._id,
-            event_name: element.event_name,
-            author: element.author,
-            description: element.description,
-            address: element.address,
-            lng: element.lng,
-            lat: element.lat,
-            start_date: element.start_date,
-            end_date: element.end_date,
-            event_picture: element.event_picture,
-            event_link: element.event_link,
-            ticket_link: element.ticket_link,
-            comments: element.comments,
-            event_types: element.event_types,
-            ratings: element.ratings,
-            current_rating: element.current_rating,
-            request: {
-              type: "GET",
-              uri: "http://localhost:3000/events/" + element._id
-            }
-          };
+        {
+          end_date: { // end_date within
+            $gte: req.headers.filter_start_date,
+            $lte: req.headers.filter_end_date
+          }
+        },
+        {
+          end_date: {
+            $gte: req.headers.filter_end_date
+          },
+          start_date: {
+            $lte: req.headers.filter_start_date
+          }
+        } // end_date and start_date around
+      ]
+    }) //enter: {verification_status: true} into brackets for only verified events
+      .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
+      .populate("event_types")
+      .populate("comments")
+      .exec()
+      .then(elements => {
+        res.status(200).json({
+          count: elements.length,
+          oEvents: elements.map(element => {
+            return {
+              _id: element._id,
+              event_name: element.event_name,
+              author: element.author,
+              description: element.description,
+              address: element.address,
+              lng: element.lng,
+              lat: element.lat,
+              start_date: element.start_date,
+              end_date: element.end_date,
+              event_picture: element.event_picture,
+              event_link: element.event_link,
+              ticket_link: element.ticket_link,
+              comments: element.comments,
+              event_types: element.event_types,
+              ratings: element.ratings,
+              current_rating: element.current_rating,
+              request: {
+                type: "GET",
+                uri: "http://localhost:3000/events/" + element._id
+              }
+            };
+          })
+        });
+      })
+      .catch(err => {
+        console.error("Error: ", err.stack);
+        res.status(500).json({
+          error: err
         })
       });
-    })
-    .catch(err => {
-      console.error("Error: ", err.stack);
-      res.status(500).json({
-        error: err
+  } else { // no end_date -> INITIAL LOADING
+    OEvent.find({
+
+
+          start_date: { //start_date within
+          $gte: req.headers.filter_start_date
+          }
+
+
+    }) //enter: {verification_status: true} into brackets for only verified events
+      .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
+      .populate("event_types")
+      .populate("comments")
+      .exec()
+      .then(elements => {
+        res.status(200).json({
+          count: elements.length,
+          oEvents: elements.map(element => {
+            return {
+              _id: element._id,
+              event_name: element.event_name,
+              author: element.author,
+              description: element.description,
+              address: element.address,
+              lng: element.lng,
+              lat: element.lat,
+              start_date: element.start_date,
+              end_date: element.end_date,
+              event_picture: element.event_picture,
+              event_link: element.event_link,
+              ticket_link: element.ticket_link,
+              comments: element.comments,
+              event_types: element.event_types,
+              ratings: element.ratings,
+              current_rating: element.current_rating,
+              request: {
+                type: "GET",
+                uri: "http://localhost:3000/events/" + element._id
+              }
+            };
+          })
+        });
       })
-    });
+      .catch(err => {
+        console.error("Error: ", err.stack);
+        res.status(500).json({
+          error: err
+        })
+      });
+  }
+
 };
 
 // exports.report_event = (req, res, next) => {
