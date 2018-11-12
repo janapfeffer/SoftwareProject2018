@@ -259,6 +259,9 @@ function setMarker(oData) {
 }
 
 function setMarkers(aEvents) {
+  //delete existing markers before creating new ones
+  map = map.removeObjects(map.getObjects());
+  //add marker for every event
     aEvents.forEach((oEvent, index) => {
         if (oEvent.oLatLgn != undefined) {
             // var oData = {index: index, iEventId: oEvent.iEventId};

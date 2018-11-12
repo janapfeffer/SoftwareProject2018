@@ -14,11 +14,14 @@ var oEvent = function (oEvent) {
 };
 
 // var usernameemail = "";
+var kommi = false;
 var loggedInUser = "";
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
 var favoritegeklickt = false;
 var initalFavoriteSetting = false;
+var i = 0;
+var achtung = 0;
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -33,16 +36,19 @@ var oNavigationVue = new Vue({
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
 
         showNewFavoriteCard: function () {
             favoritegeklickt = !favoritegeklickt;
             if (favoritegeklickt === true) {
                 document.getElementById('h2events').innerText = "Favoriten";
+                document.getElementById('AfterLoginFavoriten').innerText = "Events";
+                getFavorites(loggedInUser._id);
                }
             else {
                 document.getElementById('h2events').innerText = "Events";
+                document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+                getAllEvents(); //todo: apply current filters
             }
         },
 
@@ -50,29 +56,35 @@ var oNavigationVue = new Vue({
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         showNewRegisterCard: function () {
             oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
             oNewLoginVue.cardShown = false;
             oNewEventVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         showNewDateCard: function () {
             oNewDateVue.cardShown = !oNewDateVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewEventVue.cardShown = false;
             oNewLoginVue.cardShown = false;
-            oNewFavoriteVue.cardShown = false;
         },
         toggleBigMap: function () {
             bigmapgeklickt = !bigmapgeklickt;
             if (bigmapgeklickt === true) {
-
+                AfterLoginLogin.style.visibility = "hidden";
+                AfterLoginFavoriten.style.visibility = "hidden";
+                AfterLoginEvent.style.visibility = "hidden";
                 document.getElementById('BigMap').innerText = "zurück zur Liste ";
             }
             else {
                 document.getElementById('BigMap').innerText = "Große Karte ";
+                if (loggedInUser != "") {
+                    AfterLoginFavoriten.style.visibility = "visible";
+                    AfterLoginEvent.style.visibility = "visible";
+                }
+                else {
+                    AfterLoginLogin.style.visibility = "visible";
+                }
             }
 
             document.body.classList.toggle('bigMap');
@@ -84,34 +96,53 @@ var oNavigationVue = new Vue({
 });
 
 
-// async function starmanagement() {
-//   while(true){
-//     var stars = document.getElementsByName("stern");
-//     if (loggedInUser != ""){ // make stars visible if a user is logged in
-//         for(var m = 0; m < stars.length; m++) {
-//           stars[m].style = "visibility:visible;";
-//         }
-//     } else {
-//         for(var m = 0; m < stars.length; m++) {
-//           stars[m].style = "visibility:hidden;";
-//         }
-//     }
-//   }
-// };
-// starmanagement();
 
 var bigmapgeklickt = false;
 
 function getFavorites(user_id) {
-  const GETFAVORITES_URL = "http://localhost:3000/user" + user_id + "/events";
+  const GETFAVORITES_URL = "http://localhost:3000/user/" + user_id + "/events";
+  var ajaxRequest = new XMLHttpRequest();
 
-  axios.get(GETFAVORITES_URL).then(res => {
-      console.log("Favoriten für " + user_id + " erhalten: " + res);
-      console.log(res.saved_events);
-      //set favorite data to favorite vue
-  }).catch(function (error) {
-      console.log(error);
-  });
+  var onSuccess = function onSuccess() {
+
+      var apievents = this.response.saved_events;
+      oEventTableVue.allEvents = apievents.map(apievent => {
+          return {
+              iEventId: apievent._id,
+              aRatings: apievent.ratings,
+              iCurrentRating: apievent.current_rating,
+              sName: apievent.event_name,
+              sDescription: apievent.description,
+              sAdress: apievent.address,
+              oStartDate: apievent.start_date.split("T")[0],
+              oStartTime: apievent.start_date.split("T")[1].substring(0,5),
+              oEndDate: apievent.end_date,
+              sEventLink: apievent.event_link,
+              sTicketLink: apievent.ticket_link,
+              oLatLgn: {lat: apievent.lat, lng: apievent.lng},
+              oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
+          };
+      });
+      setMarkers(oEventTableVue.allEvents);
+
+      //set stars
+      initalFavoriteSetting = true;
+      for(var z = 0; z < oEventTableVue.allEvents.length; z++){
+        oEventTableVue.favToggle(oEventTableVue.allEvents[z]);
+      }
+      initalFavoriteSetting = false;
+  };
+
+  var onFailed = function onFailed() {
+      alert('Die Favoritenlist konnte nicht geladen werden!');
+  };
+  // Attach the event listeners to the XMLHttpRequest object
+  ajaxRequest.addEventListener("load", onSuccess);
+  ajaxRequest.addEventListener("error", onFailed);
+  ajaxRequest.responseType = "json";
+
+  ajaxRequest.open('GET', GETFAVORITES_URL);
+  ajaxRequest.send();
 };
 
 
@@ -120,8 +151,8 @@ var aAllEvents = new Array();
 var ausgewaehlt = "";
 // aAllEvents =
 
-function getAllEvents() {
-    var GETALLEVENTS_URL = 'http://localhost:3000/events';
+function getAllEvents() { //uses get events/filtered with header filter_start_date = new Date() instead of get events
+    var GETALLEVENTS_URL = 'http://localhost:3000/events/filtered';
     var ajaxRequest = new XMLHttpRequest();
 
     var onSuccess = function onSuccess() {
@@ -130,9 +161,12 @@ function getAllEvents() {
         oEventTableVue.allEvents = apievents.map(apievent => {
             return {
                 iEventId: apievent._id,
+                aComments: apievent.comments,
+                aRatings: apievent.ratings,
                 sName: apievent.event_name,
                 sDescription: apievent.description,
                 sAdress: apievent.address,
+                iCurrentRating: apievent.current_rating,
                 oStartDate: apievent.start_date.split("T")[0],
                 oStartTime: apievent.start_date.split("T")[1].substring(0,5),
                 oEndDate: apievent.end_date,
@@ -143,6 +177,20 @@ function getAllEvents() {
             };
         });
         setMarkers(oEventTableVue.allEvents);
+        if (loggedInUser != ""){
+          //set stars
+          initalFavoriteSetting = true;
+          for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+            for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+              if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                console.log(oEventTableVue.allEvents[j].iEventId);
+                oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                break;
+              }
+            }
+          }
+          initalFavoriteSetting = false;
+        }
     };
 
     var onFailed = function onFailed() {
@@ -154,8 +202,21 @@ function getAllEvents() {
     ajaxRequest.responseType = "json";
 
     ajaxRequest.open('GET', GETALLEVENTS_URL);
+    ajaxRequest.setRequestHeader("filter_start_date", new Date());
     ajaxRequest.send();
 }
+//function getComments(event_id) {
+//    const GETCOMMENTS_URL = "http://localhost:3000/events" + event_id;
+
+//    axios.get(GETCOMMENTS_URL).then(res => {
+//        console.log("Kommis für " + event_id + " erhalten: " + res);
+//        console.log(res.???);
+
+//    }).catch(function (error) {
+//        console.log(error);
+//    });
+//};
+
 
 //Vue fuer die Event Tabelle fertig
 var oEventTableVue = new Vue({
@@ -181,6 +242,11 @@ var oEventTableVue = new Vue({
                 // console.log(bool);
                 return bool;
             })
+        },
+        commentList: function () {
+          return this.allEvents.filter(function(value) {
+            return value.iEventId === this.selected;
+          })[0];
         }
     },
     methods: {
@@ -195,7 +261,12 @@ var oEventTableVue = new Vue({
               var requestURL = "http://localhost:3000/user/";
               if (target.faved) { //delete _id of target from saved_events of user
                 requestURL = requestURL + "unsaveEvent";
+                //delete favorite from loggedInUser
+                loggedInUser.saved_events = loggedInUser.saved_events.filter(function(value, index, arr){
+                  return value != target.iEventId;
+                });
               } else { // save _id of target in saved_events of user
+                loggedInUser.saved_events.push(target.iEvent);
                 requestURL = requestURL + "saveEvent";
               }
               var ajaxRequest = new XMLHttpRequest();
@@ -203,7 +274,7 @@ var oEventTableVue = new Vue({
               var onSuccess = function onSuccess(){
                 console.log("success: " + this.status);
                 if (this.status == 200){
-                  // set target to be faved
+                  // set target to be (not) faved
                   Vue.set(target, 'faved', !target.faved);
                 } else {
                   // warnung dass das gerade nicht ging?
@@ -230,6 +301,28 @@ var oEventTableVue = new Vue({
 
 
         },
+        kommentargeschickt: function (id) {
+
+            alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
+            var ajaxRequest = new XMLHttpRequest();
+            var comment = document.querySelector("#idComment").value;
+
+            var onSuccess = function onSuccess(){
+              console.log("toll");
+            };
+            var onFailed = function onFailed() {
+              console.log("failed");
+            };
+
+            ajaxRequest.addEventListener("load", onSuccess);
+            ajaxRequest.addEventListener("error", onFailed);
+            ajaxRequest.responseType = "json";
+            ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
+            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+            ajaxRequest.send(sFormData);
+
+        },
 
         select: function (target) {
             // only data with specific Ids can be selected
@@ -254,19 +347,85 @@ var oEventTableVue = new Vue({
             this.allEvents = aFilterdEvents;
         },
         //Offnet bzw macht Popup moeglich
-        KommentarGemacht: function () {
-            var dialog = document.querySelector('dialog');
-            var showDialogButton = document.querySelector('#show-dialog');
-            if (!dialog.showModal) {
-                dialogPolyfill.registerDialog(dialog);
+        KommentarGemacht: function (id, name, beschreibung, comments) {
+            kommi = true;
+            if (loggedInUser != "") {
+
+                if (kommi === true) {
+                    document.getElementById('gibhier').innerText = " Gib hier dein Kommentar ab " + loggedInUser.name +"!";
+                    // document.getElementById('lol').innerText = loggedInUser.name;
+                    var dialog = document.querySelector('dialog');
+                    document.getElementById('kommiüberschrift').innerText = name;
+                    document.getElementById('eventidkommentare2').innerText = "Hier findest du Kommentare und Bewertungen zu diesem Event ";
+                    document.getElementById('eventidkommentare').innerText = beschreibung;
+
+                    // get, whether the currently logged in user has already rated the event
+                    var selected_event = oEventTableVue.allEvents.find(obj => {
+                      return obj.iEventId == oEventTableVue.selected
+                    });
+                    var loggedInUser_rating = selected_event.aRatings.find(obj => {
+                      return obj.user_id == loggedInUser._id
+                    })
+
+                    if(loggedInUser_rating){ //set rating buttons
+                      if(loggedInUser_rating.rating == -1){
+                        document.getElementById('haha').style.color = "red"
+                        document.getElementById('idThumbUp').style.color = "grey"
+                      } else {
+                        document.getElementById('idThumbUp').style.color = "green"
+                        document.getElementById('haha').style.color = "grey"
+                      }
+                    } else {
+                      document.getElementById('idThumbUp').style.color = "grey"
+                      document.getElementById('haha').style.color = "grey"
+                    }
+                    // set current_rating
+                    i = selected_event.iCurrentRating;
+                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + selected_event.iCurrentRating;
+                    //add comments to list
+                    var list = document.getElementById("commentTable");
+                    while (list.firstChild) {
+                    list.removeChild(list.firstChild);
+}
+                    for (var r = 0; r < comments.length; r++){
+                      var node = document.createElement("LI");                 // Create a <li> node
+
+                      var span = document.createElement("SPAN");
+                      span.className = "mdl-list__item-primary-content";
+                      span = document.createElement("SPAN");
+                      var i = document.createElement("I");
+                      i.className = "material-icons mdl-list__item-avatar";
+                      i.innerHTML = "person";
+                        var comment = document.createElement("SPAN");
+                        comment = document.createElement("SPAN");
+                      comment.innerHTML = comments[r].comment;         // Create a text node
+                        var user = document.createElement("SPAN");
+                        user = document.createElement("SPAN");
+                      user.innerHTML = comments[r].username;
+                      user.className = "mdl-list__item-text-body";
+
+                      span.appendChild(i);
+                      span.appendChild(user);
+                      span.appendChild(comment);
+                        node.appendChild(span);
+
+                        // Append the text to <li>
+                      document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
+                    }
+                    dialog.showModal();
+                }
+                dialog.querySelector('.close').addEventListener('click', function () {
+                    dialog.close();
+                    getAllEvents();
+                });
             }
-            showDialogButton.addEventListener('click', function () {
-                dialog.showModal();
-            });
-            dialog.querySelector('.close').addEventListener('click', function () {
-                dialog.close();
-            });
-        }
+            else {
+                alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
+            }
+
+        },
+
+
     }
     // ,
     // mounted: function() {
@@ -282,6 +441,7 @@ var oSearchPlaceVue = new Vue({
     el: "#searchPlace",
     data: {
         sQuery: localStorage.getItem("HANSCH"),
+        dDate: null,
         sName: "Event Finder",
         sButtonName: "Suchen"
     },
@@ -289,11 +449,91 @@ var oSearchPlaceVue = new Vue({
         //Sucht nach einem Ort
         searchPlace: function searchPlace() {
             if (document.body.classList.contains('landingpage')) {
+
+                AfterLoginLogin.style.visibility = "visible";
+                BigMap.style.visibility = "visible";
                 document.body.classList.remove('landingpage');
                 document.querySelector("#searchPlace").vanillaTilt.destroy()
                 map.getViewPort().resize();
+                AfterLoginLogin.style.visibility = "visible";
+                BigMap.style.visibility = "visible";
+                document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden");
             }
-            setCenter(this.sQuery);
+            document.getElementById("idDatePickerErrorEmpty").style.display = "none";
+            //filter for start_date and end_date
+            if(this.dDate){
+              //check, whether filter dates are in the past -> reject search
+              if(this.dDate[0] > new Date() && this.dDate[1] > new Date()) {
+                var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
+                var ajaxRequest = new XMLHttpRequest();
+
+                var onSuccess = function onSuccess() {
+                    var apievents = this.response.oEvents;
+                    oEventTableVue.allEvents = apievents.map(apievent => {
+                        return {
+                            iEventId: apievent._id,
+                            aComments: apievent.comments,
+                            aRatings: apievent.ratings,
+                            sName: apievent.event_name,
+                            sDescription: apievent.description,
+                            sAdress: apievent.address,
+                            iCurrentRating: apievent.current_rating,
+                            oStartDate: apievent.start_date.split("T")[0],
+                            oStartTime: apievent.start_date.split("T")[1].substring(0,5),
+                            oEndDate: apievent.end_date,
+                            sEventLink: apievent.event_link,
+                            sTicketLink: apievent.ticket_link,
+                            oLatLgn: {lat: apievent.lat, lng: apievent.lng},
+                            oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
+                        };
+                    });
+                    setMarkers(oEventTableVue.allEvents);
+                    if (loggedInUser != ""){
+                      //set stars
+                      initalFavoriteSetting = true;
+                      for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+                        for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+                          if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                            console.log(oEventTableVue.allEvents[j].iEventId);
+                            oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                            break;
+                          }
+                        }
+                      }
+                      initalFavoriteSetting = false;
+                    }
+                    //change center of map and filter for location
+                    setCenter(this.sQuery);
+                };
+
+                var onFailed = function onFailed() {
+                    alert('Die Eventliste konnte nicht nach Datum gefiltert werden!');
+                    //change center of map and filter for location
+                    setCenter(this.sQuery);
+                };
+                // Attach the event listeners to the XMLHttpRequest object
+                ajaxRequest.addEventListener("load", onSuccess);
+                ajaxRequest.addEventListener("error", onFailed);
+                ajaxRequest.responseType = "json";
+
+                ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
+                ajaxRequest.setRequestHeader("filter_start_date", this.dDate[0].toString());
+                ajaxRequest.setRequestHeader("filter_end_date", this.dDate[1].toString());
+
+                ajaxRequest.send();
+              } else { // at least one of the dates is in the past, which is an incorrect input
+                // idDatePickerErrorEmpty
+                document.getElementById("idDatePickerErrorEmpty").style.display = "block";
+              }
+
+            } else { // no dates given
+              //change center of map and filter for location
+              getAllEvents();
+              setMarkers(oEventTableVue.allEvents);
+              setCenter(this.sQuery);
+            }
+
+
         },
         //AutoComplet Funktion der Suchleiste
         autocomplete: function autocomplete() {
@@ -489,22 +729,45 @@ var oRegisterVue = new Vue({
             }
         },
         formsubmit: function () {
-
-            if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
-                var onSuccess = function onSuccess() {
-                    alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
-                    this.cardShown = !this.cardShown;
-                    oRegisterVue.cardShown = false;
-                    oNewLoginVue.cardShown = false;
-                };
-                var onFailed = function onFailed() {
-                    alert(' SO NE SCHEISSE');
-                };
+            if (document.querySelector('#email').value.includes("@") == true) {
+                if (document.querySelector('#password2').value != "" && document.querySelector('#password1').value != "" &&
+                    document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
+                    if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
+                        var onSuccess = function onSuccess() {
+                            alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
+                            this.cardShown = !this.cardShown;
+                            oRegisterVue.cardShown = false;
+                            oNewLoginVue.cardShown = false;
+                            Reg_Pass_Fehler.style.display = "none";
+                            Reg_SONS_Fehler.style.display = "none";
+                            Reg_EMAIL_Fehler.style.display = "none";
+                        };
+                        var onFailed = function onFailed() {
+                            alert(' SO NE SCHEISSE');
+                        };
+                    }
+                    else {
+                        Reg_Pass_Fehler.style.display = "block";
+                        Reg_EMAIL_Fehler.style.display = "none";
+                        Reg_SONS_Fehler.style.display = "none";
+                    }
+                }
+                else {
+                    Reg_SONS_Fehler.style.display = "block";
+                    Reg_Pass_Fehler.style.display = "none";
+                    Reg_EMAIL_Fehler.style.display = "none";
+                }
             }
             else {
-                Reg_Pass_Fehler.style.display = "block";
+                Reg_EMAIL_Fehler.style.display = "block";
+                Reg_Pass_Fehler.style.display = "none";
+                Reg_SONS_Fehler.style.display = "none";
             }
+
+
             Reg_Pass_Fehler
+            Reg_SONS_Fehler
+            Reg_EMAIL_Fehler
 
 
 
@@ -519,7 +782,7 @@ var oRegisterVue = new Vue({
             var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
             console.log(snewuserdata);
             ajaxRequest.send(snewuserdata);
-        },
+        }
 
     }
 });
@@ -566,7 +829,8 @@ var oNewLoginVue = new Vue({
                   }
                   initalFavoriteSetting = false;
 
-                    alert('Willkommen');
+                    alert('Willkommen ' + loggedInUser.name);
+                    document.getElementById('eingeloggteruser').innerText = loggedInUser.name+"s EventFinder";
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";
                     AfterLoginLogin.style.display = "none";
@@ -688,6 +952,7 @@ function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     getAllEvents();
     checkDuplicatePositions(oEventTableVue.allEvents);
+    document.getElementById("i").placeholder = new Date(); //set start date datepicker to current date
 }
 
 

@@ -82,7 +82,7 @@
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
-                <span class="mdl-layout-title">
+                <span id="eingeloggteruser" class="mdl-layout-title">
                     Event Finder
                 </span>
                 <div class="mdl-layout-spacer"></div>
@@ -92,33 +92,21 @@
                     <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
                     <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event eintragen</a>
 
-                    <a class="mdl-navigation__link" id="BigMap" @click='toggleBigMap'>Große Karte</a>
-                    <a class="mdl-navigation__link" id="AfterLoginLogin" style="visibility: visible;" @click='showNewLoginCard'>Login</a>
+                    <a class="mdl-navigation__link" style="visibility:hidden;"id="BigMap" @click='toggleBigMap'>Große Karte</a>
+                    <a class="mdl-navigation__link" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
 
                 </nav>
             </div>
         </header>
-        <!-- TODO: Navigation nur bei kleinem display anzeigen   /// Dadurch immer resposiv bzw bessere Touch bedinung z.B. Tablets -> lieber behalten-->
-        <!-- Navigation. Hauptsächlich für kleine Geräte gedacht ist die ausklapbare, da auf kleinere Geräte alles aufgelistet -->
-        <div class="mdl-layout__drawer" style="z-index: 12;">
-            <span class="mdl-layout-title">Eventzeugs</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" @click='showNewLoginCard'>Login</a>
-                <a class="mdl-navigation__link" @click='showNewEventCard'>Event eintragen</a>
-                <a class="mdl-navigation__link"  @click='showNewFavoriteCard'>Favoriten</a>
-                <a class="mdl-navigation__link" @click='toggleBigMap'>Große Karte</a>
-            </nav>
-        </div>
     </div>
     <!-- Alles rechts neben der Karte-->
     <div id="aside">
-
         <!-- Date Filter Card-->
         <div id="newDateWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Datum Filter: </h2>
             <div id="newDate" class="sidecard">
                 <p>
-                    Geben sie das Datum an für das gefiltert werden soll
+                    Geben Sie das Datum an für das gefiltert werden soll
                 </p>
 
                 <!-- Ausgewahltes Datum wird als "FilterDate gespeichert-->
@@ -129,7 +117,7 @@
                     </el-date-picker>
                 </div>
                 <p>
-                    Wählen sie die Kategorien aus nach denen gefiltert werden soll
+                    Wählen Sie die Kategorien aus nach denen gefiltert werden soll
                 </p>
                 <!-- Checkboxen: Der Text muss noch bearbeitet werden wg Design und Größe-->
                 <input type="checkbox" id="scales" name="feature" value="Kategorie 1" checked /> Kategorie 1
@@ -152,7 +140,7 @@
             <h2>Registrierung </h2>
             <div id="newRegister" class="sidecard">
                 <p>
-                    Registrieren sie sich jetzt!
+                    Registrieren Sie sich jetzt!
                 </p>
 
                 <div id="Reg_Pass_Fehler" style="display: none">
@@ -160,6 +148,23 @@
                     <p style="color:red; ">
                         <b>
                             Die Passwörter müssen übereinstimmen!
+                        </b>
+                    </p>
+                </div>
+                <div id="Reg_SONS_Fehler" style="display: none">
+                    <i class="material-icons" style="float: left">warning</i>
+                    <p style="color:red; ">
+                        <b>
+                            Bitte fülle alle Felder sinngemäß aus.
+                        </b>
+                    </p>
+                </div>
+
+                <div id="Reg_EMAIL_Fehler" style="display: none">
+                    <i class="material-icons" style="float: left">warning</i>
+                    <p style="color:red; ">
+                        <b>
+                            Gib bitte eine echte Email Adresse an.
                         </b>
                     </p>
                 </div>
@@ -200,10 +205,10 @@
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="EINLOGEN_Karte">
             <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-                <h2>Loggen sie sich hier ein</h2>
+                <h2>Loggen Sie sich hier ein</h2>
                 <div id="newLogin" class="sidecard">
                     <p>
-                        Loggen sie sich hier ein!
+                        Loggen Sie sich hier ein!
                     </p>
 
 
@@ -211,13 +216,13 @@
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
                             <b>
-                                Bitte füllen sie alle Felder aus!
+                                Bitte füllen Sie alle Felder aus!
                             </b>
                         </p>
                     </div>
 
 
-                    <div id="LoginFehlerDaten" style="display: none">
+                    <div id="LoginFehlerDaten" style="display:none">
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
                             <b>
@@ -252,7 +257,7 @@
             <h2>Neues Event eintragen</h2>
             <div id="newEvent" class="sidecard">
                 <p>
-                    Fügen sie ein neues Event in unsere Databank ein
+                    Fügen Sie ein neues Event in unsere Databank ein
                 </p>
                 <!-- <picture-input ref="pictureInput"
                                width="100"
@@ -263,7 +268,7 @@
                                button-class="btn"
                                :custom-strings="{
                                upload: '<h1>Bummer!</h1>' ,
-                               drag: 'Laden sie ein Eventbild hoch'
+                               drag: 'Laden Sie ein Eventbild hoch'
                                }"
                                @change="onChange">
                 </picture-input> -->
@@ -323,88 +328,133 @@
                         <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
 
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht" type="text" id="sample1">
-                            <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)" type="text" id="sample1">
+                            <label  class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+
                         </div>
-                        <!-- Popup Diaglog -->
+                        <!-- Popup Dialog -->
 
                         <dialog class="mdl-dialog" style="width: 550px;">
-                            <h4 class="mdl-dialog__title">Kommentare</h4>
+                            <p style="color:grey;" id="eventidkommentare2"> haha</p>
+                            <h4 class="mdl-dialog__title" id="kommiüberschrift">Kommentare</h4>
                             <div class="mdl-dialog__content">
-                                <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
-                                <p>{{event.sName}}</p>
+
+                                <p style="color:black;" id="eventidkommentare"> haha</p>
+
                                 <br />
                                 <br />
                                 <!-- Use an element to toggle between a like/dislike icon -->
                                 <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
-                                <i onclick="LikeButton2(this)" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
+                                <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
                                 <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
                                 <script>
                                     function LikeButton(x) {
-                                        if (daumenhochgeklickt == false) {
-                                            daumenruntergeklickt = !daumenruntergeklickt;
-                                        }
-                                        if (daumenruntergeklickt === true && daumenhochgeklickt === false) {
-                                            x.style.color = "red";
-                                        }
-                                        else {
-                                            x.style.color = "grey";
-                                        }
-                                    }
-                                    function LikeButton2(x) {
+                                      if(x.style.color != "red"){
+                                        var add_rating = -1;
+                                          if (document.getElementById('idThumbUp').style.color == "green"){
+                                            add_rating = -2; //als Ausgleich zum vorherigen positiven Rating
+                                          }
+                                          document.getElementById('idThumbUp').style.color = "grey";
+                                                var ratingRequest = new XMLHttpRequest();
+                                                var onSuccess = function onSuccess(){
+                                                  if(this.status == 200){
+                                                    var selected_event = oEventTableVue.allEvents.find(obj => {
+                                                      return obj.iEventId == oEventTableVue.selected
+                                                    });
+                                                    selected_event.iCurrentRating = selected_event.iCurrentRating + add_rating;
+                                                    console.log("rating sent");
+                                                    x.style.color = "red";
+                                                    i = i - 1;
+                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + selected_event.iCurrentRating;
+                                                  }
+                                                };
+                                                var onFailed = function onFailed() {
+                                                  console.log("failed");
+                                                };
+                                                ratingRequest.addEventListener("load", onSuccess);
+                                                ratingRequest.addEventListener("error", onFailed);
+                                                ratingRequest.responseType = "json";
+                                                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                ratingRequest.send(sFormData);
 
-                                        if (daumenruntergeklickt == false) {
-                                            daumenhochgeklickt = !daumenhochgeklickt;
                                         }
-                                        if (daumenhochgeklickt === true && daumenruntergeklickt === false) {
-                                            x.style.color = "green";
-                                        }
-                                        else {
-                                            x.style.color = "grey";
-                                        }
+                                      }
+
+                                    function LikeButton2(x) {
+                                            if(x.style.color != "green"){
+                                              var add_rating = 1;
+                                                if (document.getElementById('haha').style.color == "red"){
+                                                  add_rating = 2; //als Ausgleich zum vorherigen positiven Rating
+                                                }
+
+                                                var ratingRequest = new XMLHttpRequest();
+                                                var comment = document.querySelector("#idComment").value;
+
+                                                var onSuccess = function onSuccess(){
+                                                  var selected_event = oEventTableVue.allEvents.find(obj => {
+                                                    return obj.iEventId == oEventTableVue.selected
+                                                  });
+                                                  selected_event.iCurrentRating = selected_event.iCurrentRating + add_rating;
+                                                  if(this.status == 200){
+                                                    console.log("rating sent");
+                                                    i = i + 1; // checken obs zum ersten mal geändert wurde
+                                                    x.style.color = "green";
+                                                    document.getElementById('haha').style.color = "grey";
+                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + selected_event.iCurrentRating;
+                                                  }
+                                                };
+                                                var onFailed = function onFailed() {
+                                                  console.log("failed");
+                                                };
+
+                                                ratingRequest.addEventListener("load", onSuccess);
+                                                ratingRequest.addEventListener("error", onFailed);
+                                                ratingRequest.responseType = "json";
+                                                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                ratingRequest.send(sFormData);
+                                              }
+
                                     }
                                 </script>
-                                <p style="color:black">Bewerte hier das Event gut oder schlecht </p>
 
-                                <p style="color:rebeccapurple; font:22px "> Gib hier dein Kommentar ab </p>
+                                <p style="color:black;" id="bewertungsdurchschnitt">Bewerte hier das Event gut oder schlecht </p>
+                                <br />
+                                <br />
+
+
 
                                 <form action="#" style="width: 400px;">
+
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" id="sample3" />
-                                        <label class="mdl-textfield__label" for="sample3">Ihr Kommentar</label>
+                                        <p id="gibhier" style="color:grey; font:22px "> Gib hier dein Kommentar ab </p>
+                                        <input class="mdl-textfield__input" type="text" id="idComment" />
+                                        <label class="mdl-textfield__label" for="idComment"> </label>
                                     </div>
                                 </form>
-
+                                <button style="background-color:cadetblue;" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
+                                <br />
                                 <!-- Vorübergehend, muss ersetzt werden-->
-                                <ul class="demo-list-two mdl-list">
-                                    <li class="mdl-list__item mdl-list__item--two-line">
-                                        <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-avatar">person</i>
-                                            <span>Bryan Cranston</span>
-                                            <span class="mdl-list__item-sub-title">62 Episodes</span>
-                                        </span>
-                                        <span class="mdl-list__item-secondary-content">
-                                            <span class="mdl-list__item-secondary-info">Actor</span>
-                                        </span>
-                                    </li>
-                                    <li class="mdl-list__item mdl-list__item--two-line">
-                                        <span class="mdl-list__item-primary-content">
-                                            <i class="material-icons mdl-list__item-avatar">person</i>
-                                            <span>Aaron Paul</span>
-                                            <span class="mdl-list__item-sub-title">62 Episodes</span>
-                                        </span>
-                                        <span class="mdl-list__item-secondary-content">
-
-                                        </span>
-                                    </li>
+                                <ul id="commentTable" class="sidecard demo-list-three mdl-list">
+                                    <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
+             v-bind:id="event.iEventId">
+            <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-avatar">person</i>
+                <span id="lol" test="{}"></span>
+                <span class="mdl-list__item-text-body">{{  }}</span>
+                <i class="fa fa-comment" style="font-size:18px"></i>
+                <br style="line-height: 150%;">
+            </span>
+          </span>
+        </li> -->
                                 </ul>
-                                </p>
                             </div>
-                            <div class="mdl-dialog__actions">
-                                <button type="button" class="mdl-button close">Schließen</button>
-                            </div>
-                        </dialog>
+                            <button type="button" class="mdl-button close">close</button>
 
+                        </dialog>
 
                         <!-- Two Line List with secondary info and action -->
                         <style>
@@ -424,22 +474,37 @@
 
 
     <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-        <h1>
+        <h1 >
             Event Finder
         </h1>
 
         <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
         <div id="searchPlaceInner" autocomplete="off">
-            <div class="autocomplete" style="width:370;">
+          <div id="idDatePickerErrorEmpty" style="display: none">
+              <i class="material-icons" style="float: left">error_outline</i>
+              <p style="color:red; ">
+                  <b>
+                      Bitte wählen Sie kein vergangenes Datum aus!
+                  </b>
+              </p>
+          </div>
+            <div id="idSearchBar" class="autocomplete" style="width:370;">
                 <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
                        @keyup="autocomplete" @keyup.enter="searchPlace">
+
+                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
+               <el-date-picker  id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum" end-placeholder="End Datum"
+                               :default-time="['15:00:00', '19:00:00']"  hidden="hidden">
+               </el-date-picker>
+
                 <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
                         name="action" @click="searchPlace">
                     Suche
                 </button>
             </div>
         </div>
+
 
 
     </div>
