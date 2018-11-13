@@ -15,6 +15,7 @@ var oEvent = function (oEvent) {
 
 // var usernameemail = "";
 var kommi = false;
+var logoutclicked = false;
 var loggedInUser = "";
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
@@ -53,9 +54,19 @@ var oNavigationVue = new Vue({
         },
 
         showNewLoginCard: function () {
-            oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewEventVue.cardShown = false;
+            if (logoutclicked === false) {
+                oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
+                oRegisterVue.cardShown = false;
+                oNewEventVue.cardShown = false;
+            }
+            else {
+                oNewLoginVue.formsubmit();
+                document.getElementById('h2events').innerText = "Events";
+                document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+                getAllEvents();
+                oNewEventVue.cardShown = false;
+
+            }
         },
         showNewRegisterCard: function () {
             oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
@@ -723,66 +734,63 @@ var oRegisterVue = new Vue({
         value7: ''
     },
     methods: {
-        formdraft: function () {
-            if (oEventTableVue.currentEvents[0].status != "draft") {
-                oEventTableVue.currentEvents.unshift(this.draft)
-            }
-        },
         formsubmit: function () {
-            if (document.querySelector('#email').value.includes("@") == true) {
-                if (document.querySelector('#password2').value != "" && document.querySelector('#password1').value != "" &&
-                    document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
-                    if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
-                        var onSuccess = function onSuccess() {
-                            alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
-                            this.cardShown = !this.cardShown;
-                            oRegisterVue.cardShown = false;
-                            oNewLoginVue.cardShown = false;
-                            Reg_Pass_Fehler.style.display = "none";
-                            Reg_SONS_Fehler.style.display = "none";
+           
+                if (document.querySelector('#email').value.includes("@") == true) {
+                    if (document.querySelector('#password2').value != "" && document.querySelector('#password1').value != "" &&
+                        document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
+                        if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
+                            var onSuccess = function onSuccess() {
+                                alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
+                                this.cardShown = !this.cardShown;
+                                oRegisterVue.cardShown = false;
+                                oNewLoginVue.cardShown = false;
+                                Reg_Pass_Fehler.style.display = "none";
+                                Reg_SONS_Fehler.style.display = "none";
+                                Reg_EMAIL_Fehler.style.display = "none";
+                            };
+                            var onFailed = function onFailed() {
+                                alert(' SO NE SCHEISSE');
+                            };
+                        }
+                        else {
+                            Reg_Pass_Fehler.style.display = "block";
                             Reg_EMAIL_Fehler.style.display = "none";
-                        };
-                        var onFailed = function onFailed() {
-                            alert(' SO NE SCHEISSE');
-                        };
+                            Reg_SONS_Fehler.style.display = "none";
+                        }
                     }
                     else {
-                        Reg_Pass_Fehler.style.display = "block";
+                        Reg_SONS_Fehler.style.display = "block";
+                        Reg_Pass_Fehler.style.display = "none";
                         Reg_EMAIL_Fehler.style.display = "none";
-                        Reg_SONS_Fehler.style.display = "none";
                     }
                 }
                 else {
-                    Reg_SONS_Fehler.style.display = "block";
+                    Reg_EMAIL_Fehler.style.display = "block";
                     Reg_Pass_Fehler.style.display = "none";
-                    Reg_EMAIL_Fehler.style.display = "none";
+                    Reg_SONS_Fehler.style.display = "none";
                 }
+
+
+                Reg_Pass_Fehler
+                Reg_SONS_Fehler
+                Reg_EMAIL_Fehler
+
+
+
+                var newuser = "http://localhost:3000/user/signup"
+                var ajaxRequest = new XMLHttpRequest();
+
+                ajaxRequest.addEventListener("load", onSuccess);
+                ajaxRequest.addEventListener("error", onFailed);
+                ajaxRequest.responseType = "json";
+                ajaxRequest.open("POST", newuser, true);
+                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
+                console.log(snewuserdata);
+                ajaxRequest.send(snewuserdata);
             }
-            else {
-                Reg_EMAIL_Fehler.style.display = "block";
-                Reg_Pass_Fehler.style.display = "none";
-                Reg_SONS_Fehler.style.display = "none";
-            }
-
-
-            Reg_Pass_Fehler
-            Reg_SONS_Fehler
-            Reg_EMAIL_Fehler
-
-
-
-            var newuser = "http://localhost:3000/user/signup"
-            var ajaxRequest = new XMLHttpRequest();
-
-            ajaxRequest.addEventListener("load", onSuccess);
-            ajaxRequest.addEventListener("error", onFailed);
-            ajaxRequest.responseType = "json";
-            ajaxRequest.open("POST", newuser, true);
-            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
-            console.log(snewuserdata);
-            ajaxRequest.send(snewuserdata);
-        }
+        
 
     }
 });
@@ -806,73 +814,83 @@ var oNewLoginVue = new Vue({
 
 
         formsubmit: function () {
+            logoutclicked = !logoutclicked;
+            if (logoutclicked === true) {
 
-            var suserlogin = "http://localhost:3000/user/login"
-            var ajaxRequest = new XMLHttpRequest();
+                var suserlogin = "http://localhost:3000/user/login"
+                var ajaxRequest = new XMLHttpRequest();
 
 
-            var onSuccess = function onSuccess() {
-                console.log(this.status);
-                if (this.status === 200) {
-                  // save user in global variable
-                  loggedInUser = this.response.user;
-                  initalFavoriteSetting = true
-                  //set favorite events stars (favtoggle)
-                  for (var i = 0; i < loggedInUser.saved_events.length; i++) {
-                    for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-                      if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                        console.log(oEventTableVue.allEvents[j].iEventId);
-                        oEventTableVue.favToggle(oEventTableVue.allEvents[j])
-                        break;
-                      }
+                var onSuccess = function onSuccess() {
+                    console.log(this.status);
+                    if (this.status === 200) {
+                        // save user in global variable
+                        loggedInUser = this.response.user;
+                        initalFavoriteSetting = true
+                        //set favorite events stars (favtoggle)
+                        for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+                            for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+                                if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                                    console.log(oEventTableVue.allEvents[j].iEventId);
+                                    oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                                    break;
+                                }
+                            }
+                        }
+                        initalFavoriteSetting = false;
+
+
+                        document.getElementById('eingeloggteruser').innerText = loggedInUser.name + "s EventFinder";
+                        AfterLoginFavoriten.style.visibility = "visible";
+                        AfterLoginEvent.style.visibility = "visible";
+                        document.getElementById('AfterLoginLogin').innerText = "LogOut";
+                        newLoginWrapper.style.display = "hidden";
+
+                        oEventTableVue.starVisibility = "visible";
+
+                        //Hier muss die Karte unsichtbar gemacht werden
+                        this.cardShown = !this.cardShown;
+                        oRegisterVue.cardShown = false;
+                        oNewLoginVue.cardShown = false;
+
+
+                    } else {
+                        if (document.querySelector("#Login_username").value == "" || document.querySelector("#Login_password").value == "") {
+
+                            LoginFehlerLeer.style.display = "inline";
+                        }
+                        else {
+                            LoginFehlerDaten.style.display = "inline";
+                        }
+
+
                     }
-                  }
-                  initalFavoriteSetting = false;
 
-                    alert('Willkommen ' + loggedInUser.name);
-                    document.getElementById('eingeloggteruser').innerText = loggedInUser.name+"s EventFinder";
-                    AfterLoginFavoriten.style.visibility = "visible";
-                    AfterLoginEvent.style.visibility = "visible";
-                    AfterLoginLogin.style.display = "none";
-                    newLoginWrapper.style.display = "hidden";
-
-                    oEventTableVue.starVisibility = "visible";
-
-                    //Hier muss die Karte unsichtbar gemacht werden
-                    this.cardShown = !this.cardShown;
-                    oRegisterVue.cardShown = false;
-                    oNewLoginVue.cardShown = false;
-
-
-                } else {
-                    if (document.querySelector("#Login_username").value == "" || document.querySelector("#Login_password").value == "") {
-
-                        LoginFehlerLeer.style.display = "inline";
-                    }
-                    else {
-                        LoginFehlerDaten.style.display = "inline";
-                    }
-
-
-                }
-
-            };
-            var onFailed = function onFailed() {
-                alert(' SO NE SCHEISSE');
-            };
+                };
+                var onFailed = function onFailed() {
+                    alert(' SO NE SCHEISSE');
+                };
 
 
 
-            ajaxRequest.addEventListener("load", onSuccess);
-            ajaxRequest.addEventListener("error", onFailed);
-            ajaxRequest.responseType = "json";
-            ajaxRequest.open("POST", suserlogin, true);
-            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                ajaxRequest.addEventListener("load", onSuccess);
+                ajaxRequest.addEventListener("error", onFailed);
+                ajaxRequest.responseType = "json";
+                ajaxRequest.open("POST", suserlogin, true);
+                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
-            // usernameemail = this.draft.iLoginId;
-            ajaxRequest.send(suserdata);
-
+                var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
+                // usernameemail = this.draft.iLoginId;
+                ajaxRequest.send(suserdata);
+            }
+            else {
+                document.getElementById('eingeloggteruser').innerText = "EventFinder";
+                AfterLoginFavoriten.style.visibility = "hidden";
+                AfterLoginEvent.style.visibility = "hidden";
+                document.getElementById('AfterLoginLogin').innerText = "LogIn";
+                newLoginWrapper.style.display = "visible";
+                oEventTableVue.starVisibility = "hidden";
+            }
         },
 
 
