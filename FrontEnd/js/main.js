@@ -868,7 +868,7 @@ var oNewLoginVue = new Vue({
 
                 };
                 var onFailed = function onFailed() {
-                    alert(' SO NE SCHEISSE');
+                    alert(' Login fehlgeschlagen');
                 };
 
 
@@ -886,6 +886,7 @@ var oNewLoginVue = new Vue({
             else {
                 document.getElementById('eingeloggteruser').innerText = "EventFinder";
                 AfterLoginFavoriten.style.visibility = "hidden";
+                loggedInUser = "";
                 AfterLoginEvent.style.visibility = "hidden";
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
