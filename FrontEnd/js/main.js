@@ -313,7 +313,7 @@ var oEventTableVue = new Vue({
 
         },
         kommentargeschickt: function (id) {
-
+            
             alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
             var ajaxRequest = new XMLHttpRequest();
             var comment = document.querySelector("#idComment").value;
@@ -332,6 +332,7 @@ var oEventTableVue = new Vue({
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
             ajaxRequest.send(sFormData);
+            document.querySelector("#idComment").value = "";
 
         },
 
@@ -363,11 +364,10 @@ var oEventTableVue = new Vue({
             if (loggedInUser != "") {
 
                 if (kommi === true) {
-                    document.getElementById('gibhier').innerText = " Gib hier dein Kommentar ab " + loggedInUser.name +"!";
-                    // document.getElementById('lol').innerText = loggedInUser.name;
+                    document.querySelector("#idComment").value = "";
                     var dialog = document.querySelector('dialog');
                     document.getElementById('kommiüberschrift').innerText = name;
-                    document.getElementById('eventidkommentare2').innerText = "Hier findest du Kommentare und Bewertungen zu diesem Event ";
+                   
                     document.getElementById('eventidkommentare').innerText = beschreibung;
 
                     // get, whether the currently logged in user has already rated the event
@@ -392,7 +392,8 @@ var oEventTableVue = new Vue({
                     }
                     // set current_rating
                     i = selected_event.iCurrentRating;
-                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung: " + selected_event.iCurrentRating;
+                    document.getElementById('gibhier').innerText = document.getElementById('gibhier').innerText = " Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "! aktuell:" + selected_event.iCurrentRating;
+                    
                     //add comments to list
                     var list = document.getElementById("commentTable");
                     while (list.firstChild) {
