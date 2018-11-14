@@ -334,136 +334,129 @@
                         </div>
                         <!-- Popup Dialog -->
 
-                        <dialog class="mdl-dialog" style="width: 550px;">
-                            <p style="color:grey;" id="eventidkommentare2"> haha</p>
-                            <h4 class="mdl-dialog__title" id="kommiüberschrift">Kommentare</h4>
-                            <div class="mdl-dialog__content">
+                        <dialog id="kommentardialog" class="mdl-dialog" style="width: 550px; opacity:2;">
+                            <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
+                               
+                                    <div style="background-color:whitesmoke">
 
-                                <p style="color:black;" id="eventidkommentare"> haha</p>
+                                        <h4 class="mdl-dialog__title" style="font-family:Bahnschrift;" id="kommiüberschrift">Kommentare</h4>
+                                        <div class="mdl-dialog__content">
 
-                                <br />
-                                <br />
-                                <!-- Use an element to toggle between a like/dislike icon -->
-                                <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
-                                <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
-                                <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
-                                <script>
-                                    function LikeButton(x) {
-                                      if(x.style.color != "red"){
-                                        var add_rating = -1;
-                                          if (document.getElementById('idThumbUp').style.color == "green"){
-                                            add_rating = -2; //als Ausgleich zum vorherigen positiven Rating
-                                          }
-                                          document.getElementById('idThumbUp').style.color = "grey";
-                                                var ratingRequest = new XMLHttpRequest();
-                                                var onSuccess = function onSuccess(){
-                                                  if(this.status == 200){
-                                                    var selected_event = oEventTableVue.allEvents.find(obj => {
-                                                      return obj.iEventId == oEventTableVue.selected
-                                                    });
-                                                    selected_event.iCurrentRating = selected_event.iCurrentRating + add_rating;
-                                                    console.log("rating sent");
-                                                    x.style.color = "red";
-                                                    i = i - 1;
-                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + selected_event.iCurrentRating;
-                                                  }
-                                                };
-                                                var onFailed = function onFailed() {
-                                                  console.log("failed");
-                                                };
-                                                ratingRequest.addEventListener("load", onSuccess);
-                                                ratingRequest.addEventListener("error", onFailed);
-                                                ratingRequest.responseType = "json";
-                                                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
-                                                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
-                                                ratingRequest.send(sFormData);
+                                            <p style="color:black;  font-family:Bahnschrift;" id="eventidkommentare"> haha</p>
 
-                                        }
-                                      }
+                                            <!-- Use an element to toggle between a like/dislike icon -->
+                                            <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
+                                            <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
+                                            <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
+                                            <script>
+                                                function LikeButton(x) {
+                                                    if (x.style.color != "red") {
+                                                        document.getElementById('idThumbUp').style.color = "grey";
+                                                        var ratingRequest = new XMLHttpRequest();
+                                                        var onSuccess = function onSuccess() {
+                                                            if (this.status == 200) {
+                                                                var selected_event = oEventTableVue.allEvents.find(obj => {
+                                                                    return obj.iEventId == oEventTableVue.selected
+                                                                });
+                                                                if (nochniebewertet == true) {
+                                                                    aktuellebewertung = aktuellebewertung - 1; nochniebewertet = false;
+                                                                }
+                                                                else {
+                                                                    aktuellebewertung = aktuellebewertung - 2;
+                                                                }
+                                                            }
+                                                            console.log("rating sent");
+                                                            x.style.color = "red";
+                                                            document.getElementById('ratingnumber').innerText = aktuellebewertung;
+                                                        };
+                                                        var onFailed = function onFailed() {
+                                                            console.log("failed");
+                                                        };
+                                                        ratingRequest.addEventListener("load", onSuccess);
+                                                        ratingRequest.addEventListener("error", onFailed);
+                                                        ratingRequest.responseType = "json";
+                                                        ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                        ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                        var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                        ratingRequest.send(sFormData);
+                                                    
 
-                                    function LikeButton2(x) {
-                                            if(x.style.color != "green"){
-                                              var add_rating = 1;
-                                                if (document.getElementById('haha').style.color == "red"){
-                                                  add_rating = 2; //als Ausgleich zum vorherigen positiven Rating
+                                                    }
                                                 }
 
-                                                var ratingRequest = new XMLHttpRequest();
-                                                var comment = document.querySelector("#idComment").value;
+                                                function LikeButton2(x) {
+                                                    if (x.style.color != "green") {
+                                                        var ratingRequest = new XMLHttpRequest();
+                                                        var comment = document.querySelector("#idComment").value;
+                                                        var onSuccess = function onSuccess() {
+                                                            var selected_event = oEventTableVue.allEvents.find(obj => {
+                                                                return obj.iEventId == oEventTableVue.selected
+                                                            });
+                                                            if (nochniebewertet == true) {
+                                                                aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
+                                                            }
+                                                            else {
+                                                                aktuellebewertung = aktuellebewertung + 2;
+                                                            }
+                                                            //2 besser setzen da gut bewertet
+                                                            if (this.status == 200) {
+                                                                console.log("rating sent");
+                                                                x.style.color = "green";
+                                                                document.getElementById('haha').style.color = "grey";
+                                                                document.getElementById('ratingnumber').innerText = aktuellebewertung;
+                                                            }
+                                                        };
+                                                        var onFailed = function onFailed() {
+                                                            console.log("failed");
+                                                        };
 
-                                                var onSuccess = function onSuccess(){
-                                                  var selected_event = oEventTableVue.allEvents.find(obj => {
-                                                    return obj.iEventId == oEventTableVue.selected
-                                                  });
-                                                  selected_event.iCurrentRating = selected_event.iCurrentRating + add_rating;
-                                                  if(this.status == 200){
-                                                    console.log("rating sent");
-                                                    i = i + 1; // checken obs zum ersten mal geändert wurde
-                                                    x.style.color = "green";
-                                                    document.getElementById('haha').style.color = "grey";
-                                                    document.getElementById('bewertungsdurchschnitt').innerText = "Durchschnittliche Bewertung:" + selected_event.iCurrentRating;
-                                                  }
-                                                };
-                                                var onFailed = function onFailed() {
-                                                  console.log("failed");
-                                                };
+                                                        ratingRequest.addEventListener("load", onSuccess);
+                                                        ratingRequest.addEventListener("error", onFailed);
+                                                        ratingRequest.responseType = "json";
+                                                        ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                        ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                        var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                        ratingRequest.send(sFormData);
+                                                    }
 
-                                                ratingRequest.addEventListener("load", onSuccess);
-                                                ratingRequest.addEventListener("error", onFailed);
-                                                ratingRequest.responseType = "json";
-                                                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
-                                                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
-                                                ratingRequest.send(sFormData);
-                                              }
-
-                                    }
-                                </script>
-
-                                <p style="color:black;" id="bewertungsdurchschnitt">Bewerte hier das Event gut oder schlecht </p>
-                                <br />
-                                <br />
+                                                            
+                                                }
+                                            </script>
+                                            <div>
+                                                <p id="gibhier" style="float:left;color:grey; font:22px "> Gib hier dein Kommentar ab </p>
+                                           <p id="ratingnumber"style="float:right;color:black; margin-right: 10%">zahl</p>
 
 
+                                                <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                    <input class="mdl-textfield__input" type="text" id="idComment" />
+                                                    <label class="mdl-textfield__label" for="idComment"> Kommentiere hier.. </label>
+                                                </div>
 
-                                <form action="#" style="width: 400px;">
+                                                <button id="meins" style="color:white; font-family:Bahnschrift; float:right;margin-right: 4%;background-color: #365067;width: 100px; top: 4px;left: 20px; height: 40px; padding: 0px 4px" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
 
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <p id="gibhier" style="color:grey; font:22px "> Gib hier dein Kommentar ab </p>
-                                        <input class="mdl-textfield__input" type="text" id="idComment" />
-                                        <label class="mdl-textfield__label" for="idComment"> </label>
+                                                <br />
+                                            </div>
+                                          
+                                                <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
+                                            
+                                            <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
+         v-bind:id="event.iEventId">
+        <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span id="lol" test="{}"></span>
+            <span class="mdl-list__item-text-body">{{  }}</span>
+            <i class="fa fa-comment" style="font-size:18px"></i>
+            <br style="line-height: 150%;">
+        </span>
+      </span>
+    </li> -->
+</ul>
+                                        </div>
+                                        <button type="button"  class="mdl-button close">close</button>
                                     </div>
-                                </form>
-                                <button style="background-color:cadetblue;" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
-                                <br />
-                                <!-- Vorübergehend, muss ersetzt werden-->
-                                <ul id="commentTable" class="sidecard demo-list-three mdl-list">
-                                    <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
-             v-bind:id="event.iEventId">
-            <span class="mdl-list__item-primary-content">
-                <i class="material-icons mdl-list__item-avatar">person</i>
-                <span id="lol" test="{}"></span>
-                <span class="mdl-list__item-text-body">{{  }}</span>
-                <i class="fa fa-comment" style="font-size:18px"></i>
-                <br style="line-height: 150%;">
-            </span>
-          </span>
-        </li> -->
-                                </ul>
-                            </div>
-                            <button type="button" class="mdl-button close">close</button>
-
+                                    </div>
                         </dialog>
 
-                        <!-- Two Line List with secondary info and action -->
-                        <style>
-                            .demo-list-two {
-                                width: 300px;
-                            }
-                        </style>
-
-                        <!-- Test Button Ende-->
 </div>
         </span>
 
