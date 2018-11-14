@@ -270,6 +270,12 @@ function setMarkers(aEvents) {
     })
 }
 
+function removeMarkers(aEvents){
+    aEvents.forEach((oEvent) =>{
+        map.removeObject(oEvent.marker);
+    } )
+}
+
 function setVerifyLocationMarker(sAddress) {
     var geocoder = platform.getGeocodingService(),
         geocodingParameters = {

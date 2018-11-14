@@ -124,6 +124,12 @@ exports.event_rating = (req, res, next) => {
 
 
 exports.create_event = (req, res, next) => {
+  console.log(req.body);
+  if(req.file) {
+    var path = req.file.path;
+  } else {
+    var path = "nope";
+  }
   const oEvent = new OEvent({
     _id: new mongoose.Types.ObjectId(),
     author: req.body.userId,
@@ -137,7 +143,7 @@ exports.create_event = (req, res, next) => {
     event_link: req.body.event_link,
     ticket_link: req.body.ticket_link,
     event_types: req.body.event_types,
-    event_picture: req.file.path
+    event_picture: path //req.file.path
   });
 
   oEvent

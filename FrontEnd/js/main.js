@@ -122,6 +122,7 @@ function getFavorites(user_id) {
       var apievents = this.response.saved_events;
       oEventTableVue.allEvents = apievents.map(apievent => {
           return {
+              sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
               iEventId: apievent._id,
               aRatings: apievent.ratings,
               iCurrentRating: apievent.current_rating,
@@ -181,14 +182,22 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
                 sDescription: apievent.description,
                 sAdress: apievent.address,
                 iCurrentRating: apievent.current_rating,
+                oApiEventStartDate: apievent.start_date,
                 oStartDate: apievent.start_date.split("T")[0],
-                oStartTime: apievent.start_date.split("T")[1].substring(0,5),
+                oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
                 oEndDate: apievent.end_date,
                 sEventLink: apievent.event_link,
+                sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
                 sTicketLink: apievent.ticket_link,
-                oLatLgn: {lat: apievent.lat, lng: apievent.lng},
-                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
+                oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
             };
+        });
+        //Sortiere die events - sollte später vielleicht backend machen?
+        oEventTableVue.allEvents.sort(function (a, b) {
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(a.oApiEventStartDate) - new Date(b.oApiEventStartDate);
         });
         setMarkers(oEventTableVue.allEvents);
         if (loggedInUser != ""){
@@ -316,7 +325,7 @@ var oEventTableVue = new Vue({
 
         },
         kommentargeschickt: function (id) {
-            
+
             alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
             var ajaxRequest = new XMLHttpRequest();
             var comment = document.querySelector("#idComment").value;
@@ -370,7 +379,7 @@ var oEventTableVue = new Vue({
                     document.querySelector("#idComment").value = "";
                     var dialog = document.querySelector('dialog');
                     document.getElementById('kommiüberschrift').innerText = name;
-                   
+
                     document.getElementById('eventidkommentare').innerText = beschreibung;
 
                     // get, whether the currently logged in user has already rated the event
@@ -461,7 +470,66 @@ var oSearchPlaceVue = new Vue({
         sQuery: localStorage.getItem("HANSCH"),
         dDate: null,
         sName: "Event Finder",
-        sButtonName: "Suchen"
+        sButtonName: "Suchen",
+        FilterdDate: null,
+        pickerOptions: {
+            shortcuts: [
+                {
+                    text: 'Heute',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'nächste Woche',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'nächster Monat',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'Gestern',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'Letzte Woche',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
+                    }
+                },
+                {
+                    text: 'Letzter Monat',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }
+            ]
+        },
     },
     methods: {
         //Sucht nach einem Ort
@@ -489,6 +557,7 @@ var oSearchPlaceVue = new Vue({
                     var apievents = this.response.oEvents;
                     oEventTableVue.allEvents = apievents.map(apievent => {
                         return {
+                            sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
                             iEventId: apievent._id,
                             aComments: apievent.comments,
                             aRatings: apievent.ratings,
@@ -556,7 +625,48 @@ var oSearchPlaceVue = new Vue({
         //AutoComplet Funktion der Suchleiste
         autocomplete: function autocomplete() {
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
+        },
+        filterDate: function () {
+            // axios.get('http://localhost:3000/events'
+            //     //optional parameters
+            //     // , {
+            //     //     params: {
+            //     //         date: oSearchPlaceVue.FilterdDate
+            //     //     }
+            //     // }
+            // )
+            //     .then(function (response) {
+            //         removeMarkers(oEventTableVue.allEvents);
+
+            //         var aFilterdEvents = this.response.oEvents;
+            //         oEventTableVue.allEvents = aFilterdEvents.map(apievent => {
+            //             return {
+            //                 iEventId: apievent._id,
+            //                 sName: apievent.event_name,
+            //                 sDescription: apievent.description,
+            //                 sAdress: apievent.address,
+            //                 oStartDate: apievent.start_date.split("T")[0],
+            //                 oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+            //                 oEndDate: apievent.end_date,
+            //                 sEventLink: apievent.event_link,
+            //                 sTicketLink: apievent.ticket_link,
+            //                 oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+            //                 oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
+            //             };
+            //         });
+            //         setMarkers(oEventTableVue.allEvents);
+            //     })
+            //     .catch(function (error) {
+            //         // handle error
+            //         console.log(error);
+            //     })
+            //     .then(function () {
+            //         // always executed
+            //     });
+            console.log("filter date triggered");
+
         }
+
     }
 });
 
@@ -597,39 +707,78 @@ var oNewEventVue = new Vue({
             oLatLng: {},
             status: "draft",
             EDate: null,
+            sEventLink: null,
             iEventId: Math.floor(Math.random() * 99999) + 1,
             oSelectedFile: null,
-            image: null
+            image: null,
+            titleIsInvalid: false,
+            descIsInvalid: false,
+            adressIsInvalid: false,
+            displayError: false,
+            dateIsInvalid: false
         },
         value7: ''
     },
     methods: {
-        formdraft: function () {
-            // var geocoder = platform.getGeocodingService(),
-            //     geocodingParameters = {
-            //         searchText: oNewEventVue.draft.sAdress,
-            //         jsonattributes: 1
-            //     };
-            // geocoder.geocode(
-            //     geocodingParameters,
-            //     onSuccess = function onSuccess(result) {
+        // formdraft: function () {
+        //     var geocoder = platform.getGeocodingService(),
+        //         geocodingParameters = {
+        //             searchText: oNewEventVue.draft.sAdress,
+        //             jsonattributes: 1
+        //         };
+        //     geocoder.geocode(
+        //         geocodingParameters,
+        //         onSuccess = function onSuccess(result) {
 
-            //         var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
-            //         var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
-            //         var oLatLgn = { lat: dLat, lng: dLng }
-            //         oNewEventVue.draft.oLatLng = oLatLgn;
+        //             var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
+        //             var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
+        //             var oLatLgn = { lat: dLat, lng: dLng }
 
-            //         oEventTableVue.allEvents.unshift(oNewEventVue.draft);
-            //         map.setCenter(oLatLgn, true);
-            //         setMarker(oNewEventVue.draft);
+        //             oNewEventVue.draft.oLatLng = oLatLgn;
+        //             oNewEventVue.draft.oStartDate = oNewEventVue.draft.EDate[0].split("T")[0];
+        //             oNewEventVue.draft.oStartTime = oNewEventVue.draft.EDate[1].split("T")[1].substring(0, 5);
+        //             oNewEventVue.draft.sDisplayEventLink = oNewEventVue.draft.sEventLink = undefined ? "box" : "none";
 
-            //     },
-            //     onError = function(error) {
-            //         alert('Error beim suchen der Adresse!');
-            //     }
-            // )
-        },
+        //             oEventTableVue.allEvents.unshift(oNewEventVue.draft);
+        //             map.setCenter(oLatLgn, true);
+        //             setMarker(oNewEventVue.draft);
+
+        //         },
+        //         onError = function(error) {
+        //             alert('Error beim suchen der Adresse!');
+        //         }
+        //     )
+        // },
         formsubmit: function () {
+
+           titleIsInvalid = false;
+           oNewEventVue.draft.descIsInvalid = false;
+           oNewEventVue.draft.adressIsInvalid = false;
+           oNewEventVue.draft.displayError = false;
+           oNewEventVue.draft.dateIsInvalid = false;
+
+            //Hier die Bedingungen + Ausführungen, falls nicht alle Felder korrekt oder gar nicht ausgefüllt wurden.
+            if (this.draft.sName === "") {
+                this.draft.titleIsInvalid = true;
+            }
+            if (this.draft.sDescription === "") {
+                this.draft.descIsInvalid = true;
+            }
+            if (this.draft.sAdress === "") {
+                this.draft.adressIsInvalid = true;
+            }
+            if (this.draft.EDate === null) {
+                this.draft.dateIsInvalid = true;
+            }
+
+            if (this.draft.sName === "" ||
+                this.draft.sDescription === "" ||
+                this.draft.sAdress === "" ||
+                this.draft.EDate === null) {
+                this.draft.displayError = true;
+                return;
+            }
+
             // Koordinaten für Adresse holen
             var geocoder = platform.getGeocodingService(),
                 geocodingParameters = {
@@ -653,7 +802,13 @@ var oNewEventVue = new Vue({
                     fd.append("start_date", oNewEventVue.draft.EDate[0]);
                     fd.append("end_date", oNewEventVue.draft.EDate[1]);
                     fd.append("event_types", ["5bd1874824c1783894595b68"]);
-                    fd.append("event_picture", oNewEventVue.draft.oSelectedFile, oNewEventVue.draft.oSelectedFile.name);
+                    if(oNewEventVue.draft.oSelectedFile){
+                      fd.append("event_picture", oNewEventVue.draft.oSelectedFile, oNewEventVue.draft.oSelectedFile.name);
+                    }
+                    if (oNewEventVue.draft.sEventLink){
+                      fd.append("event_link", oNewEventVue.draft.sEventLink);
+                    }
+
 
                     // //file convert + append
                     // var ImageURL = oNewEventVue.draft.image;
@@ -670,23 +825,33 @@ var oNewEventVue = new Vue({
                     axios.post("http://localhost:3000/events", fd).then(res => {
                         alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
-                        oNewEventVue.draft = { // reset vueinternal data to make possible to add new event
+                        // reset vueinternal data to make possible to add new event
+                        oNewEventVue.draft = {
                             sName: "",
                             sDescription: "",
                             sAdress: "",
-                            date: "",
+                            sDate: "",
                             time: "",
-                            latlng: {},
-                            EDate: null,
+                            oLatLng: {},
                             status: "draft",
+                            EDate: null,
+                            sEventLink: null,
                             iEventId: Math.floor(Math.random() * 99999) + 1,
+                            oSelectedFile: null,
+                            image: null,
+                            titleIsInvalid: false,
+                            descIsInvalid: false,
+                            adressIsInvalid: false,
+                            displayError: false,
+                            dateIsInvalid: false
                         }
                     }).catch(function (error) {
+                        alert("Fehler beim speichern in der Datenbank");
                         console.log(error);
                     });;
                 },
                 onError = function (error) {
-                    alert('Geodaten nicht bekommen!');
+                    alert('Geodaten nicht bekommen. Bitte überprüfen Sie, ob die angegebene Adresse existiert.');
                 }
             )
 
@@ -742,7 +907,7 @@ var oRegisterVue = new Vue({
     },
     methods: {
         formsubmit: function () {
-           
+
                 if (document.querySelector('#email').value.includes("@") == true) {
                     if (document.querySelector('#password2').value != "" && document.querySelector('#password1').value != "" &&
                         document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
@@ -796,7 +961,7 @@ var oRegisterVue = new Vue({
                 console.log(snewuserdata);
                 ajaxRequest.send(snewuserdata);
             }
-        
+
 
     }
 });
