@@ -28,8 +28,8 @@
     <meta name="author" content="Hanna Scheub">
     <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
     <title> Event Finder </title>
-    <link rel="icon" href="../images/tabicon.png">
-
+    <link rel="icon" href="images/mapIcon.PNG">
+    <!-- tab icon-->
 
     <!-- External Libaries-->
     <script src="//storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
@@ -201,6 +201,9 @@
         </div>
         <!-- Register Card End-->
 
+
+
+        <!-- anzeiegen Card End-->
         <!-- Login Card-->
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="EINLOGEN_Karte">
@@ -256,9 +259,15 @@
         <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <h2>Neues Event eintragen</h2>
             <div id="newEvent" class="sidecard">
-                <p>
-                    Fügen Sie ein neues Event in unsere Databank ein
-                </p>
+                <!-- <div id="displayNewEventError" style="display: none"> -->
+                <div v-show="draft.displayError">
+                    <i class="material-icons" style="float: left">error_outline</i>
+                    <p style="color: #d50000; ">
+                        <b>
+                            Bitte füllen Sie alle benötigten Felder aus.
+                        </b>
+                    </p>
+                </div>
                 <!-- <picture-input ref="pictureInput"
                                width="100"
                                height="100"
@@ -272,30 +281,46 @@
                                }"
                                @change="onChange">
                 </picture-input> -->
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <!-- <label class="custom-file-upload">
+                    <input id="imageUpload" type="file" style="display: none" @change="onFileSelected"/>
+                    <i class="fa fa-cloud-upload"></i> Eventfoto hochladen
+                </label> -->
+                <div v-bind:class="{ 'is-invalid': draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <!-- <div id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
                     <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
-                    <label class="mdl-textfield__label" for="sample1">Titel</label>
+                    <label class="mdl-textfield__label" for="sample1">Titel*</label>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <textarea class="mdl-textfield__input" maxlength="300" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
-                    <label class="mdl-textfield__label" for="schools">Beschreibung</label>
+                <div v-bind:class="{ 'is-invalid': draft.descIsInvalid }" id="newEventDescription" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <textarea class="mdl-textfield__input" maxlength="200" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
+                    <label class="mdl-textfield__label" for="schools">Beschreibung*</label>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div v-bind:class="{ 'is-invalid': draft.adressIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
-                    <label class="mdl-textfield__label" for="sample1">Adresse</label>
+                    <label class="mdl-textfield__label" for="sample1">Adresse*</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
+                    <label class="mdl-textfield__label" for="sample1">Link</label>
+                </div>
+
+                <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <p>Datum*</p>
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-                    <el-date-picker v-model="draft.EDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
-                                    :default-time="['15:00:00', '19:00:00']">
+                    <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
+                        start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
+                <!-- <label class="custom-file-upload">
+                        <input id="imageUpload" style="display: none" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected"/>
+                        <i v-show="!draft.oSelectedFile" class="fa fa-cloud-upload"> "{{ draft.oSelectedFile.name }} </i>
+                        <i v-show="draft.oSelectedFile" class="fa fa-cloud-upload">  Eventfoto hochladen </i>
+                </label> -->
                 <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected">
                 <!--label for="imageUpload">Laden Sie Ihr Eventbild hoch!</label-->
                 <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
+                    <!-- <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
                         Vorschau
-                    </button>
+                    </button> -->
                     <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                         Senden
                     </button>
@@ -326,6 +351,13 @@
                         <br style="line-height: 150%;">
                         <i class="fa fa-map-marker" style="font-size:24px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+                        <br style="line-height: 150%">
+                        <div v-bind:style="{ display: event.sDisplayEventLink }">
+                            <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
+                            <span class=nobr class="link" class="mdl-list__item-text-body">
+                                <a :href="event.sEventLink" target="_blank">{{ event.sEventLink }}</a>
+                            </span>
+                        </div>
 
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)" type="text" id="sample1">
@@ -336,7 +368,7 @@
 
                         <dialog id="kommentardialog" class="mdl-dialog" style="width: 550px; opacity:2;">
                             <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-                               
+
                                     <div style="background-color:whitesmoke">
 
                                         <h4 class="mdl-dialog__title" style="font-family:Bahnschrift;" id="kommiüberschrift">Kommentare</h4>
@@ -379,7 +411,7 @@
                                                         ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                                                         var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
                                                         ratingRequest.send(sFormData);
-                                                    
+
 
                                                     }
                                                 }
@@ -419,7 +451,7 @@
                                                         ratingRequest.send(sFormData);
                                                     }
 
-                                                            
+
                                                 }
                                             </script>
                                             <div>
@@ -436,9 +468,9 @@
 
                                                 <br />
                                             </div>
-                                          
+
                                                 <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
-                                            
+
                                             <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
          v-bind:id="event.iEventId">
         <span class="mdl-list__item-primary-content">
@@ -488,7 +520,7 @@
 
                      <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
                <el-date-picker  id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum" end-placeholder="End Datum"
-                               :default-time="['15:00:00', '19:00:00']"  hidden="hidden">
+                               :default-time="['15:00:00', '19:00:00']"  hidden="hidden" :picker-options="pickerOptions">
                </el-date-picker>
 
                 <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
