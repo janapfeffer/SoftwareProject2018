@@ -342,8 +342,6 @@
 
                                             <p style="color:black;  font-family:Bahnschrift;" id="eventidkommentare"> haha</p>
 
-                                            <br />
-                                            <br />
                                             <!-- Use an element to toggle between a like/dislike icon -->
                                             <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
                                             <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
@@ -366,7 +364,8 @@
                                                                 console.log("rating sent");
                                                                 x.style.color = "red";
                                                                 i = i - 1;
-                                                                document.getElementById('gibhier').innerText = " Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!              aktuell:" + selected_event.iCurrentRating;
+                                                                document.getElementById('ratingnumber').innerText = selected_event.iCurrentRating;
+                                                                document.getElementById('gibhier').innerText = " Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!";
                                                             }
                                                         };
                                                         var onFailed = function onFailed() {
@@ -403,7 +402,8 @@
                                                                 i = i + 1; // checken obs zum ersten mal geändert wurde
                                                                 x.style.color = "green";
                                                                 document.getElementById('haha').style.color = "grey";
-                                                                document.getElementById('gibhier').innerText = " Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!              aktuell:" + i;
+                                                                document.getElementById('ratingnumber').innerText = selected_event.iCurrentRating;
+                                                                document.getElementById('gibhier').innerText = " Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!";
 
                                                             }
                                                         };
@@ -422,29 +422,35 @@
 
                                                 }
                                             </script>
+                                            <div>
+                                                <p id="gibhier" style="float:left;color:grey; font:22px "> Gib hier dein Kommentar ab </p>
+                                           <p id="ratingnumber"style="float:right;color:black; margin-right: 10%">zahl</p>
 
-                                                <p id="gibhier" style="color:grey; font:22px "> Gib hier dein Kommentar ab </p>
-                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+                                                <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                                     <input class="mdl-textfield__input" type="text" id="idComment" />
                                                     <label class="mdl-textfield__label" for="idComment"> Kommentiere hier.. </label>
                                                 </div>
+
+                                                <button id="meins" style="color:white; font-family:Bahnschrift; float:right;margin-right: 4%;background-color: #365067;width: 100px; top: 4px;left: 20px; height: 40px; padding: 0px 4px" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
+
+                                                <br />
+                                            </div>
+                                          
+                                                <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
                                             
-                                            <button @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
-                                            <br />
-                                            <!-- Vorübergehend, muss ersetzt werden-->
-                                            <ul id="commentTable" style="background-color:lightgrey" class="sidecard demo-list-three mdl-list">
-                                                <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
-                             v-bind:id="event.iEventId">
-                            <span class="mdl-list__item-primary-content">
-                                <i class="material-icons mdl-list__item-avatar">person</i>
-                                <span id="lol" test="{}"></span>
-                                <span class="mdl-list__item-text-body">{{  }}</span>
-                                <i class="fa fa-comment" style="font-size:18px"></i>
-                                <br style="line-height: 150%;">
-                            </span>
-                          </span>
-                        </li> -->
-                                            </ul>
+                                            <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
+         v-bind:id="event.iEventId">
+        <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <span id="lol" test="{}"></span>
+            <span class="mdl-list__item-text-body">{{  }}</span>
+            <i class="fa fa-comment" style="font-size:18px"></i>
+            <br style="line-height: 150%;">
+        </span>
+      </span>
+    </li> -->
+</ul>
                                         </div>
                                         <button type="button"  class="mdl-button close">close</button>
                                     </div>

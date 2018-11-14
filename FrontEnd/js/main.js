@@ -88,6 +88,7 @@ var oNavigationVue = new Vue({
                 document.getElementById('BigMap').innerText = "zurück zur Liste ";
             }
             else {
+                AfterLoginLogin.style.visibility = "visible";
                 document.getElementById('BigMap').innerText = "Große Karte ";
                 if (loggedInUser != "") {
                     AfterLoginFavoriten.style.visibility = "visible";
@@ -392,8 +393,8 @@ var oEventTableVue = new Vue({
                     }
                     // set current_rating
                     i = selected_event.iCurrentRating;
-                    document.getElementById('gibhier').innerText = document.getElementById('gibhier').innerText = " Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "! aktuell:" + selected_event.iCurrentRating;
-                    
+                    document.getElementById('gibhier').innerText = "Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!";
+                    document.getElementById('ratingnumber').innerText = selected_event.iCurrentRating;
                     //add comments to list
                     var list = document.getElementById("commentTable");
                     while (list.firstChild) {
