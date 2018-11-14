@@ -349,10 +349,6 @@
                                             <script>
                                                 function LikeButton(x) {
                                                     if (x.style.color != "red") {
-                                                        var add_rating = -1;
-                                                        if (document.getElementById('idThumbUp').style.color == "green") {
-                                                            add_rating = -2; //als Ausgleich zum vorherigen positiven Rating
-                                                        }
                                                         document.getElementById('idThumbUp').style.color = "grey";
                                                         var ratingRequest = new XMLHttpRequest();
                                                         var onSuccess = function onSuccess() {
@@ -360,13 +356,16 @@
                                                                 var selected_event = oEventTableVue.allEvents.find(obj => {
                                                                     return obj.iEventId == oEventTableVue.selected
                                                                 });
-                                                                selected_event.iCurrentRating = selected_event.iCurrentRating + add_rating;
-                                                                console.log("rating sent");
-                                                                x.style.color = "red";
-                                                                i = i - 1;
-                                                                document.getElementById('ratingnumber').innerText = selected_event.iCurrentRating;
-                                                                document.getElementById('gibhier').innerText = " Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!";
+                                                                if (nochniebewertet == true) {
+                                                                    aktuellebewertung = aktuellebewertung - 1; nochniebewertet = false;
+                                                                }
+                                                                else {
+                                                                    aktuellebewertung = aktuellebewertung - 2;
+                                                                }
                                                             }
+                                                            console.log("rating sent");
+                                                            x.style.color = "red";
+                                                            document.getElementById('ratingnumber').innerText = aktuellebewertung;
                                                         };
                                                         var onFailed = function onFailed() {
                                                             console.log("failed");
@@ -378,33 +377,31 @@
                                                         ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                                                         var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
                                                         ratingRequest.send(sFormData);
+                                                    
 
                                                     }
                                                 }
 
                                                 function LikeButton2(x) {
                                                     if (x.style.color != "green") {
-                                                        var add_rating = 1;
-                                                        if (document.getElementById('haha').style.color == "red") {
-                                                            add_rating = 2; //als Ausgleich zum vorherigen positiven Rating
-                                                        }
-
                                                         var ratingRequest = new XMLHttpRequest();
                                                         var comment = document.querySelector("#idComment").value;
-
                                                         var onSuccess = function onSuccess() {
                                                             var selected_event = oEventTableVue.allEvents.find(obj => {
                                                                 return obj.iEventId == oEventTableVue.selected
                                                             });
-                                                            selected_event.iCurrentRating = selected_event.iCurrentRating + add_rating;
+                                                            if (nochniebewertet == true) {
+                                                                aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
+                                                            }
+                                                            else {
+                                                                aktuellebewertung = aktuellebewertung + 2;
+                                                            }
+                                                            //2 besser setzen da gut bewertet
                                                             if (this.status == 200) {
                                                                 console.log("rating sent");
-                                                                i = i + 1; // checken obs zum ersten mal geändert wurde
                                                                 x.style.color = "green";
                                                                 document.getElementById('haha').style.color = "grey";
-                                                                document.getElementById('ratingnumber').innerText = selected_event.iCurrentRating;
-                                                                document.getElementById('gibhier').innerText = " Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!";
-
+                                                                document.getElementById('ratingnumber').innerText = aktuellebewertung;
                                                             }
                                                         };
                                                         var onFailed = function onFailed() {
@@ -420,6 +417,7 @@
                                                         ratingRequest.send(sFormData);
                                                     }
 
+                                                            
                                                 }
                                             </script>
                                             <div>

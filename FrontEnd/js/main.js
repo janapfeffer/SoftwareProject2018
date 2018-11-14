@@ -16,6 +16,8 @@ var oEvent = function (oEvent) {
 // var usernameemail = "";
 var kommi = false;
 var logoutclicked = false;
+var aktuellebewertung = 0;
+var nochniebewertet = true;
 var loggedInUser = "";
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
@@ -380,21 +382,24 @@ var oEventTableVue = new Vue({
                     })
 
                     if(loggedInUser_rating){ //set rating buttons
-                      if(loggedInUser_rating.rating == -1){
+                        if (loggedInUser_rating.rating == -1) {
+                            nochniebewertet = false;
                         document.getElementById('haha').style.color = "red"
                         document.getElementById('idThumbUp').style.color = "grey"
-                      } else {
+                        } else {
+                            nochniebewertet = false;
                         document.getElementById('idThumbUp').style.color = "green"
                         document.getElementById('haha').style.color = "grey"
                       }
                     } else {
+                        nochniebewertet = true;
                       document.getElementById('idThumbUp').style.color = "grey"
                       document.getElementById('haha').style.color = "grey"
                     }
                     // set current_rating
-                    i = selected_event.iCurrentRating;
+                    aktuellebewertung = selected_event.iCurrentRating;
                     document.getElementById('gibhier').innerText = "Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!";
-                    document.getElementById('ratingnumber').innerText = selected_event.iCurrentRating;
+                    document.getElementById('ratingnumber').innerText = aktuellebewertung;
                     //add comments to list
                     var list = document.getElementById("commentTable");
                     while (list.firstChild) {
@@ -743,7 +748,6 @@ var oRegisterVue = new Vue({
                         document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
                         if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
                             var onSuccess = function onSuccess() {
-                                alert('ich glaube es hat geklappt. HTTP CODE ABFANGEN WEIL EVTL HAT ES NED GEKLAPPT LOL');
                                 this.cardShown = !this.cardShown;
                                 oRegisterVue.cardShown = false;
                                 oNewLoginVue.cardShown = false;
