@@ -114,6 +114,7 @@ var oNavigationVue = new Vue({
 var bigmapgeklickt = false;
 
 function getFavorites(user_id) {
+  oEventTableVue.selected = "";
   const GETFAVORITES_URL = "http://localhost:3000/user/" + user_id + "/events";
   var ajaxRequest = new XMLHttpRequest();
 
@@ -172,6 +173,7 @@ var ausgewaehlt = "";
 // aAllEvents =
 
 function getAllEvents() { //uses get events/filtered with header filter_start_date = new Date() instead of get events
+    oEventTableVue.selected = "";
     var GETALLEVENTS_URL = 'http://localhost:3000/events/filtered';
     var ajaxRequest = new XMLHttpRequest();
 
