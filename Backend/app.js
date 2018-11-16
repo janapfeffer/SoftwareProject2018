@@ -32,7 +32,7 @@ app.use((req, res, next) => {
     res.header(
         "Access-Control-Allow-Headers",
         //Allowed headers incl. custom headers
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization, filter_start_date, filter_end_date"
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization, filter_start_date, filter_end_date, filter_event_type"
     );
     //Options-Request from Browser
     if (req.method === "OPTIONS") {

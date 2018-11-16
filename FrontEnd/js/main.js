@@ -52,7 +52,7 @@ var oNavigationVue = new Vue({
             else {
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-                // getAllEvents(); //todo: apply current filters
+                // getAllEvents(); 
                 getFilteredEvents(oSearchPlaceVue.dDate);
                 document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden"); //display time filter
             }

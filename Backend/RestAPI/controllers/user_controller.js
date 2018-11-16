@@ -222,7 +222,6 @@ exports.get_saved_events = (req, res, next) => {
 
 };
 
-//todo find saved event first before trying to delete?
 exports.delete_saved_event = (req, res, next) => {
   const event_id = req.body.eventId;
   const user_id = req.body.userId;
