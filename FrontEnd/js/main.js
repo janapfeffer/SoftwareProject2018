@@ -338,12 +338,15 @@ var oEventTableVue = new Vue({
         },
         kommentargeschickt: function (id) {
 
-            alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
+            // alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
             var ajaxRequest = new XMLHttpRequest();
             var comment = document.querySelector("#idComment").value;
 
             var onSuccess = function onSuccess(){
               console.log("toll");
+              var t = oEventTableVue.selected;
+              getAllEvents(); //this leads to the comment being displayed immediatley
+              oEventTableVue.selected = t;
             };
             var onFailed = function onFailed() {
               console.log("failed");
