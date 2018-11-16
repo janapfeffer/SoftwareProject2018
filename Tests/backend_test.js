@@ -101,20 +101,23 @@ describe('Events', () => {
 });
 
 describe('Users', () => {
+  // function used to create a unique user_email for further testing
+  function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  };
+  // unique user_email for further testing, as some functions require an existing user
+  var user_email = "auto_test" + guid() + "@test.de";
   describe("/signup", () =>  {
     it("it should POST the user(*)", (done) => {
       // * email is generated randomly using a guid
       //   that could potentially cause a fail but the collision probability is extremely small
-      function guid() {
-        function s4() {
-          return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-      };
       var user = {
-        email: "auto_test" + guid() + "@test.de",
+        email: user_email,
         name: "auto test",
         password: "pw"
 
@@ -130,10 +133,11 @@ describe('Users', () => {
           });
     });
   });
+
   describe("/signup", () =>  {
     it("it should not POST the user, duplicate email", (done) => {
       var user = {
-        email: "auto_test@test.de",
+        email: user_email,
         name: "auto test",
         password: "pw"
 
@@ -145,6 +149,43 @@ describe('Users', () => {
             res.should.have.status(409);
             res.body.should.be.a("object");
             res.body.should.have.property("message").eql("Mail exists");
+            done();
+          });
+    });
+  });
+
+  describe("/login", () =>  {
+    it("it should login the user", (done) => {
+      var user = {
+        email: user_email,
+        password: "pw"
+
+      };
+      chai.request(server)
+          .post("/user/login")
+          .send(user)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a("object");
+            res.body.should.have.property("message").eql("Auth successful");
+            done();
+          });
+    });
+  });
+  describe("/login", () =>  {
+    it("it should not login the user", (done) => {
+      var user = {
+        email: user_email,
+        password: "not_correct"
+
+      };
+      chai.request(server)
+          .post("/user/login")
+          .send(user)
+          .end((err, res) => {
+            res.should.have.status(401);
+            res.body.should.be.a("object");
+            res.body.should.have.property("message").eql("Auth failed");
             done();
           });
     });
