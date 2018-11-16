@@ -3,7 +3,6 @@ const OEvent = require("../models/event_model");
 const EventType = require("../models/event_type_model");
 
 
-//todo: add additional needed fields (whatever the front end wants)
 exports.get_all_events = (req, res, next) => {
   OEvent.find() //enter: {verification_status: true} into brackets for only verified events
     .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
@@ -40,7 +39,7 @@ exports.get_all_events = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.error("Error: ", err.stack);
+      // console.error("Error: ", err.stack);
       res.status(500).json({
         error: err
       })
@@ -82,7 +81,7 @@ exports.event_rating = (req, res, next) => {
           });
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           res.status(500).json({
             error: err
           });
@@ -113,7 +112,7 @@ exports.event_rating = (req, res, next) => {
           });
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           res.status(500).json({
             error: err
           });
@@ -124,7 +123,7 @@ exports.event_rating = (req, res, next) => {
 
 
 exports.create_event = (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   if(req.file) {
     var path = req.file.path;
   } else {
@@ -173,7 +172,7 @@ exports.create_event = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.error("Error: ", err.stack);
+      // console.error("Error: ", err.stack);
       res.status(500).json({
         error: err
       })
@@ -182,7 +181,7 @@ exports.create_event = (req, res, next) => {
 
 //todo: find comment first before deleting?
 exports.delete_comment = (req, res, next) => {
-  console.log(req.body.eventId);
+  // console.log(req.body.eventId);
   OEvent.findById(req.body.eventId, "comments", function (err, event) {
     OEvent.updateOne(
       { _id: req.body.eventId },
@@ -199,7 +198,7 @@ exports.delete_comment = (req, res, next) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         res.status(500).json({
           error: err
         });
@@ -209,7 +208,7 @@ exports.delete_comment = (req, res, next) => {
 
 exports.add_comment = (req, res, next) => {
   OEvent.findById(req.body.eventId, "comments", function (err, event) {
-    console.log(event);
+    // console.log(event);
     OEvent.updateOne(
       { _id: req.body.eventId },
       {
@@ -233,7 +232,7 @@ exports.add_comment = (req, res, next) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         res.status(500).json({
           error: err
         });
@@ -247,7 +246,7 @@ exports.get_event = (req, res, next) => {
     .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments")
     .exec()
     .then(doc => {
-      console.log("From database", doc);
+      // console.log("From database", doc);
       if (doc) {
         res.status(200).json({
           product: doc,
@@ -263,7 +262,7 @@ exports.get_event = (req, res, next) => {
       }
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ error: err });
     });
 };
@@ -288,7 +287,7 @@ exports.update_event = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({
         error: err
       });
@@ -308,7 +307,7 @@ exports.delete_event = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({
         error: err
       });
@@ -384,13 +383,13 @@ exports.get_filtered_events = (req, res, next) => {
         });
       })
       .catch(err => {
-        console.error("Error: ", err.stack);
+        // console.error("Error: ", err.stack);
         res.status(500).json({
           error: err
         })
       });
   } else { // no end_date -> INITIAL LOADING
-    console.log("initial loading");
+    // console.log("initial loading");
     OEvent.find({
 
 
@@ -434,7 +433,7 @@ exports.get_filtered_events = (req, res, next) => {
         });
       })
       .catch(err => {
-        console.error("Error: ", err.stack);
+        // console.error("Error: ", err.stack);
         res.status(500).json({
           error: err
         })
