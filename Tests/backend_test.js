@@ -85,7 +85,7 @@ describe('Events', () => {
               start_date: "2019-01-01 00:00:00.000+00:00",
               end_date: "2019-01-01 23:00:00.000+00:00",
               event_types: ["5bd1874824c1783894595b68"]
-          }
+          };
         chai.request(server)
             .post('/events')
             .send(event)
@@ -97,5 +97,56 @@ describe('Events', () => {
             });
       });
 
+  });
+});
+
+describe('Users', () => {
+  describe("/signup", () =>  {
+    it("it should POST the user(*)", (done) => {
+      // * email is generated randomly using a guid
+      //   that could potentially cause a fail but the collision probability is extremely small
+      function guid() {
+        function s4() {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+      };
+      var user = {
+        email: "auto_test" + guid() + "@test.de",
+        name: "auto test",
+        password: "pw"
+
+      };
+      chai.request(server)
+          .post("/user/signup")
+          .send(user)
+          .end((err, res) => {
+            res.should.have.status(201);
+            res.body.should.be.a("object");
+            res.body.should.have.property("user");
+            done();
+          });
+    });
+  });
+  describe("/signup", () =>  {
+    it("it should not POST the user, duplicate email", (done) => {
+      var user = {
+        email: "auto_test@test.de",
+        name: "auto test",
+        password: "pw"
+
+      };
+      chai.request(server)
+          .post("/user/signup")
+          .send(user)
+          .end((err, res) => {
+            res.should.have.status(409);
+            res.body.should.be.a("object");
+            res.body.should.have.property("message").eql("Mail exists");
+            done();
+          });
+    });
   });
 });

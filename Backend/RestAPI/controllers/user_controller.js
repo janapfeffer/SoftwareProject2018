@@ -33,9 +33,11 @@ exports.user_signup = (req, res, next) => {
               .then(result => {
                 res.status(201).json({
                   message: "User created",
-                  email: req.body.email,
-                  name: req.body.name,
-                  password: hash
+                  user: {
+                    email: req.body.email,
+                    name: req.body.name,
+                    password: hash
+                  }
                 });
               })
               .catch(err => {
