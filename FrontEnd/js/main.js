@@ -139,8 +139,12 @@ function getFavorites(user_id) {
               oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
           };
       });
+      //sort by start date
+      oEventTableVue.allEvents.sort(function (a, b) {
+          return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
+      });
+      // set bubbles on map
       setMarkers(oEventTableVue.allEvents);
-
       //set stars
       initalFavoriteSetting = true;
       for(var z = 0; z < oEventTableVue.allEvents.length; z++){
