@@ -52,7 +52,7 @@ var oNavigationVue = new Vue({
             else {
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-                // getAllEvents(); 
+                // getAllEvents();
                 getFilteredEvents(oSearchPlaceVue.dDate);
                 document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden"); //display time filter
             }
@@ -484,7 +484,8 @@ var oEventTableVue = new Vue({
 });
 
 function getFilteredEvents(dDate) {
-  //filter for start_date and end_date
+  //filter for start_date and end_date and event types
+  //filter_event_type is an array of 1 - x event_types
   if(dDate){
     //check, whether filter dates are in the past -> reject search
     if(dDate[0] >= new Date().setHours(0,0,0,0) && dDate[1] >= new Date().setHours(0,0,0,0)) {
@@ -545,6 +546,7 @@ function getFilteredEvents(dDate) {
       ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
       ajaxRequest.setRequestHeader("filter_start_date", dDate[0].toString());
       ajaxRequest.setRequestHeader("filter_end_date", dDate[1].toString());
+      // ajaxRequest.setRequestHeader("filter_event_type", );
 
       ajaxRequest.send();
     } else { // at least one of the dates is in the past, which is an incorrect input
