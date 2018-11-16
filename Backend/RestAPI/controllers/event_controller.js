@@ -321,10 +321,10 @@ exports.get_filtered_events = (req, res, next) => {
   //https://stackoverflow.com/questions/32353999/mongoose-select-query-between-two-time-range
   //get events with time range filters applied
   // check wich filters are given and only apply the given ones:
-  //    start date: all events after/on this start date: for initial loading
+  //    end date: all events that are not over yet: for initial loading
   //    start & end date: all events where at least one day is in the time range
   // console.log(req.headers);
-  if (req.headers.filter_end_date) {
+  if (req.headers.filter_start_date) {
     OEvent.find({
       $or: [
         {
@@ -393,8 +393,8 @@ exports.get_filtered_events = (req, res, next) => {
     OEvent.find({
 
 
-          start_date: { //start_date within
-          $gte: req.headers.filter_start_date
+          end_date: { 
+          $gte: req.headers.filter_end_date
           }
 
 

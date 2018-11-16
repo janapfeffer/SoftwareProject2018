@@ -233,7 +233,7 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
     ajaxRequest.responseType = "json";
 
     ajaxRequest.open('GET', GETALLEVENTS_URL);
-    ajaxRequest.setRequestHeader("filter_start_date", new Date());
+    ajaxRequest.setRequestHeader("filter_end_date", new Date());
     ajaxRequest.send();
 }
 //function getComments(event_id) {
@@ -492,54 +492,27 @@ var oSearchPlaceVue = new Vue({
                 {
                     text: 'Heute',
                     onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
+                        const end = new Date().setHours(23,59,59,59);
+                        const start = new Date().setHours(0,0,0,0);
+                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
                         picker.$emit('pick', [start, end]);
                     }
                 },
                 {
                     text: 'nächste Woche',
                     onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 7);
+                        const end = new Date(new Date().getTime() + 3600 *1000 *24 *7).setHours(23,59,59,59);
+                        const start = new Date().setHours(0,0,0,0);
+                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 7);
                         picker.$emit('pick', [start, end]);
                     }
                 },
                 {
                     text: 'nächster Monat',
                     onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        end.setTime(start.getTime() + 3600 * 1000 * 24 * 30);
-                        picker.$emit('pick', [start, end]);
-                    }
-                },
-                {
-                    text: 'Gestern',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
-                        picker.$emit('pick', [start, end]);
-                    }
-                },
-                {
-                    text: 'Letzte Woche',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                        picker.$emit('pick', [start, end]);
-                    }
-                },
-                {
-                    text: 'Letzter Monat',
-                    onClick(picker) {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        const end = new Date(new Date().getTime() + 3600 *1000 *24 *30).setHours(23,59,59,59);
+                        const start = new Date().setHours(0,0,0,0);
+                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 30);
                         picker.$emit('pick', [start, end]);
                     }
                 }
@@ -564,7 +537,7 @@ var oSearchPlaceVue = new Vue({
             //filter for start_date and end_date
             if(this.dDate){
               //check, whether filter dates are in the past -> reject search
-              if(this.dDate[0] > new Date() && this.dDate[1] > new Date()) {
+              if(this.dDate[0] >= new Date().setHours(0,0,0,0) && this.dDate[1] >= new Date().setHours(0,0,0,0)) {
                 var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
                 var ajaxRequest = new XMLHttpRequest();
 
