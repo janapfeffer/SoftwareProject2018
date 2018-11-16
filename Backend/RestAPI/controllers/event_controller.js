@@ -128,7 +128,7 @@ exports.create_event = (req, res, next) => {
   if(req.file) {
     var path = req.file.path;
   } else {
-    var path = "nope";
+    var path = "event_images\\standard.png";
   }
   const oEvent = new OEvent({
     _id: new mongoose.Types.ObjectId(),

@@ -1145,7 +1145,6 @@ function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     getAllEvents();
     checkDuplicatePositions(oEventTableVue.allEvents);
-    document.getElementById("i").placeholder = new Date(); //set start date datepicker to current date
 }
 
 
