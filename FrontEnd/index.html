@@ -477,18 +477,20 @@
 
                                                 <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
 
-                                            <!-- <li v-for="event in filteredList" class="mdl-list__item mdl-list__item-three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
-         v-bind:id="event.iEventId">
-        <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-avatar">person</i>
-            <span id="lol" test="{}"></span>
-            <span class="mdl-list__item-text-body">{{  }}</span>
-            <i class="fa fa-comment" style="font-size:18px"></i>
-            <br style="line-height: 150%;">
-        </span>
-      </span>
-    </li> -->
-</ul>
+                                                  <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line"
+                                                       v-bind:id="comment._id">
+                                                      <span class="mdl-list__item-primary-content">
+                                                          <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
+                                                          <!-- <span id="name">{{ comment.name }}</span> -->
+                                                          <span>{{ comment.username }}</span>
+                                                          <br style="line-height: 150%;"/>                                                         
+                                                          <i class="fa fa-comment" style="font-size:18px"></i>
+                                                          <span class=nobr class="mdl-list__item-text-body">{{ comment.comment }}</span>
+                                                          <br style="line-height: 150%;"/>
+                                                      </span>
+
+                                                  </li>
+                                              </ul>
                                         </div>
                                         <button type="button"  class="mdl-button close">close</button>
                                     </div>
@@ -528,6 +530,8 @@
                <el-date-picker  id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum" end-placeholder="End Datum"
                                :default-time="['15:00:00', '19:00:00']"  hidden="hidden" :picker-options="pickerOptions">
                </el-date-picker>
+
+               <!-- insert drop down for event types-->
 
                 <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
                         name="action" @click="searchPlace">

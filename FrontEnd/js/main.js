@@ -272,10 +272,14 @@ var oEventTableVue = new Vue({
                 return bool;
             })
         },
-        commentList: function () {
+        commentList: function () { // comments of selected event
+          var temp = this;
+          if (this.selected === "") {
+            return [];
+          }
           return this.allEvents.filter(function(value) {
-            return value.iEventId === this.selected;
-          })[0];
+            return value.iEventId === temp.selected;
+          })[0].aComments;
         }
     },
     methods: {
@@ -416,35 +420,35 @@ var oEventTableVue = new Vue({
                     document.getElementById('gibhier').innerText = "Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!";
                     document.getElementById('ratingnumber').innerText = aktuellebewertung;
                     //add comments to list
-                    var list = document.getElementById("commentTable");
-                    while (list.firstChild) {
-                    list.removeChild(list.firstChild);
-}
-                    for (var r = 0; r < comments.length; r++){
-                      var node = document.createElement("LI");                 // Create a <li> node
-
-                      var span = document.createElement("SPAN");
-                      span.className = "mdl-list__item-primary-content";
-                      span = document.createElement("SPAN");
-                      var i = document.createElement("I");
-                      i.className = "material-icons mdl-list__item-avatar";
-                      i.innerHTML = "person";
-                        var comment = document.createElement("SPAN");
-                        comment = document.createElement("SPAN");
-                      comment.innerHTML = comments[r].comment;         // Create a text node
-                        var user = document.createElement("SPAN");
-                        user = document.createElement("SPAN");
-                      user.innerHTML = comments[r].username;
-                      user.className = "mdl-list__item-text-body";
-
-                      span.appendChild(i);
-                      span.appendChild(user);
-                      span.appendChild(comment);
-                        node.appendChild(span);
-
-                        // Append the text to <li>
-                      document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
-                    }
+//                     var list = document.getElementById("commentTable");
+//                     while (list.firstChild) {
+//                     list.removeChild(list.firstChild);
+//                     }
+//                     for (var r = 0; r < comments.length; r++){
+//                       var node = document.createElement("LI");                 // Create a <li> node
+//
+//                       var span = document.createElement("SPAN");
+//                       span.className = "mdl-list__item-primary-content";
+//                       span = document.createElement("SPAN");
+//                       var i = document.createElement("I");
+//                       i.className = "material-icons mdl-list__item-avatar";
+//                       i.innerHTML = "person";
+//                         var comment = document.createElement("SPAN");
+//                         comment = document.createElement("SPAN");
+//                       comment.innerHTML = comments[r].comment;         // Create a text node
+//                         var user = document.createElement("SPAN");
+//                         user = document.createElement("SPAN");
+//                       user.innerHTML = comments[r].username;
+//                       user.className = "mdl-list__item-text-body";
+//
+//                       span.appendChild(i);
+//                       span.appendChild(user);
+//                       span.appendChild(comment);
+//                         node.appendChild(span);
+//
+//                         // Append the text to <li>
+//                       document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
+//                     }
                     dialog.showModal();
                 }
                 dialog.querySelector('.close').addEventListener('click', function () {
