@@ -16,7 +16,7 @@ var oEvent = function (oEvent) {
 // var usernameemail = "";
 var kommi = false;
 var dialogopen = false;
-var logoutclicked = false;
+var logoutmodus = false;
 var aktuellebewertung = 0;
 var nochniebewertet = true;
 var loggedInUser = "";
@@ -60,10 +60,30 @@ var oNavigationVue = new Vue({
         },
 
         showNewLoginCard: function () {
-            if (logoutclicked === false) {
+            if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
+                logoutmodus = false;
+                document.getElementById('AfterLoginLogin').innerText = "LogIn";
+
+                document.getElementById('eingeloggteruser').innerText = "EventFinder";
+                AfterLoginFavoriten.style.visibility = "hidden";
+                loggedInUser = "";
+                AfterLoginEvent.style.visibility = "hidden";
+                document.getElementById('AfterLoginLogin').innerText = "LogIn";
+                newLoginWrapper.style.display = "visible";
+                oEventTableVue.starVisibility = "hidden";
+            }
+            if (logoutmodus === false) {
                 oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
                 oRegisterVue.cardShown = false;
                 oNewEventVue.cardShown = false;
+                
+                document.getElementById('eingeloggteruser').innerText = "EventFinder";
+                AfterLoginFavoriten.style.visibility = "hidden";
+                loggedInUser = "";
+                AfterLoginEvent.style.visibility = "hidden";
+                document.getElementById('AfterLoginLogin').innerText = "LogIn";
+                newLoginWrapper.style.display = "visible";
+                oEventTableVue.starVisibility = "hidden";
             }
             else {
                 oNewLoginVue.formsubmit();
@@ -908,66 +928,83 @@ var oRegisterVue = new Vue({
             rPassword: "",
             rPassword2: "",
             status: "draft",
+            nameIsInvalid: false,
+            passwordIsInvalid2: false,
+            passwordIsInvalid: false,
+            emailIsInvalid: false,
             iRegisterId: Math.floor(Math.random() * 99999) + 1,
         },
         value7: ''
     },
     methods: {
         formsubmit: function () {
+            this.draft.emailIsInvalid = false;
+            this.draft.password2IsInvalid = false;
+            this.draft.passwordIsInvalid = false;
+            this.draft.nameIsInvalid = false;
+            var onSuccess = function onSuccess() {
+                this.cardShown = !this.cardShown;
+                oRegisterVue.cardShown = false;
+                oNewLoginVue.cardShown = false;
+                Reg_Pass_Fehler.style.display = "none";
+                Reg_SONS_Fehler.style.display = "none";
+                Reg_EMAIL_Fehler.style.display = "none";
+            };
+            var onFailed = function onFailed() {
+                alert(' Fehler beim Login');
+            };
+            if (this.draft.rUserName === "") {
+                this.draft.nameIsInvalid = true;
+                Reg_SONS_Fehler.style.display = "block";
+                Reg_Pass_Fehler.style.display = "none";
+                Reg_EMAIL_Fehler.style.display = "none";
+                document.querySelector('#passwordinputwords').value = "";
+                document.querySelector('#passwordinputwords').value = "";
+                document.querySelector('#emailinputwords').value = "";
 
-                if (document.querySelector('#email').value.includes("@") == true) {
-                    if (document.querySelector('#password2').value != "" && document.querySelector('#password1').value != "" &&
-                        document.querySelector('#Username').value != "" && document.querySelector('#email').value != "") {
-                        if (document.querySelector("#password2").value == document.querySelector("#password1").value) {
-                            var onSuccess = function onSuccess() {
-                                this.cardShown = !this.cardShown;
-                                oRegisterVue.cardShown = false;
-                                oNewLoginVue.cardShown = false;
-                                Reg_Pass_Fehler.style.display = "none";
-                                Reg_SONS_Fehler.style.display = "none";
-                                Reg_EMAIL_Fehler.style.display = "none";
-                            };
-                            var onFailed = function onFailed() {
-                                alert(' SO NE SCHEISSE');
-                            };
-                        }
-                        else {
-                            Reg_Pass_Fehler.style.display = "block";
-                            Reg_EMAIL_Fehler.style.display = "none";
-                            Reg_SONS_Fehler.style.display = "none";
-                        }
-                    }
-                    else {
-                        Reg_SONS_Fehler.style.display = "block";
-                        Reg_Pass_Fehler.style.display = "none";
-                        Reg_EMAIL_Fehler.style.display = "none";
-                    }
-                }
-                else {
-                    Reg_EMAIL_Fehler.style.display = "block";
-                    Reg_Pass_Fehler.style.display = "none";
-                    Reg_SONS_Fehler.style.display = "none";
-                }
-
-
-                Reg_Pass_Fehler
-                Reg_SONS_Fehler
-                Reg_EMAIL_Fehler
-
-
-
-                var newuser = "http://localhost:3000/user/signup"
-                var ajaxRequest = new XMLHttpRequest();
-
-                ajaxRequest.addEventListener("load", onSuccess);
-                ajaxRequest.addEventListener("error", onFailed);
-                ajaxRequest.responseType = "json";
-                ajaxRequest.open("POST", newuser, true);
-                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
-                console.log(snewuserdata);
-                ajaxRequest.send(snewuserdata);
             }
+            if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
+                this.draft.emailIsInvalid = true;
+                Reg_EMAIL_Fehler.style.display = "block";
+                document.querySelector('#passwordinputwords').value = "";
+                document.querySelector('#passwordinputwords').value = "";
+                document.querySelector('#emailinputwords').value = "";
+                Reg_Pass_Fehler.style.display = "none";
+                Reg_SONS_Fehler.style.display = "none";
+            }
+            if (this.draft.rPassword != this.draft.rPassword2) {
+                this.draft.password2IsInvalid = true;
+                this.draft.passwordIsInvalid = true;
+                Reg_Pass_Fehler.style.display = "block";
+                Reg_EMAIL_Fehler.style.display = "none";
+                Reg_SONS_Fehler.style.display = "none";
+                document.querySelector('#passwordinputwords').value = "";
+                document.querySelector('#emailinputwords').value = "";
+                document.querySelector('#passwordinputwords').value = "";
+            }
+            
+            
+            Reg_Pass_Fehler
+            Reg_SONS_Fehler
+            Reg_EMAIL_Fehler
+            if (this.draft.emailIsInvalid == true || this.draft.nameIsInvalid == true || this.draft.password2IsInvalid == true) {
+            }
+            else {
+                
+            var newuser = "http://localhost:3000/user/signup"
+            var ajaxRequest = new XMLHttpRequest();
+
+            ajaxRequest.addEventListener("load", onSuccess);
+            ajaxRequest.addEventListener("error", onFailed);
+            ajaxRequest.responseType = "json";
+            ajaxRequest.open("POST", newuser, true);
+            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
+            console.log(snewuserdata);
+            ajaxRequest.send(snewuserdata);
+             }
+
+        }
 
 
     }
@@ -981,6 +1018,8 @@ var oNewLoginVue = new Vue({
     data: {
         cardShown: false,
         draft: {
+            passwordIsInvalid: false,
+            emailIsInvalid: false,
             sUserName: "",
             sPassword: "",
             status: "draft",
@@ -990,15 +1029,14 @@ var oNewLoginVue = new Vue({
     },
     methods: {
 
-
         formsubmit: function () {
-            logoutclicked = !logoutclicked;
-            if (logoutclicked === true) {
+            logoutmodus = true;
+            this.draft.passwordIsInvalid = false;
+            this.draft.emailIsInvalid = false;
+            if (logoutmodus === true) {
 
                 var suserlogin = "http://localhost:3000/user/login"
                 var ajaxRequest = new XMLHttpRequest();
-
-
                 var onSuccess = function onSuccess() {
                     console.log(this.status);
                     if (this.status === 200) {
@@ -1014,16 +1052,14 @@ var oNewLoginVue = new Vue({
                                     break;
                                 }
                             }
+
                         }
                         initalFavoriteSetting = false;
-
-
                         document.getElementById('eingeloggteruser').innerText = loggedInUser.name + "s EventFinder";
                         AfterLoginFavoriten.style.visibility = "visible";
                         AfterLoginEvent.style.visibility = "visible";
                         document.getElementById('AfterLoginLogin').innerText = "LogOut";
                         newLoginWrapper.style.display = "hidden";
-
                         oEventTableVue.starVisibility = "visible";
 
                         //Hier muss die Karte unsichtbar gemacht werden
@@ -1032,34 +1068,46 @@ var oNewLoginVue = new Vue({
                         oNewLoginVue.cardShown = false;
 
 
-                    } else {
-                        if (document.querySelector("#Login_username").value == "" || document.querySelector("#Login_password").value == "") {
-
-                            LoginFehlerLeer.style.display = "inline";
-                        }
-                        else {
-                            LoginFehlerDaten.style.display = "inline";
-                        }
-
+                    }
+                    else {
+                        emailIsInvalid = true;
+                        passwordIsInvalid = true;
+                        LoginFehlerDaten.style.display = "inline";
 
                     }
-
                 };
                 var onFailed = function onFailed() {
                     alert(' Login fehlgeschlagen');
+                    logoutmodus = false;
                 };
 
+                if(this.draft.sUserName === "") {
+                    this.draft.emailIsInvalid = true;
+                    LoginFehlerLeer.style.display = "inline";
+                   
+                }
 
+                if (this.draft.sPassword === "") {
+                    this.draft.passwordIsInvalid = true;
+                    LoginFehlerLeer.style.display = "inline";
+                }
+               
 
-                ajaxRequest.addEventListener("load", onSuccess);
-                ajaxRequest.addEventListener("error", onFailed);
-                ajaxRequest.responseType = "json";
-                ajaxRequest.open("POST", suserlogin, true);
-                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                if (this.draft.emailIsInvalid == false && this.draft.passwordIsInvalid == false) {
+                    ajaxRequest.addEventListener("load", onSuccess);
+                    ajaxRequest.addEventListener("error", onFailed);
+                    ajaxRequest.responseType = "json";
+                    ajaxRequest.open("POST", suserlogin, true);
+                    ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-                var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
-                // usernameemail = this.draft.iLoginId;
-                ajaxRequest.send(suserdata);
+                    var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
+                    // usernameemail = this.draft.iLoginId;
+                    ajaxRequest.send(suserdata);
+                }
+                else {
+                    logoutmodus = false;
+                }
+
             }
             else {
                 document.getElementById('eingeloggteruser').innerText = "EventFinder";

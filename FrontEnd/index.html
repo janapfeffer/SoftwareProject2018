@@ -171,23 +171,24 @@
 
 
 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" v-model="draft.rUserName" name="Username" id="Username">
-                    <label class="mdl-textfield__label" for="sample1">Username</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" v-model="draft.rEmail" name="email" id="email">
-                    <label class="mdl-textfield__label" for="sample2">E-Mail</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                    <input class="mdl-textfield__input" type="password" v-model="draft.rPassword" name="password1" id="password1">
-                    <label class="mdl-textfield__label" for="sample3">Password</label>
+                <div v-bind:class="{ 'is-invalid': draft.nameIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rUserName" id="Username">
+                    <label class="mdl-textfield__label" for="sample1">Username*</label>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                    <input class="mdl-textfield__input" type="password" v-model="draft.rPassword2" name="password2" id="password2">
-                    <label class="mdl-textfield__label" for="schools">erneuert Passwort</label>
+                <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rEmail" id="email">
+                    <label id="emailinputwords" class="mdl-textfield__label" for="sample1">E-Mail*</label>
+                </div>
+
+                <div v-bind:class="{ 'is-invalid': draft.passwordIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword" id="password1">
+                    <label id="passwordinputwords" class="mdl-textfield__label" for="sample1">Passwort*</label>
+                </div>
+                <div v-bind:class="{ 'is-invalid': draft.password2IsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword2" id="password2">
+                    <label id="passwordinputwords2"class="mdl-textfield__label" for="sample1">erneuert Passwort*</label>
                 </div>
 
 
@@ -234,14 +235,15 @@
                         </p>
                     </div>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" v-model="draft.sUserName" name="Login_username" id="Login_username">
-                        <label class="mdl-textfield__label" for="sample1">E-Mail</label>
+                    <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sUserName" id="Login_username">
+                        <label class="mdl-textfield__label" for="sample1">E-Mail*</label>
                     </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="password" v-model="draft.sPassword" name="Login_password" id="Login_password">
-                        <label class="mdl-textfield__label" for="schools">Passwort</label>
+                    <div v-bind:class="{ 'is-invalid': draft.passwordIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.sPassword" id="Login_password">
+                        <label class="mdl-textfield__label" for="sample1">Passwort*</label>
                     </div>
+
                     <div class="buttons">
                         <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click='BobMarleyCard'>
                             Registieren
@@ -286,7 +288,6 @@
                     <i class="fa fa-cloud-upload"></i> Eventfoto hochladen
                 </label> -->
                 <div v-bind:class="{ 'is-invalid': draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <!-- <div id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
                     <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
                     <label class="mdl-textfield__label" for="sample1">Titel*</label>
                 </div>
