@@ -954,34 +954,34 @@ var oRegisterVue = new Vue({
             var onFailed = function onFailed() {
                 alert(' Fehler beim Login');
             };
-            if (this.draft.rUserName === "") {
+            if (this.draft.rUserName === "" ){
                 this.draft.nameIsInvalid = true;
-                Reg_SONS_Fehler.style.display = "block";
+                Reg_SONS_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_EMAIL_Fehler.style.display = "none";
-                document.querySelector('#passwordinputwords').value = "";
-                document.querySelector('#passwordinputwords').value = "";
-                document.querySelector('#emailinputwords').value = "";
-
             }
-            if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
-                this.draft.emailIsInvalid = true;
-                Reg_EMAIL_Fehler.style.display = "block";
-                document.querySelector('#passwordinputwords').value = "";
-                document.querySelector('#passwordinputwords').value = "";
-                document.querySelector('#emailinputwords').value = "";
-                Reg_Pass_Fehler.style.display = "none";
-                Reg_SONS_Fehler.style.display = "none";
-            }
-            if (this.draft.rPassword != this.draft.rPassword2) {
+            if (this.draft.rPassword === "" || this.draft.rPassword2 === ""){
                 this.draft.password2IsInvalid = true;
                 this.draft.passwordIsInvalid = true;
-                Reg_Pass_Fehler.style.display = "block";
+                Reg_SONS_Fehler.style.display = "inline";
+                Reg_Pass_Fehler.style.display = "none";
+                Reg_EMAIL_Fehler.style.display = "none";
+
+            }
+            
+            if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
+                this.draft.emailIsInvalid = true;
+                Reg_EMAIL_Fehler.style.display = "inline";
+                Reg_Pass_Fehler.style.display = "none";
+                Reg_SONS_Fehler.style.display = "none";
+            }
+            if (this.draft.rPassword != this.draft.rPassword2 ) {
+                this.draft.password2IsInvalid = true;
+                this.draft.passwordIsInvalid = true;
+                Reg_Pass_Fehler.style.display = "inline";
                 Reg_EMAIL_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
-                document.querySelector('#passwordinputwords').value = "";
-                document.querySelector('#emailinputwords').value = "";
-                document.querySelector('#passwordinputwords').value = "";
+               
             }
             
             
