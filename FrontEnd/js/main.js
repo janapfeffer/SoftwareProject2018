@@ -71,6 +71,7 @@ var oNavigationVue = new Vue({
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
+               
             }
             if (logoutmodus === false) {
                 oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
@@ -1061,6 +1062,7 @@ var oNewLoginVue = new Vue({
                         document.getElementById('AfterLoginLogin').innerText = "LogOut";
                         newLoginWrapper.style.display = "hidden";
                         oEventTableVue.starVisibility = "visible";
+                        LoginFehlerDaten.style.display = "none";
 
                         //Hier muss die Karte unsichtbar gemacht werden
                         this.cardShown = !this.cardShown;
@@ -1094,6 +1096,8 @@ var oNewLoginVue = new Vue({
                
 
                 if (this.draft.emailIsInvalid == false && this.draft.passwordIsInvalid == false) {
+                    LoginFehlerLeer.style.display = "none";
+                    LoginFehlerDaten.style.display = "none";
                     ajaxRequest.addEventListener("load", onSuccess);
                     ajaxRequest.addEventListener("error", onFailed);
                     ajaxRequest.responseType = "json";
