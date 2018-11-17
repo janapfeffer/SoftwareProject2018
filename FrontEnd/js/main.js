@@ -15,6 +15,7 @@ var oEvent = function (oEvent) {
 
 // var usernameemail = "";
 var kommi = false;
+var dialogopen = false;
 var logoutclicked = false;
 var aktuellebewertung = 0;
 var nochniebewertet = true;
@@ -370,13 +371,19 @@ var oEventTableVue = new Vue({
 
         select: function (target) {
             // only data with specific Ids can be selected
-            if (target.iEventId != undefined) {
-                this.selected = target.iEventId;
-                ausgewaehlt = target;
+            if (dialogopen == false) {
+                if (target.iEventId != undefined) {
+
+                    this.selected = target.iEventId;
+                    ausgewaehlt = target;
+                }
+                // map.setCenter(target.marker.getPosition(), true);
+                openBubble(target.marker.getPosition(), target.marker.data);
             }
-            // map.setCenter(target.marker.getPosition(), true);
-            openBubble(target.marker.getPosition(), target.marker.data);
+            else { }
         },
+
+
         searchEvent: function () {
             if (sQuery === "" || sQuery === undefined) {
                 this.allEvents = aTestEvents;
@@ -396,6 +403,7 @@ var oEventTableVue = new Vue({
             if (loggedInUser != "") {
 
                 if (kommi === true) {
+                    dialogopen = true;
                     document.querySelector("#idComment").value = "";
                     var dialog = document.querySelector('dialog');
                     document.getElementById('kommiüberschrift').innerText = name;
@@ -464,6 +472,7 @@ var oEventTableVue = new Vue({
                 dialog.querySelector('.close').addEventListener('click', function () {
                     dialog.close();
                     // getAllEvents();
+                    dialogopen = false;
                     getFilteredEvents(oSearchPlaceVue.dDate);
                 });
             }
