@@ -105,13 +105,14 @@ h1{
 }
 
 div#aside {
-  width: 40%;
+  width: 37%;
   position:absolute;
   top: 60px;
   right: 0;
   box-sizing: border-box;
-  padding: 3%;
+  padding: 2% 2%;
   opacity: 1;
+  z-index: 2;
 }
 
 div#aside, div#map{
@@ -120,8 +121,7 @@ div#aside, div#map{
 
 .sidecardWrapper {
   transition: margin 0.5s;
-  margin: 0px;
-
+  margin-bottom: 20px;
 }
 .sidecardWrapper.hide {
   margin: -100px 0px 100px 0px;
@@ -145,6 +145,7 @@ div#aside, div#map{
   margin: 0px;
   font-size: 18px;
   border-radius: 4px;
+  box-shadow: 4px 4px 16px #00000010,rgba(0,0,0,0.12) 0px 16px 40px;
 }
 
 .sidecard .mdl-textfield {
@@ -165,7 +166,7 @@ div#aside, div#map{
 }
 
 .mdl-list__item {
-  font-family: "roboto" !important;
+  font-family: "lato" !important;
 }
 
 #eventTable li.selected {
@@ -303,19 +304,6 @@ img.eventSymbol {
   left: 0px;
 }
 
-.bigMap div#aside {
-  width: 37%;
-  position:absolute;
-  top: 100px;
-  right: 3px;
-  padding: 2%;
-  z-index: 2;
-}
-
-.bigMap #eventTable, .bigMap #newEvent {
-  box-shadow: 4px 4px 16px #00000063;
-}
-
 .sidecard h2 {
   color: black;
   font-family: "raleway";
@@ -332,6 +320,10 @@ img.eventSymbol {
   margin-left: 10px;
 }
 
+span#sterne {
+  float: right;
+}
+
 /* Infobubble Style + Überschreibungen */
 .infoBubble {
   width: 230px;
@@ -344,12 +336,16 @@ img.eventSymbol {
   background-repeat: no-repeat;
   background-position: center; */
   border-radius: 3px;
-  font: 12px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif;
+  font: 12px/1.5 "raleway";
   font-weight: 500;
   padding: 10px;
 }
 .infoBubble i {
 margin: 5px;
+}
+
+.infoBubble h2{
+  font-family: "raleway"
 }
 
 .iconContainer {
@@ -372,7 +368,6 @@ border-radius: 3px;
   font-size: 19px;
   font-weight: 300;
   margin-bottom: 26px;
-  font-family: Bahnschrift;
 }
 
 .H_ib_tail {

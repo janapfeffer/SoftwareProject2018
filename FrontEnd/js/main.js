@@ -37,12 +37,14 @@ var oNavigationVue = new Vue({
 
 
         showNewEventCard: function () {
+            $(window).scrollTop(0);
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
         },
 
         showNewFavoriteCard: function () {
+            $(window).scrollTop(0);
             favoritegeklickt = !favoritegeklickt;
             if (favoritegeklickt === true) {
                 document.getElementById('h2events').innerText = "Favoriten";
@@ -60,6 +62,7 @@ var oNavigationVue = new Vue({
         },
 
         showNewLoginCard: function () {
+            $(window).scrollTop(0);
             if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
                 logoutmodus = false;
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
@@ -78,7 +81,6 @@ var oNavigationVue = new Vue({
                 oRegisterVue.cardShown = false;
                 oNewEventVue.cardShown = false;
                 
-                document.getElementById('eingeloggteruser').innerText = "EventFinder";
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
                 AfterLoginEvent.style.visibility = "hidden";
@@ -97,6 +99,7 @@ var oNavigationVue = new Vue({
             }
         },
         showNewRegisterCard: function () {
+            $('body').scrollTop(0);
             oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
             oNewLoginVue.cardShown = false;
             oNewEventVue.cardShown = false;
@@ -453,7 +456,6 @@ var oEventTableVue = new Vue({
                     }
                     // set current_rating
                     aktuellebewertung = selected_event.iCurrentRating;
-                    document.getElementById('gibhier').innerText = "Gib hier dein Kommentar/Bewertung ab " + loggedInUser.name + "!";
                     document.getElementById('ratingnumber').innerText = aktuellebewertung;
                     //add comments to list
 //                     var list = document.getElementById("commentTable");
@@ -493,10 +495,13 @@ var oEventTableVue = new Vue({
                     dialogopen = false;
                     // getFilteredEvents(oSearchPlaceVue.dDate);
                 });
+                $(dialog).children().first().click(function (e){
+                    e.stopPropagation();
+                })
                 document.addEventListener("click", function (e) {
+                    console.log(e)
                     dialog.close();
                     dialogopen = false;
-                    
                 });
             }
             else {

@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://fonts.googleapis.com/css?family=Cabin|Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Raleway|Lato" rel="stylesheet">
 
     <!--Icon library for Like/Dislike Button-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -89,7 +89,7 @@
                     <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event
                         eintragen
                     </a>
-                    <a class="mdl-navigation__link headerLink"  id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
+                    <a class="mdl-navigation__link headerLink" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
 
                 </nav>
             </div>
@@ -133,12 +133,8 @@
         <!-- Register Card-->
         <!-- Registiereungs Daten werden immer mit "r." verarbeitet, zum Beispiel "rPassword"/"rUserName"-->
         <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-            <h2>Registrierung </h2>
             <div id="newRegister" class="sidecard">
-                <p>
-                    Registrieren Sie sich jetzt!
-                </p>
-
+                <h2>Registrieren</h2>
                 <div id="Reg_Pass_Fehler" style="display: none">
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
@@ -205,13 +201,8 @@
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="EINLOGEN_Karte">
             <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-                <h2>Loggen Sie sich hier ein</h2>
                 <div id="newLogin" class="sidecard">
-                    <p>
-                        Loggen Sie sich hier ein!
-                    </p>
-
-
+                    <h2>Einloggen</h2>
                     <div id="LoginFehlerLeer" style="display: none">
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
@@ -364,7 +355,6 @@
                             <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)"
                                 type="text" id="sample1">
                             <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
-
                         </div>
                         <!-- Popup Dialog -->
 
@@ -457,14 +447,13 @@
                                             }
                                         </script>
                                         <div>
-                                            <p id="gibhier" style="float:left;color:grey; font:22px "> Gib hier dein Kommentar
-                                                ab </p>
+                                            
                                             <p id="ratingnumber" style="float:right;color:black; margin-right: 10%">zahl</p>
 
 
                                             <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="text" id="idComment" />
-                                                <label class="mdl-textfield__label" for="idComment"> Kommentiere hier.. </label>
+                                                <input class="mdl-textfield__input" type="text" id="idComment">
+                                                <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label>
                                             </div>
 
                                             <button id="meins" style="color:white; font-family:Bahnschrift; float:right;margin-right: 4%;background-color: #365067;width: 100px; top: 4px;left: 20px; height: 40px; padding: 0px 4px"
@@ -522,8 +511,8 @@
                 </p>
             </div>
             <div id="idSearchBar" class="autocomplete" style="width:370;">
-                <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery"
-                    @keyup="autocomplete" @keyup.enter="searchPlace">
+                <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete"
+                    @keyup.enter="searchPlace">
 
                 <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
                 <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
@@ -532,8 +521,7 @@
 
                 <!-- insert drop down for event types-->
 
-                <button class="mdl-button mdl-js-button"
-                    name="action" @click="searchPlace">
+                <button class="mdl-button mdl-js-button mdl-button--raised" name="action" @click="searchPlace">
                     Suche
                 </button>
             </div>
