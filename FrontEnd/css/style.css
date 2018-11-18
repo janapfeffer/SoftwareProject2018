@@ -212,10 +212,9 @@ h1{
 #searchPlace {
   position: fixed;
   transition: all 200ms cubic-bezier(0.69, 0.11, 0.27, 1.03);
-  top: 84px;
-  left: 20px;
+  top: 7px;
+  left: 55px;
   padding: 5px;
-  background-color: rgba(0, 0, 0, 0.3);
   z-index: 10;
 }
 
@@ -243,9 +242,10 @@ div#aside, div#map{
 }
 
 .sidecardWrapper h2 {
-  color:ghostwhite; font-family: Bahnschrift;
   margin: 0px;
-  padding: 20px 0px 15px 0px;
+  padding: 20px 0px 15px 20px;
+  color: white;
+  font-family: Helvetica;
 }
 
 .hide {
@@ -254,10 +254,11 @@ div#aside, div#map{
 }
 
 .sidecard {
-  background-color:whitesmoke;
+  background-color:white;
   padding: 20px 25px;
   margin: 0px;
-  font-size: 18px
+  font-size: 18px;
+  border-radius: 4px;
 }
 
 .sidecard .mdl-textfield {
@@ -418,7 +419,7 @@ img.eventSymbol {
   width: 37%;
   position:absolute;
   top: 100px;
-  right: 57px;
+  right: 3px;
   padding: 2%;
   z-index: 2;
 }
@@ -428,7 +429,7 @@ img.eventSymbol {
 }
 
 .sidecard h2 {
-  color: white;
+  color: black;
   text-shadow: 4px 4px 30px #00000063;
 }
 

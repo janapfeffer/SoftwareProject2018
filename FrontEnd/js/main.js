@@ -491,7 +491,12 @@ var oEventTableVue = new Vue({
                     dialog.close();
                     // getAllEvents();
                     dialogopen = false;
-                    getFilteredEvents(oSearchPlaceVue.dDate);
+                    // getFilteredEvents(oSearchPlaceVue.dDate);
+                });
+                document.addEventListener("click", function (e) {
+                    dialog.close();
+                    dialogopen = false;
+                    
                 });
             }
             else {

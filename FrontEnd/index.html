@@ -89,7 +89,8 @@
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
                     <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event
-                        eintragen</a>
+                        eintragen
+                    </a>
 
                     <a class="mdl-navigation__link" style="visibility:hidden;" id="BigMap" @click='toggleBigMap'>Große Karte</a>
                     <a class="mdl-navigation__link" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
@@ -257,8 +258,8 @@
         </div>
         <!-- Karte für Event, Alles rechts neben der Karte-->
         <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-            <h2>Neues Event eintragen</h2>
             <div id="newEvent" class="sidecard">
+                <h2>Neues Event eintragen</h2>
                 <!-- <div id="displayNewEventError" style="display: none"> -->
                 <div v-show="draft.displayError">
                     <i class="material-icons" style="float: left">error_outline</i>
@@ -364,14 +365,14 @@
                         </div>
 
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)"
+                            <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)"
                                 type="text" id="sample1">
                             <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
 
                         </div>
                         <!-- Popup Dialog -->
 
-                        <dialog id="kommentardialog" class="mdl-dialog" style="width: 550px; opacity:2;">
+                        <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2;">
                             <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
 
                                 <div style="background-color:whitesmoke">
@@ -486,7 +487,8 @@
                                                     <br style="line-height: 150%;" />
                                                     <i class="fa fa-comment" style="font-size:18px"></i>
                                                     <span class=nobr class="mdl-list__item-text-body">{{ comment.comment
-                                                        }}</span>
+                                                        }}
+                                                    </span>
                                                     <br style="line-height: 150%;" />
                                                 </span>
 
