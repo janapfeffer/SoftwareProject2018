@@ -20,6 +20,14 @@ header .headerLink{
   color: black !important;
 }
 
+header img#logoIcon{
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  width: 40px;
+  height: 40px;
+}
+
 input{
   font-family: "raleway";
 }
@@ -42,7 +50,7 @@ input{
 }
 .mdl-navigation__link:active{ background-color: rgba(255, 255, 255, 0.1) }
 
-.landingpage #searchPlace h1 {
+.landingpage h1 {
   margin: 5px 5px 5px 0;
   display: block;
   transform: translateZ(20px);
