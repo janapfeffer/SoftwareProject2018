@@ -110,6 +110,9 @@ var oNavigationVue = new Vue({
         toggleBigMap: function () {
             bigmapgeklickt = !bigmapgeklickt;
             if (bigmapgeklickt === true) {
+                AfterLoginLogin.style.visibility = "hidden";
+                AfterLoginFavoriten.style.visibility = "hidden";
+                AfterLoginEvent.style.visibility = "hidden";
                 document.getElementById('BigMap').innerText = "zurück zur Liste ";
             }
             else {
@@ -491,12 +494,7 @@ var oEventTableVue = new Vue({
                     dialog.close();
                     // getAllEvents();
                     dialogopen = false;
-                    // getFilteredEvents(oSearchPlaceVue.dDate);
-                });
-                document.addEventListener("click", function (e) {
-                    dialog.close();
-                    dialogopen = false;
-                    
+                    getFilteredEvents(oSearchPlaceVue.dDate);
                 });
             }
             else {
@@ -645,6 +643,7 @@ var oSearchPlaceVue = new Vue({
                 document.querySelector("#searchPlace").vanillaTilt.destroy()
                 map.getViewPort().resize();
                 AfterLoginLogin.style.visibility = "visible";
+                BigMap.style.visibility = "visible";
                 document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden");
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
@@ -1056,6 +1055,7 @@ var oNewLoginVue = new Vue({
 
                         }
                         initalFavoriteSetting = false;
+                        document.getElementById('eingeloggteruser').innerText = loggedInUser.name + "s EventFinder";
                         AfterLoginFavoriten.style.visibility = "visible";
                         AfterLoginEvent.style.visibility = "visible";
                         document.getElementById('AfterLoginLogin').innerText = "LogOut";

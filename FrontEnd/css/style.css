@@ -10,7 +10,7 @@ body{
 
 header.mdl-layout__header{
    color: black;
-   font-family: Bahnschrift;
+   font-family: raleway;
    background-color: #fff;
    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.18);
    border-bottom: 1px solid #9e9e9e;
@@ -42,11 +42,33 @@ input{
 }
 .mdl-navigation__link:active{ background-color: rgba(255, 255, 255, 0.1) }
 
-.landingpage h1 {
+.landingpage #searchPlace h1 {
   margin: 5px 5px 5px 0;
   display: block;
   transform: translateZ(20px);
-  max-height: 100px;
+  max-height: 500px;
+  color: black;
+  font-family: raleway;
+  font-size: 45px;
+}
+
+#searchPlace h2 {
+  display: none;
+}
+
+.landingpage #searchPlace h2 {
+  display: block;
+  font-size: 12px;
+  margin: 2px;
+  line-height: 25px;
+}
+
+.landingpage #searchPlace {
+    width: 500px;
+    border-radius: 4px;
+    padding: 32px !important;
+    padding-bottom: 24px !important;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
 }
 
 h1{
@@ -65,9 +87,9 @@ h1{
   opacity: 0;
 }
 
-.landingpage div#dateFilter{
+/* .landingpage div#dateFilter{
   display: none !important;
-}
+} */
 
 #dateFilter{
   display:inline;

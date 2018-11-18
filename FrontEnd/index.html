@@ -80,16 +80,18 @@
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
+                    <h1> EventHub </h1>
                 <!-- Title -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
+                    <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;"
+                        @click='showNewFavoriteCard'>Favoriten</a>
                     <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event
                         eintragen
                     </a>
-                    <a class="mdl-navigation__link headerLink"  id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
+                    <a class="mdl-navigation__link headerLink" id="AfterLoginLogin" @click='showNewLoginCard'>Login</a>
 
                 </nav>
             </div>
@@ -108,8 +110,8 @@
                 <!-- Ausgewahltes Datum wird als "FilterDate gespeichert-->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-                    <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
-                        :default-time="['15:00:00', '19:00:00']">
+                    <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Start Date"
+                        end-placeholder="End Date" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
                 <p>
@@ -122,7 +124,8 @@
                 <input type="checkbox" id="scales" name="feature" value="Kategorie 4" checked /> Kategorie 4
 
                 <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                        @click="formsubmit">
                         Filtern
                     </button>
                 </div>
@@ -189,7 +192,8 @@
 
 
                 <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                        @click="formsubmit">
                         Abschließen
                     </button>
                 </div>
@@ -295,15 +299,16 @@
                     <label class="mdl-textfield__label" for="sample1">Adresse*</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
+                    <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input"
+                        v-model="draft.sEventLink">
                     <label class="mdl-textfield__label" for="sample1">Link</label>
                 </div>
 
                 <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <p>Datum*</p>
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-                    <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
-                        start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
+                    <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange"
+                        align="right" start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
                 <!-- <label class="custom-file-upload">
@@ -317,7 +322,8 @@
                     <!-- <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
                         Vorschau
                     </button> -->
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                        @click="formsubmit">
                         Senden
                     </button>
                 </div>
@@ -369,7 +375,8 @@
                         <!-- Popup Dialog -->
 
                         <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2;">
-                            <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
+                            <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025"
+                                data-tilt-perspective="1000">
 
                                 <div style="background-color:whitesmoke">
 
@@ -379,8 +386,10 @@
                                         <p style="color:black;  font-family:Bahnschrift;" id="eventidkommentare"> haha</p>
 
                                         <!-- Use an element to toggle between a like/dislike icon -->
-                                        <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
-                                        <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
+                                        <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;"
+                                            class="fa fa-thumbs-down"></i>
+                                        <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;"
+                                            class="fa fa-thumbs-up"></i>
                                         <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
                                         <script>
                                             function LikeButton(x) {
@@ -457,14 +466,16 @@
                                             }
                                         </script>
                                         <div>
-                                            <p id="gibhier" style="float:left;color:grey; font:22px "> Gib hier dein Kommentar
+                                            <p id="gibhier" style="float:left;color:grey; font:22px "> Gib hier dein
+                                                Kommentar
                                                 ab </p>
                                             <p id="ratingnumber" style="float:right;color:black; margin-right: 10%">zahl</p>
 
 
                                             <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                                 <input class="mdl-textfield__input" type="text" id="idComment" />
-                                                <label class="mdl-textfield__label" for="idComment"> Kommentiere hier.. </label>
+                                                <label class="mdl-textfield__label" for="idComment"> Kommentiere hier..
+                                                </label>
                                             </div>
 
                                             <button id="meins" style="color:white; font-family:Bahnschrift; float:right;margin-right: 4%;background-color: #365067;width: 100px; top: 4px;left: 20px; height: 40px; padding: 0px 4px"
@@ -473,16 +484,19 @@
                                             <br />
                                         </div>
 
-                                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
+                                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial"
+                                            class="sidecard demo-list-three mdl-list">
 
-                                            <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
+                                            <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line"
+                                                v-bind:id="comment._id">
                                                 <span class="mdl-list__item-primary-content">
                                                     <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
                                                     <!-- <span id="name">{{ comment.name }}</span> -->
                                                     <span style="font-weight: bold;">{{ comment.username }}</span>
                                                     <br style="line-height: 150%;" />
                                                     <i class="fa fa-comment" style="font-size:18px"></i>
-                                                    <span class=nobr class="mdl-list__item-text-body">{{ comment.comment
+                                                    <span class=nobr class="mdl-list__item-text-body">{{
+                                                        comment.comment
                                                         }}
                                                     </span>
                                                     <br style="line-height: 150%;" />
@@ -505,14 +519,14 @@
     </div>
 
 
-    <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-        <h1>
-            Event Finder
-        </h1>
+    <div id="searchPlace" class="sidecard" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025"
+        data-tilt-perspective="1000">
+        <h1>Finde Veranstaltungen in deiner Gegend.</h1>
 
         <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
         <div id="searchPlaceInner" autocomplete="off">
+            <h2>ORT</h2>
             <div id="idDatePickerErrorEmpty" style="display: none">
                 <i class="material-icons" style="float: left">error_outline</i>
                 <p style="color:red; ">
@@ -524,16 +538,16 @@
             <div id="idSearchBar" class="autocomplete" style="width:370;">
                 <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery"
                     @keyup="autocomplete" @keyup.enter="searchPlace">
-
+                <h2>VON-BIS</h2>
                 <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-                <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
-                    end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']" hidden="hidden" :picker-options="pickerOptions">
+                <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right"
+                    start-placeholder="Start Datum" end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']"
+                     :picker-options="pickerOptions">
                 </el-date-picker>
 
                 <!-- insert drop down for event types-->
 
-                <button class="mdl-button mdl-js-button"
-                    name="action" @click="searchPlace">
+                <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
                     Suche
                 </button>
             </div>
