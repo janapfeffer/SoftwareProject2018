@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Raleway" rel="stylesheet">
 
     <!--Icon library for Like/Dislike Button-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -74,26 +75,21 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class='landingpage'>
+<body class='landingpage bigMap'>
     <!-- Header/Navigation bar-->
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
-                <span id="eingeloggteruser" class="mdl-layout-title">
-                    Event Finder
-                </span>
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
-                    <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event
+                    <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
+                    <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event
                         eintragen
                     </a>
-
-                    <a class="mdl-navigation__link" style="visibility:hidden;" id="BigMap" @click='toggleBigMap'>Große Karte</a>
-                    <a class="mdl-navigation__link" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
+                    <a class="mdl-navigation__link headerLink"  id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
 
                 </nav>
             </div>
@@ -245,10 +241,10 @@
                     </div>
 
                     <div class="buttons">
-                        <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click='BobMarleyCard'>
+                        <button class="mdl-button mdl-js-button mdl-button--raised" @click='BobMarleyCard'>
                             Registieren
                         </button>
-                        <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                        <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                             Login
                         </button>
                     </div>
@@ -526,7 +522,7 @@
                 </p>
             </div>
             <div id="idSearchBar" class="autocomplete" style="width:370;">
-                <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
+                <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery"
                     @keyup="autocomplete" @keyup.enter="searchPlace">
 
                 <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
@@ -536,7 +532,7 @@
 
                 <!-- insert drop down for event types-->
 
-                <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
+                <button class="mdl-button mdl-js-button"
                     name="action" @click="searchPlace">
                     Suche
                 </button>

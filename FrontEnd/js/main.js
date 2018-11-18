@@ -641,12 +641,10 @@ var oSearchPlaceVue = new Vue({
             if (document.body.classList.contains('landingpage')) {
 
                 AfterLoginLogin.style.visibility = "visible";
-                BigMap.style.visibility = "visible";
                 document.body.classList.remove('landingpage');
                 document.querySelector("#searchPlace").vanillaTilt.destroy()
                 map.getViewPort().resize();
                 AfterLoginLogin.style.visibility = "visible";
-                BigMap.style.visibility = "visible";
                 document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden");
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
@@ -1058,7 +1056,6 @@ var oNewLoginVue = new Vue({
 
                         }
                         initalFavoriteSetting = false;
-                        document.getElementById('eingeloggteruser').innerText = loggedInUser.name + "s EventFinder";
                         AfterLoginFavoriten.style.visibility = "visible";
                         AfterLoginEvent.style.visibility = "visible";
                         document.getElementById('AfterLoginLogin').innerText = "LogOut";
