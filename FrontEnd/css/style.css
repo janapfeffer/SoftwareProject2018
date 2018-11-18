@@ -415,13 +415,12 @@ img.eventSymbol {
 }
 
 .bigMap div#aside {
-  display: none;
-  /* width: 37%;
+  width: 37%;
   position:absolute;
   top: 100px;
   right: 57px;
   padding: 2%;
-  z-index: 2; */
+  z-index: 2;
 }
 
 .bigMap #eventTable, .bigMap #newEvent {

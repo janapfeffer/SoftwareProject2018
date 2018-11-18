@@ -110,9 +110,6 @@ var oNavigationVue = new Vue({
         toggleBigMap: function () {
             bigmapgeklickt = !bigmapgeklickt;
             if (bigmapgeklickt === true) {
-                AfterLoginLogin.style.visibility = "hidden";
-                AfterLoginFavoriten.style.visibility = "hidden";
-                AfterLoginEvent.style.visibility = "hidden";
                 document.getElementById('BigMap').innerText = "zurück zur Liste ";
             }
             else {

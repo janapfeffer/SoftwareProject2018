@@ -32,18 +32,16 @@
     <!-- tab icon-->
 
     <!-- External Libaries-->
-    <script src="//storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
-    <link rel="stylesheet"
-          href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!--Icon library for Like/Dislike Button-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- JQuery-->
     <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
 
 
@@ -90,9 +88,10 @@
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
-                    <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event eintragen</a>
+                    <a class="mdl-navigation__link" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event
+                        eintragen</a>
 
-                    <a class="mdl-navigation__link" style="visibility:hidden;"id="BigMap" @click='toggleBigMap'>Große Karte</a>
+                    <a class="mdl-navigation__link" style="visibility:hidden;" id="BigMap" @click='toggleBigMap'>Große Karte</a>
                     <a class="mdl-navigation__link" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
 
                 </nav>
@@ -113,7 +112,7 @@
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
                     <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
-                                    :default-time="['15:00:00', '19:00:00']">
+                        :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
                 <p>
@@ -188,7 +187,7 @@
                 </div>
                 <div v-bind:class="{ 'is-invalid': draft.password2IsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword2" id="password2">
-                    <label id="passwordinputwords2"class="mdl-textfield__label" for="sample1">erneuert Passwort*</label>
+                    <label id="passwordinputwords2" class="mdl-textfield__label" for="sample1">erneuert Passwort*</label>
                 </div>
 
 
@@ -248,8 +247,7 @@
                         <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click='BobMarleyCard'>
                             Registieren
                         </button>
-                        <button style="color:ghostwhite; font-family:Bahnschrift;"
-                                class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                        <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                             Login
                         </button>
                     </div>
@@ -329,11 +327,11 @@
             </div>
         </div>
         <div class="sidecardWrapper">
-            <h2 id="h2events"> Events </h2>
 
             <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
-            v-model="sQuery" @keyup.enter="searchEvent"><input-->
+                v-model="sQuery" @keyup.enter="searchEvent"><input-->
             <ul id="eventTable" class="sidecard demo-list-three mdl-list">
+                <h2 id="h2events"> Events </h2>
                 <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
                     @click="select(event)" v-bind:id="event.iEventId">
                     <span class="mdl-list__item-primary-content">
@@ -341,15 +339,14 @@
                         <!--{{ event.oImage }} i class="material-icons mdl-list__item-avatar">person</i-->
                         <span>{{ event.sName }}</span>
                         <span id="sterne" v-bind:style="{visibility : starVisibility}" name="stern">
-                            <a class="mdl-list__item-secondary-action favstar"
-                               @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
+                            <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
                         </span>
                         <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
                         <i class="fa fa-calendar" style="font-size:18px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
                         <i class="fa fa-clock-o" style="font-size:18px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
-                        <span class=nobr>   -   </span>
+                        <span class=nobr> - </span>
                         <!-- <br style="line-height: 150%;"> -->
                         <i class="fa fa-calendar" style="font-size:18px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.oEndDate }}</span>
@@ -367,8 +364,9 @@
                         </div>
 
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)" type="text" id="sample1">
-                            <label  class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
+                            <input class="mdl-textfield__input" id="show-dialog" @click="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)"
+                                type="text" id="sample1">
+                            <label class="mdl-textfield__label" for="sample1">Kommentiere hier...</label>
 
                         </div>
                         <!-- Popup Dialog -->
@@ -376,129 +374,131 @@
                         <dialog id="kommentardialog" class="mdl-dialog" style="width: 550px; opacity:2;">
                             <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
 
-                                    <div style="background-color:whitesmoke">
+                                <div style="background-color:whitesmoke">
 
-                                        <h4 class="mdl-dialog__title" style="font-family:Bahnschrift;" id="kommiüberschrift">Kommentare</h4>
-                                        <div class="mdl-dialog__content">
+                                    <h4 class="mdl-dialog__title" style="font-family:Bahnschrift;" id="kommiüberschrift">Kommentare</h4>
+                                    <div class="mdl-dialog__content">
 
-                                            <p style="color:black;  font-family:Bahnschrift;" id="eventidkommentare"> haha</p>
+                                        <p style="color:black;  font-family:Bahnschrift;" id="eventidkommentare"> haha</p>
 
-                                            <!-- Use an element to toggle between a like/dislike icon -->
-                                            <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
-                                            <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
-                                            <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
-                                            <script>
-                                                function LikeButton(x) {
-                                                    if (x.style.color != "red") {
-                                                        document.getElementById('idThumbUp').style.color = "grey";
-                                                        var ratingRequest = new XMLHttpRequest();
-                                                        var onSuccess = function onSuccess() {
-                                                            if (this.status == 200) {
-                                                                var selected_event = oEventTableVue.allEvents.find(obj => {
-                                                                    return obj.iEventId == oEventTableVue.selected
-                                                                });
-                                                                if (nochniebewertet == true) {
-                                                                    aktuellebewertung = aktuellebewertung - 1; nochniebewertet = false;
-                                                                }
-                                                                else {
-                                                                    aktuellebewertung = aktuellebewertung - 2;
-                                                                }
-                                                            }
-                                                            console.log("rating sent");
-                                                            x.style.color = "red";
-                                                            document.getElementById('ratingnumber').innerText = aktuellebewertung;
-                                                        };
-                                                        var onFailed = function onFailed() {
-                                                            console.log("failed");
-                                                        };
-                                                        ratingRequest.addEventListener("load", onSuccess);
-                                                        ratingRequest.addEventListener("error", onFailed);
-                                                        ratingRequest.responseType = "json";
-                                                        ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
-                                                        ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                        var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
-                                                        ratingRequest.send(sFormData);
-
-
-                                                    }
-                                                }
-
-                                                function LikeButton2(x) {
-                                                    if (x.style.color != "green") {
-                                                        var ratingRequest = new XMLHttpRequest();
-                                                        var comment = document.querySelector("#idComment").value;
-                                                        var onSuccess = function onSuccess() {
+                                        <!-- Use an element to toggle between a like/dislike icon -->
+                                        <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;" class="fa fa-thumbs-down"></i>
+                                        <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;" class="fa fa-thumbs-up"></i>
+                                        <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
+                                        <script>
+                                            function LikeButton(x) {
+                                                if (x.style.color != "red") {
+                                                    document.getElementById('idThumbUp').style.color = "grey";
+                                                    var ratingRequest = new XMLHttpRequest();
+                                                    var onSuccess = function onSuccess() {
+                                                        if (this.status == 200) {
                                                             var selected_event = oEventTableVue.allEvents.find(obj => {
                                                                 return obj.iEventId == oEventTableVue.selected
                                                             });
                                                             if (nochniebewertet == true) {
-                                                                aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
+                                                                aktuellebewertung = aktuellebewertung - 1; nochniebewertet = false;
                                                             }
                                                             else {
-                                                                aktuellebewertung = aktuellebewertung + 2;
+                                                                aktuellebewertung = aktuellebewertung - 2;
                                                             }
-                                                            //2 besser setzen da gut bewertet
-                                                            if (this.status == 200) {
-                                                                console.log("rating sent");
-                                                                x.style.color = "green";
-                                                                document.getElementById('haha').style.color = "grey";
-                                                                document.getElementById('ratingnumber').innerText = aktuellebewertung;
-                                                            }
-                                                        };
-                                                        var onFailed = function onFailed() {
-                                                            console.log("failed");
-                                                        };
-
-                                                        ratingRequest.addEventListener("load", onSuccess);
-                                                        ratingRequest.addEventListener("error", onFailed);
-                                                        ratingRequest.responseType = "json";
-                                                        ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
-                                                        ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                        var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
-                                                        ratingRequest.send(sFormData);
-                                                    }
+                                                        }
+                                                        console.log("rating sent");
+                                                        x.style.color = "red";
+                                                        document.getElementById('ratingnumber').innerText = aktuellebewertung;
+                                                    };
+                                                    var onFailed = function onFailed() {
+                                                        console.log("failed");
+                                                    };
+                                                    ratingRequest.addEventListener("load", onSuccess);
+                                                    ratingRequest.addEventListener("error", onFailed);
+                                                    ratingRequest.responseType = "json";
+                                                    ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                    ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                    var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                    ratingRequest.send(sFormData);
 
 
                                                 }
-                                            </script>
-                                            <div>
-                                                <p id="gibhier" style="float:left;color:grey; font:22px "> Gib hier dein Kommentar ab </p>
-                                           <p id="ratingnumber"style="float:right;color:black; margin-right: 10%">zahl</p>
+                                            }
+
+                                            function LikeButton2(x) {
+                                                if (x.style.color != "green") {
+                                                    var ratingRequest = new XMLHttpRequest();
+                                                    var comment = document.querySelector("#idComment").value;
+                                                    var onSuccess = function onSuccess() {
+                                                        var selected_event = oEventTableVue.allEvents.find(obj => {
+                                                            return obj.iEventId == oEventTableVue.selected
+                                                        });
+                                                        if (nochniebewertet == true) {
+                                                            aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
+                                                        }
+                                                        else {
+                                                            aktuellebewertung = aktuellebewertung + 2;
+                                                        }
+                                                        //2 besser setzen da gut bewertet
+                                                        if (this.status == 200) {
+                                                            console.log("rating sent");
+                                                            x.style.color = "green";
+                                                            document.getElementById('haha').style.color = "grey";
+                                                            document.getElementById('ratingnumber').innerText = aktuellebewertung;
+                                                        }
+                                                    };
+                                                    var onFailed = function onFailed() {
+                                                        console.log("failed");
+                                                    };
+
+                                                    ratingRequest.addEventListener("load", onSuccess);
+                                                    ratingRequest.addEventListener("error", onFailed);
+                                                    ratingRequest.responseType = "json";
+                                                    ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                    ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                    var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                    ratingRequest.send(sFormData);
+                                                }
 
 
-                                                <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                    <input class="mdl-textfield__input" type="text" id="idComment" />
-                                                    <label class="mdl-textfield__label" for="idComment"> Kommentiere hier.. </label>
-                                                </div>
+                                            }
+                                        </script>
+                                        <div>
+                                            <p id="gibhier" style="float:left;color:grey; font:22px "> Gib hier dein Kommentar
+                                                ab </p>
+                                            <p id="ratingnumber" style="float:right;color:black; margin-right: 10%">zahl</p>
 
-                                                <button id="meins" style="color:white; font-family:Bahnschrift; float:right;margin-right: 4%;background-color: #365067;width: 100px; top: 4px;left: 20px; height: 40px; padding: 0px 4px" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
 
-                                                <br />
+                                            <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="text" id="idComment" />
+                                                <label class="mdl-textfield__label" for="idComment"> Kommentiere hier.. </label>
                                             </div>
 
-                                                <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
+                                            <button id="meins" style="color:white; font-family:Bahnschrift; float:right;margin-right: 4%;background-color: #365067;width: 100px; top: 4px;left: 20px; height: 40px; padding: 0px 4px"
+                                                @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
 
-                                                  <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line"
-                                                       v-bind:id="comment._id">
-                                                      <span class="mdl-list__item-primary-content">
-                                                          <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                                                          <!-- <span id="name">{{ comment.name }}</span> -->
-                                                          <span style="font-weight: bold;">{{ comment.username }}</span>
-                                                          <br style="line-height: 150%;"/>
-                                                          <i class="fa fa-comment" style="font-size:18px"></i>
-                                                          <span class=nobr class="mdl-list__item-text-body">{{ comment.comment }}</span>
-                                                          <br style="line-height: 150%;"/>
-                                                      </span>
-
-                                                  </li>
-                                              </ul>
+                                            <br />
                                         </div>
-                                        <button type="button"  class="mdl-button close">close</button>
+
+                                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
+
+                                            <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
+                                                <span class="mdl-list__item-primary-content">
+                                                    <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
+                                                    <!-- <span id="name">{{ comment.name }}</span> -->
+                                                    <span style="font-weight: bold;">{{ comment.username }}</span>
+                                                    <br style="line-height: 150%;" />
+                                                    <i class="fa fa-comment" style="font-size:18px"></i>
+                                                    <span class=nobr class="mdl-list__item-text-body">{{ comment.comment
+                                                        }}</span>
+                                                    <br style="line-height: 150%;" />
+                                                </span>
+
+                                            </li>
+                                        </ul>
                                     </div>
-                                    </div>
+                                    <button type="button" class="mdl-button close">close</button>
+                                </div>
+                            </div>
                         </dialog>
 
-</div>
+        </div>
         </span>
 
         </li>
@@ -508,34 +508,34 @@
 
 
     <div id="searchPlace" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-        <h1 >
+        <h1>
             Event Finder
         </h1>
 
         <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
 
         <div id="searchPlaceInner" autocomplete="off">
-          <div id="idDatePickerErrorEmpty" style="display: none">
-              <i class="material-icons" style="float: left">error_outline</i>
-              <p style="color:red; ">
-                  <b>
-                      Bitte wählen Sie kein vergangenes Datum aus!
-                  </b>
-              </p>
-          </div>
+            <div id="idDatePickerErrorEmpty" style="display: none">
+                <i class="material-icons" style="float: left">error_outline</i>
+                <p style="color:red; ">
+                    <b>
+                        Bitte wählen Sie kein vergangenes Datum aus!
+                    </b>
+                </p>
+            </div>
             <div id="idSearchBar" class="autocomplete" style="width:370;">
                 <input id="searchInput" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Suchort eingeben" v-model="sQuery"
-                       @keyup="autocomplete" @keyup.enter="searchPlace">
+                    @keyup="autocomplete" @keyup.enter="searchPlace">
 
-                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-               <el-date-picker  id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum" end-placeholder="End Datum"
-                               :default-time="['00:00:00', '23:59:59']"  hidden="hidden" :picker-options="pickerOptions">
-               </el-date-picker>
+                <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
+                <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
+                    end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']" hidden="hidden" :picker-options="pickerOptions">
+                </el-date-picker>
 
-               <!-- insert drop down for event types-->
+                <!-- insert drop down for event types-->
 
                 <button style="color:ghostwhite; background-color: #365067; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                        name="action" @click="searchPlace">
+                    name="action" @click="searchPlace">
                     Suche
                 </button>
             </div>
