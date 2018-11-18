@@ -496,7 +496,15 @@ var oEventTableVue = new Vue({
                     dialog.close();
                     // getAllEvents();
                     dialogopen = false;
-                    getFilteredEvents(oSearchPlaceVue.dDate);
+                    //getFilteredEvents(oSearchPlaceVue.dDate);
+                });
+                $(dialog).children().first().click(function (e){
+                    e.stopPropagation();
+                })
+                document.addEventListener("click", function (e) {
+                    console.log(e)
+                    dialog.close();
+                    dialogopen = false;
                 });
             }
             else {
@@ -1057,7 +1065,6 @@ var oNewLoginVue = new Vue({
 
                         }
                         initalFavoriteSetting = false;
-                        document.getElementById('eingeloggteruser').innerText = loggedInUser.name + "s EventFinder";
                         AfterLoginFavoriten.style.visibility = "visible";
                         AfterLoginEvent.style.visibility = "visible";
                         document.getElementById('AfterLoginLogin').innerText = "LogOut";
