@@ -51,7 +51,7 @@ var oNavigationVue = new Vue({
                 document.getElementById('AfterLoginFavoriten').innerText = "Events";
                 getFavorites(loggedInUser._id);
                 document.getElementById("idSearchBar").childNodes[2].setAttribute("hidden", "hidden");//hide time filter
-               }
+            }
             else {
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
@@ -74,13 +74,13 @@ var oNavigationVue = new Vue({
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
-               
+
             }
             if (logoutmodus === false) {
                 oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
                 oRegisterVue.cardShown = false;
                 oNewEventVue.cardShown = false;
-                
+
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
                 AfterLoginEvent.style.visibility = "hidden";
@@ -143,56 +143,56 @@ var oNavigationVue = new Vue({
 var bigmapgeklickt = false;
 
 function getFavorites(user_id) {
-  oEventTableVue.selected = "";
-  const GETFAVORITES_URL = "http://localhost:3000/user/" + user_id + "/events";
-  var ajaxRequest = new XMLHttpRequest();
+    oEventTableVue.selected = "";
+    const GETFAVORITES_URL = "http://localhost:3000/user/" + user_id + "/events";
+    var ajaxRequest = new XMLHttpRequest();
 
-  var onSuccess = function onSuccess() {
+    var onSuccess = function onSuccess() {
 
-      var apievents = this.response.saved_events;
-      oEventTableVue.allEvents = apievents.map(apievent => {
-          return {
-              sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-              iEventId: apievent._id,
-              aRatings: apievent.ratings,
-              iCurrentRating: apievent.current_rating,
-              sName: apievent.event_name,
-              sDescription: apievent.description,
-              sAdress: apievent.address,
-              oStartDate: apievent.start_date.split("T")[0],
-              oStartTime: apievent.start_date.split("T")[1].substring(0,5),
-              oEndDate: apievent.end_date.split("T")[0],
-              oEndTime: apievent.end_date.split("T")[1].substring(0,5),
-              sEventLink: apievent.event_link,
-              sTicketLink: apievent.ticket_link,
-              oLatLgn: {lat: apievent.lat, lng: apievent.lng},
-              oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
-          };
-      });
-      //sort by start date
-      oEventTableVue.allEvents.sort(function (a, b) {
-          return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
-      });
-      // set bubbles on map
-      setMarkers(oEventTableVue.allEvents);
-      //set stars
-      initalFavoriteSetting = true;
-      for(var z = 0; z < oEventTableVue.allEvents.length; z++){
-        oEventTableVue.favToggle(oEventTableVue.allEvents[z]);
-      }
-      initalFavoriteSetting = false;
-  };
+        var apievents = this.response.saved_events;
+        oEventTableVue.allEvents = apievents.map(apievent => {
+            return {
+                sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
+                iEventId: apievent._id,
+                aRatings: apievent.ratings,
+                iCurrentRating: apievent.current_rating,
+                sName: apievent.event_name,
+                sDescription: apievent.description,
+                sAdress: apievent.address,
+                oStartDate: apievent.start_date.split("T")[0],
+                oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+                oEndDate: apievent.end_date.split("T")[0],
+                oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+                sEventLink: apievent.event_link,
+                sTicketLink: apievent.ticket_link,
+                oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
+            };
+        });
+        //sort by start date
+        oEventTableVue.allEvents.sort(function (a, b) {
+            return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
+        });
+        // set bubbles on map
+        setMarkers(oEventTableVue.allEvents);
+        //set stars
+        initalFavoriteSetting = true;
+        for (var z = 0; z < oEventTableVue.allEvents.length; z++) {
+            oEventTableVue.favToggle(oEventTableVue.allEvents[z]);
+        }
+        initalFavoriteSetting = false;
+    };
 
-  var onFailed = function onFailed() {
-      alert('Die Favoritenlist konnte nicht geladen werden!');
-  };
-  // Attach the event listeners to the XMLHttpRequest object
-  ajaxRequest.addEventListener("load", onSuccess);
-  ajaxRequest.addEventListener("error", onFailed);
-  ajaxRequest.responseType = "json";
+    var onFailed = function onFailed() {
+        alert('Die Favoritenlist konnte nicht geladen werden!');
+    };
+    // Attach the event listeners to the XMLHttpRequest object
+    ajaxRequest.addEventListener("load", onSuccess);
+    ajaxRequest.addEventListener("error", onFailed);
+    ajaxRequest.responseType = "json";
 
-  ajaxRequest.open('GET', GETFAVORITES_URL);
-  ajaxRequest.send();
+    ajaxRequest.open('GET', GETFAVORITES_URL);
+    ajaxRequest.send();
 };
 
 
@@ -237,19 +237,19 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
             return new Date(a.oApiEventStartDate) - new Date(b.oApiEventStartDate);
         });
         setMarkers(oEventTableVue.allEvents);
-        if (loggedInUser != ""){
-          //set stars
-          initalFavoriteSetting = true;
-          for (var i = 0; i < loggedInUser.saved_events.length; i++) {
-            for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-              if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                console.log(oEventTableVue.allEvents[j].iEventId);
-                oEventTableVue.favToggle(oEventTableVue.allEvents[j])
-                break;
-              }
+        if (loggedInUser != "") {
+            //set stars
+            initalFavoriteSetting = true;
+            for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+                for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+                    if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                        console.log(oEventTableVue.allEvents[j].iEventId);
+                        oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                        break;
+                    }
+                }
             }
-          }
-          initalFavoriteSetting = false;
+            initalFavoriteSetting = false;
         }
     };
 
@@ -304,63 +304,63 @@ var oEventTableVue = new Vue({
             })
         },
         commentList: function () { // comments of selected event
-          var temp = this;
-          if (this.selected === "") {
-            return [];
-          }
-          return this.allEvents.filter(function(value) {
-            return value.iEventId === temp.selected;
-          })[0].aComments;
+            var temp = this;
+            if (this.selected === "") {
+                return [];
+            }
+            return this.allEvents.filter(function (value) {
+                return value.iEventId === temp.selected;
+            })[0].aComments;
         }
     },
     methods: {
 
         favToggle: function (target) {
-          // abfrage, ob es gefavt war oder nicht
-          if (loggedInUser != "") { //only change status of faved i fa user is logged in
-            if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
-              Vue.set(target, 'faved', true);
-            } else {
-              var requestType = "POST";
-              var requestURL = "http://localhost:3000/user/";
-              if (target.faved) { //delete _id of target from saved_events of user
-                requestURL = requestURL + "unsaveEvent";
-                //delete favorite from loggedInUser
-                loggedInUser.saved_events = loggedInUser.saved_events.filter(function(value, index, arr){
-                  return value != target.iEventId;
-                });
-              } else { // save _id of target in saved_events of user
-                loggedInUser.saved_events.push(target.iEvent);
-                requestURL = requestURL + "saveEvent";
-              }
-              var ajaxRequest = new XMLHttpRequest();
-
-              var onSuccess = function onSuccess(){
-                console.log("success: " + this.status);
-                if (this.status == 200){
-                  // set target to be (not) faved
-                  Vue.set(target, 'faved', !target.faved);
+            // abfrage, ob es gefavt war oder nicht
+            if (loggedInUser != "") { //only change status of faved i fa user is logged in
+                if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
+                    Vue.set(target, 'faved', true);
                 } else {
-                  // warnung dass das gerade nicht ging?
+                    var requestType = "POST";
+                    var requestURL = "http://localhost:3000/user/";
+                    if (target.faved) { //delete _id of target from saved_events of user
+                        requestURL = requestURL + "unsaveEvent";
+                        //delete favorite from loggedInUser
+                        loggedInUser.saved_events = loggedInUser.saved_events.filter(function (value, index, arr) {
+                            return value != target.iEventId;
+                        });
+                    } else { // save _id of target in saved_events of user
+                        loggedInUser.saved_events.push(target.iEvent);
+                        requestURL = requestURL + "saveEvent";
+                    }
+                    var ajaxRequest = new XMLHttpRequest();
+
+                    var onSuccess = function onSuccess() {
+                        console.log("success: " + this.status);
+                        if (this.status == 200) {
+                            // set target to be (not) faved
+                            Vue.set(target, 'faved', !target.faved);
+                        } else {
+                            // warnung dass das gerade nicht ging?
+                        }
+
+                    };
+
+                    var onFailed = function onFailed() {
+                        console.log("failed");
+                    };
+
+                    ajaxRequest.addEventListener("load", onSuccess);
+                    ajaxRequest.addEventListener("error", onFailed);
+                    ajaxRequest.responseType = "json";
+                    ajaxRequest.open(requestType, requestURL, true);
+                    ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    var sFormData = "userId=" + loggedInUser._id + "&eventId=" + target.iEventId;
+                    ajaxRequest.send(sFormData);
                 }
-
-              };
-
-              var onFailed = function onFailed() {
-                console.log("failed");
-              };
-
-              ajaxRequest.addEventListener("load", onSuccess);
-              ajaxRequest.addEventListener("error", onFailed);
-              ajaxRequest.responseType = "json";
-              ajaxRequest.open(requestType, requestURL, true);
-              ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              var sFormData = "userId=" + loggedInUser._id + "&eventId=" + target.iEventId;
-              ajaxRequest.send(sFormData);
+            } else { // user ist nicht eingeloggt
+                // meldung, dass man sich anmelden soll oder so
             }
-          } else { // user ist nicht eingeloggt
-            // meldung, dass man sich anmelden soll oder so
-          }
 
 
 
@@ -371,15 +371,15 @@ var oEventTableVue = new Vue({
             var ajaxRequest = new XMLHttpRequest();
             var comment = document.querySelector("#idComment").value;
 
-            var onSuccess = function onSuccess(){
-              console.log("toll");
-              var t = oEventTableVue.selected;
-              // getAllEvents(); //this leads to the comment being displayed immediatley
-              getFilteredEvents(oSearchPlaceVue.dDate);
-              oEventTableVue.selected = t;
+            var onSuccess = function onSuccess() {
+                console.log("toll");
+                var t = oEventTableVue.selected;
+                // getAllEvents(); //this leads to the comment being displayed immediatley
+                getFilteredEvents(oSearchPlaceVue.dDate);
+                oEventTableVue.selected = t;
             };
             var onFailed = function onFailed() {
-              console.log("failed");
+                console.log("failed");
             };
 
             ajaxRequest.addEventListener("load", onSuccess);
@@ -437,60 +437,60 @@ var oEventTableVue = new Vue({
 
                     // get, whether the currently logged in user has already rated the event
                     var selected_event = oEventTableVue.allEvents.find(obj => {
-                      return obj.iEventId == oEventTableVue.selected
+                        return obj.iEventId == oEventTableVue.selected
                     });
                     var loggedInUser_rating = selected_event.aRatings.find(obj => {
-                      return obj.user_id == loggedInUser._id
+                        return obj.user_id == loggedInUser._id
                     })
 
-                    if(loggedInUser_rating){ //set rating buttons
+                    if (loggedInUser_rating) { //set rating buttons
                         if (loggedInUser_rating.rating == -1) {
                             nochniebewertet = false;
-                        document.getElementById('haha').style.color = "red"
-                        document.getElementById('idThumbUp').style.color = "grey"
+                            document.getElementById('haha').style.color = "red"
+                            document.getElementById('idThumbUp').style.color = "grey"
                         } else {
                             nochniebewertet = false;
-                        document.getElementById('idThumbUp').style.color = "green"
-                        document.getElementById('haha').style.color = "grey"
-                      }
+                            document.getElementById('idThumbUp').style.color = "green"
+                            document.getElementById('haha').style.color = "grey"
+                        }
                     } else {
                         nochniebewertet = true;
-                      document.getElementById('idThumbUp').style.color = "grey"
-                      document.getElementById('haha').style.color = "grey"
+                        document.getElementById('idThumbUp').style.color = "grey"
+                        document.getElementById('haha').style.color = "grey"
                     }
                     // set current_rating
                     aktuellebewertung = selected_event.iCurrentRating;
                     document.getElementById('ratingnumber').innerText = aktuellebewertung;
                     //add comments to list
-//                     var list = document.getElementById("commentTable");
-//                     while (list.firstChild) {
-//                     list.removeChild(list.firstChild);
-//                     }
-//                     for (var r = 0; r < comments.length; r++){
-//                       var node = document.createElement("LI");                 // Create a <li> node
-//
-//                       var span = document.createElement("SPAN");
-//                       span.className = "mdl-list__item-primary-content";
-//                       span = document.createElement("SPAN");
-//                       var i = document.createElement("I");
-//                       i.className = "material-icons mdl-list__item-avatar";
-//                       i.innerHTML = "person";
-//                         var comment = document.createElement("SPAN");
-//                         comment = document.createElement("SPAN");
-//                       comment.innerHTML = comments[r].comment;         // Create a text node
-//                         var user = document.createElement("SPAN");
-//                         user = document.createElement("SPAN");
-//                       user.innerHTML = comments[r].username;
-//                       user.className = "mdl-list__item-text-body";
-//
-//                       span.appendChild(i);
-//                       span.appendChild(user);
-//                       span.appendChild(comment);
-//                         node.appendChild(span);
-//
-//                         // Append the text to <li>
-//                       document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
-//                     }
+                    //                     var list = document.getElementById("commentTable");
+                    //                     while (list.firstChild) {
+                    //                     list.removeChild(list.firstChild);
+                    //                     }
+                    //                     for (var r = 0; r < comments.length; r++){
+                    //                       var node = document.createElement("LI");                 // Create a <li> node
+                    //
+                    //                       var span = document.createElement("SPAN");
+                    //                       span.className = "mdl-list__item-primary-content";
+                    //                       span = document.createElement("SPAN");
+                    //                       var i = document.createElement("I");
+                    //                       i.className = "material-icons mdl-list__item-avatar";
+                    //                       i.innerHTML = "person";
+                    //                         var comment = document.createElement("SPAN");
+                    //                         comment = document.createElement("SPAN");
+                    //                       comment.innerHTML = comments[r].comment;         // Create a text node
+                    //                         var user = document.createElement("SPAN");
+                    //                         user = document.createElement("SPAN");
+                    //                       user.innerHTML = comments[r].username;
+                    //                       user.className = "mdl-list__item-text-body";
+                    //
+                    //                       span.appendChild(i);
+                    //                       span.appendChild(user);
+                    //                       span.appendChild(comment);
+                    //                         node.appendChild(span);
+                    //
+                    //                         // Append the text to <li>
+                    //                       document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
+                    //                     }
                     dialog.showModal();
                 }
                 dialog.querySelector('.close').addEventListener('click', function () {
@@ -499,7 +499,7 @@ var oEventTableVue = new Vue({
                     dialogopen = false;
                     //getFilteredEvents(oSearchPlaceVue.dDate);
                 });
-                $(dialog).children().first().click(function (e){
+                $(dialog).children().first().click(function (e) {
                     e.stopPropagation();
                 })
                 document.addEventListener("click", function (e) {
@@ -525,82 +525,82 @@ var oEventTableVue = new Vue({
 });
 
 function getFilteredEvents(dDate) {
-  //filter for start_date and end_date and event types
-  //filter_event_type is an array of 1 - x event_types
-  if(dDate){
-    //check, whether filter dates are in the past -> reject search
-    if(dDate[0] >= new Date().setHours(0,0,0,0) && dDate[1] >= new Date().setHours(0,0,0,0)) {
-      var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
-      var ajaxRequest = new XMLHttpRequest();
+    //filter for start_date and end_date and event types
+    //filter_event_type is an array of 1 - x event_types
+    if (dDate) {
+        //check, whether filter dates are in the past -> reject search
+        if (dDate[0] >= new Date().setHours(0, 0, 0, 0) && dDate[1] >= new Date().setHours(0, 0, 0, 0)) {
+            var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
+            var ajaxRequest = new XMLHttpRequest();
 
-      var onSuccess = function onSuccess() {
-          var apievents = this.response.oEvents;
-          oEventTableVue.allEvents = apievents.map(apievent => {
-              return {
-                  sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-                  iEventId: apievent._id,
-                  aComments: apievent.comments,
-                  aRatings: apievent.ratings,
-                  sName: apievent.event_name,
-                  sDescription: apievent.description,
-                  sAdress: apievent.address,
-                  iCurrentRating: apievent.current_rating,
-                  oStartDate: apievent.start_date.split("T")[0],
-                  oStartTime: apievent.start_date.split("T")[1].substring(0,5),
-                  oEndDate: apievent.end_date.split("T")[0],
-                  oEndTime: apievent.end_date.split("T")[1].substring(0,5),
-                  sEventLink: apievent.event_link,
-                  sTicketLink: apievent.ticket_link,
-                  oLatLgn: {lat: apievent.lat, lng: apievent.lng},
-                  oImage: "../Backend/" + apievent.event_picture.replace(/\\/g,"/")
-              };
-          });
-          setMarkers(oEventTableVue.allEvents);
-          if (loggedInUser != ""){
-            //set stars
-            initalFavoriteSetting = true;
-            for (var i = 0; i < loggedInUser.saved_events.length; i++) {
-              for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-                if(oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                  console.log(oEventTableVue.allEvents[j].iEventId);
-                  oEventTableVue.favToggle(oEventTableVue.allEvents[j])
-                  break;
+            var onSuccess = function onSuccess() {
+                var apievents = this.response.oEvents;
+                oEventTableVue.allEvents = apievents.map(apievent => {
+                    return {
+                        sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
+                        iEventId: apievent._id,
+                        aComments: apievent.comments,
+                        aRatings: apievent.ratings,
+                        sName: apievent.event_name,
+                        sDescription: apievent.description,
+                        sAdress: apievent.address,
+                        iCurrentRating: apievent.current_rating,
+                        oStartDate: apievent.start_date.split("T")[0],
+                        oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+                        oEndDate: apievent.end_date.split("T")[0],
+                        oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+                        sEventLink: apievent.event_link,
+                        sTicketLink: apievent.ticket_link,
+                        oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+                        oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
+                    };
+                });
+                setMarkers(oEventTableVue.allEvents);
+                if (loggedInUser != "") {
+                    //set stars
+                    initalFavoriteSetting = true;
+                    for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+                        for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+                            if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                                console.log(oEventTableVue.allEvents[j].iEventId);
+                                oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                                break;
+                            }
+                        }
+                    }
+                    initalFavoriteSetting = false;
                 }
-              }
-            }
-            initalFavoriteSetting = false;
-          }
-          //change center of map and filter for location
-        //   setCenter(oSearchPlaceVue.sQuery);
-      };
+                //change center of map and filter for location
+                //   setCenter(oSearchPlaceVue.sQuery);
+            };
 
-      var onFailed = function onFailed() {
-          alert('Die Eventliste konnte nicht nach Datum gefiltert werden!');
-          //change center of map and filter for location
-          setCenter(oSearchPlaceVue.sQuery);
-      };
-      // Attach the event listeners to the XMLHttpRequest object
-      ajaxRequest.addEventListener("load", onSuccess);
-      ajaxRequest.addEventListener("error", onFailed);
-      ajaxRequest.responseType = "json";
+            var onFailed = function onFailed() {
+                alert('Die Eventliste konnte nicht nach Datum gefiltert werden!');
+                //change center of map and filter for location
+                setCenter(oSearchPlaceVue.sQuery);
+            };
+            // Attach the event listeners to the XMLHttpRequest object
+            ajaxRequest.addEventListener("load", onSuccess);
+            ajaxRequest.addEventListener("error", onFailed);
+            ajaxRequest.responseType = "json";
 
-      ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
-      ajaxRequest.setRequestHeader("filter_start_date", dDate[0].toString());
-      ajaxRequest.setRequestHeader("filter_end_date", dDate[1].toString());
-      // ajaxRequest.setRequestHeader("filter_event_type", );
+            ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
+            ajaxRequest.setRequestHeader("filter_start_date", dDate[0].toString());
+            ajaxRequest.setRequestHeader("filter_end_date", dDate[1].toString());
+            // ajaxRequest.setRequestHeader("filter_event_type", );
 
-      ajaxRequest.send();
-    } else { // at least one of the dates is in the past, which is an incorrect input
-      // idDatePickerErrorEmpty
-      document.getElementById("idDatePickerErrorEmpty").style.display = "block";
+            ajaxRequest.send();
+        } else { // at least one of the dates is in the past, which is an incorrect input
+            // idDatePickerErrorEmpty
+            document.getElementById("idDatePickerErrorEmpty").style.display = "block";
+        }
+
+    } else { // no dates given
+        //change center of map and filter for location
+        getAllEvents();
+        setMarkers(oEventTableVue.allEvents);
+        // setCenter(oSearchPlaceVue.sQuery);
     }
-
-  } else { // no dates given
-    //change center of map and filter for location
-    getAllEvents();
-    setMarkers(oEventTableVue.allEvents);
-    // setCenter(oSearchPlaceVue.sQuery);
-  }
 };
 
 //Vue fuer die Leiste mit Suchfunktion und Filter Button
@@ -617,8 +617,8 @@ var oSearchPlaceVue = new Vue({
                 {
                     text: 'Heute',
                     onClick(picker) {
-                        const end = new Date().setHours(23,59,59,59);
-                        const start = new Date().setHours(0,0,0,0);
+                        const end = new Date().setHours(23, 59, 59, 59);
+                        const start = new Date().setHours(0, 0, 0, 0);
                         // end.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
                         picker.$emit('pick', [start, end]);
                     }
@@ -626,8 +626,8 @@ var oSearchPlaceVue = new Vue({
                 {
                     text: 'nächste Woche',
                     onClick(picker) {
-                        const end = new Date(new Date().getTime() + 3600 *1000 *24 *7).setHours(23,59,59,59);
-                        const start = new Date().setHours(0,0,0,0);
+                        const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 7).setHours(23, 59, 59, 59);
+                        const start = new Date().setHours(0, 0, 0, 0);
                         // end.setTime(start.getTime() + 3600 * 1000 * 24 * 7);
                         picker.$emit('pick', [start, end]);
                     }
@@ -635,8 +635,8 @@ var oSearchPlaceVue = new Vue({
                 {
                     text: 'nächster Monat',
                     onClick(picker) {
-                        const end = new Date(new Date().getTime() + 3600 *1000 *24 *30).setHours(23,59,59,59);
-                        const start = new Date().setHours(0,0,0,0);
+                        const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 30).setHours(23, 59, 59, 59);
+                        const start = new Date().setHours(0, 0, 0, 0);
                         // end.setTime(start.getTime() + 3600 * 1000 * 24 * 30);
                         picker.$emit('pick', [start, end]);
                     }
@@ -746,7 +746,7 @@ var oNewEventVue = new Vue({
             EDate: null,
             sEventLink: null,
             iEventId: Math.floor(Math.random() * 99999) + 1,
-            oSelectedFile: null,
+            oSelectedFile: "",
             image: null,
             titleIsInvalid: false,
             descIsInvalid: false,
@@ -788,11 +788,11 @@ var oNewEventVue = new Vue({
         // },
         formsubmit: function () {
 
-           titleIsInvalid = false;
-           oNewEventVue.draft.descIsInvalid = false;
-           oNewEventVue.draft.adressIsInvalid = false;
-           oNewEventVue.draft.displayError = false;
-           oNewEventVue.draft.dateIsInvalid = false;
+            titleIsInvalid = false;
+            oNewEventVue.draft.descIsInvalid = false;
+            oNewEventVue.draft.adressIsInvalid = false;
+            oNewEventVue.draft.displayError = false;
+            oNewEventVue.draft.dateIsInvalid = false;
 
             //Hier die Bedingungen + Ausführungen, falls nicht alle Felder korrekt oder gar nicht ausgefüllt wurden.
             if (this.draft.sName === "") {
@@ -830,6 +830,8 @@ var oNewEventVue = new Vue({
                     var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
                     var oLatLgn = { lat: dLat, lng: dLng }
 
+                    var image =  document.getElementById("imageUpload").files[0];
+
                     const fd = new FormData();
                     fd.append("event_name", oNewEventVue.draft.sName);
                     fd.append("description", oNewEventVue.draft.sDescription);
@@ -839,11 +841,11 @@ var oNewEventVue = new Vue({
                     fd.append("start_date", oNewEventVue.draft.EDate[0]);
                     fd.append("end_date", oNewEventVue.draft.EDate[1]);
                     fd.append("event_types", ["5bd1874824c1783894595b68"]);
-                    if(oNewEventVue.draft.oSelectedFile){
-                      fd.append("event_picture", oNewEventVue.draft.oSelectedFile, oNewEventVue.draft.oSelectedFile.name);
+                    if (oNewEventVue.draft.oSelectedFile) {
+                        fd.append("event_picture", image, image.name);
                     }
-                    if (oNewEventVue.draft.sEventLink){
-                      fd.append("event_link", oNewEventVue.draft.sEventLink);
+                    if (oNewEventVue.draft.sEventLink) {
+                        fd.append("event_link", oNewEventVue.draft.sEventLink);
                     }
 
 
@@ -874,14 +876,15 @@ var oNewEventVue = new Vue({
                             EDate: null,
                             sEventLink: null,
                             iEventId: Math.floor(Math.random() * 99999) + 1,
-                            oSelectedFile: null,
+                            oSelectedFile: "",
                             image: null,
                             titleIsInvalid: false,
                             descIsInvalid: false,
                             adressIsInvalid: false,
                             displayError: false,
                             dateIsInvalid: false
-                        }
+                        };
+                        document.getElementById("imageUpload").value = "";
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
                         console.log(error);
@@ -901,7 +904,28 @@ var oNewEventVue = new Vue({
             getAutocompletion(this.draft.sAdress, document.getElementById("newEventAddress"));
         },
         onFileSelected: function (event) {
+            if(event.target.files[0] === undefined){
+                this.draft.oSelectedFile = "";
+                return;
+            }
+
             this.draft.oSelectedFile = event.target.files[0];
+            
+            // Reference to the DOM input element
+            var input = event.target;
+            // Ensure that you have a file before attempting to read it
+            if (input.files && input.files[0]) {
+                // create a new FileReader to read this image and convert to base64 format
+                var reader = new FileReader();
+                // Define a callback function to run, when FileReader finishes its job
+                reader.onload = (e) => {
+                    // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
+                    // Read image as base64 and set to imageData
+                    this.draft.oSelectedFile = e.target.result;
+                }
+                // Start the reader job - read file as a data url (base64 format)
+                reader.readAsDataURL(input.files[0]);
+            }
         },
         onChange(image) {
             console.log('New picture selected!')
@@ -963,13 +987,13 @@ var oRegisterVue = new Vue({
             var onFailed = function onFailed() {
                 alert(' Fehler beim Login');
             };
-            if (this.draft.rUserName === "" ){
+            if (this.draft.rUserName === "") {
                 this.draft.nameIsInvalid = true;
                 Reg_SONS_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_EMAIL_Fehler.style.display = "none";
             }
-            if (this.draft.rPassword === "" || this.draft.rPassword2 === ""){
+            if (this.draft.rPassword === "" || this.draft.rPassword2 === "") {
                 this.draft.password2IsInvalid = true;
                 this.draft.passwordIsInvalid = true;
                 Reg_SONS_Fehler.style.display = "inline";
@@ -977,42 +1001,42 @@ var oRegisterVue = new Vue({
                 Reg_EMAIL_Fehler.style.display = "none";
 
             }
-            
+
             if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
                 this.draft.emailIsInvalid = true;
                 Reg_EMAIL_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
             }
-            if (this.draft.rPassword != this.draft.rPassword2 ) {
+            if (this.draft.rPassword != this.draft.rPassword2) {
                 this.draft.password2IsInvalid = true;
                 this.draft.passwordIsInvalid = true;
                 Reg_Pass_Fehler.style.display = "inline";
                 Reg_EMAIL_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
-               
+
             }
-            
-            
+
+
             Reg_Pass_Fehler
             Reg_SONS_Fehler
             Reg_EMAIL_Fehler
             if (this.draft.emailIsInvalid == true || this.draft.nameIsInvalid == true || this.draft.password2IsInvalid == true) {
             }
             else {
-                
-            var newuser = "http://localhost:3000/user/signup"
-            var ajaxRequest = new XMLHttpRequest();
 
-            ajaxRequest.addEventListener("load", onSuccess);
-            ajaxRequest.addEventListener("error", onFailed);
-            ajaxRequest.responseType = "json";
-            ajaxRequest.open("POST", newuser, true);
-            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
-            console.log(snewuserdata);
-            ajaxRequest.send(snewuserdata);
-             }
+                var newuser = "http://localhost:3000/user/signup"
+                var ajaxRequest = new XMLHttpRequest();
+
+                ajaxRequest.addEventListener("load", onSuccess);
+                ajaxRequest.addEventListener("error", onFailed);
+                ajaxRequest.responseType = "json";
+                ajaxRequest.open("POST", newuser, true);
+                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
+                console.log(snewuserdata);
+                ajaxRequest.send(snewuserdata);
+            }
 
         }
 
@@ -1091,17 +1115,17 @@ var oNewLoginVue = new Vue({
                     logoutmodus = false;
                 };
 
-                if(this.draft.sUserName === "") {
+                if (this.draft.sUserName === "") {
                     this.draft.emailIsInvalid = true;
                     LoginFehlerLeer.style.display = "inline";
-                   
+
                 }
 
                 if (this.draft.sPassword === "") {
                     this.draft.passwordIsInvalid = true;
                     LoginFehlerLeer.style.display = "inline";
                 }
-               
+
 
                 if (this.draft.emailIsInvalid == false && this.draft.passwordIsInvalid == false) {
                     LoginFehlerLeer.style.display = "none";

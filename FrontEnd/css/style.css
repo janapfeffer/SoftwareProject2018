@@ -245,7 +245,7 @@ img.eventSymbol {
 
 #newEvent p{
   /* margin: 5px 0px 25px 0px; */
-  font-size: 18px
+  font-size: 16px
 }
 
 #newEvent mdl-textfield__input{
@@ -433,3 +433,19 @@ padding: 0 0 0 0;
   padding: 6px 12px;
   cursor: pointer;
 }
+
+.thumbs{
+  font-size: 30px;
+}
+
+img.preview {
+  width: 200px;
+  background-color: white;
+  border: 1px solid #DDD;
+  padding: 5px;
+}
+
+.file-upload-form, .image-preview {
+  padding: 5px;
+}
+  

@@ -81,14 +81,13 @@
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <img id="logoIcon" src="images/mapIcon.PNG">
-                    <h1> EventHub </h1>
+                <h1> EventHub </h1>
                 <!-- Title -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
 
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;"
-                        @click='showNewFavoriteCard'>Favoriten</a>
+                    <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
                     <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event
                         eintragen
                     </a>
@@ -111,8 +110,8 @@
                 <!-- Ausgewahltes Datum wird als "FilterDate gespeichert-->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-                    <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Start Date"
-                        end-placeholder="End Date" :default-time="['15:00:00', '19:00:00']">
+                    <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
+                        :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
                 <p>
@@ -125,8 +124,7 @@
                 <input type="checkbox" id="scales" name="feature" value="Kategorie 4" checked /> Kategorie 4
 
                 <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                        @click="formsubmit">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                         Filtern
                     </button>
                 </div>
@@ -189,8 +187,7 @@
 
 
                 <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                        @click="formsubmit">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                         Abschließen
                     </button>
                 </div>
@@ -261,23 +258,6 @@
                         </b>
                     </p>
                 </div>
-                <!-- <picture-input ref="pictureInput"
-                               width="100"
-                               height="100"
-                               margin="16"
-                               accept="image/jpeg,image/png"
-                               size="10"
-                               button-class="btn"
-                               :custom-strings="{
-                               upload: '<h1>Bummer!</h1>' ,
-                               drag: 'Laden Sie ein Eventbild hoch'
-                               }"
-                               @change="onChange">
-                </picture-input> -->
-                <!-- <label class="custom-file-upload">
-                    <input id="imageUpload" type="file" style="display: none" @change="onFileSelected"/>
-                    <i class="fa fa-cloud-upload"></i> Eventfoto hochladen
-                </label> -->
                 <div v-bind:class="{ 'is-invalid': draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
                     <label class="mdl-textfield__label" for="sample1">Titel*</label>
@@ -291,31 +271,31 @@
                     <label class="mdl-textfield__label" for="sample1">Adresse*</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input"
-                        v-model="draft.sEventLink">
+                    <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
                     <label class="mdl-textfield__label" for="sample1">Link</label>
                 </div>
 
                 <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <p>Datum*</p>
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-                    <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange"
-                        align="right" start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
+                    <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
+                        start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
-                <!-- <label class="custom-file-upload">
-                        <input id="imageUpload" style="display: none" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected"/>
-                        <i v-show="!draft.oSelectedFile" class="fa fa-cloud-upload"> "{{ draft.oSelectedFile.name }} </i>
-                        <i v-show="draft.oSelectedFile" class="fa fa-cloud-upload">  Eventfoto hochladen </i>
-                </label> -->
-                <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected">
+
+                <div class="file-upload-form">
+                    Lade ein Eventbild hoch:
+                    <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected" accept="image/*">
+                </div>
+                <div class="image-preview" v-if="draft.oSelectedFile.length > 0">
+                    <img class="preview" :src="draft.oSelectedFile">
+                </div>
                 <!--label for="imageUpload">Laden Sie Ihr Eventbild hoch!</label-->
                 <div class="buttons">
                     <!-- <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
                         Vorschau
                     </button> -->
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised"
-                        @click="formsubmit">
+                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                         Senden
                     </button>
                 </div>
@@ -366,8 +346,7 @@
                         <!-- Popup Dialog -->
 
                         <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2;">
-                            <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025"
-                                data-tilt-perspective="1000">
+                            <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
 
                                 <div style="background-color:whitesmoke">
 
@@ -377,10 +356,8 @@
                                         <p style="color:black;  font-family:Bahnschrift;" id="eventidkommentare"> haha</p>
 
                                         <!-- Use an element to toggle between a like/dislike icon -->
-                                        <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 50px;"
-                                            class="fa fa-thumbs-down"></i>
-                                        <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 70px;"
-                                            class="fa fa-thumbs-up"></i>
+                                        <i onclick="LikeButton(this)" id="haha" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
+                                        <i onclick="LikeButton2(this)" id="idThumbUp" style="position: absolute; color:grey; right: 14%;" class="fa fa-thumbs-up thumbs"></i>
                                         <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
                                         <script>
                                             function LikeButton(x) {
@@ -457,8 +434,8 @@
                                             }
                                         </script>
                                         <div>
-                                            
-                                            <p id="ratingnumber" style="float:right;color:black; margin-right: 10%">zahl</p>
+
+                                            <p id="ratingnumber" style="float:right;color:black; margin-right: 18%; font-size: x-large;">zahl</p>
 
 
                                             <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -472,19 +449,16 @@
                                             <br />
                                         </div>
 
-                                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial"
-                                            class="sidecard demo-list-three mdl-list">
+                                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
 
-                                            <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line"
-                                                v-bind:id="comment._id">
+                                            <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
                                                 <span class="mdl-list__item-primary-content">
                                                     <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
                                                     <!-- <span id="name">{{ comment.name }}</span> -->
                                                     <span style="font-weight: bold;">{{ comment.username }}</span>
                                                     <br style="line-height: 150%;" />
                                                     <i class="fa fa-comment" style="font-size:18px"></i>
-                                                    <span class=nobr class="mdl-list__item-text-body">{{
-                                                        comment.comment
+                                                    <span class=nobr class="mdl-list__item-text-body">{{ comment.comment
                                                         }}
                                                     </span>
                                                     <br style="line-height: 150%;" />
@@ -507,8 +481,7 @@
     </div>
 
 
-    <div id="searchPlace" class="sidecard" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025"
-        data-tilt-perspective="1000">
+    <div id="searchPlace" class="sidecard" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
         <h1>Finde Veranstaltungen in deiner Gegend.</h1>
 
         <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
@@ -524,13 +497,12 @@
                 </p>
             </div>
             <div id="idSearchBar" class="autocomplete" style="width:370;">
-                <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery"
-                    @keyup="autocomplete" @keyup.enter="searchPlace">
+                <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete"
+                    @keyup.enter="searchPlace">
                 <h2>VON-BIS</h2>
                 <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-                <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right"
-                    start-placeholder="Start Datum" end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']"
-                     :picker-options="pickerOptions">
+                <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
+                    end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions">
                 </el-date-picker>
 
                 <!-- insert drop down for event types-->
