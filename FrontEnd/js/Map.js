@@ -27,6 +27,10 @@ behavior.disable(H.mapevents.Behavior.DBLTAPZOOM);
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
+ui.getControl('scalebar').setAlignment('left-bottom');
+ui.getControl('mapsettings').setAlignment('left-bottom');
+ui.getControl('zoom').setAlignment('left-bottom');
+
 //source: https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function suggestPlaces(inp, arr) {
     /*the autocomplete function takes two arguments,

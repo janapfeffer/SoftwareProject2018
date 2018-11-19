@@ -403,6 +403,7 @@ var oEventTableVue = new Vue({
                 }
                 // map.setCenter(target.marker.getPosition(), true);
                 openBubble(target.marker.getPosition(), target.marker.data);
+                zoomMap(target.marker.getPosition());
             }
             else { }
         },
@@ -570,7 +571,7 @@ function getFilteredEvents(dDate) {
             initalFavoriteSetting = false;
           }
           //change center of map and filter for location
-          setCenter(oSearchPlaceVue.sQuery);
+        //   setCenter(oSearchPlaceVue.sQuery);
       };
 
       var onFailed = function onFailed() {
@@ -598,7 +599,7 @@ function getFilteredEvents(dDate) {
     //change center of map and filter for location
     getAllEvents();
     setMarkers(oEventTableVue.allEvents);
-    setCenter(oSearchPlaceVue.sQuery);
+    // setCenter(oSearchPlaceVue.sQuery);
   }
 };
 
@@ -653,7 +654,6 @@ var oSearchPlaceVue = new Vue({
                 document.querySelector("#searchPlace").vanillaTilt.destroy()
                 map.getViewPort().resize();
                 AfterLoginLogin.style.visibility = "visible";
-                BigMap.style.visibility = "visible";
                 document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden");
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
