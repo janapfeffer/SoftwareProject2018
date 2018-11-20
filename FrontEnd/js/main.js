@@ -648,7 +648,8 @@ var oSearchPlaceVue = new Vue({
         //Sucht nach einem Ort
         searchPlace: function searchPlace() {
             if (document.body.classList.contains('landingpage')) {
-
+                
+                setCenter(this.sQuery);
                 AfterLoginLogin.style.visibility = "visible";
                 document.body.classList.remove('landingpage');
                 document.querySelector("#searchPlace").vanillaTilt.destroy()
@@ -658,9 +659,15 @@ var oSearchPlaceVue = new Vue({
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
             getFilteredEvents(this.dDate);
+            setCenter(this.sQuery);
         },
         //AutoComplet Funktion der Suchleiste
-        autocomplete: function autocomplete() {
+        autocomplete: function autocomplete(keyboardEvent) {
+            if (keyboardEvent.key === "ArrowDown" ||
+                keyboardEvent.key === "ArrowUp" ||
+                keyboardEvent.key === "Enter") {
+                return;
+            }
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
         },
         filterDate: function () {
@@ -830,7 +837,7 @@ var oNewEventVue = new Vue({
                     var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
                     var oLatLgn = { lat: dLat, lng: dLng }
 
-                    var image =  document.getElementById("imageUpload").files[0];
+                    var image = document.getElementById("imageUpload").files[0];
 
                     const fd = new FormData();
                     fd.append("event_name", oNewEventVue.draft.sName);
@@ -882,17 +889,22 @@ var oNewEventVue = new Vue({
                 }
             )
         },
-        autocomplete: function autocomplete() {
+        autocomplete: function autocomplete(keyboardEvent) {
+            if (keyboardEvent.key === "ArrowDown" ||
+                keyboardEvent.key === "ArrowUp" ||
+                keyboardEvent.key === "Enter") {
+                return;
+            }
             getAutocompletion(this.draft.sAdress, document.getElementById("newEventAddress"));
         },
         onFileSelected: function (event) {
-            if(event.target.files[0] === undefined){
+            if (event.target.files[0] === undefined) {
                 this.draft.oSelectedFile = "";
                 return;
             }
 
             this.draft.oSelectedFile = event.target.files[0];
-            
+
             // Reference to the DOM input element
             var input = event.target;
             // Ensure that you have a file before attempting to read it
