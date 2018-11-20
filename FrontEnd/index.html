@@ -14,8 +14,6 @@
           *Event Name: "sName"
           *Event Date:  "sDate"
           *Event Adress: "sAdress"
-
-
     Favoriten:
     main.js:
     Zeile 86: Funktion "checkboxToggle" wird immer aufgerufen wenn ein Hacken gesetzt wurde
@@ -80,7 +78,7 @@
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
-                <img id="logoIcon" src="images/mapIcon.PNG">
+                <img id="logoIcon" src="images/mapIcon.PNG" onclick="refreshpage()" style="cursor: pointer;"/>
                 <h1> EventHub </h1>
                 <!-- Title -->
                 <div class="mdl-layout-spacer"></div>
@@ -390,11 +388,8 @@
                                                     ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                                                     var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
                                                     ratingRequest.send(sFormData);
-
-
                                                 }
                                             }
-
                                             function LikeButton2(x) {
                                                 if (x.style.color != "green") {
                                                     var ratingRequest = new XMLHttpRequest();
@@ -420,7 +415,6 @@
                                                     var onFailed = function onFailed() {
                                                         console.log("failed");
                                                     };
-
                                                     ratingRequest.addEventListener("load", onSuccess);
                                                     ratingRequest.addEventListener("error", onFailed);
                                                     ratingRequest.responseType = "json";
@@ -429,8 +423,6 @@
                                                     var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
                                                     ratingRequest.send(sFormData);
                                                 }
-
-
                                             }
                                         </script>
                                         <div>
@@ -499,18 +491,19 @@
             <div id="idSearchBar" class="autocomplete" style="width:370;">
                 <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete"
                     @keyup.enter="searchPlace">
-                <h2>VON-BIS</h2>
-                <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-                <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
-                    end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions">
-                </el-date-picker>
-
-                <!-- insert drop down for event types-->
-
-                <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
-                    Suche
-                </button>
             </div>
+            <h2>VON-BIS</h2>
+            <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
+            <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
+                end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions">
+            </el-date-picker>
+
+            <!-- insert drop down for event types-->
+
+            <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
+                Suche
+            </button>
+
         </div>
 
 

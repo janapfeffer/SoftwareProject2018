@@ -848,19 +848,6 @@ var oNewEventVue = new Vue({
                         fd.append("event_link", oNewEventVue.draft.sEventLink);
                     }
 
-
-                    // //file convert + append
-                    // var ImageURL = oNewEventVue.draft.image;
-                    // // Split the base64 string in data and contentType
-                    // var block = ImageURL.split(";");
-                    // // Get the content type of the image
-                    // var contentType = block[0].split(":")[1];// In this case "image/gif"
-                    // // get the real base64 content of the file
-                    // var realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
-                    // // Convert it to a blob to upload
-                    // var blob = b64toBlob(realData, contentType);
-                    // // fd.append('event_picture', blob, "");
-
                     axios.post("http://localhost:3000/events", fd).then(res => {
                         alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
@@ -894,11 +881,6 @@ var oNewEventVue = new Vue({
                     alert('Geodaten nicht bekommen. Bitte überprüfen Sie, ob die angegebene Adresse existiert.');
                 }
             )
-
-
-
-
-            //https://www.youtube.com/watch?v=VqnJwh6E9ak see this for picture upload
         },
         autocomplete: function autocomplete() {
             getAutocompletion(this.draft.sAdress, document.getElementById("newEventAddress"));
@@ -932,10 +914,6 @@ var oNewEventVue = new Vue({
             if (image) {
                 console.log('Picture loaded.')
                 this.draft.image = image
-
-
-
-
             } else {
                 console.log('FileReader API not supported: use the <form>, Luke!')
             }
@@ -947,9 +925,6 @@ var oNewEventVue = new Vue({
 });
 
 setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
-
-
-
 
 // Register Vue
 var oRegisterVue = new Vue({
@@ -1227,6 +1202,10 @@ function checkDuplicatePositions(arr) {
                 }
     }
     // console.timeEnd("duplishift")
+}
+
+function refreshpage() {
+    location.reload();
 }
 
 function initEverything() {
