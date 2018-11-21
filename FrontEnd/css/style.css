@@ -384,7 +384,7 @@ margin: 5px;
 }
 
 .ibPicture {
-filter: brightness(60%);
+filter: brightness(80%);
 position: absolute;
 background-size: cover;
 background-repeat: no-repeat;
