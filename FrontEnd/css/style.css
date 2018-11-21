@@ -20,12 +20,12 @@ header .headerLink{
  color: black !important;
 }
 
-header img#logoIcon{
- position: absolute;
- top: 13px;
- left: 13px;
- width: 40px;
- height: 40px;
+header img#logoIcon {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 33px;
+  height: 33px;
 }
 
 input{

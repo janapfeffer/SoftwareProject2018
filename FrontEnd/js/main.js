@@ -67,7 +67,6 @@ var oNavigationVue = new Vue({
                 logoutmodus = false;
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
 
-                document.getElementById('eingeloggteruser').innerText = "EventFinder";
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
                 AfterLoginEvent.style.visibility = "hidden";
@@ -1133,7 +1132,6 @@ var oNewLoginVue = new Vue({
 
             }
             else {
-                document.getElementById('eingeloggteruser').innerText = "EventFinder";
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
                 AfterLoginEvent.style.visibility = "hidden";
