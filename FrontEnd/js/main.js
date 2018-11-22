@@ -75,6 +75,10 @@ var oNavigationVue = new Vue({
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
+                oNewLoginVue.draft.sUserName = "";
+                oNewLoginVue.draft.sPassword = "";
+                document.getElementById("Login_username").innerText = "";
+                document.getElementById("Login_password").innerText = "";
 
             }
             if (logoutmodus === false) {
@@ -1144,6 +1148,10 @@ var oNewLoginVue = new Vue({
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
+                oNewLoginVue.draft.sUserName = "";
+                oNewLoginVue.draft.sPassword = "";
+                document.getElementById("Login_username").innerText = "";
+                document.getElementById("Login_password").innerText = "";
             }
         },
 
