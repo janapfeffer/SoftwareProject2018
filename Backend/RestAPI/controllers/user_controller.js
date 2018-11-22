@@ -160,6 +160,23 @@ exports.user_delete = (req, res, next) => {
     });
 };
 
+exports.get_saved_events_ids = (req, res, next) => {
+  User.findById(req.params.userId, "saved_events", function(err, event) {
+  })
+  .exec()
+  .then(user => {
+    res.status(200).json({
+      saved_events: user.saved_events
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+  });
+};
+
 exports.get_saved_events = (req, res, next) => {
   //"http://localhost:3000/user/" + user_id + "/events"
   User.findById(req.params.userId, "saved_events", function(err, event) {

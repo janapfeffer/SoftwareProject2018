@@ -277,6 +277,21 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
 //    });
 //};
 
+function getFavoritesIds() {
+  var ajaxRequest = new XMLHttpRequest();
+  var onSuccess = function(){
+    loggedInUser.saved_events = this.response.saved_events;
+  }
+  var onFailed = function() {
+    console.log("Favorite IDs of user could not be loaded.");
+  }
+  ajaxRequest.addEventListener("load", onSuccess);
+  ajaxRequest.addEventListener("error", onFailed);
+  ajaxRequest.responseType = "json";
+  ajaxRequest.open("GET", "http://localhost:3000/user/" + loggedInUser._id + "/saved_events_ids", true);
+  ajaxRequest.send();
+}
+
 
 //Vue fuer die Event Tabelle fertig
 var oEventTableVue = new Vue({
@@ -325,12 +340,12 @@ var oEventTableVue = new Vue({
                     var requestURL = "http://localhost:3000/user/";
                     if (target.faved) { //delete _id of target from saved_events of user
                         requestURL = requestURL + "unsaveEvent";
-                        //delete favorite from loggedInUser
-                        loggedInUser.saved_events = loggedInUser.saved_events.filter(function (value, index, arr) {
-                            return value != target.iEventId;
-                        });
+                        // //delete favorite from loggedInUser
+                        // loggedInUser.saved_events = loggedInUser.saved_events.filter(function (value, index, arr) {
+                        //     return value != target.iEventId;
+                        // });
                     } else { // save _id of target in saved_events of user
-                        loggedInUser.saved_events.push(target.iEventId);
+                        // loggedInUser.saved_events.push(target.iEventId);
                         requestURL = requestURL + "saveEvent";
                     }
                     var ajaxRequest = new XMLHttpRequest();
@@ -340,6 +355,8 @@ var oEventTableVue = new Vue({
                         if (this.status == 200) {
                             // set target to be (not) faved
                             Vue.set(target, 'faved', !target.faved);
+                            //reload saved_events of loggedInUser
+                            getFavoritesIds();
                         } else {
                             // warnung dass das gerade nicht ging?
                         }

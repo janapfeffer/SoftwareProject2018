@@ -15,4 +15,6 @@ router.post("/unsaveEvent", UserController.delete_saved_event);
 
 router.get("/:userId/events",  UserController.get_saved_events);
 
+router.get("/:userId/saved_events_ids", UserController.get_saved_events_ids);
+
 module.exports = router;
