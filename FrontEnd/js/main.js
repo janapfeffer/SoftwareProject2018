@@ -65,6 +65,9 @@ var oNavigationVue = new Vue({
 
         showNewLoginCard: function () {
             $(window).scrollTop(0);
+            if (oRegisterVue.cardShown == true){
+              oRegisterVue.cardShown = false;
+            }
             oNewLoginVue.cardShown = true;
             if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
                 logoutmodus = false;
