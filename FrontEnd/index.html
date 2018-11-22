@@ -337,7 +337,7 @@
                         </div>
 
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments)"
+                            <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
                                 type="text" id="sample1">
                             <label class="mdl-textfield__label" for="sample1">Kommentiere und bewerte hier...</label>
                         </div>
@@ -350,6 +350,7 @@
 
                                     <h4 class="mdl-dialog__title" style="font-family:Bahnschrift;" id="kommiüberschrift">Kommentare</h4>
                                     <div class="mdl-dialog__content">
+                                        <img id="idPopUpPicture" src="event.oImage" class="eventSymbol" height="65" width="65"></img>
 
                                         <p style="color:black;  font-family:Bahnschrift;" id="eventidkommentare"> haha</p>
 

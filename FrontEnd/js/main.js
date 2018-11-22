@@ -452,7 +452,7 @@ var oEventTableVue = new Vue({
             this.allEvents = aFilterdEvents;
         },
         //Offnet bzw macht Popup moeglich
-        KommentarGemacht: function (id, name, beschreibung, comments) {
+        KommentarGemacht: function (id, name, beschreibung, comments, image) {
             kommi = true;
             if (loggedInUser != "") {
 
@@ -463,6 +463,8 @@ var oEventTableVue = new Vue({
                     document.getElementById('kommiüberschrift').innerText = name;
 
                     document.getElementById('eventidkommentare').innerText = beschreibung;
+                    document.getElementById('idPopUpPicture').src = image;
+
 
                     // get, whether the currently logged in user has already rated the event
                     var selected_event = oEventTableVue.allEvents.find(obj => {
