@@ -373,6 +373,16 @@
                                                             else {
                                                                 aktuellebewertung = aktuellebewertung - 2;
                                                             }
+                                                            var t = oEventTableVue.selected;
+                                                            //this leads to the rating being displayed immediatley
+                                                            //reload favorites/events list
+                                                            if (document.getElementById('h2events').innerText == "Favoriten"){
+                                                              getFavorites(loggedInUser._id);
+                                                            } else if (document.getElementById('h2events').innerText == "Events") {
+                                                              getFilteredEvents(oSearchPlaceVue.dDate);
+                                                            }
+                                                            // getFilteredEvents(oSearchPlaceVue.dDate);
+                                                            oEventTableVue.selected = t;
                                                         }
                                                         console.log("rating sent");
                                                         x.style.color = "red";
@@ -398,6 +408,16 @@
                                                         var selected_event = oEventTableVue.allEvents.find(obj => {
                                                             return obj.iEventId == oEventTableVue.selected
                                                         });
+                                                        var t = oEventTableVue.selected;
+                                                        //this leads to the rating being displayed immediatley
+                                                        //reload favorites/events list
+                                                        if (document.getElementById('h2events').innerText == "Favoriten"){
+                                                          getFavorites(loggedInUser._id);
+                                                        } else if (document.getElementById('h2events').innerText == "Events") {
+                                                          getFilteredEvents(oSearchPlaceVue.dDate);
+                                                        }
+                                                        // getFilteredEvents(oSearchPlaceVue.dDate);
+                                                        oEventTableVue.selected = t;
                                                         if (nochniebewertet == true) {
                                                             aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
                                                         }

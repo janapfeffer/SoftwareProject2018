@@ -151,21 +151,22 @@ function getFavorites(user_id) {
         var apievents = this.response.saved_events;
         oEventTableVue.allEvents = apievents.map(apievent => {
             return {
-                sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-                iEventId: apievent._id,
-                aRatings: apievent.ratings,
-                iCurrentRating: apievent.current_rating,
-                sName: apievent.event_name,
-                sDescription: apievent.description,
-                sAdress: apievent.address,
-                oStartDate: apievent.start_date.split("T")[0],
-                oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-                oEndDate: apievent.end_date.split("T")[0],
-                oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
-                sEventLink: apievent.event_link,
-                sTicketLink: apievent.ticket_link,
-                oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
+              sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
+              iEventId: apievent._id,
+              aComments: apievent.comments,
+              aRatings: apievent.ratings,
+              sName: apievent.event_name,
+              sDescription: apievent.description,
+              sAdress: apievent.address,
+              iCurrentRating: apievent.current_rating,
+              oStartDate: apievent.start_date.split("T")[0],
+              oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+              oEndDate: apievent.end_date.split("T")[0],
+              oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+              sEventLink: apievent.event_link,
+              sTicketLink: apievent.ticket_link,
+              oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+              oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
             };
         });
         //sort by start date
@@ -373,8 +374,14 @@ var oEventTableVue = new Vue({
             var onSuccess = function onSuccess() {
                 console.log("toll");
                 var t = oEventTableVue.selected;
-                // getAllEvents(); //this leads to the comment being displayed immediatley
-                getFilteredEvents(oSearchPlaceVue.dDate);
+                //this leads to the comment being displayed immediatley
+                //reload favorites/events list
+                if (document.getElementById('h2events').innerText == "Favoriten"){
+                  getFavorites(loggedInUser._id);
+                } else if (document.getElementById('h2events').innerText == "Events") {
+                  getFilteredEvents(oSearchPlaceVue.dDate);
+                }
+                // getFilteredEvents(oSearchPlaceVue.dDate);
                 oEventTableVue.selected = t;
             };
             var onFailed = function onFailed() {
@@ -438,9 +445,10 @@ var oEventTableVue = new Vue({
                     var selected_event = oEventTableVue.allEvents.find(obj => {
                         return obj.iEventId == oEventTableVue.selected
                     });
+
                     var loggedInUser_rating = selected_event.aRatings.find(obj => {
                         return obj.user_id == loggedInUser._id
-                    })
+                    });
 
                     if (loggedInUser_rating) { //set rating buttons
                         if (loggedInUser_rating.rating == -1) {
@@ -460,43 +468,12 @@ var oEventTableVue = new Vue({
                     // set current_rating
                     aktuellebewertung = selected_event.iCurrentRating;
                     document.getElementById('ratingnumber').innerText = aktuellebewertung;
-                    //add comments to list
-                    //                     var list = document.getElementById("commentTable");
-                    //                     while (list.firstChild) {
-                    //                     list.removeChild(list.firstChild);
-                    //                     }
-                    //                     for (var r = 0; r < comments.length; r++){
-                    //                       var node = document.createElement("LI");                 // Create a <li> node
-                    //
-                    //                       var span = document.createElement("SPAN");
-                    //                       span.className = "mdl-list__item-primary-content";
-                    //                       span = document.createElement("SPAN");
-                    //                       var i = document.createElement("I");
-                    //                       i.className = "material-icons mdl-list__item-avatar";
-                    //                       i.innerHTML = "person";
-                    //                         var comment = document.createElement("SPAN");
-                    //                         comment = document.createElement("SPAN");
-                    //                       comment.innerHTML = comments[r].comment;         // Create a text node
-                    //                         var user = document.createElement("SPAN");
-                    //                         user = document.createElement("SPAN");
-                    //                       user.innerHTML = comments[r].username;
-                    //                       user.className = "mdl-list__item-text-body";
-                    //
-                    //                       span.appendChild(i);
-                    //                       span.appendChild(user);
-                    //                       span.appendChild(comment);
-                    //                         node.appendChild(span);
-                    //
-                    //                         // Append the text to <li>
-                    //                       document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
-                    //                     }
                     dialog.showModal();
                 }
                 dialog.querySelector('.close').addEventListener('click', function () {
                     dialog.close();
-                    // getAllEvents();
                     dialogopen = false;
-                    //getFilteredEvents(oSearchPlaceVue.dDate);
+
                 });
                 $(dialog).children().first().click(function (e) {
                     e.stopPropagation();
@@ -536,22 +513,22 @@ function getFilteredEvents(dDate) {
                 var apievents = this.response.oEvents;
                 oEventTableVue.allEvents = apievents.map(apievent => {
                     return {
-                        sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-                        iEventId: apievent._id,
-                        aComments: apievent.comments,
-                        aRatings: apievent.ratings,
-                        sName: apievent.event_name,
-                        sDescription: apievent.description,
-                        sAdress: apievent.address,
-                        iCurrentRating: apievent.current_rating,
-                        oStartDate: apievent.start_date.split("T")[0],
-                        oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-                        oEndDate: apievent.end_date.split("T")[0],
-                        oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
-                        sEventLink: apievent.event_link,
-                        sTicketLink: apievent.ticket_link,
-                        oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-                        oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
+                      sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
+                      iEventId: apievent._id,
+                      aComments: apievent.comments,
+                      aRatings: apievent.ratings,
+                      sName: apievent.event_name,
+                      sDescription: apievent.description,
+                      sAdress: apievent.address,
+                      iCurrentRating: apievent.current_rating,
+                      oStartDate: apievent.start_date.split("T")[0],
+                      oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+                      oEndDate: apievent.end_date.split("T")[0],
+                      oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+                      sEventLink: apievent.event_link,
+                      sTicketLink: apievent.ticket_link,
+                      oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+                      oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
                     };
                 });
                 setMarkers(oEventTableVue.allEvents);
@@ -647,7 +624,7 @@ var oSearchPlaceVue = new Vue({
         //Sucht nach einem Ort
         searchPlace: function searchPlace() {
             if (document.body.classList.contains('landingpage')) {
-                
+
                 setCenter(this.sQuery);
                 AfterLoginLogin.style.visibility = "visible";
                 document.body.classList.remove('landingpage');

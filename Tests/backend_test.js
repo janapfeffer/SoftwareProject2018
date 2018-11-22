@@ -1,5 +1,5 @@
 // https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai
-// additionally, we tested with console.og during the development process
+// additionally, we tested with console.log during the development process
 // How to use this file:
 // 1. open command prompt and navigate into the Tests folder
 // 2. execute this file with the command "mocha backend_test.js"
