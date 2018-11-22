@@ -50,14 +50,16 @@ var oNavigationVue = new Vue({
                 document.getElementById('h2events').innerText = "Favoriten";
                 document.getElementById('AfterLoginFavoriten').innerText = "Events";
                 getFavorites(loggedInUser._id);
-                document.getElementById("idSearchBar").childNodes[2].setAttribute("hidden", "hidden");//hide time filter
+                document.getElementById("searchPlaceInner").childNodes[8].setAttribute("hidden", "hidden");//hide time filter
+                closeBubble();
             }
             else {
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
                 // getAllEvents();
                 getFilteredEvents(oSearchPlaceVue.dDate);
-                document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden"); //display time filter
+                document.getElementById("searchPlaceInner").childNodes[8].removeAttribute("hidden"); //display time filter
+                closeBubble();
             }
         },
 
