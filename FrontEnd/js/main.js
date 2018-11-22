@@ -330,7 +330,7 @@ var oEventTableVue = new Vue({
                             return value != target.iEventId;
                         });
                     } else { // save _id of target in saved_events of user
-                        loggedInUser.saved_events.push(target.iEvent);
+                        loggedInUser.saved_events.push(target.iEventId);
                         requestURL = requestURL + "saveEvent";
                     }
                     var ajaxRequest = new XMLHttpRequest();
