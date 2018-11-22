@@ -277,6 +277,8 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
 //    });
 //};
 
+//returns the saved_events of the loggedInUser
+//does not return the whole events, only the ids
 function getFavoritesIds() {
   var ajaxRequest = new XMLHttpRequest();
   var onSuccess = function(){
@@ -357,6 +359,10 @@ var oEventTableVue = new Vue({
                             Vue.set(target, 'faved', !target.faved);
                             //reload saved_events of loggedInUser
                             getFavoritesIds();
+                            // reload favorites in order to not display unsaved events
+                            if (document.getElementById('h2events').innerText == "Favoriten"){
+                              getFavorites(loggedInUser._id);
+                            }
                         } else {
                             // warnung dass das gerade nicht ging?
                         }
