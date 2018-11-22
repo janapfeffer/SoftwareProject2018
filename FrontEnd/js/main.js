@@ -65,6 +65,7 @@ var oNavigationVue = new Vue({
 
         showNewLoginCard: function () {
             $(window).scrollTop(0);
+            oNewLoginVue.cardShown = true;
             if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
                 logoutmodus = false;
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
@@ -75,33 +76,37 @@ var oNavigationVue = new Vue({
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
+
                 oNewLoginVue.draft.sUserName = "";
                 oNewLoginVue.draft.sPassword = "";
                 document.getElementById("Login_username").innerText = "";
                 document.getElementById("Login_password").innerText = "";
-
-            }
-            if (logoutmodus === false) {
-                oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
+                oNewLoginVue.cardShown = false;
                 oRegisterVue.cardShown = false;
                 oNewEventVue.cardShown = false;
 
-                AfterLoginFavoriten.style.visibility = "hidden";
-                loggedInUser = "";
-                AfterLoginEvent.style.visibility = "hidden";
-                document.getElementById('AfterLoginLogin').innerText = "LogIn";
-                newLoginWrapper.style.display = "visible";
-                oEventTableVue.starVisibility = "hidden";
             }
-            else {
-                oNewLoginVue.formsubmit();
-                document.getElementById('h2events').innerText = "Events";
-                document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-                // getAllEvents();
-                getFilteredEvents(oSearchPlaceVue.dDate);
-                oNewEventVue.cardShown = false;
-
-            }
+            // if (logoutmodus === false) {
+            //     oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
+            //     oRegisterVue.cardShown = false;
+            //     oNewEventVue.cardShown = false;
+            //
+            //     AfterLoginFavoriten.style.visibility = "hidden";
+            //     loggedInUser = "";
+            //     AfterLoginEvent.style.visibility = "hidden";
+            //     document.getElementById('AfterLoginLogin').innerText = "LogIn";
+            //     newLoginWrapper.style.display = "visible";
+            //     oEventTableVue.starVisibility = "hidden";
+            // }
+            // else {
+            //     oNewLoginVue.formsubmit();
+            //     document.getElementById('h2events').innerText = "Events";
+            //     document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+            //     // getAllEvents();
+            //     getFilteredEvents(oSearchPlaceVue.dDate);
+            //     oNewEventVue.cardShown = false;
+            //
+            // }
         },
         showNewRegisterCard: function () {
             $('body').scrollTop(0);
