@@ -13,7 +13,6 @@ var oEvent = function (oEvent) {
     this.faved = oEvent.faved;
 };
 
-// var usernameemail = "";
 var kommi = false;
 var dialogopen = false;
 var logoutmodus = false;
@@ -89,27 +88,6 @@ var oNavigationVue = new Vue({
                 oNewEventVue.cardShown = false;
 
             }
-            // if (logoutmodus === false) {
-            //     oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
-            //     oRegisterVue.cardShown = false;
-            //     oNewEventVue.cardShown = false;
-            //
-            //     AfterLoginFavoriten.style.visibility = "hidden";
-            //     loggedInUser = "";
-            //     AfterLoginEvent.style.visibility = "hidden";
-            //     document.getElementById('AfterLoginLogin').innerText = "LogIn";
-            //     newLoginWrapper.style.display = "visible";
-            //     oEventTableVue.starVisibility = "hidden";
-            // }
-            // else {
-            //     oNewLoginVue.formsubmit();
-            //     document.getElementById('h2events').innerText = "Events";
-            //     document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-            //     // getAllEvents();
-            //     getFilteredEvents(oSearchPlaceVue.dDate);
-            //     oNewEventVue.cardShown = false;
-            //
-            // }
         },
         showNewRegisterCard: function () {
             $('body').scrollTop(0);
@@ -210,10 +188,8 @@ function getFavorites(user_id) {
 };
 
 
-// aTestEvents = aTestEvents.concat(aJsonTestData);
 var aAllEvents = new Array();
 var ausgewaehlt = "";
-// aAllEvents =
 
 function getAllEvents() { //uses get events/filtered with header filter_start_date = new Date() instead of get events
     oEventTableVue.selected = "";
@@ -279,17 +255,6 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
     ajaxRequest.setRequestHeader("filter_end_date", new Date());
     ajaxRequest.send();
 }
-//function getComments(event_id) {
-//    const GETCOMMENTS_URL = "http://localhost:3000/events" + event_id;
-
-//    axios.get(GETCOMMENTS_URL).then(res => {
-//        console.log("Kommis für " + event_id + " erhalten: " + res);
-//        console.log(res.???);
-
-//    }).catch(function (error) {
-//        console.log(error);
-//    });
-//};
 
 //returns the saved_events of the loggedInUser
 //does not return the whole events, only the ids
@@ -354,16 +319,13 @@ var oEventTableVue = new Vue({
                 } else {
                     var requestType = "POST";
                     var requestURL = "http://localhost:3000/user/";
-                    if (target.faved) { //delete _id of target from saved_events of user
+
+                    if (target.faved) {
                         requestURL = requestURL + "unsaveEvent";
-                        // //delete favorite from loggedInUser
-                        // loggedInUser.saved_events = loggedInUser.saved_events.filter(function (value, index, arr) {
-                        //     return value != target.iEventId;
-                        // });
-                    } else { // save _id of target in saved_events of user
-                        // loggedInUser.saved_events.push(target.iEventId);
+                    } else {
                         requestURL = requestURL + "saveEvent";
                     }
+
                     var ajaxRequest = new XMLHttpRequest();
 
                     var onSuccess = function onSuccess() {
@@ -634,7 +596,6 @@ var oSearchPlaceVue = new Vue({
                     onClick(picker) {
                         const end = new Date().setHours(23, 59, 59, 59);
                         const start = new Date().setHours(0, 0, 0, 0);
-                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
                         picker.$emit('pick', [start, end]);
                     }
                 },
@@ -643,7 +604,6 @@ var oSearchPlaceVue = new Vue({
                     onClick(picker) {
                         const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 7).setHours(23, 59, 59, 59);
                         const start = new Date().setHours(0, 0, 0, 0);
-                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 7);
                         picker.$emit('pick', [start, end]);
                     }
                 },
@@ -652,7 +612,6 @@ var oSearchPlaceVue = new Vue({
                     onClick(picker) {
                         const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 30).setHours(23, 59, 59, 59);
                         const start = new Date().setHours(0, 0, 0, 0);
-                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 30);
                         picker.$emit('pick', [start, end]);
                     }
                 }
@@ -1203,15 +1162,6 @@ var oNewDateVue = new Vue({
 
     }
 });
-
-
-// var oAsideVue = new Vue({
-//     el: "#aside",
-//     data: {
-//         bShown: true
-//     }
-// });
-
 
 // suche nach gleichen events mit exakt gleichen Koordinaten
 // und verändert die Position der Duplikate ein bisschen (in place)
