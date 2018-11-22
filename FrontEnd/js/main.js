@@ -857,7 +857,7 @@ var oNewEventVue = new Vue({
                     }
 
                     axios.post("http://localhost:3000/events", fd).then(res => {
-                        alert("Req angekommen");
+                        // alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
                         // reset vueinternal data to make possible to add new event
                         oNewEventVue.draft = {
@@ -880,6 +880,8 @@ var oNewEventVue = new Vue({
                             dateIsInvalid: false
                         };
                         document.getElementById("imageUpload").value = "";
+                        oNewEventVue.cardShown = false; //close card for new event
+                        $(window).scrollTop(0);
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
                         console.log(error);
