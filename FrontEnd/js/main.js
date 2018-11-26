@@ -423,6 +423,96 @@ var oEventTableVue = new Vue({
             });
             this.allEvents = aFilterdEvents;
         },
+        clickLikeButton: function(){
+          var oLikeButton = document.getElementById('idThumbUp');
+          if (oLikeButton.style.color != "green") {
+              var ratingRequest = new XMLHttpRequest();
+              var comment = document.querySelector("#idComment").value;
+              var onSuccess = function onSuccess() {
+                  var selected_event = oEventTableVue.allEvents.find(obj => {
+                      return obj.iEventId == oEventTableVue.selected
+                  });
+                  var t = oEventTableVue.selected;
+                  //this leads to the rating being displayed immediatley
+                  //reload favorites/events list
+                  if (document.getElementById('h2events').innerText == "Favoriten"){
+                    getFavorites(loggedInUser._id);
+                  } else if (document.getElementById('h2events').innerText == "Events") {
+                    getFilteredEvents(oSearchPlaceVue.dDate);
+                  }
+                  // getFilteredEvents(oSearchPlaceVue.dDate);
+                  oEventTableVue.selected = t;
+                  if (nochniebewertet == true) {
+                      aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
+                  }
+                  else {
+                      aktuellebewertung = aktuellebewertung + 2;
+                  }
+                  //2 besser setzen da gut bewertet
+                  if (this.status == 200) {
+                      console.log("rating sent");
+                      oLikeButton.style.color = "green";
+                      document.getElementById('idThumbDown').style.color = "grey";
+                      document.getElementById('ratingnumber').innerText = aktuellebewertung;
+                  }
+              };
+              var onFailed = function onFailed() {
+                  console.log("failed");
+              };
+              ratingRequest.addEventListener("load", onSuccess);
+              ratingRequest.addEventListener("error", onFailed);
+              ratingRequest.responseType = "json";
+              ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+              ratingRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+              ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              var sFormData = "rating=" + "1" +  "&eventId=" + oEventTableVue.selected;
+              ratingRequest.send(sFormData);
+          }
+        },
+        clickDislikeButton: function(){
+          var oDislikeButton = document.getElementById("idThumbDown");
+          if (oDislikeButton.style.color != "red") {
+              document.getElementById('idThumbUp').style.color = "grey";
+              var ratingRequest = new XMLHttpRequest();
+              var onSuccess = function onSuccess() {
+                  if (this.status == 200) {
+                      var selected_event = oEventTableVue.allEvents.find(obj => {
+                          return obj.iEventId == oEventTableVue.selected
+                      });
+                      if (nochniebewertet == true) {
+                          aktuellebewertung = aktuellebewertung - 1; nochniebewertet = false;
+                      }
+                      else {
+                          aktuellebewertung = aktuellebewertung - 2;
+                      }
+                      var t = oEventTableVue.selected;
+                      //this leads to the rating being displayed immediatley
+                      //reload favorites/events list
+                      if (document.getElementById('h2events').innerText == "Favoriten"){
+                        getFavorites(loggedInUser._id);
+                      } else if (document.getElementById('h2events').innerText == "Events") {
+                        getFilteredEvents(oSearchPlaceVue.dDate);
+                      }
+                      // getFilteredEvents(oSearchPlaceVue.dDate);
+                      oEventTableVue.selected = t;
+                  }
+                  console.log("rating sent");
+                  oDislikeButton.style.color = "red";
+                  document.getElementById('ratingnumber').innerText = aktuellebewertung;
+              };
+              var onFailed = function onFailed() {
+                  console.log("failed");
+              };
+              ratingRequest.addEventListener("load", onSuccess);
+              ratingRequest.addEventListener("error", onFailed);
+              ratingRequest.responseType = "json";
+              ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+              ratingRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+              ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              var sFormData = "rating=" + "-1" + "&eventId=" + oEventTableVue.selected;
+              ratingRequest.send(sFormData);
+          }
+        },
         //Offnet bzw macht Popup moeglich
         KommentarGemacht: function (id, name, beschreibung, comments, image) {
             kommi = true;
@@ -450,17 +540,17 @@ var oEventTableVue = new Vue({
                     if (loggedInUser_rating) { //set rating buttons
                         if (loggedInUser_rating.rating == -1) {
                             nochniebewertet = false;
-                            document.getElementById('haha').style.color = "red"
+                            document.getElementById('idThumbDown').style.color = "red"
                             document.getElementById('idThumbUp').style.color = "grey"
                         } else {
                             nochniebewertet = false;
                             document.getElementById('idThumbUp').style.color = "green"
-                            document.getElementById('haha').style.color = "grey"
+                            document.getElementById('idThumbDown').style.color = "grey"
                         }
                     } else {
                         nochniebewertet = true;
                         document.getElementById('idThumbUp').style.color = "grey"
-                        document.getElementById('haha').style.color = "grey"
+                        document.getElementById('idThumbDown').style.color = "grey"
                     }
                     // set current_rating
                     aktuellebewertung = selected_event.iCurrentRating;
