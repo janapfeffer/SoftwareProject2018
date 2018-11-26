@@ -239,7 +239,7 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
             for (var i = 0; i < loggedInUser.saved_events.length; i++) {
                 for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
                     if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                        console.log(oEventTableVue.allEvents[j].iEventId);
+                        // console.log(oEventTableVue.allEvents[j].iEventId);
                         oEventTableVue.favToggle(oEventTableVue.allEvents[j])
                         break;
                     }
@@ -329,7 +329,7 @@ var oEventTableVue = new Vue({
                     var ajaxRequest = new XMLHttpRequest();
 
                     var onSuccess = function onSuccess() {
-                        console.log("success: " + this.status);
+                        // console.log("success: " + this.status);
                         if (this.status == 200) {
                             // set target to be (not) faved
                             Vue.set(target, 'faved', !target.faved);
@@ -366,7 +366,7 @@ var oEventTableVue = new Vue({
             var comment = document.querySelector("#idComment").value;
 
             var onSuccess = function onSuccess() {
-                console.log("toll");
+                // console.log("toll");
                 var t = oEventTableVue.selected;
                 //this leads to the comment being displayed immediatley
                 //reload favorites/events list
@@ -450,7 +450,7 @@ var oEventTableVue = new Vue({
                   }
                   //2 besser setzen da gut bewertet
                   if (this.status == 200) {
-                      console.log("rating sent");
+                      // console.log("rating sent");
                       oLikeButton.style.color = "green";
                       document.getElementById('idThumbDown').style.color = "grey";
                       document.getElementById('ratingnumber').innerText = aktuellebewertung;
@@ -496,7 +496,7 @@ var oEventTableVue = new Vue({
                       // getFilteredEvents(oSearchPlaceVue.dDate);
                       oEventTableVue.selected = t;
                   }
-                  console.log("rating sent");
+                  // console.log("rating sent");
                   oDislikeButton.style.color = "red";
                   document.getElementById('ratingnumber').innerText = aktuellebewertung;
               };
@@ -566,7 +566,7 @@ var oEventTableVue = new Vue({
                     e.stopPropagation();
                 })
                 document.addEventListener("click", function (e) {
-                    console.log(e)
+                    // console.log(e)
                     dialog.close();
                     dialogopen = false;
                 });
@@ -625,7 +625,7 @@ function getFilteredEvents(dDate) {
                     for (var i = 0; i < loggedInUser.saved_events.length; i++) {
                         for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
                             if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                                console.log(oEventTableVue.allEvents[j].iEventId);
+                                // console.log(oEventTableVue.allEvents[j].iEventId);
                                 oEventTableVue.favToggle(oEventTableVue.allEvents[j])
                                 break;
                             }
@@ -768,7 +768,7 @@ var oSearchPlaceVue = new Vue({
             //     .then(function () {
             //         // always executed
             //     });
-            console.log("filter date triggered");
+            // console.log("filter date triggered");
 
         }
 
@@ -991,9 +991,9 @@ var oNewEventVue = new Vue({
             }
         },
         onChange(image) {
-            console.log('New picture selected!')
+            // console.log('New picture selected!')
             if (image) {
-                console.log('Picture loaded.')
+                // console.log('Picture loaded.')
                 this.draft.image = image
             } else {
                 console.log('FileReader API not supported: use the <form>, Luke!')
@@ -1090,7 +1090,7 @@ var oRegisterVue = new Vue({
                 ajaxRequest.open("POST", newuser, true);
                 ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
-                console.log(snewuserdata);
+                // console.log(snewuserdata);
                 ajaxRequest.send(snewuserdata);
             }
 
@@ -1128,7 +1128,7 @@ var oNewLoginVue = new Vue({
                 var suserlogin = "http://localhost:3000/user/login"
                 var ajaxRequest = new XMLHttpRequest();
                 var onSuccess = function onSuccess() {
-                    console.log(this.status);
+                    // console.log(this.status);
                     if (this.status === 200) {
                         // save user in global variable
                         loggedInUser = this.response.user;
@@ -1137,7 +1137,7 @@ var oNewLoginVue = new Vue({
                         for (var i = 0; i < loggedInUser.saved_events.length; i++) {
                             for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
                                 if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                                    console.log(oEventTableVue.allEvents[j].iEventId);
+                                    // console.log(oEventTableVue.allEvents[j].iEventId);
                                     oEventTableVue.favToggle(oEventTableVue.allEvents[j])
                                     break;
                                 }

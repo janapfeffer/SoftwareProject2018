@@ -97,39 +97,6 @@
     </div>
     <!-- Alles rechts neben der Karte-->
     <div id="aside">
-        <!-- Date Filter Card-->
-        <div id="newDateWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-            <h2>Datum Filter: </h2>
-            <div id="newDate" class="sidecard">
-                <p>
-                    Geben Sie das Datum an für das gefiltert werden soll
-                </p>
-
-                <!-- Ausgewahltes Datum wird als "FilterDate gespeichert-->
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-                    <el-date-picker v-model="draft.FilterDate" type="datetimerange" align="right" start-placeholder="Start Date" end-placeholder="End Date"
-                        :default-time="['15:00:00', '19:00:00']">
-                    </el-date-picker>
-                </div>
-                <p>
-                    Wählen Sie die Kategorien aus nach denen gefiltert werden soll
-                </p>
-                <!-- Checkboxen: Der Text muss noch bearbeitet werden wg Design und Größe-->
-                <input type="checkbox" id="scales" name="feature" value="Kategorie 1" checked /> Kategorie 1
-                <input type="checkbox" id="scales" name="feature" value="Kategorie 2" checked /> Kategorie 2
-                <input type="checkbox" id="scales" name="feature" value="Kategorie 3" checked /> Kategorie 3
-                <input type="checkbox" id="scales" name="feature" value="Kategorie 4" checked /> Kategorie 4
-
-                <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
-                        Filtern
-                    </button>
-                </div>
-            </div>
-
-        </div>
-        <!-- Date Filter Card End-->
         <!-- Register Card-->
         <!-- Registiereungs Daten werden immer mit "r." verarbeitet, zum Beispiel "rPassword"/"rUserName"-->
         <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
