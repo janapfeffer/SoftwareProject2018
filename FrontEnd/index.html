@@ -50,6 +50,9 @@
     <!-- Picture Input-->
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vue-picture-input"></script>
+    <!-- Vue Multiselect-->
+    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
     <!-- Axios für API Request-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Material Files-->
@@ -397,6 +400,12 @@
             </el-date-picker>
 
             <!-- insert drop down for event types-->
+            <h2>WAS</h2>
+            <vue-multiselect v-model="value" placeholder="Wähle eine oder mehrere Kategorien" label="name" track-by="code" :options="options"
+                :multiple="true" :taggable="false" :hide-selected="true" :close-on-select=false select-label="" :show-no-results="false"
+                :searchable="false">
+            </vue-multiselect>
+
 
             <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
                 Suche

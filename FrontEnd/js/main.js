@@ -705,6 +705,16 @@ var oSearchPlaceVue = new Vue({
                 }
             ]
         },
+        //Multiselect stuff
+        value: [],
+        options: [ //code könnte hier dann vll die backendzahl sein
+            { name: 'Kultur', code:'1'},
+            { name: 'Sport', code:'2'},
+            { name: 'Natur', code:'3'},
+            { name: 'Party', code:'4'},
+            { name: 'Essen', code:'5'}
+        ]
+
     },
     methods: {
         //Sucht nach einem Ort
@@ -823,7 +833,18 @@ var oNewEventVue = new Vue({
             displayError: false,
             dateIsInvalid: false
         },
-        value7: ''
+        value7: '',
+        value: [],
+        options: [ //code könnte hier dann vll die backendzahl sein
+            { name: 'Kultur', code:'1'},
+            { name: 'Sport', code:'2'},
+            { name: 'Natur', code:'3'},
+            { name: 'Party', code:'4'},
+            { name: 'Essen', code:'5'}
+        ],
+    components: {
+        'vue-multiselect': window.VueMultiselect.default
+    },
     },
     methods: {
         // formdraft: function () {
