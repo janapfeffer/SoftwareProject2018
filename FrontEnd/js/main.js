@@ -714,7 +714,9 @@ var oSearchPlaceVue = new Vue({
             { name: 'Party', code:'4'},
             { name: 'Essen', code:'5'}
         ]
-
+    },
+    components: {
+        'vue-multiselect': window.VueMultiselect.default
     },
     methods: {
         //Sucht nach einem Ort
