@@ -143,7 +143,12 @@ var bigmapgeklickt = false;
 function getFavorites(user_id) {
     oEventTableVue.selected = "";
     const GETFAVORITES_URL = "http://localhost:3000/user/" + user_id + "/events";
-    axios.get(GETFAVORITES_URL)
+    var header_config = {
+      headers: {
+        authorization: "Bearer " + loggedInUser.token
+      }
+    };
+    axios.get(GETFAVORITES_URL, header_config)
       .then(response => {
         var apievents = response.data.saved_events;
         oEventTableVue.allEvents = apievents.map(apievent => {
@@ -196,7 +201,7 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
         filter_end_date: new Date()
       }
     };
-    console.log("config" +  config.headers);
+
     axios.get(GETALLEVENTS_URL, config)
       .then(response => {
         var apievents = response.data.oEvents;
@@ -252,7 +257,13 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
 //sets the saved_events of the loggedInUser
 //does not return the whole events, only the ids
 function getFavoritesIds() {
-  axios.get("http://localhost:3000/user/" + loggedInUser._id + "/saved_events_ids")
+  var header_config = {
+    headers: {
+      authorization: "Bearer " + loggedInUser.token
+    }
+  };
+
+  axios.get("http://localhost:3000/user/" + loggedInUser._id + "/saved_events_ids", header_config)
     .then(response => {
         loggedInUser.saved_events = response.data.saved_events;
     })
@@ -328,7 +339,7 @@ var oEventTableVue = new Vue({
                             if (document.getElementById('h2events').innerText == "Favoriten"){
                               getFavorites(loggedInUser._id);
                             }
-                          
+
                         }
 
                     };
@@ -342,7 +353,8 @@ var oEventTableVue = new Vue({
                     ajaxRequest.responseType = "json";
                     ajaxRequest.open("POST", requestURL, true);
                     ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    var sFormData = "userId=" + loggedInUser._id + "&eventId=" + target.iEventId;
+                    ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+                    var sFormData = "eventId=" + target.iEventId;
                     ajaxRequest.send(sFormData);
                 }
             }
@@ -375,7 +387,8 @@ var oEventTableVue = new Vue({
             ajaxRequest.responseType = "json";
             ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            var sFormData = "username=" + loggedInUser.name + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected + "&comment=" + comment;
+            ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+            var sFormData = "eventId=" + oEventTableVue.selected + "&comment=" + comment;
             ajaxRequest.send(sFormData);
             document.querySelector("#idComment").value = "";
 
@@ -813,7 +826,13 @@ var oNewEventVue = new Vue({
                         fd.append("event_link", oNewEventVue.draft.sEventLink);
                     }
 
-                    axios.post("http://localhost:3000/events", fd).then(res => {
+                    var header_config = {
+                      headers: {
+                        authorization: "Bearer " + loggedInUser.token
+                      }
+                    };
+
+                    axios.post("http://localhost:3000/events", fd, header_config).then(res => {
                         // alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
                         // reset vueinternal data to make possible to add new event

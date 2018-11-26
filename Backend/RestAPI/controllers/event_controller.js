@@ -51,7 +51,7 @@ exports.get_all_events = (req, res, next) => {
 exports.event_rating = (req, res, next) => {
   OEvent.findById(req.body.eventId, "ratings", function (err, event) {
     old_rating = event.ratings.find(obj => {
-      return obj.user_id == req.body.userId;
+      return obj.user_id == req.userData.userId;
     });
     // console.log(old_rating._id);
     if(old_rating) {
@@ -60,7 +60,7 @@ exports.event_rating = (req, res, next) => {
         { $set: {
             ratings: {
               _id: old_rating._id,
-              user_id: req.body.userId,
+              user_id: req.userData.userId,
               rating: (req.body.rating)
             }
           },
@@ -91,7 +91,7 @@ exports.event_rating = (req, res, next) => {
         { _id: req.body.eventId},
         { $push: {
             ratings: {
-              user_id: req.body.userId,
+              user_id: req.userData.userId,
               rating: req.body.rating
             }
           },
@@ -131,7 +131,7 @@ exports.create_event = (req, res, next) => {
   }
   const oEvent = new OEvent({
     _id: new mongoose.Types.ObjectId(),
-    author: req.body.userId,
+    author: req.userData.userId,
     event_name: req.body.event_name,
     description: req.body.description,
     address: req.body.address,
@@ -213,8 +213,8 @@ exports.add_comment = (req, res, next) => {
       {
         $push: {
           comments: {
-            username: req.body.username,
-            user_id: req.body.userId,
+            username: req.userData.username,
+            user_id: req.userData.userId,
             comment: req.body.comment
           }
         }
@@ -296,7 +296,7 @@ exports.update_event = (req, res, next) => {
 //should not be an issue though if the frontend calls it correctly
 //delete picture if given (NOT if its the default picture)
 exports.delete_event = (req, res, next) => {
-  OEvent.remove({ _id: req.params.eventId, author: req.body.user_id })
+  OEvent.remove({ _id: req.params.eventId, author: req.userData.user_id })
     .exec()
     .then(result => {
       res.status(200).json({

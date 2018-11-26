@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require ("multer");
 const router = express.Router();
 const EventController = require("../controllers/event_controller");
+const checkAuth = require('../middleware/check_auth');
 
 // picture upload: START
 // storage strategy: allows to adjust how files get stored
@@ -36,16 +37,17 @@ const storage = multer.diskStorage({
   });
 
 router.get("/", EventController.get_all_events);
-router.get("/filtered", EventController.get_filtered_events)
-router.post("/", upload.single('event_picture'), EventController.create_event);
-
-//with authentication
+router.get("/filtered", EventController.get_filtered_events);
 router.get("/:eventId", EventController.get_event);
-router.patch("/:eventId",  EventController.update_event);
-router.delete("/:eventId", EventController.delete_event);
-router.post("/addComment", EventController.add_comment);
-router.post("/deleteComment", EventController.delete_comment);
-router.post("/rate", EventController.event_rating);
-// router.post("/delete_rating", EventController.delete_event_rating);
+
+//protected routes with authentication
+router.post("/", checkAuth, upload.single('event_picture'), EventController.create_event);
+router.post("/addComment", checkAuth, EventController.add_comment);
+router.post("/rate", checkAuth, EventController.event_rating);
+
+//unused routes
+// router.post("/deleteComment", checkAuth, EventController.delete_comment);
+// router.patch("/:eventId", checkAuth, EventController.update_event);
+// router.delete("/:eventId", checkAuth, EventController.delete_event);
 
 module.exports = router;

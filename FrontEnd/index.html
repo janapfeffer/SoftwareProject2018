@@ -397,8 +397,9 @@
                                                     ratingRequest.addEventListener("error", onFailed);
                                                     ratingRequest.responseType = "json";
                                                     ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                    ratingRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
                                                     ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                    var sFormData = "rating=" + "-1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                    var sFormData = "rating=" + "-1" + "&eventId=" + oEventTableVue.selected;
                                                     ratingRequest.send(sFormData);
                                                 }
                                             }
@@ -441,8 +442,9 @@
                                                     ratingRequest.addEventListener("error", onFailed);
                                                     ratingRequest.responseType = "json";
                                                     ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                                                    ratingRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
                                                     ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                    var sFormData = "rating=" + "1" + "&userId=" + loggedInUser._id + "&eventId=" + oEventTableVue.selected;
+                                                    var sFormData = "rating=" + "1" +  "&eventId=" + oEventTableVue.selected;
                                                     ratingRequest.send(sFormData);
                                                 }
                                             }

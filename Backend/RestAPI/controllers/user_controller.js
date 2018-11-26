@@ -53,7 +53,8 @@ exports.user_signup = (req, res, next) => {
 
 exports.add_to_saved_events = (req, res, next) => {
     const event_id = req.body.eventId;
-    const user_id = req.body.userId;
+    const user_id = req.userData.userId;
+    console.log("user_id: " + user_id);
     User.findById(user_id, "saved_events", function (err, user) {
       try{
       if (user.saved_events.indexOf(event_id) > -1){
@@ -108,17 +109,18 @@ exports.user_login = (req, res, next) => {
           });
         }
         if (result) {
-          // console.log(user[0]);
-          // const token = jwt.sign(
-          //   {
-          //     email: user[0].email,
-          //     userId: user[0]._id
-          //   },
-          //   process.env.JWT_KEY,
-          //   {
-          //     expiresIn: "1h"
-          //   }
-          // );
+          const token = jwt.sign(
+            {
+              email: user[0].email,
+              userId: user[0]._id,
+              username: user[0].name
+            },
+            "secretjwtkey",
+            // process.env.JWT_KEY,
+            {
+              expiresIn: "1h"
+            }
+          );
           return res.status(200).json({
             message: "Auth successful",
             // token: token,s
@@ -127,7 +129,8 @@ exports.user_login = (req, res, next) => {
               saved_events: user[0].saved_events,
               _id: user[0]._id,
               email: user[0].email,
-              name: user[0].name
+              name: user[0].name,
+              token: token
             }
           });
         }
@@ -242,7 +245,8 @@ exports.get_saved_events = (req, res, next) => {
 
 exports.delete_saved_event = (req, res, next) => {
   const event_id = req.body.eventId;
-  const user_id = req.body.userId;
+  const user_id = req.userData.userId;
+  console.log("user_id: " + user_id);
   User.findById(user_id, "saved_events", function (err, user) {
       User.updateOne(
         { _id: user_id},
