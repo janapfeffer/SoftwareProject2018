@@ -114,7 +114,7 @@
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
                         <b>
-                            Bitte fülle alle Felder sinngemäß aus.
+                            Bitte füllen Sie alle Felder sinngemäß aus.
                         </b>
                     </p>
                 </div>
@@ -123,13 +123,10 @@
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
                         <b>
-                            Gib bitte eine echte Email Adresse an.
+                            Bitte geben Sie eine echte Email Adresse an.
                         </b>
                     </p>
                 </div>
-
-
-
 
                 <div v-bind:class="{ 'is-invalid': draft.nameIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rUserName" id="Username">
@@ -163,7 +160,7 @@
 
 
 
-        <!-- anzeiegen Card End-->
+        <!-- anzeigen Card End-->
         <!-- Login Card-->
         <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="EINLOGEN_Karte">
@@ -184,7 +181,7 @@
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
                             <b>
-                                Ihr eingegebener Benutzername/Passwort stimmen nicht überein!
+                                Sie konnten nicht authentifiziert werden. Bitte versuchen Sie es erneut.
                             </b>
                         </p>
                     </div>

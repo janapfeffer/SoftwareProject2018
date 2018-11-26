@@ -13,7 +13,7 @@ var oEvent = function (oEvent) {
     this.faved = oEvent.faved;
 };
 
-var kommi = false;
+var kommi = false; //wird direkt vor der Überprüfung auf true gesetzt -> löschen?
 var dialogopen = false;
 var logoutmodus = false;
 var aktuellebewertung = 0;
@@ -480,7 +480,8 @@ var oEventTableVue = new Vue({
                           return obj.iEventId == oEventTableVue.selected
                       });
                       if (nochniebewertet == true) {
-                          aktuellebewertung = aktuellebewertung - 1; nochniebewertet = false;
+                          aktuellebewertung = aktuellebewertung - 1;
+                          nochniebewertet = false;
                       }
                       else {
                           aktuellebewertung = aktuellebewertung - 2;
