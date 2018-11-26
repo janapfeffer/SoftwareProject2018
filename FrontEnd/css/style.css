@@ -83,6 +83,11 @@ input{
    box-shadow: 0 16px 40px rgba(0,0,0,0.12) !important;
 }
 
+.multiselect {
+  width: 400px;
+  color: #606266;
+}
+
 h1{
  margin: 0px;
  max-height: 0px;
@@ -93,6 +98,10 @@ h1{
 
 .landingpage #searchPlaceInner{
  transform: translateZ(25px);
+}
+
+.landingpage .mdl-button{
+  margin-top: 10px
 }
 
 .landingpage div#aside, .landingpage div#map{

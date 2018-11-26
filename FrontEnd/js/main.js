@@ -13,6 +13,7 @@ var oEvent = function (oEvent) {
     this.faved = oEvent.faved;
 };
 
+// var usernameemail = "";
 var kommi = false;
 var dialogopen = false;
 var logoutmodus = false;
@@ -49,25 +50,19 @@ var oNavigationVue = new Vue({
                 document.getElementById('h2events').innerText = "Favoriten";
                 document.getElementById('AfterLoginFavoriten').innerText = "Events";
                 getFavorites(loggedInUser._id);
-                document.getElementById("searchPlaceInner").childNodes[8].setAttribute("hidden", "hidden");//hide time filter
-                closeBubble();
+                document.getElementById("idSearchBar").childNodes[2].setAttribute("hidden", "hidden");//hide time filter
             }
             else {
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
                 // getAllEvents();
                 getFilteredEvents(oSearchPlaceVue.dDate);
-                document.getElementById("searchPlaceInner").childNodes[8].removeAttribute("hidden"); //display time filter
-                closeBubble();
+                document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden"); //display time filter
             }
         },
 
         showNewLoginCard: function () {
             $(window).scrollTop(0);
-            if (oRegisterVue.cardShown == true){
-              oRegisterVue.cardShown = false;
-            }
-            oNewLoginVue.cardShown = true;
             if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
                 logoutmodus = false;
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
@@ -79,12 +74,25 @@ var oNavigationVue = new Vue({
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
 
-                oNewLoginVue.draft.sUserName = "";
-                oNewLoginVue.draft.sPassword = "";
-                document.getElementById("Login_username").innerText = "";
-                document.getElementById("Login_password").innerText = "";
-                oNewLoginVue.cardShown = false;
+            }
+            if (logoutmodus === false) {
+                oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
                 oRegisterVue.cardShown = false;
+                oNewEventVue.cardShown = false;
+
+                AfterLoginFavoriten.style.visibility = "hidden";
+                loggedInUser = "";
+                AfterLoginEvent.style.visibility = "hidden";
+                document.getElementById('AfterLoginLogin').innerText = "LogIn";
+                newLoginWrapper.style.display = "visible";
+                oEventTableVue.starVisibility = "hidden";
+            }
+            else {
+                oNewLoginVue.formsubmit();
+                document.getElementById('h2events').innerText = "Events";
+                document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+                // getAllEvents();
+                getFilteredEvents(oSearchPlaceVue.dDate);
                 oNewEventVue.cardShown = false;
 
             }
@@ -143,22 +151,21 @@ function getFavorites(user_id) {
         var apievents = this.response.saved_events;
         oEventTableVue.allEvents = apievents.map(apievent => {
             return {
-              sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-              iEventId: apievent._id,
-              aComments: apievent.comments,
-              aRatings: apievent.ratings,
-              sName: apievent.event_name,
-              sDescription: apievent.description,
-              sAdress: apievent.address,
-              iCurrentRating: apievent.current_rating,
-              oStartDate: apievent.start_date.split("T")[0],
-              oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-              oEndDate: apievent.end_date.split("T")[0],
-              oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
-              sEventLink: apievent.event_link,
-              sTicketLink: apievent.ticket_link,
-              oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-              oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
+                sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
+                iEventId: apievent._id,
+                aRatings: apievent.ratings,
+                iCurrentRating: apievent.current_rating,
+                sName: apievent.event_name,
+                sDescription: apievent.description,
+                sAdress: apievent.address,
+                oStartDate: apievent.start_date.split("T")[0],
+                oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+                oEndDate: apievent.end_date.split("T")[0],
+                oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+                sEventLink: apievent.event_link,
+                sTicketLink: apievent.ticket_link,
+                oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+                oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
             };
         });
         //sort by start date
@@ -188,8 +195,10 @@ function getFavorites(user_id) {
 };
 
 
+// aTestEvents = aTestEvents.concat(aJsonTestData);
 var aAllEvents = new Array();
 var ausgewaehlt = "";
+// aAllEvents =
 
 function getAllEvents() { //uses get events/filtered with header filter_start_date = new Date() instead of get events
     oEventTableVue.selected = "";
@@ -255,23 +264,17 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
     ajaxRequest.setRequestHeader("filter_end_date", new Date());
     ajaxRequest.send();
 }
+//function getComments(event_id) {
+//    const GETCOMMENTS_URL = "http://localhost:3000/events" + event_id;
 
-//returns the saved_events of the loggedInUser
-//does not return the whole events, only the ids
-function getFavoritesIds() {
-  var ajaxRequest = new XMLHttpRequest();
-  var onSuccess = function(){
-    loggedInUser.saved_events = this.response.saved_events;
-  }
-  var onFailed = function() {
-    console.log("Favorite IDs of user could not be loaded.");
-  }
-  ajaxRequest.addEventListener("load", onSuccess);
-  ajaxRequest.addEventListener("error", onFailed);
-  ajaxRequest.responseType = "json";
-  ajaxRequest.open("GET", "http://localhost:3000/user/" + loggedInUser._id + "/saved_events_ids", true);
-  ajaxRequest.send();
-}
+//    axios.get(GETCOMMENTS_URL).then(res => {
+//        console.log("Kommis für " + event_id + " erhalten: " + res);
+//        console.log(res.???);
+
+//    }).catch(function (error) {
+//        console.log(error);
+//    });
+//};
 
 
 //Vue fuer die Event Tabelle fertig
@@ -319,13 +322,16 @@ var oEventTableVue = new Vue({
                 } else {
                     var requestType = "POST";
                     var requestURL = "http://localhost:3000/user/";
-
-                    if (target.faved) {
+                    if (target.faved) { //delete _id of target from saved_events of user
                         requestURL = requestURL + "unsaveEvent";
-                    } else {
+                        //delete favorite from loggedInUser
+                        loggedInUser.saved_events = loggedInUser.saved_events.filter(function (value, index, arr) {
+                            return value != target.iEventId;
+                        });
+                    } else { // save _id of target in saved_events of user
+                        loggedInUser.saved_events.push(target.iEvent);
                         requestURL = requestURL + "saveEvent";
                     }
-
                     var ajaxRequest = new XMLHttpRequest();
 
                     var onSuccess = function onSuccess() {
@@ -333,12 +339,6 @@ var oEventTableVue = new Vue({
                         if (this.status == 200) {
                             // set target to be (not) faved
                             Vue.set(target, 'faved', !target.faved);
-                            //reload saved_events of loggedInUser
-                            getFavoritesIds();
-                            // reload favorites in order to not display unsaved events
-                            if (document.getElementById('h2events').innerText == "Favoriten"){
-                              getFavorites(loggedInUser._id);
-                            }
                         } else {
                             // warnung dass das gerade nicht ging?
                         }
@@ -373,14 +373,8 @@ var oEventTableVue = new Vue({
             var onSuccess = function onSuccess() {
                 console.log("toll");
                 var t = oEventTableVue.selected;
-                //this leads to the comment being displayed immediatley
-                //reload favorites/events list
-                if (document.getElementById('h2events').innerText == "Favoriten"){
-                  getFavorites(loggedInUser._id);
-                } else if (document.getElementById('h2events').innerText == "Events") {
-                  getFilteredEvents(oSearchPlaceVue.dDate);
-                }
-                // getFilteredEvents(oSearchPlaceVue.dDate);
+                // getAllEvents(); //this leads to the comment being displayed immediatley
+                getFilteredEvents(oSearchPlaceVue.dDate);
                 oEventTableVue.selected = t;
             };
             var onFailed = function onFailed() {
@@ -428,7 +422,7 @@ var oEventTableVue = new Vue({
             this.allEvents = aFilterdEvents;
         },
         //Offnet bzw macht Popup moeglich
-        KommentarGemacht: function (id, name, beschreibung, comments, image) {
+        KommentarGemacht: function (id, name, beschreibung, comments) {
             kommi = true;
             if (loggedInUser != "") {
 
@@ -439,17 +433,14 @@ var oEventTableVue = new Vue({
                     document.getElementById('kommiüberschrift').innerText = name;
 
                     document.getElementById('eventidkommentare').innerText = beschreibung;
-                    document.getElementById('idPopUpPicture').src = image;
-
 
                     // get, whether the currently logged in user has already rated the event
                     var selected_event = oEventTableVue.allEvents.find(obj => {
                         return obj.iEventId == oEventTableVue.selected
                     });
-
                     var loggedInUser_rating = selected_event.aRatings.find(obj => {
                         return obj.user_id == loggedInUser._id
-                    });
+                    })
 
                     if (loggedInUser_rating) { //set rating buttons
                         if (loggedInUser_rating.rating == -1) {
@@ -469,12 +460,43 @@ var oEventTableVue = new Vue({
                     // set current_rating
                     aktuellebewertung = selected_event.iCurrentRating;
                     document.getElementById('ratingnumber').innerText = aktuellebewertung;
+                    //add comments to list
+                    //                     var list = document.getElementById("commentTable");
+                    //                     while (list.firstChild) {
+                    //                     list.removeChild(list.firstChild);
+                    //                     }
+                    //                     for (var r = 0; r < comments.length; r++){
+                    //                       var node = document.createElement("LI");                 // Create a <li> node
+                    //
+                    //                       var span = document.createElement("SPAN");
+                    //                       span.className = "mdl-list__item-primary-content";
+                    //                       span = document.createElement("SPAN");
+                    //                       var i = document.createElement("I");
+                    //                       i.className = "material-icons mdl-list__item-avatar";
+                    //                       i.innerHTML = "person";
+                    //                         var comment = document.createElement("SPAN");
+                    //                         comment = document.createElement("SPAN");
+                    //                       comment.innerHTML = comments[r].comment;         // Create a text node
+                    //                         var user = document.createElement("SPAN");
+                    //                         user = document.createElement("SPAN");
+                    //                       user.innerHTML = comments[r].username;
+                    //                       user.className = "mdl-list__item-text-body";
+                    //
+                    //                       span.appendChild(i);
+                    //                       span.appendChild(user);
+                    //                       span.appendChild(comment);
+                    //                         node.appendChild(span);
+                    //
+                    //                         // Append the text to <li>
+                    //                       document.getElementById("commentTable").appendChild(node);     // Append <li> to <ul> with id="myList"
+                    //                     }
                     dialog.showModal();
                 }
                 dialog.querySelector('.close').addEventListener('click', function () {
                     dialog.close();
+                    // getAllEvents();
                     dialogopen = false;
-
+                    //getFilteredEvents(oSearchPlaceVue.dDate);
                 });
                 $(dialog).children().first().click(function (e) {
                     e.stopPropagation();
@@ -514,22 +536,22 @@ function getFilteredEvents(dDate) {
                 var apievents = this.response.oEvents;
                 oEventTableVue.allEvents = apievents.map(apievent => {
                     return {
-                      sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-                      iEventId: apievent._id,
-                      aComments: apievent.comments,
-                      aRatings: apievent.ratings,
-                      sName: apievent.event_name,
-                      sDescription: apievent.description,
-                      sAdress: apievent.address,
-                      iCurrentRating: apievent.current_rating,
-                      oStartDate: apievent.start_date.split("T")[0],
-                      oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-                      oEndDate: apievent.end_date.split("T")[0],
-                      oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
-                      sEventLink: apievent.event_link,
-                      sTicketLink: apievent.ticket_link,
-                      oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-                      oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
+                        sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
+                        iEventId: apievent._id,
+                        aComments: apievent.comments,
+                        aRatings: apievent.ratings,
+                        sName: apievent.event_name,
+                        sDescription: apievent.description,
+                        sAdress: apievent.address,
+                        iCurrentRating: apievent.current_rating,
+                        oStartDate: apievent.start_date.split("T")[0],
+                        oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+                        oEndDate: apievent.end_date.split("T")[0],
+                        oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+                        sEventLink: apievent.event_link,
+                        sTicketLink: apievent.ticket_link,
+                        oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+                        oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
                     };
                 });
                 setMarkers(oEventTableVue.allEvents);
@@ -580,6 +602,7 @@ function getFilteredEvents(dDate) {
     }
 };
 
+
 //Vue fuer die Leiste mit Suchfunktion und Filter Button
 var oSearchPlaceVue = new Vue({
     el: "#searchPlace",
@@ -588,6 +611,7 @@ var oSearchPlaceVue = new Vue({
         dDate: null,
         sName: "Event Finder",
         sButtonName: "Suchen",
+        //Datepicker stuff
         FilterdDate: null,
         pickerOptions: {
             shortcuts: [
@@ -596,6 +620,7 @@ var oSearchPlaceVue = new Vue({
                     onClick(picker) {
                         const end = new Date().setHours(23, 59, 59, 59);
                         const start = new Date().setHours(0, 0, 0, 0);
+                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 1);
                         picker.$emit('pick', [start, end]);
                     }
                 },
@@ -604,6 +629,7 @@ var oSearchPlaceVue = new Vue({
                     onClick(picker) {
                         const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 7).setHours(23, 59, 59, 59);
                         const start = new Date().setHours(0, 0, 0, 0);
+                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 7);
                         picker.$emit('pick', [start, end]);
                     }
                 },
@@ -612,11 +638,24 @@ var oSearchPlaceVue = new Vue({
                     onClick(picker) {
                         const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 30).setHours(23, 59, 59, 59);
                         const start = new Date().setHours(0, 0, 0, 0);
+                        // end.setTime(start.getTime() + 3600 * 1000 * 24 * 30);
                         picker.$emit('pick', [start, end]);
                     }
                 }
             ]
         },
+        //Multiselect stuff
+        value: [],
+        options: [ //code könnte hier dann vll die backendzahl sein
+            { name: 'Kultur', code:'1'},
+            { name: 'Sport', code:'2'},
+            { name: 'Natur', code:'3'},
+            { name: 'Party', code:'4'},
+            { name: 'Essen', code:'5'}
+        ]
+    },
+    components: {
+        'vue-multiselect': window.VueMultiselect.default
     },
     methods: {
         //Sucht nach einem Ort
@@ -688,30 +727,6 @@ var oSearchPlaceVue = new Vue({
     }
 });
 
-function b64toBlob(b64Data, contentType, sliceSize) {
-    contentType = contentType || '';
-    sliceSize = sliceSize || 512;
-
-    var byteCharacters = atob(b64Data);
-    var byteArrays = [];
-
-    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-        var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-        var byteNumbers = new Array(slice.length);
-        for (var i = 0; i < slice.length; i++) {
-            byteNumbers[i] = slice.charCodeAt(i);
-        }
-
-        var byteArray = new Uint8Array(byteNumbers);
-
-        byteArrays.push(byteArray);
-    }
-
-    var blob = new Blob(byteArrays, { type: contentType });
-    return blob;
-}
-
 var oNewEventVue = new Vue({
     el: "#newEventWrapper",
     data: {
@@ -735,8 +750,19 @@ var oNewEventVue = new Vue({
             displayError: false,
             dateIsInvalid: false
         },
-        value7: ''
+        value7: '',
+        value: [],
+        options: [ //code könnte hier dann vll die backendzahl sein
+            { name: 'Kultur', code:'1'},
+            { name: 'Sport', code:'2'},
+            { name: 'Natur', code:'3'},
+            { name: 'Party', code:'4'},
+            { name: 'Essen', code:'5'}
+        ]
     },
+    // components: {
+    //     'vue-multiselect': window.VueMultiselect.default
+    // },
     methods: {
         // formdraft: function () {
         //     var geocoder = platform.getGeocodingService(),
@@ -789,6 +815,8 @@ var oNewEventVue = new Vue({
                 this.draft.dateIsInvalid = true;
             }
 
+
+
             if (this.draft.sName === "" ||
                 this.draft.sDescription === "" ||
                 this.draft.sAdress === "" ||
@@ -830,7 +858,7 @@ var oNewEventVue = new Vue({
                     }
 
                     axios.post("http://localhost:3000/events", fd).then(res => {
-                        // alert("Req angekommen");
+                        alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
                         // reset vueinternal data to make possible to add new event
                         oNewEventVue.draft = {
@@ -853,8 +881,6 @@ var oNewEventVue = new Vue({
                             dateIsInvalid: false
                         };
                         document.getElementById("imageUpload").value = "";
-                        oNewEventVue.cardShown = false; //close card for new event
-                        $(window).scrollTop(0);
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
                         console.log(error);
@@ -1115,10 +1141,6 @@ var oNewLoginVue = new Vue({
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
-                oNewLoginVue.draft.sUserName = "";
-                oNewLoginVue.draft.sPassword = "";
-                document.getElementById("Login_username").innerText = "";
-                document.getElementById("Login_password").innerText = "";
             }
         },
 
@@ -1162,6 +1184,15 @@ var oNewDateVue = new Vue({
 
     }
 });
+
+
+// var oAsideVue = new Vue({
+//     el: "#aside",
+//     data: {
+//         bShown: true
+//     }
+// });
+
 
 // suche nach gleichen events mit exakt gleichen Koordinaten
 // und verändert die Position der Duplikate ein bisschen (in place)

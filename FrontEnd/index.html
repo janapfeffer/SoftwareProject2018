@@ -50,6 +50,9 @@
     <!-- Picture Input-->
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vue-picture-input"></script>
+    <!-- Vue Multiselect-->
+    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
     <!-- Axios für API Request-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Material Files-->
@@ -78,7 +81,7 @@
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
-                <img id="logoIcon" src="images/mapIcon.PNG" onclick="refreshpage()" style="cursor: pointer;"/>
+                <img id="logoIcon" src="images/mapIcon.PNG" onclick="refreshpage()" style="cursor: pointer;" />
                 <h1 style="font-size: 30px"> EventHub </h1>
                 <!-- Title -->
                 <div class="mdl-layout-spacer"></div>
@@ -272,7 +275,13 @@
                     <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
                     <label class="mdl-textfield__label" for="sample1">Link</label>
                 </div>
-
+                <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <p>Kategorie*</p>
+                    <vue-multiselect v-model="value" placeholder="Wähle eine oder mehrere Kategorien" label="name" track-by="code" :options="options"
+                        :multiple="false" :taggable="false" :hide-selected="true" :close-on-select=false select-label="" :show-no-results="false"
+                        :searchable="false">
+                    </vue-multiselect>
+                </div> -->
                 <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <p>Datum*</p>
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
@@ -280,6 +289,7 @@
                         start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
+
 
                 <div class="file-upload-form">
                     Lade ein Eventbild hoch:
@@ -378,10 +388,10 @@
                                                             var t = oEventTableVue.selected;
                                                             //this leads to the rating being displayed immediatley
                                                             //reload favorites/events list
-                                                            if (document.getElementById('h2events').innerText == "Favoriten"){
-                                                              getFavorites(loggedInUser._id);
+                                                            if (document.getElementById('h2events').innerText == "Favoriten") {
+                                                                getFavorites(loggedInUser._id);
                                                             } else if (document.getElementById('h2events').innerText == "Events") {
-                                                              getFilteredEvents(oSearchPlaceVue.dDate);
+                                                                getFilteredEvents(oSearchPlaceVue.dDate);
                                                             }
                                                             // getFilteredEvents(oSearchPlaceVue.dDate);
                                                             oEventTableVue.selected = t;
@@ -413,10 +423,10 @@
                                                         var t = oEventTableVue.selected;
                                                         //this leads to the rating being displayed immediatley
                                                         //reload favorites/events list
-                                                        if (document.getElementById('h2events').innerText == "Favoriten"){
-                                                          getFavorites(loggedInUser._id);
+                                                        if (document.getElementById('h2events').innerText == "Favoriten") {
+                                                            getFavorites(loggedInUser._id);
                                                         } else if (document.getElementById('h2events').innerText == "Events") {
-                                                          getFilteredEvents(oSearchPlaceVue.dDate);
+                                                            getFilteredEvents(oSearchPlaceVue.dDate);
                                                         }
                                                         // getFilteredEvents(oSearchPlaceVue.dDate);
                                                         oEventTableVue.selected = t;
@@ -453,7 +463,7 @@
 
 
                                             <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment" ></input>
+                                                <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment"></input>
                                                 <!-- <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label> -->
                                             </div>
 
@@ -521,6 +531,11 @@
             </el-date-picker>
 
             <!-- insert drop down for event types-->
+            <h2>WAS</h2>
+            <vue-multiselect v-model="value" placeholder="Wähle eine oder mehrere Kategorien" label="name" track-by="code" :options="options"
+                :multiple="true" :taggable="false" :hide-selected="true" :close-on-select=false select-label="" :show-no-results="false"
+                :searchable="false">
+            </vue-multiselect>
 
             <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
                 Suche
