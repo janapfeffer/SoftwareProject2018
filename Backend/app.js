@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const helperRoutes = require("./RestAPI/routes/helper_routes");
-const eventRoutes = require( "../Backend/RestAPI/routes/event_router")
-const userRoutes = require( "../Backend/RestAPI/routes/user_router")
+// const helperRoutes = require("./RestAPI/routes/helper_routes");
+const eventRoutes = require( "../Backend/RestAPI/routes/event_router");
+const eventtypeRoutes = require( "../Backend/RestAPI/routes/event_types_router");
+const userRoutes = require( "../Backend/RestAPI/routes/user_router");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
@@ -47,7 +48,7 @@ app.use((req, res, next) => {
 });
 
 //Middleware: Connects to routes
-app.use("/event_type", helperRoutes);
+app.use("/event_types", eventtypeRoutes);
 app.use("/events", eventRoutes)
 app.use("/user", userRoutes)
 
