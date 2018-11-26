@@ -356,7 +356,7 @@ exports.get_filtered_events = (req, res, next) => {
     };
   }
   if(req.headers.filter_event_type){
-    console.log("evt");
+    // console.log("evt");
     filter_options.$and = [{
       event_types: {
         $in: req.headers.filter_event_type

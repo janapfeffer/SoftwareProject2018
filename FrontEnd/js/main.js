@@ -72,10 +72,17 @@ var oNavigationVue = new Vue({
                 logoutmodus = false;
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
 
+                //set all favorite stars to faved = false
+                for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+                  if(oEventTableVue.allEvents[j].faved){
+                    Vue.set(oEventTableVue.allEvents[j], 'faved', false);
+                  }
+                }
+
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
                 AfterLoginEvent.style.visibility = "hidden";
-                document.getElementById('AfterLoginLogin').innerText = "LogIn";
+                // document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
 
@@ -136,11 +143,9 @@ var bigmapgeklickt = false;
 function getFavorites(user_id) {
     oEventTableVue.selected = "";
     const GETFAVORITES_URL = "http://localhost:3000/user/" + user_id + "/events";
-    var ajaxRequest = new XMLHttpRequest();
-
-    var onSuccess = function onSuccess() {
-
-        var apievents = this.response.saved_events;
+    axios.get(GETFAVORITES_URL)
+      .then(response => {
+        var apievents = response.data.saved_events;
         oEventTableVue.allEvents = apievents.map(apievent => {
             return {
               sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
@@ -161,7 +166,6 @@ function getFavorites(user_id) {
               oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
             };
         });
-        //sort by start date
         oEventTableVue.allEvents.sort(function (a, b) {
             return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
         });
@@ -173,18 +177,11 @@ function getFavorites(user_id) {
             oEventTableVue.favToggle(oEventTableVue.allEvents[z]);
         }
         initalFavoriteSetting = false;
-    };
-
-    var onFailed = function onFailed() {
-        alert('Die Favoritenlist konnte nicht geladen werden!');
-    };
-    // Attach the event listeners to the XMLHttpRequest object
-    ajaxRequest.addEventListener("load", onSuccess);
-    ajaxRequest.addEventListener("error", onFailed);
-    ajaxRequest.responseType = "json";
-
-    ajaxRequest.open('GET', GETFAVORITES_URL);
-    ajaxRequest.send();
+      })
+      .catch(function (error) {
+          alert("Fehler beim Laden der Favoriten aus der Datenbank.");
+          console.log(error);
+      });
 };
 
 
@@ -194,11 +191,15 @@ var ausgewaehlt = "";
 function getAllEvents() { //uses get events/filtered with header filter_start_date = new Date() instead of get events
     oEventTableVue.selected = "";
     var GETALLEVENTS_URL = 'http://localhost:3000/events/filtered';
-    var ajaxRequest = new XMLHttpRequest();
-
-    var onSuccess = function onSuccess() {
-
-        var apievents = this.response.oEvents;
+    var config = {
+      headers: {
+        filter_end_date: new Date()
+      }
+    };
+    console.log("config" +  config.headers);
+    axios.get(GETALLEVENTS_URL, config)
+      .then(response => {
+        var apievents = response.data.oEvents;
         oEventTableVue.allEvents = apievents.map(apievent => {
             return {
                 iEventId: apievent._id,
@@ -241,36 +242,24 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
             }
             initalFavoriteSetting = false;
         }
-    };
-
-    var onFailed = function onFailed() {
-        alert('Die Eventlist konnte nicht geladen werden!');
-    };
-    // Attach the event listeners to the XMLHttpRequest object
-    ajaxRequest.addEventListener("load", onSuccess);
-    ajaxRequest.addEventListener("error", onFailed);
-    ajaxRequest.responseType = "json";
-
-    ajaxRequest.open('GET', GETALLEVENTS_URL);
-    ajaxRequest.setRequestHeader("filter_end_date", new Date());
-    ajaxRequest.send();
+      })
+      .catch(function (error) {
+          alert("Fehler beim Laden der Events aus der Datenbank.");
+          console.log(error);
+      });
 }
 
-//returns the saved_events of the loggedInUser
+//sets the saved_events of the loggedInUser
 //does not return the whole events, only the ids
 function getFavoritesIds() {
-  var ajaxRequest = new XMLHttpRequest();
-  var onSuccess = function(){
-    loggedInUser.saved_events = this.response.saved_events;
-  }
-  var onFailed = function() {
-    console.log("Favorite IDs of user could not be loaded.");
-  }
-  ajaxRequest.addEventListener("load", onSuccess);
-  ajaxRequest.addEventListener("error", onFailed);
-  ajaxRequest.responseType = "json";
-  ajaxRequest.open("GET", "http://localhost:3000/user/" + loggedInUser._id + "/saved_events_ids", true);
-  ajaxRequest.send();
+  axios.get("http://localhost:3000/user/" + loggedInUser._id + "/saved_events_ids")
+    .then(response => {
+        loggedInUser.saved_events = response.data.saved_events;
+    })
+    .catch(function (error) {
+        alert("Fehler beim Laden der Favoriten IDs aus der Datenbank.");
+        console.log(error);
+    });
 }
 
 
@@ -317,7 +306,7 @@ var oEventTableVue = new Vue({
                 if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
                     Vue.set(target, 'faved', true);
                 } else {
-                    var requestType = "POST";
+                    // var requestType = "POST";
                     var requestURL = "http://localhost:3000/user/";
 
                     if (target.faved) {
@@ -339,8 +328,7 @@ var oEventTableVue = new Vue({
                             if (document.getElementById('h2events').innerText == "Favoriten"){
                               getFavorites(loggedInUser._id);
                             }
-                        } else {
-                            // warnung dass das gerade nicht ging?
+                          
                         }
 
                     };
@@ -352,17 +340,12 @@ var oEventTableVue = new Vue({
                     ajaxRequest.addEventListener("load", onSuccess);
                     ajaxRequest.addEventListener("error", onFailed);
                     ajaxRequest.responseType = "json";
-                    ajaxRequest.open(requestType, requestURL, true);
+                    ajaxRequest.open("POST", requestURL, true);
                     ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     var sFormData = "userId=" + loggedInUser._id + "&eventId=" + target.iEventId;
                     ajaxRequest.send(sFormData);
                 }
-            } else { // user ist nicht eingeloggt
-                // meldung, dass man sich anmelden soll oder so
             }
-
-
-
         },
         kommentargeschickt: function (id) {
 
@@ -586,6 +569,7 @@ var oSearchPlaceVue = new Vue({
     data: {
         sQuery: localStorage.getItem("HANSCH"),
         dDate: null,
+        aEventTypes: null,
         sName: "Event Finder",
         sButtonName: "Suchen",
         FilterdDate: null,
@@ -858,7 +842,7 @@ var oNewEventVue = new Vue({
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
                         console.log(error);
-                    });;
+                    });
                 },
                 onError = function (error) {
                     alert('Geodaten nicht bekommen. Bitte überprüfen Sie, ob die angegebene Adresse existiert.');
@@ -1030,7 +1014,7 @@ var oNewLoginVue = new Vue({
             logoutmodus = true;
             this.draft.passwordIsInvalid = false;
             this.draft.emailIsInvalid = false;
-            if (logoutmodus === true) {
+            // if (logoutmodus === true) {
 
                 var suserlogin = "http://localhost:3000/user/login"
                 var ajaxRequest = new XMLHttpRequest();
@@ -1107,19 +1091,27 @@ var oNewLoginVue = new Vue({
                     logoutmodus = false;
                 }
 
-            }
-            else {
-                AfterLoginFavoriten.style.visibility = "hidden";
-                loggedInUser = "";
-                AfterLoginEvent.style.visibility = "hidden";
-                document.getElementById('AfterLoginLogin').innerText = "LogIn";
-                newLoginWrapper.style.display = "visible";
-                oEventTableVue.starVisibility = "hidden";
-                oNewLoginVue.draft.sUserName = "";
-                oNewLoginVue.draft.sPassword = "";
-                document.getElementById("Login_username").innerText = "";
-                document.getElementById("Login_password").innerText = "";
-            }
+            // }
+            // else {
+            //     loggedInUser._id = "";
+            //     loggedInUser.saved_events = [];
+            //       for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+            //         if(oEventTableVue.allEvents[j].faved){
+            //           oEventTableVue.favToggle(oEventTableVue.allEvents[j]);
+            //         }
+            //       }
+            //
+            //
+            //     AfterLoginFavoriten.style.visibility = "hidden";
+            //     AfterLoginEvent.style.visibility = "hidden";
+            //     document.getElementById('AfterLoginLogin').innerText = "LogIn";
+            //     newLoginWrapper.style.display = "visible";
+            //     oEventTableVue.starVisibility = "hidden";
+            //     oNewLoginVue.draft.sUserName = "";
+            //     oNewLoginVue.draft.sPassword = "";
+            //     document.getElementById("Login_username").innerText = "";
+            //     document.getElementById("Login_password").innerText = "";
+            // }
         },
 
 
@@ -1190,9 +1182,21 @@ function refreshpage() {
     location.reload();
 }
 
+function getAllEventTypes() {
+  axios.get('http://localhost:3000/event_types')
+    .then(response => {
+        oSearchPlaceVue.aEventTypes = response.data.event_types;
+    })
+    .catch(function (error) {
+        alert("Fehler beim Laden der Event_Types aus der Datenbank.");
+        console.log(error);
+    });
+};
+
 function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     getAllEvents();
+    getAllEventTypes();
     checkDuplicatePositions(oEventTableVue.allEvents);
 }
 

@@ -165,16 +165,16 @@ exports.get_saved_events_ids = (req, res, next) => {
   })
   .exec()
   .then(user => {
-    res.status(200).json({
-      saved_events: user.saved_events
+      res.status(200).json({
+        saved_events: user.saved_events
+      });
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
     });
-  });
 };
 
 exports.get_saved_events = (req, res, next) => {
@@ -192,7 +192,7 @@ exports.get_saved_events = (req, res, next) => {
       .populate("event_type")
       .exec()
       .then(events => {
-        console.log(events);
+        // console.log(events);
         res.status(200).json({
           count: user.saved_events.length,
           saved_events: events.map(event => {
