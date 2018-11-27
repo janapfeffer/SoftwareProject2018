@@ -304,7 +304,6 @@ exports.delete_event = (req, res, next) => {
 // either/both start_date and end_date within the time range or start_date before and end_date after
 // needs: filter_start_date and filter_end_date
 exports.get_filtered_events = (req, res, next) => {
-  //https://stackoverflow.com/questions/32353999/mongoose-select-query-between-two-time-range
   //get events with time range filters applied
   // check wich filters are given and only apply the given ones:
   //    end date: all events that are not over yet: for initial loading
@@ -351,7 +350,7 @@ exports.get_filtered_events = (req, res, next) => {
     }];
   }
 
-  OEvent.find(filter_options) //enter: {verification_status: true} into brackets for only verified events
+  OEvent.find(filter_options) //enter: {verification_status: true} as additional filter for only verified events
     .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
     .populate("event_types")
     .populate("comments")
