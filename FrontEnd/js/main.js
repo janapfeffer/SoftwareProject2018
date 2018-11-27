@@ -50,6 +50,7 @@ var oNavigationVue = new Vue({
                 document.getElementById('AfterLoginFavoriten').innerText = "Events";
                 getFavorites(loggedInUser._id);
                 document.getElementById("searchPlaceInner").childNodes[8].setAttribute("hidden", "hidden");//hide time filter
+                document.getElementById("searchPlaceInner").childNodes[12].setAttribute("hidden", "hidden");//hide event_types filter
                 closeBubble();
             }
             else {
@@ -58,6 +59,7 @@ var oNavigationVue = new Vue({
                 // getAllEvents();
                 getFilteredEvents(oSearchPlaceVue.dDate);
                 document.getElementById("searchPlaceInner").childNodes[8].removeAttribute("hidden"); //display time filter
+                document.getElementById("searchPlaceInner").childNodes[12].removeAttribute("hidden"); //display event types filter
                 closeBubble();
             }
         },
