@@ -954,9 +954,12 @@ var oNewEventVue = new Vue({
                     fd.append("lng", dLng);
                     fd.append("start_date", oNewEventVue.draft.EDate[0]);
                     fd.append("end_date", oNewEventVue.draft.EDate[1]);
-                    var ev_types = [];
+                    var ev_types = "";
                     for (var i = 0; i < oNewEventVue.value.length; i++) {
-                      ev_types.push(oNewEventVue.value[i].code);
+                      ev_types = ev_types + oNewEventVue.value[i].code;
+                      if (i < oNewEventVue.value.length - 1) {
+                        ev_types = ev_types + ","
+                      }
                     }
                     fd.append("event_types", ev_types);
                     if (oNewEventVue.draft.oSelectedFile) {

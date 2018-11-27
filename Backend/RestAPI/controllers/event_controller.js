@@ -123,13 +123,14 @@ exports.event_rating = (req, res, next) => {
 
 
 exports.create_event = (req, res, next) => {
-  console.log(req.body.event_types);
   // console.log(req.body);
   if(req.file) {
     var path = req.file.path;
   } else {
     var path = "event_images\\standard.png";
   }
+
+  var event_types = req.body.event_types.split(",");
   const oEvent = new OEvent({
     _id: new mongoose.Types.ObjectId(),
     author: req.userData.userId,
@@ -142,9 +143,10 @@ exports.create_event = (req, res, next) => {
     end_date: req.body.end_date,
     event_link: req.body.event_link,
     ticket_link: req.body.ticket_link,
-    event_types: req.body.event_types,
+    event_types: event_types,
     event_picture: path //req.file.path
   });
+  console.log(oEvent);
 
   oEvent
     .save()
