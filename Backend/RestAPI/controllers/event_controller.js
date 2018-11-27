@@ -123,6 +123,7 @@ exports.event_rating = (req, res, next) => {
 
 
 exports.create_event = (req, res, next) => {
+  console.log(req.body.event_types);
   // console.log(req.body);
   if(req.file) {
     var path = req.file.path;

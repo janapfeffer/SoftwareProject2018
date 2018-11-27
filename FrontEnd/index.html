@@ -248,6 +248,14 @@
                     </el-date-picker>
                 </div>
 
+                <div>
+                  <p>Veranstaltungstyp*</p>
+                  <vue-multiselect id="idMultiSelectCreate" v-model="value" placeholder="Wähle eine oder mehrere Kategorien" label="name" track-by="code" :options="aEventTypes"
+                      :multiple="true" :taggable="false" :hide-selected="true" :close-on-select=false select-label="" :show-no-results="false"
+                      :searchable="false">
+                  </vue-multiselect>
+                </div>
+
                 <div class="file-upload-form">
                     Lade ein Eventbild hoch:
                     <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected" accept="image/*">

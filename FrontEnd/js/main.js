@@ -868,16 +868,7 @@ var oNewEventVue = new Vue({
         },
         value7: '',
         value: [],
-        options: [ //code könnte hier dann vll die backendzahl sein
-            { name: 'Kultur', code:'1'},
-            { name: 'Sport', code:'2'},
-            { name: 'Natur', code:'3'},
-            { name: 'Party', code:'4'},
-            { name: 'Essen', code:'5'}
-        ],
-    components: {
-        'vue-multiselect': window.VueMultiselect.default
-    },
+        aEventTypes: [],
     },
     methods: {
         // formdraft: function () {
@@ -963,7 +954,11 @@ var oNewEventVue = new Vue({
                     fd.append("lng", dLng);
                     fd.append("start_date", oNewEventVue.draft.EDate[0]);
                     fd.append("end_date", oNewEventVue.draft.EDate[1]);
-                    fd.append("event_types", ["5bd1874824c1783894595b68"]);
+                    var ev_types = [];
+                    for (var i = 0; i < oNewEventVue.value.length; i++) {
+                      ev_types.push(oNewEventVue.value[i].code);
+                    }
+                    fd.append("event_types", ev_types);
                     if (oNewEventVue.draft.oSelectedFile) {
                         fd.append("event_picture", image, image.name);
                     }
@@ -1056,7 +1051,8 @@ var oNewEventVue = new Vue({
         }
     },
     components: {
-        'picture-input': PictureInput
+        'picture-input': PictureInput,
+        'vue-multiselect': window.VueMultiselect.default
     }
 });
 
@@ -1346,26 +1342,32 @@ function refreshpage() {
     location.reload();
 }
 
+var event_types;
 function getAllEventTypes() {
   axios.get('http://localhost:3000/event_types')
     .then(response => {
-        oSearchPlaceVue.aEventTypes = response.data.event_types.map( event_type => {
+        event_types =  response.data.event_types
+        .map( event_type => {
           return {
             name: event_type.event_type,
             code: event_type._id
           };
         });
+        oSearchPlaceVue.aEventTypes = event_types;
+        oNewEventVue.aEventTypes = event_types;
     })
     .catch(function (error) {
         alert("Fehler beim Laden der Event_Types aus der Datenbank.");
         console.log(error);
     });
+  // console.log(event_types);
 };
 
 function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     getAllEvents();
     getAllEventTypes();
+    // oSearchPlaceVue.aEventTypes = event_types();
     checkDuplicatePositions(oEventTableVue.allEvents);
 }
 
