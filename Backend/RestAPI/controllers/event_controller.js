@@ -321,6 +321,9 @@ exports.get_filtered_events = (req, res, next) => {
   //    end date: all events that are not over yet: for initial loading
   //    start & end date: all events where at least one day is in the time range
   // console.log(req.headers);
+  console.log(req.headers.filter_start_date);
+  console.log(req.headers.filter_end_date);
+  console.log(req.headers.filter_event_type);
   var filter_options = {};
   if (req.headers.filter_start_date) {
     filter_options = {
@@ -356,7 +359,7 @@ exports.get_filtered_events = (req, res, next) => {
     };
   }
   if(req.headers.filter_event_type){
-    // console.log("evt");
+    console.log("evt");
     filter_options.$and = [{
       event_types: {
         $in: req.headers.filter_event_type

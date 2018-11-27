@@ -588,12 +588,48 @@ var oEventTableVue = new Vue({
     // }
 });
 
+function _getFilterHeaders(dDate) {
+  var headers = [];
+
+  if(oSearchPlaceVue.value.length > 0){
+    var filter_event_types = [];
+    for(var i = 0; i < oSearchPlaceVue.value.length; i++){
+        filter_event_types.push(oSearchPlaceVue.value[i].code);
+    }
+    headers.push({
+      name: "filter_event_type",
+      value: filter_event_types
+    });
+  }
+
+  if(dDate){
+    if (dDate[0] >= new Date().setHours(0, 0, 0, 0) && dDate[1] >= new Date().setHours(0, 0, 0, 0)){ //check, whether filter dates are in the past -> reject search
+      headers.push({
+        name: "filter_start_date",
+        value: dDate[0]
+      });
+      headers.push({
+        name: "filter_end_date",
+        value: dDate[1]
+      });
+
+    } else {
+      document.getElementById("idDatePickerErrorEmpty").style.display = "block";
+      return null;
+    }
+  } else {
+    headers.push({
+      name: "filter_end_date",
+      value: new Date()
+    });
+  }
+  return headers;
+};
+
 function getFilteredEvents(dDate) {
     //filter for start_date and end_date and event types
     //filter_event_type is an array of 1 - x event_types
-    if (dDate) {
-        //check, whether filter dates are in the past -> reject search
-        if (dDate[0] >= new Date().setHours(0, 0, 0, 0) && dDate[1] >= new Date().setHours(0, 0, 0, 0)) {
+    if (dDate || oSearchPlaceVue.value) {
             var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
             var ajaxRequest = new XMLHttpRequest();
 
@@ -649,15 +685,15 @@ function getFilteredEvents(dDate) {
             ajaxRequest.responseType = "json";
 
             ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
-            ajaxRequest.setRequestHeader("filter_start_date", dDate[0].toString());
-            ajaxRequest.setRequestHeader("filter_end_date", dDate[1].toString());
-            // ajaxRequest.setRequestHeader("filter_event_type", );
+
+            // set headers
+            var headers = _getFilterHeaders(dDate);
+            for(var i = 0; i < headers.length; i++){
+              ajaxRequest.setRequestHeader(headers[i].name, headers[i].value);
+            }
+
 
             ajaxRequest.send();
-        } else { // at least one of the dates is in the past, which is an incorrect input
-            // idDatePickerErrorEmpty
-            document.getElementById("idDatePickerErrorEmpty").style.display = "block";
-        }
 
     } else { // no dates given
         //change center of map and filter for location
@@ -673,7 +709,7 @@ var oSearchPlaceVue = new Vue({
     data: {
         sQuery: localStorage.getItem("HANSCH"),
         dDate: null,
-        aEventTypes: null,
+        // aEventTypes: null,
         sName: "Event Finder",
         sButtonName: "Suchen",
         FilterdDate: null,
@@ -707,13 +743,7 @@ var oSearchPlaceVue = new Vue({
         },
         //Multiselect stuff
         value: [],
-        options: [ //code könnte hier dann vll die backendzahl sein
-            { name: 'Kultur', code:'1'},
-            { name: 'Sport', code:'2'},
-            { name: 'Natur', code:'3'},
-            { name: 'Party', code:'4'},
-            { name: 'Essen', code:'5'}
-        ]
+        aEventTypes: []
     },
     components: {
         'vue-multiselect': window.VueMultiselect.default
@@ -729,7 +759,6 @@ var oSearchPlaceVue = new Vue({
                 document.querySelector("#searchPlace").vanillaTilt.destroy()
                 map.getViewPort().resize();
                 AfterLoginLogin.style.visibility = "visible";
-                document.getElementById("idSearchBar").childNodes[2].removeAttribute("hidden");
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
             getFilteredEvents(this.dDate);
@@ -1318,7 +1347,12 @@ function refreshpage() {
 function getAllEventTypes() {
   axios.get('http://localhost:3000/event_types')
     .then(response => {
-        oSearchPlaceVue.aEventTypes = response.data.event_types;
+        oSearchPlaceVue.aEventTypes = response.data.event_types.map( event_type => {
+          return {
+            name: event_type.event_type,
+            code: event_type._id
+          };
+        });
     })
     .catch(function (error) {
         alert("Fehler beim Laden der Event_Types aus der Datenbank.");

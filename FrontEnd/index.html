@@ -401,7 +401,7 @@
 
             <!-- insert drop down for event types-->
             <h2>WAS</h2>
-            <vue-multiselect v-model="value" placeholder="Wähle eine oder mehrere Kategorien" label="name" track-by="code" :options="options"
+            <vue-multiselect id="idMultiSelectSearch" v-model="value" placeholder="Wähle eine oder mehrere Kategorien" label="name" track-by="code" :options="aEventTypes"
                 :multiple="true" :taggable="false" :hide-selected="true" :close-on-select=false select-label="" :show-no-results="false"
                 :searchable="false">
             </vue-multiselect>
