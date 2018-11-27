@@ -39,21 +39,19 @@ exports.get_all_events = (req, res, next) => {
       });
     })
     .catch(err => {
-      // console.error("Error: ", err.stack);
       res.status(500).json({
         error: err
       })
     });
 };
 
-// requires body with: eventId, userId, rating. rating must be the opposite of the rating that is delete_saved_event
+// requires body with: eventId, rating. rating must be the opposite of the rating that is delete_saved_event
 // -> if the event was rated with a thumb up (1) enter -1
 exports.event_rating = (req, res, next) => {
   OEvent.findById(req.body.eventId, "ratings", function (err, event) {
     old_rating = event.ratings.find(obj => {
       return obj.user_id == req.userData.userId;
     });
-    // console.log(old_rating._id);
     if(old_rating) {
       OEvent.updateOne(
         { _id: req.body.eventId},
@@ -81,7 +79,6 @@ exports.event_rating = (req, res, next) => {
           });
         })
         .catch(err => {
-          // console.log(err);
           res.status(500).json({
             error: err
           });
@@ -112,7 +109,6 @@ exports.event_rating = (req, res, next) => {
           });
         })
         .catch(err => {
-          // console.log(err);
           res.status(500).json({
             error: err
           });
@@ -123,7 +119,6 @@ exports.event_rating = (req, res, next) => {
 
 
 exports.create_event = (req, res, next) => {
-  // console.log(req.body);
   if(req.file) {
     var path = req.file.path;
   } else {
@@ -146,7 +141,6 @@ exports.create_event = (req, res, next) => {
     event_types: event_types,
     event_picture: path //req.file.path
   });
-  console.log(oEvent);
 
   oEvent
     .save()
@@ -183,7 +177,6 @@ exports.create_event = (req, res, next) => {
 };
 
 exports.delete_comment = (req, res, next) => {
-  // console.log(req.body.eventId);
   OEvent.findById(req.body.eventId, "comments", function (err, event) {
     OEvent.updateOne(
       { _id: req.body.eventId },
@@ -200,7 +193,6 @@ exports.delete_comment = (req, res, next) => {
         });
       })
       .catch(err => {
-        // console.log(err);
         res.status(500).json({
           error: err
         });
@@ -210,7 +202,6 @@ exports.delete_comment = (req, res, next) => {
 
 exports.add_comment = (req, res, next) => {
   OEvent.findById(req.body.eventId, "comments", function (err, event) {
-    // console.log(event);
     OEvent.updateOne(
       { _id: req.body.eventId },
       {
@@ -234,7 +225,6 @@ exports.add_comment = (req, res, next) => {
         });
       })
       .catch(err => {
-        // console.log(err);
         res.status(500).json({
           error: err
         });
@@ -248,7 +238,6 @@ exports.get_event = (req, res, next) => {
     .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments")
     .exec()
     .then(doc => {
-      // console.log("From database", doc);
       if (doc) {
         res.status(200).json({
           product: doc,
@@ -264,7 +253,6 @@ exports.get_event = (req, res, next) => {
       }
     })
     .catch(err => {
-      // console.log(err);
       res.status(500).json({ error: err });
     });
 };
@@ -288,7 +276,6 @@ exports.update_event = (req, res, next) => {
       });
     })
     .catch(err => {
-      // console.log(err);
       res.status(500).json({
         error: err
       });
@@ -297,9 +284,9 @@ exports.update_event = (req, res, next) => {
 
 
 //should not be an issue though if the frontend calls it correctly
-//delete picture if given (NOT if its the default picture)
+//delete picture if given (NOT if its the default picture) (currently only used for testing so thats unnecessary)
 exports.delete_event = (req, res, next) => {
-  OEvent.remove({ _id: req.params.eventId, author: req.userData.user_id })
+  OEvent.remove({ _id: req.params.eventId, author: req.userData.userid })
     .exec()
     .then(result => {
       res.status(200).json({
@@ -307,7 +294,6 @@ exports.delete_event = (req, res, next) => {
       });
     })
     .catch(err => {
-      // console.log(err);
       res.status(500).json({
         error: err
       });
@@ -323,10 +309,6 @@ exports.get_filtered_events = (req, res, next) => {
   // check wich filters are given and only apply the given ones:
   //    end date: all events that are not over yet: for initial loading
   //    start & end date: all events where at least one day is in the time range
-  // console.log(req.headers);
-  console.log(req.headers.filter_start_date);
-  console.log(req.headers.filter_end_date);
-  console.log(req.headers.filter_event_type);
   var filter_options = {};
   if (req.headers.filter_start_date) {
     filter_options = {
@@ -362,14 +344,13 @@ exports.get_filtered_events = (req, res, next) => {
     };
   }
   if(req.headers.filter_event_type){
-    console.log("evt");
     filter_options.$and = [{
       event_types: {
         $in: req.headers.filter_event_type
       }
     }];
   }
-  // console.log(filter_options);
+
   OEvent.find(filter_options) //enter: {verification_status: true} into brackets for only verified events
     .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
     .populate("event_types")
