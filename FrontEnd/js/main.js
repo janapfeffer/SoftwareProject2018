@@ -776,7 +776,9 @@ var oSearchPlaceVue = new Vue({
                 AfterLoginLogin.style.visibility = "visible";
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
-            getFilteredEvents(this.dDate);
+            if( document.getElementById('h2events').innerText == "Events"){
+              getFilteredEvents(this.dDate);
+            }
             setCenter(this.sQuery);
         },
         //AutoComplet Funktion der Suchleiste
