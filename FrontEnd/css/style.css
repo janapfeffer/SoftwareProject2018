@@ -82,9 +82,45 @@ input{
    padding-bottom: 24px !important;
    box-shadow: 0 16px 40px rgba(0,0,0,0.12) !important;
 }
-.multiselect {
+.landingpage .multiselect {
   width: 400px;
   color: #606266;
+}
+
+.multiselect {
+  width: 200px;
+  color: #606266;
+  display: inline-block;
+}
+
+/* .multiselect__tags {
+  padding: 11px 40px 0 8px;
+} */
+
+/* #searchPlaceInner .multiselect__tags-wrap {
+  display: inline-block;
+  position: absolute;
+  top: 70px;
+  left: -305%;
+} */
+
+/* .landingpage #searchPlaceInner .multiselect__tags-wrap {
+  display: inline-block;
+  position: relative;
+  top: 0px;
+  left: 0px;
+} */
+
+#newEvent .multiselect{
+  width: 100%;
+}
+
+.el-date-editor--datetimerange.el-input__inner{
+  width: 200px;
+}
+
+.landingpage .el-date-editor--datetimerange.el-input__inner{
+  width: 400px;
 }
 
 h1{
@@ -101,9 +137,6 @@ h1{
 
 .landingpage div#aside, .landingpage div#map{
  opacity: 0;
-}
-.landingpage .mdl-button{
-  margin-top: 10px
 }
 
 /* .landingpage div#dateFilter{

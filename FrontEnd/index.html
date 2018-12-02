@@ -81,7 +81,7 @@
     <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
-                <img id="logoIcon" src="images/mapIcon.PNG" onclick="refreshpage()" style="cursor: pointer;"/>
+                <img id="logoIcon" src="images/mapIcon.PNG" onclick="refreshpage()" style="cursor: pointer;" />
                 <h1 style="font-size: 30px"> EventHub </h1>
                 <!-- Title -->
                 <div class="mdl-layout-spacer"></div>
@@ -240,20 +240,20 @@
                     <label class="mdl-textfield__label" for="sample1">Link</label>
                 </div>
 
+                <div>
+                    <p>Veranstaltungstypen*</p>
+                    <vue-multiselect id="idMultiSelectCreate" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes"
+                        :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label="" :show-no-results="false"
+                        :searchable="false">
+                    </vue-multiselect>
+                </div>
+
                 <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <p>Datum*</p>
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
                     <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
                         start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
-                </div>
-
-                <div>
-                  <p>Veranstaltungstyp*</p>
-                  <vue-multiselect id="idMultiSelectCreate" v-model="value" placeholder="Wähle eine oder mehrere Kategorien" label="name" track-by="code" :options="aEventTypes"
-                      :multiple="true" :taggable="false" :hide-selected="true" :close-on-select=false select-label="" :show-no-results="false"
-                      :searchable="false">
-                  </vue-multiselect>
                 </div>
 
                 <div class="file-upload-form">
@@ -303,14 +303,16 @@
                         <br style="line-height: 150%;">
                         <i class="fa fa-map-marker" style="font-size:24px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
-                        <br style="line-height: 150%">
                         <div v-bind:style="{ display: event.sDisplayEventLink }">
+                            <br style="line-height: 150%">
                             <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
                             <span class=nobr class="link" class="mdl-list__item-text-body">
                                 <a :href="event.sEventLink" target="_blank">{{ event.sEventLink }}</a>
                             </span>
                         </div>
-
+                        <br style="line-height: 150%">
+                        <i class="fa fa-tags" aria-hidden="true" style="font-size:18px"></i>
+                        <span class=nobr class="mdl-list__item-text-body">{{ event.sEventTypes }}</span>
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
                                 type="text" id="sample1">
@@ -340,7 +342,7 @@
 
 
                                             <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment" ></input>
+                                                <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment"></input>
                                                 <!-- <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label> -->
                                             </div>
 
@@ -409,10 +411,29 @@
 
             <!-- insert drop down for event types-->
             <h2>WAS</h2>
-            <vue-multiselect id="idMultiSelectSearch" v-model="value" placeholder="Wähle eine oder mehrere Kategorien" label="name" track-by="code" :options="aEventTypes"
-                :multiple="true" :taggable="false" :hide-selected="true" :close-on-select=false select-label="" :show-no-results="false"
-                :searchable="false">
+
+
+            <vue-multiselect v-model="value" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false"
+                :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+                <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single"
+                    v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected
+                </span></template>
             </vue-multiselect>
+
+
+            <!-- <template slot="selection" slot-scope="{ values, search, isOpen }">
+                <div>
+                <label class="typo__label">Simple select / dropdown</label>
+                <vue-multiselect v-model="value" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+                    <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                </vue-multiselect>
+                <pre class="language-json"><code>{{ value }}</code></pre>
+                </div>
+            </template> -->
+
+            <!-- <vue-multiselect id="idMultiSelectSearch" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes"
+                :multiple="true" :close-on-select="false" :clear-on-select="false" select-label="" :show-no-results="false" :searchable="false">
+            </vue-multiselect> -->
 
 
             <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">

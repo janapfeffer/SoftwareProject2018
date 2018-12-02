@@ -191,8 +191,8 @@ exports.get_saved_events = (req, res, next) => {
           $in: user.saved_events
         }
       })
-      .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
-      .populate("event_type")
+      .select("_id event_name author description address start_date end_date event_picture event_type event_link ticket_link comments lat lng current_rating ratings")
+      .populate("event_types")
       .exec()
       .then(events => {
         // console.log(events);
