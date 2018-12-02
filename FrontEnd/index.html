@@ -403,22 +403,27 @@
                 <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete">
                 <!--  @keyup.enter="searchPlace" -->
             </div>
-            <h2>VON-BIS</h2>
             <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-            <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
-                end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions">
-            </el-date-picker>
+            <span id="datepickerID" >
+              <h2>VON-BIS</h2>
+              <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
+                  end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions">
+              </el-date-picker>
+            </span>
+            <span id="eventtypesfilterID">
+              <h2>WAS</h2>
+              <vue-multiselect v-model="value" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false"
+                  :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+                  <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single"
+                      v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected
+                  </span></template>
+              </vue-multiselect>
+            </span>
 
-            <!-- insert drop down for event types-->
-            <h2>WAS</h2>
+            <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
+                Suche
+            </button>
 
-
-            <vue-multiselect v-model="value" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false"
-                :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
-                <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single"
-                    v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected
-                </span></template>
-            </vue-multiselect>
 
 
             <!-- <template slot="selection" slot-scope="{ values, search, isOpen }">
@@ -434,11 +439,6 @@
             <!-- <vue-multiselect id="idMultiSelectSearch" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes"
                 :multiple="true" :close-on-select="false" :clear-on-select="false" select-label="" :show-no-results="false" :searchable="false">
             </vue-multiselect> -->
-
-
-            <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
-                Suche
-            </button>
 
         </div>
 
