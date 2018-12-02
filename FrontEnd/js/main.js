@@ -49,18 +49,23 @@ var oNavigationVue = new Vue({
                 document.getElementById('h2events').innerText = "Favoriten";
                 document.getElementById('AfterLoginFavoriten').innerText = "Events";
                 getFavorites(loggedInUser._id);
-                document.getElementById("searchPlaceInner").childNodes[8].setAttribute("hidden", "hidden");//hide time filter
-                document.getElementById("searchPlaceInner").childNodes[12].setAttribute("hidden", "hidden");//hide event_types filter
-                closeBubble();
+                document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden");//hide time filter
+                document.getElementById("datepickerID").setAttribute("hidden", "hidden");//hide event_types filter
+                if(bubble){
+                  closeBubble();
+                }
+
             }
             else {
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
                 // getAllEvents();
-                getFilteredEvents(oSearchPlaceVue.dDate);
-                document.getElementById("searchPlaceInner").childNodes[8].removeAttribute("hidden"); //display time filter
-                document.getElementById("searchPlaceInner").childNodes[12].removeAttribute("hidden"); //display event types filter
-                closeBubble();
+                getFilteredEvents();
+                document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
+                document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
+                if(bubble){
+                  closeBubble();
+                }
             }
         },
 
@@ -387,9 +392,8 @@ var oEventTableVue = new Vue({
                 if (document.getElementById('h2events').innerText == "Favoriten") {
                     getFavorites(loggedInUser._id);
                 } else if (document.getElementById('h2events').innerText == "Events") {
-                    getFilteredEvents(oSearchPlaceVue.dDate);
+                    getFilteredEvents();
                 }
-                // getFilteredEvents(oSearchPlaceVue.dDate);
                 oEventTableVue.selected = t;
             };
             var onFailed = function onFailed() {
@@ -452,9 +456,8 @@ var oEventTableVue = new Vue({
                     if (document.getElementById('h2events').innerText == "Favoriten") {
                         getFavorites(loggedInUser._id);
                     } else if (document.getElementById('h2events').innerText == "Events") {
-                        getFilteredEvents(oSearchPlaceVue.dDate);
+                        getFilteredEvents();
                     }
-                    // getFilteredEvents(oSearchPlaceVue.dDate);
                     oEventTableVue.selected = t;
                     if (nochniebewertet == true) {
                         aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
@@ -506,9 +509,8 @@ var oEventTableVue = new Vue({
                         if (document.getElementById('h2events').innerText == "Favoriten") {
                             getFavorites(loggedInUser._id);
                         } else if (document.getElementById('h2events').innerText == "Events") {
-                            getFilteredEvents(oSearchPlaceVue.dDate);
+                            getFilteredEvents();
                         }
-                        // getFilteredEvents(oSearchPlaceVue.dDate);
                         oEventTableVue.selected = t;
                     }
                     // console.log("rating sent");
@@ -602,7 +604,7 @@ var oEventTableVue = new Vue({
     // }
 });
 
-function _getFilterHeaders(dDate) {
+function _getFilterHeaders() {
     var headers = [];
 
     if (oSearchPlaceVue.value.length > 0) {
@@ -616,15 +618,15 @@ function _getFilterHeaders(dDate) {
         });
     }
 
-    if (dDate) {
-        if (dDate[0] >= new Date().setHours(0, 0, 0, 0) && dDate[1] >= new Date().setHours(0, 0, 0, 0)) { //check, whether filter dates are in the past -> reject search
+    if (oSearchPlaceVue.dDate) {
+        if (oSearchPlaceVue.dDate[0] >= new Date().setHours(0, 0, 0, 0) && oSearchPlaceVue.dDate[1] >= new Date().setHours(0, 0, 0, 0)) { //check, whether filter dates are in the past -> reject search
             headers.push({
                 name: "filter_start_date",
-                value: dDate[0]
+                value: oSearchPlaceVue.dDate[0]
             });
             headers.push({
                 name: "filter_end_date",
-                value: dDate[1]
+                value: oSearchPlaceVue.dDate[1]
             });
 
         } else {
@@ -640,10 +642,10 @@ function _getFilterHeaders(dDate) {
     return headers;
 };
 
-function getFilteredEvents(dDate) {
+function getFilteredEvents() {
     //filter for start_date and end_date and event types
     //filter_event_type is an array of 1 - x event_types
-    if (dDate || oSearchPlaceVue.value) {
+    if (oSearchPlaceVue.dDate || oSearchPlaceVue.value) {
         var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
         var ajaxRequest = new XMLHttpRequest();
 
@@ -702,7 +704,7 @@ function getFilteredEvents(dDate) {
         ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
 
         // set headers
-        var headers = _getFilterHeaders(dDate);
+        var headers = _getFilterHeaders();
         for (var i = 0; i < headers.length; i++) {
             ajaxRequest.setRequestHeader(headers[i].name, headers[i].value);
         }
@@ -775,8 +777,16 @@ var oSearchPlaceVue = new Vue({
                 map.getViewPort().resize();
                 AfterLoginLogin.style.visibility = "visible";
             }
+            if(bubble){
+              closeBubble();
+            }
+            if(oEventTableVue.selected != ""){
+              oEventTableVue.selected = "";
+            }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
-            getFilteredEvents(this.dDate);
+            if( document.getElementById('h2events').innerText == "Events"){
+              getFilteredEvents();
+            }
             setCenter(this.sQuery);
         },
         //AutoComplet Funktion der Suchleiste
@@ -1100,12 +1110,18 @@ var oRegisterVue = new Vue({
             this.draft.passwordIsInvalid = false;
             this.draft.nameIsInvalid = false;
             var onSuccess = function onSuccess() {
+              if(this.status === 409){
+                Reg_REG_Fehler.style.display = "inline";
+              } else {
                 this.cardShown = !this.cardShown;
                 oRegisterVue.cardShown = false;
                 oNewLoginVue.cardShown = false;
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
                 Reg_EMAIL_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
+              }
+
             };
             var onFailed = function onFailed() {
                 alert(' Fehler beim Login');
@@ -1115,6 +1131,7 @@ var oRegisterVue = new Vue({
                 Reg_SONS_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_EMAIL_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
             }
             if (this.draft.rPassword === "" || this.draft.rPassword2 === "") {
                 this.draft.password2IsInvalid = true;
@@ -1122,6 +1139,7 @@ var oRegisterVue = new Vue({
                 Reg_SONS_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_EMAIL_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
 
             }
 
@@ -1130,6 +1148,7 @@ var oRegisterVue = new Vue({
                 Reg_EMAIL_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
             }
             if (this.draft.rPassword != this.draft.rPassword2) {
                 this.draft.password2IsInvalid = true;
@@ -1137,6 +1156,7 @@ var oRegisterVue = new Vue({
                 Reg_Pass_Fehler.style.display = "inline";
                 Reg_EMAIL_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
 
             }
 
@@ -1144,6 +1164,7 @@ var oRegisterVue = new Vue({
             Reg_Pass_Fehler
             Reg_SONS_Fehler
             Reg_EMAIL_Fehler
+            Reg_REG_Fehler
             if (this.draft.emailIsInvalid == true || this.draft.nameIsInvalid == true || this.draft.password2IsInvalid == true) {
             }
             else {

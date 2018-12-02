@@ -345,10 +345,11 @@ exports.get_filtered_events = (req, res, next) => {
   if(req.headers.filter_event_type){
     filter_options.$and = [{
       event_types: {
-        $in: req.headers.filter_event_type
+        $in: req.headers.filter_event_type.split(",")
       }
     }];
   }
+  console.log(filter_options);
 
   OEvent.find(filter_options) //enter: {verification_status: true} as additional filter for only verified events
     .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
