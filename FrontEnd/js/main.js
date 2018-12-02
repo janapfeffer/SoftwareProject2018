@@ -51,7 +51,10 @@ var oNavigationVue = new Vue({
                 getFavorites(loggedInUser._id);
                 document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden");//hide time filter
                 document.getElementById("datepickerID").setAttribute("hidden", "hidden");//hide event_types filter
-                closeBubble();
+                if(bubble){
+                  closeBubble();
+                }
+
             }
             else {
                 document.getElementById('h2events').innerText = "Events";
@@ -60,7 +63,9 @@ var oNavigationVue = new Vue({
                 getFilteredEvents(oSearchPlaceVue.dDate);
                 document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
                 document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
-                closeBubble();
+                if(bubble){
+                  closeBubble();
+                }
             }
         },
 
@@ -774,6 +779,9 @@ var oSearchPlaceVue = new Vue({
                 document.querySelector("#searchPlace").vanillaTilt.destroy()
                 map.getViewPort().resize();
                 AfterLoginLogin.style.visibility = "visible";
+            }
+            if(bubble){
+              closeBubble();
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
             if( document.getElementById('h2events').innerText == "Events"){
