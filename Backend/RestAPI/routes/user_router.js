@@ -14,7 +14,7 @@ router.get("/:userId/saved_events_ids", checkAuth, UserController.get_saved_even
 router.post("/saveEvent", checkAuth, UserController.add_to_saved_events);
 
 
-//unused routes
-// router.delete("/:userId",  UserController.user_delete);
+//only used for testing
+router.delete("/:userId",  UserController.user_delete);
 
 module.exports = router;
