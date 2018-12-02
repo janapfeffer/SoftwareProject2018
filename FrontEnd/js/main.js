@@ -783,6 +783,9 @@ var oSearchPlaceVue = new Vue({
             if(bubble){
               closeBubble();
             }
+            if(oEventTableVue.selected != ""){
+              oEventTableVue.selected = "";
+            }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
             if( document.getElementById('h2events').innerText == "Events"){
               getFilteredEvents(this.dDate);
