@@ -1113,12 +1113,18 @@ var oRegisterVue = new Vue({
             this.draft.passwordIsInvalid = false;
             this.draft.nameIsInvalid = false;
             var onSuccess = function onSuccess() {
+              if(this.status === 409){
+                Reg_REG_Fehler.style.display = "inline";
+              } else {
                 this.cardShown = !this.cardShown;
                 oRegisterVue.cardShown = false;
                 oNewLoginVue.cardShown = false;
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
                 Reg_EMAIL_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
+              }
+
             };
             var onFailed = function onFailed() {
                 alert(' Fehler beim Login');
@@ -1128,6 +1134,7 @@ var oRegisterVue = new Vue({
                 Reg_SONS_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_EMAIL_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
             }
             if (this.draft.rPassword === "" || this.draft.rPassword2 === "") {
                 this.draft.password2IsInvalid = true;
@@ -1135,6 +1142,7 @@ var oRegisterVue = new Vue({
                 Reg_SONS_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_EMAIL_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
 
             }
 
@@ -1143,6 +1151,7 @@ var oRegisterVue = new Vue({
                 Reg_EMAIL_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
             }
             if (this.draft.rPassword != this.draft.rPassword2) {
                 this.draft.password2IsInvalid = true;
@@ -1150,6 +1159,7 @@ var oRegisterVue = new Vue({
                 Reg_Pass_Fehler.style.display = "inline";
                 Reg_EMAIL_Fehler.style.display = "none";
                 Reg_SONS_Fehler.style.display = "none";
+                Reg_REG_Fehler.style.display = "none";
 
             }
 
@@ -1157,6 +1167,7 @@ var oRegisterVue = new Vue({
             Reg_Pass_Fehler
             Reg_SONS_Fehler
             Reg_EMAIL_Fehler
+            Reg_REG_Fehler
             if (this.draft.emailIsInvalid == true || this.draft.nameIsInvalid == true || this.draft.password2IsInvalid == true) {
             }
             else {
