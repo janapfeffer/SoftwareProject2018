@@ -180,8 +180,8 @@ function getFavorites(user_id) {
                     sEventLink: apievent.event_link,
                     sTicketLink: apievent.ticket_link,
                     oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-                    oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/")
-                   // sEventTypes: getEventTypesAsString(apievent.event_types)
+                    oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
+                    sEventTypes: getEventTypesAsString(apievent.event_types)
                 };
             });
             oEventTableVue.allEvents.sort(function (a, b) {
