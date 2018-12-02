@@ -37,6 +37,29 @@ var oNavigationVue = new Vue({
 
         showNewEventCard: function () {
             $(window).scrollTop(0);
+            if (oNewEventVue.cardShown === true) {
+                oNewEventVue.draft = {
+                    sName: "",
+                    sDescription: "",
+                    sAdress: "",
+                    sDate: "",
+                    time: "",
+                    oLatLng: {},
+                    status: "draft",
+                    EDate: null,
+                    sEventLink: null,
+                    iEventId: Math.floor(Math.random() * 99999) + 1,
+                    oSelectedFile: "",
+                    image: null,
+                    titleIsInvalid: false,
+                    descIsInvalid: false,
+                    adressIsInvalid: false,
+                    displayError: false,
+                    dateIsInvalid: false
+                };
+                oNewEventVue.value7 = '';
+                oNewEventVue.value = [];
+            };
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
@@ -51,8 +74,8 @@ var oNavigationVue = new Vue({
                 getFavorites(loggedInUser._id);
                 document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden");//hide time filter
                 document.getElementById("datepickerID").setAttribute("hidden", "hidden");//hide event_types filter
-                if(bubble){
-                  closeBubble();
+                if (bubble) {
+                    closeBubble();
                 }
 
             }
@@ -63,8 +86,8 @@ var oNavigationVue = new Vue({
                 getFilteredEvents();
                 document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
                 document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
-                if(bubble){
-                  closeBubble();
+                if (bubble) {
+                    closeBubble();
                 }
             }
         },
@@ -574,11 +597,11 @@ var oEventTableVue = new Vue({
                     document.getElementById('ratingnumber').innerText = aktuellebewertung;
                     dialog.showModal();
                 }
-                dialog.querySelector('.close').addEventListener('click', function () {
-                    dialog.close();
-                    dialogopen = false;
+                // dialog.querySelector('.close').addEventListener('click', function () {
+                //     dialog.close();
+                //     dialogopen = false;
 
-                });
+                // });
                 $(dialog).children().first().click(function (e) {
                     e.stopPropagation();
                 })
@@ -606,17 +629,21 @@ var oEventTableVue = new Vue({
 
 function _getFilterHeaders() {
     var headers = [];
+    headers.push({
+        name: "filter_event_type",
+        value: oSearchPlaceVue.value.code    
+    })
 
-    if (oSearchPlaceVue.value.length > 0) {
-        var filter_event_types = [];
-        for (var i = 0; i < oSearchPlaceVue.value.length; i++) {
-            filter_event_types.push(oSearchPlaceVue.value[i].code);
-        }
-        headers.push({
-            name: "filter_event_type",
-            value: filter_event_types
-        });
-    }
+    // if (oSearchPlaceVue.value.length > 0) {
+    //     var filter_event_types = [];
+    //     for (var i = 0; i < oSearchPlaceVue.value.length; i++) {
+    //         filter_event_types.push(oSearchPlaceVue.value[i].code);
+    //     }
+    //     headers.push({
+    //         name: "filter_event_type",
+    //         value: filter_event_types
+    //     });
+    // }
 
     if (oSearchPlaceVue.dDate) {
         if (oSearchPlaceVue.dDate[0] >= new Date().setHours(0, 0, 0, 0) && oSearchPlaceVue.dDate[1] >= new Date().setHours(0, 0, 0, 0)) { //check, whether filter dates are in the past -> reject search
@@ -630,7 +657,8 @@ function _getFilterHeaders() {
             });
 
         } else {
-            document.getElementById("idDatePickerErrorEmpty").style.display = "block";
+            alert("Bitte wähle kein Datum aus der Vergangenheit aus.");
+            // document.getElementById("idDatePickerErrorEmpty").style.display = "block";
             return null;
         }
     } else {
@@ -769,7 +797,13 @@ var oSearchPlaceVue = new Vue({
         //Sucht nach einem Ort
         searchPlace: function searchPlace() {
             if (document.body.classList.contains('landingpage')) {
-
+                //don't go to next page when past event is selected
+                if (oSearchPlaceVue.dDate) {
+                    if (!(oSearchPlaceVue.dDate[0] >= new Date().setHours(0, 0, 0, 0) && oSearchPlaceVue.dDate[1] >= new Date().setHours(0, 0, 0, 0))) {
+                        alert("Bitte wähle kein Datum aus der Vergangenheit aus.");
+                        return;
+                    }
+                }
                 setCenter(this.sQuery);
                 AfterLoginLogin.style.visibility = "visible";
                 document.body.classList.remove('landingpage');
@@ -777,15 +811,15 @@ var oSearchPlaceVue = new Vue({
                 map.getViewPort().resize();
                 AfterLoginLogin.style.visibility = "visible";
             }
-            if(bubble){
-              closeBubble();
+            if (bubble) {
+                closeBubble();
             }
-            if(oEventTableVue.selected != ""){
-              oEventTableVue.selected = "";
+            if (oEventTableVue.selected != "") {
+                oEventTableVue.selected = "";
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
-            if( document.getElementById('h2events').innerText == "Events"){
-              getFilteredEvents();
+            if (document.getElementById('h2events').innerText == "Events") {
+                getFilteredEvents();
             }
             setCenter(this.sQuery);
         },
@@ -948,7 +982,8 @@ var oNewEventVue = new Vue({
             if (this.draft.sName === "" ||
                 this.draft.sDescription === "" ||
                 this.draft.sAdress === "" ||
-                this.draft.EDate === null) {
+                this.draft.EDate === null ||
+                document.getElementById("NewEventLink").classList.contains("is-invalid")) {
                 this.draft.displayError = true;
                 return;
             }
@@ -1021,6 +1056,8 @@ var oNewEventVue = new Vue({
                             displayError: false,
                             dateIsInvalid: false
                         };
+                        oNewEventVue.value7 = '',
+                        oNewEventVue.value = [],
                         document.getElementById("imageUpload").value = "";
                         oNewEventVue.cardShown = false; //close card for new event
                         $(window).scrollTop(0);
@@ -1030,7 +1067,7 @@ var oNewEventVue = new Vue({
                     });
                 },
                 onError = function (error) {
-                    alert('Geodaten nicht bekommen. Bitte überprüfen Sie, ob die angegebene Adresse existiert.');
+                    alert('Geodaten nicht bekommen. Bitte überprüfe, ob die angegebene Adresse existiert.');
                 }
             )
         },
@@ -1110,17 +1147,17 @@ var oRegisterVue = new Vue({
             this.draft.passwordIsInvalid = false;
             this.draft.nameIsInvalid = false;
             var onSuccess = function onSuccess() {
-              if(this.status === 409){
-                Reg_REG_Fehler.style.display = "inline";
-              } else {
-                this.cardShown = !this.cardShown;
-                oRegisterVue.cardShown = false;
-                oNewLoginVue.cardShown = false;
-                Reg_Pass_Fehler.style.display = "none";
-                Reg_SONS_Fehler.style.display = "none";
-                Reg_EMAIL_Fehler.style.display = "none";
-                Reg_REG_Fehler.style.display = "none";
-              }
+                if (this.status === 409) {
+                    Reg_REG_Fehler.style.display = "inline";
+                } else {
+                    this.cardShown = !this.cardShown;
+                    oRegisterVue.cardShown = false;
+                    oNewLoginVue.cardShown = false;
+                    Reg_Pass_Fehler.style.display = "none";
+                    Reg_SONS_Fehler.style.display = "none";
+                    Reg_EMAIL_Fehler.style.display = "none";
+                    Reg_REG_Fehler.style.display = "none";
+                }
 
             };
             var onFailed = function onFailed() {

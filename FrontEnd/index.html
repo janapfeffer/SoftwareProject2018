@@ -104,7 +104,7 @@
         <!-- Registiereungs Daten werden immer mit "r." verarbeitet, zum Beispiel "rPassword"/"rUserName"-->
         <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <div id="newRegister" class="sidecard">
-                <h2>Registrieren</h2>
+                <h2 style="padding: 0px;">Registrieren</h2>
                 <div id="Reg_Pass_Fehler" style="display: none">
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
@@ -125,7 +125,7 @@
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
                         <b>
-                            Bitte füllen Sie alle Felder sinngemäß aus.
+                            Bitte fülle alle Felder sinngemäß aus.
                         </b>
                     </p>
                 </div>
@@ -134,7 +134,7 @@
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
                         <b>
-                            Bitte geben Sie eine echte Email Adresse an.
+                            Bitte gib eine echte Email Adresse an.
                         </b>
                     </p>
                 </div>
@@ -160,7 +160,7 @@
 
 
                 <div class="buttons">
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                    <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                         Abschließen
                     </button>
                 </div>
@@ -177,12 +177,12 @@
         <div id="EINLOGEN_Karte">
             <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
                 <div id="newLogin" class="sidecard">
-                    <h2>Einloggen</h2>
+                    <h2 style="padding: 0px;">Einloggen</h2>
                     <div id="LoginFehlerLeer" style="display: none">
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
                             <b>
-                                Bitte füllen Sie alle Felder aus!
+                                Bitte fülle alle Felder aus!
                             </b>
                         </p>
                     </div>
@@ -192,7 +192,7 @@
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
                             <b>
-                                Sie konnten nicht authentifiziert werden. Bitte versuchen Sie es erneut.
+                                Du konntest nicht authentifiziert werden. Bitte versuche es erneut.
                             </b>
                         </p>
                     </div>
@@ -221,13 +221,13 @@
         <!-- Karte für Event, Alles rechts neben der Karte-->
         <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <div id="newEvent" class="sidecard">
-                <h2>Neues Event eintragen</h2>
+                <h2 style="padding: 0px;">Neues Event eintragen</h2>
                 <!-- <div id="displayNewEventError" style="display: none"> -->
                 <div v-show="draft.displayError">
                     <i class="material-icons" style="float: left">error_outline</i>
                     <p style="color: #d50000; ">
                         <b>
-                            Bitte füllen Sie alle benötigten Felder aus.
+                            Bitte fülle alle benötigten Felder aus und überprüfe alle Werte.
                         </b>
                     </p>
                 </div>
@@ -243,7 +243,7 @@
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
                     <label class="mdl-textfield__label" for="sample1">Adresse*</label>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div id="NewEventLink" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
                     <label class="mdl-textfield__label" for="sample1">Link</label>
                 </div>
@@ -260,7 +260,7 @@
                     <p>Datum*</p>
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
                     <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
-                        start-placeholder="Startdatum" end-placeholder="Enddatum" :default-time="['15:00:00', '19:00:00']">
+                        start-placeholder="Von" end-placeholder="Bis" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
 
@@ -276,7 +276,7 @@
                     <!-- <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
                         Vorschau
                     </button> -->
-                    <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+                    <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                         Senden
                     </button>
                 </div>
@@ -311,16 +311,15 @@
                         <br style="line-height: 150%;">
                         <i class="fa fa-map-marker" style="font-size:24px"></i>
                         <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+                        <br style="line-height: 150%">
+                        <i class="fa fa-tags" aria-hidden="true" style="font-size:18px"></i>
+                        <span class=nobr class="mdl-list__item-text-body">{{ event.sEventTypes }}</span>
                         <div v-bind:style="{ display: event.sDisplayEventLink }">
-                            <br style="line-height: 150%">
                             <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
                             <span class=nobr class="link" class="mdl-list__item-text-body">
                                 <a :href="event.sEventLink" target="_blank">{{ event.sEventLink }}</a>
                             </span>
                         </div>
-                        <br style="line-height: 150%">
-                        <i class="fa fa-tags" aria-hidden="true" style="font-size:18px"></i>
-                        <span class=nobr class="mdl-list__item-text-body">{{ event.sEventTypes }}</span>
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
                                 type="text" id="sample1">
@@ -329,16 +328,16 @@
                         <!-- Popup Dialog -->
 
                         <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
-                        box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px; padding: 20px 25px;">
+                        box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
                             <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
 
                                 <div style="background-color:whitesmoke">
 
-                                    <h4 class="mdl-dialog__title" style="font-family:Bahnschrift;" id="kommiüberschrift">Kommentare</h4>
+                                    <h2 class="mdl-dialog__title" id="kommiüberschrift">Kommentare</h2>
                                     <div class="mdl-dialog__content">
                                         <img id="idPopUpPicture" src="event.oImage" class="eventSymbol" height="65" width="65"></img>
 
-                                        <p style="color:black;  font-family:Bahnschrift;" id="eventidkommentare"> idThumbDown</p>
+                                        <p style="color:black;" id="eventidkommentare"> idThumbDown</p>
 
                                         <!-- Use an element to toggle between a like/dislike icon -->
                                         <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
@@ -354,7 +353,7 @@
                                                 <!-- <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label> -->
                                             </div>
 
-                                            <button id="meins" style="color:white; font-family:Bahnschrift; float:right;margin-right: 4%;background-color: #365067;width: 100px; top: 4px;left: 20px; height: 40px; padding: 0px 4px"
+                                            <button id="meins" style="float:right; top: 4px; left: 20px;"
                                                 @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
 
                                             <br />
@@ -378,7 +377,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <button type="button" class="mdl-button close">close</button>
+                                    <!-- <button type="button" class="mdl-button close">close</button> -->
                                 </div>
                             </div>
                         </dialog>
@@ -403,7 +402,7 @@
                 <i class="material-icons" style="float: left">error_outline</i>
                 <p style="color:red; ">
                     <b>
-                        Bitte wählen Sie kein vergangenes Datum aus!
+                        Bitte wähle kein vergangenes Datum aus!
                     </b>
                 </p>
             </div>
@@ -412,16 +411,16 @@
                 <!--  @keyup.enter="searchPlace" -->
             </div>
             <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-            <span id="datepickerID" >
+            <span id="datepickerID" > 
               <h2>VON-BIS</h2>
-              <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Start Datum"
-                  end-placeholder="End Datum" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions">
+              <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von"
+                  end-placeholder="Bis" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA" >
               </el-date-picker>
             </span>
             <span id="eventtypesfilterID">
               <h2>WAS</h2>
-              <vue-multiselect v-model="value" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false"
-                  :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+              <vue-multiselect v-model="value" :options="aEventTypes" :multiple="false" :close-on-select="true" :clear-on-select="false" :max="4"
+                  :preserve-search="true" placeholder="Kategorie" label="name" track-by="name" :preselect-first="true">
                   <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single"
                       v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected
                   </span></template>
