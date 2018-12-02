@@ -60,7 +60,7 @@ var oNavigationVue = new Vue({
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
                 // getAllEvents();
-                getFilteredEvents(oSearchPlaceVue.dDate);
+                getFilteredEvents();
                 document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
                 document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
                 if(bubble){
@@ -392,9 +392,8 @@ var oEventTableVue = new Vue({
                 if (document.getElementById('h2events').innerText == "Favoriten") {
                     getFavorites(loggedInUser._id);
                 } else if (document.getElementById('h2events').innerText == "Events") {
-                    getFilteredEvents(oSearchPlaceVue.dDate);
+                    getFilteredEvents();
                 }
-                // getFilteredEvents(oSearchPlaceVue.dDate);
                 oEventTableVue.selected = t;
             };
             var onFailed = function onFailed() {
@@ -457,9 +456,8 @@ var oEventTableVue = new Vue({
                     if (document.getElementById('h2events').innerText == "Favoriten") {
                         getFavorites(loggedInUser._id);
                     } else if (document.getElementById('h2events').innerText == "Events") {
-                        getFilteredEvents(oSearchPlaceVue.dDate);
+                        getFilteredEvents();
                     }
-                    // getFilteredEvents(oSearchPlaceVue.dDate);
                     oEventTableVue.selected = t;
                     if (nochniebewertet == true) {
                         aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
@@ -511,9 +509,8 @@ var oEventTableVue = new Vue({
                         if (document.getElementById('h2events').innerText == "Favoriten") {
                             getFavorites(loggedInUser._id);
                         } else if (document.getElementById('h2events').innerText == "Events") {
-                            getFilteredEvents(oSearchPlaceVue.dDate);
+                            getFilteredEvents();
                         }
-                        // getFilteredEvents(oSearchPlaceVue.dDate);
                         oEventTableVue.selected = t;
                     }
                     // console.log("rating sent");
@@ -607,7 +604,7 @@ var oEventTableVue = new Vue({
     // }
 });
 
-function _getFilterHeaders(dDate) {
+function _getFilterHeaders() {
     var headers = [];
 
     if (oSearchPlaceVue.value.length > 0) {
@@ -621,15 +618,15 @@ function _getFilterHeaders(dDate) {
         });
     }
 
-    if (dDate) {
-        if (dDate[0] >= new Date().setHours(0, 0, 0, 0) && dDate[1] >= new Date().setHours(0, 0, 0, 0)) { //check, whether filter dates are in the past -> reject search
+    if (oSearchPlaceVue.dDate) {
+        if (oSearchPlaceVue.dDate[0] >= new Date().setHours(0, 0, 0, 0) && oSearchPlaceVue.dDate[1] >= new Date().setHours(0, 0, 0, 0)) { //check, whether filter dates are in the past -> reject search
             headers.push({
                 name: "filter_start_date",
-                value: dDate[0]
+                value: oSearchPlaceVue.dDate[0]
             });
             headers.push({
                 name: "filter_end_date",
-                value: dDate[1]
+                value: oSearchPlaceVue.dDate[1]
             });
 
         } else {
@@ -645,10 +642,10 @@ function _getFilterHeaders(dDate) {
     return headers;
 };
 
-function getFilteredEvents(dDate) {
+function getFilteredEvents() {
     //filter for start_date and end_date and event types
     //filter_event_type is an array of 1 - x event_types
-    if (dDate || oSearchPlaceVue.value) {
+    if (oSearchPlaceVue.dDate || oSearchPlaceVue.value) {
         var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
         var ajaxRequest = new XMLHttpRequest();
 
@@ -707,7 +704,7 @@ function getFilteredEvents(dDate) {
         ajaxRequest.open('GET', GETFILTEREDEVENTS_URL);
 
         // set headers
-        var headers = _getFilterHeaders(dDate);
+        var headers = _getFilterHeaders();
         for (var i = 0; i < headers.length; i++) {
             ajaxRequest.setRequestHeader(headers[i].name, headers[i].value);
         }
@@ -788,7 +785,7 @@ var oSearchPlaceVue = new Vue({
             }
             document.getElementById("idDatePickerErrorEmpty").style.display = "none";
             if( document.getElementById('h2events').innerText == "Events"){
-              getFilteredEvents(this.dDate);
+              getFilteredEvents();
             }
             setCenter(this.sQuery);
         },
