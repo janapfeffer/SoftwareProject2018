@@ -1186,7 +1186,8 @@ var oRegisterVue = new Vue({
 
             }
 
-            if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
+            // if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
+            if(this.draft.rEmail.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) == null) {
                 this.draft.emailIsInvalid = true;
                 Reg_EMAIL_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
