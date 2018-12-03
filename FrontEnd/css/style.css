@@ -88,10 +88,11 @@ input{
 }
 
 .multiselect {
-  width: 230px;
+  width: 350px;
+  line-height: 25px;
   color: #606266;
   display: inline-block;
-  bottom: 2px;
+  /* bottom: 2px; */
 }
 
 /* .multiselect__tags {

@@ -411,19 +411,19 @@
                 <!--  @keyup.enter="searchPlace" -->
             </div>
             <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-            <span id="datepickerID" > 
+            <span id="datepickerID"class="autocomplete" >
               <h2>VON-BIS</h2>
               <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von"
                   end-placeholder="Bis" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA" >
               </el-date-picker>
             </span>
-            <span id="eventtypesfilterID">
+            <span id="eventtypesfilterID" class="autocomplete">
               <h2>WAS</h2>
-              <vue-multiselect v-model="value" :options="aEventTypes" :multiple="false" :close-on-select="true" :clear-on-select="false" :max="4"
-                  :preserve-search="true" placeholder="Kategorie" label="name" track-by="name" :preselect-first="true">
-                  <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single"
-                      v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected
-                  </span></template>
+              <vue-multiselect v-model="value" :options="aEventTypes" :multiple="true" :close-on-select="true" :clear-on-select="false" :max="4"
+                  :preserve-search="true" placeholder="Kategorie" label="name" track-by="name" :preselect-first="true" :limit="1">
+                  <!-- <template slot="selection" slot-scope="{ values, search, isOpen }">
+                    <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                  </template> -->
               </vue-multiselect>
             </span>
 
