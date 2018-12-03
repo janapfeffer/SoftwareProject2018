@@ -1159,6 +1159,10 @@ var oRegisterVue = new Vue({
                     Reg_SONS_Fehler.style.display = "none";
                     Reg_EMAIL_Fehler.style.display = "none";
                     Reg_REG_Fehler.style.display = "none";
+                    oRegisterVue.draft.rUserName = "";
+                    oRegisterVue.draft.rEmail = "";
+                    oRegisterVue.draft.rPassword = "";
+                    oRegisterVue.draft.rPassword2 = "";
                 }
 
             };
