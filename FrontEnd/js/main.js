@@ -94,7 +94,7 @@ var oNavigationVue = new Vue({
 
         showNewLoginCard: function () {
             $(window).scrollTop(0);
-
+            
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
                 logoutmodus = false;
@@ -1150,7 +1150,8 @@ var oRegisterVue = new Vue({
                 } else {
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
-                    oNewLoginVue.cardShown = false;
+                    oNewLoginVue.cardShown = true;
+                    NewRegisteredUser.style.display = "inline";
                     Reg_Pass_Fehler.style.display = "none";
                     Reg_SONS_Fehler.style.display = "none";
                     Reg_EMAIL_Fehler.style.display = "none";
@@ -1243,6 +1244,7 @@ var oNewLoginVue = new Vue({
     methods: {
 
         formsubmit: function () {
+            NewRegisteredUser.style.display = "none";
             logoutmodus = true;
             this.draft.passwordIsInvalid = false;
             this.draft.emailIsInvalid = false;
@@ -1322,28 +1324,7 @@ var oNewLoginVue = new Vue({
             else {
                 logoutmodus = false;
             }
-
-            // }
-            // else {
-            //     loggedInUser._id = "";
-            //     loggedInUser.saved_events = [];
-            //       for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-            //         if(oEventTableVue.allEvents[j].faved){
-            //           oEventTableVue.favToggle(oEventTableVue.allEvents[j]);
-            //         }
-            //       }
-            //
-            //
-            //     AfterLoginFavoriten.style.visibility = "hidden";
-            //     AfterLoginEvent.style.visibility = "hidden";
-            //     document.getElementById('AfterLoginLogin').innerText = "LogIn";
-            //     newLoginWrapper.style.display = "visible";
-            //     oEventTableVue.starVisibility = "hidden";
-            //     oNewLoginVue.draft.sUserName = "";
-            //     oNewLoginVue.draft.sPassword = "";
-            //     document.getElementById("Login_username").innerText = "";
-            //     document.getElementById("Login_password").innerText = "";
-            // }
+            
         },
 
 
