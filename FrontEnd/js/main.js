@@ -94,7 +94,7 @@ var oNavigationVue = new Vue({
 
         showNewLoginCard: function () {
             $(window).scrollTop(0);
-            
+
             oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
                 logoutmodus = false;
@@ -627,10 +627,13 @@ var oEventTableVue = new Vue({
 
 function _getFilterHeaders() {
     var headers = [];
-    headers.push({
-        name: "filter_event_type",
-        value: oSearchPlaceVue.value.code    
-    })
+    if (oSearchPlaceVue.value.code){
+      headers.push({
+          name: "filter_event_type",
+          value: oSearchPlaceVue.value.code
+      });
+    }
+
 
     // if (oSearchPlaceVue.value.length > 0) {
     //     var filter_event_types = [];
@@ -1324,7 +1327,7 @@ var oNewLoginVue = new Vue({
             else {
                 logoutmodus = false;
             }
-            
+
         },
 
 
