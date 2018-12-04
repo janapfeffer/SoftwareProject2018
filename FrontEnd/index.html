@@ -331,7 +331,7 @@
                         </div>
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
-                                type="text" id="sample1">
+                                type="text" id="sample1" readonly>
                             <label class="mdl-textfield__label" for="sample1">Kommentiere und bewerte hier...</label>
                         </div>
                         <!-- Popup Dialog -->
@@ -420,7 +420,7 @@
                 <!--  @keyup.enter="searchPlace" -->
             </div>
             <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-            <span id="datepickerID" > 
+            <span id="datepickerID" >
               <h2>VON-BIS</h2>
               <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von"
                   end-placeholder="Bis" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA" >
