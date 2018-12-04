@@ -1064,6 +1064,7 @@ var oNewEventVue = new Vue({
                         oNewEventVue.value = [],
                         document.getElementById("imageUpload").value = "";
                         oNewEventVue.cardShown = false; //close card for new event
+                        getFilteredEvents();
                         $(window).scrollTop(0);
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
