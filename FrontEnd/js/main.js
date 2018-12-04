@@ -636,24 +636,24 @@ var oEventTableVue = new Vue({
 
 function _getFilterHeaders() {
     var headers = [];
-    if (oSearchPlaceVue.value.code){
-      headers.push({
-          name: "filter_event_type",
-          value: oSearchPlaceVue.value.code
-      });
-    }
-
-
-    // if (oSearchPlaceVue.value.length > 0) {
-    //     var filter_event_types = [];
-    //     for (var i = 0; i < oSearchPlaceVue.value.length; i++) {
-    //         filter_event_types.push(oSearchPlaceVue.value[i].code);
-    //     }
-    //     headers.push({
-    //         name: "filter_event_type",
-    //         value: filter_event_types
-    //     });
+    // if (oSearchPlaceVue.value.code){
+    //   headers.push({
+    //       name: "filter_event_type",
+    //       value: oSearchPlaceVue.value.code
+    //   });
     // }
+
+
+    if (oSearchPlaceVue.value.length > 0) {
+        var filter_event_types = [];
+        for (var i = 0; i < oSearchPlaceVue.value.length; i++) {
+            filter_event_types.push(oSearchPlaceVue.value[i].code);
+        }
+        headers.push({
+            name: "filter_event_type",
+            value: filter_event_types
+        });
+    }
 
     if (oSearchPlaceVue.dDate) {
         if (oSearchPlaceVue.dDate[0] >= new Date().setHours(0, 0, 0, 0) && oSearchPlaceVue.dDate[1] >= new Date().setHours(0, 0, 0, 0)) { //check, whether filter dates are in the past -> reject search
