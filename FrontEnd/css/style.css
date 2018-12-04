@@ -88,7 +88,7 @@ input{
 }
 
 .multiselect {
-  width: 350px;
+  width: 270px;
   line-height: 25px;
   color: #606266;
   display: inline-block;
@@ -175,7 +175,7 @@ h1{
 
 #searchInput {
  border: 1px solid #dcdfe6;
- width: 340px;
+ width: 315px;
 }
 
 .landingpage #searchInput {

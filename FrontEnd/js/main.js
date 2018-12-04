@@ -798,7 +798,7 @@ var oSearchPlaceVue = new Vue({
     methods: {
         //Sucht nach einem Ort
         newText: text=>{
-            return "+" +text + " weitere ausgewählt.";
+            return "+" +text + " Tags";
         },
         searchPlace: function searchPlace() {
             if (document.body.classList.contains('landingpage')) {
