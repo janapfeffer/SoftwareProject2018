@@ -797,6 +797,9 @@ var oSearchPlaceVue = new Vue({
     },
     methods: {
         //Sucht nach einem Ort
+        newText: text=>{
+            return "+ weitere ausgewählt." ;
+        },
         searchPlace: function searchPlace() {
             if (document.body.classList.contains('landingpage')) {
                 //don't go to next page when past event is selected

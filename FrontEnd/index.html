@@ -70,8 +70,8 @@
     <!-- element -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
-    <script>ELEMENT.locale(ELEMENT.lang.en)</script>
+    <script src="https://unpkg.com/element-ui/lib/umd/locale/de.js"></script>
+    <script>ELEMENT.locale(ELEMENT.lang.de)</script>
     <!-- Own Files-->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -419,8 +419,8 @@
             </span>
             <span id="eventtypesfilterID" class="autocomplete">
               <h2>WAS</h2>
-              <vue-multiselect v-model="value" :options="aEventTypes" :multiple="true" :close-on-select="true" :clear-on-select="false" :max="4"
-                  :preserve-search="true" placeholder="Kategorie" label="name" track-by="name" :preselect-first="true" :limit="1">
+              <vue-multiselect  v-model="value" v-bind:limit-text="newText" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false" :searchable="false"
+                  :preserve-search="true" placeholder="Kategorien" label="name" track-by="name" :preselect-first="true" :limit="1" select-label="Auswählen" selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" >
                   <!-- <template slot="selection" slot-scope="{ values, search, isOpen }">
                     <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
                   </template> -->
