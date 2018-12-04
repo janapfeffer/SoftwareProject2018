@@ -99,12 +99,10 @@ input{
   padding: 11px 40px 0 8px;
 } */
 
-/* #searchPlaceInner .multiselect__tags-wrap {
-  display: inline-block;
-  position: absolute;
-  top: 70px;
-  left: -305%;
-} */
+#searchPlaceInner .multiselect__tags-wrap {
+  display: inline-flex;
+
+} 
 
 /* .landingpage #searchPlaceInner .multiselect__tags-wrap {
   display: inline-block;

@@ -419,11 +419,8 @@
             </span>
             <span id="eventtypesfilterID" class="autocomplete">
               <h2>WAS</h2>
-              <vue-multiselect  v-model="value" v-bind:limit-text="newText" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false" :searchable="false"
-                  :preserve-search="true" placeholder="Kategorien" label="name" track-by="name" :preselect-first="true" :limit="1" select-label="Auswählen" selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" >
-                  <!-- <template slot="selection" slot-scope="{ values, search, isOpen }">
-                    <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
-                  </template> -->
+              <vue-multiselect  v-model="value" v-bind:limit-text="newText"  :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false" :searchable="false"
+             placeholder="Kategorien" label="name" track-by="name" :limit="1" select-label="Auswählen" selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" :preselect-first="true">
               </vue-multiselect>
             </span>
 
