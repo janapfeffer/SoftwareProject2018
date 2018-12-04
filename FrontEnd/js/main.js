@@ -94,10 +94,9 @@ var oNavigationVue = new Vue({
 
         showNewLoginCard: function () {
             $(window).scrollTop(0);
-            if (oRegisterVue.cardShown == true) {
-                oRegisterVue.cardShown = false;
-            }
-            oNewLoginVue.cardShown = true;
+            oRegisterVue.cardShown = false;
+
+            oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
             if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
                 logoutmodus = false;
                 document.getElementById('AfterLoginLogin').innerText = "LogIn";
@@ -111,8 +110,13 @@ var oNavigationVue = new Vue({
 
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
-                document.getElementById('h2events').innerText = "Events";
-                getFilteredEvents();
+                if (document.getElementById('h2events').innerText != "Events") {
+                  document.getElementById('h2events').innerText = "Events";
+                  document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
+                  document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
+                  getFilteredEvents();
+                }
+
                 AfterLoginEvent.style.visibility = "hidden";
                 // document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
@@ -446,8 +450,9 @@ var oEventTableVue = new Vue({
                     ausgewaehlt = target;
                 }
                 // map.setCenter(target.marker.getPosition(), true);
-                openBubble(target.marker.getPosition(), target.marker.data);
                 zoomMap(target.marker.getPosition());
+                openBubble(target.marker.getPosition(), target.marker.data);
+
             }
             else { }
         },
@@ -631,21 +636,24 @@ var oEventTableVue = new Vue({
 
 function _getFilterHeaders() {
     var headers = [];
-    // headers.push({
-    //     name: "filter_event_type",
-    //     value: oSearchPlaceVue.value.code
-    // })
-
-    if (oSearchPlaceVue.value.length > 0) {
-        var filter_event_types = [];
-        for (var i = 0; i < oSearchPlaceVue.value.length; i++) {
-            filter_event_types.push(oSearchPlaceVue.value[i].code);
-        }
-        headers.push({
-            name: "filter_event_type",
-            value: filter_event_types
-        });
+    if (oSearchPlaceVue.value.code){
+      headers.push({
+          name: "filter_event_type",
+          value: oSearchPlaceVue.value.code
+      });
     }
+
+
+    // if (oSearchPlaceVue.value.length > 0) {
+    //     var filter_event_types = [];
+    //     for (var i = 0; i < oSearchPlaceVue.value.length; i++) {
+    //         filter_event_types.push(oSearchPlaceVue.value[i].code);
+    //     }
+    //     headers.push({
+    //         name: "filter_event_type",
+    //         value: filter_event_types
+    //     });
+    // }
 
     if (oSearchPlaceVue.dDate) {
         if (oSearchPlaceVue.dDate[0] >= new Date().setHours(0, 0, 0, 0) && oSearchPlaceVue.dDate[1] >= new Date().setHours(0, 0, 0, 0)) { //check, whether filter dates are in the past -> reject search
@@ -672,7 +680,7 @@ function _getFilterHeaders() {
     return headers;
 };
 
-function getFilteredEvents() {
+function getFilteredEvents(displayId) {
     //filter for start_date and end_date and event types
     //filter_event_type is an array of 1 - x event_types
     if (oSearchPlaceVue.dDate || oSearchPlaceVue.value) {
@@ -717,6 +725,12 @@ function getFilteredEvents() {
                 }
                 initalFavoriteSetting = false;
             }
+            if(displayId) {
+              oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
+                return obj.iEventId == displayId
+              }));
+            }
+
             //change center of map and filter for location
             //   setCenter(oSearchPlaceVue.sQuery);
         };
@@ -1065,6 +1079,8 @@ var oNewEventVue = new Vue({
                         oNewEventVue.value = [],
                         document.getElementById("imageUpload").value = "";
                         oNewEventVue.cardShown = false; //close card for new event
+                        getFilteredEvents(res.data.created_event._id);
+
                         $(window).scrollTop(0);
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
@@ -1157,11 +1173,16 @@ var oRegisterVue = new Vue({
                 } else {
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
-                    oNewLoginVue.cardShown = false;
+                    oNewLoginVue.cardShown = true;
+                    NewRegisteredUser.style.display = "inline";
                     Reg_Pass_Fehler.style.display = "none";
                     Reg_SONS_Fehler.style.display = "none";
                     Reg_EMAIL_Fehler.style.display = "none";
                     Reg_REG_Fehler.style.display = "none";
+                    oRegisterVue.draft.rUserName = "";
+                    oRegisterVue.draft.rEmail = "";
+                    oRegisterVue.draft.rPassword = "";
+                    oRegisterVue.draft.rPassword2 = "";
                 }
 
             };
@@ -1185,7 +1206,8 @@ var oRegisterVue = new Vue({
 
             }
 
-            if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
+            // if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
+            if(this.draft.rEmail.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) == null) {
                 this.draft.emailIsInvalid = true;
                 Reg_EMAIL_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
@@ -1250,6 +1272,7 @@ var oNewLoginVue = new Vue({
     methods: {
 
         formsubmit: function () {
+            NewRegisteredUser.style.display = "none";
             logoutmodus = true;
             this.draft.passwordIsInvalid = false;
             this.draft.emailIsInvalid = false;
@@ -1330,27 +1353,6 @@ var oNewLoginVue = new Vue({
                 logoutmodus = false;
             }
 
-            // }
-            // else {
-            //     loggedInUser._id = "";
-            //     loggedInUser.saved_events = [];
-            //       for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-            //         if(oEventTableVue.allEvents[j].faved){
-            //           oEventTableVue.favToggle(oEventTableVue.allEvents[j]);
-            //         }
-            //       }
-            //
-            //
-            //     AfterLoginFavoriten.style.visibility = "hidden";
-            //     AfterLoginEvent.style.visibility = "hidden";
-            //     document.getElementById('AfterLoginLogin').innerText = "LogIn";
-            //     newLoginWrapper.style.display = "visible";
-            //     oEventTableVue.starVisibility = "hidden";
-            //     oNewLoginVue.draft.sUserName = "";
-            //     oNewLoginVue.draft.sPassword = "";
-            //     document.getElementById("Login_username").innerText = "";
-            //     document.getElementById("Login_password").innerText = "";
-            // }
         },
 
 

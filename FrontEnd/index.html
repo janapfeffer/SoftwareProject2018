@@ -197,6 +197,15 @@
                         </p>
                     </div>
 
+                    <div id="NewRegisteredUser" style="display:none">
+                        <p style="color:green; ">
+                            <b>Du wurdest erfolgreich registriert. Logg dich ein!
+                            </b>
+                        </p>
+                    </div>
+
+
+
                     <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sUserName" id="Login_username">
                         <label class="mdl-textfield__label" for="sample1">E-Mail*</label>
@@ -322,7 +331,11 @@
                         </div>
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
+<<<<<<< HEAD
                                 type="text" id="sample1" readonly="readonly">
+=======
+                                type="text" id="sample1" readonly>
+>>>>>>> master
                             <label class="mdl-textfield__label" for="sample1">Kommentiere und bewerte hier...</label>
                         </div>
                         <!-- Popup Dialog -->
@@ -411,7 +424,11 @@
                 <!--  @keyup.enter="searchPlace" -->
             </div>
             <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
+<<<<<<< HEAD
             <span id="datepickerID"class="autocomplete" >
+=======
+            <span id="datepickerID" >
+>>>>>>> master
               <h2>VON-BIS</h2>
               <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von"
                   end-placeholder="Bis" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA" >
