@@ -111,6 +111,8 @@ var oNavigationVue = new Vue({
 
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
+                document.getElementById('h2events').innerText = "Events";
+                getFilteredEvents();
                 AfterLoginEvent.style.visibility = "hidden";
                 // document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
