@@ -445,8 +445,9 @@ var oEventTableVue = new Vue({
                     ausgewaehlt = target;
                 }
                 // map.setCenter(target.marker.getPosition(), true);
-                openBubble(target.marker.getPosition(), target.marker.data);
                 zoomMap(target.marker.getPosition());
+                openBubble(target.marker.getPosition(), target.marker.data);
+
             }
             else { }
         },
@@ -1065,6 +1066,12 @@ var oNewEventVue = new Vue({
                         document.getElementById("imageUpload").value = "";
                         oNewEventVue.cardShown = false; //close card for new event
                         getFilteredEvents();
+                        // // oEventTableVue.select(res.data.created_event); //geht so nicht wgeen asynchrnität
+                        // oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
+                        //   console.log(obj.iEventId);
+                        //   console.log(obj.iEventId == res.data.created_event._id);
+                        //   return obj.iEventId == res.data.created_event._id
+                        // }));
                         $(window).scrollTop(0);
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
