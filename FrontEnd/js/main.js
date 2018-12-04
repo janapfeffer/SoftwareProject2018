@@ -680,7 +680,7 @@ function _getFilterHeaders() {
     return headers;
 };
 
-function getFilteredEvents() {
+function getFilteredEvents(displayId) {
     //filter for start_date and end_date and event types
     //filter_event_type is an array of 1 - x event_types
     if (oSearchPlaceVue.dDate || oSearchPlaceVue.value) {
@@ -725,6 +725,12 @@ function getFilteredEvents() {
                 }
                 initalFavoriteSetting = false;
             }
+            if(displayId) {
+              oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
+                return obj.iEventId == displayId
+              }));
+            }
+
             //change center of map and filter for location
             //   setCenter(oSearchPlaceVue.sQuery);
         };
@@ -1070,13 +1076,8 @@ var oNewEventVue = new Vue({
                         oNewEventVue.value = [],
                         document.getElementById("imageUpload").value = "";
                         oNewEventVue.cardShown = false; //close card for new event
-                        getFilteredEvents();
-                        // // oEventTableVue.select(res.data.created_event); //geht so nicht wgeen asynchrnität
-                        // oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
-                        //   console.log(obj.iEventId);
-                        //   console.log(obj.iEventId == res.data.created_event._id);
-                        //   return obj.iEventId == res.data.created_event._id
-                        // }));
+                        getFilteredEvents(res.data.created_event._id);
+
                         $(window).scrollTop(0);
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
