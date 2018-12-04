@@ -110,8 +110,13 @@ var oNavigationVue = new Vue({
 
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
-                document.getElementById('h2events').innerText = "Events";
-                getFilteredEvents();
+                if (document.getElementById('h2events').innerText != "Events") {
+                  document.getElementById('h2events').innerText = "Events";
+                  document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
+                  document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
+                  getFilteredEvents();
+                }
+
                 AfterLoginEvent.style.visibility = "hidden";
                 // document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
