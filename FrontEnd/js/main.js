@@ -16,22 +16,17 @@ var oEvent = function (oEvent) {
 var dialogopen = false;
 var logoutmodus = false;
 var loggedInUser = "";
-var daumenhochgeklickt = false;
-var daumenruntergeklickt = false;
 var favoritegeklickt = false;
 var initalFavoriteSetting = false;
-var i = 0;
-var achtung = 0;
+var i = 0; //is this variable used?
+var aAllEvents = new Array();
+
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
         horizontalMenueShown: true,
-
-
     },
     methods: {
-
-
         showNewEventCard: function () {
             $(window).scrollTop(0);
             if (oNewEventVue.cardShown === true) {
@@ -74,7 +69,6 @@ var oNavigationVue = new Vue({
                 if (bubble) {
                     closeBubble();
                 }
-
             }
             else {
                 document.getElementById('h2events').innerText = "Events";
@@ -163,8 +157,6 @@ var oNavigationVue = new Vue({
 
             document.body.classList.toggle('bigMap');
             map.getViewPort().resize();
-
-            //   oAsideVue.bShown = false;
         }
     }
 });
@@ -203,8 +195,7 @@ function getFavorites(user_id) {
 };
 
 
-var aAllEvents = new Array();
-var ausgewaehlt = "";
+
 
 function getAllEvents() { //uses get events/filtered with header filter_start_date = new Date() instead of get events
     oEventTableVue.selected = "";
@@ -301,7 +292,6 @@ var oEventTableVue = new Vue({
         }
     },
     methods: {
-
         favToggle: function (target) {
             // abfrage, ob es gefavt war oder nicht
             if (loggedInUser != "") { //only change status of faved i fa user is logged in
@@ -396,14 +386,12 @@ var oEventTableVue = new Vue({
                 if (target.iEventId != undefined) {
 
                     this.selected = target.iEventId;
-                    ausgewaehlt = target;
                 }
                 // map.setCenter(target.marker.getPosition(), true);
                 zoomMap(target.marker.getPosition());
                 openBubble(target.marker.getPosition(), target.marker.data);
 
             }
-            else { }
         },
 
 
@@ -674,7 +662,6 @@ var oSearchPlaceVue = new Vue({
     data: {
         sQuery: localStorage.getItem("HANSCH"),
         dDate: null,
-        // aEventTypes: null,
         sName: "Event Finder",
         sButtonName: "Suchen",
         FilterdDate: null,
