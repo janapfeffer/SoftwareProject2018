@@ -355,11 +355,11 @@
 
             <div style="background-color:whitesmoke">
 
-                <h2 class="mdl-dialog__title" id="kommiüberschrift">Kommentare</h2>
+                <h2 class="mdl-dialog__title" id="kommiüberschrift">{{selected_event.sName}}</h2>
                 <div class="mdl-dialog__content">
-                    <img id="idPopUpPicture" src="event.oImage" class="eventSymbol" height="65" width="65"></img>
+                    <img id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
 
-                    <p style="color:black;" id="eventidkommentare"> idThumbDown</p>
+                    <p style="color:black;" id="eventidkommentare">{{selected_event.sDescription}}</p>
 
                     <!-- Use an element to toggle between a like/dislike icon -->
                     <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
@@ -367,7 +367,7 @@
                     <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
                     <div>
 
-                        <p id="ratingnumber" style="float:right;color:black; margin-right: 18%; font-size: x-large;">zahl</p>
+                        <p id="ratingnumber" style="float:right;color:black; margin-right: 18%; font-size: x-large;">{{selected_event.iCurrentRating}}</p>
 
 
                         <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -383,7 +383,7 @@
 
                     <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
 
-                        <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
+                        <li v-for="comment in selected_event.aComments" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
                             <span class="mdl-list__item-primary-content">
                               <div>
                                 <span style="font-weight: bold;"> {{comment.username}} </span>

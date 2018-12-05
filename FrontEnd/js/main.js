@@ -354,6 +354,26 @@ var oEventTableVue = new Vue({
             return this.allEvents.filter(function (value) {
                 return value.iEventId === temp.selected;
             })[0].aComments;
+        },
+        selected_event: function() {
+          var temp = this;
+          if(temp.selected === ""){
+            return {
+              iEventId: 0,
+              sName: "",
+              sDescription: "",
+              aComments: {
+                _id: 0,
+                username: "",
+                comment: ""
+              },
+              oImage: ""
+            };
+          } else {
+            return this.allEvents.filter(function (value) {
+                return value.iEventId === temp.selected;
+            })[0];
+          }
         }
     },
     methods: {
@@ -561,25 +581,10 @@ var oEventTableVue = new Vue({
         },
         //Offnet bzw macht Popup moeglich
         KommentarGemacht: function (id, name, beschreibung, comments, image) {
-            kommi = true;
             if (loggedInUser != "") {
-
-                if (kommi === true) {
                     dialogopen = true;
                     document.querySelector("#idComment").value = "";
-                    var dialog = document.querySelector('dialog');
-                    document.getElementById('kommiüberschrift').innerText = name;
-
-                    document.getElementById('eventidkommentare').innerText = beschreibung;
-                    document.getElementById('idPopUpPicture').src = image;
-
-
-                    // get, whether the currently logged in user has already rated the event
-                    var selected_event = oEventTableVue.allEvents.find(obj => {
-                        return obj.iEventId == oEventTableVue.selected
-                    });
-
-                    var loggedInUser_rating = selected_event.aRatings.find(obj => {
+                    var loggedInUser_rating = oEventTableVue.selected_event.aRatings.find(obj => {
                         return obj.user_id == loggedInUser._id
                     });
 
@@ -598,16 +603,7 @@ var oEventTableVue = new Vue({
                         document.getElementById('idThumbUp').style.color = "grey"
                         document.getElementById('idThumbDown').style.color = "grey"
                     }
-                    // set current_rating
-                    aktuellebewertung = selected_event.iCurrentRating;
-                    document.getElementById('ratingnumber').innerText = aktuellebewertung;
                     dialog.showModal();
-                }
-                // dialog.querySelector('.close').addEventListener('click', function () {
-                //     dialog.close();
-                //     dialogopen = false;
-
-                // });
                 $(dialog).children().first().click(function (e) {
                     e.stopPropagation();
                 })
@@ -625,23 +621,10 @@ var oEventTableVue = new Vue({
 
 
     }
-    // ,
-    // mounted: function() {
-    //   axios
-    //   .get('http://localhost:3000/events')
-    //   .then(response => (this.allEvents = response))
-    // }
 });
 
 function _getFilterHeaders() {
     var headers = [];
-    // if (oSearchPlaceVue.value.code){
-    //   headers.push({
-    //       name: "filter_event_type",
-    //       value: oSearchPlaceVue.value.code
-    //   });
-    // }
-
 
     if (oSearchPlaceVue.value.length > 0) {
         var filter_event_types = [];
