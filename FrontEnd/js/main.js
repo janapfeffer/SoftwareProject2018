@@ -15,8 +15,6 @@ var oEvent = function (oEvent) {
 
 var dialogopen = false;
 var logoutmodus = false;
-var aktuellebewertung = 0;
-var nochniebewertet = true;
 var loggedInUser = "";
 var daumenhochgeklickt = false;
 var daumenruntergeklickt = false;
@@ -440,18 +438,9 @@ var oEventTableVue = new Vue({
                         getFilteredEvents();
                     }
                     oEventTableVue.selected = t;
-                    if (nochniebewertet == true) {
-                        aktuellebewertung = aktuellebewertung + 1; nochniebewertet = false;
-                    }
-                    else {
-                        aktuellebewertung = aktuellebewertung + 2;
-                    }
-                    //2 besser setzen da gut bewertet
                     if (this.status == 200) {
-                        // console.log("rating sent");
                         oLikeButton.style.color = "green";
                         document.getElementById('idThumbDown').style.color = "grey";
-                        document.getElementById('ratingnumber').innerText = aktuellebewertung;
                     }
                 };
                 var onFailed = function onFailed() {
@@ -477,13 +466,6 @@ var oEventTableVue = new Vue({
                         var selected_event = oEventTableVue.allEvents.find(obj => {
                             return obj.iEventId == oEventTableVue.selected
                         });
-                        if (nochniebewertet == true) {
-                            aktuellebewertung = aktuellebewertung - 1;
-                            nochniebewertet = false;
-                        }
-                        else {
-                            aktuellebewertung = aktuellebewertung - 2;
-                        }
                         var t = oEventTableVue.selected;
                         //this leads to the rating being displayed immediatley
                         //reload favorites/events list
@@ -494,9 +476,7 @@ var oEventTableVue = new Vue({
                         }
                         oEventTableVue.selected = t;
                     }
-                    // console.log("rating sent");
                     oDislikeButton.style.color = "red";
-                    document.getElementById('ratingnumber').innerText = aktuellebewertung;
                 };
                 var onFailed = function onFailed() {
                     console.log("failed");
