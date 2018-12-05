@@ -603,6 +603,7 @@ var oEventTableVue = new Vue({
                         document.getElementById('idThumbUp').style.color = "grey"
                         document.getElementById('idThumbDown').style.color = "grey"
                     }
+                    var dialog = document.querySelector('dialog');
                     dialog.showModal();
                 $(dialog).children().first().click(function (e) {
                     e.stopPropagation();
