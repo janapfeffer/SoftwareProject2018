@@ -291,6 +291,7 @@
                 </div>
             </div>
         </div>
+        <div id="eventsWithDialog">
         <div class="sidecardWrapper">
 
             <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
@@ -332,76 +333,78 @@
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
 
-                       
+
 
                                 type="text" id="sample1" readonly>
 
                             <label class="mdl-textfield__label" for="sample1">Kommentiere und bewerte hier...</label>
                         </div>
-                        <!-- Popup Dialog   <type="text" id="sample1" readonly="readonly"> -->
 
-                        <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
-                        box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
-                            <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-
-                                <div style="background-color:whitesmoke">
-
-                                    <h2 class="mdl-dialog__title" id="kommiüberschrift">Kommentare</h2>
-                                    <div class="mdl-dialog__content">
-                                        <img id="idPopUpPicture" src="event.oImage" class="eventSymbol" height="65" width="65"></img>
-
-                                        <p style="color:black;" id="eventidkommentare"> idThumbDown</p>
-
-                                        <!-- Use an element to toggle between a like/dislike icon -->
-                                        <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
-                                        <i @click="clickLikeButton()" id="idThumbUp" style="position: absolute; color:grey; right: 14%;" class="fa fa-thumbs-up thumbs"></i>
-                                        <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
-                                        <div>
-
-                                            <p id="ratingnumber" style="float:right;color:black; margin-right: 18%; font-size: x-large;">zahl</p>
-
-
-                                            <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment"></input>
-                                                <!-- <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label> -->
-                                            </div>
-
-                                            <button id="meins" style="float:right; top: 4px; left: 20px;"
-                                                @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
-
-                                            <br />
-                                        </div>
-
-                                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
-
-                                            <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
-                                                <span class="mdl-list__item-primary-content">
-                                                    <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
-                                                    <!-- <span id="name">{{ comment.name }}</span> -->
-                                                    <span style="font-weight: bold;">{{ comment.username }}</span>
-                                                    <br style="line-height: 150%;" />
-                                                    <i class="fa fa-comment" style="font-size:18px"></i>
-                                                    <span class=nobr class="mdl-list__item-text-body">{{ comment.comment
-                                                        }}
-                                                    </span>
-                                                    <br style="line-height: 150%;" />
-                                                </span>
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- <button type="button" class="mdl-button close">close</button> -->
-                                </div>
-                            </div>
-                        </dialog>
 
         </div>
         </span>
 
         </li>
         </ul>
+    <!-- </div> -->
+    <!-- Popup Dialog   <type="text" id="sample1" readonly="readonly"> -->
+
+    <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
+    box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
+        <!-- <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000"> -->
+
+            <div style="background-color:whitesmoke">
+
+                <h2 class="mdl-dialog__title" id="kommiüberschrift">Kommentare</h2>
+                <div class="mdl-dialog__content">
+                    <img id="idPopUpPicture" src="event.oImage" class="eventSymbol" height="65" width="65"></img>
+
+                    <p style="color:black;" id="eventidkommentare"> idThumbDown</p>
+
+                    <!-- Use an element to toggle between a like/dislike icon -->
+                    <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
+                    <i @click="clickLikeButton()" id="idThumbUp" style="position: absolute; color:grey; right: 14%;" class="fa fa-thumbs-up thumbs"></i>
+                    <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
+                    <div>
+
+                        <p id="ratingnumber" style="float:right;color:black; margin-right: 18%; font-size: x-large;">zahl</p>
+
+
+                        <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment"></input>
+                            <!-- <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label> -->
+                        </div>
+
+                        <button id="meins" style="float:right; top: 4px; left: 20px;"
+                            @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
+
+                        <br />
+                    </div>
+
+                    <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
+
+                        <li v-for="comment in commentList" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
+                            <span class="mdl-list__item-primary-content">
+                                <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
+                                <!-- <span id="name">{{ comment.name }}</span> -->
+                                <span style="font-weight: bold;"> {{comment.username}} </span>
+                                <br style="line-height: 150%;" />
+                                <i class="fa fa-comment" style="font-size:18px"></i>
+                                <span class=nobr class="mdl-list__item-text-body"> {{comment.comment}}</span>
+                                <br style="line-height: 150%;" />
+                            </span>
+
+                        </li>
+                    </ul>
+                </div>
+                <!-- <button type="button" class="mdl-button close">close</button> -->
+            </div>
+        <!-- </div> -->
+    </dialog>
+  </div>
+
     </div>
-    </div>
+
 
 
     <div id="searchPlace" class="sidecard" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">

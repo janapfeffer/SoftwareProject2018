@@ -321,10 +321,9 @@ function getFavoritesIds() {
         });
 }
 
-
 //Vue fuer die Event Tabelle fertig
 var oEventTableVue = new Vue({
-    el: "#eventTable",
+    el: "#eventsWithDialog",
     data: {
         allEvents: aAllEvents,
         selected: "", //id of selected event (to see more info)
