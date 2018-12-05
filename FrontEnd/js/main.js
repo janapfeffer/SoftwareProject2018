@@ -13,7 +13,6 @@ var oEvent = function (oEvent) {
     this.faved = oEvent.faved;
 };
 
-var kommi = false; //wird direkt vor der Überprüfung auf true gesetzt -> löschen?
 var dialogopen = false;
 var logoutmodus = false;
 var aktuellebewertung = 0;
@@ -840,46 +839,6 @@ var oSearchPlaceVue = new Vue({
                 return;
             }
             getAutocompletion(this.sQuery, document.getElementById("searchInput"));
-        },
-        filterDate: function () {
-            // axios.get('http://localhost:3000/events'
-            //     //optional parameters
-            //     // , {
-            //     //     params: {
-            //     //         date: oSearchPlaceVue.FilterdDate
-            //     //     }
-            //     // }
-            // )
-            //     .then(function (response) {
-            //         removeMarkers(oEventTableVue.allEvents);
-
-            //         var aFilterdEvents = this.response.oEvents;
-            //         oEventTableVue.allEvents = aFilterdEvents.map(apievent => {
-            //             return {
-            //                 iEventId: apievent._id,
-            //                 sName: apievent.event_name,
-            //                 sDescription: apievent.description,
-            //                 sAdress: apievent.address,
-            //                 oStartDate: apievent.start_date.split("T")[0],
-            //                 oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-            //                 oEndDate: apievent.end_date,
-            //                 sEventLink: apievent.event_link,
-            //                 sTicketLink: apievent.ticket_link,
-            //                 oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-            //                 oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
-            //             };
-            //         });
-            //         setMarkers(oEventTableVue.allEvents);
-            //     })
-            //     .catch(function (error) {
-            //         // handle error
-            //         console.log(error);
-            //     })
-            //     .then(function () {
-            //         // always executed
-            //     });
-            // console.log("filter date triggered");
-
         }
 
     }
