@@ -263,9 +263,9 @@ function setMarker(oData) {
 }
 
 function setMarkers(aEvents) {
-  //delete existing markers before creating new ones
-  map = map.removeObjects(map.getObjects());
-  //add marker for every event
+    //delete existing markers before creating new ones
+    map = map.removeObjects(map.getObjects());
+    //add marker for every event
     aEvents.forEach((oEvent, index) => {
         if (oEvent.oLatLgn != undefined) {
             // var oData = {index: index, iEventId: oEvent.iEventId};
@@ -274,10 +274,10 @@ function setMarkers(aEvents) {
     })
 }
 
-function removeMarkers(aEvents){
-    aEvents.forEach((oEvent) =>{
+function removeMarkers(aEvents) {
+    aEvents.forEach((oEvent) => {
         map.removeObject(oEvent.marker);
-    } )
+    })
 }
 
 function setVerifyLocationMarker(sAddress) {
@@ -369,6 +369,25 @@ function openBubble(position, oData) {
 
 function closeBubble() {
     bubble.close();
+}
+
+function pickLocationMode() {
+    // Attach an event listener to map display
+    // obtain the coordinates and display in an alert box.
+    map.addEventListener('tap', function (evt) {
+        var coord = map.screenToGeo(evt.currentPointer.viewportX,
+            evt.currentPointer.viewportY);
+        openBubble(coord, {
+            sName: "Ist das der Ort?",
+            sAdress: "",
+            oStartDate: "",
+            oStartTime: ""
+        })
+    });
+}
+
+function cancelPickLocationMode() {
+
 }
 
 // update map size at window size

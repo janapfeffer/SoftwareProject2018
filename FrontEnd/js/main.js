@@ -110,13 +110,6 @@ var oNavigationVue = new Vue({
 
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
-                if (document.getElementById('h2events').innerText != "Events") {
-                  document.getElementById('h2events').innerText = "Events";
-                  document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
-                  document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
-                  getFilteredEvents();
-                }
-
                 AfterLoginEvent.style.visibility = "hidden";
                 // document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
@@ -450,9 +443,8 @@ var oEventTableVue = new Vue({
                     ausgewaehlt = target;
                 }
                 // map.setCenter(target.marker.getPosition(), true);
-                zoomMap(target.marker.getPosition());
                 openBubble(target.marker.getPosition(), target.marker.data);
-
+                zoomMap(target.marker.getPosition());
             }
             else { }
         },
@@ -636,11 +628,11 @@ var oEventTableVue = new Vue({
 
 function _getFilterHeaders() {
     var headers = [];
-    if (oSearchPlaceVue.value.code){
-      headers.push({
-          name: "filter_event_type",
-          value: oSearchPlaceVue.value.code
-      });
+    if (oSearchPlaceVue.value.code) {
+        headers.push({
+            name: "filter_event_type",
+            value: oSearchPlaceVue.value.code
+        });
     }
 
 
@@ -680,7 +672,7 @@ function _getFilterHeaders() {
     return headers;
 };
 
-function getFilteredEvents(displayId) {
+function getFilteredEvents() {
     //filter for start_date and end_date and event types
     //filter_event_type is an array of 1 - x event_types
     if (oSearchPlaceVue.dDate || oSearchPlaceVue.value) {
@@ -725,12 +717,6 @@ function getFilteredEvents(displayId) {
                 }
                 initalFavoriteSetting = false;
             }
-            if(displayId) {
-              oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
-                return obj.iEventId == displayId
-              }));
-            }
-
             //change center of map and filter for location
             //   setCenter(oSearchPlaceVue.sQuery);
         };
@@ -1073,11 +1059,9 @@ var oNewEventVue = new Vue({
                             dateIsInvalid: false
                         };
                         oNewEventVue.value7 = '',
-                        oNewEventVue.value = [],
-                        document.getElementById("imageUpload").value = "";
+                            oNewEventVue.value = [],
+                            document.getElementById("imageUpload").value = "";
                         oNewEventVue.cardShown = false; //close card for new event
-                        getFilteredEvents(res.data.created_event._id);
-
                         $(window).scrollTop(0);
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
@@ -1129,6 +1113,9 @@ var oNewEventVue = new Vue({
             } else {
                 console.log('FileReader API not supported: use the <form>, Luke!')
             }
+        },
+        pickLocationMode: function () {
+            locationPickerMode()
         }
     },
     components: {
@@ -1204,7 +1191,7 @@ var oRegisterVue = new Vue({
             }
 
             // if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
-            if(this.draft.rEmail.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) == null) {
+            if (this.draft.rEmail.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) == null) {
                 this.draft.emailIsInvalid = true;
                 Reg_EMAIL_Fehler.style.display = "inline";
                 Reg_Pass_Fehler.style.display = "none";
