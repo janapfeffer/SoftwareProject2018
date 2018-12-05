@@ -88,22 +88,21 @@ input{
 }
 
 .multiselect {
-  width: 230px;
+  width: 270px;
+  line-height: 25px;
   color: #606266;
   display: inline-block;
-  bottom: 2px;
+  /* bottom: 2px; */
 }
 
 /* .multiselect__tags {
   padding: 11px 40px 0 8px;
 } */
 
-/* #searchPlaceInner .multiselect__tags-wrap {
-  display: inline-block;
-  position: absolute;
-  top: 70px;
-  left: -305%;
-} */
+#searchPlaceInner .multiselect__tags-wrap {
+  display: inline-flex;
+
+} 
 
 /* .landingpage #searchPlaceInner .multiselect__tags-wrap {
   display: inline-block;
@@ -176,7 +175,7 @@ h1{
 
 #searchInput {
  border: 1px solid #dcdfe6;
- width: 340px;
+ width: 315px;
 }
 
 .landingpage #searchInput {
