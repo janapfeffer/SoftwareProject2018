@@ -196,38 +196,7 @@ function getFavorites(user_id) {
     axios.get(GETFAVORITES_URL, header_config)
         .then(response => {
             var apievents = response.data.saved_events;
-            oEventTableVue.allEvents = apievents.map(apievent => {
-                return {
-                    sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-                    iEventId: apievent._id,
-                    aComments: apievent.comments,
-                    aRatings: apievent.ratings,
-                    sName: apievent.event_name,
-                    sDescription: apievent.description,
-                    sAdress: apievent.address,
-                    iCurrentRating: apievent.current_rating,
-                    oStartDate: apievent.start_date.split("T")[0],
-                    oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-                    oEndDate: apievent.end_date.split("T")[0],
-                    oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
-                    sEventLink: apievent.event_link,
-                    sTicketLink: apievent.ticket_link,
-                    oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-                    oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
-                    sEventTypes: getEventTypesAsString(apievent.event_types)
-                };
-            });
-            oEventTableVue.allEvents.sort(function (a, b) {
-                return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
-            });
-            // set bubbles on map
-            setMarkers(oEventTableVue.allEvents);
-            //set stars
-            initalFavoriteSetting = true;
-            for (var z = 0; z < oEventTableVue.allEvents.length; z++) {
-                oEventTableVue.favToggle(oEventTableVue.allEvents[z]);
-            }
-            initalFavoriteSetting = false;
+            _setAllEventsAfterGet(apievents)
         })
         .catch(function (error) {
             alert("Fehler beim Laden der Favoriten aus der Datenbank.");
@@ -250,50 +219,8 @@ function getAllEvents() { //uses get events/filtered with header filter_start_da
 
     axios.get(GETALLEVENTS_URL, config)
         .then(response => {
-            var apievents = response.data.oEvents;
-            oEventTableVue.allEvents = apievents.map(apievent => {
-                return {
-                    iEventId: apievent._id,
-                    aComments: apievent.comments,
-                    aRatings: apievent.ratings,
-                    sName: apievent.event_name,
-                    sDescription: apievent.description,
-                    sAdress: apievent.address,
-                    iCurrentRating: apievent.current_rating,
-                    oApiEventStartDate: apievent.start_date,
-                    oStartDate: apievent.start_date.split("T")[0],
-                    oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-                    oEndDate: apievent.end_date.split("T")[0],
-                    oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
-                    sEventLink: apievent.event_link,
-                    sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-                    sTicketLink: apievent.ticket_link,
-                    oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-                    oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
-                    sEventTypes: getEventTypesAsString(apievent.event_types)
-                };
-            });
-            //Sortiere die events - sollte später vielleicht backend machen?
-            oEventTableVue.allEvents.sort(function (a, b) {
-                // Turn your strings into dates, and then subtract them
-                // to get a value that is either negative, positive, or zero.
-                return new Date(a.oApiEventStartDate) - new Date(b.oApiEventStartDate);
-            });
-            setMarkers(oEventTableVue.allEvents);
-            if (loggedInUser != "") {
-                //set stars
-                initalFavoriteSetting = true;
-                for (var i = 0; i < loggedInUser.saved_events.length; i++) {
-                    for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-                        if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                            // console.log(oEventTableVue.allEvents[j].iEventId);
-                            oEventTableVue.favToggle(oEventTableVue.allEvents[j])
-                            break;
-                        }
-                    }
-                }
-                initalFavoriteSetting = false;
-            }
+            var apievents = response.data.oEvents
+            _setAllEventsAfterGet(apievents)
         })
         .catch(function (error) {
             alert("Fehler beim Laden der Events aus der Datenbank.");
@@ -669,6 +596,49 @@ function _getFilterHeaders() {
     return headers;
 };
 
+function _setAllEventsAfterGet(apievents) {
+  oEventTableVue.allEvents = apievents.map(apievent => {
+      return {
+          sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
+          iEventId: apievent._id,
+          aComments: apievent.comments,
+          aRatings: apievent.ratings,
+          sName: apievent.event_name,
+          sDescription: apievent.description,
+          sAdress: apievent.address,
+          iCurrentRating: apievent.current_rating,
+          oStartDate: apievent.start_date.split("T")[0],
+          oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
+          oEndDate: apievent.end_date.split("T")[0],
+          oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+          sEventLink: apievent.event_link,
+          sTicketLink: apievent.ticket_link,
+          oLatLgn: { lat: apievent.lat, lng: apievent.lng },
+          oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
+          sEventTypes: getEventTypesAsString(apievent.event_types)
+      };
+  });
+  oEventTableVue.allEvents.sort(function (a, b) {
+      return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
+  });
+  // set bubbles on map
+  setMarkers(oEventTableVue.allEvents);
+  if (loggedInUser != "") {
+      //set stars
+      initalFavoriteSetting = true;
+      for (var i = 0; i < loggedInUser.saved_events.length; i++) {
+          for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+              if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
+                  // console.log(oEventTableVue.allEvents[j].iEventId);
+                  oEventTableVue.favToggle(oEventTableVue.allEvents[j])
+                  break;
+              }
+          }
+      }
+      initalFavoriteSetting = false;
+  }
+};
+
 function getFilteredEvents(displayId) {
     //filter for start_date and end_date and event types
     //filter_event_type is an array of 1 - x event_types
@@ -678,42 +648,7 @@ function getFilteredEvents(displayId) {
 
         var onSuccess = function onSuccess() {
             var apievents = this.response.oEvents;
-            oEventTableVue.allEvents = apievents.map(apievent => {
-                return {
-                    sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
-                    iEventId: apievent._id,
-                    aComments: apievent.comments,
-                    aRatings: apievent.ratings,
-                    sName: apievent.event_name,
-                    sDescription: apievent.description,
-                    sAdress: apievent.address,
-                    iCurrentRating: apievent.current_rating,
-                    oStartDate: apievent.start_date.split("T")[0],
-                    oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-                    oEndDate: apievent.end_date.split("T")[0],
-                    oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
-                    sEventLink: apievent.event_link,
-                    sTicketLink: apievent.ticket_link,
-                    oLatLgn: { lat: apievent.lat, lng: apievent.lng },
-                    oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
-                    sEventTypes: getEventTypesAsString(apievent.event_types)
-                };
-            });
-            setMarkers(oEventTableVue.allEvents);
-            if (loggedInUser != "") {
-                //set stars
-                initalFavoriteSetting = true;
-                for (var i = 0; i < loggedInUser.saved_events.length; i++) {
-                    for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-                        if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                            // console.log(oEventTableVue.allEvents[j].iEventId);
-                            oEventTableVue.favToggle(oEventTableVue.allEvents[j])
-                            break;
-                        }
-                    }
-                }
-                initalFavoriteSetting = false;
-            }
+            _setAllEventsAfterGet(apievents)
             if(displayId) {
               oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
                 return obj.iEventId == displayId
