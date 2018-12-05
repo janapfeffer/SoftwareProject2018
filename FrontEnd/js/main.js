@@ -429,34 +429,40 @@ var oEventTableVue = new Vue({
         kommentargeschickt: function (id) {
 
             // alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
-            var ajaxRequest = new XMLHttpRequest();
-            var comment = document.querySelector("#idComment").value;
+            if(document.querySelector("#idComment").value.length < 1){
+              document.getElementById("idCommentErrorEmpty").style.display = "block";
+            } else {
+              document.getElementById("idCommentErrorEmpty").style.display = "none";
+              var ajaxRequest = new XMLHttpRequest();
+              var comment = document.querySelector("#idComment").value;
 
-            var onSuccess = function onSuccess() {
-                // console.log("toll");
-                var t = oEventTableVue.selected;
-                //this leads to the comment being displayed immediatley
-                //reload favorites/events list
-                if (document.getElementById('h2events').innerText == "Favoriten") {
-                    getFavorites(loggedInUser._id);
-                } else if (document.getElementById('h2events').innerText == "Events") {
-                    getFilteredEvents();
-                }
-                oEventTableVue.selected = t;
-            };
-            var onFailed = function onFailed() {
-                console.log("failed");
-            };
+              var onSuccess = function onSuccess() {
+                  // console.log("toll");
+                  var t = oEventTableVue.selected;
+                  //this leads to the comment being displayed immediatley
+                  //reload favorites/events list
+                  if (document.getElementById('h2events').innerText == "Favoriten") {
+                      getFavorites(loggedInUser._id);
+                  } else if (document.getElementById('h2events').innerText == "Events") {
+                      getFilteredEvents();
+                  }
+                  oEventTableVue.selected = t;
+              };
+              var onFailed = function onFailed() {
+                  console.log("failed");
+              };
 
-            ajaxRequest.addEventListener("load", onSuccess);
-            ajaxRequest.addEventListener("error", onFailed);
-            ajaxRequest.responseType = "json";
-            ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
-            ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
-            var sFormData = "eventId=" + oEventTableVue.selected + "&comment=" + comment;
-            ajaxRequest.send(sFormData);
-            document.querySelector("#idComment").value = "";
+              ajaxRequest.addEventListener("load", onSuccess);
+              ajaxRequest.addEventListener("error", onFailed);
+              ajaxRequest.responseType = "json";
+              ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
+              ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+              var sFormData = "eventId=" + oEventTableVue.selected + "&comment=" + comment;
+              ajaxRequest.send(sFormData);
+              document.querySelector("#idComment").value = "";
+            }
+
 
         },
 
@@ -580,14 +586,14 @@ var oEventTableVue = new Vue({
             }
         },
         //Offnet bzw macht Popup moeglich
-        KommentarGemacht: function (id, name, beschreibung, comments, image) {
+        KommentarGemacht: function () {
             if (loggedInUser != "") {
                     dialogopen = true;
                     document.querySelector("#idComment").value = "";
+
                     var loggedInUser_rating = oEventTableVue.selected_event.aRatings.find(obj => {
                         return obj.user_id == loggedInUser._id
                     });
-
                     if (loggedInUser_rating) { //set rating buttons
                         if (loggedInUser_rating.rating == -1) {
                             nochniebewertet = false;
@@ -603,6 +609,7 @@ var oEventTableVue = new Vue({
                         document.getElementById('idThumbUp').style.color = "grey"
                         document.getElementById('idThumbDown').style.color = "grey"
                     }
+
                     var dialog = document.querySelector('dialog');
                     dialog.showModal();
                 $(dialog).children().first().click(function (e) {
@@ -618,7 +625,7 @@ var oEventTableVue = new Vue({
                 alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
             }
 
-        },
+        }
 
 
     }
