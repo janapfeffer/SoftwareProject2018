@@ -373,7 +373,16 @@
 
 
                         <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment"></input>
+                            <!-- <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment"></input> -->
+                            <div id="idCommentErrorEmpty" style="display: none">
+                                <i class="material-icons" style="float: left">error_outline</i>
+                                <p style="color:red; ">
+                                    <b>
+                                        Bitte gebe einen Kommentar ein!
+                                    </b>
+                                </p>
+                            </div>
+                            <textarea id= "idComment" class="mdl-textfield__input" maxlength="1000" type="text" rows="3"  placeholder="Kommentiere hier..."></textarea>
                             <!-- <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label> -->
                         </div>
 
