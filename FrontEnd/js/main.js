@@ -21,6 +21,33 @@ var initalFavoriteSetting = false;
 var i = 0; //is this variable used?
 var aAllEvents = new Array();
 
+var removeAllAdressSelbstSetzenStuff = function () {
+    //remove all "Setzte Adresse selbst" stuff
+    closeBubble();
+    if (verifyMarker) {
+        map.removeObject(verifyMarker);
+        verifyMarker = undefined;
+    }
+    if (document.getElementById("newEventAddress").hasAttribute("disabled")) {
+        document.getElementById("newEventAddress").removeAttribute("disabled", true);
+    }
+    //if map has event listener 
+    if (pickLocationModeMapListenerSet) {
+        //remove map event listener and delete all related markers&bubbles
+        map.removeEventListener('tap', pickLocationModeMapListener);
+        pickLocationModeMapListenerSet = false;
+        //close bubble and remove marker
+        closeBubble();
+        if (verifyMarker) {
+            map.removeObject();
+            verifyMarker = undefined;
+        }
+    }
+    if (document.getElementById("pickLocationModeToggleLabel").classList.contains("is-checked")) {
+        document.getElementById("pickLocationModeToggleLabel").classList.remove("is-checked");
+    }
+}
+
 var oNavigationVue = new Vue({
     el: "#navigation",
     data: {
@@ -52,17 +79,9 @@ var oNavigationVue = new Vue({
                 oNewEventVue.value7 = '';
                 oNewEventVue.value = [];
 
-                //remove all "Setzte Adresse selbst" stuff
-
-                closeBubble();
-                if (verifyMarker) {
-                    map.removeObject(verifyMarker);
-                    verifyMarker = undefined;
-                }
-                //if map has event listener 
-                map.removeEventListener('tap', pickLocationModeMapListener);
-
+                removeAllAdressSelbstSetzenStuff();
             };
+
             oNewEventVue.cardShown = !oNewEventVue.cardShown;
             oRegisterVue.cardShown = false;
             oNewLoginVue.cardShown = false;
@@ -873,7 +892,12 @@ var oNewEventVue = new Vue({
 
                     var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
                     var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
-                    var oLatLgn = { lat: dLat, lng: dLng }
+
+                    //check wether the coordinates should come from geocoder oder reverese gecoder (depending on the switch for "Adresse selbst setzen")
+                    if (pickLocationModeMapListenerSet) {
+                        dLat = oNewEventVue.draft.oLatLng.lat;
+                        dLng = oNewEventVue.draft.oLatLng.lng;
+                    }
 
                     var image = document.getElementById("imageUpload").files[0];
 
@@ -929,9 +953,12 @@ var oNewEventVue = new Vue({
                             displayError: false,
                             dateIsInvalid: false
                         };
-                        oNewEventVue.value7 = '',
-                            oNewEventVue.value = [],
-                            document.getElementById("imageUpload").value = "";
+                        oNewEventVue.value7 = '';
+                        oNewEventVue.value = [];
+                        document.getElementById("imageUpload").value = "";
+
+                        removeAllAdressSelbstSetzenStuff();
+
                         oNewEventVue.cardShown = false; //close card for new event
                         $(window).scrollTop(0);
                     }).catch(function (error) {

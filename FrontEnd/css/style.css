@@ -139,6 +139,10 @@ h1{
  opacity: 0;
 }
 
+/* div#map:hover{
+  cursor: pointer;
+} */
+
 /* .landingpage div#dateFilter{
  display: none !important;
 } */

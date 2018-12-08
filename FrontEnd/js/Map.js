@@ -369,88 +369,118 @@ function openBubble(position, oData, customHTML) {
 }
 
 function closeBubble() {
-    bubble.close();
+    if (bubble) {
+        bubble.close();
+    }
 }
 
+var coord = undefined;
+var pickLocationModeMapListener = function (evt) {
+    if (verifyMarker) {
+        map.removeObject(verifyMarker);
+    }
+    verifyMarker = undefined;
+    coord = undefined;
+    coord = map.screenToGeo(evt.currentPointer.viewportX,
+        evt.currentPointer.viewportY);
+    var sAddress = "";
+
+    function reverseGeocode(platform) {
+        var geocoder = platform.getGeocodingService(),
+            parameters = {
+                prox: "" + coord.lat + "," + coord.lng + ",250",
+                mode: 'retrieveAddresses',
+                maxresults: '1',
+                gen: '9'
+            };
+
+        geocoder.reverseGeocode(parameters,
+            function (result) {
+                sAddress = result.Response.View[0].Result[0].Location.Address.Label;
+
+                var sHTMLBubble = "<div class=\infoBubble\>" +
+                    "<div class=\ibText\>" +
+                    "<span>" + "Bestätige/ändere die Addresse oder klick weiter" + "</span>" +
+                    "</div>" +
+                    "<div class=\iconContainerLocationPicker\>" +
+                    "<div class=\ibPlace\>" +
+                    "<i class='fa fa-map-marker' style='font-size:16px'></i>" +
+                    "<span class=nobr>" + sAddress + "</span>" +
+                    // "<input type=\text\ class=nobr value=\\" + sAdress + "\></input>" +
+                    "</div>" +
+                    "</div>" +
+                    "<button id=\acceptLocationButton\ class=\mdl-button mdl-js-button mdl-button--raised mdl-button-positive\>Bestätigen</button>" +
+                    // "<button id=\denyLocationButton\ class=\mdl-button mdl-js-button mdl-button--raised mdl-button-negative\>Nein</button>" +
+                    "</div>";
+
+                openBubble(coord, {
+                    //those are acutally not necessary, a bit uncelan, because still needed for openBubble function - might change if time is availabe
+                    sName: "",
+                    sAdress: "",
+                    oStartDate: "",
+                    oStartTime: "",
+                }, sHTMLBubble)
+
+                verifyMarker = new H.map.Marker(coord);
+                map.addObject(verifyMarker);
+
+                //eventlistener for veryfiy
+                document.getElementById("acceptLocationButton").addEventListener("click", function () {
+                    document.getElementById("newEventAddressDiv").classList.add("is-dirty"); //make the input field look like something got inputted
+                    oNewEventVue.draft.sAdress = sAddress; //put the adress in the new event form
+                    oNewEventVue.draft.oLatLng = {
+                        lat: coord.lat,
+                        lng: coord.lng
+                    }
+                    closeBubble();
+                    if (verifyMarker) {
+                        map.removeObject(verifyMarker);
+                        verifyMarker = undefined;
+                    }
+                });
+
+            }, function (error) {
+                alert("Es gab ein Problem bei der Verbindung mit HERE Maps. Versuche es nocheinmal.");
+                return;
+            });
+    }
+    reverseGeocode(platform);
+};
+
+var pickLocationModeMapListenerSet = false;
 var verifyMarker;
 function pickLocationMode() {
-    // Attach an event listener to map display
-    // obtain the coordinates and display in an alert box.
-    var pickLocationModeMapListener = function (evt) {
+    var oToggleSwitch = document.getElementById("pickLocationModeToggleLabel");
+
+    //check wether toggle got checked/unchecked
+    //got checked
+    if (!oToggleSwitch.classList.contains("is-checked")) {
+        document.getElementById("newEventAddress").setAttribute("disabled", true);
+        oNewEventVue.draft.sAdress = "";
+        oNewEventVue.draft.oLatLng = {};
+
+        map.addEventListener('tap', pickLocationModeMapListener)
+        pickLocationModeMapListenerSet = true;
+    }
+
+    //got unchecked
+    if (oToggleSwitch.classList.contains("is-checked")) {
+        if (document.getElementById("newEventAddress").hasAttribute("disabled")) {
+            document.getElementById("newEventAddress").removeAttribute("disabled", true);
+        }
+        oNewEventVue.draft.sAdress = "";
+        oNewEventVue.draft.oLatLng = {};
+
+        //remove map event listener and delete all related markers&bubbles
+        closeBubble();
         if (verifyMarker) {
             map.removeObject(verifyMarker);
+            verifyMarker = undefined;
         }
-        verifyMarker = undefined;
-        var coord = map.screenToGeo(evt.currentPointer.viewportX,
-            evt.currentPointer.viewportY);
-        var sAddress = "";
-
-        function reverseGeocode(platform) {
-            var geocoder = platform.getGeocodingService(),
-                parameters = {
-                    prox: "" + coord.lat + "," + coord.lng + ",250",
-                    mode: 'retrieveAddresses',
-                    maxresults: '1',
-                    gen: '9'
-                };
-
-            geocoder.reverseGeocode(parameters,
-                function (result) {
-                    sAddress = result.Response.View[0].Result[0].Location.Address.Label;
-
-                    var sHTMLBubble = "<div class=\infoBubble\>" +
-                        "<div class=\ibText\>" +
-                        "<span>" + "Ist das die Adresse?" + "</span>" +
-                        "</div>" +
-                        "<div class=\iconContainerLocationPicker\>" +
-                        "<div class=\ibPlace\>" +
-                        "<i class='fa fa-map-marker' style='font-size:16px'></i>" +
-                        "<span class=nobr>" + sAddress + "</span>" +
-                        // "<input type=\text\ class=nobr value=\\" + sAdress + "\></input>" +
-                        "</div>" +
-                        "</div>" +
-                        "<button id=\acceptLocationButton\ class=\mdl-button mdl-js-button mdl-button--raised mdl-button-positive\>Ja</button>" +
-                        "<button id=\denyLocationButton\ class=\mdl-button mdl-js-button mdl-button--raised mdl-button-negative\>Nein</button>" +
-                        "</div>";
-
-                    openBubble(coord, {
-                        sName: "",
-                        sAdress: "",
-                        oStartDate: "",
-                        oStartTime: "",
-                    }, sHTMLBubble)
-
-                    verifyMarker = new H.map.Marker(coord);
-                    map.addObject(verifyMarker);
-
-                    //eventlistener for veryfiy
-                    document.getElementById("acceptLocationButton").addEventListener("click", function () {
-                        document.getElementById("newEventAddressDiv").classList.add("is-dirty");
-                        oNewEventVue.draft.sAdress = sAddress;
-                        closeBubble();
-                        map.removeObject(verifyMarker);
-                        verifyMarker = undefined;
-                        map.removeEventListener('tap', pickLocationModeMapListener);
-                    });
-
-                    //eventlistener for deny
-                    document.getElementById("denyLocationButton").addEventListener("click", function () {
-                        closeBubble();
-                        map.removeObject(verifyMarker);
-                        verifyMarker = undefined;
-                        map.removeEventListener('tap', pickLocationModeMapListener);
-                    });
-
-
-                }, function (error) {
-                    alert("Es gab ein Problem bei der Verbindung mit HERE Maps. Versuche es nocheinmal.");
-                    return;
-                });
-        }
-        reverseGeocode(platform);
-    };
-
-    map.addEventListener('tap', pickLocationModeMapListener)
+        // map.addEventListener('tap',function(){});
+        map.removeEventListener('tap', pickLocationModeMapListener);
+        pickLocationModeMapListenerSet = false;
+    }
 }
 
 // update map size at window size

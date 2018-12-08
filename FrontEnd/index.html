@@ -252,9 +252,13 @@
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
                     <label class="mdl-textfield__label" for="sample1">Adresse*</label>
                 </div>
-                <button class="mdl-button mdl-js-button mdl-button--raised" @click="pickLocationMode">
+                <!-- <button class="mdl-button mdl-js-button mdl-button--raised" @click="pickLocationMode">
                     Setze die Adresse selbst!
-                </button>
+                </button> -->   
+                <label id="pickLocationModeToggleLabel" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                    <input type="checkbox" id="switch-1" class="mdl-switch__input" unchecked @click.stop="pickLocationMode">
+                    <span class="mdl-switch__label">Addresse selbst setzen</span>
+                </label>
                 <div id="NewEventLink" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input type="url" pattern="https://.*" placeholder="https://example.com" class="mdl-textfield__input" v-model="draft.sEventLink">
                     <label class="mdl-textfield__label" for="sample1">Link</label>
