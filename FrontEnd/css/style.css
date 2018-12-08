@@ -315,8 +315,13 @@ img.eventSymbol {
  background-color: rgba(47, 66, 79, 0.66);
  margin-left: 10px;
 }
+
 .mdl-button:hover {background-color: rgba(47, 66, 79, 0.46);}
-.mdl-button:active {background-color: rgba(47, 66, 79, 0.26);}
+/* .mdl-button:active {background-color: rgba(47, 66, 79, 0.26);} */
+
+/* .mdl-button-positive:hover{background-color: rgba(42, 190, 75, 0.46) !important;}
+.infoBubble .mdl-button-negative .mdl-button:hover{background-color: rgba(182, 30, 25, 0.46);}
+.infoBubble .mdl-button:active{background-color: rgb(132, 148, 160);} */
 
 #newEvent .el-date-editor--datetimerange.el-input, #newEvent .el-date-editor--datetimerange.el-input__inner {
    width: 100%;
@@ -436,8 +441,15 @@ margin: 5px;
 }
 
 .iconContainer {
- background-color: #00000061;
- box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+  background-color: #00000061;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+}
+
+.iconContainerLocationPicker {
+  background-color: rgba(63, 81, 181, 0.19);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+  border: 1px solid black;
+  margin-bottom: 10px;
 }
 
 .ibPicture {
