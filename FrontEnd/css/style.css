@@ -273,6 +273,11 @@ div#aside, div#map{
 .mdl-list__item--three-line .mdl-list__item-text-body {
  font-size: 13px;
  line-height: 16px;
+ min-height: 52px;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ /* height: auto; */ /* if we want the whole desc to be shown in the eventtable */
+ /* https://stackoverflow.com/questions/17028911/text-overflow-ellipsis-without-white-space-nowrap */
 }
 
 #eventTable span.mdl-list__item-text-body:empty {

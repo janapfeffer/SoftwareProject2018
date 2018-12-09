@@ -489,7 +489,7 @@ function pickLocationMode() {
 
         map.addEventListener('tap', pickLocationModeMapListener)
         pickLocationModeMapListenerSet = true;
-        $("#map").delay(100).fadeOut().fadeIn('200'); //let map "blink" to show that something changed on it
+        $("#map").delay(100).fadeOut().fadeIn(200); //let map "blink" to show that something changed on it
         // $("#map").css( 'cursor', 'pointer');
     }
 
@@ -510,7 +510,7 @@ function pickLocationMode() {
         // map.addEventListener('tap',function(){});
         map.removeEventListener('tap', pickLocationModeMapListener);
         pickLocationModeMapListenerSet = false;
-        $("#map").delay(100).fadeOut().fadeIn('200'); //let map "blink" to show that something changed on it
+        $("#map").delay(100).fadeOut().fadeIn(200); //let map "blink" to show that something changed on it
         // $("#map").css( 'cursor', 'default');
     }
 }
