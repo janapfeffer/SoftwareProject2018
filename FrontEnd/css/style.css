@@ -352,6 +352,10 @@ img.eventSymbol {
    transform-style: preserve-3d;
 }
 
+.mdl-dialog .mdl-textfield__input{
+  color: black;
+}
+
 #map {
  position: fixed;
  width: 60%;

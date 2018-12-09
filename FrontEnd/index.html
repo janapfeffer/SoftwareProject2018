@@ -383,7 +383,10 @@
                                         </b>
                                     </p>
                                 </div>
-                                <textarea id="idComment" class="mdl-textfield__input" maxlength="1000" type="text" rows="3" placeholder="Kommentiere hier..."></textarea>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea id="idComment" class="mdl-textfield__input" maxlength="1000" type="text" rows="3"></textarea>
+                                    <label class="mdl-textfield__label" for="schools">Kommentar</label>
+                                </div>
                                 <!-- <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label> -->
                             </div>
 
@@ -392,7 +395,7 @@
                             <br />
                         </div>
 
-                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial" class="sidecard demo-list-three mdl-list">
+                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial;" class="sidecard demo-list-three mdl-list">
 
                             <li v-for="comment in selected_event.aComments" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
                                 <span class="mdl-list__item-primary-content">
