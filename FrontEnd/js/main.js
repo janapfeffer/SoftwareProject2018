@@ -46,6 +46,7 @@ var removeAllAdressSelbstSetzenStuff = function () {
     if (document.getElementById("pickLocationModeToggleLabel").classList.contains("is-checked")) {
         document.getElementById("pickLocationModeToggleLabel").classList.remove("is-checked");
     }
+    // $("#map").css( 'cursor', 'default');
 }
 
 var oNavigationVue = new Vue({

@@ -94,6 +94,7 @@ function suggestPlaces(inp, arr) {
         } else if (e.keyCode == 13) {
             /*If the ENTER key is pressed, prevent the form from being submitted,*/
             e.preventDefault();
+            e.stopPropagation();
             if (currentFocus > -1) {
                 /*and simulate a click on the "active" item:*/
                 if (x) x[currentFocus].click();
@@ -427,7 +428,7 @@ var pickLocationModeMapListener = function (evt) {
 
                 var sHTMLBubble = "<div class=\infoBubble\>" +
                     "<div class=\ibText\>" +
-                    "<span>" + "Bestätige/ändere die Addresse oder klick weiter" + "</span>" +
+                    "<span>" + "Bestätige oder klick weiter" + "</span>" +
                     "</div>" +
                     "<div class=\iconContainerLocationPicker\>" +
                     "<div class=\ibPlace\>" +
@@ -488,6 +489,8 @@ function pickLocationMode() {
 
         map.addEventListener('tap', pickLocationModeMapListener)
         pickLocationModeMapListenerSet = true;
+        $("#map").delay(100).fadeOut().fadeIn('200'); //let map "blink" to show that something changed on it
+        // $("#map").css( 'cursor', 'pointer');
     }
 
     //got unchecked
@@ -507,6 +510,8 @@ function pickLocationMode() {
         // map.addEventListener('tap',function(){});
         map.removeEventListener('tap', pickLocationModeMapListener);
         pickLocationModeMapListenerSet = false;
+        $("#map").delay(100).fadeOut().fadeIn('200'); //let map "blink" to show that something changed on it
+        // $("#map").css( 'cursor', 'default');
     }
 }
 
