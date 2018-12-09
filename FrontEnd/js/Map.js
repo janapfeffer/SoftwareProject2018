@@ -185,7 +185,7 @@ function getAutocompletion(sQuery, oInputField) {
     * This function will be called if a communication error occurs during the XMLHttpRequest
     */
     var onAutoCompleteFailed = function onAutoCompleteFailed() {
-        alert('Ooops!');
+        alert('Fehler beim erreichen von HERE Maps. Überprüfe deine Internetverbindung.');
     };
     // Attach the event listeners to the XMLHttpRequest object
     ajaxRequest.addEventListener("load", onAutoCompleteSuccess);

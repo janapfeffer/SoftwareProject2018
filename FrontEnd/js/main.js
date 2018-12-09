@@ -111,6 +111,9 @@ var oNavigationVue = new Vue({
                     closeBubble();
                 }
             }
+            if(oNewEventVue.cardShown === true){
+                this.showNewEventCard();
+            }
         },
 
         showNewLoginCard: function () {
@@ -144,6 +147,7 @@ var oNavigationVue = new Vue({
                 oRegisterVue.cardShown = false;
                 oNewEventVue.cardShown = false;
 
+                removeAllAdressSelbstSetzenStuff();
             }
         },
         showNewRegisterCard: function () {
