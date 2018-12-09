@@ -139,14 +139,41 @@ function getAutocompletion(sQuery, oInputField) {
     function getResponseBody(response) {
         var aSuggestions = [];
         response.suggestions.forEach(function (suggestion) {
-            var oSugAdr = suggestion.address
-            var suggestionShown = oSugAdr.city + " " + oSugAdr.street + " " + oSugAdr.houseNumber + " " + oSugAdr.state;
+            var sMatchLevel = suggestion.matchLevel;
+            var oSugAdr = suggestion.address;
+            var suggestionToDisplay;
 
-            aSuggestions.push(suggestion.label.replace(/,/g, ""))
+            if (sMatchLevel === "houseNumber") {
+                suggestionToDisplay = oSugAdr.street + " " + oSugAdr.houseNumber + " " + oSugAdr.postalCode + " " + oSugAdr.city;
+            }
+            else if (sMatchLevel === "street") {
+                suggestionToDisplay = oSugAdr.street + " " + oSugAdr.postalCode + " " + oSugAdr.city;
+            }
+            else if (sMatchLevel === "postalCode") {
+                suggestionToDisplay = oSugAdr.postalCode + " " + oSugAdr.city + " " + oSugAdr.state;
+            }
+            else if (sMatchLevel === "city") {
+                suggestionToDisplay = oSugAdr.city + " " + oSugAdr.state + " " + oSugAdr.country;
+            }
+            else if (sMatchLevel === "state") {
+                suggestionToDisplay = oSugAdr.state + " " + oSugAdr.country;
+            }
+            else if (sMatchLevel === "country") {
+                suggestionToDisplay = oSugAdr.country;
+            }
+            else if (sMatchLevel === "county"){
+                suggestionToDisplay = oSugAdr.county + " " + oSugAdr.state + " " + oSugAdr.country;
+            }
+            else if (sMatchLevel === "district"){
+                suggestionToDisplay = oSugAdr.postalCode + " " + oSugAdr.city + " " + oSugAdr.state;
+            }
+            else {
+                suggestionToDisplay = suggestion.label.replace(/,/g, "")
+            }
+            aSuggestions.push(suggestionToDisplay)
         });
         // console.log(aSuggestions);
         suggestPlaces(oInputField, aSuggestions)
-
     };
     var onAutoCompleteSuccess = function onAutoCompleteSuccess() {
 

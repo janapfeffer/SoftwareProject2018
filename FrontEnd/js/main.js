@@ -890,13 +890,19 @@ var oNewEventVue = new Vue({
                 geocodingParameters,
                 onSuccess = function onSuccess(result) {
 
-                    var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
-                    var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
-
                     //check wether the coordinates should come from geocoder oder reverese gecoder (depending on the switch for "Adresse selbst setzen")
                     if (pickLocationModeMapListenerSet) {
                         dLat = oNewEventVue.draft.oLatLng.lat;
                         dLng = oNewEventVue.draft.oLatLng.lng;
+                    //check wether the given adress exists
+                    }else if(result.response.view[0] != undefined){
+                        var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
+                        var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
+                    //tell the user, that there was no location found for the given string
+                    }else{
+                        oNewEventVue.draft.adressIsInvalid = true;
+                        alert("Die angegebene Addresse existiert nicht.");
+                        return;
                     }
 
                     var image = document.getElementById("imageUpload").files[0];
