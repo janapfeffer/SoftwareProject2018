@@ -16,9 +16,8 @@ var oEvent = function (oEvent) {
 var dialogopen = false;
 var logoutmodus = false;
 var loggedInUser = "";
-var favoritegeklickt = false;
+var favorite_clicked = false;
 var initalFavoriteSetting = false;
-var i = 0; //is this variable used?
 var aAllEvents = new Array();
 
 var removeAllAdressSelbstSetzenStuff = function () {
@@ -46,7 +45,6 @@ var removeAllAdressSelbstSetzenStuff = function () {
     if (document.getElementById("pickLocationModeToggleLabel").classList.contains("is-checked")) {
         document.getElementById("pickLocationModeToggleLabel").classList.remove("is-checked");
     }
-    // $("#map").css( 'cursor', 'default');
 }
 
 var oNavigationVue = new Vue({
@@ -90,8 +88,8 @@ var oNavigationVue = new Vue({
 
         showNewFavoriteCard: function () {
             $(window).scrollTop(0);
-            favoritegeklickt = !favoritegeklickt;
-            if (favoritegeklickt === true) {
+            favorite_clicked = !favorite_clicked;
+            if (favorite_clicked === true) {
                 document.getElementById('h2events').innerText = "Favoriten";
                 document.getElementById('AfterLoginFavoriten').innerText = "Events";
                 getFavorites(loggedInUser._id);
@@ -104,7 +102,6 @@ var oNavigationVue = new Vue({
             else {
                 document.getElementById('h2events').innerText = "Events";
                 document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-                // getAllEvents();
                 getFilteredEvents();
                 document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
                 document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
@@ -136,10 +133,8 @@ var oNavigationVue = new Vue({
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
                 AfterLoginEvent.style.visibility = "hidden";
-                // document.getElementById('AfterLoginLogin').innerText = "LogIn";
                 newLoginWrapper.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
-
                 oNewLoginVue.draft.sUserName = "";
                 oNewLoginVue.draft.sPassword = "";
                 document.getElementById("Login_username").innerText = "";
@@ -163,29 +158,7 @@ var oNavigationVue = new Vue({
             oNewEventVue.cardShown = false;
             oNewLoginVue.cardShown = false;
         },
-        toggleBigMap: function () {
-            bigmapgeklickt = !bigmapgeklickt;
-            if (bigmapgeklickt === true) {
-                AfterLoginLogin.style.visibility = "hidden";
-                AfterLoginFavoriten.style.visibility = "hidden";
-                AfterLoginEvent.style.visibility = "hidden";
-                document.getElementById('BigMap').innerText = "zurück zur Liste ";
-            }
-            else {
-                AfterLoginLogin.style.visibility = "visible";
-                document.getElementById('BigMap').innerText = "Große Karte ";
-                if (loggedInUser != "") {
-                    AfterLoginFavoriten.style.visibility = "visible";
-                    AfterLoginEvent.style.visibility = "visible";
-                }
-                else {
-                    AfterLoginLogin.style.visibility = "visible";
-                }
-            }
-
-            document.body.classList.toggle('bigMap');
-            map.getViewPort().resize();
-        }
+        
     }
 });
 
@@ -201,7 +174,6 @@ function getEventTypesAsString(oEventTypes) {
     return eventTypesString;
 }
 
-var bigmapgeklickt = false;
 
 function getFavorites(user_id) {
     oEventTableVue.selected = "";
@@ -225,7 +197,7 @@ function getFavorites(user_id) {
 
 
 
-function getAllEvents() { //uses get events/filtered with header filter_start_date = new Date() instead of get events
+function getAllEvents() { 
     oEventTableVue.selected = "";
     var GETALLEVENTS_URL = 'http://localhost:3000/events/filtered';
     var config = {
@@ -321,7 +293,7 @@ var oEventTableVue = new Vue({
     },
     methods: {
         favToggle: function (target) {
-            // abfrage, ob es gefavt war oder nicht
+            // was it already faved?
             if (loggedInUser != "") { //only change status of faved i fa user is logged in
                 if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
                     Vue.set(target, 'faved', true);
@@ -369,17 +341,14 @@ var oEventTableVue = new Vue({
             }
         },
         kommentargeschickt: function (id) {
-
-            // alert("Danke für dein Kommentar. Nachdem es verifiziert wurde, kannst du es hier sehen.");
+            
             if (document.querySelector("#idComment").value.length < 1) {
                 document.getElementById("idCommentErrorEmpty").style.display = "block";
             } else {
                 document.getElementById("idCommentErrorEmpty").style.display = "none";
                 var ajaxRequest = new XMLHttpRequest();
                 var comment = document.querySelector("#idComment").value;
-
                 var onSuccess = function onSuccess() {
-                    // console.log("toll");
                     var t = oEventTableVue.selected;
                     //this leads to the comment being displayed immediatley
                     //reload favorites/events list
@@ -412,7 +381,6 @@ var oEventTableVue = new Vue({
             // only data with specific Ids can be selected
             if (dialogopen == false) {
                 if (target.iEventId != undefined) {
-
                     this.selected = target.iEventId;
                 }
                 // map.setCenter(target.marker.getPosition(), true);
@@ -507,7 +475,7 @@ var oEventTableVue = new Vue({
             }
         },
         //Offnet bzw macht Popup moeglich
-        KommentarGemacht: function () {
+        OpenCommentPopUp: function () {
             if (loggedInUser != "") {
                 dialogopen = true;
                 document.querySelector("#idComment").value = "";
@@ -517,16 +485,13 @@ var oEventTableVue = new Vue({
                 });
                 if (loggedInUser_rating) { //set rating buttons
                     if (loggedInUser_rating.rating == -1) {
-                        nochniebewertet = false;
                         document.getElementById('idThumbDown').style.color = "red"
                         document.getElementById('idThumbUp').style.color = "grey"
                     } else {
-                        nochniebewertet = false;
                         document.getElementById('idThumbUp').style.color = "green"
                         document.getElementById('idThumbDown').style.color = "grey"
                     }
                 } else {
-                    nochniebewertet = true;
                     document.getElementById('idThumbUp').style.color = "grey"
                     document.getElementById('idThumbDown').style.color = "grey"
                 }
@@ -537,7 +502,6 @@ var oEventTableVue = new Vue({
                     e.stopPropagation();
                 })
                 document.addEventListener("click", function (e) {
-                    // console.log(e)
                     dialog.close();
                     dialogopen = false;
                 });
@@ -579,7 +543,6 @@ function _getFilterHeaders() {
 
         } else {
             alert("Bitte wähle kein Datum aus der Vergangenheit aus.");
-            // document.getElementById("idDatePickerErrorEmpty").style.display = "block";
             return null;
         }
     } else {
@@ -825,35 +788,6 @@ var oNewEventVue = new Vue({
         aEventTypes: [],
     },
     methods: {
-        // formdraft: function () {
-        //     var geocoder = platform.getGeocodingService(),
-        //         geocodingParameters = {
-        //             searchText: oNewEventVue.draft.sAdress,
-        //             jsonattributes: 1
-        //         };
-        //     geocoder.geocode(
-        //         geocodingParameters,
-        //         onSuccess = function onSuccess(result) {
-
-        //             var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
-        //             var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
-        //             var oLatLgn = { lat: dLat, lng: dLng }
-
-        //             oNewEventVue.draft.oLatLng = oLatLgn;
-        //             oNewEventVue.draft.oStartDate = oNewEventVue.draft.EDate[0].split("T")[0];
-        //             oNewEventVue.draft.oStartTime = oNewEventVue.draft.EDate[1].split("T")[1].substring(0, 5);
-        //             oNewEventVue.draft.sDisplayEventLink = oNewEventVue.draft.sEventLink = undefined ? "box" : "none";
-
-        //             oEventTableVue.allEvents.unshift(oNewEventVue.draft);
-        //             map.setCenter(oLatLgn, true);
-        //             setMarker(oNewEventVue.draft);
-
-        //         },
-        //         onError = function(error) {
-        //             alert('Error beim suchen der Adresse!');
-        //         }
-        //     )
-        // },
         formsubmit: function () {
 
             titleIsInvalid = false;
@@ -861,8 +795,7 @@ var oNewEventVue = new Vue({
             oNewEventVue.draft.adressIsInvalid = false;
             oNewEventVue.draft.displayError = false;
             oNewEventVue.draft.dateIsInvalid = false;
-
-            //Hier die Bedingungen + Ausführungen, falls nicht alle Felder korrekt oder gar nicht ausgefüllt wurden.
+            
             if (this.draft.sName === "") {
                 this.draft.titleIsInvalid = true;
             }
@@ -885,7 +818,7 @@ var oNewEventVue = new Vue({
                 return;
             }
 
-            // Koordinaten für Adresse holen
+            //get coordinates for the address
             var geocoder = platform.getGeocodingService(),
                 geocodingParameters = {
                     searchText: this.draft.sAdress,
@@ -1015,9 +948,7 @@ var oNewEventVue = new Vue({
             }
         },
         onChange(image) {
-            // console.log('New picture selected!')
             if (image) {
-                // console.log('Picture loaded.')
                 this.draft.image = image
             } else {
                 console.log('FileReader API not supported: use the <form>, Luke!')
@@ -1098,8 +1029,7 @@ var oRegisterVue = new Vue({
                 Reg_REG_Fehler.style.display = "none";
 
             }
-
-            // if (this.draft.rEmail === "" || document.querySelector('#email').value.includes("@") == false) {
+            
             if (this.draft.rEmail.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) == null) {
                 this.draft.emailIsInvalid = true;
                 Reg_EMAIL_Fehler.style.display = "inline";
@@ -1135,7 +1065,7 @@ var oRegisterVue = new Vue({
                 ajaxRequest.open("POST", newuser, true);
                 ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
-                // console.log(snewuserdata);
+                
                 ajaxRequest.send(snewuserdata);
             }
 
@@ -1145,9 +1075,6 @@ var oRegisterVue = new Vue({
     }
 });
 
-//Register Vue End
-
-//Login Vue
 var oNewLoginVue = new Vue({
     el: "#newLoginWrapper",
     data: {
@@ -1169,12 +1096,10 @@ var oNewLoginVue = new Vue({
             logoutmodus = true;
             this.draft.passwordIsInvalid = false;
             this.draft.emailIsInvalid = false;
-            // if (logoutmodus === true) {
 
             var suserlogin = "http://localhost:3000/user/login"
             var ajaxRequest = new XMLHttpRequest();
             var onSuccess = function onSuccess() {
-                // console.log(this.status);
                 if (this.status === 200) {
                     // save user in global variable
                     loggedInUser = this.response.user;
@@ -1197,8 +1122,7 @@ var oNewLoginVue = new Vue({
                     newLoginWrapper.style.display = "hidden";
                     oEventTableVue.starVisibility = "visible";
                     LoginFehlerDaten.style.display = "none";
-
-                    //Hier muss die Karte unsichtbar gemacht werden
+                    
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
                     oNewLoginVue.cardShown = false;
@@ -1239,7 +1163,6 @@ var oNewLoginVue = new Vue({
                 ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
                 var suserdata = "email=" + this.draft.sUserName + "&password=" + this.draft.sPassword;
-                // usernameemail = this.draft.iLoginId;
                 ajaxRequest.send(suserdata);
             }
             else {
@@ -1249,7 +1172,7 @@ var oNewLoginVue = new Vue({
         },
 
 
-        BobMarleyCard: function () {
+        RegisterVueShow: function () {
             this.cardShown = !this.cardShown;
             oRegisterVue.cardShown = true;
 
@@ -1257,10 +1180,7 @@ var oNewLoginVue = new Vue({
         },
     }
 });
-//Login Vue End
 
-
-// Date Vue
 var oNewDateVue = new Vue({
     el: "#newDateWrapper",
     data: {
@@ -1289,8 +1209,6 @@ var oNewDateVue = new Vue({
     }
 });
 
-// suche nach gleichen events mit exakt gleichen Koordinaten
-// und verändert die Position der Duplikate ein bisschen (in place)
 function checkDuplicatePositions(arr) {
     // console.time("duplishift")
     arrCopy = arr.slice(0); //copy array but keep references to orig. objects
@@ -1301,8 +1219,6 @@ function checkDuplicatePositions(arr) {
             if (testFor.lat - arrCopy[i].oLatLgn.lat == 0) // lat gleich?
                 if (testFor.lng - arrCopy[i].oLatLgn.lng == 0) { // long gleich ?
                     countDuplicates++;
-                    // Die Duplikate ordnen sich in einer angedeuteten Spiralformation um
-                    // die echten Koordinaten an. loool :D
                     angle = countDuplicates * 1.4 + 4;
                     arrCopy[i].oLatLgn.lng -= angle * Math.cos(angle) * 0.000005;
                     arrCopy[i].oLatLgn.lat -= angle * Math.sin(angle) * 0.000002;
@@ -1334,7 +1250,6 @@ function getAllEventTypes() {
             alert("Fehler beim Laden der Event_Types aus der Datenbank.");
             console.log(error);
         });
-    // console.log(event_types);
 };
 
 function initEverything() {

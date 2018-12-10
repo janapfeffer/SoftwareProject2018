@@ -1,25 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-<!-- Variabln Namen, Aufgelistet für das BackEnd Team:
-    -Datum des Filters:   "FilterDate"
-    -Login:
-          *Username: "sUserName"
-          *Password: "sPassword"
-    -Registierung:
-          *Username: "rUserName"
-          *Password: "rPassword"
-          *Password2: "rPassword2"
-    -Event Daten:
-          *Description: "sDescription"
-          *Event Name: "sName"
-          *Event Date:  "sDate"
-          *Event Adress: "sAdress"
-    Favoriten:
-    main.js:
-    Zeile 86: Funktion "checkboxToggle" wird immer aufgerufen wenn ein Hacken gesetzt wurde
-    -->
-<!-- MetaDaten: -->
-
 <head>
     <meta http-equiv="language" content="german, de">
     <meta charset="utf-8" />
@@ -27,8 +7,6 @@
     <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
     <title>EventHub</title>
     <link rel="icon" href="images/mapIcon.PNG">
-    <!-- tab icon-->
-
     <!-- External Libaries-->
     <script src="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
@@ -84,11 +62,10 @@
                 <h1 style="font-size: 30px"> EventHub </h1>
                 <!-- Title -->
                 <div class="mdl-layout-spacer"></div>
-                <!-- Navigation. Wird versteckt auf kleinen Displays, ist die große oben, nur die extra Seiten aufgelistet da großes Display alles anzeigt -->
-
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
-                    <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>Event
+                    <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>
+                        Event
                         eintragen
                     </a>
                     <a class="mdl-navigation__link headerLink" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
@@ -97,10 +74,8 @@
             </div>
         </header>
     </div>
-    <!-- Alles rechts neben der Karte-->
     <div id="aside">
         <!-- Register Card-->
-        <!-- Registiereungs Daten werden immer mit "r." verarbeitet, zum Beispiel "rPassword"/"rUserName"-->
         <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <div id="newRegister" class="sidecard">
                 <h2 style="padding: 0px;">Registrieren</h2>
@@ -167,12 +142,7 @@
 
         </div>
         <!-- Register Card End-->
-
-
-
-        <!-- anzeigen Card End-->
         <!-- Login Card-->
-        <!-- Login Daten werden immer mit "s." verarbeitet, zum Beispiel "sPassword"/"sUserName"-->
         <div id="EINLOGEN_Karte">
             <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
                 <div id="newLogin" class="sidecard">
@@ -185,8 +155,6 @@
                             </b>
                         </p>
                     </div>
-
-
                     <div id="LoginFehlerDaten" style="display:none">
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
@@ -198,13 +166,11 @@
 
                     <div id="NewRegisteredUser" style="display:none">
                         <p style="color:green; ">
-                            <b>Du wurdest erfolgreich registriert. Logg dich ein!
+                            <b>
+                                Du wurdest erfolgreich registriert. Logg dich ein!
                             </b>
                         </p>
                     </div>
-
-
-
                     <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sUserName" id="Login_username">
                         <label class="mdl-textfield__label" for="sample1">E-Mail*</label>
@@ -215,7 +181,7 @@
                     </div>
 
                     <div class="buttons">
-                        <button class="mdl-button mdl-js-button mdl-button--raised" @click='BobMarleyCard'>
+                        <button class="mdl-button mdl-js-button mdl-button--raised" @click='RegisterVueShow'>
                             Registieren
                         </button>
                         <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
@@ -226,11 +192,9 @@
             </div>
             <!-- Login Card End-->
         </div>
-        <!-- Karte für Event, Alles rechts neben der Karte-->
         <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <div id="newEvent" class="sidecard">
                 <h2 style="padding: 0px;">Neues Event eintragen</h2>
-                <!-- <div id="displayNewEventError" style="display: none"> -->
                 <div v-show="draft.displayError">
                     <i class="material-icons" style="float: left">error_outline</i>
                     <p style="color: #d50000; ">
@@ -251,9 +215,6 @@
                     <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
                     <label class="mdl-textfield__label" for="sample1">Adresse*</label>
                 </div>
-                <!-- <button class="mdl-button mdl-js-button mdl-button--raised" @click="pickLocationMode">
-                    Setze die Adresse selbst!
-                </button> -->
                 <label id="pickLocationModeToggleLabel" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
                     <input type="checkbox" id="switch-1" class="mdl-switch__input" unchecked @click.stop="pickLocationMode">
                     <span class="mdl-switch__label">Addresse selbst setzen</span>
@@ -265,8 +226,8 @@
                 <div>
                     <p>Veranstaltungstypen*</p>
                     <vue-multiselect id="idMultiSelectCreate" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes"
-                        :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label="" :show-no-results="false"
-                        :searchable="false">
+                                     :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label="" :show-no-results="false"
+                                     :searchable="false">
                     </vue-multiselect>
                 </div>
 
@@ -274,7 +235,7 @@
                     <p>Datum*</p>
                     <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
                     <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
-                        start-placeholder="Von" end-placeholder="Bis" :default-time="['15:00:00', '19:00:00']">
+                                    start-placeholder="Von" end-placeholder="Bis" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
 
@@ -284,12 +245,7 @@
                 </div>
                 <div class="image-preview" v-if="draft.oSelectedFile.length > 0">
                     <img class="preview" :src="draft.oSelectedFile">
-                </div>
-                <!--label for="imageUpload">Laden Sie Ihr Eventbild hoch!</label-->
-                <div class="buttons">
-                    <!-- <button style="color:ghostwhite; font-family:Bahnschrift;" class="mdl-button mdl-js-button mdl-button--raised" @click="formdraft">
-                        Vorschau
-                    </button> -->
+                </div> <div class="buttons">
                     <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
                         Senden
                     </button>
@@ -298,16 +254,12 @@
         </div>
         <div id="eventsWithDialog">
             <div class="sidecardWrapper">
-
-                <!--input id="searchEvent" style="width: 250px; height: 30px; padding: 0px 4px" type="text" placeholder="Eventname eingeben"
-                v-model="sQuery" @keyup.enter="searchEvent"><input-->
                 <ul id="eventTable" class="sidecard demo-list-three mdl-list">
                     <h2 id="h2events"> Events </h2>
                     <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
                         @click="select(event)" v-bind:id="event.iEventId">
                         <span class="mdl-list__item-primary-content">
                             <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
-                            <!--{{ event.oImage }} i class="material-icons mdl-list__item-avatar">person</i-->
                             <span>{{ event.sName }}</span>
                             <span id="sterne" v-bind:style="{visibility : starVisibility}" name="stern">
                                 <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
@@ -317,9 +269,7 @@
                             <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
                             <i class="fa fa-clock-o" style="font-size:18px"></i>
                             <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
-                            <span class=nobr> - </span>
-                            <!-- <br style="line-height: 150%;"> -->
-                            <i class="fa fa-calendar" style="font-size:18px"></i>
+                            <span class=nobr> - </span> <i class="fa fa-calendar" style="font-size:18px"></i>
                             <span class=nobr class="mdl-list__item-text-body">{{ event.oEndDate }}</span>
                             <i class="fa fa-clock-o" style="font-size:18px"></i>
                             <span class=nobr class="mdl-list__item-text-body">{{ event.oEndTime }}</span>
@@ -329,7 +279,6 @@
                             <br style="line-height: 150%">
                             <i class="fa fa-tags" aria-hidden="true" style="font-size:18px"></i>
                             <span class=nobr class="mdl-list__item-text-body">{{ event.sEventTypes }}</span>
-                            <!-- <div v-bind:style="{ display: event.sDisplayEventLink }"> -->
                             <div>
                                 <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
                                 <span class=nobr class="link" class="mdl-list__item-text-body">
@@ -337,25 +286,18 @@
                                 </span>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" id="show-dialog" @click.stop="KommentarGemacht(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
-                                    type="text" id="sample1" readonly>
+                                <input class="mdl-textfield__input" id="show-dialog" @click.stop="OpenCommentPopUp(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
+                                       type="text" id="sample1" readonly>
 
                                 <label class="mdl-textfield__label" for="sample1">Kommentiere und bewerte hier...</label>
                             </div>
-
-
             </div>
             </span>
 
             </li>
             </ul>
-            <!-- </div> -->
-            <!-- Popup Dialog   <type="text" id="sample1" readonly="readonly"> -->
-
             <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
     box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
-                <!-- <div data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000"> -->
-
                 <div style="background-color:whitesmoke">
 
                     <h2 class="mdl-dialog__title" id="kommiüberschrift">{{selected_event.sName}}</h2>
@@ -363,18 +305,11 @@
                         <img id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
 
                         <p style="color:black;" id="eventidkommentare">{{selected_event.sDescription}}</p>
-
-                        <!-- Use an element to toggle between a like/dislike icon -->
                         <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
                         <i @click="clickLikeButton()" id="idThumbUp" style="position: absolute; color:grey; right: 14%;" class="fa fa-thumbs-up thumbs"></i>
-                        <!-- Man kann nur gut oder schlecht bewerten, nicht beides gleichzeitig-->
                         <div>
-
                             <p id="ratingnumber" style="float:right;color:black; margin-right: 18%; font-size: x-large;">{{selected_event.iCurrentRating}}</p>
-
-
                             <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <!-- <input placeholder="Kommentiere hier..." class="mdl-textfield__input" type="text" id="idComment"></input> -->
                                 <div id="idCommentErrorEmpty" style="display: none">
                                     <i class="material-icons" style="float: left">error_outline</i>
                                     <p style="color:red; ">
@@ -387,23 +322,18 @@
                                     <textarea id="idComment" class="mdl-textfield__input" maxlength="1000" type="text" rows="3"></textarea>
                                     <label class="mdl-textfield__label" for="schools">Kommentar</label>
                                 </div>
-                                <!-- <label class="mdl-textfield__label" for="sample1">Kommentiere hier..</label> -->
                             </div>
-
                             <button id="meins" style="float:right; top: 4px; left: 20px;" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
-
                             <br />
                         </div>
 
                         <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial;" class="sidecard demo-list-three mdl-list">
-
                             <li v-for="comment in selected_event.aComments" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
                                 <span class="mdl-list__item-primary-content">
                                     <div>
                                         <span style="font-weight: bold;"> {{comment.username}} </span>
                                         <br style="line-height: 150%;" />
                                         <i class="fa fa-comment" style="font-size:18px"></i>
-                                        <!-- <br style="line-height: 150%;"> -->
                                         <span class=nobr class="mdl-list__item-text-body"> {{comment.comment}}</span>
 
                                         <br style="line-height: 150%;" />
@@ -413,9 +343,7 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- <button type="button" class="mdl-button close">close</button> -->
                 </div>
-                <!-- </div> -->
             </dialog>
         </div>
 
@@ -425,9 +353,6 @@
 
     <div id="searchPlace" class="sidecard" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
         <h1>Finde Veranstaltungen in deiner Gegend.</h1>
-
-        <!-- Searchbar for places  @keyup="autocomplete" @keyup.enter="searchPlace" -->
-
         <div id="searchPlaceInner" autocomplete="off">
             <h2>ORT</h2>
             <div id="idDatePickerErrorEmpty" style="display: none">
@@ -440,53 +365,30 @@
             </div>
             <div id="idSearchBar" class="autocomplete" style="width:370;">
                 <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete">
-                <!--  @keyup.enter="searchPlace" -->
             </div>
             <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-
-            <!--<span id="datepickerID"class="autocomplete" ></span>-->
-
             <span id="datepickerID">
 
                 <h2>VON-BIS</h2>
                 <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von" end-placeholder="Bis"
-                    :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA">
+                                :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA">
                 </el-date-picker>
             </span>
             <span id="eventtypesfilterID" class="autocomplete">
                 <h2>WAS</h2>
                 <vue-multiselect v-model="value" v-bind:limit-text="newText" :options="aEventTypes" :multiple="true" :close-on-select="false"
-                    :clear-on-select="false" :searchable="false" placeholder="Kategorien" label="name" track-by="name" :limit="1"
-                    select-label="Auswählen" selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" :preselect-first="true">
+                                 :clear-on-select="false" :searchable="false" placeholder="Kategorien" label="name" track-by="name" :limit="1"
+                                 select-label="Auswählen" selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" :preselect-first="true">
                 </vue-multiselect>
             </span>
-
             <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
                 Suche
             </button>
-
-
-
-            <!-- <template slot="selection" slot-scope="{ values, search, isOpen }">
-                <div>
-                <label class="typo__label">Simple select / dropdown</label>
-                <vue-multiselect v-model="value" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
-                    <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
-                </vue-multiselect>
-                <pre class="language-json"><code>{{ value }}</code></pre>
-                </div>
-            </template> -->
-
-            <!-- <vue-multiselect id="idMultiSelectSearch" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes"
-                :multiple="true" :close-on-select="false" :clear-on-select="false" select-label="" :show-no-results="false" :searchable="false">
-            </vue-multiselect> -->
-
         </div>
 
 
 
     </div>
-
     </div>
     <!-- Seachbar Ends here-->
     </div>
@@ -494,17 +396,6 @@
 
     <!-- Map-->
     <div id="map"></div>
-
-    <!-- vue datein-->
-    <!-- <script type="text/javascript" src="js/vues/eventTableVue.js"></script>
-    <script type="text/javascript" src="js/vues/favoriteVue.js"></script>
-    <script type="text/javascript" src="js/vues/navigationVue.js"></script>
-    <script type="text/javascript" src="js/vues/newDateVue.js"></script>
-    <script type="text/javascript" src="js/vues/newEventVue.js"></script>
-    <script type="text/javascript" src="js/vues/newLoginVue.js"></script>
-    <script type="text/javascript" src="js/vues/registerVue.js"></script>
-    <script type="text/javascript" src="js/vues/searchPlaceVue.js"></script> -->
-    <!-- own script files-->
     <script type="text/javascript" src="js/Map.js"></script>
     <script type="text/javascript" src="js/testdata.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
