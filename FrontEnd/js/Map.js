@@ -12,6 +12,7 @@ var defaultLayers = platform.createDefaultLayers({
     tileSize: pixelRatio === 1 ? 256 : 512,
     ppi: pixelRatio === 1 ? undefined : 320
 });
+
 //Step 2: initialize a map
 var map = new H.Map(document.getElementById('map'),
     defaultLayers.normal.map, {
@@ -20,10 +21,12 @@ var map = new H.Map(document.getElementById('map'),
         pixelRatio: pixelRatio
     });
 map.setCenter({ lat: 49.48651, lng: 8.46679 }, true);
+
 //Step 3: make the map interactive
 // MapEvents enables the event system - behavior implements default interactions for pan/zoom (also on mobile touch environments)
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 behavior.disable(H.mapevents.Behavior.DBLTAPZOOM);
+
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
@@ -31,7 +34,6 @@ ui.getControl('scalebar').setAlignment('left-bottom');
 ui.getControl('mapsettings').setAlignment('left-bottom');
 ui.getControl('zoom').setAlignment('left-bottom');
 
-//source: https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function suggestPlaces(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -50,14 +52,12 @@ function suggestPlaces(inp, arr) {
     inp.parentNode.appendChild(a);
     /*for each item in the array...*/
     for (i = 0; i < arr.length; i++) {
-        /*check if the item starts with the same letters as the text field value:*/
-        //   if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
         /*create a DIV element for each matching element:*/
         b = document.createElement("DIV");
         /*make the matching letters bold:*/
         b.innerHTML = arr[i].substr(0, val.length);
         b.innerHTML += arr[i].substr(val.length);
-        /*insert a input field that will hold the current array item's value:*/
+        /*insert an input field that will hold the current array item's value:*/
         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
         /*execute a function when someone clicks on the item value (DIV element):*/
         b.addEventListener("click", function (e) {
@@ -73,7 +73,6 @@ function suggestPlaces(inp, arr) {
             closeAllLists();
         });
         a.appendChild(b);
-        //   }
     }
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function (e) {
@@ -101,6 +100,7 @@ function suggestPlaces(inp, arr) {
             }
         }
     });
+
     function addActive(x) {
         /*a function to classify an item as "active":*/
         if (!x) return false;
@@ -111,12 +111,14 @@ function suggestPlaces(inp, arr) {
         /*add class "autocomplete-active":*/
         x[currentFocus].classList.add("autocomplete-active");
     }
+
     function removeActive(x) {
         /*a function to remove the "active" class from all autocomplete items:*/
         for (var i = 0; i < x.length; i++) {
             x[i].classList.remove("autocomplete-active");
         }
     }
+
     function closeAllLists(elmnt) {
         /*close all autocomplete lists in the document,
         except the one passed as an argument:*/
@@ -173,13 +175,11 @@ function getAutocompletion(sQuery, oInputField) {
             }
             aSuggestions.push(suggestionToDisplay)
         });
-        // console.log(aSuggestions);
         suggestPlaces(oInputField, aSuggestions)
     };
     var onAutoCompleteSuccess = function onAutoCompleteSuccess() {
 
         getResponseBody(this.response);  // In this context, 'this' means the XMLHttpRequest itself.
-        //  addSuggestionsToMap(this.response);
     };
 
     /**
@@ -204,12 +204,6 @@ function getAutocompletion(sQuery, oInputField) {
     ajaxRequest.open('GET', AUTOCOMPLETION_URL + params);
     ajaxRequest.send();
 }
-
-/**
- * A full list of available request parameters can be found in the Geocoder API documentation.
- * see: http://developer.here.com/rest-apis/documentation/geocoder/topics/resource-geocode.html
- * @param   {H.service.Platform} platform    A stub class to access HERE services
- */
 
 function zoomMap(posi) {
 
@@ -239,8 +233,6 @@ function setCenter(sQuery) {
         /**
         * This function will be called once the Geocoder REST API provides a response
         * @param  {Object} result A JSON object representing the  location(s) found.
-        *
-        * see: http://developer.here.com/rest-apis/documentation/geocoder/topics/resource-type-response-geocode.html
         */
         onSuccess = function onSuccess(result) {
             var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
@@ -270,7 +262,6 @@ function setMarker(oData) {
         zoomMap(evt.target.getPosition());
     }, false);
     marker.addEventListener('tap', function (evt) {
-        // document.getElementById(evt.target.data.iEventId).scrollIntoView({block: "end", behavior: "smooth"});
         VueScrollTo.scrollTo(document.getElementById(evt.target.data.iEventId), 800, {
             offset: -65,
             force: false,
@@ -279,7 +270,6 @@ function setMarker(oData) {
     }, false);
     marker.addEventListener('pointerenter', function (evt) {
         openBubble(evt.target.getPosition(), evt.target.data);
-        // document.getElementsByClassName('mdl-list__item mdl-list__item--three-line')[evt.target.data.index].scrollIntoView({block: "end", behavior: "smooth"});
         map.getViewPort().element.style.cursor = 'pointer';
     }, false);
     marker.addEventListener('pointerleave', function (evt) {
@@ -341,11 +331,10 @@ function setVerifyLocationMarker(sAddress) {
 }
 
 var updateViewTimeout;
-// verfolge wohin der user scrolld und draged
+// track where the user scrolls and drags
 map.addEventListener('mapviewchange', function (evt) {
     clearTimeout(updateViewTimeout);
     updateViewTimeout = setTimeout(function () {
-        console.log("update list");
         oEventTableVue.mapBounds = map.getViewBounds();
     }, 300)
 });
@@ -378,9 +367,6 @@ function openBubble(position, oData, customHTML) {
         "</div>";
 
     var myHTMLcontent = customHTML != undefined ? customHTML : standardBubbleHTML;
-
-    //background img
-    //style='background-image: url(" + oData.oImage + "); background-size: 244px 154px;;'
 
     if (!bubble) {
         bubble = new H.ui.InfoBubble(
@@ -434,15 +420,12 @@ var pickLocationModeMapListener = function (evt) {
                     "<div class=\ibPlace\>" +
                     "<i class='fa fa-map-marker' style='font-size:16px'></i>" +
                     "<span class=nobr>" + sAddress + "</span>" +
-                    // "<input type=\text\ class=nobr value=\\" + sAdress + "\></input>" +
                     "</div>" +
                     "</div>" +
                     "<button id=\acceptLocationButton\ class=\mdl-button mdl-js-button mdl-button--raised mdl-button-positive\>Bestätigen</button>" +
-                    // "<button id=\denyLocationButton\ class=\mdl-button mdl-js-button mdl-button--raised mdl-button-negative\>Nein</button>" +
                     "</div>";
 
                 openBubble(coord, {
-                    //those are acutally not necessary, a bit uncelan, because still needed for openBubble function - might change if time is availabe
                     sName: "",
                     sAdress: "",
                     oStartDate: "",
@@ -452,7 +435,7 @@ var pickLocationModeMapListener = function (evt) {
                 verifyMarker = new H.map.Marker(coord);
                 map.addObject(verifyMarker);
 
-                //eventlistener for veryfiy
+                //eventlistener for verify
                 document.getElementById("acceptLocationButton").addEventListener("click", function () {
                     document.getElementById("newEventAddressDiv").classList.add("is-dirty"); //make the input field look like something got inputted
                     oNewEventVue.draft.sAdress = sAddress; //put the adress in the new event form
@@ -468,7 +451,7 @@ var pickLocationModeMapListener = function (evt) {
                 });
 
             }, function (error) {
-                alert("Es gab ein Problem bei der Verbindung mit HERE Maps. Versuche es nocheinmal.");
+                alert("Es gab ein Problem bei der Verbindung mit HERE Maps. Versuche es noch einmal.");
                 return;
             });
     }
@@ -490,7 +473,6 @@ function pickLocationMode() {
         map.addEventListener('tap', pickLocationModeMapListener)
         pickLocationModeMapListenerSet = true;
         $("#map").delay(100).fadeOut().fadeIn(200); //let map "blink" to show that something changed on it
-        // $("#map").css( 'cursor', 'pointer');
     }
 
     //got unchecked
@@ -507,11 +489,9 @@ function pickLocationMode() {
             map.removeObject(verifyMarker);
             verifyMarker = undefined;
         }
-        // map.addEventListener('tap',function(){});
         map.removeEventListener('tap', pickLocationModeMapListener);
         pickLocationModeMapListenerSet = false;
         $("#map").delay(100).fadeOut().fadeIn(200); //let map "blink" to show that something changed on it
-        // $("#map").css( 'cursor', 'default');
     }
 }
 
