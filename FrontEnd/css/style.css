@@ -145,8 +145,8 @@ h1{
   font-family: "raleway";
 }
 
-/* #map:hover{
-  cursor: url("../images/marker.jpg"), auto;
+/* #map{
+  cursor: url("../images/marker.jpg"), auto !important;
 } */
 
 /* .landingpage div#dateFilter{
