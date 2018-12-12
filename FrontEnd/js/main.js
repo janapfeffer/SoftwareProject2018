@@ -30,7 +30,7 @@ var removeAllAdressSelbstSetzenStuff = function () {
     if (document.getElementById("newEventAddress").hasAttribute("disabled")) {
         document.getElementById("newEventAddress").removeAttribute("disabled", true);
     }
-    //if map has event listener 
+    //if map has event listener
     if (pickLocationModeMapListenerSet) {
         //remove map event listener and delete all related markers&bubbles
         map.removeEventListener('tap', pickLocationModeMapListener);
@@ -143,6 +143,13 @@ var oNavigationVue = new Vue({
                 oRegisterVue.cardShown = false;
                 oNewEventVue.cardShown = false;
 
+                if (document.getElementById('h2events').innerText != "Events") {
+                 document.getElementById('h2events').innerText = "Events";
+                 document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
+                 document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
+                 getFilteredEvents();
+               }
+
                 removeAllAdressSelbstSetzenStuff();
             }
         },
@@ -158,7 +165,7 @@ var oNavigationVue = new Vue({
             oNewEventVue.cardShown = false;
             oNewLoginVue.cardShown = false;
         },
-        
+
     }
 });
 
@@ -197,7 +204,7 @@ function getFavorites(user_id) {
 
 
 
-function getAllEvents() { 
+function getAllEvents() {
     oEventTableVue.selected = "";
     var GETALLEVENTS_URL = 'http://localhost:3000/events/filtered';
     var config = {
@@ -341,7 +348,7 @@ var oEventTableVue = new Vue({
             }
         },
         kommentargeschickt: function (id) {
-            
+
             if (document.querySelector("#idComment").value.length < 1) {
                 document.getElementById("idCommentErrorEmpty").style.display = "block";
             } else {
@@ -611,6 +618,7 @@ function getFilteredEvents(displayId) {
                 oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
                     return obj.iEventId == displayId
                 }));
+                $(window).scrollTop(0);
             }
 
             //change center of map and filter for location
@@ -795,7 +803,7 @@ var oNewEventVue = new Vue({
             oNewEventVue.draft.adressIsInvalid = false;
             oNewEventVue.draft.displayError = false;
             oNewEventVue.draft.dateIsInvalid = false;
-            
+
             if (this.draft.sName === "") {
                 this.draft.titleIsInvalid = true;
             }
@@ -904,6 +912,7 @@ var oNewEventVue = new Vue({
                         removeAllAdressSelbstSetzenStuff();
 
                         oNewEventVue.cardShown = false; //close card for new event
+                        getFilteredEvents(res.data.created_event._id);
                         $(window).scrollTop(0);
                     }).catch(function (error) {
                         alert("Fehler beim speichern in der Datenbank");
@@ -1029,7 +1038,7 @@ var oRegisterVue = new Vue({
                 Reg_REG_Fehler.style.display = "none";
 
             }
-            
+
             if (this.draft.rEmail.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) == null) {
                 this.draft.emailIsInvalid = true;
                 Reg_EMAIL_Fehler.style.display = "inline";
@@ -1065,7 +1074,7 @@ var oRegisterVue = new Vue({
                 ajaxRequest.open("POST", newuser, true);
                 ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 var snewuserdata = "name=" + this.draft.rUserName + "&email=" + this.draft.rEmail + "&password=" + this.draft.rPassword;
-                
+
                 ajaxRequest.send(snewuserdata);
             }
 
@@ -1122,7 +1131,7 @@ var oNewLoginVue = new Vue({
                     newLoginWrapper.style.display = "hidden";
                     oEventTableVue.starVisibility = "visible";
                     LoginFehlerDaten.style.display = "none";
-                    
+
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
                     oNewLoginVue.cardShown = false;
