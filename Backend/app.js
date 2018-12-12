@@ -70,8 +70,6 @@ app.use((error, req, res, next) => {
     });
 });
 
-
-
 //Server connection to port 3000
 app.listen(3000, function () {
     console.log('Node Server is listening on port 3000!');
