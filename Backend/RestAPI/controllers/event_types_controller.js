@@ -10,7 +10,6 @@ exports.post_event_types = (req, res, next) => {
     eventType
         .save()
         .then(result => {
-            console.log(result);
             res.status(201).json({
                 message: "Created new event type successfully",
                 newEventType: {
@@ -24,7 +23,6 @@ exports.post_event_types = (req, res, next) => {
             })
         })
         .catch(err => {
-            console.error("Error: ", err.stack);
             res.status(500).json({
                 err: err
             })
@@ -48,7 +46,6 @@ exports.get_event_types = (req, res, next) => {
             res.status(200).json(response);
         })
         .catch(err => {
-            console.error("Error: ", err.stack);
             res.status(500).json({
                 error: err
             });

@@ -54,7 +54,6 @@ exports.user_signup = (req, res, next) => {
 exports.add_to_saved_events = (req, res, next) => {
     const event_id = req.body.eventId;
     const user_id = req.userData.userId;
-    console.log("user_id: " + user_id);
     User.findById(user_id, "saved_events", function (err, user) {
       try{
       if (user.saved_events.indexOf(event_id) > -1){
@@ -76,7 +75,6 @@ exports.add_to_saved_events = (req, res, next) => {
           });
         })
         .catch(err => {
-          console.log(err);
           res.status(500).json({
             error: err
           });
@@ -84,7 +82,6 @@ exports.add_to_saved_events = (req, res, next) => {
       }
     }
     catch(err) {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -116,15 +113,12 @@ exports.user_login = (req, res, next) => {
               username: user[0].name
             },
             "secretjwtkey",
-            // process.env.JWT_KEY,
             {
               expiresIn: "1h"
             }
           );
           return res.status(200).json({
             message: "Auth successful",
-            // token: token,s
-            // saved_events: user[0].saved_events
             user: {
               saved_events: user[0].saved_events,
               _id: user[0]._id,
@@ -140,7 +134,6 @@ exports.user_login = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -156,7 +149,6 @@ exports.user_delete = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -173,7 +165,6 @@ exports.get_saved_events_ids = (req, res, next) => {
       });
     })
     .catch(err => {
-        console.log(err);
         res.status(500).json({
           error: err
         });
@@ -181,7 +172,6 @@ exports.get_saved_events_ids = (req, res, next) => {
 };
 
 exports.get_saved_events = (req, res, next) => {
-  //"http://localhost:3000/user/" + user_id + "/events"
   User.findById(req.params.userId, "saved_events", function(err, event) {
   })
   .exec()
@@ -195,7 +185,6 @@ exports.get_saved_events = (req, res, next) => {
       .populate("event_types")
       .exec()
       .then(events => {
-        // console.log(events);
         res.status(200).json({
           count: user.saved_events.length,
           saved_events: events.map(event => {
@@ -218,24 +207,11 @@ exports.get_saved_events = (req, res, next) => {
                 ratings: event.ratings,
               };
           })
-
-          // .then(events => {
-          //   return {
-          //     "hi"
-          //   }
-          // })
-
-          // saved_events: user.saved_events.map(event => {
-          //   return {
-          //     _id: event._id
-          //
-          //   }
         });
       })
 
     })
     .catch(err => {
-        console.error("Error: ", err.stack);
         res.status(500).json({
             error: err
         })
@@ -246,7 +222,6 @@ exports.get_saved_events = (req, res, next) => {
 exports.delete_saved_event = (req, res, next) => {
   const event_id = req.body.eventId;
   const user_id = req.userData.userId;
-  console.log("user_id: " + user_id);
   User.findById(user_id, "saved_events", function (err, user) {
       User.updateOne(
         { _id: user_id},
@@ -264,7 +239,6 @@ exports.delete_saved_event = (req, res, next) => {
         });
       })
       .catch(err => {
-        console.log(err);
         res.status(500).json({
           error: err
         });

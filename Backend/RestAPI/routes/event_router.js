@@ -23,7 +23,6 @@ const storage = multer.diskStorage({
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
       cb(null, true);
     } else {
-      // could return error here
       cb(null, false);
     }
   };

@@ -169,7 +169,6 @@ exports.create_event = (req, res, next) => {
       });
     })
     .catch(err => {
-      // console.error("Error: ", err.stack);
       res.status(500).json({
         error: err
       })
@@ -282,7 +281,6 @@ exports.update_event = (req, res, next) => {
     });
 };
 
-
 //should not be an issue though if the frontend calls it correctly
 //delete picture if given (NOT if its the default picture) (currently only used for testing so thats unnecessary)
 exports.delete_event = (req, res, next) => {
@@ -349,7 +347,6 @@ exports.get_filtered_events = (req, res, next) => {
       }
     }];
   }
-  console.log(filter_options);
 
   OEvent.find(filter_options) //enter: {verification_status: true} as additional filter for only verified events
     .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
@@ -386,17 +383,8 @@ exports.get_filtered_events = (req, res, next) => {
       });
     })
     .catch(err => {
-      // console.error("Error: ", err.stack);
       res.status(500).json({
         error: err
       })
     });
 };
-
-// exports.report_event = (req, res, next) => {
-//   //report an event
-// };
-
-// exports.report_comment = (req, res, next) => {
-//   //report a comment,
-// };

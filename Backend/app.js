@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const express = require("express");
-// const helperRoutes = require("./RestAPI/routes/helper_routes");
 const eventRoutes = require( "../Backend/RestAPI/routes/event_router");
 const eventtypeRoutes = require( "../Backend/RestAPI/routes/event_types_router");
 const userRoutes = require( "../Backend/RestAPI/routes/user_router");
@@ -41,9 +40,6 @@ app.use((req, res, next) => {
         res.header("Access-Control-Allow-Methods", "PUT, POST, UPDATE, DELETE, GET");
         return res.status(200).json({});
     }
-    /** next() has to be called at end of middleware,
-     * so that requests are allowed to pass after passing this middleware
-    */
     next();
 });
 
