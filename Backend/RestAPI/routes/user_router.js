@@ -13,6 +13,6 @@ router.get("/:userId/saved_events_ids", checkAuth, UserController.get_saved_even
 router.post("/saveEvent", checkAuth, UserController.add_to_saved_events);
 
 //only used for testing
-router.delete("/:userId",  UserController.user_delete);
+router.delete("/:userId", UserController.user_delete);
 
 module.exports = router;
