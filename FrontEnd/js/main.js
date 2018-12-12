@@ -393,7 +393,7 @@ var oNavigationVue = new Vue({
                 AfterLoginFavoriten.style.visibility = "hidden";
                 loggedInUser = "";
                 AfterLoginEvent.style.visibility = "hidden";
-                newLoginWrapper.style.display = "visible";
+                LoginCard.style.display = "visible";
                 oEventTableVue.starVisibility = "hidden";
                 oNewLoginVue.draft.sUserName = "";
                 oNewLoginVue.draft.sPassword = "";
@@ -1016,16 +1016,16 @@ var oRegisterVue = new Vue({
             this.draft.nameIsInvalid = false;
             var onSuccess = function onSuccess() {
                 if (this.status === 409) {
-                    Reg_REG_Fehler.style.display = "inline";
+                    Reg_Reg_Error.style.display = "inline";
                 } else {
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
                     oNewLoginVue.cardShown = true;
                     NewRegisteredUser.style.display = "inline";
-                    Reg_Pass_Fehler.style.display = "none";
-                    Reg_SONS_Fehler.style.display = "none";
-                    Reg_EMAIL_Fehler.style.display = "none";
-                    Reg_REG_Fehler.style.display = "none";
+                    Reg_Pass_Error.style.display = "none";
+                    Reg_Other_Error.style.display = "none";
+                    Reg_Email_Error.style.display = "none";
+                    Reg_Reg_Error.style.display = "none";
                     oRegisterVue.draft.rUserName = "";
                     oRegisterVue.draft.rEmail = "";
                     oRegisterVue.draft.rPassword = "";
@@ -1038,43 +1038,43 @@ var oRegisterVue = new Vue({
             };
             if (this.draft.rUserName === "") {
                 this.draft.nameIsInvalid = true;
-                Reg_SONS_Fehler.style.display = "inline";
-                Reg_Pass_Fehler.style.display = "none";
-                Reg_EMAIL_Fehler.style.display = "none";
-                Reg_REG_Fehler.style.display = "none";
+                Reg_Other_Error.style.display = "inline";
+                Reg_Pass_Error.style.display = "none";
+                Reg_Email_Error.style.display = "none";
+                Reg_Reg_Error.style.display = "none";
             }
             if (this.draft.rPassword === "" || this.draft.rPassword2 === "") {
                 this.draft.password2IsInvalid = true;
                 this.draft.passwordIsInvalid = true;
-                Reg_SONS_Fehler.style.display = "inline";
-                Reg_Pass_Fehler.style.display = "none";
-                Reg_EMAIL_Fehler.style.display = "none";
-                Reg_REG_Fehler.style.display = "none";
+                Reg_Other_Error.style.display = "inline";
+                Reg_Pass_Error.style.display = "none";
+                Reg_Email_Error.style.display = "none";
+                Reg_Reg_Error.style.display = "none";
 
             }
 
             if (this.draft.rEmail.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) == null) {
                 this.draft.emailIsInvalid = true;
-                Reg_EMAIL_Fehler.style.display = "inline";
-                Reg_Pass_Fehler.style.display = "none";
-                Reg_SONS_Fehler.style.display = "none";
-                Reg_REG_Fehler.style.display = "none";
+                Reg_Email_Error.style.display = "inline";
+                Reg_Pass_Error.style.display = "none";
+                Reg_Other_Error.style.display = "none";
+                Reg_Reg_Error.style.display = "none";
             }
             if (this.draft.rPassword != this.draft.rPassword2) {
                 this.draft.password2IsInvalid = true;
                 this.draft.passwordIsInvalid = true;
-                Reg_Pass_Fehler.style.display = "inline";
-                Reg_EMAIL_Fehler.style.display = "none";
-                Reg_SONS_Fehler.style.display = "none";
-                Reg_REG_Fehler.style.display = "none";
+                Reg_Pass_Error.style.display = "inline";
+                Reg_Email_Error.style.display = "none";
+                Reg_Other_Error.style.display = "none";
+                Reg_Reg_Error.style.display = "none";
 
             }
 
 
-            Reg_Pass_Fehler
-            Reg_SONS_Fehler
-            Reg_EMAIL_Fehler
-            Reg_REG_Fehler
+            Reg_Pass_Error
+            Reg_Other_Error
+            Reg_Email_Error
+            Reg_Reg_Error
             if (this.draft.emailIsInvalid == true || this.draft.nameIsInvalid == true || this.draft.password2IsInvalid == true) {
             }
             else {
@@ -1099,7 +1099,7 @@ var oRegisterVue = new Vue({
 });
 
 var oNewLoginVue = new Vue({
-    el: "#newLoginWrapper",
+    el: "#LoginCard",
     data: {
         cardShown: false,
         draft: {
@@ -1142,9 +1142,9 @@ var oNewLoginVue = new Vue({
                     AfterLoginFavoriten.style.visibility = "visible";
                     AfterLoginEvent.style.visibility = "visible";
                     document.getElementById('AfterLoginLogin').innerText = "LogOut";
-                    newLoginWrapper.style.display = "hidden";
+                    LoginCard.style.display = "hidden";
                     oEventTableVue.starVisibility = "visible";
-                    LoginFehlerDaten.style.display = "none";
+                    LoginErrorData.style.display = "none";
 
                     this.cardShown = !this.cardShown;
                     oRegisterVue.cardShown = false;
@@ -1155,7 +1155,7 @@ var oNewLoginVue = new Vue({
                 else {
                     emailIsInvalid = true;
                     passwordIsInvalid = true;
-                    LoginFehlerDaten.style.display = "inline";
+                    LoginErrorData.style.display = "inline";
 
                 }
             };
@@ -1166,19 +1166,19 @@ var oNewLoginVue = new Vue({
 
             if (this.draft.sUserName === "") {
                 this.draft.emailIsInvalid = true;
-                LoginFehlerLeer.style.display = "inline";
+                LoginErrorEmpty.style.display = "inline";
 
             }
 
             if (this.draft.sPassword === "") {
                 this.draft.passwordIsInvalid = true;
-                LoginFehlerLeer.style.display = "inline";
+                LoginErrorEmpty.style.display = "inline";
             }
 
 
             if (this.draft.emailIsInvalid == false && this.draft.passwordIsInvalid == false) {
-                LoginFehlerLeer.style.display = "none";
-                LoginFehlerDaten.style.display = "none";
+                LoginErrorEmpty.style.display = "none";
+                LoginErrorData.style.display = "none";
                 ajaxRequest.addEventListener("load", onSuccess);
                 ajaxRequest.addEventListener("error", onFailed);
                 ajaxRequest.responseType = "json";

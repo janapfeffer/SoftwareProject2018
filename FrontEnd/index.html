@@ -3,10 +3,11 @@
 <head>
     <meta http-equiv="language" content="german, de">
     <meta charset="utf-8" />
-    <meta name="author" content="Hanna Scheub">
-    <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
+    <meta name="author" content="Yueling Li, Jana Pfeffer, Cornelius Schäfer, Hanna Scheub">
+    <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder, Veranstaltung">
     <title>EventHub</title>
     <link rel="icon" href="images/mapIcon.PNG">
+
     <!-- External Libaries-->
     <script src="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
@@ -16,6 +17,7 @@
 
     <!--Icon library for Like/Dislike Button-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- JQuery-->
     <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -24,31 +26,39 @@
     <!-- Vue.js-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
+
     <!-- Picture Input-->
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vue-picture-input"></script>
+
     <!-- Vue Multiselect-->
     <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
     <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+
     <!-- Axios für API Request-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <!-- Material Files-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
     <!-- Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- HERE MAPS -->
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+
     <!-- element -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="https://unpkg.com/element-ui/lib/umd/locale/de.js"></script>
     <script>ELEMENT.locale(ELEMENT.lang.de)</script>
+
     <!-- Own Files-->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -65,8 +75,7 @@
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
                     <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>
-                        Event
-                        eintragen
+                        Event eintragen
                     </a>
                     <a class="mdl-navigation__link headerLink" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
 
@@ -79,7 +88,7 @@
         <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
             <div id="newRegister" class="sidecard">
                 <h2 style="padding: 0px;">Registrieren</h2>
-                <div id="Reg_Pass_Fehler" style="display: none">
+                <div id="Reg_Pass_Error" style="display: none">
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
                         <b>
@@ -87,7 +96,7 @@
                         </b>
                     </p>
                 </div>
-                <div id="Reg_REG_Fehler" style="display: none">
+                <div id="Reg_Reg_Error" style="display: none">
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
                         <b>
@@ -95,7 +104,7 @@
                         </b>
                     </p>
                 </div>
-                <div id="Reg_SONS_Fehler" style="display: none">
+                <div id="Reg_Other_Error" style="display: none">
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
                         <b>
@@ -104,7 +113,7 @@
                     </p>
                 </div>
 
-                <div id="Reg_EMAIL_Fehler" style="display: none">
+                <div id="Reg_Email_Error" style="display: none">
                     <i class="material-icons" style="float: left">warning</i>
                     <p style="color:red; ">
                         <b>
@@ -143,11 +152,11 @@
         </div>
         <!-- Register Card End-->
         <!-- Login Card-->
-        <div id="EINLOGEN_Karte">
+        <div id="LoginCard">
             <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
                 <div id="newLogin" class="sidecard">
                     <h2 style="padding: 0px;">Einloggen</h2>
-                    <div id="LoginFehlerLeer" style="display: none">
+                    <div id="LoginErrorEmpty" style="display: none">
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
                             <b>
@@ -155,7 +164,7 @@
                             </b>
                         </p>
                     </div>
-                    <div id="LoginFehlerDaten" style="display:none">
+                    <div id="LoginErrorData" style="display:none">
                         <i class="material-icons" style="float: left">error_outline</i>
                         <p style="color:red; ">
                             <b>
@@ -230,15 +239,12 @@
                                      :searchable="false">
                     </vue-multiselect>
                 </div>
-
                 <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <p>Datum*</p>
-                    <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
                     <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
                                     start-placeholder="Von" end-placeholder="Bis" :default-time="['15:00:00', '19:00:00']">
                     </el-date-picker>
                 </div>
-
                 <div class="file-upload-form">
                     Lade ein Eventbild hoch:
                     <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected" accept="image/*">
@@ -296,15 +302,15 @@
 
             </li>
             </ul>
-            <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
+            <dialog id="commentDialog" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
     box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
                 <div style="background-color:whitesmoke">
 
-                    <h2 class="mdl-dialog__title" id="kommiüberschrift">{{selected_event.sName}}</h2>
+                    <h2 class="mdl-dialog__title" id="commentTitle">{{selected_event.sName}}</h2>
                     <div class="mdl-dialog__content">
                         <img id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
 
-                        <p style="color:black;" id="eventidkommentare">{{selected_event.sDescription}}</p>
+                        <p style="color:black;" id="eventPopUpDescription">{{selected_event.sDescription}}</p>
                         <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
                         <i @click="clickLikeButton()" id="idThumbUp" style="position: absolute; color:grey; right: 14%;" class="fa fa-thumbs-up thumbs"></i>
                         <div>
@@ -323,7 +329,7 @@
                                     <label class="mdl-textfield__label" for="schools">Kommentar</label>
                                 </div>
                             </div>
-                            <button id="meins" style="float:right; top: 4px; left: 20px;" @click="submitComment" type="button" class="mdl-button">Abschicken</button>
+                            <button id="submitCommentButton" style="float:right; top: 4px; left: 20px;" @click="submitComment" type="button" class="mdl-button">Abschicken</button>
                             <br />
                         </div>
 
