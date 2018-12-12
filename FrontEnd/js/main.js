@@ -1,3 +1,4 @@
+//##### 1. variables needed throughout the whole program #####
 var oEvent = function (oEvent) {
     this.iEventId = oEvent.iEventId;
     this.sName = oEvent.sName;
@@ -19,9 +20,11 @@ var loggedInUser = "";
 var favorite_clicked = false;
 var initalFavoriteSetting = false;
 var aAllEvents = new Array();
+var event_types;
 
-var removeAllAdressSelbstSetzenStuff = function () {
-    //remove all "Setzte Adresse selbst" stuff
+//##### 2. functions #####
+var closeSetAdressYourself = function () {
+    //close all "Setzte Adresse selbst" components
     closeBubble();
     if (verifyMarker) {
         map.removeObject(verifyMarker);
@@ -47,128 +50,6 @@ var removeAllAdressSelbstSetzenStuff = function () {
     }
 }
 
-var oNavigationVue = new Vue({
-    el: "#navigation",
-    data: {
-        horizontalMenueShown: true,
-    },
-    methods: {
-        showNewEventCard: function () {
-            $(window).scrollTop(0);
-            if (oNewEventVue.cardShown === true) {
-                oNewEventVue.draft = {
-                    sName: "",
-                    sDescription: "",
-                    sAdress: "",
-                    sDate: "",
-                    time: "",
-                    oLatLng: {},
-                    status: "draft",
-                    EDate: null,
-                    sEventLink: null,
-                    iEventId: Math.floor(Math.random() * 99999) + 1,
-                    oSelectedFile: "",
-                    image: null,
-                    titleIsInvalid: false,
-                    descIsInvalid: false,
-                    adressIsInvalid: false,
-                    displayError: false,
-                    dateIsInvalid: false
-                };
-                oNewEventVue.value7 = '';
-                oNewEventVue.value = [];
-
-                removeAllAdressSelbstSetzenStuff();
-            };
-
-            oNewEventVue.cardShown = !oNewEventVue.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
-        },
-
-        showNewFavoriteCard: function () {
-            $(window).scrollTop(0);
-            favorite_clicked = !favorite_clicked;
-            if (favorite_clicked === true) {
-                document.getElementById('h2events').innerText = "Favoriten";
-                document.getElementById('AfterLoginFavoriten').innerText = "Events";
-                getFavorites(loggedInUser._id);
-                document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden");//hide time filter
-                document.getElementById("datepickerID").setAttribute("hidden", "hidden");//hide event_types filter
-                if (bubble) {
-                    closeBubble();
-                }
-            }
-            else {
-                document.getElementById('h2events').innerText = "Events";
-                document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-                getFilteredEvents();
-                document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
-                document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
-                if (bubble) {
-                    closeBubble();
-                }
-            }
-            if(oNewEventVue.cardShown === true){
-                this.showNewEventCard();
-            }
-        },
-
-        showNewLoginCard: function () {
-            $(window).scrollTop(0);
-            oRegisterVue.cardShown = false;
-
-            oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
-            if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
-                logoutmodus = false;
-                document.getElementById('AfterLoginLogin').innerText = "LogIn";
-
-                //set all favorite stars to faved = false
-                for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-                    if (oEventTableVue.allEvents[j].faved) {
-                        Vue.set(oEventTableVue.allEvents[j], 'faved', false);
-                    }
-                }
-
-                AfterLoginFavoriten.style.visibility = "hidden";
-                loggedInUser = "";
-                AfterLoginEvent.style.visibility = "hidden";
-                newLoginWrapper.style.display = "visible";
-                oEventTableVue.starVisibility = "hidden";
-                oNewLoginVue.draft.sUserName = "";
-                oNewLoginVue.draft.sPassword = "";
-                document.getElementById("Login_username").innerText = "";
-                document.getElementById("Login_password").innerText = "";
-                oNewLoginVue.cardShown = false;
-                oRegisterVue.cardShown = false;
-                oNewEventVue.cardShown = false;
-
-                if (document.getElementById('h2events').innerText != "Events") {
-                 document.getElementById('h2events').innerText = "Events";
-                 document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
-                 document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
-                 getFilteredEvents();
-               }
-
-                removeAllAdressSelbstSetzenStuff();
-            }
-        },
-        showNewRegisterCard: function () {
-            $('body').scrollTop(0);
-            oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
-            oNewLoginVue.cardShown = false;
-            oNewEventVue.cardShown = false;
-        },
-        showNewDateCard: function () {
-            oNewDateVue.cardShown = !oNewDateVue.cardShown;
-            oRegisterVue.cardShown = false;
-            oNewEventVue.cardShown = false;
-            oNewLoginVue.cardShown = false;
-        },
-
-    }
-});
-
 function getEventTypesAsString(oEventTypes) {
     var eventTypesString = "";
     oEventTypes.forEach(function (oEventType, index) {
@@ -180,7 +61,6 @@ function getEventTypesAsString(oEventTypes) {
     });
     return eventTypesString;
 }
-
 
 function getFavorites(user_id) {
     oEventTableVue.selected = "";
@@ -199,10 +79,7 @@ function getFavorites(user_id) {
             alert("Fehler beim Laden der Favoriten aus der Datenbank.");
             console.log(error);
         });
-};
-
-
-
+}
 
 function getAllEvents() {
     oEventTableVue.selected = "";
@@ -242,286 +119,6 @@ function getFavoritesIds() {
             console.log(error);
         });
 }
-
-//Vue fuer die Event Tabelle fertig
-var oEventTableVue = new Vue({
-    el: "#eventsWithDialog",
-    data: {
-        allEvents: aAllEvents,
-        selected: "", //id of selected event (to see more info)
-        mapBounds: { ga: 0, ha: 0, ka: 0, ja: 0 },
-        sQuery: "",
-        starVisibility: "hidden"
-
-    },
-    computed: {
-        filteredList: function () {
-            vi = this;
-            return this.allEvents.filter(function (ev) {
-                var bool = (
-                    (vi.mapBounds.ja < ev.oLatLgn.lat)
-                    && (vi.mapBounds.ka > ev.oLatLgn.lat)
-                    && (vi.mapBounds.ga < ev.oLatLgn.lng)
-                    && (vi.mapBounds.ha > ev.oLatLgn.lng)
-                );
-                // console.log(bool);
-                return bool;
-            })
-        },
-        commentList: function () { // comments of selected event
-            var temp = this;
-            if (this.selected === "") {
-                return [];
-            }
-            return this.allEvents.filter(function (value) {
-                return value.iEventId === temp.selected;
-            })[0].aComments;
-        },
-        selected_event: function () {
-            var temp = this;
-            if (temp.selected === "") {
-                return {
-                    iEventId: 0,
-                    sName: "",
-                    sDescription: "",
-                    aComments: {
-                        _id: 0,
-                        username: "",
-                        comment: ""
-                    },
-                    oImage: ""
-                };
-            } else {
-                return this.allEvents.filter(function (value) {
-                    return value.iEventId === temp.selected;
-                })[0];
-            }
-        }
-    },
-    methods: {
-        favToggle: function (target) {
-            // was it already faved?
-            if (loggedInUser != "") { //only change status of faved i fa user is logged in
-                if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
-                    Vue.set(target, 'faved', true);
-                } else {
-                    // var requestType = "POST";
-                    var requestURL = "http://localhost:3000/user/";
-
-                    if (target.faved) {
-                        requestURL = requestURL + "unsaveEvent";
-                    } else {
-                        requestURL = requestURL + "saveEvent";
-                    }
-
-                    var ajaxRequest = new XMLHttpRequest();
-
-                    var onSuccess = function onSuccess() {
-                        // console.log("success: " + this.status);
-                        if (this.status == 200) {
-                            // set target to be (not) faved
-                            Vue.set(target, 'faved', !target.faved);
-                            //reload saved_events of loggedInUser
-                            getFavoritesIds();
-                            // reload favorites in order to not display unsaved events
-                            if (document.getElementById('h2events').innerText == "Favoriten") {
-                                getFavorites(loggedInUser._id);
-                            }
-
-                        }
-
-                    };
-
-                    var onFailed = function onFailed() {
-                        console.log("failed");
-                    };
-
-                    ajaxRequest.addEventListener("load", onSuccess);
-                    ajaxRequest.addEventListener("error", onFailed);
-                    ajaxRequest.responseType = "json";
-                    ajaxRequest.open("POST", requestURL, true);
-                    ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
-                    var sFormData = "eventId=" + target.iEventId;
-                    ajaxRequest.send(sFormData);
-                }
-            }
-        },
-        kommentargeschickt: function (id) {
-
-            if (document.querySelector("#idComment").value.length < 1) {
-                document.getElementById("idCommentErrorEmpty").style.display = "block";
-            } else {
-                document.getElementById("idCommentErrorEmpty").style.display = "none";
-                var ajaxRequest = new XMLHttpRequest();
-                var comment = document.querySelector("#idComment").value;
-                var onSuccess = function onSuccess() {
-                    var t = oEventTableVue.selected;
-                    //this leads to the comment being displayed immediatley
-                    //reload favorites/events list
-                    if (document.getElementById('h2events').innerText == "Favoriten") {
-                        getFavorites(loggedInUser._id);
-                    } else if (document.getElementById('h2events').innerText == "Events") {
-                        getFilteredEvents();
-                    }
-                    oEventTableVue.selected = t;
-                };
-                var onFailed = function onFailed() {
-                    console.log("failed");
-                };
-
-                ajaxRequest.addEventListener("load", onSuccess);
-                ajaxRequest.addEventListener("error", onFailed);
-                ajaxRequest.responseType = "json";
-                ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
-                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
-                var sFormData = "eventId=" + oEventTableVue.selected + "&comment=" + comment;
-                ajaxRequest.send(sFormData);
-                document.querySelector("#idComment").value = "";
-            }
-
-
-        },
-
-        select: function (target) {
-            // only data with specific Ids can be selected
-            if (dialogopen == false) {
-                if (target.iEventId != undefined) {
-                    this.selected = target.iEventId;
-                }
-                // map.setCenter(target.marker.getPosition(), true);
-                openBubble(target.marker.getPosition(), target.marker.data);
-                zoomMap(target.marker.getPosition());
-            }
-        },
-
-
-        searchEvent: function () {
-            if (sQuery === "" || sQuery === undefined) {
-                this.allEvents = aTestEvents;
-                return;
-            }
-            var aFilterdEvents;
-            this.allEvents.forEach(function (oEvent) {
-                if (oEvent.sName.includes(sQuery)) {
-                    aFilterdEvents.push(oEvent);
-                }
-            });
-            this.allEvents = aFilterdEvents;
-        },
-        clickLikeButton: function () {
-            var oLikeButton = document.getElementById('idThumbUp');
-            if (oLikeButton.style.color != "green") {
-                var ratingRequest = new XMLHttpRequest();
-                var comment = document.querySelector("#idComment").value;
-                var onSuccess = function onSuccess() {
-                    var selected_event = oEventTableVue.allEvents.find(obj => {
-                        return obj.iEventId == oEventTableVue.selected
-                    });
-                    var t = oEventTableVue.selected;
-                    //this leads to the rating being displayed immediatley
-                    //reload favorites/events list
-                    if (document.getElementById('h2events').innerText == "Favoriten") {
-                        getFavorites(loggedInUser._id);
-                    } else if (document.getElementById('h2events').innerText == "Events") {
-                        getFilteredEvents();
-                    }
-                    oEventTableVue.selected = t;
-                    if (this.status == 200) {
-                        oLikeButton.style.color = "green";
-                        document.getElementById('idThumbDown').style.color = "grey";
-                    }
-                };
-                var onFailed = function onFailed() {
-                    console.log("failed");
-                };
-                ratingRequest.addEventListener("load", onSuccess);
-                ratingRequest.addEventListener("error", onFailed);
-                ratingRequest.responseType = "json";
-                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
-                ratingRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
-                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                var sFormData = "rating=" + "1" + "&eventId=" + oEventTableVue.selected;
-                ratingRequest.send(sFormData);
-            }
-        },
-        clickDislikeButton: function () {
-            var oDislikeButton = document.getElementById("idThumbDown");
-            if (oDislikeButton.style.color != "red") {
-                document.getElementById('idThumbUp').style.color = "grey";
-                var ratingRequest = new XMLHttpRequest();
-                var onSuccess = function onSuccess() {
-                    if (this.status == 200) {
-                        var selected_event = oEventTableVue.allEvents.find(obj => {
-                            return obj.iEventId == oEventTableVue.selected
-                        });
-                        var t = oEventTableVue.selected;
-                        //this leads to the rating being displayed immediatley
-                        //reload favorites/events list
-                        if (document.getElementById('h2events').innerText == "Favoriten") {
-                            getFavorites(loggedInUser._id);
-                        } else if (document.getElementById('h2events').innerText == "Events") {
-                            getFilteredEvents();
-                        }
-                        oEventTableVue.selected = t;
-                    }
-                    oDislikeButton.style.color = "red";
-                };
-                var onFailed = function onFailed() {
-                    console.log("failed");
-                };
-                ratingRequest.addEventListener("load", onSuccess);
-                ratingRequest.addEventListener("error", onFailed);
-                ratingRequest.responseType = "json";
-                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
-                ratingRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
-                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                var sFormData = "rating=" + "-1" + "&eventId=" + oEventTableVue.selected;
-                ratingRequest.send(sFormData);
-            }
-        },
-        //Offnet bzw macht Popup moeglich
-        OpenCommentPopUp: function () {
-            if (loggedInUser != "") {
-                dialogopen = true;
-                document.querySelector("#idComment").value = "";
-
-                var loggedInUser_rating = oEventTableVue.selected_event.aRatings.find(obj => {
-                    return obj.user_id == loggedInUser._id
-                });
-                if (loggedInUser_rating) { //set rating buttons
-                    if (loggedInUser_rating.rating == -1) {
-                        document.getElementById('idThumbDown').style.color = "red"
-                        document.getElementById('idThumbUp').style.color = "grey"
-                    } else {
-                        document.getElementById('idThumbUp').style.color = "green"
-                        document.getElementById('idThumbDown').style.color = "grey"
-                    }
-                } else {
-                    document.getElementById('idThumbUp').style.color = "grey"
-                    document.getElementById('idThumbDown').style.color = "grey"
-                }
-
-                var dialog = document.querySelector('dialog');
-                dialog.showModal();
-                $(dialog).children().first().click(function (e) {
-                    e.stopPropagation();
-                })
-                document.addEventListener("click", function (e) {
-                    dialog.close();
-                    dialogopen = false;
-                });
-            }
-            else {
-                alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
-            }
-
-        }
-
-
-    }
-});
 
 function _getFilterHeaders() {
     var headers = [];
@@ -620,9 +217,6 @@ function getFilteredEvents(displayId) {
                 }));
                 $(window).scrollTop(0);
             }
-
-            //change center of map and filter for location
-            //   setCenter(oSearchPlaceVue.sQuery);
         };
 
         var onFailed = function onFailed() {
@@ -650,11 +244,460 @@ function getFilteredEvents(displayId) {
         //change center of map and filter for location
         getAllEvents();
         setMarkers(oEventTableVue.allEvents);
-        // setCenter(oSearchPlaceVue.sQuery);
     }
-};
+}
 
-//Vue fuer die Leiste mit Suchfunktion und Filter Button
+function b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+}
+
+function checkDuplicatePositions(arr) {
+    arrCopy = arr.slice(0); //copy array but keep references to orig. objects
+    while (arrCopy.length) {
+        testFor = arrCopy.shift().oLatLgn // original eventobj that keeps location data
+        countDuplicates = 0;
+        for (var i = 0; i < arrCopy.length; i++) // iterate over array lookig for duplicates
+            if (testFor.lat - arrCopy[i].oLatLgn.lat == 0) // lat identical?
+                if (testFor.lng - arrCopy[i].oLatLgn.lng == 0) { // long identical ?
+                    countDuplicates++;
+                    angle = countDuplicates * 1.4 + 4;
+                    arrCopy[i].oLatLgn.lng -= angle * Math.cos(angle) * 0.000005;
+                    arrCopy[i].oLatLgn.lat -= angle * Math.sin(angle) * 0.000002;
+                    arrCopy.splice(i, 1) // remove object of arrCopy
+                }
+    }
+}
+
+function refreshpage() {
+    location.reload();
+}
+
+function getAllEventTypes() {
+    axios.get('http://localhost:3000/event_types')
+        .then(response => {
+            event_types = response.data.event_types
+                .map(event_type => {
+                    return {
+                        name: event_type.event_type,
+                        code: event_type._id
+                    };
+                });
+            oSearchPlaceVue.aEventTypes = event_types;
+            oNewEventVue.aEventTypes = event_types;
+        })
+        .catch(function (error) {
+            alert("Fehler beim Laden der Event_Types aus der Datenbank.");
+            console.log(error);
+        });
+}
+
+//##### 3. Vues #####
+var oNavigationVue = new Vue({
+    el: "#navigation",
+    data: {
+        horizontalMenueShown: true,
+    },
+    methods: {
+        showNewEventCard: function () {
+            $(window).scrollTop(0);
+            if (oNewEventVue.cardShown === true) {
+                oNewEventVue.draft = {
+                    sName: "",
+                    sDescription: "",
+                    sAdress: "",
+                    sDate: "",
+                    time: "",
+                    oLatLng: {},
+                    status: "draft",
+                    EDate: null,
+                    sEventLink: null,
+                    iEventId: Math.floor(Math.random() * 99999) + 1,
+                    oSelectedFile: "",
+                    image: null,
+                    titleIsInvalid: false,
+                    descIsInvalid: false,
+                    adressIsInvalid: false,
+                    displayError: false,
+                    dateIsInvalid: false
+                };
+                oNewEventVue.value7 = '';
+                oNewEventVue.value = [];
+                closeSetAdressYourself();
+            };
+            oNewEventVue.cardShown = !oNewEventVue.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+        },
+        showNewFavoriteCard: function () {
+            $(window).scrollTop(0);
+            favorite_clicked = !favorite_clicked;
+            if (favorite_clicked === true) {
+                document.getElementById('h2events').innerText = "Favoriten";
+                document.getElementById('AfterLoginFavoriten').innerText = "Events";
+                getFavorites(loggedInUser._id);
+                document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden");//hide time filter
+                document.getElementById("datepickerID").setAttribute("hidden", "hidden");//hide event_types filter
+                if (bubble) {
+                    closeBubble();
+                }
+            }
+            else {
+                document.getElementById('h2events').innerText = "Events";
+                document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+                getFilteredEvents();
+                document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
+                document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
+                if (bubble) {
+                    closeBubble();
+                }
+            }
+            if(oNewEventVue.cardShown === true){
+                this.showNewEventCard();
+            }
+        },
+        showNewLoginCard: function () {
+            $(window).scrollTop(0);
+            oRegisterVue.cardShown = false;
+
+            oNewLoginVue.cardShown = !oNewLoginVue.cardShown;
+            if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
+                logoutmodus = false;
+                document.getElementById('AfterLoginLogin').innerText = "LogIn";
+                //set all favorite stars to faved = false
+                for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+                    if (oEventTableVue.allEvents[j].faved) {
+                        Vue.set(oEventTableVue.allEvents[j], 'faved', false);
+                    }
+                }
+
+                AfterLoginFavoriten.style.visibility = "hidden";
+                loggedInUser = "";
+                AfterLoginEvent.style.visibility = "hidden";
+                newLoginWrapper.style.display = "visible";
+                oEventTableVue.starVisibility = "hidden";
+                oNewLoginVue.draft.sUserName = "";
+                oNewLoginVue.draft.sPassword = "";
+                document.getElementById("Login_username").innerText = "";
+                document.getElementById("Login_password").innerText = "";
+                oNewLoginVue.cardShown = false;
+                oRegisterVue.cardShown = false;
+                oNewEventVue.cardShown = false;
+
+                if (document.getElementById('h2events').innerText != "Events") {
+                 document.getElementById('h2events').innerText = "Events";
+                 document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
+                 document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
+                 getFilteredEvents();
+               }
+                closeSetAdressYourself();
+            }
+        },
+        showNewRegisterCard: function () {
+            $('body').scrollTop(0);
+            oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
+            oNewLoginVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+        },
+        showNewDateCard: function () {
+            oNewDateVue.cardShown = !oNewDateVue.cardShown;
+            oRegisterVue.cardShown = false;
+            oNewEventVue.cardShown = false;
+            oNewLoginVue.cardShown = false;
+        }
+    }
+});
+
+// event table on the right side
+var oEventTableVue = new Vue({
+    el: "#eventsWithDialog",
+    data: {
+        allEvents: aAllEvents,
+        selected: "", //id of selected event (to see more info)
+        mapBounds: { ga: 0, ha: 0, ka: 0, ja: 0 },
+        sQuery: "",
+        starVisibility: "hidden"
+
+    },
+    computed: {
+        filteredList: function () {
+            vi = this;
+            return this.allEvents.filter(function (ev) {
+                var bool = (
+                    (vi.mapBounds.ja < ev.oLatLgn.lat)
+                    && (vi.mapBounds.ka > ev.oLatLgn.lat)
+                    && (vi.mapBounds.ga < ev.oLatLgn.lng)
+                    && (vi.mapBounds.ha > ev.oLatLgn.lng)
+                );
+                return bool;
+            })
+        },
+        commentList: function () { // comments of selected event
+            var temp = this;
+            if (this.selected === "") {
+                return [];
+            }
+            return this.allEvents.filter(function (value) {
+                return value.iEventId === temp.selected;
+            })[0].aComments;
+        },
+        selected_event: function () {
+            var temp = this;
+            if (temp.selected === "") {
+                return {
+                    iEventId: 0,
+                    sName: "",
+                    sDescription: "",
+                    aComments: {
+                        _id: 0,
+                        username: "",
+                        comment: ""
+                    },
+                    oImage: ""
+                };
+            } else {
+                return this.allEvents.filter(function (value) {
+                    return value.iEventId === temp.selected;
+                })[0];
+            }
+        }
+    },
+    methods: {
+        favToggle: function (target) {
+            // was it already faved?
+            if (loggedInUser != "") { //only change status of faved i fa user is logged in
+                if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
+                    Vue.set(target, 'faved', true);
+                } else {
+                    var requestURL = "http://localhost:3000/user/";
+
+                    if (target.faved) {
+                        requestURL = requestURL + "unsaveEvent";
+                    } else {
+                        requestURL = requestURL + "saveEvent";
+                    }
+
+                    var ajaxRequest = new XMLHttpRequest();
+
+                    var onSuccess = function onSuccess() {
+                        if (this.status == 200) {
+                            // set target to be (not) faved
+                            Vue.set(target, 'faved', !target.faved);
+                            //reload saved_events of loggedInUser
+                            getFavoritesIds();
+                            // reload favorites in order to not display unsaved events
+                            if (document.getElementById('h2events').innerText == "Favoriten") {
+                                getFavorites(loggedInUser._id);
+                            }
+                        }
+                    };
+
+                    var onFailed = function onFailed() {
+                        console.log("failed");
+                    };
+
+                    ajaxRequest.addEventListener("load", onSuccess);
+                    ajaxRequest.addEventListener("error", onFailed);
+                    ajaxRequest.responseType = "json";
+                    ajaxRequest.open("POST", requestURL, true);
+                    ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+                    var sFormData = "eventId=" + target.iEventId;
+                    ajaxRequest.send(sFormData);
+                }
+            }
+        },
+        submitComment: function (id) {
+            if (document.querySelector("#idComment").value.length < 1) {
+                document.getElementById("idCommentErrorEmpty").style.display = "block";
+            } else {
+                document.getElementById("idCommentErrorEmpty").style.display = "none";
+                var ajaxRequest = new XMLHttpRequest();
+                var comment = document.querySelector("#idComment").value;
+                var onSuccess = function onSuccess() {
+                    var t = oEventTableVue.selected;
+                    //this leads to the comment being displayed immediatley
+                    //reload favorites/events list
+                    if (document.getElementById('h2events').innerText == "Favoriten") {
+                        getFavorites(loggedInUser._id);
+                    } else if (document.getElementById('h2events').innerText == "Events") {
+                        getFilteredEvents();
+                    }
+                    oEventTableVue.selected = t;
+                };
+                var onFailed = function onFailed() {
+                    console.log("failed");
+                };
+
+                ajaxRequest.addEventListener("load", onSuccess);
+                ajaxRequest.addEventListener("error", onFailed);
+                ajaxRequest.responseType = "json";
+                ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
+                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+                var sFormData = "eventId=" + oEventTableVue.selected + "&comment=" + comment;
+                ajaxRequest.send(sFormData);
+                document.querySelector("#idComment").value = "";
+            }
+
+
+        },
+        select: function (target) {
+            // only data with specific Ids can be selected
+            if (dialogopen == false) {
+                if (target.iEventId != undefined) {
+                    this.selected = target.iEventId;
+                }
+                openBubble(target.marker.getPosition(), target.marker.data);
+                zoomMap(target.marker.getPosition());
+            }
+        },
+        searchEvent: function () {
+            if (sQuery === "" || sQuery === undefined) {
+                this.allEvents = aTestEvents;
+                return;
+            }
+            var aFilterdEvents;
+            this.allEvents.forEach(function (oEvent) {
+                if (oEvent.sName.includes(sQuery)) {
+                    aFilterdEvents.push(oEvent);
+                }
+            });
+            this.allEvents = aFilterdEvents;
+        },
+        clickLikeButton: function () {
+            var oLikeButton = document.getElementById('idThumbUp');
+            if (oLikeButton.style.color != "green") {
+                var ratingRequest = new XMLHttpRequest();
+                var comment = document.querySelector("#idComment").value;
+                var onSuccess = function onSuccess() {
+                    var selected_event = oEventTableVue.allEvents.find(obj => {
+                        return obj.iEventId == oEventTableVue.selected
+                    });
+                    var t = oEventTableVue.selected;
+                    //this leads to the rating being displayed immediatley
+                    //reload favorites/events list
+                    if (document.getElementById('h2events').innerText == "Favoriten") {
+                        getFavorites(loggedInUser._id);
+                    } else if (document.getElementById('h2events').innerText == "Events") {
+                        getFilteredEvents();
+                    }
+                    oEventTableVue.selected = t;
+                    if (this.status == 200) {
+                        oLikeButton.style.color = "green";
+                        document.getElementById('idThumbDown').style.color = "grey";
+                    }
+                };
+                var onFailed = function onFailed() {
+                    console.log("failed");
+                };
+                ratingRequest.addEventListener("load", onSuccess);
+                ratingRequest.addEventListener("error", onFailed);
+                ratingRequest.responseType = "json";
+                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                ratingRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                var sFormData = "rating=" + "1" + "&eventId=" + oEventTableVue.selected;
+                ratingRequest.send(sFormData);
+            }
+        },
+        clickDislikeButton: function () {
+            var oDislikeButton = document.getElementById("idThumbDown");
+            if (oDislikeButton.style.color != "red") {
+                document.getElementById('idThumbUp').style.color = "grey";
+                var ratingRequest = new XMLHttpRequest();
+                var onSuccess = function onSuccess() {
+                    if (this.status == 200) {
+                        var selected_event = oEventTableVue.allEvents.find(obj => {
+                            return obj.iEventId == oEventTableVue.selected
+                        });
+                        var t = oEventTableVue.selected;
+                        //this leads to the rating being displayed immediatley
+                        //reload favorites/events list
+                        if (document.getElementById('h2events').innerText == "Favoriten") {
+                            getFavorites(loggedInUser._id);
+                        } else if (document.getElementById('h2events').innerText == "Events") {
+                            getFilteredEvents();
+                        }
+                        oEventTableVue.selected = t;
+                    }
+                    oDislikeButton.style.color = "red";
+                };
+                var onFailed = function onFailed() {
+                    console.log("failed");
+                };
+                ratingRequest.addEventListener("load", onSuccess);
+                ratingRequest.addEventListener("error", onFailed);
+                ratingRequest.responseType = "json";
+                ratingRequest.open("POST", "http://localhost:3000/events/rate", true);
+                ratingRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+                ratingRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                var sFormData = "rating=" + "-1" + "&eventId=" + oEventTableVue.selected;
+                ratingRequest.send(sFormData);
+            }
+        },
+        //Opens interactive/social Popup
+        OpenCommentPopUp: function () {
+            if (loggedInUser != "") {
+                dialogopen = true;
+                document.querySelector("#idComment").value = "";
+
+                var loggedInUser_rating = oEventTableVue.selected_event.aRatings.find(obj => {
+                    return obj.user_id == loggedInUser._id
+                });
+                if (loggedInUser_rating) { //set rating buttons
+                    if (loggedInUser_rating.rating == -1) {
+                        document.getElementById('idThumbDown').style.color = "red"
+                        document.getElementById('idThumbUp').style.color = "grey"
+                    } else {
+                        document.getElementById('idThumbUp').style.color = "green"
+                        document.getElementById('idThumbDown').style.color = "grey"
+                    }
+                } else {
+                    document.getElementById('idThumbUp').style.color = "grey"
+                    document.getElementById('idThumbDown').style.color = "grey"
+                }
+
+                var dialog = document.querySelector('dialog');
+                dialog.showModal();
+                $(dialog).children().first().click(function (e) {
+                    e.stopPropagation();
+                })
+                document.addEventListener("click", function (e) {
+                    dialog.close();
+                    dialogopen = false;
+                });
+            }
+            else {
+                alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
+            }
+
+        }
+
+
+    }
+});
+
+//Vue for search&filter bar
 var oSearchPlaceVue = new Vue({
     el: "#searchPlace",
     data: {
@@ -691,7 +734,7 @@ var oSearchPlaceVue = new Vue({
                 }
             ]
         },
-        //Multiselect stuff
+        //Multiselect variables
         value: [],
         aEventTypes: []
     },
@@ -699,7 +742,7 @@ var oSearchPlaceVue = new Vue({
         'vue-multiselect': window.VueMultiselect.default
     },
     methods: {
-        //Sucht nach einem Ort
+        //Searches for a place
         newText: text => {
             return "+" + text + " Tags";
         },
@@ -731,7 +774,7 @@ var oSearchPlaceVue = new Vue({
             }
             setCenter(this.sQuery);
         },
-        //AutoComplet Funktion der Suchleiste
+        //AutoComplet Funktion of  search bar
         autocomplete: function autocomplete(keyboardEvent) {
             if (keyboardEvent.key === "ArrowDown" ||
                 keyboardEvent.key === "ArrowUp" ||
@@ -744,30 +787,7 @@ var oSearchPlaceVue = new Vue({
     }
 });
 
-function b64toBlob(b64Data, contentType, sliceSize) {
-    contentType = contentType || '';
-    sliceSize = sliceSize || 512;
-
-    var byteCharacters = atob(b64Data);
-    var byteArrays = [];
-
-    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-        var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-        var byteNumbers = new Array(slice.length);
-        for (var i = 0; i < slice.length; i++) {
-            byteNumbers[i] = slice.charCodeAt(i);
-        }
-
-        var byteArray = new Uint8Array(byteNumbers);
-
-        byteArrays.push(byteArray);
-    }
-
-    var blob = new Blob(byteArrays, { type: contentType });
-    return blob;
-}
-
+//Vue for creating a new event
 var oNewEventVue = new Vue({
     el: "#newEventWrapper",
     data: {
@@ -835,7 +855,6 @@ var oNewEventVue = new Vue({
             geocoder.geocode(
                 geocodingParameters,
                 onSuccess = function onSuccess(result) {
-
                     //check wether the coordinates should come from geocoder oder reverese gecoder (depending on the switch for "Adresse selbst setzen")
                     if (pickLocationModeMapListenerSet) {
                         dLat = oNewEventVue.draft.oLatLng.lat;
@@ -883,7 +902,6 @@ var oNewEventVue = new Vue({
                     };
 
                     axios.post("http://localhost:3000/events", fd, header_config).then(res => {
-                        // alert("Req angekommen");
                         oNewEventVue.draft.status = "unsend";
                         // reset vueinternal data to make possible to add new event
                         oNewEventVue.draft = {
@@ -909,7 +927,7 @@ var oNewEventVue = new Vue({
                         oNewEventVue.value = [];
                         document.getElementById("imageUpload").value = "";
 
-                        removeAllAdressSelbstSetzenStuff();
+                        closeSetAdressYourself();
 
                         oNewEventVue.cardShown = false; //close card for new event
                         getFilteredEvents(res.data.created_event._id);
@@ -937,9 +955,7 @@ var oNewEventVue = new Vue({
                 this.draft.oSelectedFile = "";
                 return;
             }
-
             this.draft.oSelectedFile = event.target.files[0];
-
             // Reference to the DOM input element
             var input = event.target;
             // Ensure that you have a file before attempting to read it
@@ -972,8 +988,6 @@ var oNewEventVue = new Vue({
         'vue-multiselect': window.VueMultiselect.default
     }
 });
-
-setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
 
 // Register Vue
 var oRegisterVue = new Vue({
@@ -1218,57 +1232,12 @@ var oNewDateVue = new Vue({
     }
 });
 
-function checkDuplicatePositions(arr) {
-    // console.time("duplishift")
-    arrCopy = arr.slice(0); //copy array but keep references to orig. objects
-    while (arrCopy.length) {
-        testFor = arrCopy.shift().oLatLgn // original eventobj that keeps location data
-        countDuplicates = 0;
-        for (var i = 0; i < arrCopy.length; i++) // iterate over array lookig for duplicates
-            if (testFor.lat - arrCopy[i].oLatLgn.lat == 0) // lat gleich?
-                if (testFor.lng - arrCopy[i].oLatLgn.lng == 0) { // long gleich ?
-                    countDuplicates++;
-                    angle = countDuplicates * 1.4 + 4;
-                    arrCopy[i].oLatLgn.lng -= angle * Math.cos(angle) * 0.000005;
-                    arrCopy[i].oLatLgn.lat -= angle * Math.sin(angle) * 0.000002;
-                    arrCopy.splice(i, 1) // remove object of arrCopy
-                }
-    }
-    // console.timeEnd("duplishift")
-}
-
-function refreshpage() {
-    location.reload();
-}
-
-var event_types;
-function getAllEventTypes() {
-    axios.get('http://localhost:3000/event_types')
-        .then(response => {
-            event_types = response.data.event_types
-                .map(event_type => {
-                    return {
-                        name: event_type.event_type,
-                        code: event_type._id
-                    };
-                });
-            oSearchPlaceVue.aEventTypes = event_types;
-            oNewEventVue.aEventTypes = event_types;
-        })
-        .catch(function (error) {
-            alert("Fehler beim Laden der Event_Types aus der Datenbank.");
-            console.log(error);
-        });
-};
-
+//##### 4. initialize everything #####
 function initEverything() {
     setCenter(undefined); //Set zoom of map to the last request of the user - works via localstorage
     getAllEvents();
     getAllEventTypes();
-    // oSearchPlaceVue.aEventTypes = event_types();
     checkDuplicatePositions(oEventTableVue.allEvents);
 }
-
-
 
 initEverything();
