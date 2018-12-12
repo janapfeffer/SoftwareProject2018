@@ -48,14 +48,15 @@ exports.get_all_events = (req, res, next) => {
 // requires body with: eventId, rating. rating must be the opposite of the rating that is delete_saved_event
 // -> if the event was rated with a thumb up (1) enter -1
 exports.event_rating = (req, res, next) => {
-  OEvent.findById(req.body.eventId, "ratings", function (err, event) {
+  OEvent.findById(req.body.eventId, "ratings", function(err, event) {
     old_rating = event.ratings.find(obj => {
       return obj.user_id == req.userData.userId;
     });
-    if(old_rating) {
-      OEvent.updateOne(
-        { _id: req.body.eventId},
-        { $set: {
+    if (old_rating) {
+      OEvent.updateOne({
+          _id: req.body.eventId
+        }, {
+          $set: {
             ratings: {
               _id: old_rating._id,
               user_id: req.userData.userId,
@@ -65,9 +66,9 @@ exports.event_rating = (req, res, next) => {
           $inc: {
             current_rating: req.body.rating * 2
           }
-        },
-        { upsert: true}
-      )
+        }, {
+          upsert: true
+        })
         .exec()
         .then(result => {
           res.status(200).json({
@@ -84,9 +85,10 @@ exports.event_rating = (req, res, next) => {
           });
         });
     } else {
-      OEvent.updateOne(
-        { _id: req.body.eventId},
-        { $push: {
+      OEvent.updateOne({
+          _id: req.body.eventId
+        }, {
+          $push: {
             ratings: {
               user_id: req.userData.userId,
               rating: req.body.rating
@@ -95,9 +97,9 @@ exports.event_rating = (req, res, next) => {
           $inc: {
             current_rating: req.body.rating
           }
-        },
-        { upsert: true}
-      )
+        }, {
+          upsert: true
+        })
         .exec()
         .then(result => {
           res.status(200).json({
@@ -119,7 +121,7 @@ exports.event_rating = (req, res, next) => {
 
 
 exports.create_event = (req, res, next) => {
-  if(req.file) {
+  if (req.file) {
     var path = req.file.path;
   } else {
     var path = "event_images\\standard.png";
@@ -169,7 +171,6 @@ exports.create_event = (req, res, next) => {
       });
     })
     .catch(err => {
-      // console.error("Error: ", err.stack);
       res.status(500).json({
         error: err
       })
@@ -177,11 +178,18 @@ exports.create_event = (req, res, next) => {
 };
 
 exports.delete_comment = (req, res, next) => {
-  OEvent.findById(req.body.eventId, "comments", function (err, event) {
-    OEvent.updateOne(
-      { _id: req.body.eventId },
-      { $pull: { comments: { _id: req.body.commentId } } },
-      { upsert: true })
+  OEvent.findById(req.body.eventId, "comments", function(err, event) {
+    OEvent.updateOne({
+        _id: req.body.eventId
+      }, {
+        $pull: {
+          comments: {
+            _id: req.body.commentId
+          }
+        }
+      }, {
+        upsert: true
+      })
       .exec()
       .then(result => {
         res.status(200).json({
@@ -201,10 +209,10 @@ exports.delete_comment = (req, res, next) => {
 };
 
 exports.add_comment = (req, res, next) => {
-  OEvent.findById(req.body.eventId, "comments", function (err, event) {
-    OEvent.updateOne(
-      { _id: req.body.eventId },
-      {
+  OEvent.findById(req.body.eventId, "comments", function(err, event) {
+    OEvent.updateOne({
+        _id: req.body.eventId
+      }, {
         $push: {
           comments: {
             username: req.userData.username,
@@ -212,8 +220,9 @@ exports.add_comment = (req, res, next) => {
             comment: req.body.comment
           }
         }
-      },
-      { upsert: true })
+      }, {
+        upsert: true
+      })
       .exec()
       .then(result => {
         res.status(200).json({
@@ -249,11 +258,15 @@ exports.get_event = (req, res, next) => {
       } else {
         res
           .status(404)
-          .json({ message: "No valid entry found for provided ID." });
+          .json({
+            message: "No valid entry found for provided ID."
+          });
       }
     })
     .catch(err => {
-      res.status(500).json({ error: err });
+      res.status(500).json({
+        error: err
+      });
     });
 };
 
@@ -264,7 +277,11 @@ exports.update_event = (req, res, next) => {
   for (const ops of req.body) {
     updateOps[ops.propName] = ops.value;
   }
-  OEvent.update({ _id: id }, { $set: updateOps })
+  OEvent.update({
+      _id: id
+    }, {
+      $set: updateOps
+    })
     .exec()
     .then(result => {
       res.status(200).json({
@@ -282,11 +299,13 @@ exports.update_event = (req, res, next) => {
     });
 };
 
-
 //should not be an issue though if the frontend calls it correctly
 //delete picture if given (NOT if its the default picture) (currently only used for testing so thats unnecessary)
 exports.delete_event = (req, res, next) => {
-  OEvent.remove({ _id: req.params.eventId, author: req.userData.userid })
+  OEvent.remove({
+      _id: req.params.eventId,
+      author: req.userData.userid
+    })
     .exec()
     .then(result => {
       res.status(200).json({
@@ -311,11 +330,10 @@ exports.get_filtered_events = (req, res, next) => {
   var filter_options = {};
   if (req.headers.filter_start_date) {
     filter_options = {
-      $or: [
-        {
+      $or: [{
           start_date: { //start_date within
-          $gte: req.headers.filter_start_date,
-          $lte: req.headers.filter_end_date
+            $gte: req.headers.filter_start_date,
+            $lte: req.headers.filter_end_date
           }
         },
         {
@@ -335,21 +353,20 @@ exports.get_filtered_events = (req, res, next) => {
       ]
     };
 
-  } else if(req.headers.filter_end_date){
+  } else if (req.headers.filter_end_date) {
     filter_options = {
       end_date: {
-      $gte: req.headers.filter_end_date
+        $gte: req.headers.filter_end_date
       }
     };
   }
-  if(req.headers.filter_event_type){
+  if (req.headers.filter_event_type) {
     filter_options.$and = [{
       event_types: {
         $in: req.headers.filter_event_type.split(",")
       }
     }];
   }
-  console.log(filter_options);
 
   OEvent.find(filter_options) //enter: {verification_status: true} as additional filter for only verified events
     .select("_id event_name author description address start_date end_date event_picture event_link ticket_link comments lat lng current_rating ratings")
@@ -386,17 +403,8 @@ exports.get_filtered_events = (req, res, next) => {
       });
     })
     .catch(err => {
-      // console.error("Error: ", err.stack);
       res.status(500).json({
         error: err
       })
     });
 };
-
-// exports.report_event = (req, res, next) => {
-//   //report an event
-// };
-
-// exports.report_comment = (req, res, next) => {
-//   //report a comment,
-// };

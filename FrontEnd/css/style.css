@@ -4,11 +4,11 @@ html {
   background-size: cover;
 }
 
-body{
- font-family: "raleway";
+body {
+  font-family: "raleway";
 }
 
-header.mdl-layout__header{
+header.mdl-layout__header {
   color: black;
   font-family: raleway;
   background-color: #fff;
@@ -16,8 +16,8 @@ header.mdl-layout__header{
   border-bottom: 1px solid #9e9e9e;
 }
 
-header .headerLink{
- color: black !important;
+header .headerLink {
+  color: black !important;
 }
 
 header img#logoIcon {
@@ -28,60 +28,65 @@ header img#logoIcon {
   height: 33px;
 }
 
-input{
- font-family: "raleway";
+input {
+  font-family: "raleway";
 }
 
-.mdl-button{
- height: 40px;
- border-radius: 4px;
- margin-top: -3px;
- box-shadow: none !important;
- font-family: "raleway";
- background-color:rgb(132, 148, 160);
+.mdl-button {
+  height: 40px;
+  border-radius: 4px;
+  margin-top: -3px;
+  box-shadow: none !important;
+  font-family: "raleway";
+  background-color: rgb(132, 148, 160);
 }
 
-.mdl-navigation__link{
+.mdl-navigation__link {
   cursor: pointer;
   font-family: "raleway";
-  }
-.mdl-navigation__link:hover{
- border-bottom: 3px solid grey;
 }
-.mdl-navigation__link:active{ background-color: rgba(255, 255, 255, 0.1) }
+
+.mdl-navigation__link:hover {
+  border-bottom: 3px solid grey;
+}
+
+.mdl-navigation__link:active {
+  background-color: rgba(255, 255, 255, 0.1)
+}
 
 .landingpage h1 {
- margin: 5px 5px 5px 0;
- display: block;
- transform: translateZ(20px);
- max-height: 500px;
- color: black;
- font-family: raleway;
- font-size: 45px;
+  margin: 5px 5px 5px 0;
+  display: block;
+  transform: translateZ(20px);
+  max-height: 500px;
+  color: black;
+  font-family: raleway;
+  font-size: 45px;
 }
 
 #searchPlace {
- box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 #searchPlace h2 {
- display: none;
+  display: none;
 }
 
 .landingpage #searchPlace h2 {
- display: block;
- font-size: 12px;
- margin: 2px;
- line-height: 25px;
+  display: block;
+  font-size: 12px;
+  margin: 2px;
+  line-height: 25px;
 }
 
 .landingpage #searchPlace {
-   width: 500px;
-   border-radius: 4px;
-   padding: 32px !important;
-   padding-bottom: 24px !important;
-   box-shadow: 0 16px 40px rgba(0,0,0,0.12) !important;
+  width: 500px;
+  border-radius: 4px;
+  padding: 32px !important;
+  padding-bottom: 24px !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12) !important;
 }
+
 .landingpage .multiselect {
   width: 400px;
   color: #606266;
@@ -98,11 +103,9 @@ input{
 /* .multiselect__tags {
   padding: 11px 40px 0 8px;
 } */
-
 #searchPlaceInner .multiselect__tags-wrap {
   display: inline-flex;
-
-} 
+}
 
 /* .landingpage #searchPlaceInner .multiselect__tags-wrap {
   display: inline-block;
@@ -110,82 +113,82 @@ input{
   top: 0px;
   left: 0px;
 } */
-
-#newEvent .multiselect{
+#newEvent .multiselect {
   width: 100%;
 }
 
-.el-date-editor--datetimerange.el-input__inner{
+.el-date-editor--datetimerange.el-input__inner {
   width: 230px;
 }
 
-.landingpage .el-date-editor--datetimerange.el-input__inner{
+.landingpage .el-date-editor--datetimerange.el-input__inner {
   width: 400px;
 }
 
-h1{
- margin: 0px;
- max-height: 0px;
- color: ghostwhite;
- transition: max-height 0.5s;
- overflow:hidden;
+h1 {
+  margin: 0px;
+  max-height: 0px;
+  color: ghostwhite;
+  transition: max-height 0.5s;
+  overflow: hidden;
 }
 
-.landingpage #searchPlaceInner{
- transform: translateZ(25px);
+.landingpage #searchPlaceInner {
+  transform: translateZ(25px);
 }
 
-.landingpage div#aside, .landingpage div#map{
- opacity: 0;
+.landingpage div#aside, .landingpage div#map {
+  opacity: 0;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #c0c4cc;;
-  opacity: 1; /* Firefox */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #c0c4cc;
+  ;
+  opacity: 1;
+  /* Firefox */
   font-family: "raleway";
 }
 
 /* #map{
   cursor: url("../images/marker.jpg"), auto !important;
 } */
-
 /* .landingpage div#dateFilter{
  display: none !important;
 } */
-
-#dateFilter{
- display:inline;
+#dateFilter {
+  display: inline;
 }
 
 .el-date-range-picker__time-header {
- position: static;
+  position: static;
 }
 
 .el-picker-panel [slot=sidebar], .el-picker-panel__sidebar {
- width: 116px;
+  width: 116px;
 }
 
 .landingpage div#searchPlace {
- top: 40%;
- margin-top: -110px;
- margin-left: -165px;
- left: 30%;
- padding: 0px 15px 12px 15px;
- transform-style: preserve-3d;
+  top: 40%;
+  margin-top: -110px;
+  margin-left: -165px;
+  left: 30%;
+  padding: 0px 15px 12px 15px;
+  transform-style: preserve-3d;
 }
 
 #searchPlace {
- position: fixed;
- transition: all 200ms cubic-bezier(0.69, 0.11, 0.27, 1.03);
- top: 7px;
- left: 55px;
- padding: 5px;
- z-index: 10;
+  position: fixed;
+  transition: all 200ms cubic-bezier(0.69, 0.11, 0.27, 1.03);
+  top: 7px;
+  left: 55px;
+  padding: 5px;
+  z-index: 10;
 }
 
 #searchInput {
- border: 1px solid #dcdfe6;
- width: 315px;
+  border: 1px solid #dcdfe6;
+  width: 315px;
 }
 
 .landingpage #searchInput {
@@ -194,101 +197,109 @@ h1{
 }
 
 div#aside {
- width: 37%;
- position:absolute;
- top: 60px;
- right: 0;
- box-sizing: border-box;
- padding: 2% 2%;
- opacity: 1;
- z-index: 2;
+  width: 37%;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  box-sizing: border-box;
+  padding: 2% 2%;
+  opacity: 1;
+  z-index: 2;
 }
 
-div#aside, div#map{
- transition: opacity 0.2s linear;
+div#aside, div#map {
+  transition: opacity 0.2s linear;
 }
 
 .sidecardWrapper {
- transition: margin 0.5s;
- margin-bottom: 20px;
+  transition: margin 0.5s;
+  margin-bottom: 20px;
 }
+
 .sidecardWrapper.hide {
- margin: -100px 0px 100px 0px;
+  margin: -100px 0px 100px 0px;
 }
 
 .sidecardWrapper h2 {
- margin: 0px;
- padding: 20px 0px 15px 20px;
- color: white;
- font-family: Helvetica;
+  margin: 0px;
+  padding: 20px 0px 15px 20px;
+  color: white;
+  font-family: Helvetica;
 }
 
 .hide {
- height: 0px;
- overflow: hidden;
+  height: 0px;
+  overflow: hidden;
 }
 
 .sidecard {
- background-color:white;
- padding: 20px 25px;
- margin: 0px;
- font-size: 18px;
- border-radius: 4px;
- box-shadow: 4px 4px 16px #00000010,rgba(0,0,0,0.12) 0px 16px 40px;
+  background-color: white;
+  padding: 20px 25px;
+  margin: 0px;
+  font-size: 18px;
+  border-radius: 4px;
+  box-shadow: 4px 4px 16px #00000010, rgba(0, 0, 0, 0.12) 0px 16px 40px;
 }
 
 .sidecard .mdl-textfield {
-   /* margin: -12px 0px; */
-   display: block;
-   width: auto;
+  /* margin: -12px 0px; */
+  display: block;
+  width: auto;
 }
 
 #eventTable {
- padding: 0px;
+  padding: 0px;
 }
-#eventTable li.mdl-list__item:hover{ background-color: rgba(0, 0, 0, 0.04) }
-#eventTable li.mdl-list__item:active{ background-color: rgba(0, 0, 0, 0.06) }
+
+#eventTable li.mdl-list__item:hover {
+  background-color: rgba(0, 0, 0, 0.04)
+}
+
+#eventTable li.mdl-list__item:active {
+  background-color: rgba(0, 0, 0, 0.06)
+}
 
 #eventTable .mdl-list__item--three-line {
- height: auto;
- padding: 20px;
+  height: auto;
+  padding: 20px;
 }
 
 .mdl-list__item {
- font-family: "lato" !important;
+  font-family: "lato" !important;
 }
 
 #eventTable li.selected {
-   background-color: #36506714;
+  background-color: #36506714;
 }
 
 #eventTable li.selected:hover {
-   background-color: #36506714;
+  background-color: #36506714;
 }
 
 #eventTable li.mdl-list__item--three-line.selected .mdl-list__item-primary-content {
- height: auto;
+  height: auto;
 }
 
 .mdl-list__item--three-line .mdl-list__item-text-body {
- font-size: 13px;
- line-height: 16px;
- min-height: 52px;
- overflow: hidden;
- text-overflow: ellipsis;
- /* height: auto; */ /* if we want the whole desc to be shown in the eventtable */
- /* https://stackoverflow.com/questions/17028911/text-overflow-ellipsis-without-white-space-nowrap */
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 52px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* height: auto; */
+  /* if we want the whole desc to be shown in the eventtable */
+  /* https://stackoverflow.com/questions/17028911/text-overflow-ellipsis-without-white-space-nowrap */
 }
 
 #eventTable span.mdl-list__item-text-body:empty {
- display: none;
+  display: none;
 }
 
 img.eventSymbol {
-   margin: 0px 14px 0px 0px;
-   float: left;
-   width: 100px;
-   border-radius: 4px;
+  margin: 0px 14px 0px 0px;
+  float: left;
+  width: 100px;
+  border-radius: 4px;
 }
 
 .mdl-dialog img.eventSymbol {
@@ -296,7 +307,7 @@ img.eventSymbol {
   height: 130px;
 }
 
-.mdl-dialog__content{
+.mdl-dialog__content {
   padding: 0px 24px 24px;
 }
 
@@ -304,70 +315,73 @@ img.eventSymbol {
   color: rgb(230, 230, 230);
   cursor: pointer;
 }
+
 .favstar:hover {
- color: rgb(202, 202, 202);
- /* text-shadow: 0 0 10px rgb(255,64,129); */
+  color: rgb(202, 202, 202);
+  /* text-shadow: 0 0 10px rgb(255,64,129); */
 }
+
 .faved .favstar {
-  color: rgb(255,64,129);
+  color: rgb(255, 64, 129);
 }
 
-
-#newEvent p{
- /* margin: 5px 0px 25px 0px; */
- font-size: 16px
+#newEvent p {
+  /* margin: 5px 0px 25px 0px; */
+  font-size: 16px
 }
 
-#newEvent mdl-textfield__input{
- background-color: rgba(255, 255, 255, 0.5);
- padding: 10px;
+#newEvent mdl-textfield__input {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
 }
+
 #newEvent .buttons {
- text-align: right;
- padding: 10px 10px 3px 0px;
+  text-align: right;
+  padding: 10px 10px 3px 0px;
 }
+
 #newEvent .buttons button {
- background-color: rgba(47, 66, 79, 0.66);
- margin-left: 10px;
+  background-color: rgba(47, 66, 79, 0.66);
+  margin-left: 10px;
 }
 
-.mdl-button:hover {background-color: rgba(47, 66, 79, 0.46);}
-/* .mdl-button:active {background-color: rgba(47, 66, 79, 0.26);} */
+.mdl-button:hover {
+  background-color: rgba(47, 66, 79, 0.46);
+}
 
+/* .mdl-button:active {background-color: rgba(47, 66, 79, 0.26);} */
 /* .mdl-button-positive:hover{background-color: rgba(42, 190, 75, 0.46) !important;}
 .infoBubble .mdl-button-negative .mdl-button:hover{background-color: rgba(182, 30, 25, 0.46);}
 .infoBubble .mdl-button:active{background-color: rgb(132, 148, 160);} */
-
 #newEvent .el-date-editor--datetimerange.el-input, #newEvent .el-date-editor--datetimerange.el-input__inner {
-   width: 100%;
+  width: 100%;
 }
 
 #kommentardialog {
-   background-color: rgba(0, 0, 0, 0.3);
-   top: 40%;
-   margin-top: -110px;
-   margin-left: -165px;
-   left: 50%;
-   padding: 0px 15px 12px 15px;
-   transform-style: preserve-3d;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 40%;
+  margin-top: -110px;
+  margin-left: -165px;
+  left: 50%;
+  padding: 0px 15px 12px 15px;
+  transform-style: preserve-3d;
 }
 
-.mdl-dialog .mdl-textfield__input{
+.mdl-dialog .mdl-textfield__input {
   color: black;
 }
 
 #map {
- position: fixed;
- width: 60%;
- height: 100%;
- left: 0px;
- z-index: 1;
- opacity: 1;
+  position: fixed;
+  width: 60%;
+  height: 100%;
+  left: 0px;
+  z-index: 1;
+  opacity: 1;
 }
 
-
 .mdl-layout__header {
- position: fixed;
+  position: fixed;
 }
 
 /* top: 80px;
@@ -375,88 +389,91 @@ position: absolute;
 left: -580px;
 width: 650px; */
 /* Autocomplete stuff */
-
 .autocomplete {
- /*the container must be positioned relative:*/
- position: relative;
- display: inline-block;
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
 }
 
 .autocomplete-items {
- position: absolute;
- border: 1px solid #d4d4d4;
- border-bottom: none;
- border-top: none;
- z-index: 99;
- /*position the autocomplete items to be the same width as the container:*/
- top: 100%;
- left: 0;
- right: 0;
- width: 400px;
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 400px;
 }
+
 .autocomplete-items div {
- padding: 10px;
- cursor: pointer;
- background-color: #fff;
- border-bottom: 1px solid #d4d4d4;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
 }
+
 .autocomplete-items div:hover {
- /*when hovering an item:*/
- background-color: #e9e9e9;
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
 }
+
 .autocomplete-active {
- /*when navigating through the items using the arrow keys:*/
- background-color: DodgerBlue !important;
- color: #ffffff;
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
 }
 
 .bigMap #map {
- width: 100%;
- height: 100%;
- left: 0px;
+  width: 100%;
+  height: 100%;
+  left: 0px;
 }
 
 .sidecard h2 {
- color: black;
- font-family: "raleway";
+  color: black;
+  font-family: "raleway";
 }
 
 #newLogin .buttons button {
- background-color: rgba(47, 66, 79, 0.66);
- margin-left: 10px;
+  background-color: rgba(47, 66, 79, 0.66);
+  margin-left: 10px;
 }
 
 #newRegister .buttons button {
- background-color: rgba(47, 66, 79, 0.66);
- margin-left: 10px;
+  background-color: rgba(47, 66, 79, 0.66);
+  margin-left: 10px;
 }
 
 span#sterne {
- float: right;
+  float: right;
 }
 
 /* Infobubble Style + Überschreibungen */
 .infoBubble {
- width: 233px;
- min-height: 100px;
- /* padding: 5px; */
- color: #fff;
- box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
- filter: saturate(125%);
- /* background-size: cover;
+  width: 233px;
+  min-height: 100px;
+  /* padding: 5px; */
+  color: #fff;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+  filter: saturate(125%);
+  /* background-size: cover;
  background-repeat: no-repeat;
  background-position: center; */
- border-radius: 3px;
- font: 12px/1.5 "raleway";
- font-weight: 500;
- padding: 10px;
-}
-.infoBubble i {
-margin: 5px;
+  border-radius: 3px;
+  font: 12px/1.5 "raleway";
+  font-weight: 500;
+  padding: 10px;
 }
 
-.infoBubble h2{
- font-family: "raleway"
+.infoBubble i {
+  margin: 5px;
+}
+
+.infoBubble h2 {
+  font-family: "raleway"
 }
 
 .iconContainer {
@@ -472,68 +489,68 @@ margin: 5px;
 }
 
 .ibPicture {
-filter: brightness(80%);
-position: absolute;
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
-width: 100%;
-height: 100%;
-border-radius: 3px;
+  filter: brightness(80%);
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
 }
 
 .ibText {
- font-size: 19px;
- font-weight: 300;
- margin-bottom: 26px;
- text-shadow:2px 2px 2px #000;
+  font-size: 19px;
+  font-weight: 300;
+  margin-bottom: 26px;
+  text-shadow: 2px 2px 2px #000;
 }
 
 .H_ib_tail {
-display: none
+  display: none
 }
 
 .H_ib_body {
-background: #f1f1f1;
-bottom: auto;
-padding: 0 0 0 0;
-border-radius: auto;
-margin-right: auto;
+  background: #f1f1f1;
+  bottom: auto;
+  padding: 0 0 0 0;
+  border-radius: auto;
+  margin-right: auto;
 }
 
 .H_ib_close {
-display: none;
+  display: none;
 }
 
 .H_ib_content {
-background-color: #365067c2;
-min-width: 0;
-margin: 0 0 0 0;
-padding: 0 0 0 0;
+  background-color: #365067c2;
+  min-width: 0;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
 }
 
 .redBorder {
- border: 1px solid #d50000;
+  border: 1px solid #d50000;
 }
 
 .custom-file-upload {
- border: 1px solid #ccc;
- display: inline-block;
- padding: 6px 12px;
- cursor: pointer;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
-.thumbs{
- font-size: 30px;
+.thumbs {
+  font-size: 30px;
 }
 
 img.preview {
- width: 200px;
- background-color: white;
- border: 1px solid #DDD;
- padding: 5px;
+  width: 200px;
+  background-color: white;
+  border: 1px solid #DDD;
+  padding: 5px;
 }
 
 .file-upload-form, .image-preview {
- padding: 5px;
+  padding: 5px;
 }
