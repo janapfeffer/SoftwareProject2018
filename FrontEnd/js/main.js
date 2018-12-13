@@ -81,6 +81,25 @@ function getFavorites(user_id) {
     });
 }
 
+function getOwnedEvents(user_id) {
+  oEventTableVue.selected = "";
+  const GETOWNEDEVENTS_URL = "http://localhost:3000/user/ownedEvents";
+  var header_config = {
+    headers: {
+      authorization: "Bearer " + loggedInUser.token
+    }
+  };
+  axios.get(GETOWNEDEVENTS_URL, header_config)
+    .then(response => {
+      var apievents = response.data.saved_events;
+      _setAllEventsAfterGet(apievents)
+    })
+    .catch(function(error) {
+      alert("Fehler beim Laden der eigenen Events aus der Datenbank.");
+      console.log(error);
+    });
+}
+
 function getAllEvents() {
   oEventTableVue.selected = "";
   var GETALLEVENTS_URL = 'http://localhost:3000/events/filtered';
