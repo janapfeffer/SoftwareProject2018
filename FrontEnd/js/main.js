@@ -484,9 +484,20 @@ var oEventTableVue = new Vue({
       if (this.selected === "") {
         return [];
       }
-      return this.allEvents.filter(function(value) {
+      var comments = this.allEvents.filter(function(value) {
         return value.iEventId === temp.selected;
       })[0].aComments;
+
+      for(var i = 0; i < comments.length; i++){
+        if( comments[i].user_id === loggedInUser._id){
+          comments[i].deleteVisibility = "visible";
+        } else {
+          comments[i].deleteVisibility = "hidden";
+        }
+        comments[i].dateDay = comments[i].date.split("T")[0];
+        comments[i].dateTime = comments[i].date.split("T")[1].substring(0, 5);
+      }
+      return comments;
     },
     selected_event: function() {
       var temp = this;
@@ -510,6 +521,28 @@ var oEventTableVue = new Vue({
     }
   },
   methods: {
+    deleteComment: function(comment) {
+      var ajaxRequest = new XMLHttpRequest();
+
+      var onSuccess = function onSuccess() {
+        if (this.status == 200) {
+          getFilteredEvents();
+        }
+      };
+
+      var onFailed = function onFailed() {
+        alert("Kommentar konnte nicht gelöscht werden, bitte versuche es erneut.");
+      };
+
+      ajaxRequest.addEventListener("load", onSuccess);
+      ajaxRequest.addEventListener("error", onFailed);
+      ajaxRequest.responseType = "json";
+      ajaxRequest.open("POST", "http://localhost:3000/events/deleteComment", true);
+      ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+      var sFormData = "eventId=" + oEventTableVue.selected + "&commentId=" + comment._id;
+      ajaxRequest.send(sFormData);
+    },
     favToggle: function(target) {
       // was it already faved?
       if (loggedInUser != "") { //only change status of faved i fa user is logged in
@@ -582,7 +615,7 @@ var oEventTableVue = new Vue({
         ajaxRequest.open("POST", "http://localhost:3000/events/addComment", true);
         ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
-        var sFormData = "eventId=" + oEventTableVue.selected + "&comment=" + comment;
+        var sFormData = "eventId=" + oEventTableVue.selected + "&comment=" + comment + "&date=" + new Date();
         ajaxRequest.send(sFormData);
         document.querySelector("#idComment").value = "";
       }

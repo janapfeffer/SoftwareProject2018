@@ -217,7 +217,8 @@ exports.add_comment = (req, res, next) => {
           comments: {
             username: req.userData.username,
             user_id: req.userData.userId,
-            comment: req.body.comment
+            comment: req.body.comment,
+            date: req.body.date
           }
         }
       }, {
@@ -403,6 +404,7 @@ exports.get_filtered_events = (req, res, next) => {
       });
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json({
         error: err
       })

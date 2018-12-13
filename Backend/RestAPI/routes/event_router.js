@@ -43,12 +43,10 @@ router.get("/:eventId", EventController.get_event);
 router.post("/", checkAuth, upload.single('event_picture'), EventController.create_event);
 router.post("/addComment", checkAuth, EventController.add_comment);
 router.post("/rate", checkAuth, EventController.event_rating);
+router.patch("/:eventId", checkAuth, EventController.update_event);
+router.post("/deleteComment", checkAuth, EventController.delete_comment);
 
 //only used for testing
 router.delete("/:eventId", checkAuth, EventController.delete_event);
-
-//unused routes
-// router.patch("/:eventId", checkAuth, EventController.update_event);
-// router.post("/deleteComment", checkAuth, EventController.delete_comment);
 
 module.exports = router;
