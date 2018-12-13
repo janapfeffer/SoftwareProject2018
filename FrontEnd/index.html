@@ -1,406 +1,409 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
+
 <head>
-    <meta http-equiv="language" content="german, de">
-    <meta charset="utf-8" />
-    <meta name="author" content="Hanna Scheub">
-    <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder">
-    <title>EventHub</title>
-    <link rel="icon" href="images/mapIcon.PNG">
-    <!-- External Libaries-->
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://fonts.googleapis.com/css?family=Cabin|Raleway|Lato" rel="stylesheet">
+  <meta http-equiv="language" content="german, de">
+  <meta charset="utf-8" />
+  <meta name="author" content="Yueling Li, Jana Pfeffer, Cornelius Schäfer, Hanna Scheub">
+  <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder, Veranstaltung">
+  <title>EventHub</title>
+  <link rel="icon" href="images/mapIcon.PNG">
 
-    <!--Icon library for Like/Dislike Button-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- JQuery-->
-    <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
+  <!-- External Libaries-->
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Cabin|Raleway|Lato" rel="stylesheet">
 
-    <!-- Vue.js-->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
-    <!-- Picture Input-->
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/vue-picture-input"></script>
-    <!-- Vue Multiselect-->
-    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
-    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
-    <!-- Axios für API Request-->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- Material Files-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <!-- Icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- HERE MAPS -->
-    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-    <!-- element -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/umd/locale/de.js"></script>
-    <script>ELEMENT.locale(ELEMENT.lang.de)</script>
-    <!-- Own Files-->
-    <link rel="stylesheet" href="css/style.css">
+  <!--Icon library for Like/Dislike Button-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- JQuery-->
+  <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <link rel="stylesheet" href="css/mdl-jquery-modal-dialog/mdl-jquery-modal-dialog.css">
+
+  <!-- Vue.js-->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
+
+  <!-- Picture Input-->
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vue-picture-input"></script>
+
+  <!-- Vue Multiselect-->
+  <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+  <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+
+  <!-- Axios für API Request-->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <!-- Material Files-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  <!-- Icons-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- HERE MAPS -->
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+
+  <!-- element -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/umd/locale/de.js"></script>
+  <script>ELEMENT.locale(ELEMENT.lang.de)</script>
+
+  <!-- Own Files-->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class='landingpage bigMap'>
-    <!-- Header/Navigation bar-->
-    <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <img id="logoIcon" src="images/mapIcon.PNG" onclick="refreshpage()" style="cursor: pointer;" />
-                <h1 style="font-size: 30px"> EventHub </h1>
-                <!-- Title -->
-                <div class="mdl-layout-spacer"></div>
-                <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
-                    <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>
-                        Event
-                        eintragen
-                    </a>
-                    <a class="mdl-navigation__link headerLink" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
+  <!-- Header/Navigation bar-->
+  <div id="navigation" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <img id="logoIcon" src="images/mapIcon.PNG" onclick="refreshpage()" style="cursor: pointer;" />
+        <h1 style="font-size: 30px"> EventHub </h1>
+        <!-- Title -->
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
+          <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>
+            Event eintragen
+          </a>
+          <a class="mdl-navigation__link headerLink" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
 
-                </nav>
-            </div>
-        </header>
-    </div>
-    <div id="aside">
-        <!-- Register Card-->
-        <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-            <div id="newRegister" class="sidecard">
-                <h2 style="padding: 0px;">Registrieren</h2>
-                <div id="Reg_Pass_Fehler" style="display: none">
-                    <i class="material-icons" style="float: left">warning</i>
-                    <p style="color:red; ">
-                        <b>
-                            Die Passwörter müssen übereinstimmen!
-                        </b>
-                    </p>
-                </div>
-                <div id="Reg_REG_Fehler" style="display: none">
-                    <i class="material-icons" style="float: left">warning</i>
-                    <p style="color:red; ">
-                        <b>
-                            Registrierung fehlgeschlagen!
-                        </b>
-                    </p>
-                </div>
-                <div id="Reg_SONS_Fehler" style="display: none">
-                    <i class="material-icons" style="float: left">warning</i>
-                    <p style="color:red; ">
-                        <b>
-                            Bitte fülle alle Felder sinngemäß aus.
-                        </b>
-                    </p>
-                </div>
-
-                <div id="Reg_EMAIL_Fehler" style="display: none">
-                    <i class="material-icons" style="float: left">warning</i>
-                    <p style="color:red; ">
-                        <b>
-                            Bitte gib eine echte Email Adresse an.
-                        </b>
-                    </p>
-                </div>
-
-                <div v-bind:class="{ 'is-invalid': draft.nameIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rUserName" id="Username">
-                    <label class="mdl-textfield__label" for="sample1">Username*</label>
-                </div>
-
-                <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rEmail" id="email">
-                    <label id="emailinputwords" class="mdl-textfield__label" for="sample1">E-Mail*</label>
-                </div>
-
-                <div v-bind:class="{ 'is-invalid': draft.passwordIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword" id="password1">
-                    <label id="passwordinputwords" class="mdl-textfield__label" for="sample1">Passwort*</label>
-                </div>
-                <div v-bind:class="{ 'is-invalid': draft.password2IsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword2" id="password2">
-                    <label id="passwordinputwords2" class="mdl-textfield__label" for="sample1">erneuert Passwort*</label>
-                </div>
-
-
-                <div class="buttons">
-                    <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
-                        Abschließen
-                    </button>
-                </div>
-            </div>
-
+        </nav>
+      </div>
+    </header>
+  </div>
+  <div id="aside">
+    <!-- Register Card-->
+    <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
+      <div id="newRegister" class="sidecard">
+        <h2 style="padding: 0px;">Registrieren</h2>
+        <div id="Reg_Pass_Error" style="display: none">
+          <i class="material-icons" style="float: left">warning</i>
+          <p style="color:red; ">
+            <b>
+              Die Passwörter müssen übereinstimmen!
+            </b>
+          </p>
         </div>
-        <!-- Register Card End-->
-        <!-- Login Card-->
-        <div id="EINLOGEN_Karte">
-            <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-                <div id="newLogin" class="sidecard">
-                    <h2 style="padding: 0px;">Einloggen</h2>
-                    <div id="LoginFehlerLeer" style="display: none">
-                        <i class="material-icons" style="float: left">error_outline</i>
-                        <p style="color:red; ">
-                            <b>
-                                Bitte fülle alle Felder aus!
-                            </b>
-                        </p>
-                    </div>
-                    <div id="LoginFehlerDaten" style="display:none">
-                        <i class="material-icons" style="float: left">error_outline</i>
-                        <p style="color:red; ">
-                            <b>
-                                Du konntest nicht authentifiziert werden. Bitte versuche es erneut.
-                            </b>
-                        </p>
-                    </div>
-
-                    <div id="NewRegisteredUser" style="display:none">
-                        <p style="color:green; ">
-                            <b>
-                                Du wurdest erfolgreich registriert. Logg dich ein!
-                            </b>
-                        </p>
-                    </div>
-                    <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sUserName" id="Login_username">
-                        <label class="mdl-textfield__label" for="sample1">E-Mail*</label>
-                    </div>
-                    <div v-bind:class="{ 'is-invalid': draft.passwordIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input @keyup.enter="formsubmit" class="mdl-textfield__input" @maxlength="40" type="password" v-model="draft.sPassword" id="Login_password">
-                        <label class="mdl-textfield__label" for="sample1">Passwort*</label>
-                    </div>
-
-                    <div class="buttons">
-                        <button class="mdl-button mdl-js-button mdl-button--raised" @click='RegisterVueShow'>
-                            Registieren
-                        </button>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
-                            Login
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Login Card End-->
+        <div id="Reg_Reg_Error" style="display: none">
+          <i class="material-icons" style="float: left">warning</i>
+          <p style="color:red; ">
+            <b>
+              Registrierung fehlgeschlagen!
+            </b>
+          </p>
         </div>
-        <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
-            <div id="newEvent" class="sidecard">
-                <h2 style="padding: 0px;">Neues Event eintragen</h2>
-                <div v-show="draft.displayError">
-                    <i class="material-icons" style="float: left">error_outline</i>
-                    <p style="color: #d50000; ">
-                        <b>
-                            Bitte fülle alle benötigten Felder aus und überprüfe alle Werte.
-                        </b>
-                    </p>
-                </div>
-                <div v-bind:class="{ 'is-invalid': draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
-                    <label class="mdl-textfield__label" for="sample1">Titel*</label>
-                </div>
-                <div v-bind:class="{ 'is-invalid': draft.descIsInvalid }" id="newEventDescription" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <textarea class="mdl-textfield__input" maxlength="1000" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
-                    <label class="mdl-textfield__label" for="schools">Beschreibung*</label>
-                </div>
-                <div id="newEventAddressDiv" v-bind:class="{ 'is-invalid': draft.adressIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
-                    <label class="mdl-textfield__label" for="sample1">Adresse*</label>
-                </div>
-                <label id="pickLocationModeToggleLabel" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-                    <input type="checkbox" id="switch-1" class="mdl-switch__input" unchecked @click.stop="pickLocationMode">
-                    <span class="mdl-switch__label">Addresse selbst setzen</span>
-                </label>
-                <div id="NewEventLink" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input type="url" pattern="https://.*" placeholder="https://beispiel.com" class="mdl-textfield__input" v-model="draft.sEventLink">
-                    <label class="mdl-textfield__label" for="sample1">Link</label>
-                </div>
-                <div>
-                    <p>Veranstaltungstypen*</p>
-                    <vue-multiselect id="idMultiSelectCreate" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes"
-                                     :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label="" :show-no-results="false"
-                                     :searchable="false">
-                    </vue-multiselect>
-                </div>
-
-                <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <p>Datum*</p>
-                    <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker-->
-                    <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
-                                    start-placeholder="Von" end-placeholder="Bis" :default-time="['15:00:00', '19:00:00']">
-                    </el-date-picker>
-                </div>
-
-                <div class="file-upload-form">
-                    Lade ein Eventbild hoch:
-                    <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected" accept="image/*">
-                </div>
-                <div class="image-preview" v-if="draft.oSelectedFile.length > 0">
-                    <img class="preview" :src="draft.oSelectedFile">
-                </div> <div class="buttons">
-                    <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
-                        Senden
-                    </button>
-                </div>
-            </div>
+        <div id="Reg_Other_Error" style="display: none">
+          <i class="material-icons" style="float: left">warning</i>
+          <p style="color:red; ">
+            <b>
+              Bitte fülle alle Felder sinngemäß aus.
+            </b>
+          </p>
         </div>
-        <div id="eventsWithDialog">
-            <div class="sidecardWrapper">
-                <ul id="eventTable" class="sidecard demo-list-three mdl-list">
-                    <h2 id="h2events"> Events </h2>
-                    <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
-                        @click="select(event)" v-bind:id="event.iEventId">
-                        <span class="mdl-list__item-primary-content">
-                            <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
-                            <span>{{ event.sName }}</span>
-                            <span id="sterne" v-bind:style="{visibility : starVisibility}" name="stern">
-                                <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
-                            </span>
-                            <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
-                            <i class="fa fa-calendar" style="font-size:18px"></i>
-                            <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
-                            <i class="fa fa-clock-o" style="font-size:18px"></i>
-                            <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
-                            <span class=nobr> - </span> <i class="fa fa-calendar" style="font-size:18px"></i>
-                            <span class=nobr class="mdl-list__item-text-body">{{ event.oEndDate }}</span>
-                            <i class="fa fa-clock-o" style="font-size:18px"></i>
-                            <span class=nobr class="mdl-list__item-text-body">{{ event.oEndTime }}</span>
-                            <br style="line-height: 150%;">
-                            <i class="fa fa-map-marker" style="font-size:24px"></i>
-                            <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
-                            <br style="line-height: 150%">
-                            <i class="fa fa-tags" aria-hidden="true" style="font-size:18px"></i>
-                            <span class=nobr class="mdl-list__item-text-body">{{ event.sEventTypes }}</span>
-                            <div>
-                                <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
-                                <span class=nobr class="link" class="mdl-list__item-text-body">
-                                    <a :href="event.sEventLink" target="_blank">{{ event.sEventLink }}</a>
-                                </span>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" id="show-dialog" @click.stop="OpenCommentPopUp(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
-                                       type="text" id="sample1" readonly>
 
-                                <label class="mdl-textfield__label" for="sample1">Kommentiere und bewerte hier...</label>
-                            </div>
-            </div>
-            </span>
-
-            </li>
-            </ul>
-            <dialog id="kommentardialoge" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
-    box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
-                <div style="background-color:whitesmoke">
-
-                    <h2 class="mdl-dialog__title" id="kommiüberschrift">{{selected_event.sName}}</h2>
-                    <div class="mdl-dialog__content">
-                        <img id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
-
-                        <p style="color:black;" id="eventidkommentare">{{selected_event.sDescription}}</p>
-                        <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
-                        <i @click="clickLikeButton()" id="idThumbUp" style="position: absolute; color:grey; right: 14%;" class="fa fa-thumbs-up thumbs"></i>
-                        <div>
-                            <p id="ratingnumber" style="float:right;color:black; margin-right: 18%; font-size: x-large;">{{selected_event.iCurrentRating}}</p>
-                            <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <div id="idCommentErrorEmpty" style="display: none">
-                                    <i class="material-icons" style="float: left">error_outline</i>
-                                    <p style="color:red; ">
-                                        <b>
-                                            Bitte gebe einen Kommentar ein!
-                                        </b>
-                                    </p>
-                                </div>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <textarea id="idComment" class="mdl-textfield__input" maxlength="1000" type="text" rows="3"></textarea>
-                                    <label class="mdl-textfield__label" for="schools">Kommentar</label>
-                                </div>
-                            </div>
-                            <button id="meins" style="float:right; top: 4px; left: 20px;" @click="kommentargeschickt" type="button" class="mdl-button">Abschicken</button>
-                            <br />
-                        </div>
-
-                        <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial;" class="sidecard demo-list-three mdl-list">
-                            <li v-for="comment in selected_event.aComments" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
-                                <span class="mdl-list__item-primary-content">
-                                    <div>
-                                        <span style="font-weight: bold;"> {{comment.username}} </span>
-                                        <br style="line-height: 150%;" />
-                                        <i class="fa fa-comment" style="font-size:18px"></i>
-                                        <span class=nobr class="mdl-list__item-text-body"> {{comment.comment}}</span>
-
-                                        <br style="line-height: 150%;" />
-                                    </div>
-                                </span>
-
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </dialog>
+        <div id="Reg_Email_Error" style="display: none">
+          <i class="material-icons" style="float: left">warning</i>
+          <p style="color:red; ">
+            <b>
+              Bitte gib eine echte Email Adresse an.
+            </b>
+          </p>
         </div>
+
+        <div v-bind:class="{ 'is-invalid': draft.nameIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rUserName" id="Username">
+          <label class="mdl-textfield__label" for="sample1">Username*</label>
+        </div>
+
+        <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rEmail" id="email">
+          <label id="emailinputwords" class="mdl-textfield__label" for="sample1">E-Mail*</label>
+        </div>
+
+        <div v-bind:class="{ 'is-invalid': draft.passwordIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword" id="password1">
+          <label id="passwordinputwords" class="mdl-textfield__label" for="sample1">Passwort*</label>
+        </div>
+        <div v-bind:class="{ 'is-invalid': draft.password2IsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword2" id="password2">
+          <label id="passwordinputwords2" class="mdl-textfield__label" for="sample1">erneuert Passwort*</label>
+        </div>
+
+
+        <div class="buttons">
+          <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+            Abschließen
+          </button>
+        </div>
+      </div>
 
     </div>
+    <!-- Register Card End-->
+    <!-- Login Card-->
+    <div id="LoginCard">
+      <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
+        <div id="newLogin" class="sidecard">
+          <h2 style="padding: 0px;">Einloggen</h2>
+          <div id="LoginErrorEmpty" style="display: none">
+            <i class="material-icons" style="float: left">error_outline</i>
+            <p style="color:red; ">
+              <b>
+                Bitte fülle alle Felder aus!
+              </b>
+            </p>
+          </div>
+          <div id="LoginErrorData" style="display:none">
+            <i class="material-icons" style="float: left">error_outline</i>
+            <p style="color:red; ">
+              <b>
+                Du konntest nicht authentifiziert werden. Bitte versuche es erneut.
+              </b>
+            </p>
+          </div>
 
+          <div id="NewRegisteredUser" style="display:none">
+            <p style="color:green; ">
+              <b>
+                Du wurdest erfolgreich registriert. Logg dich ein!
+              </b>
+            </p>
+          </div>
+          <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sUserName" id="Login_username">
+            <label class="mdl-textfield__label" for="sample1">E-Mail*</label>
+          </div>
+          <div v-bind:class="{ 'is-invalid': draft.passwordIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input @keyup.enter="formsubmit" class="mdl-textfield__input" @maxlength="40" type="password" v-model="draft.sPassword" id="Login_password">
+            <label class="mdl-textfield__label" for="sample1">Passwort*</label>
+          </div>
 
-
-    <div id="searchPlace" class="sidecard" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
-        <h1>Finde Veranstaltungen in deiner Gegend.</h1>
-        <div id="searchPlaceInner" autocomplete="off">
-            <h2>ORT</h2>
-            <div id="idDatePickerErrorEmpty" style="display: none">
-                <i class="material-icons" style="float: left">error_outline</i>
-                <p style="color:red; ">
-                    <b>
-                        Bitte wähle kein vergangenes Datum aus!
-                    </b>
-                </p>
-            </div>
-            <div id="idSearchBar" class="autocomplete" style="width:370;">
-                <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete">
-            </div>
-            <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
-            <span id="datepickerID">
-
-                <h2>VON-BIS</h2>
-                <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von" end-placeholder="Bis"
-                                :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA">
-                </el-date-picker>
-            </span>
-            <span id="eventtypesfilterID" class="autocomplete">
-                <h2>WAS</h2>
-                <vue-multiselect v-model="value" v-bind:limit-text="newText" :options="aEventTypes" :multiple="true" :close-on-select="false"
-                                 :clear-on-select="false" :searchable="false" placeholder="Kategorien" label="name" track-by="name" :limit="1"
-                                 select-label="Auswählen" selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" :preselect-first="true">
-                </vue-multiselect>
-            </span>
-            <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
-                Suche
+          <div class="buttons">
+            <button class="mdl-button mdl-js-button mdl-button--raised" @click='RegisterVueShow'>
+              Registieren
             </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+              Login
+            </button>
+          </div>
         </div>
-
-
-
+      </div>
+      <!-- Login Card End-->
     </div>
+    <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
+      <div id="newEvent" class="sidecard">
+        <h2 style="padding: 0px;">Neues Event eintragen</h2>
+        <div v-show="draft.displayError">
+          <i class="material-icons" style="float: left">error_outline</i>
+          <p style="color: #d50000; ">
+            <b>
+              Bitte fülle alle benötigten Felder aus und überprüfe alle Werte.
+            </b>
+          </p>
+        </div>
+        <div v-bind:class="{ 'is-invalid': draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
+          <label class="mdl-textfield__label" for="sample1">Titel*</label>
+        </div>
+        <div v-bind:class="{ 'is-invalid': draft.descIsInvalid }" id="newEventDescription" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <textarea class="mdl-textfield__input" maxlength="1000" type="text" rows="3" maxrows="6" v-model="draft.sDescription"></textarea>
+          <label class="mdl-textfield__label" for="schools">Beschreibung*</label>
+        </div>
+        <div id="newEventAddressDiv" v-bind:class="{ 'is-invalid': draft.adressIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input id="newEventAddress" class="mdl-textfield__input" type="text" @keyup="autocomplete" v-model="draft.sAdress">
+          <label class="mdl-textfield__label" for="sample1">Adresse*</label>
+        </div>
+        <label id="pickLocationModeToggleLabel" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+          <input type="checkbox" id="switch-1" class="mdl-switch__input" unchecked @click.stop="pickLocationMode">
+          <span class="mdl-switch__label">Addresse selbst setzen</span>
+        </label>
+        <div id="NewEventLink" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input type="url" pattern="https://.*" placeholder="https://beispiel.com" class="mdl-textfield__input" v-model="draft.sEventLink">
+          <label class="mdl-textfield__label" for="sample1">Link</label>
+        </div>
+        <div>
+          <p>Veranstaltungstypen*</p>
+          <vue-multiselect id="idMultiSelectCreate" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes" :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label=""
+            :show-no-results="false" :searchable="false">
+          </vue-multiselect>
+        </div>
+        <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <p>Datum*</p>
+          <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right" start-placeholder="Von" end-placeholder="Bis" :default-time="['15:00:00', '19:00:00']">
+          </el-date-picker>
+        </div>
+        <div class="file-upload-form">
+          Lade ein Eventbild hoch:
+          <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected" accept="image/*">
+        </div>
+        <div class="image-preview" v-if="draft.oSelectedFile.length > 0">
+          <img class="preview" :src="draft.oSelectedFile">
+        </div>
+        <div class="buttons">
+          <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+            Senden
+          </button>
+        </div>
+      </div>
     </div>
-    <!-- Seachbar Ends here-->
+    <div id="eventsWithDialog">
+      <div class="sidecardWrapper">
+        <ul id="eventTable" class="sidecard demo-list-three mdl-list">
+          <h2 id="h2events"> Events </h2>
+          <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}" @click="select(event)" v-bind:id="event.iEventId">
+            <span class="mdl-list__item-primary-content">
+              <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
+              <span>{{ event.sName }}</span>
+              <span id="sterne" v-bind:style="{visibility : starVisibility}" name="stern">
+                <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
+              </span>
+              <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
+              <i class="fa fa-calendar" style="font-size:18px"></i>
+              <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
+              <i class="fa fa-clock-o" style="font-size:18px"></i>
+              <span class=nobr class="mdl-list__item-text-body">{{ event.oStartTime }}</span>
+              <span class=nobr> - </span> <i class="fa fa-calendar" style="font-size:18px"></i>
+              <span class=nobr class="mdl-list__item-text-body">{{ event.oEndDate }}</span>
+              <i class="fa fa-clock-o" style="font-size:18px"></i>
+              <span class=nobr class="mdl-list__item-text-body">{{ event.oEndTime }}</span>
+              <br style="line-height: 150%;">
+              <i class="fa fa-map-marker" style="font-size:24px"></i>
+              <span class=nobr class="mdl-list__item-text-body">{{ event.sAdress }}</span>
+              <br style="line-height: 150%">
+              <i class="fa fa-tags" aria-hidden="true" style="font-size:18px"></i>
+              <span class=nobr class="mdl-list__item-text-body">{{ event.sEventTypes }}</span>
+              <div>
+                <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
+                <span class=nobr class="link" class="mdl-list__item-text-body">
+                  <a :href="event.sEventLink" target="_blank">{{ event.sEventLink }}</a>
+                </span>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" id="show-dialog" @click.stop="OpenCommentPopUp(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)" type="text" id="sample1" readonly>
+
+                <label class="mdl-textfield__label" for="sample1">Kommentiere und bewerte hier...</label>
+              </div>
+      </div>
+      </span>
+
+      </li>
+      </ul>
+      <dialog id="commentDialog" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
+    box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
+        <div style="background-color:whitesmoke">
+
+          <h2 class="mdl-dialog__title" id="commentTitle">{{selected_event.sName}}</h2>
+          <div class="mdl-dialog__content">
+            <img id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
+
+            <p style="color:black;" id="eventPopUpDescription">{{selected_event.sDescription}}</p>
+            <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
+            <i @click="clickLikeButton()" id="idThumbUp" style="position: absolute; color:grey; right: 14%;" class="fa fa-thumbs-up thumbs"></i>
+            <div>
+              <p id="ratingnumber" style="float:right;color:black; margin-right: 18%; font-size: x-large;">{{selected_event.iCurrentRating}}</p>
+              <div style="clear:both; width: 370px; float:left;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div id="idCommentErrorEmpty" style="display: none">
+                  <i class="material-icons" style="float: left">error_outline</i>
+                  <p style="color:red; ">
+                    <b>
+                      Bitte gebe einen Kommentar ein!
+                    </b>
+                  </p>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <textarea id="idComment" class="mdl-textfield__input" maxlength="1000" type="text" rows="3"></textarea>
+                  <label class="mdl-textfield__label" for="schools">Kommentar</label>
+                </div>
+              </div>
+              <button id="submitCommentButton" style="float:right; top: 4px; left: 20px;" @click="submitComment" type="button" class="mdl-button">Abschicken</button>
+              <br />
+            </div>
+
+            <ul id="commentTable" style="clear:both; background-color:lightgrey; float:initial;" class="sidecard demo-list-three mdl-list">
+              <li v-for="comment in selected_event.aComments" class="mdl-list__item mdl-list__item-three-line" v-bind:id="comment._id">
+                <span class="mdl-list__item-primary-content">
+                  <div>
+                    <span style="font-weight: bold;"> {{comment.username}} </span>
+                    <br style="line-height: 150%;" />
+                    <i class="fa fa-comment" style="font-size:18px"></i>
+                    <span class=nobr class="mdl-list__item-text-body"> {{comment.comment}}</span>
+
+                    <br style="line-height: 150%;" />
+                  </div>
+                </span>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </dialog>
+    </div>
+
+  </div>
+
+
+
+  <div id="searchPlace" class="sidecard" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
+    <h1>Finde Veranstaltungen in deiner Gegend.</h1>
+    <div id="searchPlaceInner" autocomplete="off">
+      <h2>ORT</h2>
+      <div id="idDatePickerErrorEmpty" style="display: none">
+        <i class="material-icons" style="float: left">error_outline</i>
+        <p style="color:red; ">
+          <b>
+            Bitte wähle kein vergangenes Datum aus!
+          </b>
+        </p>
+      </div>
+      <div id="idSearchBar" class="autocomplete" style="width:370;">
+        <input id="searchInput" class="el-input__inner" type="text" placeholder="Suchort eingeben" v-model="sQuery" @keyup="autocomplete">
+      </div>
+      <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
+      <span id="datepickerID">
+
+        <h2>VON-BIS</h2>
+        <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von" end-placeholder="Bis" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA">
+        </el-date-picker>
+      </span>
+      <span id="eventtypesfilterID" class="autocomplete">
+        <h2>WAS</h2>
+        <vue-multiselect v-model="value" v-bind:limit-text="newText" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false" :searchable="false" placeholder="Kategorien" label="name" track-by="name" :limit="1"
+          select-label="Auswählen" selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" :preselect-first="true">
+        </vue-multiselect>
+      </span>
+      <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
+        Suche
+      </button>
     </div>
 
 
-    <!-- Map-->
-    <div id="map"></div>
-    <script type="text/javascript" src="js/Map.js"></script>
-    <script type="text/javascript" src="js/testdata.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <!-- tilt libary for css animations -->
-    <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
+
+  </div>
+  </div>
+  <!-- Seachbar Ends here-->
+  </div>
+
+
+  <!-- Map-->
+  <div id="map"></div>
+  <script type="text/javascript" src="js/Map.js"></script>
+  <script type="text/javascript" src="js/testdata.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <!-- tilt libary for css animations -->
+  <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
 
 </body>
 
