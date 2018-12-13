@@ -82,7 +82,7 @@ function getFavorites(user_id) {
     });
 }
 
-function getOwnedEvents(user_id) {
+function getOwnedEvents(user_id, displayId) {
   oEventTableVue.selected = "";
   const GETOWNEDEVENTS_URL = "http://localhost:3000/user/ownedEvents";
   var header_config = {
@@ -93,7 +93,7 @@ function getOwnedEvents(user_id) {
   axios.get(GETOWNEDEVENTS_URL, header_config)
     .then(response => {
       var apievents = response.data.saved_events;
-      _setAllEventsAfterGet(apievents)
+      _setAllEventsAfterGet(apievents, displayId)
     })
     .catch(function(error) {
       alert("Fehler beim Laden der eigenen Events aus der Datenbank.");
@@ -178,7 +178,7 @@ function _getFilterHeaders() {
   return headers;
 };
 
-function _setAllEventsAfterGet(apievents) {
+function _setAllEventsAfterGet(apievents, displayId) {
   oEventTableVue.allEvents = apievents.map(apievent => {
     return {
       sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
@@ -208,6 +208,13 @@ function _setAllEventsAfterGet(apievents) {
   });
   // set bubbles on map
   setMarkers(oEventTableVue.allEvents);
+
+  if (displayId) {
+    oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
+      return obj.iEventId == displayId
+    }));
+  }
+
   if (loggedInUser != "") {
     //set stars
     initalFavoriteSetting = true;
@@ -234,12 +241,7 @@ function getFilteredEvents(displayId) {
     var onSuccess = function onSuccess() {
       var apievents = this.response.oEvents;
       _setAllEventsAfterGet(apievents)
-      if (displayId) {
-        oEventTableVue.select(oEventTableVue.allEvents.find(obj => {
-          return obj.iEventId == displayId
-        }));
-        $(window).scrollTop(0);
-      }
+      $(window).scrollTop(0);
     };
 
     var onFailed = function onFailed() {
@@ -382,7 +384,7 @@ var oNavigationVue = new Vue({
         oEventTableVue.trashVisibility = "visible";
         document.getElementById('h2events').innerText = "Meine Events";
         document.getElementById('AfterLoginOwnedEvents').innerText = "Events";
-        getOwnedEvents(loggedInUser._id);
+        getOwnedEvents();
         document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden"); //hide time filter
         document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
         if (bubble) {
@@ -583,7 +585,17 @@ var oEventTableVue = new Vue({
 
       var onSuccess = function onSuccess() {
         if (this.status == 200) {
-          getFilteredEvents();
+          var t = oEventTableVue.selected;
+
+          if (document.getElementById('h2events').innerText == "Favoriten") {
+            getFavorites(loggedInUser._id);
+          } else if (document.getElementById('h2events').innerText == "Events") {
+            getFilteredEvents();
+          } else if (document.getElementById('h2events').innerText == "Meine Events") {
+            getOwnedEvents();
+          }
+
+          oEventTableVue.selected = t;
         }
       };
 
@@ -625,6 +637,10 @@ var oEventTableVue = new Vue({
               // reload favorites in order to not display unsaved events
               if (document.getElementById('h2events').innerText == "Favoriten") {
                 getFavorites(loggedInUser._id);
+              } else if (document.getElementById('h2events').innerText == "Events") {
+                getFilteredEvents();
+              } else if (document.getElementById('h2events').innerText == "Meine Events") {
+                getOwnedEvents();
               }
             }
           };
@@ -659,6 +675,8 @@ var oEventTableVue = new Vue({
             getFavorites(loggedInUser._id);
           } else if (document.getElementById('h2events').innerText == "Events") {
             getFilteredEvents();
+          } else if (document.getElementById('h2events').innerText == "Meine Events") {
+            getOwnedEvents();
           }
           oEventTableVue.selected = t;
         };
@@ -718,6 +736,8 @@ var oEventTableVue = new Vue({
             getFavorites(loggedInUser._id);
           } else if (document.getElementById('h2events').innerText == "Events") {
             getFilteredEvents();
+          } else if (document.getElementById('h2events').innerText == "Meine Events") {
+            getOwnedEvents();
           }
           oEventTableVue.selected = t;
           if (this.status == 200) {
@@ -755,6 +775,8 @@ var oEventTableVue = new Vue({
               getFavorites(loggedInUser._id);
             } else if (document.getElementById('h2events').innerText == "Events") {
               getFilteredEvents();
+            } else if (document.getElementById('h2events').innerText == "Meine Events") {
+              getOwnedEvents();
             }
             oEventTableVue.selected = t;
           }
@@ -1047,19 +1069,23 @@ var oNewEventVue = new Vue({
             closeSetAdressYourself();
 
             oNewEventVue.cardShown = false; //close card for new event
-            getFilteredEvents(res.data.created_event._id);
+
+            if (document.getElementById('h2events').innerText == "Favoriten") {
+              getFilteredEvents(res.data.created_event._id);
+              document.getElementById('h2events').innerText = "Events";
+              document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+            } else if (document.getElementById('h2events').innerText == "Events") {
+              getFilteredEvents(res.data.created_event._id);
+            } else if (document.getElementById('h2events').innerText == "Meine Events") {
+              getOwnedEvents(res.data.created_event._id);
+            }
+
             $(window).scrollTop(0);
           }).catch(function(error) {
             alert("Fehler beim speichern in der Datenbank");
             console.log(error);
           });
 
-          document.getElementById('h2events').innerText = "Events"
-
-          //in case the event was created from the owned events tab
-          owned_clicked = false;
-          document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
-          oEventTableVue.trashVisibility = "hidden";
         },
         onError = function(error) {
           alert('Geodaten nicht bekommen. Bitte überprüfe, ob die angegebene Adresse existiert.');
