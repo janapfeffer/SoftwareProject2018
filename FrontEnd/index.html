@@ -279,6 +279,11 @@
                     <i @click="deleteEvent(event)" style="color:red;" class="fa fa-trash"></i>
                   </a>
                 </span>
+                <span id="edit" v-bind:style="{visibility : trashVisibility}">
+                  <a class="mdl-list__item-secondary-action favstar">
+                    <i @click="updateEvent(event)"  style="color:black;" class="fa fa-pencil"></i>
+                  </a>
+                </span>
               </span>
               <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
               <i class="fa fa-calendar" style="font-size:18px"></i>

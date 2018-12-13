@@ -82,7 +82,7 @@ function getFavorites(user_id) {
     });
 }
 
-function getOwnedEvents(user_id, displayId) {
+function getOwnedEvents(displayId) {
   oEventTableVue.selected = "";
   const GETOWNEDEVENTS_URL = "http://localhost:3000/user/ownedEvents";
   var header_config = {
@@ -240,7 +240,7 @@ function getFilteredEvents(displayId) {
 
     var onSuccess = function onSuccess() {
       var apievents = this.response.oEvents;
-      _setAllEventsAfterGet(apievents)
+      _setAllEventsAfterGet(apievents, displayId)
       $(window).scrollTop(0);
     };
 
@@ -345,6 +345,36 @@ var oNavigationVue = new Vue({
     horizontalMenueShown: true,
   },
   methods: {
+    showUpdateEventCard: function() {
+      $(window).scrollTop(0);
+      if (oUpdatEventVue.cardShown === true) {
+        oUpdatEventVue.draft = {
+          sName: oEventTableVue.selected_event.sName,
+          sDescription: "",
+          sAdress: "",
+          sDate: "",
+          time: "",
+          oLatLng: {},
+          status: "draft",
+          EDate: null,
+          sEventLink: null,
+          iEventId: Math.floor(Math.random() * 99999) + 1,
+          oSelectedFile: "",
+          image: null,
+          titleIsInvalid: false,
+          descIsInvalid: false,
+          adressIsInvalid: false,
+          displayError: false,
+          dateIsInvalid: false
+        };
+        oUpdatEventVue.value7 = '';
+        oUpdatEventVue.value = [];
+        closeSetAdressYourself();
+      };
+      oUpdatEventVue.cardShown = !oUpdatEventVue.cardShown;
+      oRegisterVue.cardShown = false;
+      oNewLoginVue.cardShown = false;
+    },
     showNewEventCard: function() {
       $(window).scrollTop(0);
       if (oNewEventVue.cardShown === true) {
@@ -559,12 +589,19 @@ var oEventTableVue = new Vue({
     }
   },
   methods: {
+    updateEvent: function(event) {
+      oNavigationVue.showUpdateEventCard();
+    },
     deleteEvent: function(event) {
       var ajaxRequest = new XMLHttpRequest();
 
       var onSuccess = function onSuccess() {
         if (this.status == 200) {
           getOwnedEvents();
+          if(bubble){
+            closeBubble();
+          }
+          oEventTableVue.selected = "";
         }
       };
 
@@ -925,7 +962,7 @@ var oSearchPlaceVue = new Vue({
   }
 });
 
-//Vue for creating a new event
+//Vue for creating a new event and updating an old event
 var oNewEventVue = new Vue({
   el: "#newEventWrapper",
   data: {
@@ -954,7 +991,7 @@ var oNewEventVue = new Vue({
     aEventTypes: [],
   },
   methods: {
-    formsubmit: function() {
+    formsubmit: function(updateEvent) {
 
       titleIsInvalid = false;
       oNewEventVue.draft.descIsInvalid = false;
@@ -1008,83 +1045,89 @@ var oNewEventVue = new Vue({
             return;
           }
 
-          var image = document.getElementById("imageUpload").files[0];
+          if (updateEvent === true) {
 
-          const fd = new FormData();
-          fd.append("event_name", oNewEventVue.draft.sName);
-          fd.append("description", oNewEventVue.draft.sDescription);
-          fd.append("address", oNewEventVue.draft.sAdress);
-          fd.append("lat", dLat);
-          fd.append("lng", dLng);
-          fd.append("start_date", oNewEventVue.draft.EDate[0]);
-          fd.append("end_date", oNewEventVue.draft.EDate[1]);
-          fd.append("author", loggedInUser._id);
-          var ev_types = "";
-          for (var i = 0; i < oNewEventVue.value.length; i++) {
-            ev_types = ev_types + oNewEventVue.value[i].code;
-            if (i < oNewEventVue.value.length - 1) {
-              ev_types = ev_types + ","
+          } else {
+            var image = document.getElementById("imageUpload").files[0];
+
+            const fd = new FormData();
+            fd.append("event_name", oNewEventVue.draft.sName);
+            fd.append("description", oNewEventVue.draft.sDescription);
+            fd.append("address", oNewEventVue.draft.sAdress);
+            fd.append("lat", dLat);
+            fd.append("lng", dLng);
+            fd.append("start_date", oNewEventVue.draft.EDate[0]);
+            fd.append("end_date", oNewEventVue.draft.EDate[1]);
+            fd.append("author", loggedInUser._id);
+            var ev_types = "";
+            for (var i = 0; i < oNewEventVue.value.length; i++) {
+              ev_types = ev_types + oNewEventVue.value[i].code;
+              if (i < oNewEventVue.value.length - 1) {
+                ev_types = ev_types + ","
+              }
             }
-          }
-          fd.append("event_types", ev_types);
-          if (oNewEventVue.draft.oSelectedFile) {
-            fd.append("event_picture", image, image.name);
-          }
-          if (oNewEventVue.draft.sEventLink) {
-            fd.append("event_link", oNewEventVue.draft.sEventLink);
-          }
-
-          var header_config = {
-            headers: {
-              authorization: "Bearer " + loggedInUser.token
+            fd.append("event_types", ev_types);
+            if (oNewEventVue.draft.oSelectedFile) {
+              fd.append("event_picture", image, image.name);
             }
-          };
+            if (oNewEventVue.draft.sEventLink) {
+              fd.append("event_link", oNewEventVue.draft.sEventLink);
+            }
 
-          axios.post("http://localhost:3000/events", fd, header_config).then(res => {
-            oNewEventVue.draft.status = "unsend";
-            // reset vueinternal data to make possible to add new event
-            oNewEventVue.draft = {
-              sName: "",
-              sDescription: "",
-              sAdress: "",
-              sDate: "",
-              time: "",
-              oLatLng: {},
-              status: "draft",
-              EDate: null,
-              sEventLink: null,
-              iEventId: Math.floor(Math.random() * 99999) + 1,
-              oSelectedFile: "",
-              image: null,
-              titleIsInvalid: false,
-              descIsInvalid: false,
-              adressIsInvalid: false,
-              displayError: false,
-              dateIsInvalid: false
+            var header_config = {
+              headers: {
+                authorization: "Bearer " + loggedInUser.token
+              }
             };
-            oNewEventVue.value7 = '';
-            oNewEventVue.value = [];
-            document.getElementById("imageUpload").value = "";
 
-            closeSetAdressYourself();
+            axios.post("http://localhost:3000/events", fd, header_config).then(res => {
+              oNewEventVue.draft.status = "unsend";
+              // reset vueinternal data to make possible to add new event
+              oNewEventVue.draft = {
+                sName: "",
+                sDescription: "",
+                sAdress: "",
+                sDate: "",
+                time: "",
+                oLatLng: {},
+                status: "draft",
+                EDate: null,
+                sEventLink: null,
+                iEventId: Math.floor(Math.random() * 99999) + 1,
+                oSelectedFile: "",
+                image: null,
+                titleIsInvalid: false,
+                descIsInvalid: false,
+                adressIsInvalid: false,
+                displayError: false,
+                dateIsInvalid: false
+              };
+              oNewEventVue.value7 = '';
+              oNewEventVue.value = [];
+              document.getElementById("imageUpload").value = "";
 
-            oNewEventVue.cardShown = false; //close card for new event
+              closeSetAdressYourself();
 
-            if (document.getElementById('h2events').innerText == "Favoriten") {
-              getFilteredEvents(res.data.created_event._id);
-              document.getElementById('h2events').innerText = "Events";
-              document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-            } else if (document.getElementById('h2events').innerText == "Events") {
-              getFilteredEvents(res.data.created_event._id);
-            } else if (document.getElementById('h2events').innerText == "Meine Events") {
-              getOwnedEvents(res.data.created_event._id);
-            }
+              oNewEventVue.cardShown = false; //close card for new event
 
-            $(window).scrollTop(0);
-          }).catch(function(error) {
-            alert("Fehler beim speichern in der Datenbank");
-            console.log(error);
-          });
+              if (document.getElementById('h2events').innerText == "Favoriten") {
+                getFilteredEvents(res.data.created_event._id);
+                document.getElementById('h2events').innerText = "Events";
+                document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+              } else if (document.getElementById('h2events').innerText == "Events") {
+                getFilteredEvents(res.data.created_event._id);
+              } else if (document.getElementById('h2events').innerText == "Meine Events") {
+                getOwnedEvents(res.data.created_event._id);
+              }
+
+              $(window).scrollTop(0);
+            }).catch(function(error) {
+              alert("Fehler beim speichern in der Datenbank");
+              console.log(error);
+            });
+
+          }
+
 
         },
         onError = function(error) {
