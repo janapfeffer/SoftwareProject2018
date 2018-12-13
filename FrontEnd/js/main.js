@@ -887,6 +887,7 @@ var oNewEventVue = new Vue({
           fd.append("lng", dLng);
           fd.append("start_date", oNewEventVue.draft.EDate[0]);
           fd.append("end_date", oNewEventVue.draft.EDate[1]);
+          fd.append("author", loggedInUser._id);
           var ev_types = "";
           for (var i = 0; i < oNewEventVue.value.length; i++) {
             ev_types = ev_types + oNewEventVue.value[i].code;
