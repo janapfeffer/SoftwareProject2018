@@ -74,6 +74,10 @@ const oEventSchema = mongoose.Schema({
     comment: {
       type: String,
       required: true
+    },
+    date: {
+      type: Date,
+      required: true
     }
   }],
   current_rating: {

@@ -254,3 +254,45 @@ exports.delete_saved_event = (req, res, next) => {
       });
   });
 };
+
+exports.get_owned_events = (req, res, next) => {
+  OEvent.find({
+      author: {
+        $in: req.userData.userId
+      }
+    })
+    .select("_id event_name author description address start_date end_date event_picture event_type event_link ticket_link comments lat lng current_rating ratings")
+    .populate("event_types")
+    .exec()
+    .then(events => {
+      res.status(200).json({
+        count: events.length,
+        saved_events: events.map(event => {
+          return {
+            _id: event._id,
+            event_name: event.event_name,
+            author: event.author,
+            description: event.description,
+            address: event.address,
+            lng: event.lng,
+            lat: event.lat,
+            start_date: event.start_date,
+            end_date: event.end_date,
+            event_picture: event.event_picture,
+            event_link: event.event_link,
+            ticket_link: event.ticket_link,
+            comments: event.comments,
+            event_types: event.event_types,
+            current_rating: event.current_rating,
+            ratings: event.ratings,
+          };
+        })
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      })
+    });
+
+};
