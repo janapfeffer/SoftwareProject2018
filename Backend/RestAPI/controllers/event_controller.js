@@ -303,9 +303,8 @@ exports.update_event = (req, res, next) => {
 //should not be an issue though if the frontend calls it correctly
 //delete picture if given (NOT if its the default picture) (currently only used for testing so thats unnecessary)
 exports.delete_event = (req, res, next) => {
-  OEvent.remove({
-      _id: req.params.eventId,
-      author: req.userData.userid
+  OEvent.deleteOne({
+      _id: req.params.eventId
     })
     .exec()
     .then(result => {

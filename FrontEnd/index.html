@@ -75,6 +75,7 @@
         <!-- Title -->
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link headerLink" id="AfterLoginOwnedEvents" style="visibility: hidden;" @click='showNewOwnedEventsCard'>Meine Events</a>
           <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
           <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>
             Event eintragen
@@ -270,6 +271,9 @@
               <span id="stars" v-bind:style="{visibility : starVisibility}">
                 <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)"><i class="material-icons">star</i></a>
               </span>
+              <span id="trash" v-bind:style="{visibility : trashVisibility}">
+                <a class="mdl-list__item-secondary-action favstar" @click.stop="deleteEvent(event)"><i class="fa fa-trash"></i></a>
+              </span>
               <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
               <i class="fa fa-calendar" style="font-size:18px"></i>
               <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
@@ -337,7 +341,7 @@
                 <span class="mdl-list__item-primary-content">
                   <div>
                     <span style="font-weight: bold;"> {{comment.username}} </span>
-                    <span id="idDelete" v-bind:style="{visibility : comment.deleteVisibility}" >
+                    <span id="idDelete" v-bind:style="{visibility : comment.deleteVisibility}">
                       <a class="mdl-list__item-secondary-action favstar" @click.stop="deleteComment(comment)"><i class="fa fa-trash"></i></a>
                     </span>
                     <br style="line-height: 150%;" />

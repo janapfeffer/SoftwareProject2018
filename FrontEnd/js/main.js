@@ -18,6 +18,7 @@ var dialogopen = false;
 var logoutmodus = false;
 var loggedInUser = "";
 var favorite_clicked = false;
+var owned_clicked = false;
 var initalFavoriteSetting = false;
 var aAllEvents = new Array();
 var event_types;
@@ -372,9 +373,42 @@ var oNavigationVue = new Vue({
       oRegisterVue.cardShown = false;
       oNewLoginVue.cardShown = false;
     },
+    showNewOwnedEventsCard: function() {
+      $(window).scrollTop(0);
+      favorite_clicked = false;
+      owned_clicked = !owned_clicked;
+      document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+      if (owned_clicked === true) {
+        oEventTableVue.trashVisibility = "visible";
+        document.getElementById('h2events').innerText = "Meine Events";
+        document.getElementById('AfterLoginOwnedEvents').innerText = "Events";
+        getOwnedEvents(loggedInUser._id);
+        document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden"); //hide time filter
+        document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
+        if (bubble) {
+          closeBubble();
+        }
+      } else {
+        oEventTableVue.trashVisibility = "hidden";
+        document.getElementById('h2events').innerText = "Events";
+        document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
+        getFilteredEvents();
+        document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
+        document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
+        if (bubble) {
+          closeBubble();
+        }
+      }
+      if (oNewEventVue.cardShown === true) {
+        this.showNewEventCard();
+      }
+    },
     showNewFavoriteCard: function() {
       $(window).scrollTop(0);
       favorite_clicked = !favorite_clicked;
+      owned_clicked = false;
+      document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
+      oEventTableVue.trashVisibility = "hidden";
       if (favorite_clicked === true) {
         document.getElementById('h2events').innerText = "Favoriten";
         document.getElementById('AfterLoginFavoriten').innerText = "Events";
@@ -414,6 +448,7 @@ var oNavigationVue = new Vue({
         }
 
         AfterLoginFavoriten.style.visibility = "hidden";
+        AfterLoginOwnedEvents.style.visibility = "hidden";
         loggedInUser = "";
         AfterLoginEvent.style.visibility = "hidden";
         LoginCard.style.display = "visible";
@@ -463,7 +498,8 @@ var oEventTableVue = new Vue({
       ja: 0
     },
     sQuery: "",
-    starVisibility: "hidden"
+    starVisibility: "hidden",
+    trashVisibility: "hidden"
 
   },
   computed: {
@@ -488,8 +524,8 @@ var oEventTableVue = new Vue({
         return value.iEventId === temp.selected;
       })[0].aComments;
 
-      for(var i = 0; i < comments.length; i++){
-        if( comments[i].user_id === loggedInUser._id){
+      for (var i = 0; i < comments.length; i++) {
+        if (comments[i].user_id === loggedInUser._id) {
           comments[i].deleteVisibility = "visible";
         } else {
           comments[i].deleteVisibility = "hidden";
@@ -521,6 +557,27 @@ var oEventTableVue = new Vue({
     }
   },
   methods: {
+    deleteEvent: function(event) {
+      var ajaxRequest = new XMLHttpRequest();
+
+      var onSuccess = function onSuccess() {
+        if (this.status == 200) {
+          getOwnedEvents();
+        }
+      };
+
+      var onFailed = function onFailed() {
+        alert("Event konnte nicht gelöscht werden, bitte versuche es erneut.");
+      };
+
+      ajaxRequest.addEventListener("load", onSuccess);
+      ajaxRequest.addEventListener("error", onFailed);
+      ajaxRequest.responseType = "json";
+      ajaxRequest.open("DELETE", "http://localhost:3000/events/" + event.iEventId, true);
+      ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+      ajaxRequest.send();
+    },
     deleteComment: function(comment) {
       var ajaxRequest = new XMLHttpRequest();
 
@@ -996,6 +1053,13 @@ var oNewEventVue = new Vue({
             alert("Fehler beim speichern in der Datenbank");
             console.log(error);
           });
+
+          document.getElementById('h2events').innerText = "Events"
+
+          //in case the event was created from the owned events tab
+          owned_clicked = false;
+          document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
+          oEventTableVue.trashVisibility = "hidden";
         },
         onError = function(error) {
           alert('Geodaten nicht bekommen. Bitte überprüfe, ob die angegebene Adresse existiert.');
@@ -1198,6 +1262,7 @@ var oNewLoginVue = new Vue({
           }
           initalFavoriteSetting = false;
           AfterLoginFavoriten.style.visibility = "visible";
+          AfterLoginOwnedEvents.style.visibility = "visible";
           AfterLoginEvent.style.visibility = "visible";
           document.getElementById('AfterLoginLogin').innerText = "LogOut";
           LoginCard.style.display = "hidden";

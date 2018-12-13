@@ -45,8 +45,6 @@ router.post("/addComment", checkAuth, EventController.add_comment);
 router.post("/rate", checkAuth, EventController.event_rating);
 router.patch("/:eventId", checkAuth, EventController.update_event);
 router.post("/deleteComment", checkAuth, EventController.delete_comment);
-
-//only used for testing
 router.delete("/:eventId", checkAuth, EventController.delete_event);
 
 module.exports = router;
