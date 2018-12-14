@@ -664,6 +664,29 @@ var oEventTableVue = new Vue({
       var dialog = document.querySelector('#deleteEventDialog');
       dialog.showModal();
     },
+    openEditEvent: function(target) {
+      oNewEventVue.cardShown = false;
+      oNavigationVue.showNewEventCard()
+
+      //General Idea: Set Modi via Global Variable ODER Checke text des buttons
+
+      //Step1: Edit Header + Button (for Button also edit functionality)
+      document.getElementById("h2NewEvent").innerText = "Bearbeite dein Event";
+      document.getElementById("newEventSendenButton").innerText = "Speichern";
+      document.getElementById("eventPictureUploadText").innerText = "Lade ein anderes Eventbild hoch:"
+
+      //Step2: Adjust draft to the values of the selected event
+      oNewEventVue.draft.sName = target.sName;
+      oNewEventVue.draft.sDescription = target.sDescription;
+      oNewEventVue.draft.sAdress = target.sAdress;
+      oNewEventVue.draft.sEventLink = target.sEventLink;
+      oNewEventVue.value = target.event_types;
+      oNewEventVue.draft.EDate = [new Date(target.start_date), new Date(target.end_date)]; //todo Sommerzeit/Winterzeit beachten
+      oNewEventVue.draft.oSelectedFile = target.oImage;
+
+      //Todo: make inputfields active
+
+    },
     closeDeleteEventDialog: function() {
       document.querySelector('#deleteEventDialog').close();
     },
