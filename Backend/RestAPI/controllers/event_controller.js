@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const OEvent = require("../models/event_model");
 const EventType = require("../models/event_type_model");
+const fs = require('fs');
 
 
 exports.get_all_events = (req, res, next) => {
@@ -276,11 +277,40 @@ exports.get_event = (req, res, next) => {
 exports.update_event = (req, res, next) => {
   const id = req.params.eventId;
 
-  if (req.file) {
-    req.body.event_picture = req.file.path;
+  //update Picture
+  //1. get new file path
+  if (req.body.not_update_event_picture === "y") {
+    console.log("no pic update");
   } else {
-    req.body.event_picture = "event_images\\standard.png";
+    console.log("update picture");
+    if (req.file) {
+      req.body.event_picture = req.file.path;
+    } else {
+      req.body.event_picture = "event_images\\standard.png";
+    }
+    //2. get old file path
+    var old_path = "";
+    OEvent.findById(id, "event_picture", function(err, event) {
+        old_path = event.event_picture;
+      })
+      .catch(err => {
+        res.status(500).json({
+          error: err
+        });
+      });
+    //3. delete old file
+    console.log(old_path);
+    // fs.unlink(old_path, (err) => {
+    //   if (err) throw err;
+    //   console.log(old_path + ' was deleted');
+    // }).catch(err => {
+    //   res.status(500).json({
+    //     error: err
+    //   });
+    // });
   }
+
+
   req.body.event_types = req.body.event_types.split(",");
 
   OEvent.update({

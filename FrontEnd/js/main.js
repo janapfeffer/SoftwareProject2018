@@ -1152,7 +1152,12 @@ var oNewEventVue = new Vue({
           }
           fd.append("event_types", ev_types);
           if (oNewEventVue.draft.oSelectedFile) {
-            fd.append("event_picture", image, image.name);
+            if(image){
+              fd.append("event_picture", image, image.name);
+            } else { //only occurs for update if the picture isn't changed
+              fd.append("not_update_event_picture", "y");
+            }
+
           }
           if (oNewEventVue.draft.sEventLink) {
             fd.append("event_link", oNewEventVue.draft.sEventLink);
