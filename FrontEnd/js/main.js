@@ -409,6 +409,11 @@ var oNavigationVue = new Vue({
         oNewEventVue.value7 = '';
         oNewEventVue.value = [];
         closeSetAdressYourself();
+        //reset all Inputfield to inactive
+        document.getElementById("newEventTitle").MaterialTextfield.change();
+        document.getElementById("newEventDescription").MaterialTextfield.change();
+        document.getElementById("newEventAddressDiv").MaterialTextfield.change();
+        document.getElementById("NewEventLink").MaterialTextfield.change();
       };
       oNewEventVue.cardShown = !oNewEventVue.cardShown;
       oRegisterVue.cardShown = false;
@@ -676,16 +681,19 @@ var oEventTableVue = new Vue({
       document.getElementById("eventPictureUploadText").innerText = "Lade ein anderes Eventbild hoch:"
 
       //Step2: Adjust draft to the values of the selected event
-      oNewEventVue.draft.sName = target.sName;
-      oNewEventVue.draft.sDescription = target.sDescription;
-      oNewEventVue.draft.sAdress = target.sAdress;
-      oNewEventVue.draft.sEventLink = target.sEventLink;
+
+      //using MaterialTextfield.change sets the state of the textfield to fille, so now overlays appear
+      document.getElementById("newEventTitle").MaterialTextfield.change(oNewEventVue.draft.sName = target.sName);
+      document.getElementById("newEventDescription").MaterialTextfield.change(oNewEventVue.draft.sDescription = target.sDescription);
+      document.getElementById("newEventAddressDiv").MaterialTextfield.change( oNewEventVue.draft.sAdress = target.sAdress);
+      document.getElementById("NewEventLink").MaterialTextfield.change( oNewEventVue.draft.sEventLink = target.sEventLink);
       oNewEventVue.value = target.event_types;
-      oNewEventVue.draft.EDate = [new Date(target.start_date), new Date(target.end_date)]; //todo Sommerzeit/Winterzeit beachten
+      var oStartDate = new Date(target.start_date);
+      var oStartDateTimeAdjusted = oStartDate.setHours(oStartDate.getHours() - 1);
+      var oEndDate = new Date(target.end_date);
+      var oEndDateTimeAdjusted = oEndDate.setHours(oEndDate.getHours() - 1);
+      oNewEventVue.draft.EDate = [oStartDateTimeAdjusted, oEndDateTimeAdjusted]; //todo Sommerzeit/Winterzeit beachten
       oNewEventVue.draft.oSelectedFile = target.oImage;
-
-      //Todo: make inputfields active
-
     },
     closeDeleteEventDialog: function() {
       document.querySelector('#deleteEventDialog').close();
