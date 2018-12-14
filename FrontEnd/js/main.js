@@ -212,6 +212,19 @@ function _setAllEventsAfterGet(apievents, displayId) {
 
     };
   });
+  for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+    for (var i = 0; i < oEventTableVue.allEvents[j].aComments.length; i++) {
+      if (oEventTableVue.allEvents[j].aComments[i].user_id === loggedInUser._id) {
+        oEventTableVue.allEvents[j].aComments[i].deleteVisibility = "visible";
+      } else {
+        oEventTableVue.allEvents[j].aComments[i].deleteVisibility = "hidden";
+      }
+      if(oEventTableVue.allEvents[j].aComments[i].date){
+        oEventTableVue.allEvents[j].aComments[i].date = oEventTableVue.allEvents[j].aComments[i].date.split("T")[0] + " " + oEventTableVue.allEvents[j].aComments[i].date.split("T")[1].substring(0, 5);
+      }
+
+    }
+  }
   oEventTableVue.allEvents.sort(function(a, b) {
     return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
   });
@@ -483,6 +496,7 @@ var oNavigationVue = new Vue({
       if (document.getElementById('AfterLoginLogin').innerText === "LogOut") {
         logoutmodus = false;
         document.getElementById('AfterLoginLogin').innerText = "LogIn";
+        oEventTableVue.trashVisibility = "hidden";
         //set all favorite stars to faved = false
         for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
           if (oEventTableVue.allEvents[j].faved) {
@@ -563,20 +577,9 @@ var oEventTableVue = new Vue({
       if (this.selected === "") {
         return [];
       }
-      var comments = this.allEvents.filter(function(value) {
+      return this.allEvents.filter(function(value) {
         return value.iEventId === temp.selected;
       })[0].aComments;
-
-      for (var i = 0; i < comments.length; i++) {
-        if (comments[i].user_id === loggedInUser._id) {
-          comments[i].deleteVisibility = "visible";
-        } else {
-          comments[i].deleteVisibility = "hidden";
-        }
-        comments[i].dateDay = comments[i].date.split("T")[0];
-        comments[i].dateTime = comments[i].date.split("T")[1].substring(0, 5);
-      }
-      return comments;
     },
     selected_event: function() {
       var temp = this;
