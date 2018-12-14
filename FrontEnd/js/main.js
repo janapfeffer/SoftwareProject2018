@@ -173,6 +173,8 @@ function _setAllEventsAfterGet(apievents) {
       oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
       oEndDate: apievent.end_date.split("T")[0],
       oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+      end_date: apievent.end_date,
+      start_date: apievent.start_date,
       sEventLink: apievent.event_link,
       sTicketLink: apievent.ticket_link,
       oLatLgn: {
@@ -180,7 +182,13 @@ function _setAllEventsAfterGet(apievents) {
         lng: apievent.lng
       },
       oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
-      sEventTypes: getEventTypesAsString(apievent.event_types)
+      sEventTypes: getEventTypesAsString(apievent.event_types),
+      event_types: apievent.event_types.map(event_type => {
+        return {
+          name: event_type.event_type,
+          code: event_type.id
+        }
+      })
     };
   });
   oEventTableVue.allEvents.sort(function(a, b) {
@@ -291,6 +299,7 @@ function checkDuplicatePositions(arr) {
           arrCopy.splice(i, 1) // remove object of arrCopy
         }
   }
+  
 }
 
 function refreshpage() {
@@ -324,6 +333,11 @@ var oNavigationVue = new Vue({
   },
   methods: {
     showNewEventCard: function() {
+      //change back values to indicate it is a new event and not edit an event
+      document.getElementById("h2NewEvent").innerText = "Neues Event eintragen";
+      document.getElementById("newEventSendenButton").innerText = "Senden";
+      document.getElementById("eventPictureUploadText").innerText = "Lade ein Eventbild hoch:"
+      
       $(window).scrollTop(0);
       if (oNewEventVue.cardShown === true) {
         oNewEventVue.draft = {
@@ -378,6 +392,30 @@ var oNavigationVue = new Vue({
       if (oNewEventVue.cardShown === true) {
         this.showNewEventCard();
       }
+      oEventTableVue.starVisibility = "visible";
+      oEventTableVue.deleteEventVisibility = "hidden";
+      oEventTableVue.editEventVisibility = "hidden";
+    },
+    showMyEventsCard: function() {
+      $(window).scrollTop(0);
+        //setting the fav/events button to events, so the user can go back to events after watching his own events.
+        document.getElementById('AfterLoginFavoriten').innerText = "Events";
+        favorite_clicked = true; //acutally not true, just so that later when clicked on "Events" it shows the events
+
+        document.getElementById('h2events').innerText = "Meine Events";
+        
+        //@Jana getMyEvents(loggedInUser._id); //so hatte ich es mir vorgestellt
+        oEventTableVue.starVisibility = "hidden";
+        oEventTableVue.deleteEventVisibility = "visible";
+        oEventTableVue.editEventVisibility = "visible";
+
+        document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden"); //hide time filter
+        document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
+        closeBubble();
+
+      if (oNewEventVue.cardShown === true) {
+        this.showNewEventCard();
+      }
     },
     showNewLoginCard: function() {
       $(window).scrollTop(0);
@@ -397,8 +435,11 @@ var oNavigationVue = new Vue({
         AfterLoginFavoriten.style.visibility = "hidden";
         loggedInUser = "";
         AfterLoginEvent.style.visibility = "hidden";
+        AfterLoginMyEvents.style.visibility = "hidden";
         LoginCard.style.display = "visible";
         oEventTableVue.starVisibility = "hidden";
+        oEventTableVue.deleteEventVisibility = "hidden";
+        oEventTableVue.editEventVisibility = "hidden";
         oNewLoginVue.draft.sUserName = "";
         oNewLoginVue.draft.sPassword = "";
         document.getElementById("Login_username").innerText = "";
@@ -409,6 +450,8 @@ var oNavigationVue = new Vue({
 
         if (document.getElementById('h2events').innerText != "Events") {
           document.getElementById('h2events').innerText = "Events";
+          document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+          favorite_clicked = false;
           document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
           document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
           getFilteredEvents();
@@ -444,8 +487,9 @@ var oEventTableVue = new Vue({
       ja: 0
     },
     sQuery: "",
-    starVisibility: "hidden"
-
+    starVisibility: "hidden",
+    deleteEventVisibility: "hidden",
+    editEventVisibility: "hidden"
   },
   computed: {
     filteredList: function() {
@@ -534,6 +578,40 @@ var oEventTableVue = new Vue({
           ajaxRequest.send(sFormData);
         }
       }
+    },
+    openDeleteEventDialog: function(target){
+      var dialog = document.querySelector('#deleteEventDialog');
+      dialog.showModal();
+    },
+    confirmDeleteEvent: function(){
+      //@Jana: Hier dann das event aus der Datenbank löschen und "Meine Events" entsprechend neu laden bzw. aktuellen Stand anzeigen
+      document.querySelector('#deleteEventDialog').close();
+    },
+    closeDeleteEventDialog: function(){
+      document.querySelector('#deleteEventDialog').close();
+    },
+    openEditEvent: function(target){
+      oNewEventVue.cardShown = false;
+      oNavigationVue.showNewEventCard()
+      
+      //General Idea: Set Modi via Global Variable ODER Checke text des buttons
+      
+      //Step1: Edit Header + Button (for Button also edit functionality)
+      document.getElementById("h2NewEvent").innerText = "Bearbeite dein Event";
+      document.getElementById("newEventSendenButton").innerText = "Speichern";
+      document.getElementById("eventPictureUploadText").innerText = "Lade ein anderes Eventbild hoch:"
+
+      //Step2: Adjust draft to the values of the selected event
+      oNewEventVue.draft.sName = target.sName;
+      oNewEventVue.draft.sDescription = target.sDescription;
+      oNewEventVue.draft.sAdress = target.sAdress;
+      oNewEventVue.draft.sEventLink = target.sEventLink;
+      oNewEventVue.value = target.event_types;
+      oNewEventVue.draft.EDate = [new Date(target.start_date), new Date(target.end_date)]; //todo Sommerzeit/Winterzeit beachten
+      oNewEventVue.draft.oSelectedFile = target.oImage;
+      
+      //Todo: make inputfields active
+
     },
     submitComment: function(id) {
       if (document.querySelector("#idComment").value.length < 1) {
@@ -686,7 +764,7 @@ var oEventTableVue = new Vue({
           document.getElementById('idThumbDown').style.color = "grey"
         }
 
-        var dialog = document.querySelector('dialog');
+        var dialog = document.querySelector('#commentDialog');
         dialog.showModal();
         $(dialog).children().first().click(function(e) {
           e.stopPropagation();
@@ -1146,6 +1224,7 @@ var oNewLoginVue = new Vue({
           initalFavoriteSetting = false;
           AfterLoginFavoriten.style.visibility = "visible";
           AfterLoginEvent.style.visibility = "visible";
+          AfterLoginMyEvents.style.visibility = "visible";
           document.getElementById('AfterLoginLogin').innerText = "LogOut";
           LoginCard.style.display = "hidden";
           oEventTableVue.starVisibility = "visible";

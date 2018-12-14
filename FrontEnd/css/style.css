@@ -311,6 +311,17 @@ img.eventSymbol {
   padding: 0px 24px 24px;
 }
 
+.mdl-dialog {
+  border-radius: 4px;
+  box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;"
+}
+
+.mdl-dialog .sidecard{
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
 .favstar {
   color: rgb(230, 230, 230);
   cursor: pointer;
