@@ -146,7 +146,7 @@
 
 
         <div class="buttons">
-          <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+          <button id="newEventSendenButton" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
             Abschließen
           </button>
         </div>
@@ -206,7 +206,7 @@
     </div>
     <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
       <div id="newEvent" class="sidecard">
-        <h2 style="padding: 0px;">Neues Event eintragen</h2>
+        <h2 id="h2NewEvent"style="padding: 0px;">Neues Event eintragen</h2>
         <div v-show="draft.displayError">
           <i class="material-icons" style="float: left">error_outline</i>
           <p style="color: #d50000; ">
@@ -247,7 +247,7 @@
           </el-date-picker>
         </div>
         <div class="file-upload-form">
-          Lade ein Eventbild hoch:
+          <p id="eventPictureUploadText">Lade ein Eventbild hoch:</p>
           <input id="imageUpload" class="imageUpload" class="mdl-textfield__input" type="file" @change="onFileSelected" accept="image/*">
         </div>
         <div class="image-preview" v-if="draft.oSelectedFile.length > 0">

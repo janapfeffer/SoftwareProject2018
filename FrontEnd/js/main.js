@@ -193,6 +193,8 @@ function _setAllEventsAfterGet(apievents, displayId) {
       oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
       oEndDate: apievent.end_date.split("T")[0],
       oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
+      end_date: apievent.end_date,
+      start_date: apievent.start_date,
       sEventLink: apievent.event_link,
       sTicketLink: apievent.ticket_link,
       oLatLgn: {
@@ -200,7 +202,14 @@ function _setAllEventsAfterGet(apievents, displayId) {
         lng: apievent.lng
       },
       oImage: "../Backend/" + apievent.event_picture.replace(/\\/g, "/"),
-      sEventTypes: getEventTypesAsString(apievent.event_types)
+      sEventTypes: getEventTypesAsString(apievent.event_types),
+      event_types: apievent.event_types.map(event_type => {
+        return {
+          name: event_type.event_type,
+          code: event_type.id
+        }
+      })
+
     };
   });
   oEventTableVue.allEvents.sort(function(a, b) {
