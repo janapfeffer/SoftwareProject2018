@@ -38,7 +38,7 @@ app.use((req, res, next) => {
   //Options-Request from Browser
   if (req.method === "OPTIONS") {
     //Our response to the browser: allowed http methods
-    res.header("Access-Control-Allow-Methods", "PUT, POST, UPDATE, DELETE, GET");
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, UPDATE, DELETE, GET");
     return res.status(200).json({});
   }
   next();

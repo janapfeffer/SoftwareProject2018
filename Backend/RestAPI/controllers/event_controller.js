@@ -275,14 +275,18 @@ exports.get_event = (req, res, next) => {
 //delete old picture and save new/default picture if picture is changed
 exports.update_event = (req, res, next) => {
   const id = req.params.eventId;
-  const updateOps = {};
-  for (const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
+
+  if (req.file) {
+    req.body.event_picture = req.file.path;
+  } else {
+    req.body.event_picture = "event_images\\standard.png";
   }
+  req.body.event_types = req.body.event_types.split(",");
+
   OEvent.update({
       _id: id
     }, {
-      $set: updateOps
+      $set: req.body
     })
     .exec()
     .then(result => {

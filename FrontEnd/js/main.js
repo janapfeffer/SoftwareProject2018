@@ -243,7 +243,7 @@ function _setAllEventsAfterGet(apievents, displayId) {
 }
 
 function setReactiveCommentAttributes() {
-  if(loggedInUser != ""){
+  if (loggedInUser != "") {
     for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
       for (var i = 0; i < oEventTableVue.allEvents[j].aComments.length; i++) {
         if (oEventTableVue.allEvents[j].aComments[i].user_id === loggedInUser._id) {
@@ -251,7 +251,7 @@ function setReactiveCommentAttributes() {
         } else {
           oEventTableVue.allEvents[j].aComments[i].deleteVisibility = "hidden";
         }
-        if(oEventTableVue.allEvents[j].aComments[i].date){
+        if (oEventTableVue.allEvents[j].aComments[i].date) {
           oEventTableVue.allEvents[j].aComments[i].date = oEventTableVue.allEvents[j].aComments[i].date.split("T")[0] + " " + oEventTableVue.allEvents[j].aComments[i].date.split("T")[1].substring(0, 5);
         }
 
@@ -697,8 +697,8 @@ var oEventTableVue = new Vue({
       //using MaterialTextfield.change sets the state of the textfield to fille, so now overlays appear
       document.getElementById("newEventTitle").MaterialTextfield.change(oNewEventVue.draft.sName = target.sName);
       document.getElementById("newEventDescription").MaterialTextfield.change(oNewEventVue.draft.sDescription = target.sDescription);
-      document.getElementById("newEventAddressDiv").MaterialTextfield.change( oNewEventVue.draft.sAdress = target.sAdress);
-      document.getElementById("NewEventLink").MaterialTextfield.change( oNewEventVue.draft.sEventLink = target.sEventLink);
+      document.getElementById("newEventAddressDiv").MaterialTextfield.change(oNewEventVue.draft.sAdress = target.sAdress);
+      document.getElementById("NewEventLink").MaterialTextfield.change(oNewEventVue.draft.sEventLink = target.sEventLink);
       oNewEventVue.value = target.event_types;
       var oStartDate = new Date(target.start_date);
       var oStartDateTimeAdjusted = oStartDate.setHours(oStartDate.getHours() - 1);
@@ -1163,8 +1163,7 @@ var oNewEventVue = new Vue({
               authorization: "Bearer " + loggedInUser.token
             }
           };
-
-          axios.post("http://localhost:3000/events", fd, header_config).then(res => {
+          var emptyAfterSaving = function(eventId) {
             oNewEventVue.draft.status = "unsend";
             // reset vueinternal data to make possible to add new event
             oNewEventVue.draft = {
@@ -1195,20 +1194,33 @@ var oNewEventVue = new Vue({
             oNewEventVue.cardShown = false; //close card for new event
 
             if (document.getElementById('h2events').innerText == "Favoriten") {
-              getFilteredEvents(res.data.created_event._id);
+              getFilteredEvents(reventId);
               document.getElementById('h2events').innerText = "Events";
               document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
             } else if (document.getElementById('h2events').innerText == "Events") {
-              getFilteredEvents(res.data.created_event._id);
+              getFilteredEvents(eventId);
             } else if (document.getElementById('h2events').innerText == "Meine Events") {
-              getOwnedEvents(res.data.created_event._id);
+              getOwnedEvents(eventId);
             }
 
             $(window).scrollTop(0);
-          }).catch(function(error) {
-            alert("Fehler beim speichern in der Datenbank");
-            console.log(error);
-          });
+          }
+          if (document.getElementById("h2NewEvent").innerText === "Bearbeite dein Event") {
+            axios.patch("http://localhost:3000/events/" + oEventTableVue.selected, fd, header_config).then(res => {
+              emptyAfterSaving(oEventTableVue.selected);
+            }).catch(function(error) {
+              alert("Fehler beim Speichern in der Datenbank");
+              console.log(error);
+            });
+          } else { //add new event
+            axios.post("http://localhost:3000/events", fd, header_config).then(res => {
+              emptyAfterSaving(res.data.created_event._id);
+            }).catch(function(error) {
+              alert("Fehler beim Speichern in der Datenbank");
+              console.log(error);
+            });
+          }
+
 
 
 
