@@ -75,11 +75,11 @@
         <!-- Title -->
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link headerLink" id="AfterLoginOwnedEvents" style="visibility: hidden;" @click='showNewOwnedEventsCard'>Meine Events</a>
           <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
           <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>
             Event eintragen
           </a>
+          <a class="mdl-navigation__link headerLink" id="AfterLoginOwnedEvents" style="visibility: hidden;" @click='showNewOwnedEventsCard'>Meine Events</a>
           <a class="mdl-navigation__link headerLink" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
 
         </nav>
@@ -276,12 +276,12 @@
                 </span>
                 <span id="trash" v-bind:style="{visibility : trashVisibility}">
                   <a class="mdl-list__item-secondary-action favstar">
-                    <i @click="deleteEvent(event)" style="color:red;" class="fa fa-trash"></i>
+                    <i @click="deleteEvent(event)" style="color:black;" class="material-icons">delete</i>
                   </a>
                 </span>
                 <span id="edit" v-bind:style="{visibility : trashVisibility}">
                   <a class="mdl-list__item-secondary-action favstar">
-                    <i @click="updateEvent(event)"  style="color:black;" class="fa fa-pencil"></i>
+                    <i @click="updateEvent(event)" style="color:black;" class="material-icons">edit</i>
                   </a>
                 </span>
               </span>

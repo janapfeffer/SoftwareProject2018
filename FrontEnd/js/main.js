@@ -412,6 +412,7 @@ var oNavigationVue = new Vue({
       document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
       if (owned_clicked === true) {
         oEventTableVue.trashVisibility = "visible";
+        oEventTableVue.starVisibility = "hidden";
         document.getElementById('h2events').innerText = "Meine Events";
         document.getElementById('AfterLoginOwnedEvents').innerText = "Events";
         getOwnedEvents();
@@ -422,6 +423,7 @@ var oNavigationVue = new Vue({
         }
       } else {
         oEventTableVue.trashVisibility = "hidden";
+        oEventTableVue.starVisibility = "visible";
         document.getElementById('h2events').innerText = "Events";
         document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
         getFilteredEvents();
