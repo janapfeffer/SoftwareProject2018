@@ -594,31 +594,31 @@ var oEventTableVue = new Vue({
     updateEvent: function(event) {
       oNavigationVue.showUpdateEventCard();
     },
-    deleteEvent: function(event) {
-      var ajaxRequest = new XMLHttpRequest();
-
-      var onSuccess = function onSuccess() {
-        if (this.status == 200) {
-          getOwnedEvents();
-          if (bubble) {
-            closeBubble();
-          }
-          oEventTableVue.selected = "";
-        }
-      };
-
-      var onFailed = function onFailed() {
-        alert("Event konnte nicht gelöscht werden, bitte versuche es erneut.");
-      };
-
-      ajaxRequest.addEventListener("load", onSuccess);
-      ajaxRequest.addEventListener("error", onFailed);
-      ajaxRequest.responseType = "json";
-      ajaxRequest.open("DELETE", "http://localhost:3000/events/" + event.iEventId, true);
-      ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
-      ajaxRequest.send();
-    },
+    // deleteEvent: function(event) {
+    //   var ajaxRequest = new XMLHttpRequest();
+    //
+    //   var onSuccess = function onSuccess() {
+    //     if (this.status == 200) {
+    //       getOwnedEvents();
+    //       if (bubble) {
+    //         closeBubble();
+    //       }
+    //       oEventTableVue.selected = "";
+    //     }
+    //   };
+    //
+    //   var onFailed = function onFailed() {
+    //     alert("Event konnte nicht gelöscht werden, bitte versuche es erneut.");
+    //   };
+    //
+    //   ajaxRequest.addEventListener("load", onSuccess);
+    //   ajaxRequest.addEventListener("error", onFailed);
+    //   ajaxRequest.responseType = "json";
+    //   ajaxRequest.open("DELETE", "http://localhost:3000/events/" + event.iEventId, true);
+    //   ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //   ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+    //   ajaxRequest.send();
+    // },
     deleteComment: function(comment) {
       var ajaxRequest = new XMLHttpRequest();
 
@@ -650,6 +650,39 @@ var oEventTableVue = new Vue({
       ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
       var sFormData = "eventId=" + oEventTableVue.selected + "&commentId=" + comment._id;
       ajaxRequest.send(sFormData);
+    },
+    openDeleteEventDialog: function(target) {
+      var dialog = document.querySelector('#deleteEventDialog');
+      dialog.showModal();
+    },
+    closeDeleteEventDialog: function() {
+      document.querySelector('#deleteEventDialog').close();
+    },
+    confirmDeleteEvent: function(event) {
+      var ajaxRequest = new XMLHttpRequest();
+
+      var onSuccess = function onSuccess() {
+        if (this.status == 200) {
+          getOwnedEvents();
+          if (bubble) {
+            closeBubble();
+          }
+          oEventTableVue.selected = "";
+          document.querySelector('#deleteEventDialog').close();
+        }
+      };
+
+      var onFailed = function onFailed() {
+        alert("Event konnte nicht gelöscht werden, bitte versuche es erneut.");
+      };
+
+      ajaxRequest.addEventListener("load", onSuccess);
+      ajaxRequest.addEventListener("error", onFailed);
+      ajaxRequest.responseType = "json";
+      ajaxRequest.open("DELETE", "http://localhost:3000/events/" + oEventTableVue.selected, true);
+      ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
+      ajaxRequest.send();
     },
     favToggle: function(target) {
       // was it already faved?

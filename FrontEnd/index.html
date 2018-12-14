@@ -276,7 +276,7 @@
                 </span>
                 <span id="trash" v-bind:style="{visibility : trashVisibility}">
                   <a class="mdl-list__item-secondary-action favstar">
-                    <i @click="deleteEvent(event)" style="color:black;" class="material-icons">delete</i>
+                    <i @click="openDeleteEventDialog(event)" style="color:black;" class="material-icons">delete</i>
                   </a>
                 </span>
                 <span id="edit" v-bind:style="{visibility : trashVisibility}">
@@ -316,6 +316,19 @@
 
       </li>
       </ul>
+
+      <dialog id="deleteEventDialog" class="mdl-dialog">
+        <div class="mdl-dialog__content">
+          <p style="color: black;">
+            Willst du dieses Event wirklich löschen?
+          </p>
+        </div>
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button close" @click="closeDeleteEventDialog">Zurück</button>
+          <button type="button" class="mdl-button close" @click="confirmDeleteEvent">Ja</button>
+        </div>
+      </dialog>
+
       <dialog id="commentDialog" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
     box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
         <div style="background-color:whitesmoke">
