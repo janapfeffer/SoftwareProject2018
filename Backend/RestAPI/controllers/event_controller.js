@@ -272,6 +272,7 @@ exports.get_event = (req, res, next) => {
 };
 
 //the parameters in the body have to have the same name as in the database (e.g. event_name)
+//delete old picture and save new/default picture if picture is changed
 exports.update_event = (req, res, next) => {
   const id = req.params.eventId;
   const updateOps = {};
@@ -403,7 +404,6 @@ exports.get_filtered_events = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       })
