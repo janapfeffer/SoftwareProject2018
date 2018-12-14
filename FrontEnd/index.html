@@ -76,7 +76,7 @@
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation mdl-layout--large-screen-only">
           <a class="mdl-navigation__link headerLink" id="AfterLoginFavoriten" style="visibility: hidden;" @click='showNewFavoriteCard'>Favoriten</a>
-          <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard'>
+          <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard($event)'>
             Event eintragen
           </a>
           <a class="mdl-navigation__link headerLink" id="AfterLoginOwnedEvents" style="visibility: hidden;" @click='showNewOwnedEventsCard'>Meine Events</a>
@@ -145,7 +145,7 @@
 
 
         <div class="buttons">
-          <button id="newEventSendenButton" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+          <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
             Abschließen
           </button>
         </div>
@@ -237,7 +237,7 @@
         <div>
           <p>Veranstaltungstypen*</p>
           <vue-multiselect id="idMultiSelectCreate" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes" :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label=""
-            :show-no-results="false" :searchable="false">
+            :show-no-results="false" :searchable="false" v-bind:class="{ redBorder: draft.categoryIsInvalid}">
           </vue-multiselect>
         </div>
         <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -253,7 +253,7 @@
           <img class="preview" :src="draft.oSelectedFile">
         </div>
         <div class="buttons">
-          <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
+          <button id="newEventSendenButton" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
             Senden
           </button>
         </div>

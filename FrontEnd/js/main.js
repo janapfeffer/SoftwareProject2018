@@ -376,37 +376,38 @@ var oNavigationVue = new Vue({
     horizontalMenueShown: true,
   },
   methods: {
-    showUpdateEventCard: function() {
-      $(window).scrollTop(0);
-      if (oNewEventVue.cardShown === true) {
-        oNewEventVue.draft = {
-          sName: oEventTableVue.selected_event.sName,
-          sDescription: "",
-          sAdress: "",
-          sDate: "",
-          time: "",
-          oLatLng: {},
-          status: "draft",
-          EDate: null,
-          sEventLink: null,
-          iEventId: Math.floor(Math.random() * 99999) + 1,
-          oSelectedFile: "",
-          image: null,
-          titleIsInvalid: false,
-          descIsInvalid: false,
-          adressIsInvalid: false,
-          displayError: false,
-          dateIsInvalid: false
-        };
-        oNewEventVue.value7 = '';
-        oNewEventVue.value = [];
-        closeSetAdressYourself();
-      };
-      oNewEventVue.cardShown = !oNewEventVue.cardShown;
-      oRegisterVue.cardShown = false;
-      oNewLoginVue.cardShown = false;
-    },
-    showNewEventCard: function() {
+    //Wofür?
+    // showUpdateEventCard: function() {
+    //   $(window).scrollTop(0);
+    //   if (oNewEventVue.cardShown === true) {
+    //     oNewEventVue.draft = {
+    //       sName: oEventTableVue.selected_event.sName,
+    //       sDescription: "",
+    //       sAdress: "",
+    //       sDate: "",
+    //       time: "",
+    //       oLatLng: {},
+    //       status: "draft",
+    //       EDate: null,
+    //       sEventLink: null,
+    //       iEventId: Math.floor(Math.random() * 99999) + 1,
+    //       oSelectedFile: "",
+    //       image: null,
+    //       titleIsInvalid: false,
+    //       descIsInvalid: false,
+    //       adressIsInvalid: false,
+    //       displayError: false,
+    //       dateIsInvalid: false
+    //     };
+    //     oNewEventVue.value7 = '';
+    //     oNewEventVue.value = [];
+    //     closeSetAdressYourself();
+    //   };
+    //   oNewEventVue.cardShown = !oNewEventVue.cardShown;
+    //   oRegisterVue.cardShown = false;
+    //   oNewLoginVue.cardShown = false;
+    // },
+    showNewEventCard: function(event) {
       $(window).scrollTop(0);
       if (oNewEventVue.cardShown === true) {
         oNewEventVue.draft = {
@@ -431,44 +432,54 @@ var oNavigationVue = new Vue({
         oNewEventVue.value7 = '';
         oNewEventVue.value = [];
         closeSetAdressYourself();
+      }
+
+      // if clicked on "Event eintragen" and the card was open in edit mode, the card should not be closed, but just changed in details like header etc.
+      if(event){
+       if(event.target.id === "AfterLoginEvent" && document.getElementById("h2NewEvent").innerText === "Bearbeite dein Event"){
+          oNewEventVue.cardShown = false;
+        }
+      }
+      oNewEventVue.cardShown = !oNewEventVue.cardShown;
+        // oNewEventVue.cardShown = !oNewEventVue.cardShown;
+        oRegisterVue.cardShown = false;
+        oNewLoginVue.cardShown = false;
         //reset all Inputfield to inactive
         document.getElementById("newEventTitle").MaterialTextfield.change();
         document.getElementById("newEventDescription").MaterialTextfield.change();
         document.getElementById("newEventAddressDiv").MaterialTextfield.change();
         document.getElementById("NewEventLink").MaterialTextfield.change();
-      };
-      oNewEventVue.cardShown = !oNewEventVue.cardShown;
-      oRegisterVue.cardShown = false;
-      oNewLoginVue.cardShown = false;
+        //change header and other texts back according to "new Event"
+        document.getElementById("h2NewEvent").innerText = "Neues Event eintragen";
+        document.getElementById("newEventSendenButton").innerText = "Senden";
+        document.getElementById("eventPictureUploadText").innerText = "Lade ein Eventbild hoch:";
     },
     showNewOwnedEventsCard: function() {
       $(window).scrollTop(0);
-      favorite_clicked = false;
-      owned_clicked = !owned_clicked;
-      document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-      if (owned_clicked === true) {
+      favorite_clicked = true; // in order to open "Events" when clicking on events
+      // owned_clicked = !owned_clicked;
+      document.getElementById('h2events').innerText = "Meine Events";
+      document.getElementById('AfterLoginFavoriten').innerText = "Events";
+      // if (owned_clicked === true) {
         oEventTableVue.trashVisibility = "visible";
         oEventTableVue.starVisibility = "hidden";
-        document.getElementById('h2events').innerText = "Meine Events";
-        document.getElementById('AfterLoginOwnedEvents').innerText = "Events";
         getOwnedEvents();
         document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden"); //hide time filter
         document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
-        if (bubble) {
-          closeBubble();
-        }
-      } else {
-        oEventTableVue.trashVisibility = "hidden";
-        oEventTableVue.starVisibility = "visible";
-        document.getElementById('h2events').innerText = "Events";
-        document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
-        getFilteredEvents();
-        document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
-        document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
-        if (bubble) {
-          closeBubble();
-        }
-      }
+        closeBubble();
+      // }
+      // else { 
+      //   oEventTableVue.trashVisibility = "hidden";
+      //   oEventTableVue.starVisibility = "visible";
+      //   document.getElementById('h2events').innerText = "Events";
+      //   document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
+      //   getFilteredEvents();
+      //   document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
+      //   document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
+      //   if (bubble) {
+      //     closeBubble();
+      //   }
+      // }
       if (oNewEventVue.cardShown === true) {
         this.showNewEventCard();
       }
@@ -476,8 +487,9 @@ var oNavigationVue = new Vue({
     showNewFavoriteCard: function() {
       $(window).scrollTop(0);
       favorite_clicked = !favorite_clicked;
-      owned_clicked = false;
-      document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
+      oEventTableVue.starVisibility = "visible";
+      // owned_clicked = false;
+      // document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
       oEventTableVue.trashVisibility = "hidden";
       if (favorite_clicked === true) {
         document.getElementById('h2events').innerText = "Favoriten";
@@ -485,18 +497,14 @@ var oNavigationVue = new Vue({
         getFavorites(loggedInUser._id);
         document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden"); //hide time filter
         document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
-        if (bubble) {
-          closeBubble();
-        }
+        closeBubble();
       } else {
         document.getElementById('h2events').innerText = "Events";
         document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
         getFilteredEvents();
         document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
         document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
-        if (bubble) {
-          closeBubble();
-        }
+        closeBubble();
       }
       if (oNewEventVue.cardShown === true) {
         this.showNewEventCard();
@@ -539,6 +547,8 @@ var oNavigationVue = new Vue({
           getFilteredEvents();
         }
         closeSetAdressYourself();
+        document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+        favorite_clicked = false;
       }
     },
     showNewRegisterCard: function() {
@@ -619,9 +629,9 @@ var oEventTableVue = new Vue({
     }
   },
   methods: {
-    updateEvent: function(event) {
-      oNavigationVue.showUpdateEventCard();
-    },
+    // updateEvent: function(event) {
+    //   oNavigationVue.showUpdateEventCard();
+    // },
     // deleteEvent: function(event) {
     //   var ajaxRequest = new XMLHttpRequest();
     //
@@ -691,7 +701,7 @@ var oEventTableVue = new Vue({
 
       //Step1: Edit Header + Button (for Button also edit functionality)
       document.getElementById("h2NewEvent").innerText = "Bearbeite dein Event";
-      document.getElementById("newEventSendenButton").innerText = "Speichern";
+      document.getElementById("newEventSendenButton").innerText = "Bearbeitung speichern";
       document.getElementById("eventPictureUploadText").innerText = "Lade ein anderes Eventbild hoch:"
 
       //Step2: Adjust draft to the values of the selected event
@@ -723,6 +733,7 @@ var oEventTableVue = new Vue({
           }
           oEventTableVue.selected = "";
           document.querySelector('#deleteEventDialog').close();
+        oNewEventVue.cardShown = false;  
         }
       };
 
@@ -1073,7 +1084,8 @@ var oNewEventVue = new Vue({
       descIsInvalid: false,
       adressIsInvalid: false,
       displayError: false,
-      dateIsInvalid: false
+      dateIsInvalid: false,
+      categoryIsInvalid: false
     },
     value7: '',
     value: [],
@@ -1087,6 +1099,7 @@ var oNewEventVue = new Vue({
       oNewEventVue.draft.adressIsInvalid = false;
       oNewEventVue.draft.displayError = false;
       oNewEventVue.draft.dateIsInvalid = false;
+      oNewEventVue.draft.categoryIsInvalid = false;
 
       if (this.draft.sName === "") {
         this.draft.titleIsInvalid = true;
@@ -1100,11 +1113,15 @@ var oNewEventVue = new Vue({
       if (this.draft.EDate === null) {
         this.draft.dateIsInvalid = true;
       }
+      if (this.value.length === 0){
+        this.draft.categoryIsInvalid = true
+      }
 
       if (this.draft.sName === "" ||
         this.draft.sDescription === "" ||
         this.draft.sAdress === "" ||
         this.draft.EDate === null ||
+        this.value === [] ||
         document.getElementById("NewEventLink").classList.contains("is-invalid")) {
         this.draft.displayError = true;
         return;
@@ -1126,7 +1143,7 @@ var oNewEventVue = new Vue({
             //check wether the given adress exists
           } else if (result.response.view[0] != undefined) {
             var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
-            var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
+            var dLng = result.response.view[0].result[0].location.displayPosition.longitude;    
             //tell the user, that there was no location found for the given string
           } else {
             oNewEventVue.draft.adressIsInvalid = true;
@@ -1190,7 +1207,8 @@ var oNewEventVue = new Vue({
               descIsInvalid: false,
               adressIsInvalid: false,
               displayError: false,
-              dateIsInvalid: false
+              dateIsInvalid: false,
+              categoryIsInvalid: false,
             };
             oNewEventVue.value7 = '';
             oNewEventVue.value = [];
@@ -1212,7 +1230,7 @@ var oNewEventVue = new Vue({
 
             $(window).scrollTop(0);
           }
-          if (document.getElementById("h2NewEvent").innerText === "Bearbeite dein Event") {
+          if (document.getElementById("h2NewEvent").innerText === "Bearbeite dein Event") { //edit event
             axios.patch("http://localhost:3000/events/" + oEventTableVue.selected, fd, header_config).then(res => {
               emptyAfterSaving(oEventTableVue.selected);
             }).catch(function(error) {
