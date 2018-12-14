@@ -217,8 +217,7 @@ exports.add_comment = (req, res, next) => {
           comments: {
             username: req.userData.username,
             user_id: req.userData.userId,
-            comment: req.body.comment,
-            date: req.body.date
+            comment: req.body.comment
           }
         }
       }, {
@@ -272,6 +271,7 @@ exports.get_event = (req, res, next) => {
 };
 
 //the parameters in the body have to have the same name as in the database (e.g. event_name)
+//delete old picture and save new/default picture if picture is changed
 exports.update_event = (req, res, next) => {
   const id = req.params.eventId;
   const updateOps = {};
@@ -303,8 +303,9 @@ exports.update_event = (req, res, next) => {
 //should not be an issue though if the frontend calls it correctly
 //delete picture if given (NOT if its the default picture) (currently only used for testing so thats unnecessary)
 exports.delete_event = (req, res, next) => {
-  OEvent.deleteOne({
-      _id: req.params.eventId
+  OEvent.remove({
+      _id: req.params.eventId,
+      author: req.userData.userid
     })
     .exec()
     .then(result => {
@@ -403,7 +404,6 @@ exports.get_filtered_events = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       })

@@ -921,7 +921,7 @@ var oEventTableVue = new Vue({
           document.getElementById('idThumbDown').style.color = "grey"
         }
 
-        var dialog = document.querySelector('dialog');
+        var dialog = document.getElementById('commentDialog');
         dialog.showModal();
         $(dialog).children().first().click(function(e) {
           e.stopPropagation();
