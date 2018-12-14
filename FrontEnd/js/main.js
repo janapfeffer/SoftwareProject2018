@@ -270,7 +270,9 @@ function getFilteredEvents(displayId) {
     var onSuccess = function onSuccess() {
       var apievents = this.response.oEvents;
       _setAllEventsAfterGet(apievents, displayId)
-      $(window).scrollTop(0);
+      if(!dialogopen){
+        $(window).scrollTop(0);
+      }
     };
 
     var onFailed = function onFailed() {
