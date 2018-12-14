@@ -212,19 +212,7 @@ function _setAllEventsAfterGet(apievents, displayId) {
 
     };
   });
-  for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
-    for (var i = 0; i < oEventTableVue.allEvents[j].aComments.length; i++) {
-      if (oEventTableVue.allEvents[j].aComments[i].user_id === loggedInUser._id) {
-        oEventTableVue.allEvents[j].aComments[i].deleteVisibility = "visible";
-      } else {
-        oEventTableVue.allEvents[j].aComments[i].deleteVisibility = "hidden";
-      }
-      if(oEventTableVue.allEvents[j].aComments[i].date){
-        oEventTableVue.allEvents[j].aComments[i].date = oEventTableVue.allEvents[j].aComments[i].date.split("T")[0] + " " + oEventTableVue.allEvents[j].aComments[i].date.split("T")[1].substring(0, 5);
-      }
 
-    }
-  }
   oEventTableVue.allEvents.sort(function(a, b) {
     return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
   });
@@ -238,6 +226,7 @@ function _setAllEventsAfterGet(apievents, displayId) {
   }
 
   if (loggedInUser != "") {
+    setReactiveCommentAttributes();
     //set stars
     initalFavoriteSetting = true;
     for (var i = 0; i < loggedInUser.saved_events.length; i++) {
@@ -251,7 +240,25 @@ function _setAllEventsAfterGet(apievents, displayId) {
     }
     initalFavoriteSetting = false;
   }
-};
+}
+
+function setReactiveCommentAttributes() {
+  if(loggedInUser != ""){
+    for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
+      for (var i = 0; i < oEventTableVue.allEvents[j].aComments.length; i++) {
+        if (oEventTableVue.allEvents[j].aComments[i].user_id === loggedInUser._id) {
+          oEventTableVue.allEvents[j].aComments[i].deleteVisibility = "visible";
+        } else {
+          oEventTableVue.allEvents[j].aComments[i].deleteVisibility = "hidden";
+        }
+        if(oEventTableVue.allEvents[j].aComments[i].date){
+          oEventTableVue.allEvents[j].aComments[i].date = oEventTableVue.allEvents[j].aComments[i].date.split("T")[0] + " " + oEventTableVue.allEvents[j].aComments[i].date.split("T")[1].substring(0, 5);
+        }
+
+      }
+    }
+  }
+}
 
 function getFilteredEvents(displayId) {
   //filter for start_date and end_date and event types
@@ -596,7 +603,9 @@ var oEventTableVue = new Vue({
           aComments: {
             _id: 0,
             username: "",
-            comment: ""
+            comment: "",
+            date: "",
+            user_id: ""
           },
           oImage: ""
         };
@@ -1405,6 +1414,7 @@ var oNewLoginVue = new Vue({
 
           }
           initalFavoriteSetting = false;
+          setReactiveCommentAttributes();
           AfterLoginFavoriten.style.visibility = "visible";
           AfterLoginOwnedEvents.style.visibility = "visible";
           AfterLoginEvent.style.visibility = "visible";
