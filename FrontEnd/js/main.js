@@ -252,7 +252,7 @@ function setReactiveCommentAttributes() {
           oEventTableVue.allEvents[j].aComments[i].deleteVisibility = "hidden";
         }
         if (oEventTableVue.allEvents[j].aComments[i].date) {
-          oEventTableVue.allEvents[j].aComments[i].date = oEventTableVue.allEvents[j].aComments[i].date.split("T")[0] + " " + oEventTableVue.allEvents[j].aComments[i].date.split("T")[1].substring(0, 5);
+          oEventTableVue.allEvents[j].aComments[i].dateD = oEventTableVue.allEvents[j].aComments[i].date.split("T")[0] + " " + oEventTableVue.allEvents[j].aComments[i].date.split("T")[1].substring(0, 5);
         }
 
       }
