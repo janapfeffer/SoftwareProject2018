@@ -1095,7 +1095,7 @@ var emptyAfterSaving = function (eventId) {
   oNewEventVue.cardShown = false; //close card for new event
   if (eventId) {
     if (document.getElementById('h2events').innerText == "Favoriten") {
-      getFilteredEvents(reventId);
+      getFilteredEvents(eventId);
       document.getElementById('h2events').innerText = "Events";
       document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
     } else if (document.getElementById('h2events').innerText == "Events") {
