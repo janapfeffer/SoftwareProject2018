@@ -206,7 +206,7 @@ function _setAllEventsAfterGet(apievents, displayId) {
       event_types: apievent.event_types.map(event_type => {
         return {
           name: event_type.event_type,
-          code: event_type.id
+          code: event_type._id
         }
       })
 
