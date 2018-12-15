@@ -297,7 +297,7 @@ div#aside, div#map {
   min-height: 52px;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* height: auto; */
+  height: auto;
   /* if we want the whole desc to be shown in the eventtable */
   /* https://stackoverflow.com/questions/17028911/text-overflow-ellipsis-without-white-space-nowrap */
 }

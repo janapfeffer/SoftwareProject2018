@@ -236,7 +236,7 @@
         </div>
         <div>
           <p>Veranstaltungstypen*</p>
-          <vue-multiselect id="idMultiSelectCreate" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes" :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label=""
+          <vue-multiselect id="newEventMultiselect" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes" :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label=""
             :show-no-results="false" :searchable="false" v-bind:class="{ redBorder: draft.categoryIsInvalid}">
           </vue-multiselect>
         </div>
@@ -253,6 +253,9 @@
           <img class="preview" :src="draft.oSelectedFile">
         </div>
         <div class="buttons">
+          <button id="newEventSchließenButton" class="mdl-button mdl-js-button mdl-button--raised" @click="closeNewEventCard">
+              Schließen
+          </button>
           <button id="newEventSendenButton" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
             Senden
           </button>
@@ -268,11 +271,6 @@
               <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
               <span>{{ event.sName }}</span>
               <span style="position: absolute; right: 8%;">
-                <span id="stars" v-bind:style="{visibility : starVisibility}">
-                  <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)">
-                    <i class="material-icons">star</i>
-                  </a>
-                </span>
                 <span id="trash" v-bind:style="{visibility : trashVisibility}">
                   <a class="mdl-list__item-secondary-action favstar">
                     <i @click="openDeleteEventDialog(event)" style="color:black;" class="material-icons">delete</i>
@@ -281,6 +279,11 @@
                 <span id="edit" v-bind:style="{visibility : trashVisibility}">
                   <a class="mdl-list__item-secondary-action favstar">
                     <i @click="openEditEvent(event)" style="color:black;" class="material-icons">edit</i>
+                  </a>
+                </span>
+                <span id="stars" v-bind:style="{visibility : starVisibility}">
+                  <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)">
+                    <i class="material-icons">star</i>
                   </a>
                 </span>
               </span>

@@ -1,5 +1,5 @@
 //##### 1. variables needed throughout the whole program #####
-var oEvent = function(oEvent) {
+var oEvent = function (oEvent) {
   this.iEventId = oEvent.iEventId;
   this.sName = oEvent.sName;
   this.sDescription = oEvent.sDescription;
@@ -24,7 +24,7 @@ var aAllEvents = new Array();
 var event_types;
 
 //##### 2. functions #####
-var closeSetAdressYourself = function() {
+var closeSetAdressYourself = function () {
   //close all "Setzte Adresse selbst" components
   closeBubble();
   if (verifyMarker) {
@@ -53,7 +53,7 @@ var closeSetAdressYourself = function() {
 
 function getEventTypesAsString(oEventTypes) {
   var eventTypesString = "";
-  oEventTypes.forEach(function(oEventType, index) {
+  oEventTypes.forEach(function (oEventType, index) {
     if (index === oEventTypes.length - 1) {
       eventTypesString = eventTypesString + oEventType.event_type;
     } else {
@@ -76,7 +76,7 @@ function getFavorites(user_id) {
       var apievents = response.data.saved_events;
       _setAllEventsAfterGet(apievents)
     })
-    .catch(function(error) {
+    .catch(function (error) {
       alert("Fehler beim Laden der Favoriten aus der Datenbank.");
       console.log(error);
     });
@@ -95,7 +95,7 @@ function getOwnedEvents(displayId) {
       var apievents = response.data.saved_events;
       _setAllEventsAfterGet(apievents, displayId)
     })
-    .catch(function(error) {
+    .catch(function (error) {
       alert("Fehler beim Laden der eigenen Events aus der Datenbank.");
       console.log(error);
     });
@@ -115,7 +115,7 @@ function getAllEvents() {
       var apievents = response.data.oEvents
       _setAllEventsAfterGet(apievents)
     })
-    .catch(function(error) {
+    .catch(function (error) {
       alert("Fehler beim Laden der Events aus der Datenbank.");
       console.log(error);
     });
@@ -134,7 +134,7 @@ function getFavoritesIds() {
     .then(response => {
       loggedInUser.saved_events = response.data.saved_events;
     })
-    .catch(function(error) {
+    .catch(function (error) {
       alert("Fehler beim Laden der Favoriten IDs aus der Datenbank.");
       console.log(error);
     });
@@ -213,7 +213,7 @@ function _setAllEventsAfterGet(apievents, displayId) {
     };
   });
 
-  oEventTableVue.allEvents.sort(function(a, b) {
+  oEventTableVue.allEvents.sort(function (a, b) {
     return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
   });
   // set bubbles on map
@@ -270,7 +270,7 @@ function getFilteredEvents(displayId) {
     var onSuccess = function onSuccess() {
       var apievents = this.response.oEvents;
       _setAllEventsAfterGet(apievents, displayId)
-      if(!dialogopen){
+      if (!dialogopen) {
         $(window).scrollTop(0);
       }
     };
@@ -363,7 +363,7 @@ function getAllEventTypes() {
       oSearchPlaceVue.aEventTypes = event_types;
       oNewEventVue.aEventTypes = event_types;
     })
-    .catch(function(error) {
+    .catch(function (error) {
       alert("Fehler beim Laden der Event_Types aus der Datenbank.");
       console.log(error);
     });
@@ -407,7 +407,7 @@ var oNavigationVue = new Vue({
     //   oRegisterVue.cardShown = false;
     //   oNewLoginVue.cardShown = false;
     // },
-    showNewEventCard: function(event) {
+    showNewEventCard: function (event) {
       $(window).scrollTop(0);
       if (oNewEventVue.cardShown === true) {
         oNewEventVue.draft = {
@@ -435,38 +435,38 @@ var oNavigationVue = new Vue({
       }
 
       // if clicked on "Event eintragen" and the card was open in edit mode, the card should not be closed, but just changed in details like header etc.
-      if(event){
-       if(event.target.id === "AfterLoginEvent" && document.getElementById("h2NewEvent").innerText === "Bearbeite dein Event"){
+      if (event) {
+        if (event.target.id === "AfterLoginEvent" && document.getElementById("h2NewEvent").innerText === "Bearbeite dein Event") {
           oNewEventVue.cardShown = false;
         }
       }
       oNewEventVue.cardShown = !oNewEventVue.cardShown;
-        // oNewEventVue.cardShown = !oNewEventVue.cardShown;
-        oRegisterVue.cardShown = false;
-        oNewLoginVue.cardShown = false;
-        //reset all Inputfield to inactive
-        document.getElementById("newEventTitle").MaterialTextfield.change();
-        document.getElementById("newEventDescription").MaterialTextfield.change();
-        document.getElementById("newEventAddressDiv").MaterialTextfield.change();
-        document.getElementById("NewEventLink").MaterialTextfield.change();
-        //change header and other texts back according to "new Event"
-        document.getElementById("h2NewEvent").innerText = "Neues Event eintragen";
-        document.getElementById("newEventSendenButton").innerText = "Senden";
-        document.getElementById("eventPictureUploadText").innerText = "Lade ein Eventbild hoch:";
+      // oNewEventVue.cardShown = !oNewEventVue.cardShown;
+      oRegisterVue.cardShown = false;
+      oNewLoginVue.cardShown = false;
+      //reset all Inputfield to inactive
+      document.getElementById("newEventTitle").MaterialTextfield.change();
+      document.getElementById("newEventDescription").MaterialTextfield.change();
+      document.getElementById("newEventAddressDiv").MaterialTextfield.change();
+      document.getElementById("NewEventLink").MaterialTextfield.change();
+      //change header and other texts back according to "new Event"
+      document.getElementById("h2NewEvent").innerText = "Neues Event eintragen";
+      document.getElementById("newEventSendenButton").innerText = "Senden";
+      document.getElementById("eventPictureUploadText").innerText = "Lade ein Eventbild hoch:";
     },
-    showNewOwnedEventsCard: function() {
+    showNewOwnedEventsCard: function () {
       $(window).scrollTop(0);
       favorite_clicked = true; // in order to open "Events" when clicking on events
       // owned_clicked = !owned_clicked;
       document.getElementById('h2events').innerText = "Meine Events";
       document.getElementById('AfterLoginFavoriten').innerText = "Events";
       // if (owned_clicked === true) {
-        oEventTableVue.trashVisibility = "visible";
-        oEventTableVue.starVisibility = "hidden";
-        getOwnedEvents();
-        document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden"); //hide time filter
-        document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
-        closeBubble();
+      oEventTableVue.trashVisibility = "visible";
+      oEventTableVue.starVisibility = "hidden";
+      getOwnedEvents();
+      document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden"); //hide time filter
+      document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
+      closeBubble();
       // }
       // else { 
       //   oEventTableVue.trashVisibility = "hidden";
@@ -484,7 +484,7 @@ var oNavigationVue = new Vue({
         this.showNewEventCard();
       }
     },
-    showNewFavoriteCard: function() {
+    showNewFavoriteCard: function () {
       $(window).scrollTop(0);
       favorite_clicked = !favorite_clicked;
       oEventTableVue.starVisibility = "visible";
@@ -510,7 +510,7 @@ var oNavigationVue = new Vue({
         this.showNewEventCard();
       }
     },
-    showNewLoginCard: function() {
+    showNewLoginCard: function () {
       $(window).scrollTop(0);
       oRegisterVue.cardShown = false;
 
@@ -551,13 +551,13 @@ var oNavigationVue = new Vue({
         favorite_clicked = false;
       }
     },
-    showNewRegisterCard: function() {
+    showNewRegisterCard: function () {
       $('body').scrollTop(0);
       oNewRegisterVue.cardShown = !oNewRegisterVue.cardShown;
       oNewLoginVue.cardShown = false;
       oNewEventVue.cardShown = false;
     },
-    showNewDateCard: function() {
+    showNewDateCard: function () {
       oNewDateVue.cardShown = !oNewDateVue.cardShown;
       oRegisterVue.cardShown = false;
       oNewEventVue.cardShown = false;
@@ -584,9 +584,9 @@ var oEventTableVue = new Vue({
 
   },
   computed: {
-    filteredList: function() {
+    filteredList: function () {
       vi = this;
-      return this.allEvents.filter(function(ev) {
+      return this.allEvents.filter(function (ev) {
         var bool = (
           (vi.mapBounds.ja < ev.oLatLgn.lat) &&
           (vi.mapBounds.ka > ev.oLatLgn.lat) &&
@@ -596,16 +596,16 @@ var oEventTableVue = new Vue({
         return bool;
       })
     },
-    commentList: function() { // comments of selected event
+    commentList: function () { // comments of selected event
       var temp = this;
       if (this.selected === "") {
         return [];
       }
-      return this.allEvents.filter(function(value) {
+      return this.allEvents.filter(function (value) {
         return value.iEventId === temp.selected;
       })[0].aComments;
     },
-    selected_event: function() {
+    selected_event: function () {
       var temp = this;
       if (temp.selected === "") {
         return {
@@ -622,7 +622,7 @@ var oEventTableVue = new Vue({
           oImage: ""
         };
       } else {
-        return this.allEvents.filter(function(value) {
+        return this.allEvents.filter(function (value) {
           return value.iEventId === temp.selected;
         })[0];
       }
@@ -657,7 +657,7 @@ var oEventTableVue = new Vue({
     //   ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
     //   ajaxRequest.send();
     // },
-    deleteComment: function(comment) {
+    deleteComment: function (comment) {
       var ajaxRequest = new XMLHttpRequest();
 
       var onSuccess = function onSuccess() {
@@ -689,11 +689,11 @@ var oEventTableVue = new Vue({
       var sFormData = "eventId=" + oEventTableVue.selected + "&commentId=" + comment._id;
       ajaxRequest.send(sFormData);
     },
-    openDeleteEventDialog: function(target) {
+    openDeleteEventDialog: function (target) {
       var dialog = document.querySelector('#deleteEventDialog');
       dialog.showModal();
     },
-    openEditEvent: function(target) {
+    openEditEvent: function (target) {
       oNewEventVue.cardShown = false;
       oNavigationVue.showNewEventCard()
 
@@ -705,24 +705,25 @@ var oEventTableVue = new Vue({
       document.getElementById("eventPictureUploadText").innerText = "Lade ein anderes Eventbild hoch:"
 
       //Step2: Adjust draft to the values of the selected event
-
       //using MaterialTextfield.change sets the state of the textfield to fille, so now overlays appear
       document.getElementById("newEventTitle").MaterialTextfield.change(oNewEventVue.draft.sName = target.sName);
       document.getElementById("newEventDescription").MaterialTextfield.change(oNewEventVue.draft.sDescription = target.sDescription);
       document.getElementById("newEventAddressDiv").MaterialTextfield.change(oNewEventVue.draft.sAdress = target.sAdress);
       document.getElementById("NewEventLink").MaterialTextfield.change(oNewEventVue.draft.sEventLink = target.sEventLink);
-      oNewEventVue.value = target.event_types;
+
       var oStartDate = new Date(target.start_date);
       var oStartDateTimeAdjusted = oStartDate.setHours(oStartDate.getHours() - 1);
       var oEndDate = new Date(target.end_date);
       var oEndDateTimeAdjusted = oEndDate.setHours(oEndDate.getHours() - 1);
+
       oNewEventVue.draft.EDate = [oStartDateTimeAdjusted, oEndDateTimeAdjusted]; //todo Sommerzeit/Winterzeit beachten
+      oNewEventVue.value = target.event_types;
       oNewEventVue.draft.oSelectedFile = target.oImage;
     },
-    closeDeleteEventDialog: function() {
+    closeDeleteEventDialog: function () {
       document.querySelector('#deleteEventDialog').close();
     },
-    confirmDeleteEvent: function(event) {
+    confirmDeleteEvent: function (event) {
       var ajaxRequest = new XMLHttpRequest();
 
       var onSuccess = function onSuccess() {
@@ -733,7 +734,7 @@ var oEventTableVue = new Vue({
           }
           oEventTableVue.selected = "";
           document.querySelector('#deleteEventDialog').close();
-        oNewEventVue.cardShown = false;  
+          oNewEventVue.cardShown = false;
         }
       };
 
@@ -749,7 +750,7 @@ var oEventTableVue = new Vue({
       ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
       ajaxRequest.send();
     },
-    favToggle: function(target) {
+    favToggle: function (target) {
       // was it already faved?
       if (loggedInUser != "") { //only change status of faved i fa user is logged in
         if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
@@ -797,7 +798,7 @@ var oEventTableVue = new Vue({
         }
       }
     },
-    submitComment: function(id) {
+    submitComment: function (id) {
       if (document.querySelector("#idComment").value.length < 1) {
         document.getElementById("idCommentErrorEmpty").style.display = "block";
       } else {
@@ -834,7 +835,7 @@ var oEventTableVue = new Vue({
 
 
     },
-    select: function(target) {
+    select: function (target) {
       // only data with specific Ids can be selected
       if (dialogopen == false) {
         if (target.iEventId != undefined) {
@@ -844,20 +845,20 @@ var oEventTableVue = new Vue({
         zoomMap(target.marker.getPosition());
       }
     },
-    searchEvent: function() {
+    searchEvent: function () {
       if (sQuery === "" || sQuery === undefined) {
         this.allEvents = aTestEvents;
         return;
       }
       var aFilterdEvents;
-      this.allEvents.forEach(function(oEvent) {
+      this.allEvents.forEach(function (oEvent) {
         if (oEvent.sName.includes(sQuery)) {
           aFilterdEvents.push(oEvent);
         }
       });
       this.allEvents = aFilterdEvents;
     },
-    clickLikeButton: function() {
+    clickLikeButton: function () {
       var oLikeButton = document.getElementById('idThumbUp');
       if (oLikeButton.style.color != "green") {
         var ratingRequest = new XMLHttpRequest();
@@ -895,7 +896,7 @@ var oEventTableVue = new Vue({
         ratingRequest.send(sFormData);
       }
     },
-    clickDislikeButton: function() {
+    clickDislikeButton: function () {
       var oDislikeButton = document.getElementById("idThumbDown");
       if (oDislikeButton.style.color != "red") {
         document.getElementById('idThumbUp').style.color = "grey";
@@ -933,7 +934,7 @@ var oEventTableVue = new Vue({
       }
     },
     //Opens interactive/social Popup
-    OpenCommentPopUp: function() {
+    OpenCommentPopUp: function () {
       if (loggedInUser != "") {
         dialogopen = true;
         document.querySelector("#idComment").value = "";
@@ -956,10 +957,10 @@ var oEventTableVue = new Vue({
 
         var dialog = document.querySelector('#commentDialog');
         dialog.showModal();
-        $(dialog).children().first().click(function(e) {
+        $(dialog).children().first().click(function (e) {
           e.stopPropagation();
         })
-        document.addEventListener("click", function(e) {
+        document.addEventListener("click", function (e) {
           dialog.close();
           dialogopen = false;
         });
@@ -984,29 +985,29 @@ var oSearchPlaceVue = new Vue({
     FilterdDate: null,
     pickerOptions: {
       shortcuts: [{
-          text: 'Heute',
-          onClick(picker) {
-            const end = new Date().setHours(23, 59, 59, 59);
-            const start = new Date().setHours(0, 0, 0, 0);
-            picker.$emit('pick', [start, end]);
-          }
-        },
-        {
-          text: 'nächste Woche',
-          onClick(picker) {
-            const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 7).setHours(23, 59, 59, 59);
-            const start = new Date().setHours(0, 0, 0, 0);
-            picker.$emit('pick', [start, end]);
-          }
-        },
-        {
-          text: 'nächster Monat',
-          onClick(picker) {
-            const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 30).setHours(23, 59, 59, 59);
-            const start = new Date().setHours(0, 0, 0, 0);
-            picker.$emit('pick', [start, end]);
-          }
+        text: 'Heute',
+        onClick(picker) {
+          const end = new Date().setHours(23, 59, 59, 59);
+          const start = new Date().setHours(0, 0, 0, 0);
+          picker.$emit('pick', [start, end]);
         }
+      },
+      {
+        text: 'nächste Woche',
+        onClick(picker) {
+          const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 7).setHours(23, 59, 59, 59);
+          const start = new Date().setHours(0, 0, 0, 0);
+          picker.$emit('pick', [start, end]);
+        }
+      },
+      {
+        text: 'nächster Monat',
+        onClick(picker) {
+          const end = new Date(new Date().getTime() + 3600 * 1000 * 24 * 30).setHours(23, 59, 59, 59);
+          const start = new Date().setHours(0, 0, 0, 0);
+          picker.$emit('pick', [start, end]);
+        }
+      }
       ]
     },
     //Multiselect variables
@@ -1062,6 +1063,50 @@ var oSearchPlaceVue = new Vue({
   }
 });
 
+var emptyAfterSaving = function (eventId) {
+  oNewEventVue.draft.status = "unsend";
+  // reset vueinternal data to make possible to add new event
+  oNewEventVue.draft = {
+    sName: "",
+    sDescription: "",
+    sAdress: "",
+    sDate: "",
+    time: "",
+    oLatLng: {},
+    status: "draft",
+    EDate: null,
+    sEventLink: null,
+    iEventId: Math.floor(Math.random() * 99999) + 1,
+    oSelectedFile: "",
+    image: null,
+    titleIsInvalid: false,
+    descIsInvalid: false,
+    adressIsInvalid: false,
+    displayError: false,
+    dateIsInvalid: false,
+    categoryIsInvalid: false,
+  };
+  oNewEventVue.value7 = '';
+  oNewEventVue.value = [];
+  document.getElementById("imageUpload").value = "";
+
+  closeSetAdressYourself();
+
+  oNewEventVue.cardShown = false; //close card for new event
+  if (eventId) {
+    if (document.getElementById('h2events').innerText == "Favoriten") {
+      getFilteredEvents(reventId);
+      document.getElementById('h2events').innerText = "Events";
+      document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
+    } else if (document.getElementById('h2events').innerText == "Events") {
+      getFilteredEvents(eventId);
+    } else if (document.getElementById('h2events').innerText == "Meine Events") {
+      getOwnedEvents(eventId);
+    }
+  }
+
+  $(window).scrollTop(0);
+}
 //Vue for creating a new event and updating an old event
 var oNewEventVue = new Vue({
   el: "#newEventWrapper",
@@ -1092,7 +1137,11 @@ var oNewEventVue = new Vue({
     aEventTypes: [],
   },
   methods: {
-    formsubmit: function() {
+    closeNewEventCard: function () {
+      oNewEventVue.cardShown = false;
+      emptyAfterSaving();
+    },
+    formsubmit: function () {
 
       titleIsInvalid = false;
       oNewEventVue.draft.descIsInvalid = false;
@@ -1113,7 +1162,7 @@ var oNewEventVue = new Vue({
       if (this.draft.EDate === null) {
         this.draft.dateIsInvalid = true;
       }
-      if (this.value.length === 0){
+      if (this.value.length === 0) {
         this.draft.categoryIsInvalid = true
       }
 
@@ -1121,7 +1170,7 @@ var oNewEventVue = new Vue({
         this.draft.sDescription === "" ||
         this.draft.sAdress === "" ||
         this.draft.EDate === null ||
-        this.value === [] ||
+        this.value.length === 0 ||
         document.getElementById("NewEventLink").classList.contains("is-invalid")) {
         this.draft.displayError = true;
         return;
@@ -1143,7 +1192,7 @@ var oNewEventVue = new Vue({
             //check wether the given adress exists
           } else if (result.response.view[0] != undefined) {
             var dLat = result.response.view[0].result[0].location.displayPosition.latitude;
-            var dLng = result.response.view[0].result[0].location.displayPosition.longitude;    
+            var dLng = result.response.view[0].result[0].location.displayPosition.longitude;
             //tell the user, that there was no location found for the given string
           } else {
             oNewEventVue.draft.adressIsInvalid = true;
@@ -1171,7 +1220,7 @@ var oNewEventVue = new Vue({
           }
           fd.append("event_types", ev_types);
           if (oNewEventVue.draft.oSelectedFile) {
-            if(image){
+            if (image) {
               fd.append("event_picture", image, image.name);
             } else { //only occurs for update if the picture isn't changed
               fd.append("not_update_event_picture", "y");
@@ -1187,60 +1236,18 @@ var oNewEventVue = new Vue({
               authorization: "Bearer " + loggedInUser.token
             }
           };
-          var emptyAfterSaving = function(eventId) {
-            oNewEventVue.draft.status = "unsend";
-            // reset vueinternal data to make possible to add new event
-            oNewEventVue.draft = {
-              sName: "",
-              sDescription: "",
-              sAdress: "",
-              sDate: "",
-              time: "",
-              oLatLng: {},
-              status: "draft",
-              EDate: null,
-              sEventLink: null,
-              iEventId: Math.floor(Math.random() * 99999) + 1,
-              oSelectedFile: "",
-              image: null,
-              titleIsInvalid: false,
-              descIsInvalid: false,
-              adressIsInvalid: false,
-              displayError: false,
-              dateIsInvalid: false,
-              categoryIsInvalid: false,
-            };
-            oNewEventVue.value7 = '';
-            oNewEventVue.value = [];
-            document.getElementById("imageUpload").value = "";
 
-            closeSetAdressYourself();
-
-            oNewEventVue.cardShown = false; //close card for new event
-
-            if (document.getElementById('h2events').innerText == "Favoriten") {
-              getFilteredEvents(reventId);
-              document.getElementById('h2events').innerText = "Events";
-              document.getElementById('AfterLoginFavoriten').innerText = "Favoriten";
-            } else if (document.getElementById('h2events').innerText == "Events") {
-              getFilteredEvents(eventId);
-            } else if (document.getElementById('h2events').innerText == "Meine Events") {
-              getOwnedEvents(eventId);
-            }
-
-            $(window).scrollTop(0);
-          }
           if (document.getElementById("h2NewEvent").innerText === "Bearbeite dein Event") { //edit event
             axios.patch("http://localhost:3000/events/" + oEventTableVue.selected, fd, header_config).then(res => {
               emptyAfterSaving(oEventTableVue.selected);
-            }).catch(function(error) {
+            }).catch(function (error) {
               alert("Fehler beim Speichern in der Datenbank");
               console.log(error);
             });
           } else { //add new event
             axios.post("http://localhost:3000/events", fd, header_config).then(res => {
               emptyAfterSaving(res.data.created_event._id);
-            }).catch(function(error) {
+            }).catch(function (error) {
               alert("Fehler beim Speichern in der Datenbank");
               console.log(error);
             });
@@ -1251,7 +1258,7 @@ var oNewEventVue = new Vue({
 
 
         },
-        onError = function(error) {
+        onError = function (error) {
           alert('Geodaten nicht bekommen. Bitte überprüfe, ob die angegebene Adresse existiert.');
         }
       )
@@ -1264,7 +1271,7 @@ var oNewEventVue = new Vue({
       }
       getAutocompletion(this.draft.sAdress, document.getElementById("newEventAddress"));
     },
-    onFileSelected: function(event) {
+    onFileSelected: function (event) {
       if (event.target.files[0] === undefined) {
         this.draft.oSelectedFile = "";
         return;
@@ -1293,7 +1300,7 @@ var oNewEventVue = new Vue({
         console.log('FileReader API not supported: use the <form>, Luke!')
       }
     },
-    pickLocationMode: function() {
+    pickLocationMode: function () {
       pickLocationMode()
     }
   },
@@ -1323,7 +1330,7 @@ var oRegisterVue = new Vue({
     value7: ''
   },
   methods: {
-    formsubmit: function() {
+    formsubmit: function () {
       this.draft.emailIsInvalid = false;
       this.draft.password2IsInvalid = false;
       this.draft.passwordIsInvalid = false;
@@ -1389,7 +1396,7 @@ var oRegisterVue = new Vue({
       Reg_Other_Error
       Reg_Email_Error
       Reg_Reg_Error
-      if (this.draft.emailIsInvalid == true || this.draft.nameIsInvalid == true || this.draft.password2IsInvalid == true) {} else {
+      if (this.draft.emailIsInvalid == true || this.draft.nameIsInvalid == true || this.draft.password2IsInvalid == true) { } else {
 
         var newuser = "http://localhost:3000/user/signup"
         var ajaxRequest = new XMLHttpRequest();
@@ -1426,7 +1433,7 @@ var oNewLoginVue = new Vue({
   },
   methods: {
 
-    formsubmit: function() {
+    formsubmit: function () {
       NewRegisteredUser.style.display = "none";
       logoutmodus = true;
       this.draft.passwordIsInvalid = false;
@@ -1507,7 +1514,7 @@ var oNewLoginVue = new Vue({
     },
 
 
-    RegisterVueShow: function() {
+    RegisterVueShow: function () {
       this.cardShown = !this.cardShown;
       oRegisterVue.cardShown = true;
 
@@ -1528,12 +1535,12 @@ var oNewDateVue = new Vue({
     value7: ''
   },
   methods: {
-    formdraft: function() {
+    formdraft: function () {
       if (oEventTableVue.currentEvents[0].status != "draft") {
         oEventTableVue.currentEvents.unshift(this.draft)
       }
     },
-    formsubmit: function() {
+    formsubmit: function () {
 
       this.cardShown = !this.cardShown;
       oRegisterVue.cardShown = false;
