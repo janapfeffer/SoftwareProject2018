@@ -1,7 +1,0 @@
-Facebook API:
-https://developers.facebook.com/docs/facebook-login/
-https://developers.facebook.com/docs/facebook-login/web
-- wir brauchen eine APP ID
-- https statt http (haben wir beides nicht)
-  tutorial https://itnext.io/node-express-letsencrypt-generate-a-free-ssl-certificate-and-run-an-https-server-in-5-minutes-a730fbe528ca
-- code beispiel steht unten (gespeichert als facebook.html)
