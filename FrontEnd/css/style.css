@@ -23,7 +23,7 @@ header .headerLink {
 header img#logoIcon {
   position: absolute;
   top: -3px;
-  left: -3px;
+  left: 0px;
   width: 65px;
   height: 67px;
 }
@@ -591,4 +591,21 @@ img.preview {
 
 .file-upload-form, .image-preview {
   padding: 5px;
+}
+
+#toast-container.toast-top-left .toast {
+  margin-top: 60px;
+}
+
+.toast-info {
+  background-color: #fead9d;
+}
+
+.toast-success {
+  background-color: rgb(165, 215, 147);
+}
+
+#toast-container>div{
+  opacity: 0.95;
+
 }

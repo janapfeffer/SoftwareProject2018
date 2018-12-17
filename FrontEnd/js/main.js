@@ -166,7 +166,7 @@ function _getFilterHeaders() {
       });
 
     } else {
-      alert("Bitte wähle kein Datum aus der Vergangenheit aus.");
+      toastr["info"]("Bitte wähle kein Datum aus der Vergangenheit aus");
       return null;
     }
   } else {
@@ -278,7 +278,7 @@ function getFilteredEvents(displayId) {
     };
 
     var onFailed = function onFailed() {
-      alert('Die Eventliste konnte nicht nach Datum gefiltert werden!');
+      toastr["error"]("Die Eventliste konnte nicht nach Datum gefiltert werden!");
       //change center of map and filter for location
       setCenter(oSearchPlaceVue.sQuery);
     };
@@ -530,6 +530,7 @@ var oNavigationVue = new Vue({
 
         AfterLoginFavoriten.style.visibility = "hidden";
         AfterLoginOwnedEvents.style.visibility = "hidden";
+        toastr["success"]("Auf Wiedersehen " + loggedInUser.name + "!");
         loggedInUser = "";
         AfterLoginEvent.style.visibility = "hidden";
         LoginCard.style.display = "visible";
@@ -679,7 +680,7 @@ var oEventTableVue = new Vue({
       };
 
       var onFailed = function onFailed() {
-        alert("Kommentar konnte nicht gelöscht werden, bitte versuche es erneut.");
+        toastr["info"]("Kommentar konnte nicht gelöscht werden, bitte versuche es erneut");
       };
 
       ajaxRequest.addEventListener("load", onSuccess);
@@ -967,7 +968,10 @@ var oEventTableVue = new Vue({
           dialogopen = false;
         });
       } else {
-        alert("Logg dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
+
+        toastr["info"]("Logge dich bitte ein, um Kommentare und Bewertungen zu hinterlassen");
+        oNewLoginVue.cardShown = false;
+        oNavigationVue.showNewLoginCard();
       }
 
     }
@@ -1029,7 +1033,7 @@ var oSearchPlaceVue = new Vue({
         //don't go to next page when past event is selected
         if (oSearchPlaceVue.dDate) {
           if (!(oSearchPlaceVue.dDate[0] >= new Date().setHours(0, 0, 0, 0) && oSearchPlaceVue.dDate[1] >= new Date().setHours(0, 0, 0, 0))) {
-            alert("Bitte wähle kein Datum aus der Vergangenheit aus.");
+            toastr["info"]("Bitte wähle kein Datum aus der Vergangenheit aus.");
             return;
           }
         }
@@ -1198,7 +1202,7 @@ var oNewEventVue = new Vue({
             //tell the user, that there was no location found for the given string
           } else {
             oNewEventVue.draft.adressIsInvalid = true;
-            alert("Die angegebene Addresse existiert nicht.");
+            toastr["error"]("Die angegebene Addresse existiert nicht");
             return;
           }
 
@@ -1261,7 +1265,7 @@ var oNewEventVue = new Vue({
 
         },
         onError = function (error) {
-          alert('Geodaten nicht bekommen. Bitte überprüfe, ob die angegebene Adresse existiert.');
+          toastr["error"]("Geodaten nicht bekommen. Bitte überprüfe, ob die angegebene Adresse existiert");
         }
       )
     },
@@ -1473,6 +1477,7 @@ var oNewLoginVue = new Vue({
           oRegisterVue.cardShown = false;
           oNewLoginVue.cardShown = false;
 
+          toastr["success"]("Wilkommen " + loggedInUser.name + "!");
 
         } else {
           emailIsInvalid = true;
@@ -1559,6 +1564,26 @@ function initEverything() {
   getAllEvents();
   getAllEventTypes();
   checkDuplicatePositions(oEventTableVue.allEvents);
+
+  //options for the toasts
+  toastr.options = { 
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-left",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "3500",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
 }
 
 initEverything();

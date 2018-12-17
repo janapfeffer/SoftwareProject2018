@@ -482,6 +482,10 @@ function pickLocationMode() {
     map.addEventListener('tap', pickLocationModeMapListener)
     pickLocationModeMapListenerSet = true;
     $("#map").delay(100).fadeOut().fadeIn(200); //let map "blink" to show that something changed on it
+    setTimeout(function() {
+      toastr["info"]("Klicke auf die Map und wähle den Eventort!");
+    }, 300)
+    
   }
 
   //got unchecked
