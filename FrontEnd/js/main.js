@@ -180,6 +180,8 @@ function _getFilterHeaders() {
 
 function _setAllEventsAfterGet(apievents, displayId) {
   oEventTableVue.allEvents = apievents.map(apievent => {
+    var sd = new Date(apievent.start_date);
+    var ed = new Date(apievent.end_date);
     return {
       sDisplayEventLink: apievent.event_link != undefined ? "box" : "none",
       iEventId: apievent._id,
@@ -189,12 +191,12 @@ function _setAllEventsAfterGet(apievents, displayId) {
       sDescription: apievent.description,
       sAdress: apievent.address,
       iCurrentRating: apievent.current_rating,
-      oStartDate: apievent.start_date.split("T")[0],
-      oStartTime: apievent.start_date.split("T")[1].substring(0, 5),
-      oEndDate: apievent.end_date.split("T")[0],
-      oEndTime: apievent.end_date.split("T")[1].substring(0, 5),
-      end_date: apievent.end_date,
-      start_date: apievent.start_date,
+      oStartDate: sd.getDate() + "." + sd.getMonth() + "." + sd.getFullYear(),//new Date(apievent.start_date), //.split("T")[0],
+      oStartTime: sd.getHours() + ":" + sd.getMinutes(),//new Date(apievent.start_date), //.split("T")[1].substring(0, 5),
+      oEndDate: ed.getDate() + "." + ed.getMonth() + "." + ed.getFullYear(),//new Date (apievent.end_date), //.split("T")[0],
+      oEndTime: ed.getHours() + ":" + ed.getMinutes(),//new Date(apievent.end_date), //.split("T")[1].substring(0, 5),
+      end_date: ed,
+      start_date: sd,
       sEventLink: apievent.event_link,
       sTicketLink: apievent.ticket_link,
       oLatLgn: {
@@ -468,7 +470,7 @@ var oNavigationVue = new Vue({
       document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
       closeBubble();
       // }
-      // else { 
+      // else {
       //   oEventTableVue.trashVisibility = "hidden";
       //   oEventTableVue.starVisibility = "visible";
       //   document.getElementById('h2events').innerText = "Events";
