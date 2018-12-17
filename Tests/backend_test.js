@@ -33,17 +33,7 @@ var test_data = {};
 }
 */
 
-// function used to create a unique user_email for further testing
-function guid() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-};
-// unique user_email for further testing, as some functions require an existing user
-var user_email = "auto_test" + guid() + "@test.de";
+var user_email = "autotest@test.de";
 
 test_data.user = {
   email: user_email,
@@ -92,9 +82,7 @@ describe("EventTypes", () => {
 //test user routes
 describe('Users', () => {
   describe("/signup", () => {
-    it("it should POST the user(*)", (done) => {
-      // * email is generated randomly using a guid
-      //   that could potentially cause a fail but the collision probability is extremely small
+    it("it should POST the user", (done) => {
       chai.request(server)
         .post("/user/signup")
         .send(test_data.user)
@@ -161,6 +149,7 @@ describe('Users', () => {
   });
 });
 
+/* Test Event routes*/
 describe('Events', () => {
   // Test the /GET routes
   describe('/GET events', () => {
@@ -242,6 +231,7 @@ describe('Events', () => {
   });
 });
 
+/* User Interaction routes*/
 describe('User-Events Interaction', () => {
   describe("/user/saveEvent", () => {
     it("it should save the event as favorite", (done) => {
@@ -334,6 +324,7 @@ describe('User-Events Interaction', () => {
   });
 });
 
+//##### Delete test data #####/
 describe("delete testdata", () => {
   describe("/user/:userId", () => {
     it("it should delete the test user", (done) => {
