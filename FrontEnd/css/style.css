@@ -8,6 +8,14 @@ body {
   font-family: "raleway";
 }
 
+.mdl-switch.is-checked .mdl-switch__track {
+  background: rgba(254, 154, 134, 0.41);
+}
+
+.mdl-switch.is-checked .mdl-switch__thumb {
+  background: rgba(255,87,34,.5);
+}
+
 header.mdl-layout__header {
   color: black;
   font-family: raleway;
@@ -481,7 +489,7 @@ width: 650px; */
 }
 
 .sidecard h2 {
-  color: black;
+  color: #666666;
   font-family: "raleway";
 }
 
