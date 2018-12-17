@@ -167,7 +167,6 @@ function _getFilterHeaders() {
 
     } else {
       alert("Bitte wähle kein Datum aus der Vergangenheit aus.");
-      return null;
     }
   } else {
     headers.push({
@@ -191,10 +190,10 @@ function _setAllEventsAfterGet(apievents, displayId) {
       sDescription: apievent.description,
       sAdress: apievent.address,
       iCurrentRating: apievent.current_rating,
-      oStartDate: sd.getDate() + "." + (sd.getMonth() + 1) + "." + sd.getFullYear(),//new Date(apievent.start_date), //.split("T")[0],
-      oStartTime: sd.getHours() + ":" + (sd.getMinutes()<10?'0':'') + sd.getMinutes(),//new Date(apievent.start_date), //.split("T")[1].substring(0, 5),
-      oEndDate: ed.getDate() + "." + (ed.getMonth() + 1) + "." + ed.getFullYear(),//new Date (apievent.end_date), //.split("T")[0],
-      oEndTime: ed.getHours() + ":" + (ed.getMinutes()<10?'0':'') + ed.getMinutes(),//new Date(apievent.end_date), //.split("T")[1].substring(0, 5),
+      oStartDate: sd.getDate() + "." + (sd.getMonth() + 1) + "." + sd.getFullYear(),
+      oStartTime: sd.getHours() + ":" + (sd.getMinutes()<10?'0':'') + sd.getMinutes(),
+      oEndDate: ed.getDate() + "." + (ed.getMonth() + 1) + "." + ed.getFullYear(),
+      oEndTime: ed.getHours() + ":" + (ed.getMinutes()<10?'0':'') + ed.getMinutes(),
       end_date: ed,
       start_date: sd,
       sEventLink: apievent.event_link,
@@ -234,7 +233,6 @@ function _setAllEventsAfterGet(apievents, displayId) {
     for (var i = 0; i < loggedInUser.saved_events.length; i++) {
       for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
         if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-          // console.log(oEventTableVue.allEvents[j].iEventId);
           oEventTableVue.favToggle(oEventTableVue.allEvents[j])
           break;
         }
@@ -379,37 +377,6 @@ var oNavigationVue = new Vue({
     horizontalMenueShown: true,
   },
   methods: {
-    //Wofür?
-    // showUpdateEventCard: function() {
-    //   $(window).scrollTop(0);
-    //   if (oNewEventVue.cardShown === true) {
-    //     oNewEventVue.draft = {
-    //       sName: oEventTableVue.selected_event.sName,
-    //       sDescription: "",
-    //       sAdress: "",
-    //       sDate: "",
-    //       time: "",
-    //       oLatLng: {},
-    //       status: "draft",
-    //       EDate: null,
-    //       sEventLink: null,
-    //       iEventId: Math.floor(Math.random() * 99999) + 1,
-    //       oSelectedFile: "",
-    //       image: null,
-    //       titleIsInvalid: false,
-    //       descIsInvalid: false,
-    //       adressIsInvalid: false,
-    //       displayError: false,
-    //       dateIsInvalid: false
-    //     };
-    //     oNewEventVue.value7 = '';
-    //     oNewEventVue.value = [];
-    //     closeSetAdressYourself();
-    //   };
-    //   oNewEventVue.cardShown = !oNewEventVue.cardShown;
-    //   oRegisterVue.cardShown = false;
-    //   oNewLoginVue.cardShown = false;
-    // },
     showNewEventCard: function (event) {
       $(window).scrollTop(0);
       if (oNewEventVue.cardShown === true) {
@@ -444,7 +411,6 @@ var oNavigationVue = new Vue({
         }
       }
       oNewEventVue.cardShown = !oNewEventVue.cardShown;
-      // oNewEventVue.cardShown = !oNewEventVue.cardShown;
       oRegisterVue.cardShown = false;
       oNewLoginVue.cardShown = false;
       //reset all Inputfield to inactive
@@ -460,29 +426,14 @@ var oNavigationVue = new Vue({
     showNewOwnedEventsCard: function () {
       $(window).scrollTop(0);
       favorite_clicked = true; // in order to open "Events" when clicking on events
-      // owned_clicked = !owned_clicked;
       document.getElementById('h2events').innerText = "Meine Events";
       document.getElementById('AfterLoginFavoriten').innerText = "Events";
-      // if (owned_clicked === true) {
       oEventTableVue.trashVisibility = "visible";
       oEventTableVue.starVisibility = "hidden";
       getOwnedEvents();
       document.getElementById("eventtypesfilterID").setAttribute("hidden", "hidden"); //hide time filter
       document.getElementById("datepickerID").setAttribute("hidden", "hidden"); //hide event_types filter
       closeBubble();
-      // }
-      // else {
-      //   oEventTableVue.trashVisibility = "hidden";
-      //   oEventTableVue.starVisibility = "visible";
-      //   document.getElementById('h2events').innerText = "Events";
-      //   document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
-      //   getFilteredEvents();
-      //   document.getElementById("eventtypesfilterID").removeAttribute("hidden"); //display time filter
-      //   document.getElementById("datepickerID").removeAttribute("hidden"); //display event types filter
-      //   if (bubble) {
-      //     closeBubble();
-      //   }
-      // }
       if (oNewEventVue.cardShown === true) {
         this.showNewEventCard();
       }
@@ -491,8 +442,6 @@ var oNavigationVue = new Vue({
       $(window).scrollTop(0);
       favorite_clicked = !favorite_clicked;
       oEventTableVue.starVisibility = "visible";
-      // owned_clicked = false;
-      // document.getElementById('AfterLoginOwnedEvents').innerText = "Meine Events";
       oEventTableVue.trashVisibility = "hidden";
       if (favorite_clicked === true) {
         document.getElementById('h2events').innerText = "Favoriten";
@@ -632,34 +581,6 @@ var oEventTableVue = new Vue({
     }
   },
   methods: {
-    // updateEvent: function(event) {
-    //   oNavigationVue.showUpdateEventCard();
-    // },
-    // deleteEvent: function(event) {
-    //   var ajaxRequest = new XMLHttpRequest();
-    //
-    //   var onSuccess = function onSuccess() {
-    //     if (this.status == 200) {
-    //       getOwnedEvents();
-    //       if (bubble) {
-    //         closeBubble();
-    //       }
-    //       oEventTableVue.selected = "";
-    //     }
-    //   };
-    //
-    //   var onFailed = function onFailed() {
-    //     alert("Event konnte nicht gelöscht werden, bitte versuche es erneut.");
-    //   };
-    //
-    //   ajaxRequest.addEventListener("load", onSuccess);
-    //   ajaxRequest.addEventListener("error", onFailed);
-    //   ajaxRequest.responseType = "json";
-    //   ajaxRequest.open("DELETE", "http://localhost:3000/events/" + event.iEventId, true);
-    //   ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    //   ajaxRequest.setRequestHeader("authorization", "Bearer " + loggedInUser.token);
-    //   ajaxRequest.send();
-    // },
     deleteComment: function (comment) {
       var ajaxRequest = new XMLHttpRequest();
 
@@ -700,8 +621,6 @@ var oEventTableVue = new Vue({
       oNewEventVue.cardShown = false;
       oNavigationVue.showNewEventCard()
 
-      //General Idea: Set Modi via Global Variable ODER Checke text des buttons
-
       //Step1: Edit Header + Button (for Button also edit functionality)
       document.getElementById("h2NewEvent").innerText = "Bearbeite dein Event";
       document.getElementById("newEventSendenButton").innerText = "Bearbeitung speichern";
@@ -719,7 +638,7 @@ var oEventTableVue = new Vue({
       var oEndDate = new Date(target.end_date);
       var oEndDateTimeAdjusted = oEndDate.setHours(oEndDate.getHours() - 1);
 
-      oNewEventVue.draft.EDate = [oStartDateTimeAdjusted, oEndDateTimeAdjusted]; //todo Sommerzeit/Winterzeit beachten
+      oNewEventVue.draft.EDate = [oStartDateTimeAdjusted, oEndDateTimeAdjusted];
       oNewEventVue.value = target.event_types;
       oNewEventVue.draft.oSelectedFile = target.oImage;
     },
@@ -1453,7 +1372,6 @@ var oNewLoginVue = new Vue({
           for (var i = 0; i < loggedInUser.saved_events.length; i++) {
             for (var j = 0; j < oEventTableVue.allEvents.length; j++) {
               if (oEventTableVue.allEvents[j].iEventId === loggedInUser.saved_events[i]) {
-                // console.log(oEventTableVue.allEvents[j].iEventId);
                 oEventTableVue.favToggle(oEventTableVue.allEvents[j])
                 break;
               }
