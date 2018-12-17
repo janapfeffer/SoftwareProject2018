@@ -8,14 +8,6 @@ body {
   font-family: "raleway";
 }
 
-.mdl-switch.is-checked .mdl-switch__track {
-  background: rgba(254, 154, 134, 0.41);
-}
-
-.mdl-switch.is-checked .mdl-switch__thumb {
-  background: rgba(255,87,34,.5);
-}
-
 header.mdl-layout__header {
   color: black;
   font-family: raleway;
@@ -41,12 +33,17 @@ a {
   font-weight: 500;
 }
 
-.updateIcons  .material-icons{
+.updateIcons {
+  position: absolute;
   left: 507px;
+  right: 9%;
   font-size: 18px;
 }
 
-
+.starIcon {
+  left: -15px;
+  top: 22px;
+}
 
 .mdl-dialog {
   border-radius: 4px;
@@ -137,21 +134,6 @@ input {
 } */
 #searchPlaceInner .multiselect__tags-wrap {
   display: inline-flex;
-}
-
-.multiselect__tag {
-  background: rgb(165, 215, 147);
-  color:#545f67;
-}
-.multiselect__option--highlight {
-  background:  rgb(165, 215, 147);
-  color:#545f67;
-
-}
-
-.multiselect__option--highlight:after {
-  background:  rgb(165, 215, 147);
-  color:#545f67;
 }
 
 /* .landingpage #searchPlaceInner .multiselect__tags-wrap {
@@ -397,7 +379,6 @@ img.eventSymbol {
 }
 
 #newEvent .buttons button {
-  background-color: rgba(47, 66, 79, 0.66);
   margin-left: 10px;
 }
 
@@ -489,17 +470,25 @@ width: 650px; */
 }
 
 .sidecard h2 {
-  color: #666666;
+  color: black;
   font-family: "raleway";
 }
 
+#newLogin .buttons {
+  text-align: right;
+  padding: 10px 10px 3px 0px;
+}
+
+#newRegister .buttons {
+  text-align: right;
+  padding: 10px 10px 3px 0px;
+}
+
 #newLogin .buttons button {
-  background-color: rgba(47, 66, 79, 0.66);
   margin-left: 10px;
 }
 
 #newRegister .buttons button {
-  background-color: rgba(47, 66, 79, 0.66);
   margin-left: 10px;
 }
 
