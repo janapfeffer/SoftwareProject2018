@@ -191,9 +191,9 @@ function _setAllEventsAfterGet(apievents, displayId) {
       sAdress: apievent.address,
       iCurrentRating: apievent.current_rating,
       oStartDate: sd.getDate() + "." + (sd.getMonth() + 1) + "." + sd.getFullYear(),
-      oStartTime: sd.getHours() + ":" + (sd.getMinutes()<10?'0':'') + sd.getMinutes(),
+      oStartTime: sd.getHours() + ":" + (sd.getMinutes() < 10 ? '0' : '') + sd.getMinutes(),
       oEndDate: ed.getDate() + "." + (ed.getMonth() + 1) + "." + ed.getFullYear(),
-      oEndTime: ed.getHours() + ":" + (ed.getMinutes()<10?'0':'') + ed.getMinutes(),
+      oEndTime: ed.getHours() + ":" + (ed.getMinutes() < 10 ? '0' : '') + ed.getMinutes(),
       end_date: ed,
       start_date: sd,
       sEventLink: apievent.event_link,
@@ -217,7 +217,6 @@ function _setAllEventsAfterGet(apievents, displayId) {
   oEventTableVue.allEvents.sort(function (a, b) {
     return new Date(b.oApiEventStartDate) - new Date(a.oApiEventStartDate);
   });
-  // set bubbles on map
   setMarkers(oEventTableVue.allEvents);
 
   if (displayId) {
@@ -293,41 +292,12 @@ function getFilteredEvents(displayId) {
     for (var i = 0; i < headers.length; i++) {
       ajaxRequest.setRequestHeader(headers[i].name, headers[i].value);
     }
-
-
     ajaxRequest.send();
-
   } else { // no dates given
     //change center of map and filter for location
     getAllEvents();
     setMarkers(oEventTableVue.allEvents);
   }
-}
-
-function b64toBlob(b64Data, contentType, sliceSize) {
-  contentType = contentType || '';
-  sliceSize = sliceSize || 512;
-
-  var byteCharacters = atob(b64Data);
-  var byteArrays = [];
-
-  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-    var byteNumbers = new Array(slice.length);
-    for (var i = 0; i < slice.length; i++) {
-      byteNumbers[i] = slice.charCodeAt(i);
-    }
-
-    var byteArray = new Uint8Array(byteNumbers);
-
-    byteArrays.push(byteArray);
-  }
-
-  var blob = new Blob(byteArrays, {
-    type: contentType
-  });
-  return blob;
 }
 
 function checkDuplicatePositions(arr) {
@@ -370,7 +340,7 @@ function getAllEventTypes() {
     });
 }
 
-//##### 3. Vues #####
+//##### 3. Vue Objects #####
 var oNavigationVue = new Vue({
   el: "#navigation",
   data: {
@@ -674,7 +644,6 @@ var oEventTableVue = new Vue({
       ajaxRequest.send();
     },
     favToggle: function (target) {
-      // was it already faved?
       if (loggedInUser != "") { //only change status of faved i fa user is logged in
         if (initalFavoriteSetting) { // don't save the event as favorite if it's the initial setting of favorites during log in
           Vue.set(target, 'faved', true);
@@ -755,7 +724,6 @@ var oEventTableVue = new Vue({
         ajaxRequest.send(sFormData);
         document.querySelector("#idComment").value = "";
       }
-
 
     },
     select: function (target) {
@@ -895,8 +863,6 @@ var oEventTableVue = new Vue({
       }
 
     }
-
-
   }
 });
 
@@ -1033,6 +999,7 @@ var emptyAfterSaving = function (eventId) {
 
   $(window).scrollTop(0);
 }
+
 //Vue for creating a new event and updating an old event
 var oNewEventVue = new Vue({
   el: "#newEventWrapper",
@@ -1178,11 +1145,6 @@ var oNewEventVue = new Vue({
               console.log(error);
             });
           }
-
-
-
-
-
         },
         onError = function (error) {
           toastr["error"]("Geodaten nicht bekommen. Bitte überprüfe, ob die angegebene Adresse existiert");
@@ -1314,10 +1276,7 @@ var oRegisterVue = new Vue({
         Reg_Email_Error.style.display = "none";
         Reg_Other_Error.style.display = "none";
         Reg_Reg_Error.style.display = "none";
-
       }
-
-
       Reg_Pass_Error
       Reg_Other_Error
       Reg_Email_Error
@@ -1336,10 +1295,7 @@ var oRegisterVue = new Vue({
 
         ajaxRequest.send(snewuserdata);
       }
-
     }
-
-
   }
 });
 
@@ -1358,7 +1314,6 @@ var oNewLoginVue = new Vue({
     value7: ''
   },
   methods: {
-
     formsubmit: function () {
       NewRegisteredUser.style.display = "none";
       logoutmodus = true;
@@ -1395,9 +1350,7 @@ var oNewLoginVue = new Vue({
           this.cardShown = !this.cardShown;
           oRegisterVue.cardShown = false;
           oNewLoginVue.cardShown = false;
-
           toastr["success"]("Wilkommen " + loggedInUser.name + "!");
-
         } else {
           emailIsInvalid = true;
           passwordIsInvalid = true;
@@ -1415,13 +1368,10 @@ var oNewLoginVue = new Vue({
         LoginErrorEmpty.style.display = "inline";
 
       }
-
       if (this.draft.sPassword === "") {
         this.draft.passwordIsInvalid = true;
         LoginErrorEmpty.style.display = "inline";
       }
-
-
       if (this.draft.emailIsInvalid == false && this.draft.passwordIsInvalid == false) {
         LoginErrorEmpty.style.display = "none";
         LoginErrorData.style.display = "none";
@@ -1436,15 +1386,10 @@ var oNewLoginVue = new Vue({
       } else {
         logoutmodus = false;
       }
-
     },
-
-
     RegisterVueShow: function () {
       this.cardShown = !this.cardShown;
       oRegisterVue.cardShown = true;
-
-
     },
   }
 });
@@ -1467,13 +1412,10 @@ var oNewDateVue = new Vue({
       }
     },
     formsubmit: function () {
-
       this.cardShown = !this.cardShown;
       oRegisterVue.cardShown = false;
       oNewLoginVue.cardShown = false;
-
     },
-
   }
 });
 
@@ -1483,6 +1425,7 @@ function initEverything() {
   getAllEvents();
   getAllEventTypes();
   checkDuplicatePositions(oEventTableVue.allEvents);
+  map.setZoom(14.0, true);
 
   //options for the toasts
   toastr.options = {
@@ -1502,7 +1445,6 @@ function initEverything() {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   }
-
 }
 
 initEverything();

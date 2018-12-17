@@ -68,7 +68,7 @@ function suggestPlaces(inp, arr) {
     /*insert an input field that will hold the current array item's value:*/
     b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
     /*execute a function when someone clicks on the item value (DIV element):*/
-    b.addEventListener("click", function(e) {
+    b.addEventListener("click", function (e) {
       /*insert the value for the autocomplete text field:*/
       if (inp === document.getElementById("newEventAddress")) {
         oNewEventVue.draft.sAdress = this.getElementsByTagName("input")[0].value;
@@ -83,7 +83,7 @@ function suggestPlaces(inp, arr) {
     a.appendChild(b);
   }
   /*execute a function presses a key on the keyboard:*/
-  inp.addEventListener("keydown", function(e) {
+  inp.addEventListener("keydown", function (e) {
     var x = document.getElementById(this.id + "autocomplete-list");
     if (x) x = x.getElementsByTagName("div");
     if (e.keyCode == 40) {
@@ -138,7 +138,7 @@ function suggestPlaces(inp, arr) {
     }
   }
   /*execute a function when someone clicks in the document:*/
-  document.addEventListener("click", function(e) {
+  document.addEventListener("click", function (e) {
     closeAllLists(e.target);
   });
 }
@@ -149,7 +149,7 @@ function getAutocompletion(sQuery, oInputField) {
 
   function getResponseBody(response) {
     var aSuggestions = [];
-    response.suggestions.forEach(function(suggestion) {
+    response.suggestions.forEach(function (suggestion) {
       var sMatchLevel = suggestion.matchLevel;
       var oSugAdr = suggestion.address;
       var suggestionToDisplay;
@@ -178,7 +178,6 @@ function getAutocompletion(sQuery, oInputField) {
     suggestPlaces(oInputField, aSuggestions)
   };
   var onAutoCompleteSuccess = function onAutoCompleteSuccess() {
-
     getResponseBody(this.response); // In this context, 'this' means the XMLHttpRequest itself.
   };
 
@@ -206,9 +205,8 @@ function getAutocompletion(sQuery, oInputField) {
 }
 
 function zoomMap(posi) {
-
-  if (map.getZoom() < 14.5) {
-    map.setZoom(14.5, true);
+  if (map.getZoom() < 14.0) {
+    map.setZoom(14.0, true);
   }
   if (map.getZoom() > 17) {
     map.setZoom(16, true);
@@ -216,7 +214,6 @@ function zoomMap(posi) {
   if (posi) {
     map.setCenter(posi, true);
   }
-
 }
 
 function setCenter(sQuery) {
@@ -241,7 +238,6 @@ function setCenter(sQuery) {
         lat: dLat,
         lng: dLng
       }
-
       map.setCenter(oLatLgn, true);
       zoomMap();
     },
@@ -249,7 +245,7 @@ function setCenter(sQuery) {
      * This function will be called if a communication error occurs during the JSON-P request
      * @param  {Object} error  The error message received.
      */
-    onError = function(error) {
+    onError = function (error) {
       alert('Ooops!');
     }
   );
@@ -261,21 +257,21 @@ function setMarker(oData) {
 
   map.addObject(marker);
 
-  marker.addEventListener('dbltap', function(evt) {
+  marker.addEventListener('dbltap', function (evt) {
     zoomMap(evt.target.getPosition());
   }, false);
-  marker.addEventListener('tap', function(evt) {
+  marker.addEventListener('tap', function (evt) {
     VueScrollTo.scrollTo(document.getElementById(evt.target.data.iEventId), 800, {
       offset: -65,
       force: false,
     })
     oEventTableVue.selected = evt.target.data.iEventId;
   }, false);
-  marker.addEventListener('pointerenter', function(evt) {
+  marker.addEventListener('pointerenter', function (evt) {
     openBubble(evt.target.getPosition(), evt.target.data);
     map.getViewPort().element.style.cursor = 'pointer';
   }, false);
-  marker.addEventListener('pointerleave', function(evt) {
+  marker.addEventListener('pointerleave', function (evt) {
     closeBubble(evt.target.getPosition());
     map.getViewPort().element.style.cursor = 'auto';
   }, false);
@@ -317,19 +313,15 @@ function setVerifyLocationMarker(sAddress) {
         lat: dLat,
         lng: dLng
       }
-
       var marker = new H.map.Marker(oLatLgn);
       marker.label = "Ist das der Ort Ihres Events?";
-
       map.addObject(marker);
-
-      marker.addEventListener('tap', function(evt) {
+      marker.addEventListener('tap', function (evt) {
         map.setCenter(evt.target.getPosition(), true);
         openBubble(evt.target.getPosition(), evt.target.label);
       }, false);
-
     },
-    onError = function(error) {
+    onError = function (error) {
       alert('Ooops!');
     }
   )
@@ -338,13 +330,12 @@ function setVerifyLocationMarker(sAddress) {
 
 var updateViewTimeout;
 // track where the user scrolls and drags
-map.addEventListener('mapviewchange', function(evt) {
+map.addEventListener('mapviewchange', function (evt) {
   clearTimeout(updateViewTimeout);
-  updateViewTimeout = setTimeout(function() {
+  updateViewTimeout = setTimeout(function () {
     oEventTableVue.mapBounds = map.getViewBounds();
   }, 300)
 });
-
 
 var bubble; // Hold a reference to any infobubble opened
 /**
@@ -396,7 +387,7 @@ function closeBubble() {
 }
 
 var coord = undefined;
-var pickLocationModeMapListener = function(evt) {
+var pickLocationModeMapListener = function (evt) {
   if (verifyMarker) {
     map.removeObject(verifyMarker);
   }
@@ -416,7 +407,7 @@ var pickLocationModeMapListener = function(evt) {
       };
 
     geocoder.reverseGeocode(parameters,
-      function(result) {
+      function (result) {
         sAddress = result.Response.View[0].Result[0].Location.Address.Label;
 
         var sHTMLBubble = "<div class=\infoBubble\>" +
@@ -443,7 +434,7 @@ var pickLocationModeMapListener = function(evt) {
         map.addObject(verifyMarker);
 
         //eventlistener for verify
-        document.getElementById("acceptLocationButton").addEventListener("click", function() {
+        document.getElementById("acceptLocationButton").addEventListener("click", function () {
           document.getElementById("newEventAddressDiv").classList.add("is-dirty"); //make the input field look like something got inputted
           oNewEventVue.draft.sAdress = sAddress; //put the adress in the new event form
           oNewEventVue.draft.oLatLng = {
@@ -458,7 +449,7 @@ var pickLocationModeMapListener = function(evt) {
         });
 
       },
-      function(error) {
+      function (error) {
         alert("Es gab ein Problem bei der Verbindung mit HERE Maps. Versuche es noch einmal.");
         return;
       });
@@ -482,10 +473,9 @@ function pickLocationMode() {
     map.addEventListener('tap', pickLocationModeMapListener)
     pickLocationModeMapListenerSet = true;
     $("#map").delay(100).fadeOut().fadeIn(200); //let map "blink" to show that something changed on it
-    setTimeout(function() {
+    setTimeout(function () {
       toastr["info"]("Klicke auf die Map und wähle den Eventort!");
     }, 300)
-    
   }
 
   //got unchecked
@@ -509,6 +499,6 @@ function pickLocationMode() {
 }
 
 // update map size at window size
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
   map.getViewPort().resize();
 });

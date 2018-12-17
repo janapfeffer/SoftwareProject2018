@@ -457,10 +457,6 @@ img.eventSymbol {
   position: fixed;
 }
 
-/* top: 80px;
-position: absolute;
-left: -580px;
-width: 650px; */
 /* Autocomplete stuff */
 .autocomplete {
   /*the container must be positioned relative:*/
@@ -655,5 +651,4 @@ img.preview {
 
 #toast-container>div{
   opacity: 0.95;
-
 }

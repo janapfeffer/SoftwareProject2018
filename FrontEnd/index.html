@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -9,12 +8,6 @@
   <meta name="keywords" content="Party, PartyLocator, Locator, Partys, Umgebung, Party Sucher, Feiern, Event, Event Finder, Finder, Veranstaltung">
   <title>EventHub</title>
   <link rel="icon" href="images/Logo2.png">
-
-  <!-- materializecss -->
-  <!-- Compiled and minified CSS -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
-  <!-- Compiled and minified JavaScript -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
 
   <!-- External Libaries-->
   <script src="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
@@ -89,15 +82,17 @@
           <a class="mdl-navigation__link headerLink" id="AfterLoginEvent" style="visibility: hidden;" @click='showNewEventCard($event)'>
             Event eintragen
           </a>
-          <a class="mdl-navigation__link headerLink" id="AfterLoginOwnedEvents" style="visibility: hidden;" @click='showNewOwnedEventsCard'>Meine Events</a>
+          <a class="mdl-navigation__link headerLink" id="AfterLoginOwnedEvents" style="visibility: hidden;" @click='showNewOwnedEventsCard'>Meine
+            Events
+          </a>
           <a class="mdl-navigation__link headerLink" id="AfterLoginLogin" style="visibility: hidden;" @click='showNewLoginCard'>Login</a>
-
         </nav>
       </div>
     </header>
+
   </div>
+  <!-- Register Card-->
   <div id="aside">
-    <!-- Register Card-->
     <div id="newRegisterWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
       <div id="newRegister" class="sidecard">
         <h2 style="padding: 0px;">Registrieren</h2>
@@ -138,12 +133,10 @@
           <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rUserName" id="Username">
           <label class="mdl-textfield__label" for="sample1">Username*</label>
         </div>
-
         <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.rEmail" id="email">
           <label id="emailinputwords" class="mdl-textfield__label" for="sample1">E-Mail*</label>
         </div>
-
         <div v-bind:class="{ 'is-invalid': draft.passwordIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword" id="password1">
           <label id="passwordinputwords" class="mdl-textfield__label" for="sample1">Passwort*</label>
@@ -152,17 +145,14 @@
           <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="password" v-model="draft.rPassword2" id="password2">
           <label id="passwordinputwords2" class="mdl-textfield__label" for="sample1">erneuert Passwort*</label>
         </div>
-
-
         <div class="buttons">
           <button class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
             Abschließen
           </button>
         </div>
       </div>
-
     </div>
-    <!-- Register Card End-->
+
     <!-- Login Card-->
     <div id="LoginCard">
       <div id="newLoginWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
@@ -184,7 +174,6 @@
               </b>
             </p>
           </div>
-
           <div id="NewRegisteredUser" style="display:none">
             <p style="color:green; ">
               <b>
@@ -192,6 +181,7 @@
               </b>
             </p>
           </div>
+
           <div v-bind:class="{ 'is-invalid': draft.emailIsInvalid }" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input @keyup.enter="formsubmit" class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sUserName" id="Login_username">
             <label class="mdl-textfield__label" for="sample1">E-Mail*</label>
@@ -211,8 +201,9 @@
           </div>
         </div>
       </div>
-      <!-- Login Card End-->
     </div>
+
+    <!-- new event card -->
     <div id="newEventWrapper" class="sidecardWrapper" v-bind:class="{ hide: !cardShown}">
       <div id="newEvent" class="sidecard">
         <h2 id="h2NewEvent" style="padding: 0px;">Neues Event eintragen</h2>
@@ -224,6 +215,7 @@
             </b>
           </p>
         </div>
+
         <div v-bind:class="{ 'is-invalid': draft.titleIsInvalid }" id="newEventTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input class="mdl-textfield__input" maxlength="40" type="text" v-model="draft.sName">
           <label class="mdl-textfield__label" for="sample1">Titel*</label>
@@ -246,13 +238,15 @@
         </div>
         <div>
           <p>Veranstaltungstypen*</p>
-          <vue-multiselect id="newEventMultiselect" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes" :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label=""
-            :show-no-results="false" :searchable="false" v-bind:class="{ redBorder: draft.categoryIsInvalid}">
+          <vue-multiselect id="newEventMultiselect" v-model="value" placeholder="Kategorien" label="name" track-by="code" :options="aEventTypes"
+            :multiple="true" :taggable="false" :hide-selected="true" :close-on-select="false" select-label="" :show-no-results="false"
+            :searchable="false" v-bind:class="{ redBorder: draft.categoryIsInvalid}">
           </vue-multiselect>
         </div>
         <div id="newEventDate" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <p>Datum*</p>
-          <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right" start-placeholder="Von" end-placeholder="Bis" :default-time="['15:00:00', '19:00:00']">
+          <el-date-picker v-bind:class="{ redBorder: draft.dateIsInvalid}" v-model="draft.EDate" type="datetimerange" align="right"
+            start-placeholder="Von" end-placeholder="Bis" :default-time="['15:00:00', '19:00:00']">
           </el-date-picker>
         </div>
         <div class="file-upload-form">
@@ -262,9 +256,10 @@
         <div class="image-preview" v-if="draft.oSelectedFile.length > 0">
           <img class="preview" :src="draft.oSelectedFile">
         </div>
+
         <div class="buttons">
           <button id="newEventSchließenButton" class="mdl-button mdl-js-button mdl-button--raised" @click="closeNewEventCard">
-              Schließen
+            Schließen
           </button>
           <button id="newEventSendenButton" class="mdl-button mdl-js-button mdl-button--raised" @click="formsubmit">
             Senden
@@ -272,16 +267,19 @@
         </div>
       </div>
     </div>
+
+    <!-- events table -->
     <div id="eventsWithDialog">
       <div class="sidecardWrapper">
         <ul id="eventTable" class="sidecard demo-list-three mdl-list">
           <h2 id="h2events"> Events </h2>
-          <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}" @click="select(event)" v-bind:id="event.iEventId">
+          <li v-for="event in filteredList" class="mdl-list__item mdl-list__item--three-line" :class="{selected:event.iEventId == selected, faved: event.faved}"
+            @click="select(event)" v-bind:id="event.iEventId">
             <span class="mdl-list__item-primary-content">
               <img v-bind:src="event.oImage" class="eventSymbol" height="65" width="65">
               <span>{{ event.sName }}</span>
               <span class="updateIcons" style="position: absolute; right: 8%;">
-                <span  id="trash" v-bind:style="{visibility : trashVisibility}">
+                <span id="trash" v-bind:style="{visibility : trashVisibility}">
                   <a class="mdl-list__item-secondary-action favstar">
                     <i @click="openDeleteEventDialog(event)" style="color:#535c6299;" class="material-icons">delete</i>
                   </a>
@@ -292,11 +290,11 @@
                   </a>
                 </span>
               </span>
-                <span class="starIcon" id="stars" v-bind:style="{visibility : starVisibility}" style="position: absolute; right: 8%;" >
-                  <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)">
-                    <i class="material-icons">star</i>
-                  </a>
-                </span>
+              <span class="starIcon" id="stars" v-bind:style="{visibility : starVisibility}" style="position: absolute; right: 8%;">
+                <a class="mdl-list__item-secondary-action favstar" @click.stop="favToggle(event)">
+                  <i class="material-icons">star</i>
+                </a>
+              </span>
               <span class="mdl-list__item-text-body">{{ event.sDescription }}</span>
               <i class="fa fa-calendar" style="font-size:18px"></i>
               <span class=nobr class="mdl-list__item-text-body">{{ event.oStartDate }}</span>
@@ -319,16 +317,17 @@
                 </span>
               </div>
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" id="show-dialog" @click.stop="OpenCommentPopUp(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)" type="text" id="sample1" readonly>
+                <input class="mdl-textfield__input" id="show-dialog" @click.stop="OpenCommentPopUp(event.iEventId, event.sName, event.sDescription, event.aComments, event.oImage)"
+                  type="text" id="sample1" readonly>
 
                 <label class="mdl-textfield__label" for="sample1">Kommentiere und bewerte hier...</label>
               </div>
       </div>
       </span>
-
       </li>
       </ul>
 
+      <!-- verify delete event dialog -->
       <dialog id="deleteEventDialog" class="mdl-dialog">
         <div class="mdl-dialog__content">
           <p style="color: black;">
@@ -341,14 +340,13 @@
         </div>
       </dialog>
 
+      <!-- comment and rating dialog -->
       <dialog id="commentDialog" class="mdl-dialog" style="width: 550px; opacity:2; border-radius: 4px;
     box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;">
         <div style="background-color:whitesmoke">
-
           <h2 class="mdl-dialog__title" id="commentTitle">{{selected_event.sName}}</h2>
           <div class="mdl-dialog__content">
-            <img  id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
-
+            <img id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
             <p style="color:black;" id="eventPopUpDescription">{{selected_event.sDescription}}</p>
             <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
             <i @click="clickLikeButton()" id="idThumbUp" style="position: absolute; color:grey; right: 14%;" class="fa fa-thumbs-up thumbs"></i>
@@ -391,18 +389,15 @@
                     <br style="line-height: 150%;" />
                   </div>
                 </span>
-
               </li>
             </ul>
           </div>
         </div>
       </dialog>
     </div>
-
   </div>
 
-
-
+  <!-- search bar -->
   <div id="searchPlace" class="sidecard" data-tilt-speed="1000" data-tilt-max="5" data-tilt data-tilt-scale="1.025" data-tilt-perspective="1000">
     <h1>Finde Veranstaltungen in deiner Gegend.</h1>
     <div id="searchPlaceInner" autocomplete="off">
@@ -420,29 +415,25 @@
       </div>
       <!-- other data formats etc https://element.eleme.io/#/en-US/component/datetime-picker -->
       <span id="datepickerID">
-
         <h2>VON-BIS</h2>
-        <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von" end-placeholder="Bis" :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA">
+        <el-date-picker id="idDatePickerInput" v-model="dDate" type="datetimerange" align="right" start-placeholder="Von" end-placeholder="Bis"
+          :default-time="['00:00:00', '23:59:59']" :picker-options="pickerOptions" format="dd.MM-HA">
         </el-date-picker>
       </span>
       <span id="eventtypesfilterID" class="autocomplete">
         <h2>WAS</h2>
-        <vue-multiselect v-model="value" v-bind:limit-text="newText" :options="aEventTypes" :multiple="true" :close-on-select="false" :clear-on-select="false" :searchable="false" placeholder="Kategorien" label="name" track-by="name" :limit="1"
-          select-label="Auswählen" selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" :preselect-first="true">
+        <vue-multiselect v-model="value" v-bind:limit-text="newText" :options="aEventTypes" :multiple="true" :close-on-select="false"
+          :clear-on-select="false" :searchable="false" placeholder="Kategorien" label="name" track-by="name" :limit="1" select-label="Auswählen"
+          selected-label="Ausgewählt" deselect-label="Nicht mehr auswählen" :preselect-first="true">
         </vue-multiselect>
       </span>
       <button class="mdl-button mdl-js-button" name="action" @click="searchPlace">
         Suche
       </button>
     </div>
-
-
-
   </div>
   </div>
-  <!-- Seachbar Ends here-->
   </div>
-
 
   <!-- Map-->
   <div id="map"></div>
@@ -451,7 +442,6 @@
   <script type="text/javascript" src="js/main.js"></script>
   <!-- tilt libary for css animations -->
   <script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
-
 </body>
 
 </html>
