@@ -6,7 +6,6 @@
 // NOTE: don't run app.js at the same time, as the port will be occupied
 
 var mongoose = require("mongoose");
-var Event = require("../Backend/RestAPI/models/event_model");
 var assert = require('assert');
 var chai = require("chai");
 var chaiHttp = require("chai-http");
@@ -149,7 +148,7 @@ describe('Users', () => {
   });
 });
 
-/* Test Event routes*/
+// Test Event routes
 describe('Events', () => {
   // Test the /GET routes
   describe('/GET events', () => {
@@ -231,7 +230,7 @@ describe('Events', () => {
   });
 });
 
-/* User Interaction routes*/
+// User Interaction routes
 describe('User-Events Interaction', () => {
   describe("/user/saveEvent", () => {
     it("it should save the event as favorite", (done) => {
@@ -297,7 +296,8 @@ describe('User-Events Interaction', () => {
       chai.request(server)
         .post("/events/addComment")
         .set("authorization", "Bearer " + test_data.user.token)
-        .send(test_data.user._id, test_data.user.name, test_data.event._id, test_data.comment)
+        .send(test_data.user._id, test_data.user.name, test_data.event._id,
+          test_data.comment)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.have.property("message").eql("Comment saved");
@@ -325,6 +325,7 @@ describe('User-Events Interaction', () => {
 });
 
 //##### Delete test data #####/
+
 describe("delete testdata", () => {
   describe("/user/:userId", () => {
     it("it should delete the test user", (done) => {
