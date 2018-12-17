@@ -320,6 +320,12 @@ div#aside, div#map {
   background-color: #36506714;
 }
 
+/* #eventTable li.selected img{
+  width: 120px;
+  height: 78px;
+  transition: 0.1s;
+} */
+
 #eventTable li.mdl-list__item--three-line.selected .mdl-list__item-primary-content {
   height: auto;
 }
@@ -331,6 +337,7 @@ div#aside, div#map {
   overflow: hidden;
   text-overflow: ellipsis;
   height: auto;
+  width: 70%;
   /* if we want the whole desc to be shown in the eventtable */
   /* https://stackoverflow.com/questions/17028911/text-overflow-ellipsis-without-white-space-nowrap */
 }
@@ -343,7 +350,9 @@ img.eventSymbol {
   margin: 0px 14px 0px 0px;
   float: left;
   width: 100px;
+  height: 65px;
   border-radius: 4px;
+  /* transition: 0.25s; */
 }
 
 .mdl-dialog img.eventSymbol {
