@@ -129,9 +129,14 @@ input {
   /* bottom: 2px; */
 }
 
+.multiselect__single {
+  color: #c0c4cc;
+}
+
 /* .multiselect__tags {
   padding: 11px 40px 0 8px;
 } */
+
 #searchPlaceInner .multiselect__tags-wrap {
   display: inline-flex;
 }
@@ -142,8 +147,31 @@ input {
   top: 0px;
   left: 0px;
 } */
+
 #newEvent .multiselect {
   width: 100%;
+}
+
+.multiselect__tag {
+  background: rgb(165, 215, 147);
+  color:#545f67;
+}
+.multiselect__option--highlight {
+  background:  rgb(165, 215, 147);
+  color:#545f67;
+}
+
+.multiselect__option--highlight:after {
+  background:  rgb(165, 215, 147);
+  color:#545f67;
+}
+
+.mdl-switch.is-checked .mdl-switch__track {
+  background: rgba(254, 154, 134, 0.41);
+}
+
+.mdl-switch.is-checked .mdl-switch__thumb {
+  background: rgba(255,87,34,.5);
 }
 
 .el-date-editor--datetimerange.el-input__inner {
@@ -472,6 +500,10 @@ width: 650px; */
 .sidecard h2 {
   color: black;
   font-family: "raleway";
+}
+
+h2{
+  font-size: 35px;
 }
 
 #newLogin .buttons {

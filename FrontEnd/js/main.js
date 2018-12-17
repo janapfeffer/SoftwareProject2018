@@ -624,7 +624,7 @@ var oEventTableVue = new Vue({
 
       //Step1: Edit Header + Button (for Button also edit functionality)
       document.getElementById("h2NewEvent").innerText = "Bearbeite dein Event";
-      document.getElementById("newEventSendenButton").innerText = "Bearbeitung speichern";
+      document.getElementById("newEventSendenButton").innerText = "Speichern";
       document.getElementById("eventPictureUploadText").innerText = "Lade ein anderes Eventbild hoch:"
 
       //Step2: Adjust draft to the values of the selected event
