@@ -22,15 +22,32 @@ header .headerLink {
 
 header img#logoIcon {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  width: 33px;
-  height: 33px;
+  top: -3px;
+  left: -3px;
+  width: 65px;
+  height: 67px;
+}
+
+a {
+  color: rgb(239, 132, 110);
+  font-weight: 500;
+}
+
+.updateIcons {
+  position: absolute;
+  left: 507px;
+  right: 9%;
+  font-size: 18px;
+}
+
+.starIcon {
+  left: -15px;
+  top: 22px;
 }
 
 .mdl-dialog {
   border-radius: 4px;
-  box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;"
+  box-shadow: 4px 4px 16px #00000010, rgba(0,0,0,0.12) 0px 16px 40px;
 }
 
 .mdl-dialog .sidecard{
@@ -77,6 +94,7 @@ input {
 
 #searchPlace {
   box-shadow: none !important;
+  width:950px;
 }
 
 #searchPlace h2 {
@@ -287,6 +305,12 @@ div#aside, div#map {
   background-color: #36506714;
 }
 
+/* #eventTable li.selected img{
+  width: 120px;
+  height: 78px;
+  transition: 0.1s;
+} */
+
 #eventTable li.mdl-list__item--three-line.selected .mdl-list__item-primary-content {
   height: auto;
 }
@@ -298,6 +322,7 @@ div#aside, div#map {
   overflow: hidden;
   text-overflow: ellipsis;
   height: auto;
+  width: 70%;
   /* if we want the whole desc to be shown in the eventtable */
   /* https://stackoverflow.com/questions/17028911/text-overflow-ellipsis-without-white-space-nowrap */
 }
@@ -310,7 +335,9 @@ img.eventSymbol {
   margin: 0px 14px 0px 0px;
   float: left;
   width: 100px;
+  height: 65px;
   border-radius: 4px;
+  /* transition: 0.25s; */
 }
 
 .mdl-dialog img.eventSymbol {
@@ -333,7 +360,7 @@ img.eventSymbol {
 }
 
 .faved .favstar {
-  color: rgb(255, 64, 129);
+  color: rgb(254, 174, 158);
 }
 
 #newEvent p {
