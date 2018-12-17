@@ -33,17 +33,12 @@ a {
   font-weight: 500;
 }
 
-.updateIcons {
-  position: absolute;
+.updateIcons  .material-icons{
   left: 507px;
-  right: 9%;
   font-size: 18px;
 }
 
-.starIcon {
-  left: -15px;
-  top: 22px;
-}
+
 
 .mdl-dialog {
   border-radius: 4px;
