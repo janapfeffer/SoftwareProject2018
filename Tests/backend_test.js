@@ -277,7 +277,6 @@ describe('User-Events Interaction', () => {
 
   describe("/user/unsaveEvent", () => {
     it("it should unsave the saved event", (done) => {
-      ;
       chai.request(server)
         .post("/user/unsaveEvent")
         .set("authorization", "Bearer " + test_data.user.token)
@@ -292,7 +291,6 @@ describe('User-Events Interaction', () => {
 
   describe("/events/addComment", () => {
     it("it should add a comment to the created event", (done) => {
-      ;
       chai.request(server)
         .post("/events/addComment")
         .set("authorization", "Bearer " + test_data.user.token)
