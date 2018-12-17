@@ -133,6 +133,10 @@ input {
   color: #c0c4cc;
 }
 
+.multiselect__select:before{
+  border-color: #c0c4cc transparent transparent;
+}
+
 /* .multiselect__tags {
   padding: 11px 40px 0 8px;
 } */
@@ -176,6 +180,10 @@ input {
 
 .el-date-editor--datetimerange.el-input__inner {
   width: 230px;
+}
+
+.el-date-editor .el-range-separator {
+  color: #c0c4cc;
 }
 
 .landingpage .el-date-editor--datetimerange.el-input__inner {
@@ -504,6 +512,7 @@ width: 650px; */
 
 h2{
   font-size: 35px;
+  font-family: "raleway";
 }
 
 #newLogin .buttons {
