@@ -136,6 +136,21 @@ input {
   display: inline-flex;
 }
 
+.multiselect__tag {
+  background: rgb(165, 215, 147);
+  color:#545f67;
+}
+.multiselect__option--highlight {
+  background:  rgb(165, 215, 147);
+  color:#545f67;
+
+}
+
+.multiselect__option--highlight:after {
+  background:  rgb(165, 215, 147);
+  color:#545f67;
+}
+
 /* .landingpage #searchPlaceInner .multiselect__tags-wrap {
   display: inline-block;
   position: relative;
