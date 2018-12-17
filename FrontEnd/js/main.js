@@ -265,6 +265,7 @@ function setReactiveCommentAttributes() {
 function getFilteredEvents(displayId) {
   //filter for start_date and end_date and event types
   //filter_event_type is an array of 1 - x event_types
+  oEventTableVue.selected = "";
   if (oSearchPlaceVue.dDate || oSearchPlaceVue.value) {
     var GETFILTEREDEVENTS_URL = 'http://localhost:3000/events/filtered';
     var ajaxRequest = new XMLHttpRequest();
