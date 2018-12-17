@@ -10,6 +10,12 @@
   <title>EventHub</title>
   <link rel="icon" href="images/mapIcon.PNG">
 
+  <!-- materializecss -->
+  <!-- Compiled and minified CSS -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+  <!-- Compiled and minified JavaScript -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+
   <!-- External Libaries-->
   <script src="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js"></script>
   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.2.1/material.deep_orange-amber.min.css" />
@@ -337,7 +343,7 @@
 
           <h2 class="mdl-dialog__title" id="commentTitle">{{selected_event.sName}}</h2>
           <div class="mdl-dialog__content">
-            <img id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
+            <img  id="idPopUpPicture" v-bind:src="selected_event.oImage" class="eventSymbol" height="65" width="65"></img>
 
             <p style="color:black;" id="eventPopUpDescription">{{selected_event.sDescription}}</p>
             <i @click="clickDislikeButton()" id="idThumbDown" style="color:grey; position: absolute; right: 8%;" class="fa fa-thumbs-down thumbs"></i>
