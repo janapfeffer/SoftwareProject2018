@@ -642,7 +642,8 @@ img.preview {
 }
 
 .toast-info {
-  background-color: #fead9d;
+  background-color: rgb(153, 205, 254);
+  /* background-color: #fead9d; */
 }
 
 .toast-success {
