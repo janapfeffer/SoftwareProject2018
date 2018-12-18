@@ -33,10 +33,10 @@ a {
   font-weight: 500;
 }
 
-.updateIcons {
-  position: absolute;
+.updateIcons .material-icons{
+  /* position: absolute; */
   left: 507px;
-  right: 9%;
+  /* right: 9%; */
   font-size: 18px;
 }
 
