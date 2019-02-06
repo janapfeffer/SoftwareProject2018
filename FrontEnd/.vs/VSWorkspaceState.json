@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\css",
-    "\\js",
-    "\\js\\vues"
+    "\\js"
   ],
-  "SelectedNode": "\\js\\main.js",
+  "SelectedNode": "\\js\\vanilla-tilt.min.js",
   "PreviewInSolutionExplorer": false
 }
